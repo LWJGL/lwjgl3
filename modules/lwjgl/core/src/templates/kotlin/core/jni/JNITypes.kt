@@ -46,9 +46,7 @@ val java_nio_ByteBuffer = java.nio.ByteBuffer::class.jobject
 val JavaVM = "JavaVM".handle
 
 val JNINativeMethod = struct(Module.CORE_JNI, "JNINativeMethod") {
-    documentation = ""
-
-    charUTF8.p("name", "")
-    charUTF8.p("signature", "")
-    opaque_p("fnPtr", "")
+    charUTF8.p("name")
+    charUTF8.p("signature")
+    opaque_p("fnPtr")
 }

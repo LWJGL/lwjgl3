@@ -9,84 +9,15 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val KHR_shader_float16_int8 = "KHRShaderFloat16Int8".nativeClassVK("KHR_shader_float16_int8", type = "device", postfix = "KHR") {
-    documentation =
-        """
-        The {@code VK_KHR_shader_float16_int8} extension allows use of 16-bit floating-point types and 8-bit integer types in shaders for arithmetic operations.
-
-        It introduces two new optional features {@code shaderFloat16} and {@code shaderInt8} which directly map to the {@code Float16} and the {@code Int8} SPIR-V capabilities. The {@code VK_KHR_shader_float16_int8} extension also specifies precision requirements for half-precision floating-point SPIR-V operations. This extension does not enable use of 8-bit integer types or 16-bit floating-point types in any <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#interfaces-iointerfaces">shader input and output interfaces</a> and therefore does not supersede the {@link KHR8bitStorage VK_KHR_8bit_storage} or {@link KHR16bitStorage VK_KHR_16bit_storage} extensions.
-
-        <h5>Promotion to Vulkan 1.2</h5>
-        All functionality in this extension is included in core Vulkan 1.2, with the KHR suffix omitted. However, if Vulkan 1.2 is supported and this extension is not, both the {@code shaderFloat16} and {@code shaderInt8} capabilities are optional. The original type, enum, and command names are still available as aliases of the core functionality.
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_KHR_shader_float16_int8}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>83</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
-
-            <dt><b>Deprecation State</b></dt>
-            <dd><ul>
-                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.2-promotions">Vulkan 1.2</a></li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Alexander Galazin <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_shader_float16_int8]%20@alegal-arm%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_shader_float16_int8%20extension*">alegal-arm</a></li>
-            </ul></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2018-03-07</dd>
-
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension interacts with {@link KHR8bitStorage VK_KHR_8bit_storage}</li>
-                <li>This extension interacts with {@link KHR16bitStorage VK_KHR_16bit_storage}</li>
-                <li>This extension interacts with {@link KHRShaderFloatControls VK_KHR_shader_float_controls}</li>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GL_EXT_shader_explicit_arithmetic_types.txt">{@code GL_EXT_shader_explicit_arithmetic_types}</a></li>
-            </ul></dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Alexander Galazin, Arm</li>
-                <li>Jan-Harald Fredriksen, Arm</li>
-                <li>Jeff Bolz, NVIDIA</li>
-                <li>Graeme Leese, Broadcom</li>
-                <li>Daniel Rakos, AMD</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "KHR_SHADER_FLOAT16_INT8_SPEC_VERSION".."1"
     )
 
     StringConstant(
-        "The extension name.",
-
         "KHR_SHADER_FLOAT16_INT8_EXTENSION_NAME".."VK_KHR_shader_float16_int8"
     )
 
     EnumConstant(
-        "Extends {@code VkStructureType}.",
-
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR".."1000082000",
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR".."1000082000"
     )

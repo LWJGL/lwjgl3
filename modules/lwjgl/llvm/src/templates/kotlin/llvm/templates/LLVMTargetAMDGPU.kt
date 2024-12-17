@@ -13,14 +13,12 @@ val LLVMTargetAMDGPU = "LLVMTargetAMDGPU".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
-    documentation = ""
-
-    void("InitializeAMDGPUTargetInfo",   "", void())
-    void("InitializeAMDGPUTarget",       "", void())
-    void("InitializeAMDGPUTargetMC",     "", void())
+    void("InitializeAMDGPUTargetInfo",   void())
+    void("InitializeAMDGPUTarget",       void())
+    void("InitializeAMDGPUTargetMC",     void())
     IgnoreMissing..
-    void("InitializeAMDGPUTargetMCA",    "", void())
-    void("InitializeAMDGPUAsmPrinter",   "", void())
-    void("InitializeAMDGPUAsmParser",    "", void())
-    void("InitializeAMDGPUDisassembler", "", void())
+    void("InitializeAMDGPUTargetMCA",    void())
+    void("InitializeAMDGPUAsmPrinter",   void())
+    void("InitializeAMDGPUAsmParser",    void())
+    void("InitializeAMDGPUDisassembler", void())
 }

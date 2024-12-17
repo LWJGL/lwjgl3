@@ -221,7 +221,6 @@ val GLBinding = Generator.register(object : APIBinding(
             "static org.lwjgl.system.MemoryUtil.*"
         )
 
-        documentation = "Defines the capabilities of an OpenGL context."
     }
 
     override fun PrintWriter.generateJava() {
@@ -356,7 +355,7 @@ fun String.nativeClassGL(
     prefix: String = "GL",
     prefixMethod: String = prefix.lowercase(),
     postfix: String = "",
-    init: NativeClass.() -> Unit
+    init: (NativeClass.() -> Unit)? = null
 ) = nativeClass(
     Module.OPENGL,
     templateName,
@@ -365,7 +364,9 @@ fun String.nativeClassGL(
     postfix = postfix,
     binding = GLBinding,
     init = {
-        init()
+        if (init != null) {
+            init()
+        }
         if (!skipNative) {
             nativeImport("opengl.h")
         }

@@ -11,11 +11,7 @@ val SSE = "SSE".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_") {
         "intrinsics.h"
     )
 
-    documentation = "Bindings to SSE macros."
-
-    val ExceptionState = IntConstant(
-        "Exception state.",
-
+    IntConstant(
         "EXCEPT_MASK"..0x003f,
         "EXCEPT_INVALID"..0x0001,
         "EXCEPT_DENORM"..0x0002,
@@ -23,11 +19,9 @@ val SSE = "SSE".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_") {
         "EXCEPT_OVERFLOW"..0x0008,
         "EXCEPT_UNDERFLOW"..0x0010,
         "EXCEPT_INEXACT"..0x0020
-    ).javaDocLinks
+    )
 
-    val ExceptionMask = IntConstant(
-        "Exception mask.",
-
+    IntConstant(
         "MASK_MASK"..0x1f80,
         "MASK_INVALID"..0x0080,
         "MASK_DENORM"..0x0100,
@@ -35,64 +29,47 @@ val SSE = "SSE".nativeClass(Module.SSE, prefix = "_MM", prefixMethod = "_MM_") {
         "MASK_OVERFLOW"..0x0400,
         "MASK_UNDERFLOW"..0x0800,
         "MASK_INEXACT"..0x1000
-    ).javaDocLinks
+    )
 
-    val RoundMode = IntConstant(
-        "Round mode.",
-
+    IntConstant(
         "ROUND_MASK"..0x6000,
         "ROUND_NEAREST"..0x0000,
         "ROUND_DOWN"..0x2000,
         "ROUND_UP"..0x4000,
         "ROUND_TOWARD_ZERO"..0x6000
-    ).javaDocLinks
+    )
 
-    val FlushZeroMode = IntConstant(
-        "Flush zero mask.",
-
+    IntConstant(
         "FLUSH_ZERO_MASK"..0x8000,
         "FLUSH_ZERO_ON"..0x8000,
         "FLUSH_ZERO_OFF"..0x0000
-    ).javaDocLinks
+    )
 
     macro()..void(
         "SET_EXCEPTION_STATE",
-        "Sets the exception state bits of the MXCSR control and status register.",
 
-        unsigned_int("mask", "the exception state", ExceptionState)
+        unsigned_int("mask")
     )
-    macro()..unsigned_int("GET_EXCEPTION_STATE", "Returns the exception state bits from the MXCSR control and status register.", void())
+    macro()..unsigned_int("GET_EXCEPTION_STATE", void())
 
     macro()..void(
         "SET_EXCEPTION_MASK",
-        """
-        Sets the exception mask bits of the MXCSR control and status register.
 
-        All six exception mask bits are always affected. Bits not set explicitly are cleared.
-        """,
-
-        unsigned_int("mask", "the exception mask", ExceptionMask, LinkMode.BITFIELD)
+        unsigned_int("mask")
     )
-    macro()..unsigned_int("GET_EXCEPTION_MASK", "Returns the exception mask bits from the MXCSR control and status register.", void())
+    macro()..unsigned_int("GET_EXCEPTION_MASK", void())
 
     macro()..void(
         "SET_ROUNDING_MODE",
-        "Sets the rounding mode bits of the MXCSR control and status register.",
 
-        unsigned_int("mode", "the rounding mode", RoundMode)
+        unsigned_int("mode")
     )
-    macro()..unsigned_int("GET_ROUNDING_MODE", "Returns the rounding mode bits from the MXCSR control and status register.", void())
+    macro()..unsigned_int("GET_ROUNDING_MODE", void())
 
     macro()..void(
         "SET_FLUSH_ZERO_MODE",
-        """
-        Sets the flush zero bits of the MXCSR control and status register. FTZ sets denormal results from floating-point calculations to zero.
 
-        FTZ is a method of bypassing IEEE 754 methods of dealing with invalid floating-point numbers due to underflows. This mode is less precise, but much
-        faster.
-        """,
-
-        unsigned_int("mode", "the flush-to-zero mode", FlushZeroMode)
+        unsigned_int("mode")
     )
-    macro()..unsigned_int("GET_FLUSH_ZERO_MODE", "Returns the flush zero bits from the MXCSR control and status register.", void())
+    macro()..unsigned_int("GET_FLUSH_ZERO_MODE", void())
 }

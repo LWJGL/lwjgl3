@@ -9,43 +9,19 @@ import org.lwjgl.generator.*
 import openxr.*
 
 val ULTRALEAP_hand_tracking_forearm = "ULTRALEAPHandTrackingForearm".nativeClassXR("ULTRALEAP_hand_tracking_forearm", type = "instance", postfix = "ULTRALEAP") {
-    documentation =
-        """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_ULTRALEAP_hand_tracking_forearm">XR_ULTRALEAP_hand_tracking_forearm</a> extension.
-
-        This extension augments the {@link EXTHandTracking XR_EXT_hand_tracking} extension to enable applications to request the default set of 26 hand joints, with the addition of a joint representing the user’s elbow.
-
-        The application <b>must</b> also enable the {@link EXTHandTracking XR_EXT_hand_tracking} extension in order to use this extension.
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "ULTRALEAP_hand_tracking_forearm_SPEC_VERSION".."1"
     )
 
     StringConstant(
-        "The extension name.",
-
         "ULTRALEAP_HAND_TRACKING_FOREARM_EXTENSION_NAME".."XR_ULTRALEAP_hand_tracking_forearm"
     )
 
     EnumConstant(
-        "Extends {@code XrHandJointSetEXT}.",
-
         "HAND_JOINT_SET_HAND_WITH_FOREARM_ULTRALEAP".."1000149000"
     )
 
     EnumConstant(
-        """
-        XrHandForearmJointULTRALEAP - The name of hand joints that can be tracked including the elbow
-
-        <h5>Description</h5>
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The first #HAND_JOINT_COUNT_EXT members of {@code XrHandForearmJointULTRALEAP} are identical to the members of {@code XrHandJointEXT} and <b>can</b> be used interchangeably.
-        </div>
-        """,
-
         "HAND_FOREARM_JOINT_PALM_ULTRALEAP".."0",
         "HAND_FOREARM_JOINT_WRIST_ULTRALEAP".."1",
         "HAND_FOREARM_JOINT_THUMB_METACARPAL_ULTRALEAP".."2",

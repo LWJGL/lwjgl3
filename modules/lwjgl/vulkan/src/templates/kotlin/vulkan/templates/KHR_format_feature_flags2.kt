@@ -9,100 +9,19 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val KHR_format_feature_flags2 = "KHRFormatFeatureFlags2".nativeClassVK("KHR_format_feature_flags2", type = "device", postfix = "KHR") {
-    documentation =
-        """
-        This extension adds a new {@code VkFormatFeatureFlagBits2KHR} 64bits format feature flag type to extend the existing {@code VkFormatFeatureFlagBits} which is limited to 31 flags. At the time of this writing 29 bits of {@code VkFormatFeatureFlagBits} are already used.
-
-        Because ##VkFormatProperties2 is already defined to extend the Vulkan 1.0 #GetPhysicalDeviceFormatProperties() command, this extension defines a new ##VkFormatProperties3KHR to extend the ##VkFormatProperties.
-
-        On top of replicating all the bits from {@code VkFormatFeatureFlagBits}, {@code VkFormatFeatureFlagBits2KHR} adds the following bits :
-
-        <ul>
-            <li>#FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR and #FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR specify that an implementation supports reading and writing, respectively, a given {@code VkFormat} through storage operations without specifying the format in the shader.</li>
-            <li>#FORMAT_FEATURE_2_SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR specifies that an implementation supports depth comparison performed by {@code OpImage*Dref*} instructions on a given {@code VkFormat}. Previously the result of executing a {@code OpImage*Dref*} instruction on an image view, where the {@code format} was not one of the depth/stencil formats with a depth component, was undefined. This bit clarifies on which formats such instructions can be used.</li>
-        </ul>
-
-        Prior to version 2 of this extension, implementations exposing the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-shaderStorageImageReadWithoutFormat">{@code shaderStorageImageReadWithoutFormat}</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#features-shaderStorageImageWriteWithoutFormat">{@code shaderStorageImageWriteWithoutFormat}</a> features may not report #FORMAT_FEATURE_2_STORAGE_READ_WITHOUT_FORMAT_BIT_KHR and #FORMAT_FEATURE_2_STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR in ##VkFormatProperties3KHR{@code ::bufferFeatures}. Despite this, buffer reads/writes are supported as intended by the original features.
-
-        <h5>Promotion to Vulkan 1.3</h5>
-        Vulkan APIs in this extension are included in core Vulkan 1.3, with the KHR suffix omitted. External interactions defined by this extension, such as SPIR-V token names, retain their original names. The original Vulkan API names are still available as aliases of the core functionality.
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_KHR_format_feature_flags2}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>361</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>2</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
-
-            <dt><b>API Interactions</b></dt>
-            <dd><ul>
-                <li>Interacts with VK_VERSION_1_2</li>
-                <li>Interacts with VK_EXT_filter_cubic</li>
-                <li>Interacts with VK_EXT_sampler_filter_minmax</li>
-                <li>Interacts with VK_IMG_filter_cubic</li>
-            </ul></dd>
-
-            <dt><b>Deprecation State</b></dt>
-            <dd><ul>
-                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Lionel Landwerlin <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_format_feature_flags2]%20@llandwerlin%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_format_feature_flags2%20extension*">llandwerlin</a></li>
-            </ul></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2021-07-01</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Lionel Landwerlin, Intel</li>
-                <li>Faith Ekstrand, Intel</li>
-                <li>Tobias Hector, AMD</li>
-                <li>Spencer Fricke, Samsung Electronics</li>
-                <li>Graeme Leese, Broadcom</li>
-                <li>Jan-Harald Fredriksen, ARM</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "KHR_FORMAT_FEATURE_FLAGS_2_SPEC_VERSION".."2"
     )
 
     StringConstant(
-        "The extension name.",
-
         "KHR_FORMAT_FEATURE_FLAGS_2_EXTENSION_NAME".."VK_KHR_format_feature_flags2"
     )
 
     EnumConstant(
-        "Extends {@code VkStructureType}.",
-
         "STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR".."1000360000"
     )
 
     EnumConstantLong(
-        "Extends {@code VkFormatFeatureFlagBits2}.",
-
         "FORMAT_FEATURE_2_SAMPLED_IMAGE_BIT_KHR".enum(0x00000001L),
         "FORMAT_FEATURE_2_STORAGE_IMAGE_BIT_KHR".enum(0x00000002L),
         "FORMAT_FEATURE_2_STORAGE_IMAGE_ATOMIC_BIT_KHR".enum(0x00000004L),

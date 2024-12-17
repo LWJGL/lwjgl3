@@ -45,7 +45,6 @@ val OPENVR_FNTABLE_BINDING: APIBinding = Generator.register(object : APIBinding(
             "static org.lwjgl.system.MemoryStack.*",
             "static org.lwjgl.system.MemoryUtil.*"
         )
-        documentation = "The OpenVR function tables."
     }
 
     override fun PrintWriter.generateJava() {

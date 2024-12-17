@@ -8,27 +8,19 @@ import org.lwjgl.generator.*
 import openal.*
 
 val ALC10 = "ALC10".nativeClassALC("ALC10") {
-    documentation = "Native bindings to ALC 1.0 functionality."
-
     IntConstant(
-        "General tokens.",
-
         "INVALID"..0xFFFFFFFF.i,
         "FALSE"..0x0,
         "TRUE"..0x1
     )
 
-    val ContextAttributes = IntConstant(
-        "Context creation attributes.",
-
+    IntConstant(
         "FREQUENCY"..0x1007,
         "REFRESH"..0x1008,
         "SYNC"..0x1009
-    ).javaDocLinks + " #MONO_SOURCES #STEREO_SOURCES"
+    )
 
     IntConstant(
-        "Error conditions.",
-
         "NO_ERROR"..0x0,
         "INVALID_DEVICE"..0xA001,
         "INVALID_CONTEXT"..0xA002,
@@ -37,202 +29,114 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
         "OUT_OF_MEMORY"..0xA005
     )
 
-    val StringQueries = IntConstant(
-        "String queries.",
-
+    IntConstant(
         "DEFAULT_DEVICE_SPECIFIER"..0x1004,
         "DEVICE_SPECIFIER"..0x1005,
         "EXTENSIONS"..0x1006
-    ).javaDocLinks + " #CAPTURE_DEFAULT_DEVICE_SPECIFIER #CAPTURE_DEVICE_SPECIFIER"
+    )
 
-    val IntegerQueries = IntConstant(
-        "Integer queries.",
-
+    IntConstant(
         "MAJOR_VERSION"..0x1000,
         "MINOR_VERSION"..0x1001,
         "ATTRIBUTES_SIZE"..0x1002,
         "ALL_ATTRIBUTES"..0x1003
-    ).javaDocLinks + " #CAPTURE_SAMPLES"
+    )
 
     ALCdevice.p(
         "OpenDevice",
-        """
-        Allows the application to connect to a device.
 
-        If the function returns #NULL, then no sound driver/device has been found. The argument is a null terminated string that requests a certain device or
-        device configuration. If #NULL is specified, the implementation will provide an implementation specific default.
-        """,
-
-        nullable..ALCcharUTF8.const.p("deviceSpecifier", "the requested device or device configuration")
+        nullable..ALCcharUTF8.const.p("deviceSpecifier")
     )
 
     ALCboolean(
         "CloseDevice",
-        """
-        Allows the application to disconnect from a device.
 
-        The return code will be ALC_TRUE or ALC_FALSE, indicating success or failure. Failure will occur if all the device's contexts and buffers have not been
-        destroyed. Once closed, the {@code deviceHandle} is invalid.
-        """,
-
-        ALCdevice.const.p("deviceHandle", "the device to close")
+        ALCdevice.const.p("deviceHandle")
     )
 
     ALCcontext.p(
         "CreateContext",
-        "Creates an AL context.",
 
-        ALCdevice.const.p("deviceHandle", "a valid device"),
-        nullable..NullTerminated..ALCint.const.p(
-            "attrList",
-            "null or a zero terminated list of integer pairs composed of valid ALC attribute tokens and requested values",
-            ContextAttributes
-        )
+        ALCdevice.const.p("deviceHandle"),
+        nullable..NullTerminated..ALCint.const.p("attrList")
     )
 
     ALCboolean(
         "MakeContextCurrent",
-        """
-        Makes a context current with respect to OpenAL operation.
 
-        The context parameter can be #NULL or a valid context pointer. Using #NULL results in no context being current, which is useful when shutting OpenAL down.
-        The operation will apply to the device that the context was created for.
-
-        For each OS process (usually this means for each application), only one context can be current at any given time. All AL commands apply to the current
-        context. Commands that affect objects shared among contexts (e.g. buffers) have side effects on other contexts.
-        """,
-
-        nullable..ALCcontext.p("context", "the context to make current")
+        nullable..ALCcontext.p("context")
     )
 
     ALCvoid(
         "ProcessContext",
-        """
-        The current context is the only context accessible to state changes by AL commands (aside from state changes affecting shared objects). However,
-        multiple contexts can be processed at the same time. To indicate that a context should be processed (i.e. that internal execution state such as the
-        offset increments are to be performed), the application uses {@code alcProcessContext}.
 
-        Repeated calls to alcProcessContext are legal, and do not affect a context that is already marked as processing. The default state of a context created
-        by alcCreateContext is that it is processing.
-        """,
-
-        ALCcontext.p("context", "the context to mark for processing")
+        ALCcontext.p("context")
     )
 
     ALCvoid(
         "SuspendContext",
-        """
-        The application can suspend any context from processing (including the current one). To indicate that a context should be suspended from processing
-        (i.e. that internal execution state such as offset increments are not to be changed), the application uses {@code alcSuspendContext}.
 
-        Repeated calls to alcSuspendContext are legal, and do not affect a context that is already marked as suspended.
-        """,
-
-        ALCcontext.p("context", "the context to mark as suspended")
+        ALCcontext.p("context")
     )
 
     ALCvoid(
         "DestroyContext",
-        """
-        Destroys a context.
 
-        The correct way to destroy a context is to first release it using alcMakeCurrent with a #NULL context. Applications should not attempt to destroy a
-        current context – doing so will not work and will result in an ALC_INVALID_OPERATION error. All sources within a context will automatically be deleted
-        during context destruction.
-        """,
-
-        ALCcontext.p("context", "the context to destroy")
+        ALCcontext.p("context")
     )
 
     ALCcontext.p(
         "GetCurrentContext",
-        "Queries for, and obtains a handle to, the current context for the application. If there is no current context, #NULL is returned.",
         void()
     )
 
     ALCdevice.p(
         "GetContextsDevice",
-        "Queries for, and obtains a handle to, the device of a given context.",
 
-        ALCcontext.p("context", "the context to query")
+        ALCcontext.p("context")
     )
 
     ALCboolean(
         "IsExtensionPresent",
-        """
-        Verifies that a given extension is available for the current context and the device it is associated with.
 
-        Invalid and unsupported string tokens return ALC_FALSE. A #NULL deviceHandle is acceptable. {@code extName} is not case sensitive – the implementation
-        will convert the name to all upper-case internally (and will express extension names in upper-case).
-        """,
-
-        nullable..ALCdevice.const.p("deviceHandle", "the device to query"),
-        ALCcharASCII.const.p("extName", "the extension name")
+        nullable..ALCdevice.const.p("deviceHandle"),
+        ALCcharASCII.const.p("extName")
     )
 
     "ALCvoid".opaque.p(
         "GetProcAddress",
-        """
-        Retrieves extension entry points.
 
-        The application is expected to verify the applicability of an extension or core function entry point before requesting it by name, by use of
-        #IsExtensionPresent().
-
-        Entry points can be device specific, but are not context specific. Using a #NULL device handle does not guarantee that the entry point is returned,
-        even if available for one of the available devices.
-        """,
-
-        nullable..ALCdevice.const.p("deviceHandle", "the device to query"),
-        ALcharASCII.const.p("funcName", "the function name")
+        nullable..ALCdevice.const.p("deviceHandle"),
+        ALcharASCII.const.p("funcName")
     )
 
     ALCenum(
         "GetEnumValue",
-        """
-        Returns extension enum values.
 
-        Enumeration/token values are device independent, but tokens defined for extensions might not be present for a given device. Using a #NULL handle is
-        legal, but only the tokens defined by the AL core are guaranteed. Availability of extension tokens depends on the ALC extension.
-        """,
-
-        nullable..ALCdevice.const.p("deviceHandle", "the device to query"),
-        ALCcharASCII.const.p("enumName", "the enum name")
+        nullable..ALCdevice.const.p("deviceHandle"),
+        ALCcharASCII.const.p("enumName")
     )
 
     ALCenum(
         "GetError",
-        """
-        Queries ALC errors.
 
-        ALC uses the same conventions and mechanisms as AL for error handling. In particular, ALC does not use conventions derived from X11 (GLX) or Windows
-        (WGL).
-
-        Error conditions are specific to the device, and (like AL) a call to alcGetError resets the error state.
-        """,
-
-        nullable..ALCdevice.p("deviceHandle", "the device to query")
+        nullable..ALCdevice.p("deviceHandle")
     )
 
     ALCcharUTF8.const.p(
         "GetString",
-        """
-        Obtains string value(s) from ALC.
 
-        <b>LWJGL note</b>: Use ALUtil#getStringList() for those tokens that return multiple values.
-        """,
-
-        nullable..ALCdevice.p("deviceHandle", "the device to query"),
-        ALCenum("token", "the information to query", StringQueries)
+        nullable..ALCdevice.p("deviceHandle"),
+        ALCenum("token")
     )
 
     ALCvoid(
         "GetIntegerv",
-        "Obtains integer value(s) from ALC.",
 
-        nullable..ALCdevice.p("deviceHandle", "the device to query"),
-        ALCenum("token", "the information to query", IntegerQueries),
-        AutoSize("dest")..ALCsizei("size", "the size of the {@code dest} buffer"),
-        ReturnParam..ALCint.p("dest", "the destination buffer")
+        nullable..ALCdevice.p("deviceHandle"),
+        ALCenum("token"),
+        AutoSize("dest")..ALCsizei("size"),
+        ReturnParam..ALCint.p("dest")
     )
 
 }

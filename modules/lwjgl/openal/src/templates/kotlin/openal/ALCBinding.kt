@@ -91,7 +91,6 @@ val ALCBinding = Generator.register(object : APIBinding(
             "static org.lwjgl.system.Checks.*"
         )
 
-        documentation = "Defines the capabilities of the OpenAL Context API."
     }
 
     override fun PrintWriter.generateJava() {

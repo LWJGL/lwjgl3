@@ -15,31 +15,10 @@ val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(Module.GLFW, nativeSubPath = "wi
         "static org.lwjgl.system.MemoryUtil.*"
     )
 
-    documentation = "Native bindings to the GLFW library's WGL native access functions."
-
     HGLRC(
         "GetWGLContext",
-        """
-        Returns the {@code HGLRC} of the specified window.
-        
-        The {@code HDC} associated with the window can be queried with the
-        ${url("https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdc", "GetDC")} function.
-        ${code("""
-        HDC dc = GetDC(glfwGetWin32Window(window));""")}
-        This DC is private and does not need to be released.
 
-        Note: This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", "the GLFW window"),
-
-        returnDoc =
-        """
-        the {@code HGLRC} of the specified window, or #NULL if an error occurred.
-        
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.0"
+        GLFWwindow.p("window")
     )
 
     customMethod("""

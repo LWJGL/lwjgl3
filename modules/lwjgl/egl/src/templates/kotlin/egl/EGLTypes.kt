@@ -51,39 +51,16 @@ val EGLLabelKHR = "EGLLabelKHR".handle
 val EGLDEBUGPROCKHR = Module.EGL.callback {
     void(
         "EGLDebugMessageKHRCallback",
-        "Will be called when a debug message is generated.",
 
-        EGLenum("error", "will contain an EGL error code, or #SUCCESS, as applicable"),
-        charASCII.const.p("command", "will contain a pointer to a string. Example \"eglBindApi\"."),
-        EGLint("messageType", "will contain one of the debug message types"),
-        EGLLabelKHR(
-            "threadLabel",
-            """
-            will contain the label attached to the current thread. The {@code threadLabel} will be #NULL if not set by the application. If the message is from an
-            internal thread, the label will be #NULL.
-            """
-        ),
-        EGLLabelKHR(
-            "objectLabel",
-            """
-            will contain the label attached to the primary object of the message; Labels will be #NULL if not set by the application. The primary object should
-            be the object the function operates on, see table 13.2 which provides the recommended mapping between functions and their primary object. This
-            {@code objectLabel} may be #NULL even though the application labeled the object. This is because it is possible an error was raised while executing
-            the command before the primary object was validated, therefore its label can not be included in the callback.
-            """
-        ),
-        nullable..charUTF8.const.p(
-            "message",
-            """
-            will contain a platform specific debug string message; This string should provide added information to the application developer regarding the
-            condition that generated the message. The format of a message is implementation-defined, although it should represent a concise description of the
-            event that caused the message to be generated. Message strings can be #NULL and should not be assumed otherwise.
-            """
-        ),
+        EGLenum("error"),
+        charASCII.const.p("command"),
+        EGLint("messageType"),
+        EGLLabelKHR("threadLabel"),
+        EGLLabelKHR("objectLabel"),
+        nullable..charUTF8.const.p("message"),
 
         nativeType = "EGLDEBUGPROCKHR"
     ) {
-        documentation = "Instances of this interface may be passed to the #DebugMessageControlKHR() method."
         additionalCode = """
     /**
      * Converts the specified {@link EGLDebugMessageKHRCallback} argument to a String.
@@ -132,30 +109,28 @@ val EGLNativeFileDescriptorKHR = typedef(int, "EGLNativeFileDescriptorKHR")
 val EGLsizeiANDROID = typedef(khronos_ssize_t, "EGLsizeiANDROID")
 val EGLSetBlobFuncANDROID = Module.EGL.callback {
     void(
-        "EGLSetBlobFuncANDROID", "",
+        "EGLSetBlobFuncANDROID",
 
-        void.const.p("key", ""),
-        AutoSize("key")..EGLsizeiANDROID("keySize", ""),
-        void.const.p("value", ""),
-        AutoSize("value")..EGLsizeiANDROID("valueSize", ""),
+        void.const.p("key"),
+        AutoSize("key")..EGLsizeiANDROID("keySize"),
+        void.const.p("value"),
+        AutoSize("value")..EGLsizeiANDROID("valueSize"),
 
         nativeType = "EGLSetBlobFuncANDROID"
     ) {
-        documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
     }
 }
 val EGLGetBlobFuncANDROID = Module.EGL.callback {
     EGLsizeiANDROID(
-        "EGLGetBlobFuncANDROID", "",
+        "EGLGetBlobFuncANDROID",
 
-        void.const.p("key", ""),
-        AutoSize("key")..EGLsizeiANDROID("keySize", ""),
-        void.p("value", ""),
-        AutoSize("value")..EGLsizeiANDROID("valueSize", ""),
+        void.const.p("key"),
+        AutoSize("key")..EGLsizeiANDROID("keySize"),
+        void.p("value"),
+        AutoSize("value")..EGLsizeiANDROID("valueSize"),
 
         nativeType = "EGLGetBlobFuncANDROID"
     ) {
-        documentation = "Instances of this interface may be passed to the #SetBlobCacheFuncsANDROID() method."
     }
 }
 
@@ -168,28 +143,10 @@ val EGLOutputPortEXT = "EGLOutputPortEXT".handle
 
 // HI_clientpixmap
 val EGLClientPixmapHI = struct(Module.EGL, "EGLClientPixmapHI", nativeName = "struct EGLClientPixmapHI") {
-    documentation =
-        """
-        Specifies the width, height, stride, format and memory pointer of the pixmap to be used by the function #CreatePixmapSurfaceHI() to
-        create the {@code PixmapSurface}.
-        """
-
-    void.p(
-        "pData",
-        """
-        pointer to a memory buffer allocated by the application that will contain the result of the drawing operations. It is up to the application to ensure
-        that the buffer size corresponds to {@code iHeight * iStride * sizeof(pixel)}.
-        """
-    )
-    EGLint("iWidth", "width of the buffer in pixels")
-    EGLint(
-        "iHeight",
-        """
-        height of the buffer in pixels. The height of the buffer can be negative; in that case the result of the drawing operations will be vertically swapped.
-        When positive, {@code pData} will point at the bottom-left corner of the image; when negative, to the top-left corner.
-        """
-    )
-    EGLint("iStride", "stride of the buffer, in pixels. It is important to note that each row of the buffer must start on 32-bit boundaries.")
+    void.p("pData")
+    EGLint("iWidth")
+    EGLint("iHeight")
+    EGLint("iStride")
 }
 
 // NV_sync

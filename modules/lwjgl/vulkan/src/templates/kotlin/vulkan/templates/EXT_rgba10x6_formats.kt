@@ -9,64 +9,15 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val EXT_rgba10x6_formats = "EXTRgba10x6Formats".nativeClassVK("EXT_rgba10x6_formats", type = "device", postfix = "EXT") {
-    documentation =
-        """
-        This extension enables the #FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 format to be used without a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> enabled.
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_EXT_rgba10x6_formats}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>345</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Jan-Harald Fredriksen <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_rgba10x6_formats]%20@janharaldfredriksen-arm%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_rgba10x6_formats%20extension*">janharaldfredriksen-arm</a></li>
-            </ul></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2021-09-29</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Jan-Harald Fredriksen, Arm</li>
-                <li>Graeme Leese, Broadcom</li>
-                <li>Spencer Fricke, Samsung</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "EXT_RGBA10X6_FORMATS_SPEC_VERSION".."1"
     )
 
     StringConstant(
-        "The extension name.",
-
         "EXT_RGBA10X6_FORMATS_EXTENSION_NAME".."VK_EXT_rgba10x6_formats"
     )
 
     EnumConstant(
-        "Extends {@code VkStructureType}.",
-
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT".."1000344000"
     )
 }

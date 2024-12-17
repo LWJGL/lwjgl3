@@ -70,7 +70,6 @@ val WGLBinding = Generator.register(object : APIBinding(
             "static org.lwjgl.system.Checks.*"
         )
 
-        documentation = "Defines the WGL capabilities of an OpenGL device."
     }
 
     override fun PrintWriter.generateJava() {

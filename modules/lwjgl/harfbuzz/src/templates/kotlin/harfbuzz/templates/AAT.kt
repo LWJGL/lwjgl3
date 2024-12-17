@@ -8,30 +8,20 @@ import org.lwjgl.generator.*
 import harfbuzz.*
 
 val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod = "hb_att_", binding = HARFBUZZ_BINDING_DELEGATE) {
-    documentation =
-        "Native bindings to the Apple Advanced Typography Layout API of the ${url("https://harfbuzz.github.io/", "HarfBuzz")} library."
-
     EnumConstant(
-        """
-        The possible feature types defined for AAT shaping, from Apple ${url(
-            "https://developer.apple.com/fonts/TrueType-Reference-Manual/RM09/AppendixF.html",
-            "Font Feature Registry"
-        )}. ({@code hb_aat_layout_feature_type_t})
-        """,
-
-        "LAYOUT_FEATURE_TYPE_INVALID".enum("", "0xFFFF"),
-        "LAYOUT_FEATURE_TYPE_ALL_TYPOGRAPHIC".enum("", "0"),
+        "LAYOUT_FEATURE_TYPE_INVALID".enum("0xFFFF"),
+        "LAYOUT_FEATURE_TYPE_ALL_TYPOGRAPHIC".enum("0"),
         "LAYOUT_FEATURE_TYPE_LIGATURES".enum,
         "LAYOUT_FEATURE_TYPE_CURSIVE_CONNECTION".enum,
         "LAYOUT_FEATURE_TYPE_LETTER_CASE".enum,
         "LAYOUT_FEATURE_TYPE_VERTICAL_SUBSTITUTION".enum,
         "LAYOUT_FEATURE_TYPE_LINGUISTIC_REARRANGEMENT".enum,
         "LAYOUT_FEATURE_TYPE_NUMBER_SPACING".enum,
-        "LAYOUT_FEATURE_TYPE_SMART_SWASH_TYPE".enum("", "8"),
+        "LAYOUT_FEATURE_TYPE_SMART_SWASH_TYPE".enum("8"),
         "LAYOUT_FEATURE_TYPE_DIACRITICS_TYPE".enum,
         "LAYOUT_FEATURE_TYPE_VERTICAL_POSITION".enum,
         "LAYOUT_FEATURE_TYPE_FRACTIONS".enum,
-        "LAYOUT_FEATURE_TYPE_OVERLAPPING_CHARACTERS_TYPE".enum("", "13"),
+        "LAYOUT_FEATURE_TYPE_OVERLAPPING_CHARACTERS_TYPE".enum("13"),
         "LAYOUT_FEATURE_TYPE_TYPOGRAPHIC_EXTRAS".enum,
         "LAYOUT_FEATURE_TYPE_MATHEMATICAL_EXTRAS".enum,
         "LAYOUT_FEATURE_TYPE_ORNAMENT_SETS_TYPE".enum,
@@ -58,18 +48,16 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_TYPE_LOWER_CASE".enum,
         "LAYOUT_FEATURE_TYPE_UPPER_CASE".enum,
         "LAYOUT_FEATURE_TYPE_LANGUAGE_TAG_TYPE".enum,
-        "LAYOUT_FEATURE_TYPE_CJK_ROMAN_SPACING_TYPE".enum("", "103")
+        "LAYOUT_FEATURE_TYPE_CJK_ROMAN_SPACING_TYPE".enum("103")
     ).noPrefix()
 
     EnumConstant(
-        "The selectors defined for specifying AAT feature settings. ({@code hb_aat_layout_feature_selector_t})",
+        "LAYOUT_FEATURE_SELECTOR_INVALID".enum("0xFFFF"),
 
-        "LAYOUT_FEATURE_SELECTOR_INVALID".enum("", "0xFFFF"),
-
-        "LAYOUT_FEATURE_SELECTOR_ALL_TYPE_FEATURES_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_ALL_TYPE_FEATURES_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_ALL_TYPE_FEATURES_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_REQUIRED_LIGATURES_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_REQUIRED_LIGATURES_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_REQUIRED_LIGATURES_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_COMMON_LIGATURES_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_COMMON_LIGATURES_OFF".enum,
@@ -92,29 +80,29 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_HISTORICAL_LIGATURES_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_HISTORICAL_LIGATURES_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_UNCONNECTED".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_UNCONNECTED".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_PARTIALLY_CONNECTED".enum,
         "LAYOUT_FEATURE_SELECTOR_CURSIVE".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_UPPER_AND_LOWER_CASE".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_UPPER_AND_LOWER_CASE".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_ALL_CAPS".enum,
         "LAYOUT_FEATURE_SELECTOR_ALL_LOWER_CASE".enum,
         "LAYOUT_FEATURE_SELECTOR_SMALL_CAPS".enum,
         "LAYOUT_FEATURE_SELECTOR_INITIAL_CAPS".enum,
         "LAYOUT_FEATURE_SELECTOR_INITIAL_CAPS_AND_SMALL_CAPS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_SUBSTITUTE_VERTICAL_FORMS_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_SUBSTITUTE_VERTICAL_FORMS_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_SUBSTITUTE_VERTICAL_FORMS_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_LINGUISTIC_REARRANGEMENT_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_LINGUISTIC_REARRANGEMENT_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_LINGUISTIC_REARRANGEMENT_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_MONOSPACED_NUMBERS".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_MONOSPACED_NUMBERS".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_NUMBERS".enum,
         "LAYOUT_FEATURE_SELECTOR_THIRD_WIDTH_NUMBERS".enum,
         "LAYOUT_FEATURE_SELECTOR_QUARTER_WIDTH_NUMBERS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_WORD_INITIAL_SWASHES_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_WORD_INITIAL_SWASHES_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_WORD_INITIAL_SWASHES_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_WORD_FINAL_SWASHES_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_WORD_FINAL_SWASHES_OFF".enum,
@@ -125,24 +113,24 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_NON_FINAL_SWASHES_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_NON_FINAL_SWASHES_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_SHOW_DIACRITICS".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_SHOW_DIACRITICS".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_HIDE_DIACRITICS".enum,
         "LAYOUT_FEATURE_SELECTOR_DECOMPOSE_DIACRITICS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NORMAL_POSITION".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NORMAL_POSITION".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_SUPERIORS".enum,
         "LAYOUT_FEATURE_SELECTOR_INFERIORS".enum,
         "LAYOUT_FEATURE_SELECTOR_ORDINALS".enum,
         "LAYOUT_FEATURE_SELECTOR_SCIENTIFIC_INFERIORS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_FRACTIONS".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_FRACTIONS".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_VERTICAL_FRACTIONS".enum,
         "LAYOUT_FEATURE_SELECTOR_DIAGONAL_FRACTIONS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_PREVENT_OVERLAP_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_PREVENT_OVERLAP_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_PREVENT_OVERLAP_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_HYPHENS_TO_EM_DASH_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_HYPHENS_TO_EM_DASH_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_HYPHENS_TO_EM_DASH_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_EN_DASH_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_EN_DASH_OFF".enum,
@@ -155,7 +143,7 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_PERIODS_TO_ELLIPSIS_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_PERIODS_TO_ELLIPSIS_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_MINUS_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_MINUS_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_HYPHEN_TO_MINUS_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_ASTERISK_TO_MULTIPLY_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_ASTERISK_TO_MULTIPLY_OFF".enum,
@@ -168,7 +156,7 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_MATHEMATICAL_GREEK_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_MATHEMATICAL_GREEK_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_ORNAMENTS".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_ORNAMENTS".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_DINGBATS".enum,
         "LAYOUT_FEATURE_SELECTOR_PI_CHARACTERS".enum,
         "LAYOUT_FEATURE_SELECTOR_FLEURONS".enum,
@@ -176,22 +164,22 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_INTERNATIONAL_SYMBOLS".enum,
         "LAYOUT_FEATURE_SELECTOR_MATH_SYMBOLS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_ALTERNATES".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_ALTERNATES".enum("0"),
 
-        "LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL1".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL1".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL2".enum,
         "LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL3".enum,
         "LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL4".enum,
         "LAYOUT_FEATURE_SELECTOR_DESIGN_LEVEL5".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_STYLE_OPTIONS".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_STYLE_OPTIONS".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_DISPLAY_TEXT".enum,
         "LAYOUT_FEATURE_SELECTOR_ENGRAVED_TEXT".enum,
         "LAYOUT_FEATURE_SELECTOR_ILLUMINATED_CAPS".enum,
         "LAYOUT_FEATURE_SELECTOR_TITLING_CAPS".enum,
         "LAYOUT_FEATURE_SELECTOR_TALL_CAPS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_TRADITIONAL_CHARACTERS".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_TRADITIONAL_CHARACTERS".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_SIMPLIFIED_CHARACTERS".enum,
         "LAYOUT_FEATURE_SELECTOR_JIS1978_CHARACTERS".enum,
         "LAYOUT_FEATURE_SELECTOR_JIS1983_CHARACTERS".enum,
@@ -207,10 +195,10 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_NLCCHARACTERS".enum,
         "LAYOUT_FEATURE_SELECTOR_TRADITIONAL_NAMES_CHARACTERS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_LOWER_CASE_NUMBERS".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_LOWER_CASE_NUMBERS".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_UPPER_CASE_NUMBERS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_TEXT".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_TEXT".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_MONOSPACED_TEXT".enum,
         "LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_TEXT".enum,
         "LAYOUT_FEATURE_SELECTOR_THIRD_WIDTH_TEXT".enum,
@@ -218,7 +206,7 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_ALT_PROPORTIONAL_TEXT".enum,
         "LAYOUT_FEATURE_SELECTOR_ALT_HALF_WIDTH_TEXT".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_TRANSLITERATION".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_TRANSLITERATION".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL".enum,
         "LAYOUT_FEATURE_SELECTOR_HIRAGANA_TO_KATAKANA".enum,
         "LAYOUT_FEATURE_SELECTOR_KATAKANA_TO_HIRAGANA".enum,
@@ -229,7 +217,7 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL_ALT_TWO".enum,
         "LAYOUT_FEATURE_SELECTOR_HANJA_TO_HANGUL_ALT_THREE".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_ANNOTATION".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_ANNOTATION".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_BOX_ANNOTATION".enum,
         "LAYOUT_FEATURE_SELECTOR_ROUNDED_BOX_ANNOTATION".enum,
         "LAYOUT_FEATURE_SELECTOR_CIRCLE_ANNOTATION".enum,
@@ -241,59 +229,59 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_INVERTED_BOX_ANNOTATION".enum,
         "LAYOUT_FEATURE_SELECTOR_INVERTED_ROUNDED_BOX_ANNOTATION".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_KANA".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_KANA".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_KANA".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_IDEOGRAPHS".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_IDEOGRAPHS".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_IDEOGRAPHS".enum,
         "LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_IDEOGRAPHS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_CANONICAL_COMPOSITION_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_CANONICAL_COMPOSITION_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_CANONICAL_COMPOSITION_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_COMPATIBILITY_COMPOSITION_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_COMPATIBILITY_COMPOSITION_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_TRANSCODING_COMPOSITION_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_TRANSCODING_COMPOSITION_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_RUBY_KANA".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_RUBY_KANA".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_RUBY_KANA".enum,
         "LAYOUT_FEATURE_SELECTOR_RUBY_KANA_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_RUBY_KANA_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_CJK_SYMBOL_ALTERNATIVES".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_CJK_SYMBOL_ALTERNATIVES".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_ONE".enum,
         "LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_TWO".enum,
         "LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_THREE".enum,
         "LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_FOUR".enum,
         "LAYOUT_FEATURE_SELECTOR_CJK_SYMBOL_ALT_FIVE".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_IDEOGRAPHIC_ALTERNATIVES".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_IDEOGRAPHIC_ALTERNATIVES".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_ONE".enum,
         "LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_TWO".enum,
         "LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_THREE".enum,
         "LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_FOUR".enum,
         "LAYOUT_FEATURE_SELECTOR_IDEOGRAPHIC_ALT_FIVE".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_CJK_VERTICAL_ROMAN_CENTERED".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_CJK_VERTICAL_ROMAN_CENTERED".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_CJK_VERTICAL_ROMAN_HBASELINE".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_CJK_ITALIC_ROMAN".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_NO_CJK_ITALIC_ROMAN".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_CJK_ITALIC_ROMAN".enum,
         "LAYOUT_FEATURE_SELECTOR_CJK_ITALIC_ROMAN_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_CJK_ITALIC_ROMAN_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_LAYOUT_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_LAYOUT_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_LAYOUT_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_SPACING_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_CASE_SENSITIVE_SPACING_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_ALTERNATE_HORIZ_KANA_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_ALTERNATE_HORIZ_KANA_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_ALTERNATE_HORIZ_KANA_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_ALTERNATE_VERT_KANA_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_ALTERNATE_VERT_KANA_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_NO_STYLISTIC_ALTERNATES".enum("", "0"),
-        "LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ONE_ON".enum("", "2"),
+        "LAYOUT_FEATURE_SELECTOR_NO_STYLISTIC_ALTERNATES".enum("0"),
+        "LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ONE_ON".enum("2"),
         "LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_ONE_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWO_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWO_OFF".enum,
@@ -334,85 +322,73 @@ val hb_aat = "AAT".nativeClass(Module.HARFBUZZ, prefix = "HB_ATT", prefixMethod 
         "LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWENTY_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_STYLISTIC_ALT_TWENTY_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_ALTERNATES_ON".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_ALTERNATES_ON".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_ALTERNATES_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_SWASH_ALTERNATES_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_SWASH_ALTERNATES_OFF".enum,
         "LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_SWASH_ALTERNATES_ON".enum,
         "LAYOUT_FEATURE_SELECTOR_CONTEXTUAL_SWASH_ALTERNATES_OFF".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_DEFAULT_LOWER_CASE".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_DEFAULT_LOWER_CASE".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_LOWER_CASE_SMALL_CAPS".enum,
         "LAYOUT_FEATURE_SELECTOR_LOWER_CASE_PETITE_CAPS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_DEFAULT_UPPER_CASE".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_DEFAULT_UPPER_CASE".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_UPPER_CASE_SMALL_CAPS".enum,
         "LAYOUT_FEATURE_SELECTOR_UPPER_CASE_PETITE_CAPS".enum,
 
-        "LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_CJK_ROMAN".enum("", "0"),
+        "LAYOUT_FEATURE_SELECTOR_HALF_WIDTH_CJK_ROMAN".enum("0"),
         "LAYOUT_FEATURE_SELECTOR_PROPORTIONAL_CJK_ROMAN".enum,
         "LAYOUT_FEATURE_SELECTOR_DEFAULT_CJK_ROMAN".enum,
         "LAYOUT_FEATURE_SELECTOR_FULL_WIDTH_CJK_ROMAN".enum
     )
 
     IntConstant(
-        """
-        Used when getting or setting AAT feature selectors.
-
-        Indicates that there is no selector index corresponding to the selector of interest.
-        """,
-
         "LAYOUT_NO_SELECTOR_INDEX".."0xFFFF"
     )
 
     unsigned_int(
         "layout_get_feature_types",
-        "",
 
-        hb_face_t.p("face", ""),
-        unsigned_int("start_offset", ""),
-        AutoSize("features")..Check(1)..nullable..unsigned_int.p("feature_count", ""),
-        nullable..hb_aat_layout_feature_type_t.p("features", "")
+        hb_face_t.p("face"),
+        unsigned_int("start_offset"),
+        AutoSize("features")..Check(1)..nullable..unsigned_int.p("feature_count"),
+        nullable..hb_aat_layout_feature_type_t.p("features")
     )
 
     hb_ot_name_id_t(
         "layout_feature_type_get_name_id",
-        "",
 
-        hb_face_t.p("face", ""),
-        hb_aat_layout_feature_type_t("feature_type", "")
+        hb_face_t.p("face"),
+        hb_aat_layout_feature_type_t("feature_type")
     )
 
     unsigned_int(
         "layout_feature_type_get_selector_infos",
-        "",
 
-        hb_face_t.p("face", ""),
-        hb_aat_layout_feature_type_t("feature_type", ""),
-        unsigned_int("start_offset", ""),
-        AutoSize("selectors")..Check(1)..nullable..unsigned_int.p("selector_count", ""),
-        nullable..hb_aat_layout_feature_selector_info_t.p("selectors", ""),
-        Check(1)..nullable..unsigned_int.p("default_index", "")
+        hb_face_t.p("face"),
+        hb_aat_layout_feature_type_t("feature_type"),
+        unsigned_int("start_offset"),
+        AutoSize("selectors")..Check(1)..nullable..unsigned_int.p("selector_count"),
+        nullable..hb_aat_layout_feature_selector_info_t.p("selectors"),
+        Check(1)..nullable..unsigned_int.p("default_index")
     )
 
     hb_bool_t(
         "layout_has_substitution",
-        "",
 
-        hb_face_t.p("face", "")
+        hb_face_t.p("face")
     )
 
     hb_bool_t(
         "layout_has_positioning",
-        "",
 
-        hb_face_t.p("face", "")
+        hb_face_t.p("face")
     )
 
     hb_bool_t(
         "layout_has_tracking",
-        "",
 
-        hb_face_t.p("face", "")
+        hb_face_t.p("face")
     )
 }

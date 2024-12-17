@@ -9,32 +9,14 @@ import opengl.*
 import core.windows.*
 
 val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity", NV) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        On systems with more than one GPU it is desirable to be able to select which GPU(s) in the system become the target for OpenGL rendering commands. This
-        extension introduces the concept of a GPU affinity mask. OpenGL rendering commands are directed to the GPU(s) specified by the affinity mask. GPU
-        affinity is immutable. Once set, it cannot be changed.
-
-        This extension also introduces the concept called affinity-DC. An affinity-DC is a device context with a GPU affinity mask embedded in it. This
-        restricts the device context to only allow OpenGL commands to be sent to the GPU(s) in the affinity mask.
-
-        Requires ${WGL_ARB_extensions_string.link}.
-        """
-
     val wglMakeCurrent = "WGL#wglMakeCurrent()"
     val wglMakeContextCurrentARB = "#MakeContextCurrentARB()"
 
     IntConstant(
-        "New error code set by wglShareLists, wglMakeCurrent and $wglMakeContextCurrentARB.",
-
         "ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV"..0x20D0
     ).noPrefix()
 
     IntConstant(
-        "New error code set by $wglMakeCurrent and $wglMakeContextCurrentARB.",
-
         "ERROR_MISSING_AFFINITY_MASK_NV"..0x20D1
     ).noPrefix()
 
@@ -42,60 +24,36 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 
     BOOL(
         "EnumGpusNV",
-        """
-        Returns the handles for all GPUs in a system.
 
-        By looping over {@code wglEnumGpusNV} and incrementing {@code gpuIndex}, starting at index 0, all GPU handles can be queried. If the function succeeds,
-        the return value is TRUE. If the function fails, the return value is FALSE and {@code gpu} will be unmodified. The function fails if {@code gpuIndex} is
-        greater or equal than the number of GPUs supported by the system.
-        """,
-
-        UINT("gpuIndex", "an index value that specifies a GPU"),
-        Check(1)..HGPUNV.p("gpu", "returns a handle for GPU number {@code gpuIndex}. The first GPU will be index 0.")
+        UINT("gpuIndex"),
+        Check(1)..HGPUNV.p("gpu")
     )
 
     BOOL(
         "EnumGpuDevicesNV",
-        "Retrieve information about the display devices supported by a GPU.",
 
-        HGPUNV("gpu", "a handle to the GPU to query"),
-        UINT("deviceIndex", "an index value that specifies a display device, supported by {@code gpu}, to query. The first display device will be index 0."),
-        PGPU_DEVICE("gpuDevice", "a ##GPU_DEVICE structure which will receive information about the display device at index {@code deviceIndex}.")
+        HGPUNV("gpu"),
+        UINT("deviceIndex"),
+        PGPU_DEVICE("gpuDevice")
     )
 
     HDC(
         "CreateAffinityDCNV",
-        """
-        Creates an affinity-DC. Affinity-DCs, a new type of DC, can be used to direct OpenGL commands to a specific GPU or set of GPUs. An affinity-DC is a
-        device context with a GPU affinity mask embedded in it. This restricts the device context to only allow OpenGL commands to be sent to the GPU(s) in the
-        affinity mask. An affinity-DC can be created directly, using the new function {@code wglCreateAffinityDCNV} and also indirectly by calling
-        #CreatePbufferARB() followed by #GetPbufferDCARB().
 
-        If successful, the function returns an affinity-DC handle. If it fails, #NULL will be returned.
-        """,
-
-        NullTerminated..HGPUNV.const.p("gpuList", "a #NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
+        NullTerminated..HGPUNV.const.p("gpuList")
     )
 
     BOOL(
         "EnumGpusFromAffinityDCNV",
-        """
-        Retrieves a list of GPU handles that make up the affinity-mask of an affinity-DC.
 
-        By looping over {@code wglEnumGpusFromAffinityDCNV} and incrementing {@code gpuIndex}, starting at index 0, all GPU handles associated with the DC can
-        be queried. If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE and {@code gpu} will be unmodified. The
-        function fails if {@code gpuIndex} is greater or equal than the number of GPUs associated with {@code affinityDC}.
-        """,
-
-        HDC("affinityDC", "a handle of the affinity-DC to query"),
-        UINT("gpuIndex", "an index value of the GPU handle in the affinity mask of {@code affinityDC} to query"),
-        Check(1)..HGPUNV.p("gpu", "returns a handle for  GPU number {@code gpuIndex}. The first GPU will be at index 0.")
+        HDC("affinityDC"),
+        UINT("gpuIndex"),
+        Check(1)..HGPUNV.p("gpu")
     )
 
     BOOL(
         "DeleteDCNV",
-        "Deletes an affinity-DC.",
 
-        HDC("hdc", "a handle of an affinity-DC to delete")
+        HDC("hdc")
     )
 }

@@ -8,70 +8,8 @@ import org.lwjgl.generator.*
 import opengl.*
 import opengl.BufferType.*
 
-const val PRIMITIVE_TYPES = "$CORE_PRIMITIVE_TYPES #POLYGON #QUADS #QUAD_STRIP"
-
-// Table 8.26
-const val CUBE_MAP_FACES =
-    """
-    #TEXTURE_CUBE_MAP_POSITIVE_X #TEXTURE_CUBE_MAP_NEGATIVE_X
-    #TEXTURE_CUBE_MAP_POSITIVE_Y #TEXTURE_CUBE_MAP_NEGATIVE_Y
-    #TEXTURE_CUBE_MAP_POSITIVE_Z #TEXTURE_CUBE_MAP_NEGATIVE_Z
-    """
-
-const val TEXTURE_2D_TARGETS = "#TEXTURE_2D #TEXTURE_1D_ARRAY #TEXTURE_RECTANGLE #TEXTURE_CUBE_MAP"
-const val TEXTURE_2D_FACE_TARGETS = "#TEXTURE_2D #TEXTURE_1D_ARRAY $CUBE_MAP_FACES"
-const val PROXY_TEXTURE_2D_TARGETS = "#PROXY_TEXTURE_2D #PROXY_TEXTURE_1D_ARRAY #PROXY_TEXTURE_RECTANGLE #PROXY_TEXTURE_CUBE_MAP"
-
-const val TEXTURE_3D_TARGETS = "#TEXTURE_3D #TEXTURE_2D_ARRAY #TEXTURE_CUBE_MAP_ARRAY"
-const val PROXY_TEXTURE_3D_TARGETS = "#PROXY_TEXTURE_3D #PROXY_TEXTURE_2D_ARRAY #PROXY_TEXTURE_CUBE_MAP_ARRAY"
-
-const val PIXEL_DATA_TYPES = "$CORE_PIXEL_DATA_TYPES #BITMAP"
-const val PIXEL_DATA_FORMATS = "$CORE_PIXEL_DATA_FORMATS #LUMINANCE #LUMINANCE_ALPHA"
-
-// Table 8.22
-const val GENERIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
-    "#COMPRESSED_RED #COMPRESSED_RG #COMPRESSED_RGB #COMPRESSED_RGBA #COMPRESSED_SRGB #COMPRESSED_SRGB_ALPHA"
-
-const val SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
-    """
-    #COMPRESSED_RED_RGTC1 #COMPRESSED_SIGNED_RED_RGTC1 #COMPRESSED_RG_RGTC2 #COMPRESSED_SIGNED_RG_RGTC2
-    #COMPRESSED_RGBA_BPTC_UNORM #COMPRESSED_SRGB_ALPHA_BPTC_UNORM #COMPRESSED_RGB_BPTC_SIGNED_FLOAT #COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT
-
-    #COMPRESSED_RGB8_ETC2 #COMPRESSED_SRGB8_ETC2 #COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2
-    #COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 #COMPRESSED_RGBA8_ETC2_EAC #COMPRESSED_SRGB8_ALPHA8_ETC2_EAC #COMPRESSED_R11_EAC
-    #COMPRESSED_SIGNED_R11_EAC #COMPRESSED_RG11_EAC #COMPRESSED_SIGNED_RG11_EAC
-
-    @##EXTTextureCompressionS3TC @##EXTTextureCompressionLATC @##ATITextureCompression3DC
-    """
-
-// Error codes
-const val INVALID_ENUM = "#INVALID_ENUM"
-const val INVALID_VALUE = "#INVALID_VALUE"
-const val INVALID_OPERATION = "#INVALID_OPERATION"
-const val STACK_OVERFLOW = "#STACK_OVERFLOW"
-const val STACK_UNDERFLOW = "#STACK_UNDERFLOW"
-const val OUT_OF_MEMORY = "#OUT_OF_MEMORY"
-const val INVALID_FRAMEBUFFER_OPERATION = "#INVALID_FRAMEBUFFER_OPERATION"
-
 val GL11 = "GL11".nativeClassGL("GL11") {
-    documentation =
-        """
-        The OpenGL functionality up to version 1.1. Includes the deprecated symbols of the Compatibility Profile.
-
-        Extensions promoted to core in this release:
-        ${ul(
-            registryLinkTo("EXT", "vertex_array"),
-            registryLinkTo("EXT", "polygon_offset"),
-            registryLinkTo("EXT", "blend_logic_op"),
-            registryLinkTo("EXT", "texture"),
-            registryLinkTo("EXT", "copy_texture"),
-            registryLinkTo("EXT", "subtexture"),
-            registryLinkTo("EXT", "texture_object")
-        )}
-        """
-
     IntConstant(
-        "AccumOp",
         "ACCUM"..0x0100,
         "LOAD"..0x0101,
         "RETURN"..0x0102,
@@ -80,7 +18,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "AlphaFunction",
         "NEVER"..0x0200,
         "LESS"..0x0201,
         "EQUAL"..0x0202,
@@ -92,7 +29,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "AttribMask",
         "CURRENT_BIT"..0x00000001,
         "POINT_BIT"..0x00000002,
         "LINE_BIT"..0x00000004,
@@ -117,7 +53,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "BeginMode",
         "POINTS"..0x0000,
         "LINES"..0x0001,
         "LINE_LOOP"..0x0002,
@@ -131,7 +66,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "BlendingFactorDest",
         "ZERO".."0",
         "ONE".."1",
         "SRC_COLOR"..0x0300,
@@ -143,7 +77,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "BlendingFactorSrc",
         /*      ZERO */
         /*      ONE */
         "DST_COLOR"..0x0306,
@@ -152,13 +85,11 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "Boolean",
         "TRUE".."1",
         "FALSE".."0"
     )
 
     IntConstant(
-        "ClipPlaneName",
         "CLIP_PLANE0"..0x3000,
         "CLIP_PLANE1"..0x3001,
         "CLIP_PLANE2"..0x3002,
@@ -168,7 +99,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "DataType",
         "BYTE"..0x1400,
         "UNSIGNED_BYTE"..0x1401,
         "SHORT"..0x1402,
@@ -183,7 +113,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "DrawBufferMode",
         "NONE".."0",
         "FRONT_LEFT"..0x0400,
         "FRONT_RIGHT"..0x0401,
@@ -201,7 +130,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "ErrorCode",
         "NO_ERROR".."0",
         "INVALID_ENUM"..0x0500,
         "INVALID_VALUE"..0x0501,
@@ -212,7 +140,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "FeedBackMode",
         "2D"..0x0600,
         "3D"..0x0601,
         "3D_COLOR"..0x0602,
@@ -221,7 +148,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "FeedBackToken",
         "PASS_THROUGH_TOKEN"..0x0700,
         "POINT_TOKEN"..0x0701,
         "LINE_TOKEN"..0x0702,
@@ -233,27 +159,23 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "FogMode",
         /*      LINEAR */
         "EXP"..0x0800,
         "EXP2"..0x0801
     )
 
     IntConstant(
-        "FrontFaceDirection",
         "CW"..0x0900,
         "CCW"..0x0901
     )
 
     IntConstant(
-        "GetMapTarget",
         "COEFF"..0x0A00,
         "ORDER"..0x0A01,
         "DOMAIN"..0x0A02
     )
 
     IntConstant(
-        "GetTarget",
         "CURRENT_COLOR"..0x0B00,
         "CURRENT_INDEX"..0x0B01,
         "CURRENT_NORMAL"..0x0B02,
@@ -467,7 +389,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "GetTextureParameter",
         /*      TEXTURE_MAG_FILTER */
         /*      TEXTURE_MIN_FILTER */
         /*      TEXTURE_WRAP_S */
@@ -489,14 +410,12 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "HintMode",
         "DONT_CARE"..0x1100,
         "FASTEST"..0x1101,
         "NICEST"..0x1102
     )
 
     IntConstant(
-        "LightName",
         "LIGHT0"..0x4000,
         "LIGHT1"..0x4001,
         "LIGHT2"..0x4002,
@@ -508,7 +427,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "LightParameter",
         "AMBIENT"..0x1200,
         "DIFFUSE"..0x1201,
         "SPECULAR"..0x1202,
@@ -522,13 +440,11 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "ListMode",
         "COMPILE"..0x1300,
         "COMPILE_AND_EXECUTE"..0x1301
     )
 
     IntConstant(
-        "LogicOp",
         "CLEAR"..0x1500,
         "AND"..0x1501,
         "AND_REVERSE"..0x1502,
@@ -548,7 +464,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "MaterialParameter",
         "EMISSION"..0x1600,
         "SHININESS"..0x1601,
         "AMBIENT_AND_DIFFUSE"..0x1602,
@@ -559,21 +474,18 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "MatrixMode",
         "MODELVIEW"..0x1700,
         "PROJECTION"..0x1701,
         "TEXTURE"..0x1702
     )
 
     IntConstant(
-        "PixelCopyType",
         "COLOR"..0x1800,
         "DEPTH"..0x1801,
         "STENCIL"..0x1802
     )
 
     IntConstant(
-        "PixelFormat",
         "COLOR_INDEX"..0x1900,
         "STENCIL_INDEX"..0x1901,
         "DEPTH_COMPONENT"..0x1902,
@@ -588,7 +500,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "PixelType",
         "BITMAP"..0x1A00
         /*      BYTE */
         /*      UNSIGNED_BYTE */
@@ -600,27 +511,23 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "PolygonMode",
         "POINT"..0x1B00,
         "LINE"..0x1B01,
         "FILL"..0x1B02
     )
 
     IntConstant(
-        "RenderingMode",
         "RENDER"..0x1C00,
         "FEEDBACK"..0x1C01,
         "SELECT"..0x1C02
     )
 
     IntConstant(
-        "ShadingModel",
         "FLAT"..0x1D00,
         "SMOOTH"..0x1D01
     )
 
     IntConstant(
-        "StencilOp",
         /*      ZERO */
         "KEEP"..0x1E00,
         "REPLACE"..0x1E01,
@@ -630,7 +537,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "StringName",
         "VENDOR"..0x1F00,
         "RENDERER"..0x1F01,
         "VERSION"..0x1F02,
@@ -638,7 +544,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "TextureCoordName",
         "S"..0x2000,
         "T"..0x2001,
         "R"..0x2002,
@@ -652,7 +557,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     /*      DOUBLE */
 
     IntConstant(
-        "TextureEnvMode",
         "MODULATE"..0x2100,
         "DECAL"..0x2101
         /*      BLEND */
@@ -660,38 +564,32 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "TextureEnvParameter",
         "TEXTURE_ENV_MODE"..0x2200,
         "TEXTURE_ENV_COLOR"..0x2201
     )
 
     IntConstant(
-        "TextureEnvTarget",
         "TEXTURE_ENV"..0x2300
     )
 
     IntConstant(
-        "TextureGenMode",
         "EYE_LINEAR"..0x2400,
         "OBJECT_LINEAR"..0x2401,
         "SPHERE_MAP"..0x2402
     )
 
     IntConstant(
-        "TextureGenParameter",
         "TEXTURE_GEN_MODE"..0x2500,
         "OBJECT_PLANE"..0x2501,
         "EYE_PLANE"..0x2502
     )
 
     IntConstant(
-        "TextureMagFilter",
         "NEAREST"..0x2600,
         "LINEAR"..0x2601
     )
 
     IntConstant(
-        "TextureMinFilter",
         /*      NEAREST */
         /*      LINEAR */
         "NEAREST_MIPMAP_NEAREST"..0x2700,
@@ -701,7 +599,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "TextureParameterName",
         "TEXTURE_MAG_FILTER"..0x2800,
         "TEXTURE_MIN_FILTER"..0x2801,
         "TEXTURE_WRAP_S"..0x2802,
@@ -711,20 +608,17 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "TextureWrapMode",
         "CLAMP"..0x2900,
         "REPEAT"..0x2901
     )
 
     IntConstant(
-        "ClientAttribMask",
         "CLIENT_PIXEL_STORE_BIT"..0x00000001,
         "CLIENT_VERTEX_ARRAY_BIT"..0x00000002,
         "CLIENT_ALL_ATTRIB_BITS"..0xffffffff.i
     )
 
     IntConstant(
-        "polygon_offset",
         "POLYGON_OFFSET_FACTOR"..0x8038,
         "POLYGON_OFFSET_UNITS"..0x2A00,
         "POLYGON_OFFSET_POINT"..0x2A01,
@@ -733,7 +627,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "texture",
         "ALPHA4"..0x803B,
         "ALPHA8"..0x803C,
         "ALPHA12"..0x803D,
@@ -778,7 +671,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "texture_object",
         "TEXTURE_PRIORITY"..0x8066,
         "TEXTURE_RESIDENT"..0x8067,
         "TEXTURE_BINDING_1D"..0x8068,
@@ -786,7 +678,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     )
 
     IntConstant(
-        "vertex_array",
         "VERTEX_ARRAY"..0x8074,
         "NORMAL_ARRAY"..0x8075,
         "COLOR_ARRAY"..0x8076,
@@ -829,32 +720,6 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         "T4F_C4F_N3F_V4F"..0x2A2D
     )
 
-    // Some definitions to be used in the javadocs below
-
-    val COMPARISON_FUNCTIONS = "#NEVER #ALWAYS #LESS #LEQUAL #EQUAL #GEQUAL #GREATER #NOTEQUAL"
-
-    val TEX_COORDS = "#S #T #R #Q"
-
-    // Table 8.3
-    val PIXEL_MAP_NAMES =
-        """
-        #PIXEL_MAP_I_TO_I #PIXEL_MAP_S_TO_S #PIXEL_MAP_I_TO_R #PIXEL_MAP_I_TO_G #PIXEL_MAP_I_TO_B #PIXEL_MAP_I_TO_A
-        #PIXEL_MAP_R_TO_R #PIXEL_MAP_G_TO_G #PIXEL_MAP_B_TO_B #PIXEL_MAP_A_TO_A
-        """
-
-    // Table 21.1
-    val MAP1_TARGETS =
-        """
-        #MAP1_VERTEX_3 #MAP1_VERTEX_4 #MAP1_COLOR_4 #MAP1_NORMAL
-        #MAP1_TEXTURE_COORD_1 #MAP1_TEXTURE_COORD_2 #MAP1_TEXTURE_COORD_3 #MAP1_TEXTURE_COORD_4
-        """
-
-    val MAP2_TARGETS =
-        """
-        #MAP2_VERTEX_3 #MAP2_VERTEX_4 #MAP2_COLOR_4 #MAP2_NORMAL
-        #MAP2_TEXTURE_COORD_1 #MAP2_TEXTURE_COORD_2 #MAP2_TEXTURE_COORD_3 #MAP2_TEXTURE_COORD_4
-        """
-
     // Functions
 
     reuse(GL11C, "Enable")
@@ -862,104 +727,77 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void(
         "Accum",
-        """
-        Each portion of a pixel in the accumulation buffer consists of four values: one for each of R, G, B, and A. The accumulation buffer is controlled
-        exclusively through the use of this method (except for clearing it).
-        """,
 
-        GLenum("op", "a symbolic constant indicating an accumulation buffer operation"),
-        GLfloat("value", "a floating-point value to be used in that operation", "#ACCUM #LOAD #RETURN #MULT #ADD")
+        GLenum("op"),
+        GLfloat("value")
     )
 
     DeprecatedGL..void(
         "AlphaFunc",
-        """
-        The alpha test discards a fragment conditionally based on the outcome of a comparison between the incoming fragment’s alpha value and a constant value.
-        The comparison is enabled or disabled with the generic #Enable() and #Disable() commands using the symbolic constant #ALPHA_TEST.
-        When disabled, it is as if the comparison always passes. The test is controlled with this method.
-        """,
 
-        GLenum("func", "a symbolic constant indicating the alpha test function", COMPARISON_FUNCTIONS),
-        GLfloat("ref", "a reference value clamped to the range [0, 1]. When performing the alpha test, the GL will convert the reference value to the same representation as the fragment's alpha value (floating-point or fixed-point).")
+        GLenum("func"),
+        GLfloat("ref")
     )
 
     DeprecatedGL..GLboolean(
         "AreTexturesResident",
-        """
-        Returns #TRUE if all of the texture objects named in textures are resident, or if the implementation does not distinguish a working set. If
-        at least one of the texture objects named in textures is not resident, then #FALSE is returned, and the residence of each texture object is
-        returned in residences. Otherwise the contents of residences are not changed.
-        """,
 
-        AutoSize("textures", "residences")..(GLsizei("n", "the number of texture objects in {@code textures}")),
-        SingleValue("texture")..GLuint.const.p("textures", "an array of texture objects"),
-        GLboolean.p("residences", "returns the residences of each texture object")
+        AutoSize("textures", "residences")..(GLsizei("n")),
+        SingleValue("texture")..GLuint.const.p("textures"),
+        GLboolean.p("residences")
     )
 
     DeprecatedGL..void(
         "ArrayElement",
-        "Transfers the ith element of every enabled, non-instanced array, and the first element of every enabled, instanced array to the GL.",
 
-        GLint("i", "the element to transfer")
+        GLint("i")
     )
 
     DeprecatedGL..void(
         "Begin",
-        "Begins the definition of vertex attributes of a sequence of primitives to be transferred to the GL.",
 
-        GLenum("mode", "the primitive type being defined", PRIMITIVE_TYPES)
+        GLenum("mode")
     )
 
     reuse(GL11C, "BindTexture")
 
     DeprecatedGL..void(
         "Bitmap",
-        """
-        Sents a bitmap to the GL. Bitmaps are rectangles of zeros and ones specifying a particular pattern of fragments to be produced. Each of these fragments
-        has the same associated data. These data are those associated with the current raster position.
-        """,
 
-        GLsizei("w", "the bitmap width"),
-        GLsizei("h", "the bitmap width"),
-        GLfloat("xOrig", "the bitmap origin x coordinate"),
-        GLfloat("yOrig", "the bitmap origin y coordinate"),
-        GLfloat("xInc", "the x increment added to the raster position"),
-        GLfloat("yInc", "the y increment added to the raster position"),
-        Check("((w + 7) >> 3) * h")..RawPointer..nullable..GLubyte.const.p("data", "the buffer containing the bitmap data.")
+        GLsizei("w"),
+        GLsizei("h"),
+        GLfloat("xOrig"),
+        GLfloat("yOrig"),
+        GLfloat("xInc"),
+        GLfloat("yInc"),
+        Check("((w + 7) >> 3) * h")..RawPointer..nullable..GLubyte.const.p("data")
     )
 
     reuse(GL11C, "BlendFunc")
 
     DeprecatedGL..void(
         "CallList",
-        "Executes a display list. Causes the commands saved in the display list to be executed, in order, just as if they were issued without using a display list.",
 
-        GLuint("list", "the index of the display list to be called")
+        GLuint("list")
     )
 
     DeprecatedGL..void(
         "CallLists",
-        "Provides an efficient means for executing a number of display lists.",
-
-        AutoSizeDiv("GLChecks.typeToBytes(type)", "lists")..GLsizei("n", "the number of display lists to be called"),
-        AutoType("lists", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum(
-            "type",
-            "the data type of each element in {@code lists}",
-            "#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT #FLOAT #2_BYTES #3_BYTES #4_BYTES"
-        ),
-        void.const.p("lists", "an array of offsets. Each offset is added to the display list base to obtain the display list number.")
+        
+        AutoSizeDiv("GLChecks.typeToBytes(type)", "lists")..GLsizei("n"),
+        AutoType("lists", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type"),
+        void.const.p("lists")
     )
 
     reuse(GL11C, "Clear")
 
     DeprecatedGL..void(
         "ClearAccum",
-        "Sets the clear values for the accumulation buffer. These values are clamped to the range [-1,1] when they are specified.",
 
-        GLfloat("red", "the value to which to clear the R values of the accumulation buffer"),
-        GLfloat("green", "the value to which to clear the G values of the accumulation buffer"),
-        GLfloat("blue", "the value to which to clear the B values of the accumulation buffer"),
-        GLfloat("alpha", "the value to which to clear the A values of the accumulation buffer")
+        GLfloat("red"),
+        GLfloat("green"),
+        GLfloat("blue"),
+        GLfloat("alpha")
     )
 
     reuse(GL11C, "ClearColor")
@@ -967,142 +805,106 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void(
         "ClearIndex",
-        """
-        sets the clear color index. index is converted to a fixed-point value with unspecified precision to the left of the binary point; the integer part of
-        this value is then masked with ${code("2<sup>m</sup> &ndash; 1")}, where {@code m} is the number of bits in a color index value stored in the
-        framebuffer.
-        """,
 
-        GLfloat("index", "the value to which to clear the color buffer in color index mode")
+        GLfloat("index")
     )
 
     reuse(GL11C, "ClearStencil")
 
     DeprecatedGL..void(
         "ClipPlane",
-        """
-        Specifies a client-defined clip plane.
 
-        The value of the first argument, {@code plane}, is a symbolic constant, CLIP_PLANEi, where i is an integer between 0 and n &ndash; 1, indicating one of
-        n client-defined clip planes. {@code equation} is an array of four double-precision floating-point values. These are the coefficients of a plane
-        equation in object coordinates: p1, p2, p3, and p4 (in that order).
-        """,
-
-        GLenum("plane", "the clip plane to define"),
-        Check(4)..GLdouble.const.p("equation", "the clip plane coefficients")
+        GLenum("plane"),
+        Check(4)..GLdouble.const.p("equation")
     )
-
-    // Color functions javadoc
-    val colorRed = "the red component of the current color"
-    val colorGreen = "the green component of the current color"
-    val colorBlue = "the blue component of the current color"
-    val colorAlpha = "the alpha component of the current color"
-    val colorBuffer = "the color buffer"
 
     DeprecatedGL..void(
         "Color3b",
-        "Sets the R, G, and B components of the current color. The alpha component is set to 1.0.",
 
-        GLbyte("red", colorRed),
-        GLbyte("green", colorGreen),
-        GLbyte("blue", colorBlue)
+        GLbyte("red"),
+        GLbyte("green"),
+        GLbyte("blue")
     )
-    DeprecatedGL..void("Color3s", "Short version of #Color3b()", GLshort("red", colorRed), GLshort("green", colorGreen), GLshort("blue", colorBlue))
-    DeprecatedGL..void("Color3i", "Integer version of #Color3b()", GLint("red", colorRed), GLint("green", colorGreen), GLint("blue", colorBlue))
-    DeprecatedGL..void("Color3f", "Float version of #Color3b()", GLfloat("red", colorRed), GLfloat("green", colorGreen), GLfloat("blue", colorBlue))
-    DeprecatedGL..void("Color3d", "Double version of #Color3b()", GLdouble("red", colorRed), GLdouble("green", colorGreen), GLdouble("blue", colorBlue))
-    DeprecatedGL..void("Color3ub", "Unsigned version of #Color3b()", GLubyte("red", colorRed), GLubyte("green", colorGreen), GLubyte("blue", colorBlue))
-    DeprecatedGL..void("Color3us", "Unsigned short version of #Color3b()", GLushort("red", colorRed), GLushort("green", colorGreen), GLushort("blue", colorBlue))
-    DeprecatedGL..void("Color3ui", "Unsigned int version of #Color3b()", GLint("red", colorRed), GLint("green", colorGreen), GLint("blue", colorBlue))
+    DeprecatedGL..void("Color3s", GLshort("red"), GLshort("green"), GLshort("blue"))
+    DeprecatedGL..void("Color3i", GLint("red"), GLint("green"), GLint("blue"))
+    DeprecatedGL..void("Color3f", GLfloat("red"), GLfloat("green"), GLfloat("blue"))
+    DeprecatedGL..void("Color3d", GLdouble("red"), GLdouble("green"), GLdouble("blue"))
+    DeprecatedGL..void("Color3ub", GLubyte("red"), GLubyte("green"), GLubyte("blue"))
+    DeprecatedGL..void("Color3us", GLushort("red"), GLushort("green"), GLushort("blue"))
+    DeprecatedGL..void("Color3ui", GLint("red"), GLint("green"), GLint("blue"))
 
-    DeprecatedGL..void("Color3bv", "Byte pointer version of #Color3b().", Check(3)..GLbyte.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color3sv", "Pointer version of #Color3s().", Check(3)..GLshort.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color3iv", "Pointer version of #Color3i().", Check(3)..GLint.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color3fv", "Pointer version of #Color3f().", Check(3)..GLfloat.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color3dv", "Pointer version of #Color3d().", Check(3)..GLdouble.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color3ubv", "Pointer version of #Color3ub().", Check(3)..GLubyte.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color3usv", "Pointer version of #Color3us().", Check(3)..GLushort.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color3uiv", "Pointer version of #Color3ui().", Check(3)..GLuint.const.p("v", colorBuffer))
+    DeprecatedGL..void("Color3bv", Check(3)..GLbyte.const.p("v"))
+    DeprecatedGL..void("Color3sv", Check(3)..GLshort.const.p("v"))
+    DeprecatedGL..void("Color3iv", Check(3)..GLint.const.p("v"))
+    DeprecatedGL..void("Color3fv", Check(3)..GLfloat.const.p("v"))
+    DeprecatedGL..void("Color3dv", Check(3)..GLdouble.const.p("v"))
+    DeprecatedGL..void("Color3ubv", Check(3)..GLubyte.const.p("v"))
+    DeprecatedGL..void("Color3usv", Check(3)..GLushort.const.p("v"))
+    DeprecatedGL..void("Color3uiv", Check(3)..GLuint.const.p("v"))
 
     DeprecatedGL..void(
         "Color4b",
-        "Sets the current color.",
 
-        GLbyte("red", colorRed),
-        GLbyte("green", colorGreen),
-        GLbyte("blue", colorBlue),
-        GLbyte("alpha", colorAlpha)
+        GLbyte("red"),
+        GLbyte("green"),
+        GLbyte("blue"),
+        GLbyte("alpha")
     )
 
-    DeprecatedGL..void("Color4s", "Short version of #Color4b()", GLshort("red", colorRed), GLshort("green", colorGreen), GLshort("blue", colorBlue), GLshort("alpha", colorAlpha))
-    DeprecatedGL..void("Color4i", "Integer version of #Color4b()", GLint("red", colorRed), GLint("green", colorGreen), GLint("blue", colorBlue), GLint("alpha", colorAlpha))
-    DeprecatedGL..void("Color4f", "Float version of #Color4b()", GLfloat("red", colorRed), GLfloat("green", colorGreen), GLfloat("blue", colorBlue), GLfloat("alpha", colorAlpha))
-    DeprecatedGL..void("Color4d", "Double version of #Color4b()", GLdouble("red", colorRed), GLdouble("green", colorGreen), GLdouble("blue", colorBlue), GLdouble("alpha", colorAlpha))
-    DeprecatedGL..void("Color4ub", "Unsigned version of #Color4b()", GLubyte("red", colorRed), GLubyte("green", colorGreen), GLubyte("blue", colorBlue), GLubyte("alpha", colorAlpha))
-    DeprecatedGL..void("Color4us", "Unsigned short version of #Color4b()", GLushort("red", colorRed), GLushort("green", colorGreen), GLushort("blue", colorBlue), GLushort("alpha", colorAlpha))
-    DeprecatedGL..void("Color4ui", "Unsigned int version of #Color4b()", GLint("red", colorRed), GLint("green", colorGreen), GLint("blue", colorBlue), GLint("alpha", colorAlpha))
+    DeprecatedGL..void("Color4s", GLshort("red"), GLshort("green"), GLshort("blue"), GLshort("alpha"))
+    DeprecatedGL..void("Color4i", GLint("red"), GLint("green"), GLint("blue"), GLint("alpha"))
+    DeprecatedGL..void("Color4f", GLfloat("red"), GLfloat("green"), GLfloat("blue"), GLfloat("alpha"))
+    DeprecatedGL..void("Color4d", GLdouble("red"), GLdouble("green"), GLdouble("blue"), GLdouble("alpha"))
+    DeprecatedGL..void("Color4ub", GLubyte("red"), GLubyte("green"), GLubyte("blue"), GLubyte("alpha"))
+    DeprecatedGL..void("Color4us", GLushort("red"), GLushort("green"), GLushort("blue"), GLushort("alpha"))
+    DeprecatedGL..void("Color4ui", GLint("red"), GLint("green"), GLint("blue"), GLint("alpha"))
 
-    DeprecatedGL..void("Color4bv", "Pointer version of #Color4b().", Check(4)..GLbyte.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color4sv", "Pointer version of #Color4s().", Check(4)..GLshort.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color4iv", "Pointer version of #Color4i().", Check(4)..GLint.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color4fv", "Pointer version of #Color4f().", Check(4)..GLfloat.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color4dv", "Pointer version of #Color4d().", Check(4)..GLdouble.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color4ubv", "Pointer version of #Color4ub().", Check(4)..GLubyte.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color4usv", "Pointer version of #Color4us().", Check(4)..GLushort.const.p("v", colorBuffer))
-    DeprecatedGL..void("Color4uiv", "Pointer version of #Color4ui().", Check(4)..GLuint.const.p("v", colorBuffer))
+    DeprecatedGL..void("Color4bv", Check(4)..GLbyte.const.p("v"))
+    DeprecatedGL..void("Color4sv", Check(4)..GLshort.const.p("v"))
+    DeprecatedGL..void("Color4iv", Check(4)..GLint.const.p("v"))
+    DeprecatedGL..void("Color4fv", Check(4)..GLfloat.const.p("v"))
+    DeprecatedGL..void("Color4dv", Check(4)..GLdouble.const.p("v"))
+    DeprecatedGL..void("Color4ubv", Check(4)..GLubyte.const.p("v"))
+    DeprecatedGL..void("Color4usv", Check(4)..GLushort.const.p("v"))
+    DeprecatedGL..void("Color4uiv", Check(4)..GLuint.const.p("v"))
 
     reuse(GL11C, "ColorMask")
 
     DeprecatedGL..void(
         "ColorMaterial",
-        """
-        It is possible to attach one or more material properties to the current color, so that they continuously track its component values. This behavior is
-        enabled and disabled by calling #Enable() or #Disable() with the symbolic value #COLOR_MATERIAL. This function controls which
-        of these modes is selected.
-        """,
 
-        GLenum("face", "specifies which material face is affected by the current color", "#FRONT #BACK #FRONT_AND_BACK"),
-        GLenum("mode", "specifies which material property or properties track the current color", "#EMISSION #AMBIENT #DIFFUSE #SPECULAR #AMBIENT_AND_DIFFUSE")
+        GLenum("face"),
+        GLenum("mode")
     )
 
     OffHeapOnly..DeprecatedGL..void(
         "ColorPointer",
-        "Specifies the location and organization of a color array.",
 
-        GLint("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3 4 #BGRA"),
-        GLenum(
-            "type",
-            "the data type of the values stored in the array",
-            "#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT #HALF_FLOAT #FLOAT #DOUBLE #UNSIGNED_INT_2_10_10_10_REV #INT_2_10_10_10_REV"
-        ),
-        GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
+        GLint("size"),
+        GLenum("type"),
+        GLsizei("stride"),
         RawPointer..MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..void.const.p("pointer", "the color array data")
+        )..Unsafe..void.const.p("pointer")
     )
 
     DeprecatedGL..void(
         "CopyPixels",
-        "Transfers a rectangle of pixel values from one region of the read framebuffer to another in the draw framebuffer",
 
-        GLint("x", "the left framebuffer pixel coordinate"),
-        GLint("y", "the lower framebuffer pixel coordinate"),
-        GLsizei("width", "the rectangle width"),
-        GLsizei("height", "the rectangle height"),
-        GLenum("type", "Indicates the type of values to be transfered", "#COLOR #STENCIL #DEPTH #DEPTH_STENCIL")
+        GLint("x"),
+        GLint("y"),
+        GLsizei("width"),
+        GLsizei("height"),
+        GLenum("type")
     )
 
     reuse(GL11C, "CullFace")
 
     DeprecatedGL..void(
         "DeleteLists",
-        """
-        Deletes a contiguous group of display lists. All information about the display lists is lost, and the indices become unused. Indices to which no display
-        list corresponds are ignored. If {@code range} is zero, nothing happens.
-        """,
 
-        GLuint("list", "the index of the first display list to be deleted"),
-        GLsizei("range", "the number of display lists to be deleted")
+        GLuint("list"),
+        GLsizei("range")
     )
 
     reuse(GL11C, "DepthFunc")
@@ -1111,20 +913,8 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..DependsOn("GL_NV_vertex_buffer_unified_memory")..void(
         "DisableClientState",
-        """
-        Disables a client-side capability.
 
-        If the ##NVVertexBufferUnifiedMemory extension is supported, this function is available even in a core profile context.
-        """,
-
-        GLenum(
-            "cap",
-            "the capability to disable",
-            """
-            #COLOR_ARRAY #EDGE_FLAG_ARRAY #FOG_COORD_ARRAY #INDEX_ARRAY #NORMAL_ARRAY #SECONDARY_COLOR_ARRAY #TEXTURE_COORD_ARRAY #VERTEX_ARRAY
-            #VERTEX_ATTRIB_ARRAY_UNIFIED_NV #ELEMENT_ARRAY_UNIFIED_NV
-            """
-        )
+        GLenum("cap")
     )
 
     reuse(GL11C, "DrawArrays")
@@ -1133,166 +923,129 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void(
         "DrawPixels",
-        "Draws a pixel rectangle to the active draw buffers.",
 
-        GLsizei("width", "the pixel rectangle width"),
-        GLsizei("height", "the pixel rectangle height"),
-        GLenum("format", "the pixel data format", PIXEL_DATA_FORMATS),
-        GLenum("type", "the pixel data type", PIXEL_DATA_TYPES),
+        GLsizei("width"),
+        GLsizei("height"),
+        GLenum("format"),
+        GLenum("type"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..RawPointer..void.const.p("pixels", "the pixel data")
+        )..Unsafe..RawPointer..void.const.p("pixels")
     )
 
     DeprecatedGL..void(
         "EdgeFlag",
-        """
-        Each edge of each polygon primitive generated is flagged as either boundary or non-boundary. These classifications are used during polygon
-        rasterization; some modes affect the interpretation of polygon boundary edges. By default, all edges are boundary edges, but the flagging of polygons,
-        separate triangles, or separate quadrilaterals may be altered by calling this function.
 
-        When a primitive of type #POLYGON, #TRIANGLES, or #QUADS is drawn, each vertex transferred begins an edge. If the edge
-        flag bit is TRUE, then each specified vertex begins an edge that is flagged as boundary. If the bit is FALSE, then induced edges are flagged as
-        non-boundary.
-        """,
-
-        GLboolean("flag", "the edge flag bit")
+        GLboolean("flag")
     )
 
     DeprecatedGL..void(
         "EdgeFlagv",
-        "Pointer version of #EdgeFlag().",
 
-        Check(1)..GLboolean.const.p("flag", "the edge flag buffer")
+        Check(1)..GLboolean.const.p("flag")
     )
 
     OffHeapOnly..DeprecatedGL..void(
         "EdgeFlagPointer",
-        "Specifies the location and organization of an edge flag array.",
 
-        GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-        Unsafe..RawPointer..GLboolean.const.p("pointer", "the edge flag array data")
+        GLsizei("stride"),
+        Unsafe..RawPointer..GLboolean.const.p("pointer")
     )
 
     DeprecatedGL..DependsOn("GL_NV_vertex_buffer_unified_memory")..void(
         "EnableClientState",
-        """
-        Enables a client-side capability.
 
-        If the ##NVVertexBufferUnifiedMemory extension is supported, this function is available even in a core profile context.
-        """,
-
-        GLenum(
-            "cap",
-            "the capability to enable",
-            """
-            #COLOR_ARRAY #EDGE_FLAG_ARRAY #FOG_COORD_ARRAY #INDEX_ARRAY #NORMAL_ARRAY #SECONDARY_COLOR_ARRAY #TEXTURE_COORD_ARRAY #VERTEX_ARRAY
-            #VERTEX_ATTRIB_ARRAY_UNIFIED_NV #ELEMENT_ARRAY_UNIFIED_NV
-            """
-        )
+        GLenum("cap")
     )
 
-    DeprecatedGL..void("End", "Ends the definition of vertex attributes of a sequence of primitives to be transferred to the GL.")
+    DeprecatedGL..void("End")
 
     DeprecatedGL..void(
         "EvalCoord1f",
-        "Causes evaluation of the enabled one-dimensional evaluator maps.",
 
-        GLfloat("u", "the domain coordinate u")
+        GLfloat("u")
     )
 
     DeprecatedGL..void(
         "EvalCoord1fv",
-        "Pointer version of #EvalCoord1f().",
 
-        Check(1)..GLfloat.const.p("u", "the domain coordinate buffer")
+        Check(1)..GLfloat.const.p("u")
     )
 
     DeprecatedGL..void(
         "EvalCoord1d",
-        "Double version of #EvalCoord1f().",
 
-        GLdouble("u", "the domain coordinate u")
+        GLdouble("u")
     )
 
     DeprecatedGL..void(
         "EvalCoord1dv",
-        "Pointer version of #EvalCoord1d().",
 
-        Check(1)..GLdouble.const.p("u", "the domain coordinate buffer")
+        Check(1)..GLdouble.const.p("u")
     )
 
     DeprecatedGL..void(
         "EvalCoord2f",
-        "Causes evaluation of the enabled two-dimensional evaluator maps.",
 
-        GLfloat("u", "the domain coordinate u"),
-        GLfloat("v", "the domain coordinate v")
+        GLfloat("u"),
+        GLfloat("v")
     )
 
     DeprecatedGL..void(
         "EvalCoord2fv",
-        "Pointer version of #EvalCoord2f().",
 
-        Check(2)..GLfloat.const.p("u", "the domain coordinate buffer")
+        Check(2)..GLfloat.const.p("u")
     )
 
     DeprecatedGL..void(
         "EvalCoord2d",
-        "Double version of #EvalCoord2f().",
 
-        GLdouble("u", "the domain coordinate u"),
-        GLdouble("v", "the domain coordinate v")
+        GLdouble("u"),
+        GLdouble("v")
     )
 
     DeprecatedGL..void(
         "EvalCoord2dv",
-        "Pointer version of #EvalCoord2d().",
 
-        Check(2)..GLdouble.const.p("u", "the domain coordinate buffer")
+        Check(2)..GLdouble.const.p("u")
     )
 
     DeprecatedGL..void(
         "EvalMesh1",
-        "Carries out an evaluation on a subset of the one-dimensional map grid.",
 
-        GLenum("mode", "the mesh type", "#POINT #LINE"),
-        GLint("i1", "the start index"),
-        GLint("i2", "the end index")
+        GLenum("mode"),
+        GLint("i1"),
+        GLint("i2")
     )
 
     DeprecatedGL..void(
         "EvalMesh2",
-        "Carries out an evaluation on a rectangular subset of the two-dimensional map grid.",
 
-        GLenum("mode", "the mesh type", "#FILL #LINE #POINT"),
-        GLint("i1", "the u-dimension start index"),
-        GLint("i2", "the u-dimension end index"),
-        GLint("j1", "the v-dimension start index"),
-        GLint("j2", "the v-dimension end index")
+        GLenum("mode"),
+        GLint("i1"),
+        GLint("i2"),
+        GLint("j1"),
+        GLint("j2")
     )
 
     DeprecatedGL..void(
         "EvalPoint1",
-        "Carries out an evalutation of a single point on the one-dimensional map grid.",
 
-        GLint("i", "the grid index")
+        GLint("i")
     )
 
     DeprecatedGL..void(
         "EvalPoint2",
-        "Carries out an evalutation of a single point on the two-dimensional map grid.",
-        GLint("i", "the u-dimension grid index"),
-        GLint("j", "the v-dimension grid index")
+        GLint("i"),
+        GLint("j")
     )
 
     DeprecatedGL..void(
         "FeedbackBuffer",
-        "Returns information about primitives when the GL is in feedback mode.",
 
-        AutoSize("buffer")..GLsizei("size", "the maximum number of values that can be written to {@code buffer}"),
-        GLenum("type", "the type of information to feed back for each vertex", "#2D #3D #3D_COLOR #3D_COLOR_TEXTURE #4D_COLOR_TEXTURE"),
-        GLfloat.p("buffer", "an array of floating-point values into which feedback information will be placed")
+        AutoSize("buffer")..GLsizei("size"),
+        GLenum("type"),
+        GLfloat.p("buffer")
     )
 
     reuse(GL11C, "Finish")
@@ -1300,48 +1053,38 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void(
         "Fogi",
-        "Sets the integer value of a fog parameter.",
 
-        GLenum("pname", "the fog parameter", "#FOG_MODE #FOG_COORD_SRC"),
-        GLint("param", "the fog parameter value", "#EXP #EXP2 #LINEAR #FRAGMENT_DEPTH #FOG_COORD")
+        GLenum("pname"),
+        GLint("param")
     )
 
     DeprecatedGL..void(
         "Fogiv",
-        "Pointer version of #Fogi().",
 
-        GLenum("pname", "the fog parameter", "#FOG_MODE #FOG_COORD_SRC"),
-        Check(1)..GLint.const.p("params", "the fog parameter buffer")
+        GLenum("pname"),
+        Check(1)..GLint.const.p("params")
     )
 
     DeprecatedGL..void(
         "Fogf",
-        "Sets the float value of a fog parameter.",
 
-        GLenum("pname", "the fog parameter", "#FOG_DENSITY #FOG_START #FOG_END"),
-        GLfloat("param", "the fog parameter value")
+        GLenum("pname"),
+        GLfloat("param")
     )
 
     DeprecatedGL..void(
         "Fogfv",
-        "Pointer version of #Fogf().",
 
-        GLenum("pname", "the fog parameter", "#FOG_DENSITY #FOG_START #FOG_END"),
-        Check(1)..GLfloat.const.p("params", "the fog parameter buffer")
+        GLenum("pname"),
+        Check(1)..GLfloat.const.p("params")
     )
 
     reuse(GL11C, "FrontFace")
 
     DeprecatedGL..GLuint(
         "GenLists",
-        """
-        Returns an integer n such that the indices {@code n,..., n + s - 1} are previously unused (i.e. there are {@code s} previously unused display list
-        indices starting at n). {@code GenLists} also has the effect of creating an empty display list for each of the indices {@code n,..., n + s - 1}, so
-        that these indices all become used. {@code GenLists} returns zero if there is no group of {@code s} contiguous previously unused display list indices,
-        or if {@code s = 0}.
-        """,
 
-        GLsizei("s", "the number of display lists to create")
+        GLsizei("s")
     )
 
     reuse(GL11C, "GenTextures")
@@ -1349,13 +1092,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void(
         "GetClipPlane",
-        """
-        Returns four double-precision values in {@code equation}; these are the coefficients of the plane equation of plane in eye coordinates (these
-        coordinates are those that were computed when the plane was specified).
-        """,
 
-        GLenum("plane", "the clip plane"),
-        Check(4)..GLdouble.p("equation", "a buffer in which to place the returned values")
+        GLenum("plane"),
+        Check(4)..GLdouble.p("equation")
     )
 
     reuse(GL11C, "GetBooleanv")
@@ -1366,160 +1105,129 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void(
         "GetLightiv",
-        "Returns integer information about light parameter {@code pname} for {@code light} in {@code data}.",
 
-        GLenum("light", "the light for which to return information", "#LIGHT0 GL_LIGHT[1-7]"),
-        GLenum(
-            "pname",
-            "the light parameter to query",
-            """
-            #AMBIENT #DIFFUSE #SPECULAR #POSITION #CONSTANT_ATTENUATION #LINEAR_ATTENUATION #QUADRATIC_ATTENUATION
-            #SPOT_DIRECTION #SPOT_EXPONENT #SPOT_CUTOFF
-            """
-        ),
-        Check(4)..ReturnParam..GLint.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("light"),
+        GLenum("pname"),
+        Check(4)..ReturnParam..GLint.p("data")
     )
 
     DeprecatedGL..void(
         "GetLightfv",
-        "Float version of #GetLightiv().",
 
-        GLenum("light", "the light for which to return information"),
-        GLenum("pname", "the light parameter to query"),
-        Check(4)..ReturnParam..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("light"),
+        GLenum("pname"),
+        Check(4)..ReturnParam..GLfloat.p("data")
     )
 
     DeprecatedGL..void(
         "GetMapiv",
-        "Returns integer information about {@code query} for evaluator map {@code target} in {@code data}.",
 
-        GLenum("target", "the evaluator target", "$MAP1_TARGETS $MAP2_TARGETS"),
-        GLenum("query", "the information to query", "#ORDER #COEFF #DOMAIN"),
-        Check(4)..ReturnParam..GLint.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("target"),
+        GLenum("query"),
+        Check(4)..ReturnParam..GLint.p("data")
     )
 
     DeprecatedGL..void(
         "GetMapfv",
-        "Float version of #GetMapiv().",
 
-        GLenum("target", "the evaluator map"),
-        GLenum("query", "the information to query"),
-        Check(4)..ReturnParam..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("target"),
+        GLenum("query"),
+        Check(4)..ReturnParam..GLfloat.p("data")
     )
 
     DeprecatedGL..void(
         "GetMapdv",
-        "Double version of #GetMapiv().",
 
-        GLenum("target", "the evaluator map"),
-        GLenum("query", "the information to query"),
-        Check(4)..ReturnParam..GLdouble.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("target"),
+        GLenum("query"),
+        Check(4)..ReturnParam..GLdouble.p("data")
     )
 
     DeprecatedGL..void(
         "GetMaterialiv",
-        "Returns integer information about material property {@code pname} for {@code face} in {@code data}.",
 
-        GLenum("face", "the material face for which to return information", "#FRONT #BACK"),
-        GLenum("pname", "the information to query", "#AMBIENT #DIFFUSE #SPECULAR #EMISSION #SHININESS"),
-        Check(1)..GLint.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("face"),
+        GLenum("pname"),
+        Check(1)..GLint.p("data")
     )
 
     DeprecatedGL..void(
         "GetMaterialfv",
-        "Float version of #GetMaterialiv().",
 
-        GLenum("face", "the material face for which to return information"),
-        GLenum("pname", "the information to query"),
-        Check(1)..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("face"),
+        GLenum("pname"),
+        Check(1)..GLfloat.p("data")
     )
 
     DeprecatedGL..void(
         "GetPixelMapfv",
-        "Returns all float values in the pixel map {@code map} in {@code data}.",
 
-        GLenum("map", "the pixel map parameter to query", PIXEL_MAP_NAMES),
-        Check(32)..RawPointer..GLfloat.p("data", "a buffer in which to place the returned data")
+        GLenum("map"),
+        Check(32)..RawPointer..GLfloat.p("data")
     )
 
     DeprecatedGL..void(
         "GetPixelMapusv",
-        "Unsigned short version of #GetPixelMapfv().",
 
-        GLenum("map", "the pixel map parameter to query"),
-        Check(32)..RawPointer..GLushort.p("data", "a buffer in which to place the returned data")
+        GLenum("map"),
+        Check(32)..RawPointer..GLushort.p("data")
     )
 
     DeprecatedGL..void(
         "GetPixelMapuiv",
-        "Unsigned integer version of #GetPixelMapfv().",
 
-        GLenum("map", "the pixel map parameter to query"),
-        Check(32)..RawPointer..GLuint.p("data", "a buffer in which to place the returned data")
+        GLenum("map"),
+        Check(32)..RawPointer..GLuint.p("data")
     )
 
     reuse(GL11C, "GetPointerv")
 
     DeprecatedGL..void(
         "GetPolygonStipple",
-        "Obtains the polygon stipple.",
 
-        Check(128)..RawPointer..void.p("pattern", "a buffer in which to place the returned data")
+        Check(128)..RawPointer..void.p("pattern")
     )
 
     reuse(GL11C, "GetString")
 
     DeprecatedGL..void(
         "GetTexEnviv",
-        "Returns integer information about {@code pname} for {@code env} in {@code data}.",
 
-        GLenum("env", "the texture environment to query", "#POINT_SPRITE #TEXTURE_ENV #TEXTURE_FILTER_CONTROL"),
-        GLenum(
-            "pname",
-            "the parameter to query",
-            """
-            #COORD_REPLACE #TEXTURE_ENV_MODE #TEXTURE_ENV_COLOR #TEXTURE_LOD_BIAS #COMBINE_RGB #COMBINE_ALPHA #SRC0_RGB
-            #SRC1_RGB #SRC2_RGB #SRC0_ALPHA #SRC1_ALPHA #SRC2_ALPHA #OPERAND0_RGB #OPERAND1_RGB
-            #OPERAND2_RGB #OPERAND0_ALPHA #OPERAND1_ALPHA #OPERAND2_ALPHA #RGB_SCALE #ALPHA_SCALE
-            """
-        ),
-        Check(1)..ReturnParam..GLint.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("env"),
+        GLenum("pname"),
+        Check(1)..ReturnParam..GLint.p("data")
     )
 
     DeprecatedGL..void(
         "GetTexEnvfv",
-        "Float version of #GetTexEnviv().",
 
-        GLenum("env", "the texture environment to query"),
-        GLenum("pname", "the parameter to query"),
-        Check(1)..ReturnParam..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("env"),
+        GLenum("pname"),
+        Check(1)..ReturnParam..GLfloat.p("data")
     )
 
     DeprecatedGL..void(
         "GetTexGeniv",
-        "Returns integer information about {@code pname} for {@code coord} in {@code data}.",
 
-        GLenum("coord", "the coord to query", TEX_COORDS),
-        GLenum("pname", "the parameter to query", "#EYE_PLANE #OBJECT_PLANE #TEXTURE_GEN_MODE"),
-        Check(1)..ReturnParam..GLint.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("coord"),
+        GLenum("pname"),
+        Check(1)..ReturnParam..GLint.p("data")
     )
 
     DeprecatedGL..void(
         "GetTexGenfv",
-        "Float version of #GetTexGeniv().",
 
-        GLenum("coord", "the coord to query"),
-        GLenum("pname", "the parameter to query"),
-        Check(4)..ReturnParam..GLfloat.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("coord"),
+        GLenum("pname"),
+        Check(4)..ReturnParam..GLfloat.p("data")
     )
 
     DeprecatedGL..void(
         "GetTexGendv",
-        "Double version of #GetTexGeniv().",
 
-        GLenum("coord", "the coord to query"),
-        GLenum("pname", "the parameter to query"),
-        Check(4)..ReturnParam..GLdouble.p("data", "a scalar or buffer in which to place the returned data")
+        GLenum("coord"),
+        GLenum("pname"),
+        Check(4)..ReturnParam..GLdouble.p("data")
     )
 
     reuse(GL11C, "GetTexImage")
@@ -1529,534 +1237,383 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     reuse(GL11C, "GetTexParameterfv")
     reuse(GL11C, "Hint")
 
-    val index = "the value to which the current color index should be set"
-
     DeprecatedGL..void(
         "Indexi",
-        "Updates the current (single-valued) color index.",
-        GLint("index", index)
+        GLint("index")
     )
-    DeprecatedGL..void("Indexub", "Unsigned byte version of #Indexi().", GLubyte("index", index))
-    DeprecatedGL..void("Indexs", "Short version of #Indexi().", GLshort("index", index))
-    DeprecatedGL..void("Indexf", "Float version of #Indexi().", GLfloat("index", index))
-    DeprecatedGL..void("Indexd", "Double version of #Indexi().", GLdouble("index", index))
+    DeprecatedGL..void("Indexub", GLubyte("index"))
+    DeprecatedGL..void("Indexs", GLshort("index"))
+    DeprecatedGL..void("Indexf", GLfloat("index"))
+    DeprecatedGL..void("Indexd", GLdouble("index"))
 
     DeprecatedGL..void(
         "Indexiv",
-        "Pointer version of #Indexi()",
 
-        Check(1)..GLint.const.p("index", index)
+        Check(1)..GLint.const.p("index")
     )
 
-    DeprecatedGL..void("Indexubv", "Pointer version of #Indexub().", Check(1)..GLubyte.const.p("index", index))
-    DeprecatedGL..void("Indexsv", "Pointer version of #Indexs().", Check(1)..GLshort.const.p("index", index))
-    DeprecatedGL..void("Indexfv", "Pointer version of #Indexf().", Check(1)..GLfloat.const.p("index", index))
-    DeprecatedGL..void("Indexdv", "Pointer version of #Indexd().", Check(1)..GLdouble.const.p("index", index))
+    DeprecatedGL..void("Indexubv", Check(1)..GLubyte.const.p("index"))
+    DeprecatedGL..void("Indexsv", Check(1)..GLshort.const.p("index"))
+    DeprecatedGL..void("Indexfv", Check(1)..GLfloat.const.p("index"))
+    DeprecatedGL..void("Indexdv", Check(1)..GLdouble.const.p("index"))
 
     DeprecatedGL..void(
         "IndexMask",
-        """
-        The least significant n bits of mask, where n is the number of bits in a color index buffer, specify a mask. Where a 1 appears in this mask, the
-        corresponding bit in the color index buffer (or buffers) is written; where a 0 appears, the bit is not written. This mask applies only in color index
-        mode.
-        """,
 
-        GLuint("mask", "the color index mask value")
+        GLuint("mask")
     )
 
     OffHeapOnly..DeprecatedGL..void(
         "IndexPointer",
-        "Specifies the location and organization of a color index array.",
 
-        AutoType("pointer", GL_UNSIGNED_BYTE, GL_SHORT, GL_INT)..GLenum(
-            "type",
-            "the data type of the values stored in the array",
-            "#UNSIGNED_BYTE #SHORT #INT #FLOAT #DOUBLE"
-        ),
-        GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-        Unsafe..RawPointer..void.const.p("pointer", "the color index array data")
+        AutoType("pointer", GL_UNSIGNED_BYTE, GL_SHORT, GL_INT)..GLenum("type"),
+        GLsizei("stride"),
+        Unsafe..RawPointer..void.const.p("pointer")
     )
 
-    DeprecatedGL..void("InitNames", "Clears the selection name stack.")
+    DeprecatedGL..void("InitNames")
 
     DeprecatedGL..void(
         "InterleavedArrays",
-        "Efficiently initializes the six vertex arrays and their enables to one of 14 configurations.",
 
-        GLenum(
-            "format",
-            "the interleaved array format",
-            """
-            #V2F #V3F #C4UB_V2F #C4UB_V3F #C3F_V3F #N3F_V3F #C4F_N3F_V3F #T2F_V3F #T4F_V4F #T2F_C4UB_V3F #T2F_C3F_V3F
-            #T2F_N3F_V3F #T2F_C4F_N3F_V3F #T4F_C4F_N3F_V4F
-            """
-        ),
-        GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
+        GLenum("format"),
+        GLsizei("stride"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-        )..Unsafe..RawPointer..void.const.p("pointer", "the vertex array data")
+        )..Unsafe..RawPointer..void.const.p("pointer")
     )
 
     reuse(GL11C, "IsEnabled")
 
     DeprecatedGL..GLboolean(
         "IsList",
-        "Returns true if the {@code list} is the index of some display list.",
 
-        GLuint("list", "the list index to query")
+        GLuint("list")
     )
 
     reuse(GL11C, "IsTexture")
 
     DeprecatedGL..void(
         "LightModeli",
-        "Set the integer value of a lighting model parameter.",
 
-        GLenum(
-            "pname",
-            "the lighting model parameter to set",
-            "#LIGHT_MODEL_AMBIENT #LIGHT_MODEL_LOCAL_VIEWER #LIGHT_MODEL_TWO_SIDE #LIGHT_MODEL_COLOR_CONTROL"
-        ),
-        GLint("param", "the parameter value")
+        GLenum("pname"),
+        GLint("param")
     )
 
     DeprecatedGL..void(
         "LightModelf",
-        "Float version of #LightModeli().",
 
-        GLenum("pname", "the lighting model parameter to set"),
-        GLfloat("param", "the parameter value")
+        GLenum("pname"),
+        GLfloat("param")
     )
 
     DeprecatedGL..void(
         "LightModeliv",
-        "Pointer version of #LightModeli().",
 
-        GLenum("pname", "the lighting model parameter to set"),
-        Check(4)..GLint.const.p("params", "the parameter value")
+        GLenum("pname"),
+        Check(4)..GLint.const.p("params")
     )
 
     DeprecatedGL..void(
         "LightModelfv",
-        "Pointer version of #LightModelf().",
 
-        GLenum("pname", "the lighting model parameter to set"),
-        Check(4)..GLfloat.const.p("params", "the parameter value")
+        GLenum("pname"),
+        Check(4)..GLfloat.const.p("params")
     )
 
     DeprecatedGL..void(
         "Lighti",
-        "Sets the integer value of a light parameter.",
 
-        GLenum("light", "the light for which to set the parameter", "#LIGHT0 GL_LIGHT[1-7]"),
-        GLenum(
-            "pname",
-            "the parameter to set",
-            """
-            #AMBIENT #DIFFUSE #SPECULAR #POSITION #CONSTANT_ATTENUATION #LINEAR_ATTENUATION #QUADRATIC_ATTENUATION
-            #SPOT_DIRECTION #SPOT_EXPONENT #SPOT_CUTOFF
-            """
-        ),
-        GLint("param", "the parameter value")
+        GLenum("light"),
+        GLenum("pname"),
+        GLint("param")
     )
 
     DeprecatedGL..void(
         "Lightf",
-        "Float version of #Lighti().",
 
-        GLenum("light", "the light for which to set the parameter"),
-        GLenum("pname", "the parameter to set"),
-        GLfloat("param", "the parameter value")
+        GLenum("light"),
+        GLenum("pname"),
+        GLfloat("param")
     )
 
     DeprecatedGL..void(
         "Lightiv",
-        "Pointer version of #Lighti().",
 
-        GLenum("light", "the light for which to set the parameter"),
-        GLenum("pname", "the parameter to set"),
-        Check(4)..GLint.const.p("params", "the parameter value")
+        GLenum("light"),
+        GLenum("pname"),
+        Check(4)..GLint.const.p("params")
     )
 
     DeprecatedGL..void(
         "Lightfv",
-        "Pointer version of #Lightf().",
 
-        GLenum("light", "the light for which to set the parameter"),
-        GLenum("pname", "the parameter to set"),
-        Check(4)..GLfloat.const.p("params", "the parameter value")
+        GLenum("light"),
+        GLenum("pname"),
+        Check(4)..GLfloat.const.p("params")
     )
 
     DeprecatedGL..void(
         "LineStipple",
-        """
-        Defines a line stipple. It determines those fragments that are to be drawn when the line is rasterized. Line stippling may be enabled or disabled using
-        #Enable() or #Disable() with the constant #LINE_STIPPLE. When disabled, it is as if the line stipple has its default value.
-        """,
 
-        GLint(
-            "factor",
-            """
-            a count that is used to modify the effective line stipple by causing each bit in pattern to be used {@code factor} times. {@code factor} is clamped
-            to the range [1, 256].
-            """
-        ),
-        GLushort("pattern", "an unsigned short integer whose 16 bits define the stipple pattern")
+        GLint("factor"),
+        GLushort("pattern")
     )
 
     reuse(GL11C, "LineWidth")
 
     DeprecatedGL..void(
         "ListBase",
-        "Sets the display list base.",
 
-        GLuint("base", "the display list base offset")
+        GLuint("base")
     )
 
     DeprecatedGL..void(
         "LoadMatrixf",
-        """
-        Sets the current matrix to a 4 &times; 4 matrix in column-major order.
 
-        The matrix is stored as 16 consecutive values, i.e. as:
-        ${table(
-            tr(td("a1"), td("a5"), td("a9"), td("a13")),
-            tr(td("a2"), td("a6"), td("a10"), td("a14")),
-            tr(td("a3"), td("a7"), td("a11"), td("a15")),
-            tr(td("a4"), td("a8"), td("a12"), td("a16"))
-        )}
-
-        This differs from the standard row-major ordering for matrix elements. If the standard ordering is used, all of the subsequent transformation equations
-        are transposed, and the columns representing vectors become rows.
-        """,
-
-        Check(16)..GLfloat.const.p("m", "the matrix data")
+        Check(16)..GLfloat.const.p("m")
     )
 
     DeprecatedGL..void(
         "LoadMatrixd",
-        "Double version of #LoadMatrixf().",
 
-        Check(16)..GLdouble.const.p("m", "the matrix data")
+        Check(16)..GLdouble.const.p("m")
     )
 
     DeprecatedGL..void(
         "LoadIdentity",
-        """
-        Sets the current matrix to the identity matrix.
-
-        Calling this function is equivalent to calling #LoadMatrixf() with the following matrix:
-        ${table(
-            tr(td("1"), td("0"), td("0"), td("0")),
-            tr(td("0"), td("1"), td("0"), td("0")),
-            tr(td("0"), td("0"), td("1"), td("0")),
-            tr(td("0"), td("0"), td("0"), td("1"))
-        )}
-        """
+        void()
     )
 
     DeprecatedGL..void(
         "LoadName",
-        "Replaces the value on the top of the selection stack with {@code name}.",
 
-        GLuint("name", "the name to load")
+        GLuint("name")
     )
 
     reuse(GL11C, "LogicOp")
 
     DeprecatedGL..void(
         "Map1f",
-        """
-        Defines a polynomial or rational polynomial mapping to produce vertex, normal, texture coordinates and colors. The values so produced are sent on to
-        further stages of the GL as if they had been provided directly by the client.
-        """,
 
-        GLenum("target", "the evaluator target", MAP1_TARGETS),
-        GLfloat("u1", "the first endpoint of the pre-image of the map"),
-        GLfloat("u2", "the second endpoint of the pre-image of the map"),
-        GLint("stride", "the number of values in each block of storage"),
-        GLint("order", "the polynomial order"),
-        Check("order * stride")..GLfloat.const.p("points", "a set of {@code order} blocks of storage containing control points")
+        GLenum("target"),
+        GLfloat("u1"),
+        GLfloat("u2"),
+        GLint("stride"),
+        GLint("order"),
+        Check("order * stride")..GLfloat.const.p("points")
     )
 
     DeprecatedGL..void(
         "Map1d",
-        "Double version of #Map1f().",
 
-        GLenum("target", "the evaluator target"),
-        GLdouble("u1", "the first endpoint of the pre-image of the map"),
-        GLdouble("u2", "the second endpoint of the pre-image of the map"),
-        GLint("stride", "the number of values in each block of storage"),
-        GLint("order", "the polynomial order"),
-        Check("stride * order")..GLdouble.const.p("points", "a set of {@code order} blocks of storage containing control points")
+        GLenum("target"),
+        GLdouble("u1"),
+        GLdouble("u2"),
+        GLint("stride"),
+        GLint("order"),
+        Check("stride * order")..GLdouble.const.p("points")
     )
 
     DeprecatedGL..void(
         "Map2f",
-        "Bivariate version of #Map1f().",
 
-        GLenum("target", "the evaluator target"),
-        GLfloat("u1", "the first u-dimension endpoint of the pre-image rectangle of the map"),
-        GLfloat("u2", "the second u-dimension endpoint of the pre-image rectangle of the map"),
-        GLint("ustride", "the number of values in the u-dimension in each block of storage"),
-        GLint("uorder", "the polynomial order in the u-dimension"),
-        GLfloat("v1", "the first v-dimension endpoint of the pre-image rectangle of the map"),
-        GLfloat("v2", "the second v-dimension endpoint of the pre-image rectangle of the map"),
-        GLint("vstride", "the number of values in the v-dimension in each block of storage"),
-        GLint("vorder", "the polynomial order in the v-dimension"),
-        Check("ustride * uorder * vstride * vorder")..GLfloat.const.p("points", "a set of ${code("uorder &times; vorder")} blocks of storage containing control points")
+        GLenum("target"),
+        GLfloat("u1"),
+        GLfloat("u2"),
+        GLint("ustride"),
+        GLint("uorder"),
+        GLfloat("v1"),
+        GLfloat("v2"),
+        GLint("vstride"),
+        GLint("vorder"),
+        Check("ustride * uorder * vstride * vorder")..GLfloat.const.p("points")
     )
 
     DeprecatedGL..void(
         "Map2d",
-        "Double version of #Map2f().",
 
-        GLenum("target", "the evaluator target"),
-        GLdouble("u1", "the first u-dimension endpoint of the pre-image rectangle of the map"),
-        GLdouble("u2", "the second u-dimension endpoint of the pre-image rectangle of the map"),
-        GLint("ustride", "the number of values in the u-dimension in each block of storage"),
-        GLint("uorder", "the polynomial order in the u-dimension"),
-        GLdouble("v1", "the first v-dimension endpoint of the pre-image rectangle of the map"),
-        GLdouble("v2", "the second v-dimension endpoint of the pre-image rectangle of the map"),
-        GLint("vstride", "the number of values in the v-dimension in each block of storage"),
-        GLint("vorder", "the polynomial order in the v-dimension"),
-        Check("ustride * uorder * vstride * vorder")..GLdouble.const.p("points", "a set of ${code("uorder &times; vorder")} blocks of storage containing control points")
+        GLenum("target"),
+        GLdouble("u1"),
+        GLdouble("u2"),
+        GLint("ustride"),
+        GLint("uorder"),
+        GLdouble("v1"),
+        GLdouble("v2"),
+        GLint("vstride"),
+        GLint("vorder"),
+        Check("ustride * uorder * vstride * vorder")..GLdouble.const.p("points")
     )
 
     DeprecatedGL..void(
         "MapGrid1f",
-        "Defines a one-dimensional grid in the map evaluator domain.",
 
-        GLint("n", "the number of partitions of the interval"),
-        GLfloat("u1", "the first interval endpoint"),
-        GLfloat("u2", "the second interval endpoint")
+        GLint("n"),
+        GLfloat("u1"),
+        GLfloat("u2")
     )
 
     DeprecatedGL..void(
         "MapGrid1d",
-        "Double version of #MapGrid1f().",
 
-        GLint("n", "the number of partitions of the interval"),
-        GLdouble("u1", "the first interval endpoint"),
-        GLdouble("u2", "the second interval endpoint")
+        GLint("n"),
+        GLdouble("u1"),
+        GLdouble("u2")
     )
 
     DeprecatedGL..void(
         "MapGrid2f",
-        "Defines a two-dimensional grid in the map evaluator domain.",
 
-        GLint("un", "the number of partitions of the interval in the u-dimension"),
-        GLfloat("u1", "the first u-dimension interval endpoint"),
-        GLfloat("u2", "the second u-dimension interval endpoint"),
-        GLint("vn", "the number of partitions of the interval in the v-dimension"),
-        GLfloat("v1", "the first v-dimension interval endpoint"),
-        GLfloat("v2", "the second v-dimension interval endpoint")
+        GLint("un"),
+        GLfloat("u1"),
+        GLfloat("u2"),
+        GLint("vn"),
+        GLfloat("v1"),
+        GLfloat("v2")
     )
 
     DeprecatedGL..void(
         "MapGrid2d",
-        "Double version of #MapGrid2f().",
 
-        GLint("un", "the number of partitions of the interval in the u-dimension"),
-        GLdouble("u1", "the first u-dimension interval endpoint"),
-        GLdouble("u2", "the second u-dimension interval endpoint"),
-        GLint("vn", "the number of partitions of the interval in the v-dimension"),
-        GLdouble("v1", "the first v-dimension interval endpoint"),
-        GLdouble("v2", "the second v-dimension interval endpoint")
+        GLint("un"),
+        GLdouble("u1"),
+        GLdouble("u2"),
+        GLint("vn"),
+        GLdouble("v1"),
+        GLdouble("v2")
     )
 
     DeprecatedGL..void(
         "Materiali",
-        "Sets the integer value of a material parameter.",
 
-        GLenum("face", "the material face for which to set the parameter", "#FRONT #BACK #FRONT_AND_BACK"),
-        GLenum("pname", "the parameter to set", "#SHININESS"),
-        GLint("param", "the parameter value")
+        GLenum("face"),
+        GLenum("pname"),
+        GLint("param")
     )
 
     DeprecatedGL..void(
         "Materialf",
-        "Float version of #Materiali().",
 
-        GLenum("face", "the material face for which to set the parameter"),
-        GLenum("pname", "the parameter to set"),
-        GLfloat("param", "the parameter value")
+        GLenum("face"),
+        GLenum("pname"),
+        GLfloat("param")
     )
 
     DeprecatedGL..void(
         "Materialiv",
-        "Pointer version of #Materiali().",
 
-        GLenum("face", "the material face for which to set the parameter"),
-        GLenum("pname", "the parameter to set", "#AMBIENT #DIFFUSE #AMBIENT_AND_DIFFUSE #SPECULAR #EMISSION"),
-        Check(4)..GLint.const.p("params", "the parameter value")
+        GLenum("face"),
+        GLenum("pname"),
+        Check(4)..GLint.const.p("params")
     )
 
     DeprecatedGL..void(
         "Materialfv",
-        "Pointer version of #Materialf().",
 
-        GLenum("face", "the material face for which to set the parameter"),
-        GLenum("pname", "the parameter to set"),
-        Check(4)..GLfloat.const.p("params", "the parameter value")
+        GLenum("face"),
+        GLenum("pname"),
+        Check(4)..GLfloat.const.p("params")
     )
 
     DeprecatedGL..void(
         "MatrixMode",
-        "Set the current matrix mode.",
 
-        GLenum("mode", "the matrix mode", "#MODELVIEW #PROJECTION #TEXTURE #COLOR")
+        GLenum("mode")
     )
 
     DeprecatedGL..void(
         "MultMatrixf",
-        "Multiplies the current matrix with a 4 &times; 4 matrix in column-major order. See #LoadMatrixf() for details.",
 
-        Check(16)..GLfloat.const.p("m", "the matrix data")
+        Check(16)..GLfloat.const.p("m")
     )
 
     DeprecatedGL..void(
         "MultMatrixd",
-        "Double version of #MultMatrixf().",
 
-        Check(16)..GLdouble.const.p("m", "the matrix data")
+        Check(16)..GLdouble.const.p("m")
     )
 
     DeprecatedGL..void(
         "Frustum",
-        """
-        Manipulates the current matrix with a matrix that produces perspective projection, in such a way that the coordinates ${code("(lb &ndash; n)<sup>T</sup>")}
-        and ${code("(rt &ndash; n)<sup>T</sup>")} specify the points on the near clipping plane that are mapped to the lower left and upper right corners of the
-        window, respectively (assuming that the eye is located at ${code("(0 0 0)<sup>T</sup>")}). {@code f} gives the distance from the eye to the far clipping
-        plane.
 
-        Calling this function is equivalent to calling #MultMatrixf() with the following matrix:
-        ${table(
-            tr(td("2n / (r - l)"), td("0"), td("(r + l) / (r - l)"), td("0")),
-            tr(td("0"), td("2n / (t - b)"), td("(t + b) / (t - b)"), td("0")),
-            tr(td("0"), td("0"), td("- (f + n) / (f - n)"), td("- (2fn) / (f - n)")),
-            tr(td("0"), td("0"), td("-1"), td("0"))
-        )}
-        """,
-
-        GLdouble("l", "the left frustum plane"),
-        GLdouble("r", "the right frustum plane"),
-        GLdouble("b", "the bottom frustum plane"),
-        GLdouble("t", "the top frustum plane"),
-        GLdouble("n", "the near frustum plane"),
-        GLdouble("f", "the far frustum plane")
+        GLdouble("l"),
+        GLdouble("r"),
+        GLdouble("b"),
+        GLdouble("t"),
+        GLdouble("n"),
+        GLdouble("f")
     )
 
     DeprecatedGL..void(
         "NewList",
-        "Begins the definition of a display list.",
 
-        GLuint("n", "a positive integer to which the display list that follows is assigned"),
-        GLenum("mode", "a symbolic constant that controls the behavior of the GL during display list creation", "#COMPILE #COMPILE_AND_EXECUTE")
+        GLuint("n"),
+        GLenum("mode")
     )
 
-    DeprecatedGL..void(
-        "EndList",
-        """
-        Ends the definition of GL commands to be placed in a display list. It is only when {@code EndList} occurs that the specified display list is actually
-        associated with the index indicated with #NewList().
-        """
-    )
+    DeprecatedGL..void("EndList")
 
-    // Normal functions javadoc
-    val normalX = "the x coordinate of the current normal"
-    val normalY = "the y coordinate of the current normal"
-    val normalZ = "the z coordinate of the current normal"
-    val normalBuffer = "the normal buffer"
+    DeprecatedGL..void("Normal3f", GLfloat("nx"), GLfloat("ny"), GLfloat("nz"))
+    DeprecatedGL..void("Normal3b", GLbyte("nx"), GLbyte("ny"), GLbyte("nz"))
+    DeprecatedGL..void("Normal3s", GLshort("nx"), GLshort("ny"), GLshort("nz"))
+    DeprecatedGL..void("Normal3i", GLint("nx"), GLint("ny"), GLint("nz"))
+    DeprecatedGL..void("Normal3d", GLdouble("nx"), GLdouble("ny"), GLdouble("nz"))
 
-    DeprecatedGL..void("Normal3f", "Sets the current normal.", GLfloat("nx", normalX), GLfloat("ny", normalY), GLfloat("nz", normalZ))
-    DeprecatedGL..void("Normal3b", "Byte version of #Normal3f().", GLbyte("nx", normalX), GLbyte("ny", normalY), GLbyte("nz", normalZ))
-    DeprecatedGL..void("Normal3s", "Short version of #Normal3f().", GLshort("nx", normalX), GLshort("ny", normalY), GLshort("nz", normalZ))
-    DeprecatedGL..void("Normal3i", "Integer version of #Normal3f().", GLint("nx", normalX), GLint("ny", normalY), GLint("nz", normalZ))
-    DeprecatedGL..void("Normal3d", "Double version of #Normal3f().", GLdouble("nx", normalX), GLdouble("ny", normalY), GLdouble("nz", normalZ))
-
-    DeprecatedGL..void("Normal3fv", "Pointer version of #Normal3f().", Check(3)..GLfloat.const.p("v", normalBuffer))
-    DeprecatedGL..void("Normal3bv", "Pointer version of #Normal3b().", Check(3)..GLbyte.const.p("v", normalBuffer))
-    DeprecatedGL..void("Normal3sv", "Pointer version of #Normal3s().", Check(3)..GLshort.const.p("v", normalBuffer))
-    DeprecatedGL..void("Normal3iv", "Pointer version of #Normal3i().", Check(3)..GLint.const.p("v", normalBuffer))
-    DeprecatedGL..void("Normal3dv", "Pointer version of #Normal3d().", Check(3)..GLdouble.const.p("v", normalBuffer))
+    DeprecatedGL..void("Normal3fv", Check(3)..GLfloat.const.p("v"))
+    DeprecatedGL..void("Normal3bv", Check(3)..GLbyte.const.p("v"))
+    DeprecatedGL..void("Normal3sv", Check(3)..GLshort.const.p("v"))
+    DeprecatedGL..void("Normal3iv", Check(3)..GLint.const.p("v"))
+    DeprecatedGL..void("Normal3dv", Check(3)..GLdouble.const.p("v"))
 
     OffHeapOnly..DeprecatedGL..void(
         "NormalPointer",
-        "Specifies the location and organization of a normal array.",
 
-        GLenum(
-            "type",
-            "the data type of the values stored in the array",
-            "#BYTE #SHORT #INT #HALF_FLOAT #FLOAT #DOUBLE #UNSIGNED_INT_2_10_10_10_REV #INT_2_10_10_10_REV"
-        ),
-        GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
+        GLenum("type"),
+        GLsizei("stride"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..RawPointer..void.const.p("pointer", "the normal array data")
+        )..Unsafe..RawPointer..void.const.p("pointer")
     )
 
     DeprecatedGL..void(
         "Ortho",
-        """
-        Manipulates the current matrix with a matrix that produces parallel projection, in such a way that the coordinates ${code("(lb &ndash; n)<sup>T</sup>")}
-        and ${code("(rt &ndash; n)<sup>T</sup>")} specify the points on the near clipping plane that are mapped to the lower left and upper right corners of the
-        window, respectively (assuming that the eye is located at ${code("(0 0 0)<sup>T</sup>")}). {@code f} gives the distance from the eye to the far clipping
-        plane.
 
-        Calling this function is equivalent to calling #MultMatrixf() with the following matrix:
-        ${table(
-            tr(td("2 / (r - l)"), td("0"), td("0"), td("- (r + l) / (r - l)")),
-            tr(td("0"), td("2 / (t - b)"), td("0"), td("- (t + b) / (t - b)")),
-            tr(td("0"), td("0"), td("- 2 / (f - n)"), td("- (f + n) / (f - n)")),
-            tr(td("0"), td("0"), td("0"), td("1"))
-        )}
-        """,
-
-        GLdouble("l", "the left frustum plane"),
-        GLdouble("r", "the right frustum plane"),
-        GLdouble("b", "the bottom frustum plane"),
-        GLdouble("t", "the top frustum plane"),
-        GLdouble("n", "the near frustum plane"),
-        GLdouble("f", "the far frustum plane")
+        GLdouble("l"),
+        GLdouble("r"),
+        GLdouble("b"),
+        GLdouble("t"),
+        GLdouble("n"),
+        GLdouble("f")
     )
 
     DeprecatedGL..void(
         "PassThrough",
-        """
-        Inserts a marker when the GL is in feeback mode. {@code token} is returned as if it were a primitive; it is indicated with its own unique identifying
-        value. The ordering of any {@code PassThrough} commands with respect to primitive specification is maintained by feedback. {@code PassThrough} may
-        not occur between #Begin() and #End().
-        """,
 
-        GLfloat("token", "the marker value to insert")
+        GLfloat("token")
     )
 
     DeprecatedGL..void(
         "PixelMapfv",
-        "Sets a pixel map lookup table.",
 
-        GLenum("map", "the map to set", PIXEL_MAP_NAMES),
-        AutoSize("values")..GLsizei("size", "the map size"),
-        RawPointer..GLfloat.const.p("values", "the map values")
+        GLenum("map"),
+        AutoSize("values")..GLsizei("size"),
+        RawPointer..GLfloat.const.p("values")
     )
 
     DeprecatedGL..void(
         "PixelMapusv",
-        "Unsigned short version of #PixelMapfv().",
 
-        GLenum("map", "the map to set"),
-        AutoSize("values")..GLsizei("size", "the map size"),
-        RawPointer..GLushort.const.p("values", "the map values")
+        GLenum("map"),
+        AutoSize("values")..GLsizei("size"),
+        RawPointer..GLushort.const.p("values")
     )
 
     DeprecatedGL..void(
         "PixelMapuiv",
-        "Unsigned integer version of #PixelMapfv().",
 
-        GLenum("map", "the map to set"),
-        AutoSize("values")..GLsizei("size", "the map size"),
-        RawPointer..GLuint.const.p("values", "the map values")
+        GLenum("map"),
+        AutoSize("values")..GLsizei("size"),
+        RawPointer..GLuint.const.p("values")
     )
 
     reuse(GL11C, "PixelStorei")
@@ -2064,49 +1621,23 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void(
         "PixelTransferi",
-        "Sets the integer value of a pixel transfer parameter.",
 
-        GLenum(
-            "pname",
-            "the pixel transfer parameter to set",
-            """
-            #MAP_COLOR #MAP_STENCIL #INDEX_SHIFT #INDEX_OFFSET #RED_SCALE #GREEN_SCALE #BLUE_SCALE #ALPHA_SCALE #DEPTH_SCALE
-            #RED_BIAS #GREEN_BIAS #BLUE_BIAS #ALPHA_BIAS #DEPTH_BIAS
-            #POST_CONVOLUTION_RED_SCALE #POST_CONVOLUTION_RED_BIAS #POST_COLOR_MATRIX_RED_SCALE
-            #POST_COLOR_MATRIX_RED_BIAS #POST_CONVOLUTION_GREEN_SCALE #POST_CONVOLUTION_GREEN_BIAS
-            #POST_COLOR_MATRIX_GREEN_SCALE #POST_COLOR_MATRIX_GREEN_BIAS #POST_CONVOLUTION_BLUE_SCALE
-            #POST_CONVOLUTION_BLUE_BIAS #POST_COLOR_MATRIX_BLUE_SCALE #POST_COLOR_MATRIX_BLUE_BIAS
-            #POST_CONVOLUTION_ALPHA_SCALE #POST_CONVOLUTION_ALPHA_BIAS #POST_COLOR_MATRIX_ALPHA_SCALE
-            #POST_COLOR_MATRIX_ALPHA_BIAS
-            """
-        ),
-        GLint("param", "the parameter value")
+        GLenum("pname"),
+        GLint("param")
     )
 
     DeprecatedGL..void(
         "PixelTransferf",
-        "Float version of #PixelTransferi().",
 
-        GLenum("pname", "the pixel transfer parameter to set"),
-        GLfloat("param", "the parameter value")
+        GLenum("pname"),
+        GLfloat("param")
     )
 
     DeprecatedGL..void(
         "PixelZoom",
-        """
-        Controls the conversion of a group of fragments.
 
-        Let (x<sub>rp</sub>, y<sub>rp</sub>) be the current raster position. If a particular group is the n<sup>th</sup> in a row and belongs to the
-        m<sup>th</sup> row, consider the region in window coordinates bounded by the rectangle with corners
-
-        (x<sub>rp</sub> + z<sub>x</sub>n, y<sub>rp</sub> + z<sub>y</sub>m) and (x<sub>rp</sub> + z<sub>x</sub>(n + 1), y<sub>rp</sub> + z<sub>y</sub>(m + 1))
-
-        (either z<sub>x</sub> or z<sub>y</sub> may be negative). A fragment representing group {@code (n, m)} is produced for each framebuffer pixel inside, or
-        on the bottom or left boundary, of this rectangle.
-        """,
-
-        GLfloat("xfactor", "the z<sub>x</sub> factor"),
-        GLfloat("yfactor", "the z<sub>y</sub> factor")
+        GLfloat("xfactor"),
+        GLfloat("yfactor")
     )
 
     reuse(GL11C, "PointSize")
@@ -2115,527 +1646,334 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void(
         "PolygonStipple",
-        """
-        Defines a polygon stipple. It works much the same way as #LineStipple(), masking out certain fragments produced by rasterization so that they
-        are not sent to the next stage of the GL. This is the case regardless of the state of polygon antialiasing.
 
-        If x<sub>w</sub> and y<sub>w</sub> are the window coordinates of a rasterized polygon fragment, then that fragment is sent to the next stage of the GL
-        if and only if the bit of the pattern (x<sub>w</sub> mod 32, y<sub>w</sub> mod 32) is 1.
-
-        Polygon stippling may be enabled or disabled with #Enable() or #Disable() using the constant #POLYGON_STIPPLE. When disabled,
-        it is as if the stipple pattern were all ones.
-        """,
-
-        Check(128)..RawPointer..GLubyte.const.p("pattern", "a pointer to memory into which a 32 &times; 32 pattern is packed")
+        Check(128)..RawPointer..GLubyte.const.p("pattern")
     )
 
     DeprecatedGL..void(
         "PushAttrib",
-        """
-        Takes a bitwise OR of symbolic constants indicating which groups of state variables to push onto the server attribute stack. Each constant refers to a
-        group of state variables.
 
-        Bits set in mask that do not correspond to an attribute group are ignored. The special mask value #ALL_ATTRIB_BITS may be used to push all
-        stackable server state.
-
-        A #STACK_OVERFLOW error is generated if {@code PushAttrib} is called and the attribute stack depth is equal to the value of
-        #MAX_ATTRIB_STACK_DEPTH.
-        """,
-
-        GLbitfield(
-            "mask",
-            "the state variables to push",
-            """
-            #ACCUM_BUFFER_BIT #COLOR_BUFFER_BIT #CURRENT_BIT #DEPTH_BUFFER_BIT #ENABLE_BIT #EVAL_BIT #FOG_BIT #HINT_BIT #LIGHTING_BIT
-            #LINE_BIT #LIST_BIT #MULTISAMPLE_BIT #PIXEL_MODE_BIT #POINT_BIT #POLYGON_BIT #POLYGON_STIPPLE_BIT #SCISSOR_BIT
-            #STENCIL_BUFFER_BIT #TEXTURE_BIT #TRANSFORM_BIT #VIEWPORT_BIT #ALL_ATTRIB_BITS
-            """, LinkMode.BITFIELD
-        )
+        GLbitfield("mask")
     )
 
     DeprecatedGL..void(
         "PushClientAttrib",
-        """
-        Takes a bitwise OR of symbolic constants indicating which groups of state variables to push onto the client attribute stack. Each constant refers to a
-        group of state variables.
 
-        Bits set in mask that do not correspond to an attribute group are ignored. The special mask value #CLIENT_ALL_ATTRIB_BITS may be used to push
-        all stackable client state.
-
-        A #STACK_OVERFLOW error is generated if {@code PushAttrib} is called and the client attribute stack depth is equal to the value of
-        #MAX_CLIENT_ATTRIB_STACK_DEPTH.
-        """,
-
-        GLbitfield("mask", "the state variables to push", "#CLIENT_VERTEX_ARRAY_BIT #CLIENT_PIXEL_STORE_BIT #CLIENT_ALL_ATTRIB_BITS", LinkMode.BITFIELD)
+        GLbitfield("mask")
     )
 
-    DeprecatedGL..void(
-        "PopAttrib",
-        "Resets the values of those state variables that were saved with the last #PushAttrib(). Those not saved remain unchanged."
-    )
+    DeprecatedGL..void("PopAttrib")
 
-    DeprecatedGL..void(
-        "PopClientAttrib",
-        "Resets the values of those state variables that were saved with the last #PushClientAttrib(). Those not saved remain unchanged."
-    )
+    DeprecatedGL..void("PopClientAttrib")
 
-    DeprecatedGL..void(
-        "PopMatrix",
-        "Pops the top entry off the current matrix stack, replacing the current matrix with the matrix that was the second entry in the stack."
-    )
+    DeprecatedGL..void("PopMatrix")
 
-    DeprecatedGL..void("PopName", "Pops one name off the top of the selection name stack.")
+    DeprecatedGL..void("PopName")
 
     DeprecatedGL..void(
         "PrioritizeTextures",
-        """
-        Sets the priority of texture objects. Each priority value is clamped to the range [0, 1] before it is assigned. Zero indicates the lowest priority, with
-        the least likelihood of being resident. One indicates the highest priority, with the greatest likelihood of being resident.
-        """,
 
-        AutoSize("textures", "priorities")..GLsizei("n", "the number of texture object priorities to set"),
-        GLuint.const.p("textures", "an array of texture object names"),
-        GLfloat.const.p("priorities", "an array of texture object priorities")
+        AutoSize("textures", "priorities")..GLsizei("n"),
+        GLuint.const.p("textures"),
+        GLfloat.const.p("priorities")
     )
 
 
-    DeprecatedGL..void("PushMatrix", "Pushes the current matrix stack down by one, duplicating the current matrix in both the top of the stack and the entry below it.")
+    DeprecatedGL..void("PushMatrix")
 
     DeprecatedGL..void(
         "PushName",
-        "Causes {@code name} to be pushed onto the selection name stack.",
 
-        GLuint("name", "the name to push")
+        GLuint("name")
     )
-
-    // RasterPos functions javadoc
-    val rasterX = "the {@code x} raster coordinate"
-    val rasterY = "the {@code y} raster coordinate"
-    val rasterZ = "the {@code z} raster coordinate"
-    val rasterW = "the {@code w} raster coordinate"
-    val rasterBuffer = "the raster position buffer"
 
     DeprecatedGL..void(
         "RasterPos2i",
-        """
-        Sets the two-dimensional current raster position. {@code z} is implicitly set to 0 and {@code w} implicitly set to 1.
 
-        The coordinates are treated as if they were specified in a Vertex command. If a vertex shader is active, this vertex shader is executed using the x, y,
-        z, and w coordinates as the object coordinates of the vertex. Otherwise, the x, y, z, and w coordinates are transformed by the current model-view and
-        projection matrices. These coordinates, along with current values, are used to generate primary and secondary colors and texture coordinates just as is
-        done for a vertex. The colors and texture coordinates so produced replace the colors and texture coordinates stored in the current raster position's
-        associated data.
-        """,
-
-        GLint("x", rasterX),
-        GLint("y", rasterY)
+        GLint("x"),
+        GLint("y")
     )
 
-    DeprecatedGL..void("RasterPos2s", "Short version of #RasterPos2i().", GLshort("x", rasterX), GLshort("y", rasterY))
-    DeprecatedGL..void("RasterPos2f", "Float version of #RasterPos2i().", GLfloat("x", rasterX), GLfloat("y", rasterY))
-    DeprecatedGL..void("RasterPos2d", "Double version of #RasterPos2i().", GLdouble("x", rasterX), GLdouble("y", rasterY))
+    DeprecatedGL..void("RasterPos2s", GLshort("x"), GLshort("y"))
+    DeprecatedGL..void("RasterPos2f", GLfloat("x"), GLfloat("y"))
+    DeprecatedGL..void("RasterPos2d", GLdouble("x"), GLdouble("y"))
 
-    DeprecatedGL..void("RasterPos2iv", "Pointer version of #RasterPos2i().", Check(2)..GLint.const.p("coords", rasterBuffer))
-    DeprecatedGL..void("RasterPos2sv", "Pointer version of #RasterPos2s().", Check(2)..GLshort.const.p("coords", rasterBuffer))
-    DeprecatedGL..void("RasterPos2fv", "Pointer version of #RasterPos2f().", Check(2)..GLfloat.const.p("coords", rasterBuffer))
-    DeprecatedGL..void("RasterPos2dv", "Pointer version of #RasterPos2d().", Check(2)..GLdouble.const.p("coords", rasterBuffer))
+    DeprecatedGL..void("RasterPos2iv", Check(2)..GLint.const.p("coords"))
+    DeprecatedGL..void("RasterPos2sv", Check(2)..GLshort.const.p("coords"))
+    DeprecatedGL..void("RasterPos2fv", Check(2)..GLfloat.const.p("coords"))
+    DeprecatedGL..void("RasterPos2dv", Check(2)..GLdouble.const.p("coords"))
 
     DeprecatedGL..void(
         "RasterPos3i",
-        "Sets the three-dimensional current raster position. {@code w} is implicitly set to 1. See #RasterPos2i() for more details.",
 
-        GLint("x", rasterX),
-        GLint("y", rasterY),
-        GLint("z", rasterZ)
+        GLint("x"),
+        GLint("y"),
+        GLint("z")
     )
 
-    DeprecatedGL..void("RasterPos3s", "Short version of #RasterPos3i().", GLshort("x", rasterX), GLshort("y", rasterY), GLshort("z", rasterZ))
-    DeprecatedGL..void("RasterPos3f", "Float version of #RasterPos3i().", GLfloat("x", rasterX), GLfloat("y", rasterY), GLfloat("z", rasterZ))
-    DeprecatedGL..void("RasterPos3d", "Double version of #RasterPos3i().", GLdouble("x", rasterX), GLdouble("y", rasterY), GLdouble("z", rasterZ))
+    DeprecatedGL..void("RasterPos3s", GLshort("x"), GLshort("y"), GLshort("z"))
+    DeprecatedGL..void("RasterPos3f", GLfloat("x"), GLfloat("y"), GLfloat("z"))
+    DeprecatedGL..void("RasterPos3d", GLdouble("x"), GLdouble("y"), GLdouble("z"))
 
-    DeprecatedGL..void("RasterPos3iv", "Pointer version of #RasterPos3i().", Check(3)..GLint.const.p("coords", rasterBuffer))
-    DeprecatedGL..void("RasterPos3sv", "Pointer version of #RasterPos3s().", Check(3)..GLshort.const.p("coords", rasterBuffer))
-    DeprecatedGL..void("RasterPos3fv", "Pointer version of #RasterPos3f().", Check(3)..GLfloat.const.p("coords", rasterBuffer))
-    DeprecatedGL..void("RasterPos3dv", "Pointer version of #RasterPos3d().", Check(3)..GLdouble.const.p("coords", rasterBuffer))
+    DeprecatedGL..void("RasterPos3iv", Check(3)..GLint.const.p("coords"))
+    DeprecatedGL..void("RasterPos3sv", Check(3)..GLshort.const.p("coords"))
+    DeprecatedGL..void("RasterPos3fv", Check(3)..GLfloat.const.p("coords"))
+    DeprecatedGL..void("RasterPos3dv", Check(3)..GLdouble.const.p("coords"))
 
     DeprecatedGL..void(
         "RasterPos4i",
-        "Sets the four-dimensional current raster position. See #RasterPos2i() for more details.",
 
-        GLint("x", rasterX),
-        GLint("y", rasterY),
-        GLint("z", rasterZ),
-        GLint("w", rasterW)
+        GLint("x"),
+        GLint("y"),
+        GLint("z"),
+        GLint("w")
     )
 
-    DeprecatedGL..void("RasterPos4s", "Short version of #RasterPos4i().", GLshort("x", rasterX), GLshort("y", rasterY), GLshort("z", rasterZ), GLshort("w", rasterW))
-    DeprecatedGL..void("RasterPos4f", "Float version of RasterPos4i.", GLfloat("x", rasterX), GLfloat("y", rasterY), GLfloat("z", rasterZ), GLfloat("w", rasterW))
-    DeprecatedGL..void("RasterPos4d", "Double version of #RasterPos4i().", GLdouble("x", rasterX), GLdouble("y", rasterY), GLdouble("z", rasterZ), GLdouble("w", rasterW))
+    DeprecatedGL..void("RasterPos4s", GLshort("x"), GLshort("y"), GLshort("z"), GLshort("w"))
+    DeprecatedGL..void("RasterPos4f", GLfloat("x"), GLfloat("y"), GLfloat("z"), GLfloat("w"))
+    DeprecatedGL..void("RasterPos4d", GLdouble("x"), GLdouble("y"), GLdouble("z"), GLdouble("w"))
 
-    DeprecatedGL..void("RasterPos4iv", "Pointer version of #RasterPos4i().", Check(4)..GLint.const.p("coords", rasterBuffer))
-    DeprecatedGL..void("RasterPos4sv", "Pointer version of #RasterPos4s().", Check(4)..GLshort.const.p("coords", rasterBuffer))
-    DeprecatedGL..void("RasterPos4fv", "Pointer version of #RasterPos4f().", Check(4)..GLfloat.const.p("coords", rasterBuffer))
-    DeprecatedGL..void("RasterPos4dv", "Pointer version of #RasterPos4d().", Check(4)..GLdouble.const.p("coords", rasterBuffer))
+    DeprecatedGL..void("RasterPos4iv", Check(4)..GLint.const.p("coords"))
+    DeprecatedGL..void("RasterPos4sv", Check(4)..GLshort.const.p("coords"))
+    DeprecatedGL..void("RasterPos4fv", Check(4)..GLfloat.const.p("coords"))
+    DeprecatedGL..void("RasterPos4dv", Check(4)..GLdouble.const.p("coords"))
 
     reuse(GL11C, "ReadBuffer")
     reuse(GL11C, "ReadPixels")
 
-    // Rect functions javadoc
-    val rectX1 = "the x coordinate of the first corner vertex"
-    val rectY1 = "the y coordinate of the first corner vertex"
-    val rectX2 = "the x coordinate of the second corner vertex"
-    val rectY2 = "the y coordinate of the second corner vertex"
-    val rectBuffer1 = "the first vertex buffer"
-    val rectBuffer2 = "the second vertex buffer"
-
     DeprecatedGL..void(
         "Recti",
-        """
-        Specifies a rectangle as two corner vertices. The effect of the Rect command
 
-        {@code Rect(x1, y1, x2, y2);}
-
-        is exactly the same as the following sequence of commands:
-        {@code
-        Begin(POLYGON);
-            Vertex2(x1, y1);
-            Vertex2(x2, y1);
-            Vertex2(x2, y2);
-            Vertex2(x1, y2);
-        End();}
-
-        The appropriate Vertex2 command would be invoked depending on which of the Rect commands is issued.
-        """,
-
-        GLint("x1", rectX1),
-        GLint("y1", rectY1),
-        GLint("x2", rectX2),
-        GLint("y2", rectY2)
+        GLint("x1"),
+        GLint("y1"),
+        GLint("x2"),
+        GLint("y2")
     )
 
-    DeprecatedGL..void("Rects", "Short version of #Recti().", GLshort("x1", rectX1), GLshort("y1", rectY1), GLshort("x2", rectX2), GLshort("y2", rectY2))
-    DeprecatedGL..void("Rectf", "Float version of #Recti().", GLfloat("x1", rectX1), GLfloat("y1", rectY1), GLfloat("x2", rectX2), GLfloat("y2", rectY2))
-    DeprecatedGL..void("Rectd", "Double version of #Recti().", GLdouble("x1", rectX1), GLdouble("y1", rectY1), GLdouble("x2", rectX2), GLdouble("y2", rectY2))
+    DeprecatedGL..void("Rects", GLshort("x1"), GLshort("y1"), GLshort("x2"), GLshort("y2"))
+    DeprecatedGL..void("Rectf", GLfloat("x1"), GLfloat("y1"), GLfloat("x2"), GLfloat("y2"))
+    DeprecatedGL..void("Rectd", GLdouble("x1"), GLdouble("y1"), GLdouble("x2"), GLdouble("y2"))
 
-    DeprecatedGL..void("Rectiv", "Pointer version of #Recti().", Check(2)..GLint.const.p("v1", rectBuffer1), Check(2)..GLint.const.p("v2", rectBuffer2))
-    DeprecatedGL..void("Rectsv", "Pointer version of #Rects().", Check(2)..GLshort.const.p("v1", rectBuffer1), Check(2)..GLshort.const.p("v2", rectBuffer2))
-    DeprecatedGL..void("Rectfv", "Pointer version of #Rectf().", Check(2)..GLfloat.const.p("v1", rectBuffer1), Check(2)..GLfloat.const.p("v2", rectBuffer2))
-    DeprecatedGL..void("Rectdv", "Pointer version of #Rectd().", Check(2)..GLdouble.const.p("v1", rectBuffer1), Check(2)..GLdouble.const.p("v2", rectBuffer2))
+    DeprecatedGL..void("Rectiv", Check(2)..GLint.const.p("v1"), Check(2)..GLint.const.p("v2"))
+    DeprecatedGL..void("Rectsv", Check(2)..GLshort.const.p("v1"), Check(2)..GLshort.const.p("v2"))
+    DeprecatedGL..void("Rectfv", Check(2)..GLfloat.const.p("v1"), Check(2)..GLfloat.const.p("v2"))
+    DeprecatedGL..void("Rectdv", Check(2)..GLdouble.const.p("v1"), Check(2)..GLdouble.const.p("v2"))
 
     DeprecatedGL..GLint(
         "RenderMode",
-        "Sets the current render mode. The default is #RENDER.",
 
-        GLenum("mode", "the render mode", "#RENDER #SELECT #FEEDBACK")
+        GLenum("mode")
     )
 
     DeprecatedGL..void(
         "Rotatef",
-        """
-        Manipulates the current matrix with a rotation matrix.
 
-        {@code angle} gives an angle of rotation in degrees; the coordinates of a vector v are given by ${code("v = (x y z)<sup>T</sup>")}. The computed matrix
-        is a counter-clockwise rotation about the line through the origin with the specified axis when that axis is pointing up (i.e. the right-hand rule
-        determines the sense of the rotation angle). The matrix is thus
-        ${table(
-            tr(td("<b>R</b>", 3, 3), td("0")),
-            tr(td("0")),
-            tr(td("0")),
-            tr(td("0"), td("0"), td("0"), td("1"))
-        )}
-
-        Let <code>u = v / ||v|| = (x' y' z')<sup>T</sup></code>. If <b>S</b> =
-        ${table(
-            tr(td("0"), td("-z'"), td("y'")),
-            tr(td("z'"), td("0"), td("-x'")),
-            tr(td("-y'"), td("x'"), td("0"))
-        )}
-
-        then ${code("<b>R</b> = uu<sup>T</sup> + cos(angle)(I - uu<sup>T</sup>) + sin(angle)<b>S</b>")}
-        """,
-
-        GLfloat("angle", "the angle of rotation in degrees"),
-        GLfloat("x", "the x coordinate of the rotation vector"),
-        GLfloat("y", "the y coordinate of the rotation vector"),
-        GLfloat("z", "the z coordinate of the rotation vector")
+        GLfloat("angle"),
+        GLfloat("x"),
+        GLfloat("y"),
+        GLfloat("z")
     )
 
     DeprecatedGL..void(
         "Rotated",
-        "Double version of #Rotatef().",
 
-        GLdouble("angle", "the angle of rotation in degrees"),
-        GLdouble("x", "the x coordinate of the rotation vector"),
-        GLdouble("y", "the y coordinate of the rotation vector"),
-        GLdouble("z", "the z coordinate of the rotation vector")
+        GLdouble("angle"),
+        GLdouble("x"),
+        GLdouble("y"),
+        GLdouble("z")
     )
 
     DeprecatedGL..void(
         "Scalef",
-        """
-        Manipulates the current matrix with a general scaling matrix along the x-, y- and z- axes.
 
-        Calling this function is equivalent to calling #MultMatrixf() with the following matrix:
-        ${table(
-            tr(td("x"), td("0"), td("0"), td("0")),
-            tr(td("0"), td("y"), td("0"), td("0")),
-            tr(td("0"), td("0"), td("z"), td("0")),
-            tr(td("0"), td("0"), td("0"), td("1"))
-        )}
-        """,
-
-        GLfloat("x", "the x-axis scaling factor"),
-        GLfloat("y", "the y-axis scaling factor"),
-        GLfloat("z", "the z-axis scaling factor")
+        GLfloat("x"),
+        GLfloat("y"),
+        GLfloat("z")
     )
 
     DeprecatedGL..void(
         "Scaled",
-        "Double version of #Scalef().",
 
-        GLdouble("x", "the x-axis scaling factor"),
-        GLdouble("y", "the y-axis scaling factor"),
-        GLdouble("z", "the z-axis scaling factor")
+        GLdouble("x"),
+        GLdouble("y"),
+        GLdouble("z")
     )
 
     reuse(GL11C, "Scissor")
 
     DeprecatedGL..void(
         "SelectBuffer",
-        "Sets the selection array.",
 
-        AutoSize("buffer")..GLsizei("size", "the maximum number of values that can be stored in {@code buffer}"),
-        GLuint.p("buffer", "an array of unsigned integers to be potentially filled names")
+        AutoSize("buffer")..GLsizei("size"),
+        GLuint.p("buffer")
     )
 
     DeprecatedGL..void(
         "ShadeModel",
-        """
-        Sets the current shade mode. The initial value of the shade mode is #SMOOTH.
 
-        If mode is #SMOOTH, vertex colors are treated individually. If mode is #FLAT, flatshading is enabled and colors are taken from the
-        provoking vertex of the primitive. The colors selected are those derived from current values, generated by lighting, or generated by vertex shading, if
-        lighting is disabled, enabled, or a vertex shader is in use, respectively.
-        """,
-
-        GLenum("mode", "the shade mode", "#SMOOTH #FLAT")
+        GLenum("mode")
     )
 
     reuse(GL11C, "StencilFunc")
     reuse(GL11C, "StencilMask")
     reuse(GL11C, "StencilOp")
 
-    // TexCoord functions javadoc
-    val texCoordS = "the s component of the current texture coordinates"
-    val texCoordT = "the t component of the current texture coordinates"
-    val texCoordR = "the r component of the current texture coordinates"
-    val texCoordQ = "the q component of the current texture coordinates"
-    val texCoordBuffer = "the texture coordinate buffer"
-
     DeprecatedGL..void(
         "TexCoord1f",
-        "Sets the current one-dimensional texture coordinate. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.",
 
-        GLfloat("s", texCoordS)
+        GLfloat("s")
     )
 
-    DeprecatedGL..void("TexCoord1s", "Short version of #TexCoord1f().", GLshort("s", texCoordS))
-    DeprecatedGL..void("TexCoord1i", "Integer version of #TexCoord1f().", GLint("s", texCoordS))
-    DeprecatedGL..void("TexCoord1d", "Double version of #TexCoord1f().", GLdouble("s", texCoordS))
+    DeprecatedGL..void("TexCoord1s", GLshort("s"))
+    DeprecatedGL..void("TexCoord1i", GLint("s"))
+    DeprecatedGL..void("TexCoord1d", GLdouble("s"))
 
-    DeprecatedGL..void("TexCoord1fv", "Pointer version of #TexCoord1f().", Check(1)..GLfloat.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord1sv", "Pointer version of #TexCoord1s().", Check(1)..GLshort.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord1iv", "Pointer version of #TexCoord1i().", Check(1)..GLint.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord1dv", "Pointer version of #TexCoord1d().", Check(1)..GLdouble.const.p("v", texCoordBuffer))
+    DeprecatedGL..void("TexCoord1fv", Check(1)..GLfloat.const.p("v"))
+    DeprecatedGL..void("TexCoord1sv", Check(1)..GLshort.const.p("v"))
+    DeprecatedGL..void("TexCoord1iv", Check(1)..GLint.const.p("v"))
+    DeprecatedGL..void("TexCoord1dv", Check(1)..GLdouble.const.p("v"))
 
     DeprecatedGL..void(
         "TexCoord2f",
-        "Sets the current two-dimensional texture coordinate. {@code r} is implicitly set to 0 and {@code q} to 1.",
 
-        GLfloat("s", texCoordS),
-        GLfloat("t", texCoordT)
+        GLfloat("s"),
+        GLfloat("t")
     )
 
-    DeprecatedGL..void("TexCoord2s", "Short version of #TexCoord2f().", GLshort("s", texCoordS), GLshort("t", texCoordT))
-    DeprecatedGL..void("TexCoord2i", "Integer version of #TexCoord2f().", GLint("s", texCoordS), GLint("t", texCoordT))
-    DeprecatedGL..void("TexCoord2d", "Double version of #TexCoord2f().", GLdouble("s", texCoordS), GLdouble("t", texCoordT))
+    DeprecatedGL..void("TexCoord2s", GLshort("s"), GLshort("t"))
+    DeprecatedGL..void("TexCoord2i", GLint("s"), GLint("t"))
+    DeprecatedGL..void("TexCoord2d", GLdouble("s"), GLdouble("t"))
 
-    DeprecatedGL..void("TexCoord2fv", "Pointer version of #TexCoord2f().", Check(2)..GLfloat.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord2sv", "Pointer version of #TexCoord2s().", Check(2)..GLshort.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord2iv", "Pointer version of #TexCoord2i().", Check(2)..GLint.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord2dv", "Pointer version of #TexCoord2d().", Check(2)..GLdouble.const.p("v", texCoordBuffer))
+    DeprecatedGL..void("TexCoord2fv", Check(2)..GLfloat.const.p("v"))
+    DeprecatedGL..void("TexCoord2sv", Check(2)..GLshort.const.p("v"))
+    DeprecatedGL..void("TexCoord2iv", Check(2)..GLint.const.p("v"))
+    DeprecatedGL..void("TexCoord2dv", Check(2)..GLdouble.const.p("v"))
 
     DeprecatedGL..void(
         "TexCoord3f",
-        "Sets the current three-dimensional texture coordinate. {@code q} is implicitly set to 1.",
 
-        GLfloat("s", texCoordS),
-        GLfloat("t", texCoordT),
-        GLfloat("r", texCoordR)
+        GLfloat("s"),
+        GLfloat("t"),
+        GLfloat("r")
     )
 
-    DeprecatedGL..void("TexCoord3s", "Short version of #TexCoord3f().", GLshort("s", texCoordS), GLshort("t", texCoordT), GLshort("r", texCoordR))
-    DeprecatedGL..void("TexCoord3i", "Integer version of #TexCoord3f().", GLint("s", texCoordS), GLint("t", texCoordT), GLint("r", texCoordR))
-    DeprecatedGL..void("TexCoord3d", "Double version of #TexCoord3f().", GLdouble("s", texCoordS), GLdouble("t", texCoordT), GLdouble("r", texCoordR))
+    DeprecatedGL..void("TexCoord3s", GLshort("s"), GLshort("t"), GLshort("r"))
+    DeprecatedGL..void("TexCoord3i", GLint("s"), GLint("t"), GLint("r"))
+    DeprecatedGL..void("TexCoord3d", GLdouble("s"), GLdouble("t"), GLdouble("r"))
 
-    DeprecatedGL..void("TexCoord3fv", "Pointer version of #TexCoord3f().", Check(3)..GLfloat.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord3sv", "Pointer version of #TexCoord3s().", Check(3)..GLshort.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord3iv", "Pointer version of #TexCoord3i().", Check(3)..GLint.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord3dv", "Pointer version of #TexCoord3d().", Check(3)..GLdouble.const.p("v", texCoordBuffer))
+    DeprecatedGL..void("TexCoord3fv", Check(3)..GLfloat.const.p("v"))
+    DeprecatedGL..void("TexCoord3sv", Check(3)..GLshort.const.p("v"))
+    DeprecatedGL..void("TexCoord3iv", Check(3)..GLint.const.p("v"))
+    DeprecatedGL..void("TexCoord3dv", Check(3)..GLdouble.const.p("v"))
 
     DeprecatedGL..void(
         "TexCoord4f",
-        "Sets the current four-dimensional texture coordinate.",
 
-        GLfloat("s", texCoordS),
-        GLfloat("t", texCoordT),
-        GLfloat("r", texCoordR),
-        GLfloat("q", texCoordQ)
+        GLfloat("s"),
+        GLfloat("t"),
+        GLfloat("r"),
+        GLfloat("q")
     )
 
-    DeprecatedGL..void("TexCoord4s", "Short version of #TexCoord4f().", GLshort("s", texCoordS), GLshort("t", texCoordT), GLshort("r", texCoordR), GLshort("q", texCoordQ))
-    DeprecatedGL..void("TexCoord4i", "Integer version of #TexCoord4f().", GLint("s", texCoordS), GLint("t", texCoordT), GLint("r", texCoordR), GLint("q", texCoordQ))
-    DeprecatedGL..void("TexCoord4d", "Double version of #TexCoord4f().", GLdouble("s", texCoordS), GLdouble("t", texCoordT), GLdouble("r", texCoordR), GLdouble("q", texCoordQ))
+    DeprecatedGL..void("TexCoord4s", GLshort("s"), GLshort("t"), GLshort("r"), GLshort("q"))
+    DeprecatedGL..void("TexCoord4i", GLint("s"), GLint("t"), GLint("r"), GLint("q"))
+    DeprecatedGL..void("TexCoord4d", GLdouble("s"), GLdouble("t"), GLdouble("r"), GLdouble("q"))
 
-    DeprecatedGL..void("TexCoord4fv", "Pointer version of #TexCoord4f().", Check(4)..GLfloat.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord4sv", "Pointer version of #TexCoord4s().", Check(4)..GLshort.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord4iv", "Pointer version of #TexCoord4i().", Check(4)..GLint.const.p("v", texCoordBuffer))
-    DeprecatedGL..void("TexCoord4dv", "Pointer version of #TexCoord4d().", Check(4)..GLdouble.const.p("v", texCoordBuffer))
+    DeprecatedGL..void("TexCoord4fv", Check(4)..GLfloat.const.p("v"))
+    DeprecatedGL..void("TexCoord4sv", Check(4)..GLshort.const.p("v"))
+    DeprecatedGL..void("TexCoord4iv", Check(4)..GLint.const.p("v"))
+    DeprecatedGL..void("TexCoord4dv", Check(4)..GLdouble.const.p("v"))
 
     OffHeapOnly..DeprecatedGL..void(
         "TexCoordPointer",
-        "Specifies the location and organization of a texture coordinate array.",
 
-        GLint("size", "the number of values per vertex that are stored in the array", "1 2 3 4"),
-        GLenum(
-            "type",
-            "the data type of the values stored in the array",
-            "#SHORT #INT #HALF_FLOAT #FLOAT #DOUBLE #UNSIGNED_INT_2_10_10_10_REV #INT_2_10_10_10_REV"
-        ),
-        GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
+        GLint("size"),
+        GLenum("type"),
+        GLsizei("stride"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..RawPointer..void.const.p("pointer", "the texture coordinate array data")
+        )..Unsafe..RawPointer..void.const.p("pointer")
     )
 
     DeprecatedGL..void(
         "TexEnvi",
-        """
-        Sets parameters of the texture environment that specifies how texture values are interpreted when texturing a fragment, or sets per-texture-unit
-        filtering parameters.
-        """,
 
-        GLenum("target", "the texture environment target", "#TEXTURE_ENV #TEXTURE_FILTER_CONTROL #POINT_SPRITE"),
-        GLenum(
-            "pname",
-            "the parameter to set",
-            """
-            #COORD_REPLACE #TEXTURE_ENV_MODE #TEXTURE_LOD_BIAS #COMBINE_RGB #COMBINE_ALPHA #SRC0_RGB #SRC1_RGB
-            #SRC2_RGB #SRC0_ALPHA #SRC1_ALPHA #SRC2_ALPHA #OPERAND0_RGB #OPERAND1_RGB #OPERAND2_RGB
-            #OPERAND0_ALPHA #OPERAND1_ALPHA #OPERAND2_ALPHA #RGB_SCALE #ALPHA_SCALE
-            """
-        ),
-        GLint(
-            "param",
-            "the parameter value. Scalar value or",
-            """
-            #REPLACE #MODULATE #DECAL #BLEND #ADD #COMBINE
-            #ADD_SIGNED #INTERPOLATE #SUBTRACT #DOT3_RGB #DOT3_RGBA
-            #TEXTURE #TEXTURE0 GL13.GL_TEXTURE[1-31] #CONSTANT #PRIMARY_COLOR #PREVIOUS
-            """, LinkMode.SINGLE_CNT
-        )
+        GLenum("target"),
+        GLenum("pname"),
+        GLint("param")
     )
 
     DeprecatedGL..void(
         "TexEnviv",
-        "Pointer version of #TexEnvi().",
 
-        GLenum("target", "the texture environment target", "#TEXTURE_ENV"),
-        GLenum("pname", "the parameter to set", "#TEXTURE_ENV_COLOR"),
-        Check(4)..GLint.const.p("params", "the parameter value")
+        GLenum("target"),
+        GLenum("pname"),
+        Check(4)..GLint.const.p("params")
     )
 
 
     DeprecatedGL..void(
         "TexEnvf",
-        "Float version of #TexEnvi().",
 
-        GLenum("target", "the texture environment target"),
-        GLenum("pname", "the parameter to set"),
-        GLfloat("param", "the parameter value")
+        GLenum("target"),
+        GLenum("pname"),
+        GLfloat("param")
     )
 
     DeprecatedGL..void(
         "TexEnvfv",
-        "Pointer version of #TexEnvf().",
 
-        GLenum("target", "the texture environment target", "#TEXTURE_ENV"),
-        GLenum("pname", "the parameter to set", "#TEXTURE_ENV_COLOR"),
-        Check(4)..GLfloat.const.p("params", "the parameter value")
+        GLenum("target"),
+        GLenum("pname"),
+        Check(4)..GLfloat.const.p("params")
     )
 
     DeprecatedGL..void(
         "TexGeni",
-        """
-        Sets an integer texture coordinate generation parameter.
 
-        A texture coordinate generation function is enabled or disabled using #Enable() and #Disable() with an argument of
-        #TEXTURE_GEN_S, #TEXTURE_GEN_T, #TEXTURE_GEN_R, or #TEXTURE_GEN_Q (each indicates the corresponding texture
-        coordinate). When enabled, the specified texture coordinate is computed according to the current #EYE_LINEAR, #OBJECT_LINEAR or
-        #SPHERE_MAP specification, depending on the current setting of #TEXTURE_GEN_MODE for that coordinate. When disabled, subsequent
-        vertices will take the indicated texture coordinate from the current texture coordinates.
-
-        The initial state has the texture generation function disabled for all texture coordinates. Initially all texture generation modes are EYE_LINEAR.
-        """,
-
-        GLenum("coord", "the coordinate for which to set the parameter", TEX_COORDS),
-        GLenum("pname", "the parameter to set", "#TEXTURE_GEN_MODE"),
-        GLint("param", "the parameter value", "#OBJECT_LINEAR #EYE_LINEAR #SPHERE_MAP #REFLECTION_MAP #NORMAL_MAP")
+        GLenum("coord"),
+        GLenum("pname"),
+        GLint("param")
     )
 
     DeprecatedGL..void(
         "TexGeniv",
-        "Pointer version of #TexGeni().",
 
-        GLenum("coord", "the coordinate for which to set the parameter"),
-        GLenum("pname", "the parameter to set", "#OBJECT_PLANE #EYE_PLANE"),
-        Check(4)..GLint.const.p("params", "the parameter value")
+        GLenum("coord"),
+        GLenum("pname"),
+        Check(4)..GLint.const.p("params")
     )
 
     DeprecatedGL..void(
         "TexGenf",
-        "Float version of #TexGeni().",
 
-        GLenum("coord", "the coordinate for which to set the parameter"),
-        GLenum("pname", "the parameter to set"),
-        GLfloat("param", "the parameter value")
+        GLenum("coord"),
+        GLenum("pname"),
+        GLfloat("param")
     )
 
     DeprecatedGL..void(
         "TexGenfv",
-        "Pointer version of #TexGenf().",
 
-        GLenum("coord", "the coordinate for which to set the parameter"),
-        GLenum("pname", "the parameter to set", "#OBJECT_PLANE #EYE_PLANE"),
-        Check(4)..GLfloat.const.p("params", "the parameter value")
+        GLenum("coord"),
+        GLenum("pname"),
+        Check(4)..GLfloat.const.p("params")
     )
 
     DeprecatedGL..void(
         "TexGend",
-        "Double version of #TexGeni().",
 
-        GLenum("coord", "the coordinate for which to set the parameter"),
-        GLenum("pname", "the parameter to set"),
-        GLdouble("param", "the parameter value")
+        GLenum("coord"),
+        GLenum("pname"),
+        GLdouble("param")
     )
 
     DeprecatedGL..void(
         "TexGendv",
-        "Pointer version of #TexGend().",
 
-        GLenum("coord", "the coordinate for which to set the parameter"),
-        GLenum("pname", "the parameter to set"),
-        Check(4)..GLdouble.const.p("params", "the parameter value")
+        GLenum("coord"),
+        GLenum("pname"),
+        Check(4)..GLdouble.const.p("params")
     )
 
     reuse(GL11C, "TexImage1D")
@@ -2653,113 +1991,80 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
     DeprecatedGL..void(
         "Translatef",
-        """
-        Manipulates the current matrix with a translation matrix along the x-, y- and z- axes.
 
-        Calling this function is equivalent to calling #MultMatrixf() with the following matrix:
-        ${table(
-            tr(td("1"), td("0"), td("0"), td("x")),
-            tr(td("0"), td("1"), td("0"), td("y")),
-            tr(td("0"), td("0"), td("1"), td("z")),
-            tr(td("0"), td("0"), td("0"), td("1"))
-        )}
-        """,
-
-        GLfloat("x", "the x-axis translation"),
-        GLfloat("y", "the y-axis translation"),
-        GLfloat("z", "the z-axis translation")
+        GLfloat("x"),
+        GLfloat("y"),
+        GLfloat("z")
     )
 
     DeprecatedGL..void(
         "Translated",
-        "Double version of #Translatef().",
 
-        GLdouble("x", "the x-axis translation"),
-        GLdouble("y", "the y-axis translation"),
-        GLdouble("z", "the z-axis translation")
+        GLdouble("x"),
+        GLdouble("y"),
+        GLdouble("z")
     )
-
-    // Vertex functions javadoc
-    val vertexX = "the vertex x coordinate"
-    val vertexY = "the vertex y coordinate"
-    val vertexZ = "the vertex z coordinate"
-    val vertexW = "the vertex w coordinate"
-    val vertexBuffer = "the vertex buffer"
 
     DeprecatedGL..void(
         "Vertex2f",
-        """
-        Specifies a single vertex between #Begin() and #End() by giving its coordinates in two dimensions. The z coordinate is implicitly set
-        to zero and the w coordinate to one.
-        """,
 
-        GLfloat("x", vertexX),
-        GLfloat("y", vertexY)
+        GLfloat("x"),
+        GLfloat("y")
     )
 
-    DeprecatedGL..void("Vertex2s", "Short version of #Vertex2f().", GLshort("x", vertexX), GLshort("y", vertexY))
-    DeprecatedGL..void("Vertex2i", "Integer version of #Vertex2f().", GLint("x", vertexX), GLint("y", vertexY))
-    DeprecatedGL..void("Vertex2d", "Double version of #Vertex2f().", GLdouble("x", vertexX), GLdouble("y", vertexY))
+    DeprecatedGL..void("Vertex2s", GLshort("x"), GLshort("y"))
+    DeprecatedGL..void("Vertex2i", GLint("x"), GLint("y"))
+    DeprecatedGL..void("Vertex2d", GLdouble("x"), GLdouble("y"))
 
-    DeprecatedGL..void("Vertex2fv", "Pointer version of #Vertex2f().", Check(2)..GLfloat.const.p("coords", vertexBuffer))
-    DeprecatedGL..void("Vertex2sv", "Pointer version of #Vertex2s().", Check(2)..GLshort.const.p("coords", vertexBuffer))
-    DeprecatedGL..void("Vertex2iv", "Pointer version of #Vertex2i().", Check(2)..GLint.const.p("coords", vertexBuffer))
-    DeprecatedGL..void("Vertex2dv", "Pointer version of #Vertex2d().", Check(2)..GLdouble.const.p("coords", vertexBuffer))
+    DeprecatedGL..void("Vertex2fv", Check(2)..GLfloat.const.p("coords"))
+    DeprecatedGL..void("Vertex2sv", Check(2)..GLshort.const.p("coords"))
+    DeprecatedGL..void("Vertex2iv", Check(2)..GLint.const.p("coords"))
+    DeprecatedGL..void("Vertex2dv", Check(2)..GLdouble.const.p("coords"))
 
     DeprecatedGL..void(
         "Vertex3f",
-        """
-        Specifies a single vertex between #Begin() and #End() by giving its coordinates in three dimensions. The w coordinate is implicitly set
-        to one.
-        """,
 
-        GLfloat("x", vertexX),
-        GLfloat("y", vertexY),
-        GLfloat("z", vertexZ)
+        GLfloat("x"),
+        GLfloat("y"),
+        GLfloat("z")
     )
 
-    DeprecatedGL..void("Vertex3s", "Short version of #Vertex3f().", GLshort("x", vertexX), GLshort("y", vertexY), GLshort("z", vertexZ))
-    DeprecatedGL..void("Vertex3i", "Integer version of #Vertex3f().", GLint("x", vertexX), GLint("y", vertexY), GLint("z", vertexZ))
-    DeprecatedGL..void("Vertex3d", "Double version of #Vertex3f().", GLdouble("x", vertexX), GLdouble("y", vertexY), GLdouble("z", vertexZ))
+    DeprecatedGL..void("Vertex3s", GLshort("x"), GLshort("y"), GLshort("z"))
+    DeprecatedGL..void("Vertex3i", GLint("x"), GLint("y"), GLint("z"))
+    DeprecatedGL..void("Vertex3d", GLdouble("x"), GLdouble("y"), GLdouble("z"))
 
-    DeprecatedGL..void("Vertex3fv", "Pointer version of #Vertex3f().", Check(3)..GLfloat.const.p("coords", vertexBuffer))
-    DeprecatedGL..void("Vertex3sv", "Pointer version of #Vertex3s().", Check(3)..GLshort.const.p("coords", vertexBuffer))
-    DeprecatedGL..void("Vertex3iv", "Pointer version of #Vertex3i().", Check(3)..GLint.const.p("coords", vertexBuffer))
-    DeprecatedGL..void("Vertex3dv", "Pointer version of #Vertex3d().", Check(3)..GLdouble.const.p("coords", vertexBuffer))
+    DeprecatedGL..void("Vertex3fv", Check(3)..GLfloat.const.p("coords"))
+    DeprecatedGL..void("Vertex3sv", Check(3)..GLshort.const.p("coords"))
+    DeprecatedGL..void("Vertex3iv", Check(3)..GLint.const.p("coords"))
+    DeprecatedGL..void("Vertex3dv", Check(3)..GLdouble.const.p("coords"))
 
     DeprecatedGL..void(
         "Vertex4f",
-        "Specifies a single vertex between #Begin() and #End() by giving its coordinates in four dimensions.",
 
-        GLfloat("x", vertexX),
-        GLfloat("y", vertexY),
-        GLfloat("z", vertexZ),
-        GLfloat("w", vertexW)
+        GLfloat("x"),
+        GLfloat("y"),
+        GLfloat("z"),
+        GLfloat("w")
     )
 
-    DeprecatedGL..void("Vertex4s", "Short version of #Vertex4f().", GLshort("x", vertexX), GLshort("y", vertexY), GLshort("z", vertexZ), GLshort("w", vertexW))
-    DeprecatedGL..void("Vertex4i", "Integer version of #Vertex4f().", GLint("x", vertexX), GLint("y", vertexY), GLint("z", vertexZ), GLint("w", vertexW))
-    DeprecatedGL..void("Vertex4d", "Double version of #Vertex4f().", GLdouble("x", vertexX), GLdouble("y", vertexY), GLdouble("z", vertexZ), GLdouble("w", vertexW))
+    DeprecatedGL..void("Vertex4s", GLshort("x"), GLshort("y"), GLshort("z"), GLshort("w"))
+    DeprecatedGL..void("Vertex4i", GLint("x"), GLint("y"), GLint("z"), GLint("w"))
+    DeprecatedGL..void("Vertex4d", GLdouble("x"), GLdouble("y"), GLdouble("z"), GLdouble("w"))
 
-    DeprecatedGL..void("Vertex4fv", "Pointer version of #Vertex4f().", Check(4)..GLfloat.const.p("coords", vertexBuffer))
-    DeprecatedGL..void("Vertex4sv", "Pointer version of #Vertex4s().", Check(4)..GLshort.const.p("coords", vertexBuffer))
-    DeprecatedGL..void("Vertex4iv", "Pointer version of #Vertex4i().", Check(4)..GLint.const.p("coords", vertexBuffer))
-    DeprecatedGL..void("Vertex4dv", "Pointer version of #Vertex4d().", Check(4)..GLdouble.const.p("coords", vertexBuffer))
+    DeprecatedGL..void("Vertex4fv", Check(4)..GLfloat.const.p("coords"))
+    DeprecatedGL..void("Vertex4sv", Check(4)..GLshort.const.p("coords"))
+    DeprecatedGL..void("Vertex4iv", Check(4)..GLint.const.p("coords"))
+    DeprecatedGL..void("Vertex4dv", Check(4)..GLdouble.const.p("coords"))
 
     OffHeapOnly..DeprecatedGL..void(
         "VertexPointer",
-        "Specifies the location and organization of a vertex array.",
 
-        GLint("size", "the number of values per vertex that are stored in the array", "2 3 4"),
-        GLenum(
-            "type",
-            "the data type of the values stored in the array",
-            "#SHORT #INT #HALF_FLOAT #FLOAT #DOUBLE #UNSIGNED_INT_2_10_10_10_REV #INT_2_10_10_10_REV"
-        ),
-        GLsizei("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
+        GLint("size"),
+        GLenum("type"),
+        GLsizei("stride"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..RawPointer..void.const.p("pointer", "the vertex array data")
+        )..Unsafe..RawPointer..void.const.p("pointer")
     )
 
     reuse(GL11C, "Viewport")

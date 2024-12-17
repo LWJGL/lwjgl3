@@ -10,12 +10,7 @@ import opengles.BufferType.*
 
 val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
     extends = GLES20
-    documentation =
-        "The core OpenGL ES 3.0 functionality."
-
     IntConstant(
-        "",
-
         "READ_BUFFER"..0x0C02,
         "UNPACK_ROW_LENGTH"..0x0CF2,
         "UNPACK_SKIP_ROWS"..0x0CF3,
@@ -339,1001 +334,889 @@ val GLES30 = "GLES30".nativeClassGLES("GLES30", postfix = "") {
     )
 
     LongConstant(
-        "",
-
         "TIMEOUT_IGNORED".."0xFFFFFFFFFFFFFFFFL"
     )
 
     void(
         "ReadBuffer",
-        "",
 
-        GLenum("src", "")
+        GLenum("src")
     )
 
     void(
         "DrawRangeElements",
-        "",
 
-        GLenum("mode", ""),
-        GLuint("start", ""),
-        GLuint("end", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        RawPointer..void.const.p("indices", "")
+        GLenum("mode"),
+        GLuint("start"),
+        GLuint("end"),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count"),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type"),
+        RawPointer..void.const.p("indices")
     )
 
     void(
         "TexImage3D",
-        "",
 
-        GLenum("target", ""),
-        GLint("level", ""),
-        GLint("internalformat", ""),
-        GLsizei("width", ""),
-        GLsizei("height", ""),
-        GLsizei("depth", ""),
-        GLint("border", ""),
-        GLenum("format", ""),
-        GLenum("type", ""),
+        GLenum("target"),
+        GLint("level"),
+        GLint("internalformat"),
+        GLsizei("width"),
+        GLsizei("height"),
+        GLsizei("depth"),
+        GLint("border"),
+        GLenum("format"),
+        GLenum("type"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..RawPointer..nullable..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..nullable..void.const.p("pixels")
     )
 
     void(
         "TexSubImage3D",
-        "",
 
-        GLenum("target", ""),
-        GLint("level", ""),
-        GLint("xoffset", ""),
-        GLint("yoffset", ""),
-        GLint("zoffset", ""),
-        GLsizei("width", ""),
-        GLsizei("height", ""),
-        GLsizei("depth", ""),
-        GLenum("format", ""),
-        GLenum("type", ""),
+        GLenum("target"),
+        GLint("level"),
+        GLint("xoffset"),
+        GLint("yoffset"),
+        GLint("zoffset"),
+        GLsizei("width"),
+        GLsizei("height"),
+        GLsizei("depth"),
+        GLenum("format"),
+        GLenum("type"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-        )..Unsafe..RawPointer..void.const.p("pixels", "")
+        )..Unsafe..RawPointer..void.const.p("pixels")
     )
 
     void(
         "CopyTexSubImage3D",
-        "",
 
-        GLenum("target", ""),
-        GLint("level", ""),
-        GLint("xoffset", ""),
-        GLint("yoffset", ""),
-        GLint("zoffset", ""),
-        GLint("x", ""),
-        GLint("y", ""),
-        GLsizei("width", ""),
-        GLsizei("height", "")
+        GLenum("target"),
+        GLint("level"),
+        GLint("xoffset"),
+        GLint("yoffset"),
+        GLint("zoffset"),
+        GLint("x"),
+        GLint("y"),
+        GLsizei("width"),
+        GLsizei("height")
     )
 
     void(
         "CompressedTexImage3D",
-        "",
 
-        GLenum("target", ""),
-        GLint("level", ""),
-        GLenum("internalformat", ""),
-        GLsizei("width", ""),
-        GLsizei("height", ""),
-        GLsizei("depth", ""),
-        GLint("border", ""),
-        AutoSize("data")..GLsizei("imageSize", ""),
-        RawPointer..nullable..void.const.p("data", "")
+        GLenum("target"),
+        GLint("level"),
+        GLenum("internalformat"),
+        GLsizei("width"),
+        GLsizei("height"),
+        GLsizei("depth"),
+        GLint("border"),
+        AutoSize("data")..GLsizei("imageSize"),
+        RawPointer..nullable..void.const.p("data")
     )
 
     void(
         "CompressedTexSubImage3D",
-        "",
 
-        GLenum("target", ""),
-        GLint("level", ""),
-        GLint("xoffset", ""),
-        GLint("yoffset", ""),
-        GLint("zoffset", ""),
-        GLsizei("width", ""),
-        GLsizei("height", ""),
-        GLsizei("depth", ""),
-        GLenum("format", ""),
-        AutoSize("data")..GLsizei("imageSize", ""),
-        RawPointer..void.const.p("data", "")
+        GLenum("target"),
+        GLint("level"),
+        GLint("xoffset"),
+        GLint("yoffset"),
+        GLint("zoffset"),
+        GLsizei("width"),
+        GLsizei("height"),
+        GLsizei("depth"),
+        GLenum("format"),
+        AutoSize("data")..GLsizei("imageSize"),
+        RawPointer..void.const.p("data")
     )
 
     void(
         "GenQueries",
-        "",
 
-        AutoSize("ids")..GLsizei("n", ""),
-        ReturnParam..GLuint.p("ids", "")
+        AutoSize("ids")..GLsizei("n"),
+        ReturnParam..GLuint.p("ids")
     )
 
     void(
         "DeleteQueries",
-        "",
 
-        AutoSize("ids")..GLsizei("n", ""),
-        SingleValue("id")..GLuint.const.p("ids", "")
+        AutoSize("ids")..GLsizei("n"),
+        SingleValue("id")..GLuint.const.p("ids")
     )
 
     GLboolean(
         "IsQuery",
-        "",
 
-        GLuint("id", "")
+        GLuint("id")
     )
 
     void(
         "BeginQuery",
-        "",
 
-        GLenum("target", ""),
-        GLuint("id", "")
+        GLenum("target"),
+        GLuint("id")
     )
 
     void(
         "EndQuery",
-        "",
 
-        GLenum("target", "")
+        GLenum("target")
     )
 
     void(
         "GetQueryiv",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p("params", "")
+        GLenum("target"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint.p("params")
     )
 
     void(
         "GetQueryObjectuiv",
-        "",
 
-        GLuint("id", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLuint.p("params", "")
+        GLuint("id"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLuint.p("params")
     )
 
     GLboolean(
         "UnmapBuffer",
-        "",
 
-        GLenum("target", "")
+        GLenum("target")
     )
 
     void(
         "GetBufferPointerv",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..void.p.p("params", "")
+        GLenum("target"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..void.p.p("params")
     )
 
     void(
         "DrawBuffers",
-        "",
 
-        AutoSize("bufs")..GLsizei("n", ""),
-        SingleValue("buf")..GLenum.const.p("bufs", "")
+        AutoSize("bufs")..GLsizei("n"),
+        SingleValue("buf")..GLenum.const.p("bufs")
     )
 
     void(
         "UniformMatrix2x3fv",
-        "",
 
-        GLint("location", ""),
-        AutoSize(2 x 3, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLint("location"),
+        AutoSize(2 x 3, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "UniformMatrix3x2fv",
-        "",
 
-        GLint("location", ""),
-        AutoSize(3 x 2, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLint("location"),
+        AutoSize(3 x 2, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "UniformMatrix2x4fv",
-        "",
 
-        GLint("location", ""),
-        AutoSize(2 x 4, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLint("location"),
+        AutoSize(2 x 4, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "UniformMatrix4x2fv",
-        "",
 
-        GLint("location", ""),
-        AutoSize(4 x 2, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLint("location"),
+        AutoSize(4 x 2, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "UniformMatrix3x4fv",
-        "",
 
-        GLint("location", ""),
-        AutoSize(3 x 4, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLint("location"),
+        AutoSize(3 x 4, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "UniformMatrix4x3fv",
-        "",
 
-        GLint("location", ""),
-        AutoSize(4 x 3, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLint("location"),
+        AutoSize(4 x 3, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "BlitFramebuffer",
-        "",
 
-        GLint("srcX0", ""),
-        GLint("srcY0", ""),
-        GLint("srcX1", ""),
-        GLint("srcY1", ""),
-        GLint("dstX0", ""),
-        GLint("dstY0", ""),
-        GLint("dstX1", ""),
-        GLint("dstY1", ""),
-        GLbitfield("mask", ""),
-        GLenum("filter", "")
+        GLint("srcX0"),
+        GLint("srcY0"),
+        GLint("srcX1"),
+        GLint("srcY1"),
+        GLint("dstX0"),
+        GLint("dstY0"),
+        GLint("dstX1"),
+        GLint("dstY1"),
+        GLbitfield("mask"),
+        GLenum("filter")
     )
 
     void(
         "RenderbufferStorageMultisample",
-        "",
 
-        GLenum("target", ""),
-        GLsizei("samples", ""),
-        GLenum("internalformat", ""),
-        GLsizei("width", ""),
-        GLsizei("height", "")
+        GLenum("target"),
+        GLsizei("samples"),
+        GLenum("internalformat"),
+        GLsizei("width"),
+        GLsizei("height")
     )
 
     void(
         "FramebufferTextureLayer",
-        "",
 
-        GLenum("target", ""),
-        GLenum("attachment", ""),
-        GLuint("texture", ""),
-        GLint("level", ""),
-        GLint("layer", "")
+        GLenum("target"),
+        GLenum("attachment"),
+        GLuint("texture"),
+        GLint("level"),
+        GLint("layer")
     )
 
     MapPointer("length", oldBufferOverloads = true)..void.p(
         "MapBufferRange",
-        "",
 
-        GLenum("target", ""),
-        GLintptr("offset", ""),
-        GLsizeiptr("length", ""),
-        GLbitfield("access", "")
+        GLenum("target"),
+        GLintptr("offset"),
+        GLsizeiptr("length"),
+        GLbitfield("access")
     )
 
     void(
         "FlushMappedBufferRange",
-        "",
 
-        GLenum("target", ""),
-        GLintptr("offset", ""),
-        GLsizeiptr("length", "")
+        GLenum("target"),
+        GLintptr("offset"),
+        GLsizeiptr("length")
     )
 
     void(
         "BindVertexArray",
-        "",
 
-        GLuint("array", "")
+        GLuint("array")
     )
 
     void(
         "DeleteVertexArrays",
-        "",
 
-        AutoSize("arrays")..GLsizei("n", ""),
-        SingleValue("array")..GLuint.const.p("arrays", "")
+        AutoSize("arrays")..GLsizei("n"),
+        SingleValue("array")..GLuint.const.p("arrays")
     )
 
     void(
         "GenVertexArrays",
-        "",
 
-        AutoSize("arrays")..GLsizei("n", ""),
-        ReturnParam..GLuint.p("arrays", "")
+        AutoSize("arrays")..GLsizei("n"),
+        ReturnParam..GLuint.p("arrays")
     )
 
     GLboolean(
         "IsVertexArray",
-        "",
 
-        GLuint("array", "")
+        GLuint("array")
     )
 
     void(
         "GetIntegeri_v",
-        "",
 
-        GLenum("target", ""),
-        GLuint("index", ""),
-        ReturnParam..Check(1)..GLint.p("data", "")
+        GLenum("target"),
+        GLuint("index"),
+        ReturnParam..Check(1)..GLint.p("data")
     )
 
     void(
         "BeginTransformFeedback",
-        "",
 
-        GLenum("primitiveMode", "")
+        GLenum("primitiveMode")
     )
 
-    void(
-        "EndTransformFeedback",
-        ""
-    )
+    void("EndTransformFeedback")
 
     void(
         "BindBufferRange",
-        "",
 
-        GLenum("target", ""),
-        GLuint("index", ""),
-        GLuint("buffer", ""),
-        GLintptr("offset", ""),
-        GLsizeiptr("size", "")
+        GLenum("target"),
+        GLuint("index"),
+        GLuint("buffer"),
+        GLintptr("offset"),
+        GLsizeiptr("size")
     )
 
     void(
         "BindBufferBase",
-        "",
 
-        GLenum("target", ""),
-        GLuint("index", ""),
-        GLuint("buffer", "")
+        GLenum("target"),
+        GLuint("index"),
+        GLuint("buffer")
     )
 
     void(
         "TransformFeedbackVaryings",
-        "",
 
-        GLuint("program", ""),
-        AutoSize("varyings")..GLsizei("count", ""),
-        PointerArray(GLcharASCII.p, "varying")..GLcharASCII.const.p.const.p("varyings", ""),
-        GLenum("bufferMode", "")
+        GLuint("program"),
+        AutoSize("varyings")..GLsizei("count"),
+        PointerArray(GLcharASCII.p, "varying")..GLcharASCII.const.p.const.p("varyings"),
+        GLenum("bufferMode")
     )
 
     void(
         "GetTransformFeedbackVarying",
-        "",
 
-        GLuint("program", ""),
-        GLuint("index", ""),
-        AutoSize("name")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p("length", ""),
-        Check(1)..GLsizei.p("size", ""),
-        Check(1)..GLenum.p("type", ""),
+        GLuint("program"),
+        GLuint("index"),
+        AutoSize("name")..GLsizei("bufSize"),
+        Check(1)..nullable..GLsizei.p("length"),
+        Check(1)..GLsizei.p("size"),
+        Check(1)..GLenum.p("type"),
         Return(
             "length",
             "GLES20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)"
-        )..GLcharASCII.p("name", "")
+        )..GLcharASCII.p("name")
     )
 
     OffHeapOnly..void(
         "VertexAttribIPointer",
-        "",
 
-        GLuint("index", ""),
-        GLint("size", ""),
-        GLenum("type", ""),
-        GLsizei("stride", ""),
+        GLuint("index"),
+        GLint("size"),
+        GLenum("type"),
+        GLsizei("stride"),
         MultiType(
             PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
-        )..Unsafe..RawPointer..void.const.p("pointer", "")
+        )..Unsafe..RawPointer..void.const.p("pointer")
     )
 
     void(
         "GetVertexAttribIiv",
-        "",
 
-        GLuint("index", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p("params", "")
+        GLuint("index"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint.p("params")
     )
 
     void(
         "GetVertexAttribIuiv",
-        "",
 
-        GLuint("index", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLuint.p("params", "")
+        GLuint("index"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLuint.p("params")
     )
 
     void(
         "VertexAttribI4i",
-        "",
 
-        GLuint("index", ""),
-        GLint("x", ""),
-        GLint("y", ""),
-        GLint("z", ""),
-        GLint("w", "")
+        GLuint("index"),
+        GLint("x"),
+        GLint("y"),
+        GLint("z"),
+        GLint("w")
     )
 
     void(
         "VertexAttribI4ui",
-        "",
 
-        GLuint("index", ""),
-        GLuint("x", ""),
-        GLuint("y", ""),
-        GLuint("z", ""),
-        GLuint("w", "")
+        GLuint("index"),
+        GLuint("x"),
+        GLuint("y"),
+        GLuint("z"),
+        GLuint("w")
     )
 
     void(
         "VertexAttribI4iv",
-        "",
 
-        GLuint("index", ""),
-        Check(4)..GLint.const.p("v", "")
+        GLuint("index"),
+        Check(4)..GLint.const.p("v")
     )
 
     void(
         "VertexAttribI4uiv",
-        "",
 
-        GLuint("index", ""),
-        Check(4)..GLuint.const.p("v", "")
+        GLuint("index"),
+        Check(4)..GLuint.const.p("v")
     )
 
     void(
         "GetUniformuiv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        ReturnParam..Check(1)..GLuint.p("params", "")
+        GLuint("program"),
+        GLint("location"),
+        ReturnParam..Check(1)..GLuint.p("params")
     )
 
     GLint(
         "GetFragDataLocation",
-        "",
 
-        GLuint("program", ""),
-        GLcharASCII.const.p("name", "")
+        GLuint("program"),
+        GLcharASCII.const.p("name")
     )
 
     void(
         "Uniform1ui",
-        "",
 
-        GLint("location", ""),
-        GLuint("v0", "")
+        GLint("location"),
+        GLuint("v0")
     )
 
     void(
         "Uniform2ui",
-        "",
 
-        GLint("location", ""),
-        GLuint("v0", ""),
-        GLuint("v1", "")
+        GLint("location"),
+        GLuint("v0"),
+        GLuint("v1")
     )
 
     void(
         "Uniform3ui",
-        "",
 
-        GLint("location", ""),
-        GLuint("v0", ""),
-        GLuint("v1", ""),
-        GLuint("v2", "")
+        GLint("location"),
+        GLuint("v0"),
+        GLuint("v1"),
+        GLuint("v2")
     )
 
     void(
         "Uniform4ui",
-        "",
 
-        GLint("location", ""),
-        GLuint("v0", ""),
-        GLuint("v1", ""),
-        GLuint("v2", ""),
-        GLuint("v3", "")
+        GLint("location"),
+        GLuint("v0"),
+        GLuint("v1"),
+        GLuint("v2"),
+        GLuint("v3")
     )
 
     void(
         "Uniform1uiv",
-        "",
 
-        GLint("location", ""),
-        AutoSize("value")..GLsizei("count", ""),
-        GLuint.const.p("value", "")
+        GLint("location"),
+        AutoSize("value")..GLsizei("count"),
+        GLuint.const.p("value")
     )
 
     void(
         "Uniform2uiv",
-        "",
 
-        GLint("location", ""),
-        AutoSize(2, "value")..GLsizei("count", ""),
-        GLuint.const.p("value", "")
+        GLint("location"),
+        AutoSize(2, "value")..GLsizei("count"),
+        GLuint.const.p("value")
     )
 
     void(
         "Uniform3uiv",
-        "",
 
-        GLint("location", ""),
-        AutoSize(3, "value")..GLsizei("count", ""),
-        GLuint.const.p("value", "")
+        GLint("location"),
+        AutoSize(3, "value")..GLsizei("count"),
+        GLuint.const.p("value")
     )
 
     void(
         "Uniform4uiv",
-        "",
 
-        GLint("location", ""),
-        AutoSize(4, "value")..GLsizei("count", ""),
-        GLuint.const.p("value", "")
+        GLint("location"),
+        AutoSize(4, "value")..GLsizei("count"),
+        GLuint.const.p("value")
     )
 
     void(
         "ClearBufferiv",
-        "",
 
-        GLenum("buffer", ""),
-        GLint("drawbuffer", ""),
-        Check(1)..GLint.const.p("value", "")
+        GLenum("buffer"),
+        GLint("drawbuffer"),
+        Check(1)..GLint.const.p("value")
     )
 
     void(
         "ClearBufferuiv",
-        "",
 
-        GLenum("buffer", ""),
-        GLint("drawbuffer", ""),
-        Check(1)..GLuint.const.p("value", "")
+        GLenum("buffer"),
+        GLint("drawbuffer"),
+        Check(1)..GLuint.const.p("value")
     )
 
     void(
         "ClearBufferfv",
-        "",
 
-        GLenum("buffer", ""),
-        GLint("drawbuffer", ""),
-        Check(1)..GLfloat.const.p("value", "")
+        GLenum("buffer"),
+        GLint("drawbuffer"),
+        Check(1)..GLfloat.const.p("value")
     )
 
     void(
         "ClearBufferfi",
-        "",
 
-        GLenum("buffer", ""),
-        GLint("drawbuffer", ""),
-        GLfloat("depth", ""),
-        GLint("stencil", "")
+        GLenum("buffer"),
+        GLint("drawbuffer"),
+        GLfloat("depth"),
+        GLint("stencil")
     )
 
     GLubyteUTF8.const.p(
         "GetStringi",
-        "",
 
-        GLenum("name", ""),
-        GLuint("index", "")
+        GLenum("name"),
+        GLuint("index")
     )
 
     void(
         "CopyBufferSubData",
-        "",
 
-        GLenum("readTarget", ""),
-        GLenum("writeTarget", ""),
-        GLintptr("readOffset", ""),
-        GLintptr("writeOffset", ""),
-        GLsizeiptr("size", "")
+        GLenum("readTarget"),
+        GLenum("writeTarget"),
+        GLintptr("readOffset"),
+        GLintptr("writeOffset"),
+        GLsizeiptr("size")
     )
 
     void(
         "GetUniformIndices",
-        "",
 
-        GLuint("program", ""),
-        AutoSize("uniformNames", "uniformIndices")..GLsizei("uniformCount", ""),
-        GLcharASCII.const.p.const.p("uniformNames", ""),
-        GLuint.p("uniformIndices", "")
+        GLuint("program"),
+        AutoSize("uniformNames", "uniformIndices")..GLsizei("uniformCount"),
+        GLcharASCII.const.p.const.p("uniformNames"),
+        GLuint.p("uniformIndices")
     )
 
     void(
         "GetActiveUniformsiv",
-        "",
 
-        GLuint("program", ""),
-        AutoSize("uniformIndices", "params")..GLsizei("uniformCount", ""),
-        GLuint.const.p("uniformIndices", ""),
-        GLenum("pname", ""),
-        GLint.p("params", "")
+        GLuint("program"),
+        AutoSize("uniformIndices", "params")..GLsizei("uniformCount"),
+        GLuint.const.p("uniformIndices"),
+        GLenum("pname"),
+        GLint.p("params")
     )
 
     GLuint(
         "GetUniformBlockIndex",
-        "",
 
-        GLuint("program", ""),
-        GLcharASCII.const.p("uniformBlockName", "")
+        GLuint("program"),
+        GLcharASCII.const.p("uniformBlockName")
     )
 
     void(
         "GetActiveUniformBlockiv",
-        "",
 
-        GLuint("program", ""),
-        GLuint("uniformBlockIndex", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p("params", "")
+        GLuint("program"),
+        GLuint("uniformBlockIndex"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint.p("params")
     )
 
     void(
         "GetActiveUniformBlockName",
-        "",
 
-        GLuint("program", ""),
-        GLuint("uniformBlockIndex", ""),
-        AutoSize("uniformBlockName")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p("length", ""),
+        GLuint("program"),
+        GLuint("uniformBlockIndex"),
+        AutoSize("uniformBlockName")..GLsizei("bufSize"),
+        Check(1)..nullable..GLsizei.p("length"),
         Return(
             "length",
             "glGetActiveUniformBlocki(program, uniformBlockIndex, GL_UNIFORM_BLOCK_NAME_LENGTH)"
-        )..GLcharASCII.p("uniformBlockName", "")
+        )..GLcharASCII.p("uniformBlockName")
     )
 
     void(
         "UniformBlockBinding",
-        "",
 
-        GLuint("program", ""),
-        GLuint("uniformBlockIndex", ""),
-        GLuint("uniformBlockBinding", "")
+        GLuint("program"),
+        GLuint("uniformBlockIndex"),
+        GLuint("uniformBlockBinding")
     )
 
     void(
         "DrawArraysInstanced",
-        "",
 
-        GLenum("mode", ""),
-        GLint("first", ""),
-        GLsizei("count", ""),
-        GLsizei("instancecount", "")
+        GLenum("mode"),
+        GLint("first"),
+        GLsizei("count"),
+        GLsizei("instancecount")
     )
 
     void(
         "DrawElementsInstanced",
-        "",
 
-        GLenum("mode", ""),
-        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count", ""),
-        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type", ""),
-        RawPointer..void.const.p("indices", ""),
-        GLsizei("instancecount", "")
+        GLenum("mode"),
+        AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei("count"),
+        AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum("type"),
+        RawPointer..void.const.p("indices"),
+        GLsizei("instancecount")
     )
 
     GLsync(
         "FenceSync",
-        "",
 
-        GLenum("condition", ""),
-        GLbitfield("flags", "")
+        GLenum("condition"),
+        GLbitfield("flags")
     )
 
     GLboolean(
         "IsSync",
-        "",
 
-        GLsync("sync", "")
+        GLsync("sync")
     )
 
     void(
         "DeleteSync",
-        "",
 
-        GLsync("sync", "")
+        GLsync("sync")
     )
 
     GLenum(
         "ClientWaitSync",
-        "",
 
-        GLsync("sync", ""),
-        GLbitfield("flags", ""),
-        GLuint64("timeout", "")
+        GLsync("sync"),
+        GLbitfield("flags"),
+        GLuint64("timeout")
     )
 
     void(
         "WaitSync",
-        "",
 
-        GLsync("sync", ""),
-        GLbitfield("flags", ""),
-        GLuint64("timeout", "")
+        GLsync("sync"),
+        GLbitfield("flags"),
+        GLuint64("timeout")
     )
 
     void(
         "GetInteger64v",
-        "",
 
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint64.p("data", "")
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint64.p("data")
     )
 
     void(
         "GetSynciv",
-        "",
 
-        GLsync("sync", ""),
-        GLenum("pname", ""),
-        AutoSize("values")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p("length", ""),
-        ReturnParam..GLint.p("values", "")
+        GLsync("sync"),
+        GLenum("pname"),
+        AutoSize("values")..GLsizei("bufSize"),
+        Check(1)..nullable..GLsizei.p("length"),
+        ReturnParam..GLint.p("values")
     )
 
     void(
         "GetInteger64i_v",
-        "",
 
-        GLenum("target", ""),
-        GLuint("index", ""),
-        ReturnParam..Check(1)..GLint64.p("data", "")
+        GLenum("target"),
+        GLuint("index"),
+        ReturnParam..Check(1)..GLint64.p("data")
     )
 
     void(
         "GetBufferParameteri64v",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint64.p("params", "")
+        GLenum("target"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint64.p("params")
     )
 
     void(
         "GenSamplers",
-        "",
 
-        AutoSize("samplers")..GLsizei("count", ""),
-        ReturnParam..GLuint.p("samplers", "")
+        AutoSize("samplers")..GLsizei("count"),
+        ReturnParam..GLuint.p("samplers")
     )
 
     void(
         "DeleteSamplers",
-        "",
 
-        AutoSize("samplers")..GLsizei("count", ""),
-        SingleValue("sampler")..GLuint.const.p("samplers", "")
+        AutoSize("samplers")..GLsizei("count"),
+        SingleValue("sampler")..GLuint.const.p("samplers")
     )
 
     GLboolean(
         "IsSampler",
-        "",
 
-        GLuint("sampler", "")
+        GLuint("sampler")
     )
 
     void(
         "BindSampler",
-        "",
 
-        GLuint("unit", ""),
-        GLuint("sampler", "")
+        GLuint("unit"),
+        GLuint("sampler")
     )
 
     void(
         "SamplerParameteri",
-        "",
 
-        GLuint("sampler", ""),
-        GLenum("pname", ""),
-        GLint("param", "")
+        GLuint("sampler"),
+        GLenum("pname"),
+        GLint("param")
     )
 
     void(
         "SamplerParameteriv",
-        "",
 
-        GLuint("sampler", ""),
-        GLenum("pname", ""),
-        Check(1)..GLint.const.p("param", "")
+        GLuint("sampler"),
+        GLenum("pname"),
+        Check(1)..GLint.const.p("param")
     )
 
     void(
         "SamplerParameterf",
-        "",
 
-        GLuint("sampler", ""),
-        GLenum("pname", ""),
-        GLfloat("param", "")
+        GLuint("sampler"),
+        GLenum("pname"),
+        GLfloat("param")
     )
 
     void(
         "SamplerParameterfv",
-        "",
 
-        GLuint("sampler", ""),
-        GLenum("pname", ""),
-        Check(1)..GLfloat.const.p("param", "")
+        GLuint("sampler"),
+        GLenum("pname"),
+        Check(1)..GLfloat.const.p("param")
     )
 
     void(
         "GetSamplerParameteriv",
-        "",
 
-        GLuint("sampler", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p("params", "")
+        GLuint("sampler"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint.p("params")
     )
 
     void(
         "GetSamplerParameterfv",
-        "",
 
-        GLuint("sampler", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLfloat.p("params", "")
+        GLuint("sampler"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLfloat.p("params")
     )
 
     void(
         "VertexAttribDivisor",
-        "",
 
-        GLuint("index", ""),
-        GLuint("divisor", "")
+        GLuint("index"),
+        GLuint("divisor")
     )
 
     void(
         "BindTransformFeedback",
-        "",
 
-        GLenum("target", ""),
-        GLuint("id", "")
+        GLenum("target"),
+        GLuint("id")
     )
 
     void(
         "DeleteTransformFeedbacks",
-        "",
 
-        AutoSize("ids")..GLsizei("n", ""),
-        SingleValue("id")..GLuint.const.p("ids", "")
+        AutoSize("ids")..GLsizei("n"),
+        SingleValue("id")..GLuint.const.p("ids")
     )
 
     void(
         "GenTransformFeedbacks",
-        "",
 
-        AutoSize("ids")..GLsizei("n", ""),
-        ReturnParam..GLuint.p("ids", "")
+        AutoSize("ids")..GLsizei("n"),
+        ReturnParam..GLuint.p("ids")
     )
 
     GLboolean(
         "IsTransformFeedback",
-        "",
 
-        GLuint("id", "")
+        GLuint("id")
     )
 
-    void(
-        "PauseTransformFeedback",
-        ""
-    )
+    void("PauseTransformFeedback")
 
-    void(
-        "ResumeTransformFeedback",
-        ""
-    )
+    void("ResumeTransformFeedback")
 
     void(
         "GetProgramBinary",
-        "",
 
-        GLuint("program", ""),
-        AutoSize("binary")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p("length", ""),
-        Check(1)..GLenum.p("binaryFormat", ""),
-        void.p("binary", "")
+        GLuint("program"),
+        AutoSize("binary")..GLsizei("bufSize"),
+        Check(1)..nullable..GLsizei.p("length"),
+        Check(1)..GLenum.p("binaryFormat"),
+        void.p("binary")
     )
 
     void(
         "ProgramBinary",
-        "",
 
-        GLuint("program", ""),
-        GLenum("binaryFormat", ""),
-        void.const.p("binary", ""),
-        AutoSize("binary")..GLsizei("length", "")
+        GLuint("program"),
+        GLenum("binaryFormat"),
+        void.const.p("binary"),
+        AutoSize("binary")..GLsizei("length")
     )
 
     void(
         "ProgramParameteri",
-        "",
 
-        GLuint("program", ""),
-        GLenum("pname", ""),
-        GLint("value", "")
+        GLuint("program"),
+        GLenum("pname"),
+        GLint("value")
     )
 
     void(
         "InvalidateFramebuffer",
-        "",
 
-        GLenum("target", ""),
-        AutoSize("attachments")..GLsizei("numAttachments", ""),
-        SingleValue("attachment")..GLenum.const.p("attachments", "")
+        GLenum("target"),
+        AutoSize("attachments")..GLsizei("numAttachments"),
+        SingleValue("attachment")..GLenum.const.p("attachments")
     )
 
     void(
         "InvalidateSubFramebuffer",
-        "",
 
-        GLenum("target", ""),
-        AutoSize("attachments")..GLsizei("numAttachments", ""),
-        SingleValue("attachment")..GLenum.const.p("attachments", ""),
-        GLint("x", ""),
-        GLint("y", ""),
-        GLsizei("width", ""),
-        GLsizei("height", "")
+        GLenum("target"),
+        AutoSize("attachments")..GLsizei("numAttachments"),
+        SingleValue("attachment")..GLenum.const.p("attachments"),
+        GLint("x"),
+        GLint("y"),
+        GLsizei("width"),
+        GLsizei("height")
     )
 
     void(
         "TexStorage2D",
-        "",
 
-        GLenum("target", ""),
-        GLsizei("levels", ""),
-        GLenum("internalformat", ""),
-        GLsizei("width", ""),
-        GLsizei("height", "")
+        GLenum("target"),
+        GLsizei("levels"),
+        GLenum("internalformat"),
+        GLsizei("width"),
+        GLsizei("height")
     )
 
     void(
         "TexStorage3D",
-        "",
 
-        GLenum("target", ""),
-        GLsizei("levels", ""),
-        GLenum("internalformat", ""),
-        GLsizei("width", ""),
-        GLsizei("height", ""),
-        GLsizei("depth", "")
+        GLenum("target"),
+        GLsizei("levels"),
+        GLenum("internalformat"),
+        GLsizei("width"),
+        GLsizei("height"),
+        GLsizei("depth")
     )
 
     void(
         "GetInternalformativ",
-        "",
 
-        GLenum("target", ""),
-        GLenum("internalformat", ""),
-        GLenum("pname", ""),
-        AutoSize("params")..GLsizei("bufSize", ""),
-        ReturnParam..GLint.p("params", "")
+        GLenum("target"),
+        GLenum("internalformat"),
+        GLenum("pname"),
+        AutoSize("params")..GLsizei("bufSize"),
+        ReturnParam..GLint.p("params")
     )
 }

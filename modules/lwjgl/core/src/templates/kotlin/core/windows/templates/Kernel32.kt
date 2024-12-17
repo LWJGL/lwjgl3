@@ -8,60 +8,50 @@ import org.lwjgl.generator.*
 import core.windows.*
 
 val Kernel32 = "Kernel32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", binding = simpleBinding(Module.CORE_WINDOWS, "kernel32")) {
-    documentation = "Native bindings to Kernel32 library."
-
     HANDLE(
         "GetCurrentProcess",
-        "",
 
         void()
     )
 
     DWORD(
         "GetCurrentProcessId",
-        "",
 
         void()
     )
 
     DWORD(
         "GetProcessId",
-        "",
 
-        HANDLE("Process", "")
+        HANDLE("Process")
     )
 
     HANDLE(
         "GetCurrentThread",
-        "",
 
         void()
     )
 
     DWORD(
         "GetCurrentThreadId",
-        "",
 
         void()
     )
 
     IgnoreMissing..DWORD(
         "GetThreadId",
-        "",
 
-        HANDLE("Thread", "")
+        HANDLE("Thread")
     )
 
     IgnoreMissing..DWORD(
         "GetProcessIdOfThread",
-        "",
 
-        HANDLE("Thread", "")
+        HANDLE("Thread")
     )
 
     IgnoreMissing..DWORD(
         "GetCurrentProcessorNumber",
-        "",
 
         void()
     )

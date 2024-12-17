@@ -74,7 +74,6 @@ private val ALBinding = Generator.register(object : APIBinding(
             "static org.lwjgl.system.Checks.*"
         )
 
-        documentation = "Defines the capabilities of an OpenAL context."
     }
 
     override fun PrintWriter.generateJava() {
@@ -160,10 +159,7 @@ private val ALBinding = Generator.register(object : APIBinding(
 fun String.nativeClassAL(templateName: String, prefixTemplate: String = "AL", postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
     nativeClass(Module.OPENAL, templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, binding = ALBinding, init = init)
 
-val NativeClass.specLinkOpenALSoft: String get() = url("https://openal-soft.org/openal-extensions/$templateName.txt", templateName)
-val NativeClass.extensionName: String get() = "{@code ${prefixTemplate}_$templateName}"
-
-private val DIRECT_CONTEXT = arrayOf(Parameter(ALCcontext.p, "context", ""))
+private val DIRECT_CONTEXT = arrayOf(Parameter(ALCcontext.p, "context"))
 fun Func.directContext() {
     val postfix = this.nativeClass.postfix
     val name = if (postfix.isEmpty())
@@ -175,7 +171,6 @@ fun Func.directContext() {
         returns = this.returns,
         simpleName = name,
         name = name,
-        documentation = this.documentation,
         nativeClass = this.nativeClass,
         parameters = DIRECT_CONTEXT + this.parameters
     ))

@@ -8,20 +8,7 @@ import org.lwjgl.generator.*
 import opengles.*
 
 val NV_draw_buffers = "NVDrawBuffers".nativeClassGLES("NV_draw_buffers", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension extends OpenGL ES 2.0 to allow multiple output colors, and provides a mechanism for directing those outputs to multiple color buffers.
-
-        This extension serves a similar purpose to ARB_draw_buffers except that this is for OpenGL ES 2.0.
-
-        When OpenGL ES 3.0 is present, this extension relaxes the order restriction on color attachments to draw framebuffer objects.
-        """
-
     IntConstant(
-        "Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
-
         "MAX_DRAW_BUFFERS_NV"..0x8824,
         "DRAW_BUFFER0_NV"..0x8825,
         "DRAW_BUFFER1_NV"..0x8826,
@@ -42,8 +29,6 @@ val NV_draw_buffers = "NVDrawBuffers".nativeClassGLES("NV_draw_buffers", postfix
     )
 
     IntConstant(
-        "Accepted by the {@code bufs} parameter of DrawBuffersNV.",
-
         "COLOR_ATTACHMENT0_NV"..0x8CE0,
         "COLOR_ATTACHMENT1_NV"..0x8CE1,
         "COLOR_ATTACHMENT2_NV"..0x8CE2,
@@ -64,9 +49,8 @@ val NV_draw_buffers = "NVDrawBuffers".nativeClassGLES("NV_draw_buffers", postfix
 
     void(
         "DrawBuffersNV",
-        "",
 
-        AutoSize("bufs")..GLsizei("n", ""),
-        SingleValue("buf")..GLenum.const.p("bufs", "")
+        AutoSize("bufs")..GLsizei("n"),
+        SingleValue("buf")..GLenum.const.p("bufs")
     )
 }

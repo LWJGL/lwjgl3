@@ -8,39 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_attrib_64bit") {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension provides OpenGL shading language support for vertex shader inputs with 64-bit floating-point components and OpenGL API support for
-        specifying the value of those inputs using vertex array or immediate mode entry points. This builds on the support for general-purpose support for
-        64-bit floating-point values in the ARB_gpu_shader_fp64 extension.
-
-        This extension provides a new class of vertex attribute functions, beginning with "VertexAttribL" ("L" for "long"), that can be used to specify
-        attributes with 64-bit floating-point components. This extension provides no automatic type conversion between attribute and shader variables;
-        single-precision attributes are not automatically converted to double-precision or vice versa. For shader variables with 64-bit component types, the
-        "VertexAttribL" functions must be used to specify attribute values. For other shader variables, the "VertexAttribL" functions must not be used. If a
-        vertex attribute is specified using the wrong attribute function, the values of the corresponding shader input are undefined. This approach requiring
-        matching types is identical to that used for the "VertexAttribI" functions provided by OpenGL 3.0 and the ${EXT_gpu_shader4.link} extension.
-
-        Additionally, some vertex shader inputs using the wider 64-bit components may count double against the implementation-dependent limit on the number of
-        vertex shader attribute vectors. A 64-bit scalar or a two-component vector consumes only a single generic vertex attribute; three- and four-component
-        "long" may count as two. This approach is similar to the one used in the current GL where matrix attributes consume multiple attributes.
-
-        Note that 64-bit generic vertex attributes were nominally supported beginning with the introduction of vertex shaders in OpenGL 2.0. However, the OpenGL
-        Shading Language at the time had no support for 64-bit data types, so any such values were automatically converted to 32-bit.
-
-        Support for 64-bit floating-point vertex attributes in this extension can be combined with other extensions. In particular, this extension provides an
-        entry point that can be used with EXT_direct_state_access to directly set state for any vertex array object. Also, the related
-        ${NV_vertex_attrib_integer_64bit.link} extension provides an entry point to specify bindless vertex attribute arrays with 64-bit
-        components, integer or floating-point.
-
-        Requires ${GL30.core}, GLSL 1.30 and ${ARB_gpu_shader_fp64.link}. ${GL41.promoted}
-        """
-
     IntConstant(
-        "Returned in the {@code type} parameter of GetActiveAttrib.",
-
         "DOUBLE_VEC2"..0x8FFC,
         "DOUBLE_VEC3"..0x8FFD,
         "DOUBLE_VEC4"..0x8FFE,
@@ -70,23 +38,13 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
 
     DependsOn("GL_EXT_direct_state_access")..void(
         "VertexArrayVertexAttribLOffsetEXT",
-        "DSA version of #VertexAttribLPointer().",
 
-        GLuint("vaobj", "the vertex array object"),
-        GLuint("buffer", "the buffer object"),
-        GLuint("index", "the index of the generic vertex attribute to be modified"),
-        GLint("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 #BGRA"),
-        GLenum("type", "the data type of each component in the array", "#DOUBLE"),
-        GLsizei(
-            "stride",
-            """
-            the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
-            the array. The initial value is 0.
-            """
-        ),
-        GLintptr(
-            "offset",
-            "the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer. The initial value is 0."
-        )
+        GLuint("vaobj"),
+        GLuint("buffer"),
+        GLuint("index"),
+        GLint("size"),
+        GLenum("type"),
+        GLsizei("stride"),
+        GLintptr("offset")
     )
 }

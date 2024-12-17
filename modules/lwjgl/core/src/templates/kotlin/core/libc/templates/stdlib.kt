@@ -27,73 +27,46 @@ val stdlib = "LibCStdlib".nativeClass(Module.CORE_LIBC) {
     #define __aligned_free free
 #endif""")
 
-    documentation = "Native bindings to stdlib.h."
-
     void.p(
         "malloc",
-        """
-        Allocates {@code size} bytes and returns a pointer to the allocated memory. The memory is not initialized. If {@code size} is 0, then malloc() returns
-        either #NULL, or a unique pointer value that can later be successfully passed to #free().
-        """,
 
-        AutoSizeResult..size_t("size", "the number of bytes to allocate")
+        AutoSizeResult..size_t("size")
     )
 
     void.p(
         "calloc",
-        """
-        Allocates memory for an array of {@code nmemb} elements of {@code size} bytes each and returns a pointer to the allocated memory. The memory is set to
-        zero. If {@code nmemb} or {@code size} is 0, then calloc() returns either #NULL, or a unique pointer value that can later be successfully passed to
-        #free().
-        """,
 
-        AutoSizeResult..size_t("nmemb", "the number of elements to allocate"),
-        AutoSizeResult..size_t("size", "the number of bytes to allocate per element")
+        AutoSizeResult..size_t("nmemb"),
+        AutoSizeResult..size_t("size")
     )
 
     void.p(
         "realloc",
-        """
-        Changes the size of the memory block pointed to by {@code ptr} to {@code size} bytes  The contents will be unchanged in the range from the start of the
-        region up to the minimum of the old and new sizes. If the new size is larger than the old size, the added memory will not be initialized. If
-        {@code ptr} is #NULL, then the call is equivalent to {@code malloc(size)}, for all values of {@code size}; if {@code size} is equal to zero, and
-        {@code ptr} is not #NULL, then the call is equivalent to {@code free(ptr)}. Unless {@code ptr} is #NULL, it must have been returned by an earlier call
-        to #malloc(), #calloc() or #realloc(). If the area pointed to was moved, a {@code free(ptr)} is done.
-        """,
 
-        Unsafe..nullable..void.p("ptr", "the memory block to reallocate"),
-        AutoSizeResult..size_t("size", "the new memory block size, in bytes")
+        Unsafe..nullable..void.p("ptr"),
+        AutoSizeResult..size_t("size")
     )
 
     OffHeapOnly..void(
         "free",
-        """
-        Frees the memory space pointed to by {@code ptr}, which must have been returned by a previous call to #malloc(), #calloc(), or #realloc(). Otherwise,
-        or if {@code free(ptr)} has already been called before, undefined behavior occurs. If ptr is #NULL, no operation is performed.
-        """,
 
-        MultiTypeAll..Unsafe..nullable..void.p("ptr", "the memory space to free")
+        MultiTypeAll..Unsafe..nullable..void.p("ptr")
     )
 
     Code(
         nativeCall = "${t}return (jlong)(uintptr_t)__aligned_alloc((size_t)alignment, (size_t)size);"
     )..void.p(
         "aligned_alloc",
-        """
-        Allocates {@code size} bytes of uninitialized storage whose alignment is specified by {@code alignment}. The size parameter must be an integral multiple
-        of alignment. Memory allocated with aligned_alloc() must be freed with #aligned_free().
-        """,
 
-        size_t("alignment", "the alignment. Must be a power of two value."),
-        AutoSizeResult..size_t("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
+        size_t("alignment"),
+        AutoSizeResult..size_t("size")
     )
 
     Code(
         nativeCall = "${t}__aligned_free(ptr);"
     )..OffHeapOnly..void(
         "aligned_free",
-        "Frees a block of memory that was allocated with #aligned_alloc(). If ptr is #NULL, no operation is performed.",
 
-        Unsafe..MultiTypeAll..nullable..void.p("ptr", "the aligned block of memory to free")
+        Unsafe..MultiTypeAll..nullable..void.p("ptr")
     )
 }

@@ -9,72 +9,15 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", type = "device", postfix = "KHR") {
-    documentation =
-        """
-        This extension provides extensible versions of the Vulkan buffer and image copy commands. The new commands are functionally identical to the core commands, except that their copy parameters are specified using extensible structures that can be used to pass extension-specific information.
-
-        The following extensible copy commands are introduced with this extension: #CmdCopyBuffer2KHR(), #CmdCopyImage2KHR(), #CmdCopyBufferToImage2KHR(), #CmdCopyImageToBuffer2KHR(), #CmdBlitImage2KHR(), and #CmdResolveImage2KHR(). Each command contains an stext:*Info2KHR structure parameter that includes {@code sType}/{@code pNext} members. Lower level structures describing each region to be copied are also extended with {@code sType}/{@code pNext} members.
-
-        <h5>Promotion to Vulkan 1.3</h5>
-        Vulkan APIs in this extension are included in core Vulkan 1.3, with the KHR suffix omitted. External interactions defined by this extension, such as SPIR-V token names, retain their original names. The original Vulkan API names are still available as aliases of the core functionality.
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_KHR_copy_commands2}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>338</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
-
-            <dt><b>Deprecation State</b></dt>
-            <dd><ul>
-                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.3-promotions">Vulkan 1.3</a></li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Matthew Netsch <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_copy_commands2]%20@mnetsch%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_copy_commands2%20extension*">mnetsch</a></li>
-            </ul></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2020-07-06</dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Jeff Leger, Qualcomm</li>
-                <li>Tobias Hector, AMD</li>
-                <li>Jan-Harald Fredriksen, ARM</li>
-                <li>Tom Olson, ARM</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "KHR_COPY_COMMANDS_2_SPEC_VERSION".."1"
     )
 
     StringConstant(
-        "The extension name.",
-
         "KHR_COPY_COMMANDS_2_EXTENSION_NAME".."VK_KHR_copy_commands2"
     )
 
     EnumConstant(
-        "Extends {@code VkStructureType}.",
-
         "STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR".."1000337000",
         "STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR".."1000337001",
         "STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR".."1000337002",
@@ -90,49 +33,43 @@ val KHR_copy_commands2 = "KHRCopyCommands2".nativeClassVK("KHR_copy_commands2", 
 
     void(
         "CmdCopyBuffer2KHR",
-        "See #CmdCopyBuffer2().",
 
-        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkCopyBufferInfo2.const.p("pCopyBufferInfo", "a pointer to a ##VkCopyBufferInfo2 structure describing the copy parameters.")
+        VkCommandBuffer("commandBuffer"),
+        VkCopyBufferInfo2.const.p("pCopyBufferInfo")
     )
 
     void(
         "CmdCopyImage2KHR",
-        "See #CmdCopyImage2().",
 
-        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkCopyImageInfo2.const.p("pCopyImageInfo", "a pointer to a ##VkCopyImageInfo2 structure describing the copy parameters.")
+        VkCommandBuffer("commandBuffer"),
+        VkCopyImageInfo2.const.p("pCopyImageInfo")
     )
 
     void(
         "CmdCopyBufferToImage2KHR",
-        "See #CmdCopyBufferToImage2().",
 
-        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkCopyBufferToImageInfo2.const.p("pCopyBufferToImageInfo", "a pointer to a ##VkCopyBufferToImageInfo2 structure describing the copy parameters.")
+        VkCommandBuffer("commandBuffer"),
+        VkCopyBufferToImageInfo2.const.p("pCopyBufferToImageInfo")
     )
 
     void(
         "CmdCopyImageToBuffer2KHR",
-        "See #CmdCopyImageToBuffer2().",
 
-        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkCopyImageToBufferInfo2.const.p("pCopyImageToBufferInfo", "a pointer to a ##VkCopyImageToBufferInfo2 structure describing the copy parameters.")
+        VkCommandBuffer("commandBuffer"),
+        VkCopyImageToBufferInfo2.const.p("pCopyImageToBufferInfo")
     )
 
     void(
         "CmdBlitImage2KHR",
-        "See #CmdBlitImage2().",
 
-        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkBlitImageInfo2.const.p("pBlitImageInfo", "a pointer to a ##VkBlitImageInfo2 structure describing the blit parameters.")
+        VkCommandBuffer("commandBuffer"),
+        VkBlitImageInfo2.const.p("pBlitImageInfo")
     )
 
     void(
         "CmdResolveImage2KHR",
-        "See #CmdResolveImage2().",
 
-        VkCommandBuffer("commandBuffer", "the command buffer into which the command will be recorded."),
-        VkResolveImageInfo2.const.p("pResolveImageInfo", "a pointer to a ##VkResolveImageInfo2 structure describing the resolve parameters.")
+        VkCommandBuffer("commandBuffer"),
+        VkResolveImageInfo2.const.p("pResolveImageInfo")
     )
 }

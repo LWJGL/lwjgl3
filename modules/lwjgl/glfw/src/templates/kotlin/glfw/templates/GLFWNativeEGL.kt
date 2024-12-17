@@ -17,82 +17,27 @@ val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(Module.GLFW, nativeSubPath = "eg
         "static org.lwjgl.system.MemoryUtil.*"
     )
 
-    documentation = "Native bindings to the GLFW library's EGL native access functions."
-
     EGLDisplay(
         "GetEGLDisplay",
-        """
-        Returns the {@code EGLDisplay} used by GLFW.
-
-        Because EGL is initialized on demand, this function will return EGL10#EGL_NO_DISPLAY until the first context has been created via EGL.
-
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        returnDoc =
-        """
-        the {@code EGLDisplay} used by GLFW, or EGL10#EGL_NO_DISPLAY if an error occured.
-
-        Possible errors include #NOT_INITIALIZED.
-        """,
-        since = "version 3.0"
+        void()
     )
 
     EGLContext(
         "GetEGLContext",
-        """
-        Returns the {@code EGLContext} of the specified window.
 
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", "a GLFW window"),
-
-        returnDoc =
-        """
-        the {@code EGLContext} of the specified window, or EGL10#EGL_NO_CONTEXT if an error occurred.
-
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.0"
+        GLFWwindow.p("window")
     )
 
     EGLSurface(
         "GetEGLSurface",
-        """
-        Returns the {@code EGLSurface} of the specified window.
 
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", ""),
-
-        returnDoc =
-        """
-        the {@code EGLSurface} of the specified window, or EGL10#EGL_NO_SURFACE if an error occurred.
-
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.0"
+        GLFWwindow.p("window")
     )
 
     EGLConfig(
         "GetEGLConfig",
-        """
-        Returns the {@code EGLConfig} of the specified window.
 
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", ""),
-
-        returnDoc =
-        """
-        the {@code EGLConfig} of the specified window, or EGL10#EGL_NO_SURFACE if an error occurred.
-
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.4"
+        GLFWwindow.p("window")
     )
 
     customMethod("""

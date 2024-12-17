@@ -66,7 +66,6 @@ private val EGLBinding = Generator.register(object : APIBinding(
             "static org.lwjgl.system.APIUtil.*",
             "static org.lwjgl.system.Checks.*"
         )
-        documentation = "Defines the capabilities of an EGLDisplay or the EGL client library."
     }
 
     override fun PrintWriter.generateJava() {

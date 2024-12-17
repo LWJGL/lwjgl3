@@ -10,11 +10,7 @@ import core.windows.*
 val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", binding = simpleBinding(Module.CORE_WINDOWS, "gdi32")) {
     nativeImport("WindowsLWJGL.h")
 
-    documentation = "Native bindings to wingdi.h and gdi32.dll."
-
     IntConstant(
-        "Display device state flags.",
-
         "DISPLAY_DEVICE_ATTACHED_TO_DESKTOP"..0x00000001,
         "DISPLAY_DEVICE_MULTI_DRIVER"..0x00000002,
         "DISPLAY_DEVICE_PRIMARY_DEVICE"..0x00000004,
@@ -29,21 +25,15 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
     )
 
     IntConstant(
-        "Child display device state flags.",
-
         "DISPLAY_DEVICE_ACTIVE"..0x00000001,
         "DISPLAY_DEVICE_ATTACHED"..0x00000002
     )
 
     IntConstant(
-        "##DEVMODE specification version.",
-
         "DM_SPECVERSION"..0x0401
     )
 
     IntConstant(
-        "##DEVMODE field selection bits.",
-
         "DM_ORIENTATION"..0x00000001,
         "DM_PAPERSIZE"..0x00000002,
         "DM_PAPERLENGTH"..0x00000004,
@@ -77,8 +67,6 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
     )
 
     IntConstant(
-        "##DEVMODE {@code dmDisplayOrientation} specifications.",
-
         "DMDO_DEFAULT".."0",
         "DMDO_90".."1",
         "DMDO_180".."2",
@@ -87,23 +75,17 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
     )
 
     IntConstant(
-        "##DEVMODE {@code dmDisplayFixedOutput} specifications.",
-
         "DMDFO_DEFAULT".."0",
         "DMDFO_STRETCH".."1",
         "DMDFO_CENTER".."2"
     )
 
     IntConstant(
-        "##DEVMODE {@code dmDisplayFlags} flags.",
-
         "DM_INTERLACED"..0x00000002,
         "DMDISPLAYFLAGS_TEXTMODE"..0x00000004
     )
 
     IntConstant(
-        "##PIXELFORMATDESCRIPTOR flags.",
-
         "PFD_DOUBLEBUFFER"..0x00000001,
         "PFD_STEREO"..0x00000002,
         "PFD_DRAW_TO_WINDOW"..0x00000004,
@@ -128,15 +110,11 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
     )
 
     ByteConstant(
-        "##PIXELFORMATDESCRIPTOR pixel types.",
-
         "PFD_TYPE_RGBA".."0",
         "PFD_TYPE_COLORINDEX".."1"
     )
 
     ByteConstant(
-        "##PIXELFORMATDESCRIPTOR layer types.",
-
         "PFD_MAIN_PLANE".."0",
         "PFD_OVERLAY_PLANE".."1",
         "PFD_UNDERLAY_PLANE".."(byte)-1"
@@ -144,76 +122,42 @@ val gdi32 = "GDI32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", 
 
     int(
         "ChoosePixelFormat",
-        "Attempts to match an appropriate pixel format supported by a device context to a given pixel format specification.",
 
         CaptureCallState.GetLastError.param,
-        HDC("hdc", "the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}"),
-        PIXELFORMATDESCRIPTOR.const.p("pixelFormatDescriptor", "a ##PIXELFORMATDESCRIPTOR structure that specifies the requested pixel format")
+        HDC("hdc"),
+        PIXELFORMATDESCRIPTOR.const.p("pixelFormatDescriptor")
     )
 
     int(
         "DescribePixelFormat",
-        """
-        Obtains information about the pixel format identified by pixelFormat of the device associated with dc. The function sets the members of the
-        ##PIXELFORMATDESCRIPTOR structure pointed to by pixelFormatDescriptor with that pixel format data. The return value is the maximum pixel format
-        index of the device context.
-        """,
 
         CaptureCallState.GetLastError.param,
-        HDC("hdc", "the device context"),
-        int("pixelFormat", "index that specifies the pixel format. The pixel formats that a device context supports are identified by positive one-based integer indexes."),
-        Expression("PIXELFORMATDESCRIPTOR.SIZEOF")..UINT(
-            "bytes",
-            """
-            the size, in bytes, of the structure pointed to by {@code pixelFormatDescriptor}. The {@code wglDescribePixelFormat} function stores no more than
-            {@code bytes} bytes of data to that structure. Set this value to PIXELFORMATDESCRIPTOR#SIZEOF.
-            """
-        ),
-        nullable..LPPIXELFORMATDESCRIPTOR(
-            "pixelFormatDescriptor",
-            """
-            a ##PIXELFORMATDESCRIPTOR structure whose members the function sets with pixel format data. The function stores the number of bytes copied to
-            the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is #NULL, the function writes no data to the
-            structure. This is useful when you only want to obtain the maximum pixel format index of a device context.
-            """
-        )
+        HDC("hdc"),
+        int("pixelFormat"),
+        Expression("PIXELFORMATDESCRIPTOR.SIZEOF")..UINT("bytes"),
+        nullable..LPPIXELFORMATDESCRIPTOR("pixelFormatDescriptor")
     )
 
     int(
         "GetPixelFormat",
-        "Obtains the index of the currently selected pixel format of the specified device context.",
 
         CaptureCallState.GetLastError.param,
-        HDC("hdc", "the device context of the currently selected pixel format index returned by the function")
+        HDC("hdc")
     )
 
     BOOL(
         "SetPixelFormat",
-        "Sets the pixel format of the specified device context to the format specified by the pixelFormat index.",
 
         CaptureCallState.GetLastError.param,
-        HDC("hdc", "the device context whose pixel format the function attempts to set"),
-        int("pixelFormat", "index that identifies the pixel format to set. The various pixel formats supported by a device context are identified by one-based indexes."),
-        nullable..PIXELFORMATDESCRIPTOR.const.p(
-            "pixelFormatDescriptor",
-            """
-            a ##PIXELFORMATDESCRIPTOR structure that contains the logical pixel format specification. The system's metafile component uses this structure
-            to record the logical pixel format specification. The structure has no other effect upon the behavior of the SetPixelFormat function.
-            """
-        )
+        HDC("hdc"),
+        int("pixelFormat"),
+        nullable..PIXELFORMATDESCRIPTOR.const.p("pixelFormatDescriptor")
     )
 
     BOOL(
         "SwapBuffers",
-        "Exchanges the front and back buffers if the current pixel format for the window referenced by the specified device context includes a back buffer.",
 
         CaptureCallState.GetLastError.param,
-        HDC(
-            "dc",
-            """
-            a device context. If the current pixel format for the window referenced by this device context includes a back buffer, the function exchanges the
-            front and back buffers.
-            """
-        )
+        HDC("dc")
     )
 }

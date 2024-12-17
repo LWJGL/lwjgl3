@@ -9,67 +9,15 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val EXT_subpass_merge_feedback = "EXTSubpassMergeFeedback".nativeClassVK("EXT_subpass_merge_feedback", type = "device", postfix = "EXT") {
-    documentation =
-        """
-        This extension adds a mechanism to provide feedback to an application about whether the subpasses specified on render pass creation are merged by the implementation. Additionally, it provides a control to enable or disable subpass merging in the render pass.
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_EXT_subpass_merge_feedback}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>459</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>2</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Ting Wei <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_subpass_merge_feedback]%20@catweiting%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_subpass_merge_feedback%20extension*">catweiting</a></li>
-            </ul></dd>
-
-            <dt><b>Extension Proposal</b></dt>
-            <dd><a href="https://github.com/KhronosGroup/Vulkan-Docs/tree/main/proposals/VK_EXT_subpass_merge_feedback.adoc">VK_EXT_subpass_merge_feedback</a></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2022-05-24</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Jan-Harald Fredriksen, Arm</li>
-                <li>Jorg Wagner, Arm</li>
-                <li>Ting Wei, Arm</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION".."2"
     )
 
     StringConstant(
-        "The extension name.",
-
         "EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION_NAME".."VK_EXT_subpass_merge_feedback"
     )
 
     EnumConstant(
-        "Extends {@code VkStructureType}.",
-
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT".."1000458000",
         "STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT".."1000458001",
         "STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT".."1000458002",
@@ -77,31 +25,6 @@ val EXT_subpass_merge_feedback = "EXTSubpassMergeFeedback".nativeClassVK("EXT_su
     )
 
     EnumConstant(
-        """
-        VkSubpassMergeStatusEXT - Specify a subpass merging status
-
-        <h5>Description</h5>
-        <ul>
-            <li>#SUBPASS_MERGE_STATUS_MERGED_EXT specifies that the subpass is merged with a previous subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_DISALLOWED_EXT specifies that the subpass is not merged because merging was disabled using ##VkRenderPassCreationControlEXT. If the render pass does not allow subpass merging, then all subpass statuses are set to this value. If a subpass description does not allow subpass merging, then only that subpass’s status is set to this value.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_SIDE_EFFECTS_EXT specifies that the subpass is not merged because it contains side effects.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_SAMPLES_MISMATCH_EXT specifies that the subpass is not merged because sample count is not compatible with the previous subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_VIEWS_MISMATCH_EXT specifies that the subpass is not merged because view masks do not match with previous subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_ALIASING_EXT specifies that the subpass is not merged because of attachments aliasing between them.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_DEPENDENCIES_EXT specifies that the subpass is not merged because subpass dependencies do not allow merging.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_INCOMPATIBLE_INPUT_ATTACHMENT_EXT specifies that the subpass is not merged because input attachment is not a color attachment from previous subpass or the formats are incompatible.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_TOO_MANY_ATTACHMENTS_EXT specifies that the subpass is not merged because of too many attachments.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_INSUFFICIENT_STORAGE_EXT specifies that the subpass is not merged because of insufficient memory.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_DEPTH_STENCIL_COUNT_EXT specifies that the subpass is not merged because of too many depth/stencil attachments.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_RESOLVE_ATTACHMENT_REUSE_EXT specifies that the subpass is not merged because a resolve attachment is reused as an input attachment in a subsequent subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_SINGLE_SUBPASS_EXT specifies that the subpass is not merged because the render pass has only one subpass.</li>
-            <li>#SUBPASS_MERGE_STATUS_NOT_MERGED_UNSPECIFIED_EXT specifies that the subpass is not merged for unspecified reasons. Implementations <b>should</b> return this value when no other {@code VkSubpassMergeStatusEXT} value is appropriate.</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##VkRenderPassSubpassFeedbackInfoEXT
-        """,
-
         "SUBPASS_MERGE_STATUS_MERGED_EXT".."0",
         "SUBPASS_MERGE_STATUS_DISALLOWED_EXT".."1",
         "SUBPASS_MERGE_STATUS_NOT_MERGED_SIDE_EFFECTS_EXT".."2",

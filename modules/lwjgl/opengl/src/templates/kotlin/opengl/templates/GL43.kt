@@ -9,59 +9,18 @@ import opengl.*
 
 val GL43 = "GL43".nativeClassGL("GL43") {
     extends = GL42
-    documentation =
-        """
-        The OpenGL functionality up to version 4.3. Includes the deprecated symbols of the Compatibility Profile.
-
-        OpenGL 4.3 implementations support revision 4.30 of the OpenGL Shading Language.
-
-        Extensions promoted to core in this release:
-        ${ul(
-            registryLinkTo("ARB", "arrays_of_arrays"),
-            registryLinkTo("ARB", "ES3_compatibility"),
-            registryLinkTo("ARB", "clear_buffer_object"),
-            registryLinkTo("ARB", "compute_shader"),
-            registryLinkTo("ARB", "copy_image"),
-            "{@code ARB_debug_group}",
-            registryLinkTo("EXT", "debug_label"),
-            "{@code ARB_debug_output2}",
-            registryLinkTo("ARB", "debug_output"),
-            registryLinkTo("ARB", "explicit_uniform_location"),
-            registryLinkTo("ARB", "fragment_layer_viewport"),
-            registryLinkTo("ARB", "framebuffer_no_attachments"),
-            registryLinkTo("ARB", "internalformat_query2"),
-            registryLinkTo("ARB", "invalidate_subdata"),
-            registryLinkTo("ARB", "multi_draw_indirect"),
-            registryLinkTo("ARB", "program_interface_query"),
-            registryLinkTo("ARB", "robust_buffer_access_behavior"),
-            registryLinkTo("ARB", "shader_image_size"),
-            registryLinkTo("ARB", "shader_storage_buffer_object"),
-            registryLinkTo("ARB", "stencil_texturing"),
-            registryLinkTo("ARB", "texture_buffer_range"),
-            registryLinkTo("ARB", "texture_query_levels"),
-            registryLinkTo("ARB", "texture_storage_multisample"),
-            registryLinkTo("ARB", "texture_view"),
-            registryLinkTo("ARB", "vertex_attrib_binding")
-        )}
-        """
 
     IntConstant(
-        "No. of supported Shading Language Versions. Accepted by the {@code pname} parameter of GetIntegerv.",
-
         "NUM_SHADING_LANGUAGE_VERSIONS"..0x82E9
     )
 
     IntConstant(
-        "Vertex attrib array has unconverted doubles. Accepted by the {@code pname} parameter of GetVertexAttribiv.",
-
         "VERTEX_ATTRIB_ARRAY_LONG"..0x874E
     )
 
     // ARB_ES3_compatibility
 
     IntConstant(
-        "Accepted by the {@code internalformat} parameter of CompressedTexImage2D.",
-
         "COMPRESSED_RGB8_ETC2"..0x9274,
         "COMPRESSED_SRGB8_ETC2"..0x9275,
         "COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2"..0x9276,
@@ -75,26 +34,18 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Accepted by the {@code target} parameter of Enable and Disable.",
-
         "PRIMITIVE_RESTART_FIXED_INDEX"..0x8D69
     )
 
     IntConstant(
-        "Accepted by the {@code target} parameter of BeginQuery, EndQuery, GetQueryIndexediv and GetQueryiv.",
-
         "ANY_SAMPLES_PASSED_CONSERVATIVE"..0x8D6A
     )
 
     IntConstant(
-        "Accepted by the {@code value} parameter of the GetInteger* functions.",
-
         "MAX_ELEMENT_INDEX"..0x8D6B
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameters of GetTexParameterfv and  GetTexParameteriv.",
-
         "TEXTURE_IMMUTABLE_LEVELS"..0x82DF
     )
 
@@ -106,14 +57,10 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     // ARB_compute_shader
 
     IntConstant(
-        "Accepted by the {@code type} parameter of CreateShader and returned in the {@code params} parameter by GetShaderiv.",
-
         "COMPUTE_SHADER"..0x91B9
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev and GetInteger64v.",
-
         "MAX_COMPUTE_UNIFORM_BLOCKS"..0x91BB,
         "MAX_COMPUTE_TEXTURE_IMAGE_UNITS"..0x91BC,
         "MAX_COMPUTE_IMAGE_UNIFORMS"..0x91BD,
@@ -126,45 +73,31 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetFloati_v, GetDoublei_v and GetInteger64i_v.",
-
         "MAX_COMPUTE_WORK_GROUP_COUNT"..0x91BE,
         "MAX_COMPUTE_WORK_GROUP_SIZE"..0x91BF
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetProgramiv.",
-
         "COMPUTE_WORK_GROUP_SIZE"..0x8267
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetActiveUniformBlockiv.",
-
         "UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER"..0x90EC
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetActiveAtomicCounterBufferiv.",
-
         "ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER"..0x90ED
     )
 
     IntConstant(
-        "Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
-
         "DISPATCH_INDIRECT_BUFFER"..0x90EE
     )
 
     IntConstant(
-        "Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
-
         "DISPATCH_INDIRECT_BUFFER_BINDING"..0x90EF
     )
 
     IntConstant(
-        "Accepted by the {@code stages} parameter of UseProgramStages.",
-
         "COMPUTE_SHADER_BIT"..0x00000020
     )
 
@@ -179,21 +112,15 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     // KHR_debug
 
     IntConstant(
-        "Tokens accepted by the {@code target} parameters of Enable, Disable, and  IsEnabled.",
-
         "DEBUG_OUTPUT"..0x92E0,
         "DEBUG_OUTPUT_SYNCHRONOUS"..0x8242
     )
 
     IntConstant(
-        "Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.",
-
         "CONTEXT_FLAG_DEBUG_BIT"..0x00000002
     )
 
     IntConstant(
-        "Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv,  GetFloatv, GetDoublev and GetInteger64v.",
-
         "MAX_DEBUG_MESSAGE_LENGTH"..0x9143,
         "MAX_DEBUG_LOGGED_MESSAGES"..0x9144,
         "DEBUG_LOGGED_MESSAGES"..0x9145,
@@ -204,18 +131,11 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Tokens accepted by the {@code pname} parameter of GetPointerv.",
-
         "DEBUG_CALLBACK_FUNCTION"..0x8244,
         "DEBUG_CALLBACK_USER_PARAM"..0x8245
     )
 
     IntConstant(
-        """
-        Tokens accepted or provided by the {@code source} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC, and the {@code sources} parameter
-        of GetDebugMessageLog.
-        """,
-
         "DEBUG_SOURCE_API"..0x8246,
         "DEBUG_SOURCE_WINDOW_SYSTEM"..0x8247,
         "DEBUG_SOURCE_SHADER_COMPILER"..0x8248,
@@ -225,11 +145,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        """
-        Tokens accepted or provided by the {@code type} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC, and the {@code types} parameter of
-        GetDebugMessageLog.
-        """,
-
         "DEBUG_TYPE_ERROR"..0x824C,
         "DEBUG_TYPE_DEPRECATED_BEHAVIOR"..0x824D,
         "DEBUG_TYPE_UNDEFINED_BEHAVIOR"..0x824E,
@@ -240,20 +155,11 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        """
-        Tokens accepted or provided by the {@code type} parameters of DebugMessageControl and DEBUGPROC, and the {@code types} parameter of GetDebugMessageLog.
-        """,
-
         "DEBUG_TYPE_PUSH_GROUP"..0x8269,
         "DEBUG_TYPE_POP_GROUP"..0x826A
     )
 
     IntConstant(
-        """
-        Tokens accepted or provided by the {@code severity} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC callback functions, and the
-        {@code severities} parameter of GetDebugMessageLog.
-        """,
-
         "DEBUG_SEVERITY_HIGH"..0x9146,
         "DEBUG_SEVERITY_MEDIUM"..0x9147,
         "DEBUG_SEVERITY_LOW"..0x9148,
@@ -261,8 +167,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
-
         "BUFFER"..0x82E0,
         "SHADER"..0x82E1,
         "PROGRAM"..0x82E2,
@@ -286,19 +190,12 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     // ARB_explicit_uniform_location
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
-
         "MAX_UNIFORM_LOCATIONS"..0x826E
     )
 
     // ARB_framebuffer_no_attachments
 
     IntConstant(
-        """
-        Accepted by the {@code pname} parameter of FramebufferParameteri, GetFramebufferParameteriv, NamedFramebufferParameteriEXT, and
-        GetNamedFramebufferParameterivEXT.
-        """,
-
         "FRAMEBUFFER_DEFAULT_WIDTH"..0x9310,
         "FRAMEBUFFER_DEFAULT_HEIGHT"..0x9311,
         "FRAMEBUFFER_DEFAULT_LAYERS"..0x9312,
@@ -307,8 +204,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
-
         "MAX_FRAMEBUFFER_WIDTH"..0x9315,
         "MAX_FRAMEBUFFER_HEIGHT"..0x9316,
         "MAX_FRAMEBUFFER_LAYERS"..0x9317,
@@ -321,8 +216,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     // ARB_internalformat_query2
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetInternalformativ and GetInternalformati64v.",
-
         "INTERNALFORMAT_SUPPORTED"..0x826F,
         "INTERNALFORMAT_PREFERRED"..0x8270,
         "INTERNALFORMAT_RED_SIZE"..0x8271,
@@ -395,8 +288,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Returned as possible responses for various {@code pname} queries to GetInternalformativ and GetInternalformati64v.",
-
         "FULL_SUPPORT"..0x82B7,
         "CAVEAT_SUPPORT"..0x82B8,
         "IMAGE_CLASS_4_X_32"..0x82B9,
@@ -447,11 +338,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     // ARB_program_interface_query
 
     IntConstant(
-        """
-        Accepted by the {@code programInterface} parameter of GetProgramInterfaceiv, GetProgramResourceIndex, GetProgramResourceName, GetProgramResourceiv,
-        GetProgramResourceLocation, and GetProgramResourceLocationIndex.
-        """,
-
         "UNIFORM"..0x92E1,
         "UNIFORM_BLOCK"..0x92E2,
         "PROGRAM_INPUT"..0x92E3,
@@ -474,8 +360,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetProgramInterfaceiv.",
-
         "ACTIVE_RESOURCES"..0x92F5,
         "MAX_NAME_LENGTH"..0x92F6,
         "MAX_NUM_ACTIVE_VARIABLES"..0x92F7,
@@ -483,8 +367,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Accepted in the {@code props} array of GetProgramResourceiv.",
-
         "NAME_LENGTH"..0x92F9,
         "TYPE"..0x92FA,
         "ARRAY_SIZE"..0x92FB,
@@ -521,30 +403,19 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     // ARB_shader_storage_buffer_object
 
     IntConstant(
-        "Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
-
         "SHADER_STORAGE_BUFFER"..0x90D2
     )
 
     IntConstant(
-        """
-        Accepted by the {@code pname} parameter of GetIntegerv, GetIntegeri_v, GetBooleanv, GetInteger64v, GetFloatv, GetDoublev, GetBooleani_v, GetIntegeri_v,
-        GetFloati_v, GetDoublei_v, and GetInteger64i_v.
-        """,
-
         "SHADER_STORAGE_BUFFER_BINDING"..0x90D3
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v.",
-
         "SHADER_STORAGE_BUFFER_START"..0x90D4,
         "SHADER_STORAGE_BUFFER_SIZE"..0x90D5
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
-
         "MAX_VERTEX_SHADER_STORAGE_BLOCKS"..0x90D6,
         "MAX_GEOMETRY_SHADER_STORAGE_BLOCKS"..0x90D7,
         "MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS"..0x90D8,
@@ -558,14 +429,10 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Accepted in the {@code barriers} bitfield in glMemoryBarrier.",
-
         "SHADER_STORAGE_BARRIER_BIT"..0x2000
     )
 
     IntConstant(
-        "Alias for the existing token MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS.",
-
         "MAX_COMBINED_SHADER_OUTPUT_RESOURCES"..0x8F39
     )
 
@@ -574,23 +441,17 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     // ARB_stencil_texturing
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of TexParameter* and GetTexParameter*.",
-
         "DEPTH_STENCIL_TEXTURE_MODE"..0x90EA
     )
 
     // ARB_texture_buffer_range
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetTexLevelParameter.",
-
         "TEXTURE_BUFFER_OFFSET"..0x919D,
         "TEXTURE_BUFFER_SIZE"..0x919E
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "TEXTURE_BUFFER_OFFSET_ALIGNMENT"..0x919F
     )
 
@@ -604,8 +465,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     // ARB_texture_view
 
     IntConstant(
-        "Accepted by the {@code pname} parameters of GetTexParameterfv and  GetTexParameteriv.",
-
         "TEXTURE_VIEW_MIN_LEVEL"..0x82DB,
         "TEXTURE_VIEW_NUM_LEVELS"..0x82DC,
         "TEXTURE_VIEW_MIN_LAYER"..0x82DD,
@@ -617,15 +476,11 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     // ARB_vertex_attrib_binding
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetVertexAttrib*v.",
-
         "VERTEX_ATTRIB_BINDING"..0x82D4,
         "VERTEX_ATTRIB_RELATIVE_OFFSET"..0x82D5
     )
 
     IntConstant(
-        "Accepted by the {@code target} parameter of GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v.",
-
         "VERTEX_BINDING_DIVISOR"..0x82D6,
         "VERTEX_BINDING_OFFSET"..0x82D7,
         "VERTEX_BINDING_STRIDE"..0x82D8,
@@ -633,8 +488,6 @@ val GL43 = "GL43".nativeClassGL("GL43") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetIntegerv, ....",
-
         "MAX_VERTEX_ATTRIB_RELATIVE_OFFSET"..0x82D9,
         "MAX_VERTEX_ATTRIB_BINDINGS"..0x82DA
     )

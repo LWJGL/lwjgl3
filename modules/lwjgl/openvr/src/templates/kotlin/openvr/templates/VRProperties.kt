@@ -12,39 +12,31 @@ val VRProperties = "VRProperties".nativeClass(
     prefixMethod = "VRProperties_",
     binding = OPENVR_FNTABLE_BINDING
 ) {
-    documentation =
-        """
-        """
-
     ETrackedPropertyError(
         "ReadPropertyBatch",
-        "",
 
-        PropertyContainerHandle_t("ulContainerHandle", ""),
-        PropertyRead_t.p("pBatch", ""),
-        AutoSize("pBatch")..uint32_t("unBatchEntryCount", "")
+        PropertyContainerHandle_t("ulContainerHandle"),
+        PropertyRead_t.p("pBatch"),
+        AutoSize("pBatch")..uint32_t("unBatchEntryCount")
     )
 
     ETrackedPropertyError(
         "WritePropertyBatch",
-        "",
 
-        PropertyContainerHandle_t("ulContainerHandle", ""),
-        PropertyWrite_t.p("pBatch", ""),
-        AutoSize("pBatch")..uint32_t("unBatchEntryCount", "")
+        PropertyContainerHandle_t("ulContainerHandle"),
+        PropertyWrite_t.p("pBatch"),
+        AutoSize("pBatch")..uint32_t("unBatchEntryCount")
     )
 
     charASCII.p(
         "GetPropErrorNameFromEnum",
-        "",
 
-        ETrackedPropertyError("error", "")
+        ETrackedPropertyError("error")
     )
 
     PropertyContainerHandle_t(
         "TrackedDeviceToPropertyContainer",
-        "",
 
-        TrackedDeviceIndex_t("nDevice", "")
+        TrackedDeviceIndex_t("nDevice")
     )
 }

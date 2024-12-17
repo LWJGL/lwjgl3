@@ -131,17 +131,17 @@ val VK_BINDING_INSTANCE = Generator.register(object : APIBinding(
 
     init {
         javaImport("static org.lwjgl.system.Checks.*")
-
-        documentation =
-            """
-            Reports the enabled capabilities and function pointers of a Vulkan {@code VkInstance}.
-
-            The addresses are cached for future use. This class also allows developers to query the capabilities made available to the Vulkan instance handle.
-            """
     }
 
     override fun PrintWriter.generateJava() {
         generateJavaPreamble()
+        println(
+            """
+            Reports the enabled capabilities and function pointers of a Vulkan {@code VkInstance}.
+
+            The addresses are cached for future use. This class also allows developers to query the capabilities made available to the Vulkan instance handle.
+            """.toJavaDoc(indentation = "")
+        )
         println("@SuppressWarnings(\"SimplifiableIfStatement\")")
         println("public class $CAPS_INSTANCE {")
 
@@ -280,17 +280,17 @@ val VK_BINDING_DEVICE = Generator.register(object : GeneratorTarget(Module.VULKA
 
             "static org.lwjgl.system.Checks.*"
         )
-
-        documentation =
-            """
-            Reports the enabled capabilities and function pointers of a Vulkan {@code VkDevice}.
-
-            The addresses are cached for future use. This class also allows developers to query the capabilities made available to the Vulkan device handle.
-            """
     }
 
     override fun PrintWriter.generateJava() {
         generateJavaPreamble()
+        println(
+            """
+            Reports the enabled capabilities and function pointers of a Vulkan {@code VkDevice}.
+
+            The addresses are cached for future use. This class also allows developers to query the capabilities made available to the Vulkan device handle.
+            """.toJavaDoc(indentation = "")
+        )
         println("@SuppressWarnings(\"SimplifiableIfStatement\")")
         println("public class $CAPS_DEVICE {")
 

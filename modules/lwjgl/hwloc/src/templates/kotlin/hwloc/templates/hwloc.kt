@@ -12,441 +12,373 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         "java.util.Objects",
         "java.util.regex.*"
     )
-    documentation =
-        """
-        Native bindings to ${url("https://www.open-mpi.org/projects/hwloc/", "hwloc")}, a portable abstraction (across OS, versions, architectures, ...) of the
-        hierarchical topology of modern architectures, including NUMA memory nodes, sockets, shared caches, cores and simultaneous multithreading.
-
-        It also gathers various system attributes such as cache and memory information as well as the locality of I/O devices such as network interfaces,
-        InfiniBand HCAs or GPUs.
-
-        hwloc primarily aims at helping applications with gathering information about increasingly complex parallel computing platforms so as to exploit them
-        accordingly and efficiently. For instance, two tasks that tightly cooperate should probably be placed onto cores sharing a cache. However, two
-        independent memory-intensive tasks should better be spread out onto different sockets so as to maximize their memory throughput.
-
-        hwloc may also help many applications just by providing a portable CPU and memory binding API and a reliable way to find out how many cores and/or
-        hardware threads are available.
-        """
 
     // bitmap.h
 
     hwloc_bitmap_t(
         "bitmap_alloc",
-        "",
 
         void()
     )
 
     hwloc_bitmap_t(
         "bitmap_alloc_full",
-        "",
 
         void()
     )
 
     void(
         "bitmap_free",
-        "",
 
-        nullable..hwloc_bitmap_t("bitmap", "")
+        nullable..hwloc_bitmap_t("bitmap")
     )
 
     hwloc_bitmap_t(
         "bitmap_dup",
-        "",
 
-        nullable..hwloc_const_bitmap_t("bitmap", "")
+        nullable..hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_copy",
-        "",
 
-        hwloc_bitmap_t("dst", ""),
-        hwloc_const_bitmap_t("src", "")
+        hwloc_bitmap_t("dst"),
+        hwloc_const_bitmap_t("src")
     )
 
     int(
         "bitmap_snprintf",
-        "",
 
-        nullable..charASCII.p("buf", ""),
-        AutoSize("buf")..size_t("buflen", ""),
-        hwloc_const_bitmap_t("bitmap", "")
+        nullable..charASCII.p("buf"),
+        AutoSize("buf")..size_t("buflen"),
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_asprintf",
-        "",
 
-        Check(1)..char.p.p("strp", ""),
-        hwloc_const_bitmap_t("bitmap", "")
+        Check(1)..char.p.p("strp"),
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_sscanf",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        charASCII.const.p("string", "")
+        hwloc_bitmap_t("bitmap"),
+        charASCII.const.p("string")
     )
 
     int(
         "bitmap_list_snprintf",
-        "",
 
-        nullable..char.p("buf", ""),
-        AutoSize("buf")..size_t("buflen", ""),
-        hwloc_const_bitmap_t("bitmap", "")
+        nullable..char.p("buf"),
+        AutoSize("buf")..size_t("buflen"),
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_list_asprintf",
-        "",
 
-        Check(1)..char.p.p("strp", ""),
-        hwloc_const_bitmap_t("bitmap", "")
+        Check(1)..char.p.p("strp"),
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_list_sscanf",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        charASCII.const.p("string", "")
+        hwloc_bitmap_t("bitmap"),
+        charASCII.const.p("string")
     )
 
     int(
         "bitmap_taskset_snprintf",
-        "",
 
-        nullable..char.p("buf", ""),
-        AutoSize("buf")..size_t("buflen", ""),
-        hwloc_const_bitmap_t("bitmap", "")
+        nullable..char.p("buf"),
+        AutoSize("buf")..size_t("buflen"),
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_taskset_asprintf",
-        "",
 
-        Check(1)..char.p.p("strp", ""),
-        hwloc_const_bitmap_t("bitmap", "")
+        Check(1)..char.p.p("strp"),
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_taskset_sscanf",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        charASCII.const.p("string", "")
+        hwloc_bitmap_t("bitmap"),
+        charASCII.const.p("string")
     )
 
     void(
         "bitmap_zero",
-        "",
 
-        hwloc_bitmap_t("bitmap", "")
+        hwloc_bitmap_t("bitmap")
     )
 
     void(
         "bitmap_fill",
-        "",
 
-        hwloc_bitmap_t("bitmap", "")
+        hwloc_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_only",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        unsigned_int("id", "")
+        hwloc_bitmap_t("bitmap"),
+        unsigned_int("id")
     )
 
     int(
         "bitmap_allbut",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        unsigned_int("id", "")
+        hwloc_bitmap_t("bitmap"),
+        unsigned_int("id")
     )
 
     int(
         "bitmap_from_ulong",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        unsigned_long("mask", "")
+        hwloc_bitmap_t("bitmap"),
+        unsigned_long("mask")
     )
 
     int(
         "bitmap_from_ith_ulong",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        unsigned_int("i", ""),
-        unsigned_long("mask", "")
+        hwloc_bitmap_t("bitmap"),
+        unsigned_int("i"),
+        unsigned_long("mask")
     )
 
     int(
         "bitmap_from_ulongs",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        AutoSize("masks")..unsigned_int("nr", ""),
-        unsigned_long.const.p("masks", "")
+        hwloc_bitmap_t("bitmap"),
+        AutoSize("masks")..unsigned_int("nr"),
+        unsigned_long.const.p("masks")
     )
 
     int(
         "bitmap_set",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        unsigned_int("id", "")
+        hwloc_bitmap_t("bitmap"),
+        unsigned_int("id")
     )
 
     int(
         "bitmap_set_range",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        unsigned_int("begin", ""),
-        int("end", "")
+        hwloc_bitmap_t("bitmap"),
+        unsigned_int("begin"),
+        int("end")
     )
 
     int(
         "bitmap_set_ith_ulong",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        unsigned_int("i", ""),
-        unsigned_long("mask", "")
+        hwloc_bitmap_t("bitmap"),
+        unsigned_int("i"),
+        unsigned_long("mask")
     )
 
     int(
         "bitmap_clr",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        unsigned_int("id", "")
+        hwloc_bitmap_t("bitmap"),
+        unsigned_int("id")
     )
 
     int(
         "bitmap_clr_range",
-        "",
 
-        hwloc_bitmap_t("bitmap", ""),
-        unsigned_int("begin", ""),
-        int("end", "")
+        hwloc_bitmap_t("bitmap"),
+        unsigned_int("begin"),
+        int("end")
     )
 
     int(
         "bitmap_singlify",
-        "",
 
-        hwloc_bitmap_t("bitmap", "")
+        hwloc_bitmap_t("bitmap")
     )
 
     unsigned_long(
         "bitmap_to_ulong",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_const_bitmap_t("bitmap")
     )
 
     unsigned_long(
         "bitmap_to_ith_ulong",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", ""),
-        unsigned_int("i", "")
+        hwloc_const_bitmap_t("bitmap"),
+        unsigned_int("i")
     )
 
     int(
         "bitmap_to_ulongs",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", ""),
-        AutoSize("masks")..unsigned_int("nr", ""),
-        unsigned_long.p("masks", "")
+        hwloc_const_bitmap_t("bitmap"),
+        AutoSize("masks")..unsigned_int("nr"),
+        unsigned_long.p("masks")
     )
 
     int(
         "bitmap_nr_ulongs",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_const_bitmap_t("bitmap")
     )
 
     intb(
         "bitmap_isset",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", ""),
-        unsigned_int("id", "")
+        hwloc_const_bitmap_t("bitmap"),
+        unsigned_int("id")
     )
 
     intb(
         "bitmap_iszero",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_const_bitmap_t("bitmap")
     )
 
     intb(
         "bitmap_isfull",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_first",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_next",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", ""),
-        int("prev", "")
+        hwloc_const_bitmap_t("bitmap"),
+        int("prev")
     )
 
     int(
         "bitmap_last",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_weight",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_first_unset",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_next_unset",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", ""),
-        int("prev", "")
+        hwloc_const_bitmap_t("bitmap"),
+        int("prev")
     )
 
     int(
         "bitmap_last_unset",
-        "",
 
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_const_bitmap_t("bitmap")
     )
 
     int(
         "bitmap_or",
-        "",
 
-        hwloc_bitmap_t("res", ""),
-        hwloc_const_bitmap_t("bitmap1", ""),
-        hwloc_const_bitmap_t("bitmap2", "")
+        hwloc_bitmap_t("res"),
+        hwloc_const_bitmap_t("bitmap1"),
+        hwloc_const_bitmap_t("bitmap2")
     )
 
     int(
         "bitmap_and",
-        "",
 
-        hwloc_bitmap_t("res", ""),
-        hwloc_const_bitmap_t("bitmap1", ""),
-        hwloc_const_bitmap_t("bitmap2", "")
+        hwloc_bitmap_t("res"),
+        hwloc_const_bitmap_t("bitmap1"),
+        hwloc_const_bitmap_t("bitmap2")
     )
 
     int(
         "bitmap_andnot",
-        "",
 
-        hwloc_bitmap_t("res", ""),
-        hwloc_const_bitmap_t("bitmap1", ""),
-        hwloc_const_bitmap_t("bitmap2", "")
+        hwloc_bitmap_t("res"),
+        hwloc_const_bitmap_t("bitmap1"),
+        hwloc_const_bitmap_t("bitmap2")
     )
 
     int(
         "bitmap_xor",
-        "",
 
-        hwloc_bitmap_t("res", ""),
-        hwloc_const_bitmap_t("bitmap1", ""),
-        hwloc_const_bitmap_t("bitmap2", "")
+        hwloc_bitmap_t("res"),
+        hwloc_const_bitmap_t("bitmap1"),
+        hwloc_const_bitmap_t("bitmap2")
     )
 
     int(
         "bitmap_not",
-        "",
 
-        hwloc_bitmap_t("res", ""),
-        hwloc_const_bitmap_t("bitmap", "")
+        hwloc_bitmap_t("res"),
+        hwloc_const_bitmap_t("bitmap")
     )
 
     intb(
         "bitmap_intersects",
-        "",
 
-        hwloc_const_bitmap_t("bitmap1", ""),
-        hwloc_const_bitmap_t("bitmap2", "")
+        hwloc_const_bitmap_t("bitmap1"),
+        hwloc_const_bitmap_t("bitmap2")
     )
 
     intb(
         "bitmap_isincluded",
-        "",
 
-        hwloc_const_bitmap_t("sub_bitmap", ""),
-        hwloc_const_bitmap_t("super_bitmap", "")
+        hwloc_const_bitmap_t("sub_bitmap"),
+        hwloc_const_bitmap_t("super_bitmap")
     )
 
     intb(
         "bitmap_isequal",
-        "",
 
-        hwloc_const_bitmap_t("bitmap1", ""),
-        hwloc_const_bitmap_t("bitmap2", "")
+        hwloc_const_bitmap_t("bitmap1"),
+        hwloc_const_bitmap_t("bitmap2")
     )
 
     int(
         "bitmap_compare_first",
-        "",
 
-        hwloc_const_bitmap_t("bitmap1", ""),
-        hwloc_const_bitmap_t("bitmap2", "")
+        hwloc_const_bitmap_t("bitmap1"),
+        hwloc_const_bitmap_t("bitmap2")
     )
 
     int(
         "bitmap_compare",
-        "",
 
-        hwloc_const_bitmap_t("bitmap1", ""),
-        hwloc_const_bitmap_t("bitmap2", "")
+        hwloc_const_bitmap_t("bitmap1"),
+        hwloc_const_bitmap_t("bitmap2")
     )
 
     // hwloc.h
 
-    IntConstant("", "API_VERSION"..0x00030000)
-    IntConstant("", "COMPONENT_ABI".."8")
-    IntConstant("", "TYPE_UNORDERED".."Integer.MAX_VALUE")
-    IntConstant("", "UNKNOWN_INDEX".."-1")
+    IntConstant("API_VERSION"..0x00030000)
+    IntConstant("COMPONENT_ABI".."8")
+    IntConstant("TYPE_UNORDERED".."Integer.MAX_VALUE")
+    IntConstant("UNKNOWN_INDEX".."-1")
 
     EnumConstant(
-        "{@code hwloc_obj_type_t}",
-
-        "OBJ_TYPE_MIN".enum("", "0"),
-        "OBJ_MACHINE".enum("", "0"),
+        "OBJ_TYPE_MIN".enum("0"),
+        "OBJ_MACHINE".enum("0"),
         "OBJ_PACKAGE".enum,
         "OBJ_DIE".enum,
         "OBJ_CORE".enum,
@@ -470,145 +402,115 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
     )
 
     EnumConstant(
-        "{@code hwloc_obj_cache_type_t}",
-
-        "OBJ_CACHE_UNIFIED".enum("", "0"),
+        "OBJ_CACHE_UNIFIED".enum("0"),
         "OBJ_CACHE_DATA".enum,
         "OBJ_CACHE_INSTRUCTION".enum
     )
 
     EnumConstant(
-        "{@code hwloc_obj_bridge_type_t}",
-
-        "OBJ_BRIDGE_HOST".enum("", "0"),
+        "OBJ_BRIDGE_HOST".enum("0"),
         "OBJ_BRIDGE_PCI".enum
     )
 
     EnumConstantLong(
-        "{@code hwloc_obj_osdev_type_t}",
-
-        "OBJ_OSDEV_STORAGE".enumLong("", "1L << 0"),
-        "OBJ_OSDEV_MEMORY".enumLong("", "1L << 1"),
-        "OBJ_OSDEV_GPU".enumLong("", "1L << 2"),
-        "OBJ_OSDEV_COPROC".enumLong("", "1L << 3"),
-        "OBJ_OSDEV_NETWORK".enumLong("", "1L << 4"),
-        "OBJ_OSDEV_OPENFABRICS".enumLong("", "1L << 5"),
-        "OBJ_OSDEV_DMA".enumLong("", "1L << 6")
+        "OBJ_OSDEV_STORAGE".enumLong("1L << 0"),
+        "OBJ_OSDEV_MEMORY".enumLong("1L << 1"),
+        "OBJ_OSDEV_GPU".enumLong("1L << 2"),
+        "OBJ_OSDEV_COPROC".enumLong("1L << 3"),
+        "OBJ_OSDEV_NETWORK".enumLong("1L << 4"),
+        "OBJ_OSDEV_OPENFABRICS".enumLong("1L << 5"),
+        "OBJ_OSDEV_DMA".enumLong("1L << 6")
     )
 
     EnumConstant(
-        "{@code enum hwloc_get_type_depth_e}",
-
-        "TYPE_DEPTH_UNKNOWN".enum("", "-1"),
-        "TYPE_DEPTH_MULTIPLE".enum("", "-2"),
-        "TYPE_DEPTH_NUMANODE".enum("", "-3"),
-        "TYPE_DEPTH_BRIDGE".enum("", "-4"),
-        "TYPE_DEPTH_PCI_DEVICE".enum("", "-5"),
-        "TYPE_DEPTH_OS_DEVICE".enum("", "-6"),
-        "TYPE_DEPTH_MISC".enum("", "-7"),
-        "TYPE_DEPTH_MEMCACHE".enum("", "-8")
+        "TYPE_DEPTH_UNKNOWN".enum("-1"),
+        "TYPE_DEPTH_MULTIPLE".enum("-2"),
+        "TYPE_DEPTH_NUMANODE".enum("-3"),
+        "TYPE_DEPTH_BRIDGE".enum("-4"),
+        "TYPE_DEPTH_PCI_DEVICE".enum("-5"),
+        "TYPE_DEPTH_OS_DEVICE".enum("-6"),
+        "TYPE_DEPTH_MISC".enum("-7"),
+        "TYPE_DEPTH_MEMCACHE".enum("-8")
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_obj_snprintf_flag_e}",
-
-        "OBJ_SNPRINTF_FLAG_LONG_NAMES".enumLong("", "1L<<1"),
-        "OBJ_SNPRINTF_FLAG_SHORT_NAMES".enumLong("", "1L<<2"),
-        "OBJ_SNPRINTF_FLAG_MORE_ATTRS".enumLong("", "1L<<3"),
-        "OBJ_SNPRINTF_FLAG_NO_UNITS".enumLong("", "1L<<4"),
-        "OBJ_SNPRINTF_FLAG_UNITS_1000".enumLong("", "1L<<5"),
-        "OBJ_SNPRINTF_FLAG_OLD_VERBOSE".enumLong("", "1L<<0")
+        "OBJ_SNPRINTF_FLAG_LONG_NAMES".enumLong("1L<<1"),
+        "OBJ_SNPRINTF_FLAG_SHORT_NAMES".enumLong("1L<<2"),
+        "OBJ_SNPRINTF_FLAG_MORE_ATTRS".enumLong("1L<<3"),
+        "OBJ_SNPRINTF_FLAG_NO_UNITS".enumLong("1L<<4"),
+        "OBJ_SNPRINTF_FLAG_UNITS_1000".enumLong("1L<<5"),
+        "OBJ_SNPRINTF_FLAG_OLD_VERBOSE".enumLong("1L<<0")
     )
 
     EnumConstant(
-        "{@code hwloc_cpubind_flags_t}",
-
-        "CPUBIND_PROCESS".enum("", "1<<0"),
-        "CPUBIND_THREAD".enum("", "1<<1"),
-        "CPUBIND_STRICT".enum("", "1<<2"),
-        "CPUBIND_NOMEMBIND".enum("", "1<<3")
+        "CPUBIND_PROCESS".enum("1<<0"),
+        "CPUBIND_THREAD".enum("1<<1"),
+        "CPUBIND_STRICT".enum("1<<2"),
+        "CPUBIND_NOMEMBIND".enum("1<<3")
     )
 
     EnumConstant(
-        "{@code hwloc_membind_policy_t}",
-
-        "MEMBIND_DEFAULT".enum("", "0"),
+        "MEMBIND_DEFAULT".enum("0"),
         "MEMBIND_FIRSTTOUCH".enum,
         "MEMBIND_BIND".enum,
         "MEMBIND_INTERLEAVE".enum,
-        "MEMBIND_WEIGHTED_INTERLEAVE".enum("", "5"),
-        "MEMBIND_NEXTTOUCH".enum("", "4"),
-        "MEMBIND_MIXED".enum("", "-1")
+        "MEMBIND_WEIGHTED_INTERLEAVE".enum("5"),
+        "MEMBIND_NEXTTOUCH".enum("4"),
+        "MEMBIND_MIXED".enum("-1")
     )
 
     EnumConstant(
-        "{@code hwloc_membind_flags_t}",
-
-        "MEMBIND_PROCESS".enum("", "1<<0"),
-        "MEMBIND_THREAD".enum("", "1<<1"),
-        "MEMBIND_STRICT".enum("", "1<<2"),
-        "MEMBIND_MIGRATE".enum("", "1<<3"),
-        "MEMBIND_NOCPUBIND".enum("", "1<<4"),
-        "MEMBIND_BYNODESET".enum("", "1<<5")
+        "MEMBIND_PROCESS".enum("1<<0"),
+        "MEMBIND_THREAD".enum("1<<1"),
+        "MEMBIND_STRICT".enum("1<<2"),
+        "MEMBIND_MIGRATE".enum("1<<3"),
+        "MEMBIND_NOCPUBIND".enum("1<<4"),
+        "MEMBIND_BYNODESET".enum("1<<5")
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_topology_components_flag_e}",
-
-        "TOPOLOGY_COMPONENTS_FLAG_BLACKLIST".enumLong("", "1L<<0")
+        "TOPOLOGY_COMPONENTS_FLAG_BLACKLIST".enumLong("1L<<0")
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_topology_flags_e}",
-
-        "TOPOLOGY_FLAG_INCLUDE_DISALLOWED".enumLong("", "1L<<0"),
-        "TOPOLOGY_FLAG_IS_THISSYSTEM".enumLong("", "1L<<1"),
-        "TOPOLOGY_FLAG_THISSYSTEM_ALLOWED_RESOURCES".enumLong("", "1L<<2"),
-        "TOPOLOGY_FLAG_IMPORT_SUPPORT".enumLong("", "1L<<3"),
-        "TOPOLOGY_FLAG_RESTRICT_TO_CPUBINDING".enumLong("", "1L<<4"),
-        "TOPOLOGY_FLAG_RESTRICT_TO_MEMBINDING".enumLong("", "1L<<5"),
-        "TOPOLOGY_FLAG_DONT_CHANGE_BINDING".enumLong("", "1L<<6"),
-        "TOPOLOGY_FLAG_NO_DISTANCES".enumLong("", "1L<<7"),
-        "TOPOLOGY_FLAG_NO_MEMATTRS".enumLong("", "1L<<8"),
-        "TOPOLOGY_FLAG_NO_CPUKINDS".enumLong("", "1L<<9")
+        "TOPOLOGY_FLAG_INCLUDE_DISALLOWED".enumLong("1L<<0"),
+        "TOPOLOGY_FLAG_IS_THISSYSTEM".enumLong("1L<<1"),
+        "TOPOLOGY_FLAG_THISSYSTEM_ALLOWED_RESOURCES".enumLong("1L<<2"),
+        "TOPOLOGY_FLAG_IMPORT_SUPPORT".enumLong("1L<<3"),
+        "TOPOLOGY_FLAG_RESTRICT_TO_CPUBINDING".enumLong("1L<<4"),
+        "TOPOLOGY_FLAG_RESTRICT_TO_MEMBINDING".enumLong("1L<<5"),
+        "TOPOLOGY_FLAG_DONT_CHANGE_BINDING".enumLong("1L<<6"),
+        "TOPOLOGY_FLAG_NO_DISTANCES".enumLong("1L<<7"),
+        "TOPOLOGY_FLAG_NO_MEMATTRS".enumLong("1L<<8"),
+        "TOPOLOGY_FLAG_NO_CPUKINDS".enumLong("1L<<9")
     )
 
     EnumConstant(
-        "{@code enum hwloc_type_filter_e}",
-
-        "TYPE_FILTER_KEEP_ALL".enum("", "0"),
+        "TYPE_FILTER_KEEP_ALL".enum("0"),
         "TYPE_FILTER_KEEP_NONE".enum,
         "TYPE_FILTER_KEEP_STRUCTURE".enum,
         "TYPE_FILTER_KEEP_IMPORTANT".enum
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_restrict_flags_e}",
-
-        "RESTRICT_FLAG_REMOVE_CPULESS".enumLong("", "1L<<0"),
-        "RESTRICT_FLAG_BYNODESET".enumLong("", "1L<<3"),
-        "RESTRICT_FLAG_REMOVE_MEMLESS".enumLong("", "1L<<4"),
-        "RESTRICT_FLAG_ADAPT_MISC".enumLong("", "1L<<1"),
-        "RESTRICT_FLAG_ADAPT_IO".enumLong("", "1L<<2")
+        "RESTRICT_FLAG_REMOVE_CPULESS".enumLong("1L<<0"),
+        "RESTRICT_FLAG_BYNODESET".enumLong("1L<<3"),
+        "RESTRICT_FLAG_REMOVE_MEMLESS".enumLong("1L<<4"),
+        "RESTRICT_FLAG_ADAPT_MISC".enumLong("1L<<1"),
+        "RESTRICT_FLAG_ADAPT_IO".enumLong("1L<<2")
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_allow_flags_e}",
-
-        "ALLOW_FLAG_ALL".enumLong("", "1L<<0"),
-        "ALLOW_FLAG_LOCAL_RESTRICTIONS".enumLong("", "1L<<1"),
-        "ALLOW_FLAG_CUSTOM".enumLong("", "1L<<2")
+        "ALLOW_FLAG_ALL".enumLong("1L<<0"),
+        "ALLOW_FLAG_LOCAL_RESTRICTIONS".enumLong("1L<<1"),
+        "ALLOW_FLAG_CUSTOM".enumLong("1L<<2")
     )
 
     val CHECK_UNIX = Code(javaInit = statement("\t\tif (Platform.get() == Platform.WINDOWS) throw new UnsupportedOperationException();"))
     val CHECK_WINDOWS = Code(javaInit = statement("\t\tif (Platform.get() != Platform.WINDOWS) throw new UnsupportedOperationException();"))
     fun DataType.platform(
         name: String,
-        documentation: String,
         vararg parameters: Parameter,
-        returnDoc: String = "",
-        see: Array<String>? = null,
-        since: String = "",
         noPrefix: Boolean = false,
     ): Pair<Func, Func> {
         val nativeName = NativeName("hwloc_$name")
@@ -618,134 +520,121 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
         var suffix: String? = null
         for (parameter in parameters) {
             if (parameter.nativeType == hwloc_thread_t) {
-                params += Parameter(pthread_t, parameter.name, parameter.documentation)
+                params += Parameter(pthread_t, parameter.name)
                 suffix = "pthread"
             } else if (parameter.nativeType == hwloc_pid_t) {
-                params += Parameter(pid_t, "pid", parameter.documentation)
+                params += Parameter(pid_t, "pid")
                 suffix = "pid"
             } else {
                 params += parameter
             }
         }
         checkNotNull(suffix) { "No platform variant found for $name" }
-        val unix = CHECK_UNIX..nativeName..this("${name}_${suffix}", documentation, *params.toTypedArray(), returnDoc = returnDoc, see = see, since = since, noPrefix = noPrefix)
+        val unix = CHECK_UNIX..nativeName..this("${name}_${suffix}", *params.toTypedArray(), noPrefix = noPrefix)
 
         // WINDOWS variant
         params.clear()
         suffix = null
         for (parameter in parameters) {
             if (parameter.nativeType == hwloc_thread_t) {
-                params += Parameter(HANDLE, parameter.name, parameter.documentation)
+                params += Parameter(HANDLE, parameter.name)
                 suffix = "handle"
             } else if (parameter.nativeType == hwloc_pid_t) {
-                params += Parameter(HANDLE, parameter.name, parameter.documentation)
+                params += Parameter(HANDLE, parameter.name)
                 suffix = "handle"
             } else {
                 params += parameter
             }
         }
         checkNotNull(suffix) { "No platform variant found for $name" }
-        val windows = CHECK_WINDOWS..nativeName..this("${name}_${suffix}", documentation, *params.toTypedArray(), returnDoc = returnDoc, see = see, since = since, noPrefix = noPrefix)
+        val windows = CHECK_WINDOWS..nativeName..this("${name}_${suffix}", *params.toTypedArray(), noPrefix = noPrefix)
 
         return Pair(unix, windows)
     }
 
     unsigned(
         "get_api_version",
-        "",
 
         void()
     )
 
     int(
         "compare_types",
-        "",
 
-        hwloc_obj_type_t("type1", ""),
-        hwloc_obj_type_t("type2", "")
+        hwloc_obj_type_t("type1"),
+        hwloc_obj_type_t("type2")
     )
 
     int(
         "topology_init",
-        "",
 
-        Check(1)..hwloc_topology_t.p("topologyp", "")
+        Check(1)..hwloc_topology_t.p("topologyp")
     )
 
     int(
         "topology_load",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     void(
         "topology_destroy",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     int(
         "topology_dup",
-        "",
 
-        Check(1)..hwloc_topology_t.p("newtopology", ""),
-        hwloc_topology_t("oldtopology", "")
+        Check(1)..hwloc_topology_t.p("newtopology"),
+        hwloc_topology_t("oldtopology")
     )
 
     int(
         "topology_abi_check",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     void(
         "topology_check",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     int(
         "topology_get_depth",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     int(
         "get_type_depth",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type")
     )
 
     int(
         "get_type_depth_with_attr",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", ""),
-        nullable..hwloc_obj_attr_u.p("attrp", ""),
-        AutoSize("attrp")..size_t("attrsize", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type"),
+        nullable..hwloc_obj_attr_u.p("attrp"),
+        AutoSize("attrp")..size_t("attrsize")
     )
 
     int(
         "get_memory_parents_depth",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     /*int(
         "get_type_or_below_depth",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type")
     )*/
     customMethod("""
     public static int hwloc_get_type_or_below_depth(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_type_t") int type) {
@@ -768,10 +657,9 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     /*int(
         "get_type_or_above_depth",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type")
     )*/
     customMethod("""
     public static int hwloc_get_type_or_above_depth(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_type_t") int type) {
@@ -794,26 +682,23 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     hwloc_obj_type_t(
         "get_depth_type",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        int("depth", "")
+        hwloc_topology_t("topology"),
+        int("depth")
     )
 
     unsigned(
         "get_nbobjs_by_depth",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        int("depth", "")
+        hwloc_topology_t("topology"),
+        int("depth")
     )
 
     /*int(
         "get_nbobjs_by_type",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type")
     )*/
     customMethod("""
     public static int hwloc_get_nbobjs_by_type(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_type_t") int type) {
@@ -829,9 +714,8 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     /*hwloc_obj_t(
         "get_root_obj",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )*/
     customMethod("""
     @Nullable
@@ -842,20 +726,18 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     hwloc_obj_t(
         "get_obj_by_depth",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        int("depth", ""),
-        unsigned("idx", "")
+        hwloc_topology_t("topology"),
+        int("depth"),
+        unsigned("idx")
     )
 
     /*hwloc_obj_t(
         "get_obj_by_type",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", ""),
-        unsigned("idx", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type"),
+        unsigned("idx")
     )*/
     customMethod("""
     @Nullable
@@ -873,11 +755,10 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     /*hwloc_obj_t(
         "get_next_obj_by_depth",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        int("depth", ""),
-        hwloc_obj_t("prev", "")
+        hwloc_topology_t("topology"),
+        int("depth"),
+        hwloc_obj_t("prev")
     )*/
     customMethod("""
     @Nullable
@@ -894,11 +775,10 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     /*hwloc_obj_t(
         "get_next_obj_by_type",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", ""),
-        hwloc_obj_t("prev", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type"),
+        hwloc_obj_t("prev")
     )*/
     customMethod("""
     @Nullable
@@ -913,48 +793,43 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     charASCII.const.p(
         "obj_type_string",
-        "",
 
-        hwloc_obj_type_t("type", "")
+        hwloc_obj_type_t("type")
     )
 
     int(
         "obj_type_snprintf",
-        "",
 
-        nullable..charASCII.p("string", ""),
-        AutoSize("string")..size_t("size", ""),
-        hwloc_obj_t("obj", ""),
-        unsigned_long("flags", "")
+        nullable..charASCII.p("string"),
+        AutoSize("string")..size_t("size"),
+        hwloc_obj_t("obj"),
+        unsigned_long("flags")
     )
 
     int(
         "obj_attr_snprintf",
-        "",
 
-        charASCII.p("string", ""),
-        AutoSize("string")..size_t("size", ""),
-        hwloc_obj_t("obj", ""),
-        charASCII.const.p("separator", ""),
-        unsigned_long("flags", "")
+        charASCII.p("string"),
+        AutoSize("string")..size_t("size"),
+        hwloc_obj_t("obj"),
+        charASCII.const.p("separator"),
+        unsigned_long("flags")
     )
 
     int(
         "type_sscanf",
-        "",
 
-        charASCII.const.p("string", ""),
-        Check(1)..hwloc_obj_type_t.p("typep", ""),
-        nullable..hwloc_obj_attr_u.p("attrp", ""),
-        AutoSize("attrp")..size_t("attrsize", "")
+        charASCII.const.p("string"),
+        Check(1)..hwloc_obj_type_t.p("typep"),
+        nullable..hwloc_obj_attr_u.p("attrp"),
+        AutoSize("attrp")..size_t("attrsize")
     )
 
     /*char.const.p(
         "obj_get_info_by_name",
-        "",
 
-        hwloc_obj_t("obj", ""),
-        char.const.p("name", "")
+        hwloc_obj_t("obj"),
+        char.const.p("name")
     )*/
     customMethod("""
     @Nullable
@@ -965,10 +840,9 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     /*char.const.p(
         "get_info_by_name",
-        "",
 
-        hwloc_infos_s.p("infos", ""),
-        char.const.p("name", "")
+        hwloc_infos_s.p("infos"),
+        char.const.p("name")
     )*/
     customMethod("""
     @Nullable
@@ -988,30 +862,26 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     int(
         "modify_infos",
-        "",
 
-        hwloc_infos_s.p("infos", ""),
-        unsigned_long("operation", ""),
-        charASCII.const.p("name", ""),
-        charASCII.const.p("value", "")
+        hwloc_infos_s.p("infos"),
+        unsigned_long("operation"),
+        charASCII.const.p("name"),
+        charASCII.const.p("value")
     )
 
     EnumConstantLong(
-        "{@code hwloc_modify_infos_op_e}",
-
-        "MODIFY_INFOS_OP_ADD".enumLong("", "1L<<0"),
-        "MODIFY_INFOS_OP_ADD_UNIQUE".enumLong("", "1L<<1"),
-        "MODIFY_INFOS_OP_REPLACE".enumLong("", "1L<<2"),
-        "MODIFY_INFOS_OP_REMOVE".enumLong("", "1L<<3")
+        "MODIFY_INFOS_OP_ADD".enumLong("1L<<0"),
+        "MODIFY_INFOS_OP_ADD_UNIQUE".enumLong("1L<<1"),
+        "MODIFY_INFOS_OP_REPLACE".enumLong("1L<<2"),
+        "MODIFY_INFOS_OP_REMOVE".enumLong("1L<<3")
     )
 
     /*int(
         "obj_add_info",
-        "",
 
-        hwloc_obj_t("obj", ""),
-        charASCII.const.p("name", ""),
-        charASCII.const.p("value", "")
+        hwloc_obj_t("obj"),
+        charASCII.const.p("name"),
+        charASCII.const.p("value")
     )*/
     customMethod("""
     public static int hwloc_obj_add_info(@NativeType("hwloc_obj_t") hwloc_obj obj, @NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer value) {
@@ -1024,202 +894,182 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     Nonnull..hwloc_infos_s.p(
         "topology_get_infos",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     int(
         "obj_set_subtype",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_t("obj", ""),
-        nullable..charASCII.const.p("subtype", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_t("obj"),
+        nullable..charASCII.const.p("subtype")
     )
 
     int(
         "set_cpubind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_const_cpuset_t("set", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_const_cpuset_t("set"),
+        int("flags")
     )
 
     int(
         "get_cpubind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_cpuset_t("set", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_cpuset_t("set"),
+        int("flags")
     )
 
     int.platform(
         "set_proc_cpubind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_pid_t("pid", ""),
-        hwloc_const_cpuset_t("set", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_pid_t("pid"),
+        hwloc_const_cpuset_t("set"),
+        int("flags")
     )
 
     int.platform(
         "get_proc_cpubind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_pid_t("pid", ""),
-        hwloc_cpuset_t("set", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_pid_t("pid"),
+        hwloc_cpuset_t("set"),
+        int("flags")
     )
 
     int.platform(
         "set_thread_cpubind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_thread_t("thread", ""),
-        hwloc_const_cpuset_t("set", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_thread_t("thread"),
+        hwloc_const_cpuset_t("set"),
+        int("flags")
     )
 
     int.platform(
         "get_thread_cpubind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_thread_t("thread", ""),
-        hwloc_cpuset_t("set", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_thread_t("thread"),
+        hwloc_cpuset_t("set"),
+        int("flags")
     )
 
     int(
         "get_last_cpu_location",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_cpuset_t("set", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_cpuset_t("set"),
+        int("flags")
     )
 
     int.platform(
         "get_proc_last_cpu_location",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_pid_t("pid", ""),
-        hwloc_cpuset_t("set", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_pid_t("pid"),
+        hwloc_cpuset_t("set"),
+        int("flags")
     )
 
     int(
         "set_membind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_const_bitmap_t("set", ""),
-        hwloc_membind_policy_t("policy", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_const_bitmap_t("set"),
+        hwloc_membind_policy_t("policy"),
+        int("flags")
     )
 
     int(
         "get_membind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_bitmap_t("set", ""),
-        Check(1)..hwloc_membind_policy_t.p("policy", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_bitmap_t("set"),
+        Check(1)..hwloc_membind_policy_t.p("policy"),
+        int("flags")
     )
 
     int.platform(
         "set_proc_membind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_pid_t("pid", ""),
-        hwloc_const_bitmap_t("set", ""),
-        hwloc_membind_policy_t("policy", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_pid_t("pid"),
+        hwloc_const_bitmap_t("set"),
+        hwloc_membind_policy_t("policy"),
+        int("flags")
     )
 
     int.platform(
         "get_proc_membind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_pid_t("pid", ""),
-        hwloc_bitmap_t("set", ""),
-        Check(1)..hwloc_membind_policy_t.p("policy", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_pid_t("pid"),
+        hwloc_bitmap_t("set"),
+        Check(1)..hwloc_membind_policy_t.p("policy"),
+        int("flags")
     )
 
     int(
         "set_area_membind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        void.const.p("addr", ""),
-        AutoSize("addr")..size_t("len", ""),
-        hwloc_const_bitmap_t("set", ""),
-        hwloc_membind_policy_t("policy", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        void.const.p("addr"),
+        AutoSize("addr")..size_t("len"),
+        hwloc_const_bitmap_t("set"),
+        hwloc_membind_policy_t("policy"),
+        int("flags")
     )
 
     int(
         "get_area_membind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        void.const.p("addr", ""),
-        AutoSize("addr")..size_t("len", ""),
-        hwloc_bitmap_t("set", ""),
-        Check(1)..hwloc_membind_policy_t.p("policy", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        void.const.p("addr"),
+        AutoSize("addr")..size_t("len"),
+        hwloc_bitmap_t("set"),
+        Check(1)..hwloc_membind_policy_t.p("policy"),
+        int("flags")
     )
 
     int(
         "get_area_memlocation",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        void.const.p("addr", ""),
-        AutoSize("addr")..size_t("len", ""),
-        hwloc_bitmap_t("set", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        void.const.p("addr"),
+        AutoSize("addr")..size_t("len"),
+        hwloc_bitmap_t("set"),
+        int("flags")
     )
 
     void.p(
         "alloc",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        AutoSizeResult..size_t("len", "")
+        hwloc_topology_t("topology"),
+        AutoSizeResult..size_t("len")
     )
 
     void.p(
         "alloc_membind",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        AutoSizeResult..size_t("len", ""),
-        hwloc_const_bitmap_t("set", ""),
-        hwloc_membind_policy_t("policy", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        AutoSizeResult..size_t("len"),
+        hwloc_const_bitmap_t("set"),
+        hwloc_membind_policy_t("policy"),
+        int("flags")
     )
 
     /*void.p(
         "alloc_membind_policy",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        size_t("len", ""),
-        hwloc_const_bitmap_t("set", ""),
-        hwloc_membind_policy_t("policy", ""),
-        int("flags", "")
+        hwloc_topology_t("topology"),
+        size_t("len"),
+        hwloc_const_bitmap_t("set"),
+        hwloc_membind_policy_t("policy"),
+        int("flags")
     )*/
     customMethod("""
     @Nullable
@@ -1244,223 +1094,197 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     int(
         "free",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        void.p("addr", ""),
-        AutoSize("addr")..size_t("len", "")
+        hwloc_topology_t("topology"),
+        void.p("addr"),
+        AutoSize("addr")..size_t("len")
     )
 
     int.platform(
         "topology_set_pid",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_pid_t("pid", "")
+        hwloc_topology_t("topology"),
+        hwloc_pid_t("pid")
     )
 
     int(
         "topology_set_synthetic",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        charASCII.const.p("description", "")
+        hwloc_topology_t("topology"),
+        charASCII.const.p("description")
     )
 
     int(
         "topology_set_xml",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        charUTF8.const.p("xmlpath", "")
+        hwloc_topology_t("topology"),
+        charUTF8.const.p("xmlpath")
     )
 
     int(
         "topology_set_xmlbuffer",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        charASCII.const.p("buffer", ""),
-        AutoSize("buffer")..int("size", "")
+        hwloc_topology_t("topology"),
+        charASCII.const.p("buffer"),
+        AutoSize("buffer")..int("size")
     )
 
     int(
         "topology_set_components",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        unsigned_long("flags", ""),
-        charASCII.const.p("name", "")
+        hwloc_topology_t("topology"),
+        unsigned_long("flags"),
+        charASCII.const.p("name")
     )
 
     int(
         "topology_set_flags",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        unsigned_long("flags")
     )
 
     unsigned_long(
         "topology_get_flags",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     intb(
         "topology_is_thissystem",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     hwloc_topology_support.const.p(
         "topology_get_support",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     int(
         "topology_set_type_filter",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", ""),
-        hwloc_type_filter_e("filter", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type"),
+        hwloc_type_filter_e("filter")
     )
 
     int(
         "topology_get_type_filter",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", ""),
-        Check(1)..hwloc_type_filter_e.p("filter", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type"),
+        Check(1)..hwloc_type_filter_e.p("filter")
     )
 
     int(
         "topology_set_all_types_filter",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_type_filter_e("filter", "")
+        hwloc_topology_t("topology"),
+        hwloc_type_filter_e("filter")
     )
 
     int(
         "topology_set_cache_types_filter",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_type_filter_e("filter", "")
+        hwloc_topology_t("topology"),
+        hwloc_type_filter_e("filter")
     )
 
     int(
         "topology_set_icache_types_filter",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_type_filter_e("filter", "")
+        hwloc_topology_t("topology"),
+        hwloc_type_filter_e("filter")
     )
 
     int(
         "topology_set_io_types_filter",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_type_filter_e("filter", "")
+        hwloc_topology_t("topology"),
+        hwloc_type_filter_e("filter")
     )
 
     void(
         "topology_set_userdata",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        nullable..opaque_const_p("userdata", "")
+        hwloc_topology_t("topology"),
+        nullable..opaque_const_p("userdata")
     )
 
     opaque_p(
         "topology_get_userdata",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     int(
         "topology_restrict",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_const_bitmap_t("set", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_const_bitmap_t("set"),
+        unsigned_long("flags")
     )
 
     int(
         "topology_allow",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_const_cpuset_t("cpuset", ""),
-        hwloc_const_nodeset_t("nodeset", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_const_cpuset_t("cpuset"),
+        hwloc_const_nodeset_t("nodeset"),
+        unsigned_long("flags")
     )
 
     hwloc_obj_t(
         "topology_insert_misc_object",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_t("parent", ""),
-        charASCII.const.p("name", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_t("parent"),
+        charASCII.const.p("name")
     )
 
     hwloc_obj_t(
         "topology_alloc_group_object",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     int(
         "topology_free_group_object",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_t("group", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_t("group")
     )
 
     hwloc_obj_t(
         "topology_insert_group_object",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_t("group", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_t("group")
     )
 
     int(
         "obj_add_other_obj_sets",
-        "",
 
-        hwloc_obj_t("dst", ""),
-        hwloc_obj_t("src", "")
+        hwloc_obj_t("dst"),
+        hwloc_obj_t("src")
     )
 
     int(
         "topology_refresh",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     // helper.h
 
-    intb("obj_type_is_normal", "", hwloc_obj_type_t("type", ""))
-    intb("obj_type_is_io", "", hwloc_obj_type_t("type", ""))
-    intb("obj_type_is_memory", "", hwloc_obj_type_t("type", ""))
-    intb("obj_type_is_cache", "", hwloc_obj_type_t("type", ""))
-    intb("obj_type_is_dcache", "", hwloc_obj_type_t("type", ""))
-    intb("obj_type_is_icache", "", hwloc_obj_type_t("type", ""))
+    intb("obj_type_is_normal", hwloc_obj_type_t("type"))
+    intb("obj_type_is_io", hwloc_obj_type_t("type"))
+    intb("obj_type_is_memory", hwloc_obj_type_t("type"))
+    intb("obj_type_is_cache", hwloc_obj_type_t("type"))
+    intb("obj_type_is_dcache", hwloc_obj_type_t("type"))
+    intb("obj_type_is_icache", hwloc_obj_type_t("type"))
 
     customMethod("""
     @Nullable
@@ -1492,12 +1316,11 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     int(
         "get_largest_objs_inside_cpuset",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_const_cpuset_t("set", ""),
-        hwloc_obj_t.p("objs", ""),
-        AutoSize("objs")..int("max", "")
+        hwloc_topology_t("topology"),
+        hwloc_const_cpuset_t("set"),
+        hwloc_obj_t.p("objs"),
+        AutoSize("objs")..int("max")
     )
 
     customMethod("""
@@ -1808,11 +1631,10 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     int(
         "bitmap_singlify_per_core",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_bitmap_t("cpuset", ""),
-        unsigned("which", "")
+        hwloc_topology_t("topology"),
+        hwloc_bitmap_t("cpuset"),
+        unsigned("which")
     )
 
     customMethod("""
@@ -1843,12 +1665,11 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     unsigned(
         "get_closest_objs",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_t("src", ""),
-        hwloc_obj_t.p("objs", ""),
-        AutoSize("objs")..unsigned("max", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_t("src"),
+        hwloc_obj_t.p("objs"),
+        AutoSize("objs")..unsigned("max")
     )
 
     customMethod("""
@@ -1878,20 +1699,17 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     hwloc_obj_t(
         "get_obj_with_same_locality",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_t("src", ""),
-        hwloc_obj_type_t("type", ""),
-        nullable..charASCII.const.p("subtype", ""),
-        nullable..charASCII.const.p("nameprefix", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_t("src"),
+        hwloc_obj_type_t("type"),
+        nullable..charASCII.const.p("subtype"),
+        nullable..charASCII.const.p("nameprefix"),
+        unsigned_long("flags")
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_distrib_flags_e}",
-
-        "DISTRIB_FLAG_REVERSE".enumLong("", "1L<<0")
+        "DISTRIB_FLAG_REVERSE".enumLong("1L<<0")
     )
 
     customMethod("""
@@ -1950,44 +1768,38 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     hwloc_const_cpuset_t(
         "topology_get_complete_cpuset",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     hwloc_const_cpuset_t(
         "topology_get_topology_cpuset",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     hwloc_const_cpuset_t(
         "topology_get_allowed_cpuset",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     hwloc_const_nodeset_t(
         "topology_get_complete_nodeset",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     hwloc_const_nodeset_t(
         "topology_get_topology_nodeset",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     hwloc_const_nodeset_t(
         "topology_get_allowed_nodeset",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     customMethod("""
@@ -2110,407 +1922,358 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
     // memattrs.h
 
     EnumConstant(
-        "{@code enum hwloc_memattr_id_e}",
-
-        "MEMATTR_ID_CAPACITY".enum("", "0"),
+        "MEMATTR_ID_CAPACITY".enum("0"),
         "MEMATTR_ID_LOCALITY".enum,
         "MEMATTR_ID_BANDWIDTH".enum,
-        "MEMATTR_ID_READ_BANDWIDTH".enum("", "4"),
+        "MEMATTR_ID_READ_BANDWIDTH".enum("4"),
         "MEMATTR_ID_WRITE_BANDWIDTH".enum,
-        "MEMATTR_ID_LATENCY".enum("", "3"),
-        "MEMATTR_ID_READ_LATENCY".enum("", "6"),
+        "MEMATTR_ID_LATENCY".enum("3"),
+        "MEMATTR_ID_READ_LATENCY".enum("6"),
         "MEMATTR_ID_WRITE_LATENCY".enum
     )
 
     EnumConstant(
-        "{@code enum hwloc_location_type_e}",
-
-        "LOCATION_TYPE_CPUSET".enum("", "1"),
-        "LOCATION_TYPE_OBJECT".enum("", "0")
+        "LOCATION_TYPE_CPUSET".enum("1"),
+        "LOCATION_TYPE_OBJECT".enum("0")
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_local_numanode_flag_e}",
-
-        "LOCAL_NUMANODE_FLAG_LARGER_LOCALITY".enumLong("", "1L<<0"),
-        "LOCAL_NUMANODE_FLAG_SMALLER_LOCALITY".enumLong("", "1L<<1"),
-        "LOCAL_NUMANODE_FLAG_ALL".enumLong("", "1L<<2")
+        "LOCAL_NUMANODE_FLAG_LARGER_LOCALITY".enumLong("1L<<0"),
+        "LOCAL_NUMANODE_FLAG_SMALLER_LOCALITY".enumLong("1L<<1"),
+        "LOCAL_NUMANODE_FLAG_ALL".enumLong("1L<<2")
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_memattr_flag_e}",
-
-        "MEMATTR_FLAG_HIGHER_FIRST".enumLong("", "1L<<0"),
-        "MEMATTR_FLAG_LOWER_FIRST".enumLong("", "1L<<1"),
-        "MEMATTR_FLAG_NEED_INITIATOR".enumLong("", "1L<<2")
+        "MEMATTR_FLAG_HIGHER_FIRST".enumLong("1L<<0"),
+        "MEMATTR_FLAG_LOWER_FIRST".enumLong("1L<<1"),
+        "MEMATTR_FLAG_NEED_INITIATOR".enumLong("1L<<2")
     )
 
     int(
         "memattr_get_by_name",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        charASCII.const.p("name", ""),
-        Check(1)..hwloc_memattr_id_t.p("id", "")
+        hwloc_topology_t("topology"),
+        charASCII.const.p("name"),
+        Check(1)..hwloc_memattr_id_t.p("id")
     )
 
     int(
         "get_local_numanode_objs",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_location.p("location", ""),
-        AutoSize("nodes")..Check(1)..unsigned_int.p("nr", ""),
-        hwloc_obj_t.p("nodes", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_location.p("location"),
+        AutoSize("nodes")..Check(1)..unsigned_int.p("nr"),
+        hwloc_obj_t.p("nodes"),
+        unsigned_long("flags")
     )
 
     int(
         "memattr_get_value",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        hwloc_obj_t("target_node", ""),
-        nullable..hwloc_location.p("initiator", ""),
-        unsigned_long("flags", ""),
-        Check(1)..hwloc_uint64_t.p("value", "")
+        hwloc_topology_t("topology"),
+        hwloc_memattr_id_t("attribute"),
+        hwloc_obj_t("target_node"),
+        nullable..hwloc_location.p("initiator"),
+        unsigned_long("flags"),
+        Check(1)..hwloc_uint64_t.p("value")
     )
 
     int(
         "memattr_get_best_target",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        nullable..hwloc_location.p("initiator", ""),
-        unsigned_long("flags", ""),
-        Check(1)..hwloc_obj_t.p("best_target", ""),
-        Check(1)..nullable..hwloc_uint64_t.p("value", "")
+        hwloc_topology_t("topology"),
+        hwloc_memattr_id_t("attribute"),
+        nullable..hwloc_location.p("initiator"),
+        unsigned_long("flags"),
+        Check(1)..hwloc_obj_t.p("best_target"),
+        Check(1)..nullable..hwloc_uint64_t.p("value")
     )
 
     int(
         "memattr_get_best_initiator",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        hwloc_obj_t("target_node", ""),
-        unsigned_long("flags", ""),
-        Check(1)..hwloc_location.p("best_initiator", ""),
-        Check(1)..nullable..hwloc_uint64_t.p("value", "")
+        hwloc_topology_t("topology"),
+        hwloc_memattr_id_t("attribute"),
+        hwloc_obj_t("target_node"),
+        unsigned_long("flags"),
+        Check(1)..hwloc_location.p("best_initiator"),
+        Check(1)..nullable..hwloc_uint64_t.p("value")
     )
 
     int(
         "memattr_get_targets",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        nullable..hwloc_location.p("initiator", ""),
-        unsigned_long("flags", ""),
-        AutoSize("targets", "values")..Check(1)..unsigned_int.p("nr", ""),
-        hwloc_obj_t.p("targets", ""),
-        nullable..hwloc_uint64_t.p("values", "")
+        hwloc_topology_t("topology"),
+        hwloc_memattr_id_t("attribute"),
+        nullable..hwloc_location.p("initiator"),
+        unsigned_long("flags"),
+        AutoSize("targets", "values")..Check(1)..unsigned_int.p("nr"),
+        hwloc_obj_t.p("targets"),
+        nullable..hwloc_uint64_t.p("values")
     )
 
     int(
         "memattr_get_initiators",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        hwloc_obj_t("target_node", ""),
-        unsigned_long("flags", ""),
-        AutoSize("initiators", "values")..Check(1)..unsigned_int.p("nr", ""),
-        hwloc_location.p("initiators", ""),
-        nullable..hwloc_uint64_t.p("values", "")
+        hwloc_topology_t("topology"),
+        hwloc_memattr_id_t("attribute"),
+        hwloc_obj_t("target_node"),
+        unsigned_long("flags"),
+        AutoSize("initiators", "values")..Check(1)..unsigned_int.p("nr"),
+        hwloc_location.p("initiators"),
+        nullable..hwloc_uint64_t.p("values")
     )
 
     int(
         "memattr_get_name",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        Check(1)..char.const.p.p("name", "")
+        hwloc_topology_t("topology"),
+        hwloc_memattr_id_t("attribute"),
+        Check(1)..char.const.p.p("name")
     )
 
     int(
         "memattr_get_flags",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        Check(1)..unsigned_long.p("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_memattr_id_t("attribute"),
+        Check(1)..unsigned_long.p("flags")
     )
 
     int(
         "memattr_register",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        charASCII.const.p("name", ""),
-        unsigned_long("flags", ""),
-        Check(1)..hwloc_memattr_id_t.p("id", "")
+        hwloc_topology_t("topology"),
+        charASCII.const.p("name"),
+        unsigned_long("flags"),
+        Check(1)..hwloc_memattr_id_t.p("id")
     )
 
     int(
         "memattr_set_value",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_memattr_id_t("attribute", ""),
-        hwloc_obj_t("target_node", ""),
-        nullable..hwloc_location.p("initiator", ""),
-        unsigned_long("flags", ""),
-        hwloc_uint64_t("value", "")
+        hwloc_topology_t("topology"),
+        hwloc_memattr_id_t("attribute"),
+        hwloc_obj_t("target_node"),
+        nullable..hwloc_location.p("initiator"),
+        unsigned_long("flags"),
+        hwloc_uint64_t("value")
     )
 
     // cpukinds.h
 
     int(
         "cpukinds_get_nr",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        unsigned_long("flags")
     )
 
     int(
         "cpukinds_get_by_cpuset",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_const_bitmap_t("cpuset", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_const_bitmap_t("cpuset"),
+        unsigned_long("flags")
     )
 
     int(
         "cpukinds_get_info",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        unsigned_int("kind_index", ""),
-        nullable..hwloc_bitmap_t("cpuset", ""),
-        Check(1)..nullable..int.p("efficiency", ""),
-        Check(1)..hwloc_infos_s.p.p("infosp", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        unsigned_int("kind_index"),
+        nullable..hwloc_bitmap_t("cpuset"),
+        Check(1)..nullable..int.p("efficiency"),
+        Check(1)..hwloc_infos_s.p.p("infosp"),
+        unsigned_long("flags")
     )
 
     int(
         "cpukinds_register",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_bitmap_t("cpuset", ""),
-        int("forced_efficiency", ""),
-        nullable..hwloc_infos_s.p("infos", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_bitmap_t("cpuset"),
+        int("forced_efficiency"),
+        nullable..hwloc_infos_s.p("infos"),
+        unsigned_long("flags")
     )
 
     // export.h
 
     EnumConstantLong(
-        "{@code enum hwloc_topology_export_xml_flags_e}",
-
-        "TOPOLOGY_EXPORT_XML_FLAG_V2".enumLong("", "1L<<1")
+        "TOPOLOGY_EXPORT_XML_FLAG_V2".enumLong("1L<<1")
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_topology_export_synthetic_flags_e}",
-
-        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_NO_EXTENDED_TYPES".enumLong("", "1L<<0"),
-        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_NO_ATTRS".enumLong("", "1L<<1"),
-        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_V1".enumLong("", "1L<<2"),
-        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_IGNORE_MEMORY".enumLong("", "1L<<3")
+        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_NO_EXTENDED_TYPES".enumLong("1L<<0"),
+        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_NO_ATTRS".enumLong("1L<<1"),
+        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_V1".enumLong("1L<<2"),
+        "TOPOLOGY_EXPORT_SYNTHETIC_FLAG_IGNORE_MEMORY".enumLong("1L<<3")
     )
 
     int(
         "topology_export_xml",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        charUTF8.const.p("xmlpath", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        charUTF8.const.p("xmlpath"),
+        unsigned_long("flags")
     )
 
     int(
         "topology_export_xmlbuffer",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        Check(1)..char.p.p("xmlbuffer", ""),
-        Check(1)..int.p("buflen", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        Check(1)..char.p.p("xmlbuffer"),
+        Check(1)..int.p("buflen"),
+        unsigned_long("flags")
     )
 
     void(
         "free_xmlbuffer",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        Unsafe..char.p("xmlbuffer", "")
+        hwloc_topology_t("topology"),
+        Unsafe..char.p("xmlbuffer")
     )
 
     void(
         "topology_set_userdata_export_callback",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        topology_set_userdata_export_callback("export_cb", "")
+        hwloc_topology_t("topology"),
+        topology_set_userdata_export_callback("export_cb")
     )
 
     int(
         "export_obj_userdata",
-        "",
 
-        nullable..opaque_p("reserved", ""),
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_t("obj", ""),
-        charASCII.const.p("name", ""),
-        void.const.p("buffer", ""),
-        AutoSize("buffer")..size_t("length", "")
+        nullable..opaque_p("reserved"),
+        hwloc_topology_t("topology"),
+        hwloc_obj_t("obj"),
+        charASCII.const.p("name"),
+        void.const.p("buffer"),
+        AutoSize("buffer")..size_t("length")
     )
 
     int(
         "export_obj_userdata_base64",
-        "",
 
-        nullable..opaque_p("reserved", ""),
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_t("obj", ""),
-        charASCII.const.p("name", ""),
-        void.const.p("buffer", ""),
-        AutoSize("buffer")..size_t("length", "")
+        nullable..opaque_p("reserved"),
+        hwloc_topology_t("topology"),
+        hwloc_obj_t("obj"),
+        charASCII.const.p("name"),
+        void.const.p("buffer"),
+        AutoSize("buffer")..size_t("length")
     )
 
     void(
         "topology_set_userdata_import_callback",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        topology_set_userdata_import_callback("import_cb", "")
+        hwloc_topology_t("topology"),
+        topology_set_userdata_import_callback("import_cb")
     )
 
     int(
         "topology_export_synthetic",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        char.p("buffer", ""),
-        AutoSize("buffer")..size_t("buflen", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        char.p("buffer"),
+        AutoSize("buffer")..size_t("buflen"),
+        unsigned_long("flags")
     )
 
     // distances.h
 
     EnumConstantLong(
-        "{@code enum hwloc_distances_kind_e}",
-
-        "DISTANCES_KIND_FROM_OS".enumLong("", "1L<<0"),
-        "DISTANCES_KIND_FROM_USER".enumLong("", "1L<<1"),
-        "DISTANCES_KIND_VALUE_LATENCY".enumLong("", "1L<<2"),
-        "DISTANCES_KIND_VALUE_BANDWIDTH".enumLong("", "1L<<3"),
-        "DISTANCES_KIND_VALUE_HOPS".enumLong("", "1L<<5"),
-        "DISTANCES_KIND_HETEROGENEOUS_TYPES".enumLong("", "1L<<4")
+        "DISTANCES_KIND_FROM_OS".enumLong("1L<<0"),
+        "DISTANCES_KIND_FROM_USER".enumLong("1L<<1"),
+        "DISTANCES_KIND_VALUE_LATENCY".enumLong("1L<<2"),
+        "DISTANCES_KIND_VALUE_BANDWIDTH".enumLong("1L<<3"),
+        "DISTANCES_KIND_VALUE_HOPS".enumLong("1L<<5"),
+        "DISTANCES_KIND_HETEROGENEOUS_TYPES".enumLong("1L<<4")
     )
 
     EnumConstant(
-        "{@code enum hwloc_distances_transform_e}",
-
-        "DISTANCES_TRANSFORM_REMOVE_NULL".enum("", "0"),
+        "DISTANCES_TRANSFORM_REMOVE_NULL".enum("0"),
         "DISTANCES_TRANSFORM_LINKS".enum,
         "DISTANCES_TRANSFORM_MERGE_SWITCH_PORTS".enum,
         "DISTANCES_TRANSFORM_TRANSITIVE_CLOSURE".enum
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_distances_add_flag_e}",
-
-        "DISTANCES_ADD_FLAG_GROUP".enumLong("", "1L<<0"),
-        "DISTANCES_ADD_FLAG_GROUP_INACCURATE".enumLong("", "1L<<1")
+        "DISTANCES_ADD_FLAG_GROUP".enumLong("1L<<0"),
+        "DISTANCES_ADD_FLAG_GROUP_INACCURATE".enumLong("1L<<1")
     )
 
     int(
         "distances_get",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        AutoSize("distances")..Check(1)..unsigned_int.p("nr", ""),
-        hwloc_distances_s.p.p("distances", ""),
-        unsigned_long("kind", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        AutoSize("distances")..Check(1)..unsigned_int.p("nr"),
+        hwloc_distances_s.p.p("distances"),
+        unsigned_long("kind"),
+        unsigned_long("flags")
     )
 
     int(
         "distances_get_by_depth",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        int("depth", ""),
-        AutoSize("distances")..Check(1)..unsigned_int.p("nr", ""),
-        hwloc_distances_s.p.p("distances", ""),
-        unsigned_long("kind", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        int("depth"),
+        AutoSize("distances")..Check(1)..unsigned_int.p("nr"),
+        hwloc_distances_s.p.p("distances"),
+        unsigned_long("kind"),
+        unsigned_long("flags")
     )
 
     int(
         "distances_get_by_type",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", ""),
-        AutoSize("distances")..Check(1)..unsigned_int.p("nr", ""),
-        hwloc_distances_s.p.p("distances", ""),
-        unsigned_long("kind", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type"),
+        AutoSize("distances")..Check(1)..unsigned_int.p("nr"),
+        hwloc_distances_s.p.p("distances"),
+        unsigned_long("kind"),
+        unsigned_long("flags")
     )
 
     int(
         "distances_get_by_name",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        charASCII.const.p("name", ""),
-        AutoSize("distances")..Check(1)..unsigned_int.p("nr", ""),
-        hwloc_distances_s.p.p("distances", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        charASCII.const.p("name"),
+        AutoSize("distances")..Check(1)..unsigned_int.p("nr"),
+        hwloc_distances_s.p.p("distances"),
+        unsigned_long("flags")
     )
 
     charASCII.const.p(
         "distances_get_name",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_distances_s.p("distances", "")
+        hwloc_topology_t("topology"),
+        hwloc_distances_s.p("distances")
     )
 
     void(
         "distances_release",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_distances_s.p("distances", "")
+        hwloc_topology_t("topology"),
+        hwloc_distances_s.p("distances")
     )
 
     int(
         "distances_transform",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_distances_s.p("distances", ""),
-        hwloc_distances_transform_e("transform", ""),
-        nullable..opaque_p("transform_attr", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_distances_s.p("distances"),
+        hwloc_distances_transform_e("transform"),
+        nullable..opaque_p("transform_attr"),
+        unsigned_long("flags")
     )
 
     /*int(
         "distances_obj_index",
-        "",
 
-        hwloc_distances_s.p("distances", ""),
-        hwloc_obj_t("obj", "")
+        hwloc_distances_s.p("distances"),
+        hwloc_obj_t("obj")
     )*/
     customMethod("""
     public static int hwloc_distances_obj_index(@NativeType("struct hwloc_distances_s *") hwloc_distances_s distances, @NativeType("hwloc_obj_t") hwloc_obj obj) {
@@ -2525,13 +2288,12 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     /*int(
         "distances_obj_pair_values",
-        "",
 
-        hwloc_distances_s.p("distances", ""),
-        hwloc_obj_t("obj1", ""),
-        hwloc_obj_t("obj2", ""),
-        hwloc_uint64_t.p("value1to2", ""),
-        hwloc_uint64_t.p("value2to1", "")
+        hwloc_distances_s.p("distances"),
+        hwloc_obj_t("obj1"),
+        hwloc_obj_t("obj2"),
+        hwloc_uint64_t.p("value1to2"),
+        hwloc_uint64_t.p("value2to1")
     )*/
     customMethod("""
     public static int hwloc_distances_obj_pair_values(@NativeType("struct hwloc_distances_s *") hwloc_distances_s distances, @NativeType("hwloc_obj_t") hwloc_obj obj1, @NativeType("hwloc_obj_t") hwloc_obj obj2, LongBuffer value1to2, LongBuffer value2to1) {
@@ -2548,56 +2310,50 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     hwloc_distances_add_handle_t(
         "distances_add_create",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        nullable..charASCII.const.p("name", ""),
-        unsigned_long("kind", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        nullable..charASCII.const.p("name"),
+        unsigned_long("kind"),
+        unsigned_long("flags")
     )
 
     int(
         "distances_add_values",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_distances_add_handle_t("handle", ""),
-        unsigned_int("nbobjs", ""),
-        Check("nbobjs")..hwloc_obj_t.p("objs", ""),
-        Check("nbobjs * nbobjs")..hwloc_uint64_t.p("values", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_distances_add_handle_t("handle"),
+        unsigned_int("nbobjs"),
+        Check("nbobjs")..hwloc_obj_t.p("objs"),
+        Check("nbobjs * nbobjs")..hwloc_uint64_t.p("values"),
+        unsigned_long("flags")
     )
 
     int(
         "distances_add_commit",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_distances_add_handle_t("handle", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_distances_add_handle_t("handle"),
+        unsigned_long("flags")
     )
 
     int(
         "distances_remove",
-        "",
 
-        hwloc_topology_t("topology", "")
+        hwloc_topology_t("topology")
     )
 
     int(
         "distances_remove_by_depth",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        int("depth", "")
+        hwloc_topology_t("topology"),
+        int("depth")
     )
 
     /*int(
         "distances_remove_by_type",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_obj_type_t("type", "")
+        hwloc_topology_t("topology"),
+        hwloc_obj_type_t("type")
     )*/
     customMethod("""
     public static int hwloc_distances_remove_by_type(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_type_t") int type) {
@@ -2610,96 +2366,82 @@ val hwloc = "HWLoc".nativeClass(Module.HWLOC, prefix = "HWLOC", prefixMethod = "
 
     int(
         "distances_release_remove",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_distances_s.p("distances", "")
+        hwloc_topology_t("topology"),
+        hwloc_distances_s.p("distances")
     )
 
     // diff.h
 
     EnumConstant(
-        "{@code hwloc_topology_diff_obj_attr_type_t}",
-
-        "TOPOLOGY_DIFF_OBJ_ATTR_SIZE".enum("", "0"),
+        "TOPOLOGY_DIFF_OBJ_ATTR_SIZE".enum("0"),
         "TOPOLOGY_DIFF_OBJ_ATTR_NAME".enum,
         "TOPOLOGY_DIFF_OBJ_ATTR_INFO".enum
     )
 
     EnumConstant(
-        "{@code hwloc_topology_diff_type_t}",
-
-        "TOPOLOGY_DIFF_OBJ_ATTR".enum("", "0"),
+        "TOPOLOGY_DIFF_OBJ_ATTR".enum("0"),
         "TOPOLOGY_DIFF_TOO_COMPLEX".enum
     )
 
     EnumConstantLong(
-        "{@code enum hwloc_topology_diff_apply_flags_e}",
-
-        "TOPOLOGY_DIFF_APPLY_REVERSE".enumLong("", "1L<<0")
+        "TOPOLOGY_DIFF_APPLY_REVERSE".enumLong("1L<<0")
     )
 
     int(
         "topology_diff_build",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_topology_t("newtopology", ""),
-        unsigned_long("flags", ""),
-        Check(1)..hwloc_topology_diff_t.p("diff", "")
+        hwloc_topology_t("topology"),
+        hwloc_topology_t("newtopology"),
+        unsigned_long("flags"),
+        Check(1)..hwloc_topology_diff_t.p("diff")
     )
 
     int(
         "topology_diff_apply",
-        "",
 
-        hwloc_topology_t("topology", ""),
-        hwloc_topology_diff_t("diff", ""),
-        unsigned_long("flags", "")
+        hwloc_topology_t("topology"),
+        hwloc_topology_diff_t("diff"),
+        unsigned_long("flags")
     )
 
     int(
         "topology_diff_destroy",
-        "",
 
-        hwloc_topology_diff_t("diff", "")
+        hwloc_topology_diff_t("diff")
     )
 
     int(
         "topology_diff_load_xml",
-        "",
 
-        charUTF8.const.p("xmlpath", ""),
-        Check(1)..hwloc_topology_diff_t.p("diff", ""),
-        Check(1)..char.p.p("refname", "")
+        charUTF8.const.p("xmlpath"),
+        Check(1)..hwloc_topology_diff_t.p("diff"),
+        Check(1)..char.p.p("refname")
     )
 
     int(
         "topology_diff_export_xml",
-        "",
 
-        hwloc_topology_diff_t("diff", ""),
-        charASCII.const.p("refname", ""),
-        charUTF8.const.p("xmlpath", "")
+        hwloc_topology_diff_t("diff"),
+        charASCII.const.p("refname"),
+        charUTF8.const.p("xmlpath")
     )
 
     int(
         "topology_diff_load_xmlbuffer",
-        "",
 
-        char.const.p("xmlbuffer", ""),
-        AutoSize("xmlbuffer")..int("buflen", ""),
-        Check(1)..hwloc_topology_diff_t.p("diff", ""),
-        Check(1)..char.p.p("refname", "")
+        char.const.p("xmlbuffer"),
+        AutoSize("xmlbuffer")..int("buflen"),
+        Check(1)..hwloc_topology_diff_t.p("diff"),
+        Check(1)..char.p.p("refname")
     )
 
     int(
         "topology_diff_export_xmlbuffer",
-        "",
 
-        hwloc_topology_diff_t("diff", ""),
-        charASCII.const.p("refname", ""),
-        Check(1)..char.p.p("xmlbuffer", ""),
-        Check(1)..int.p("buflen", "")
+        hwloc_topology_diff_t("diff"),
+        charASCII.const.p("refname"),
+        Check(1)..char.p.p("xmlbuffer"),
+        Check(1)..int.p("buflen")
     )
 }

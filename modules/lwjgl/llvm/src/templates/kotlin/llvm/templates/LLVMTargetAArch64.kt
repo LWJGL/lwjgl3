@@ -13,12 +13,10 @@ val LLVMTargetAArch64 = "LLVMTargetAArch64".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
-    documentation = ""
-
-    void("InitializeAArch64TargetInfo",   "", void())
-    void("InitializeAArch64Target",       "", void())
-    void("InitializeAArch64TargetMC",     "", void())
-    void("InitializeAArch64AsmPrinter",   "", void())
-    void("InitializeAArch64AsmParser",    "", void())
-    void("InitializeAArch64Disassembler", "", void())
+    void("InitializeAArch64TargetInfo",   void())
+    void("InitializeAArch64Target",       void())
+    void("InitializeAArch64TargetMC",     void())
+    void("InitializeAArch64AsmPrinter",   void())
+    void("InitializeAArch64AsmParser",    void())
+    void("InitializeAArch64Disassembler", void())
 }

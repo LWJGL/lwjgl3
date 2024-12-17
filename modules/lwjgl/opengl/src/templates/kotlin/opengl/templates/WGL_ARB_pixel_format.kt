@@ -9,24 +9,7 @@ import opengl.*
 import core.windows.*
 
 val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_format", ARB) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension adds functions to query pixel format attributes and to choose from the list of supported pixel formats.
-
-        These functions treat pixel formats as opaque types: attributes are specified by name rather than by accessing them directly as fields in a structure.
-        Thus the list of attributes can be easily extended.
-
-        Requires ${WGL_ARB_extensions_string.link}.
-        """
-
-    val WGL_ATTRIBUTES = IntConstant(
-        """
-        Accepted in the {@code attributes} parameter array of #GetPixelFormatAttribivARB(), and #GetPixelFormatAttribfvARB(), and as a type in
-        the {@code attribIList} and {@code attribFList} parameter arrays of #ChoosePixelFormatARB().
-        """,
-
+    IntConstant(
         "NUMBER_PIXEL_FORMATS_ARB"..0x2000,
         "DRAW_TO_WINDOW_ARB"..0x2001,
         "DRAW_TO_BITMAP_ARB"..0x2002,
@@ -68,14 +51,9 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
         "DEPTH_BITS_ARB"..0x2022,
         "STENCIL_BITS_ARB"..0x2023,
         "AUX_BUFFERS_ARB"..0x2024
-    ).javaDocLinks
+    )
 
     IntConstant(
-        """
-        Accepted as a value in the {@code attribIList} and {@code attribFList} parameter arrays of #ChoosePixelFormatARB(), and returned in the
-        {@code values} parameter array of #GetPixelFormatAttribivARB() and #GetPixelFormatAttribfvARB().
-        """,
-
         "NO_ACCELERATION_ARB"..0x2025,
         "GENERIC_ACCELERATION_ARB"..0x2026,
         "FULL_ACCELERATION_ARB"..0x2027,
@@ -90,48 +68,35 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 
     BOOL(
         "GetPixelFormatAttribivARB",
-        "",
 
-        HDC("hdc", "the device context on which the pixel format is supported"),
-        int("pixelFormat", "an index that specifies the pixel format"),
-        int("layerPlane", "the plane being queried"),
-        AutoSize("attributes", "values")..UINT("n", "the number of attributes being queried"),
-        SingleValue("attribute")..int.const.p("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
-        int.p("values", "a buffer into which the results of the query will be placed")
+        HDC("hdc"),
+        int("pixelFormat"),
+        int("layerPlane"),
+        AutoSize("attributes", "values")..UINT("n"),
+        SingleValue("attribute")..int.const.p("attributes"),
+        int.p("values")
     )
 
     BOOL(
         "GetPixelFormatAttribfvARB",
-        "Float version of #GetPixelFormatAttribivARB().",
 
-        HDC("hdc", "the device context on which the pixel format is supported"),
-        int("pixelFormat", "an index that specifies the pixel format"),
-        int("layerPlane", "the plane being queried"),
-        AutoSize("attributes", "values")..UINT("n", "the number of attributes being queried"),
-        SingleValue("attribute")..int.const.p("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
-        FLOAT.p("values", "a buffer into which the results of the query will be placed")
+        HDC("hdc"),
+        int("pixelFormat"),
+        int("layerPlane"),
+        AutoSize("attributes", "values")..UINT("n"),
+        SingleValue("attribute")..int.const.p("attributes"),
+        FLOAT.p("values")
     )
 
     BOOL(
         "ChoosePixelFormatARB",
-        """
-        Selects from among all of the available pixel formats (including both accelerated and generic formats and non-displayable formats). This function
-        accepts attributes for the main planes. A list of pixel formats that match the specified attributes is returned with the "best" pixel formats at the
-        start of the list (order is device dependent).
-        """,
 
-        HDC("hdc", "the device context on which the pixel format is supported"),
-        NullTerminated..nullable..int.const.p("attribIList", "a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
-        NullTerminated..nullable..FLOAT.const.p("attribFList", "a list of attribute {type, value} pairs containing floating point attribute values"),
-        AutoSize("formats")..UINT("maxFormats", "the number of attributes being queried"),
-        int.p(
-            "formats",
-            """
-            an array of returned indices of the matching pixel formats. The best pixel formats (i.e. closest match and best format for the hardware) are at the
-            head of the list.
-            """
-        ),
-        Check(1)..UINT.p("numFormats", "returns the number of matching formats")
+        HDC("hdc"),
+        NullTerminated..nullable..int.const.p("attribIList"),
+        NullTerminated..nullable..FLOAT.const.p("attribFList"),
+        AutoSize("formats")..UINT("maxFormats"),
+        int.p("formats"),
+        Check(1)..UINT.p("numFormats")
     )
 
 }

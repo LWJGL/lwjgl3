@@ -9,12 +9,7 @@ import org.lwjgl.generator.*
 
 val EGL11 = "EGL11".nativeClassEGL("EGL11", postfix = "") {
     extends = EGL10
-    documentation =
-        "The core EGL 1.1 functionality."
-
     IntConstant(
-        "",
-
         "BACK_BUFFER"..0x3084,
         "BIND_TO_TEXTURE_RGB"..0x3039,
         "BIND_TO_TEXTURE_RGBA"..0x303A,
@@ -33,37 +28,33 @@ val EGL11 = "EGL11".nativeClassEGL("EGL11", postfix = "") {
 
     EGLBoolean(
         "BindTexImage",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", ""),
-        EGLint("buffer", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface"),
+        EGLint("buffer")
     )
 
     EGLBoolean(
         "ReleaseTexImage",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", ""),
-        EGLint("buffer", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface"),
+        EGLint("buffer")
     )
 
     EGLBoolean(
         "SurfaceAttrib",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", ""),
-        EGLint("attribute", ""),
-        EGLint("value", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface"),
+        EGLint("attribute"),
+        EGLint("value")
     )
 
     EGLBoolean(
         "SwapInterval",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLint("interval", "")
+        EGLDisplay("dpy"),
+        EGLint("interval")
     )
 }

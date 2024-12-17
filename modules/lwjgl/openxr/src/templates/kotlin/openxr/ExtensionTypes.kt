@@ -186,10880 +186,3055 @@ val _XrDebugUtilsMessengerCallbackDataEXT = struct(Module.OPENXR, "XrDebugUtilsM
 val PFN_xrDebugUtilsMessengerCallbackEXT = Module.OPENXR.callback {
     XrBool32(
         "XrDebugUtilsMessengerCallbackEXT",
-        "Type of callback function invoked by the debug utils.",
 
-        XrDebugUtilsMessageSeverityFlagsEXT("messageSeverity", "indicates the single bit value of {@code XrDebugUtilsMessageSeverityFlagsEXT} that triggered this callback."),
-        XrDebugUtilsMessageTypeFlagsEXT("messageTypes", "indicates the {@code XrDebugUtilsMessageTypeFlagsEXT} specifying which types of event triggered this callback."),
-        _XrDebugUtilsMessengerCallbackDataEXT.const.p("callbackData", "contains all the callback related data in the ##XrDebugUtilsMessengerCallbackDataEXT structure."),
-        opaque_p("userData", "the user data provided when the {@code XrDebugUtilsMessengerEXT} was created."),
+        XrDebugUtilsMessageSeverityFlagsEXT("messageSeverity"),
+        XrDebugUtilsMessageTypeFlagsEXT("messageTypes"),
+        _XrDebugUtilsMessengerCallbackDataEXT.const.p("callbackData"),
+        opaque_p("userData"),
 
         nativeType = "PFN_xrDebugUtilsMessengerCallbackEXT"
-    ) {
-        documentation =
-        """
-        Type of callback function invoked by the debug utils.
-
-        <h5>C Specification</h5>
-        <pre><code>
-￿typedef XrBool32 (XRAPI_PTR *PFN_xrDebugUtilsMessengerCallbackEXT)(
-￿            XrDebugUtilsMessageSeverityFlagsEXT              messageSeverity,
-￿            XrDebugUtilsMessageTypeFlagsEXT                  messageTypes,
-￿            const XrDebugUtilsMessengerCallbackDataEXT*      callbackData,
-￿            void*                                            userData);</code></pre>
-
-        <h5>Description</h5>
-        The callback <b>must</b> not call #DestroyDebugUtilsMessengerEXT().
-
-        The callback returns an {@code XrBool32} that indicates to the calling layer the application’s desire to abort the call. A value of #TRUE indicates that the application wants to abort this call. If the application returns #FALSE, the function <b>must</b> not be aborted. Applications <b>should</b> always return #FALSE so that they see the same behavior with and without validation layers enabled.
-
-        If the application returns #TRUE from its callback and the OpenXR call being aborted returns an {@code XrResult}, the layer will return #ERROR_VALIDATION_FAILURE.
-
-        The object pointed to by {@code callbackData} (and any pointers in it recursively) <b>must</b> be valid during the lifetime of the triggered callback. It <b>may</b> become invalid afterwards.
-
-        <h5>See Also</h5>
-        ##XrDebugUtilsMessengerCreateInfoEXT, #CreateDebugUtilsMessengerEXT()
-        """
-    }
+    ) {}
 }
 
 // Struct types
 val XrCompositionLayerCubeKHR = struct(Module.OPENXR, "XrCompositionLayerCubeKHR", parentStruct = XrCompositionLayerBaseHeader) {
-    documentation =
-        """
-        Cube map layer composition info.
-
-        <h5>Description</h5>
-        ##XrCompositionLayerCubeKHR contains the information needed to render a cube map when calling #EndFrame(). ##XrCompositionLayerCubeKHR is an alias type for the base struct ##XrCompositionLayerBaseHeader used in ##XrFrameEndInfo.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRCompositionLayerCube XR_KHR_composition_layer_cube} extension <b>must</b> be enabled prior to using ##XrCompositionLayerCubeKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_CUBE_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code eyeVisibility} <b>must</b> be a valid {@code XrEyeVisibility} value</li>
-            <li>{@code swapchain} <b>must</b> be a valid {@code XrSwapchain} handle</li>
-            <li>Both of {@code space} and {@code swapchain} <b>must</b> have been created, allocated, or retrieved from the same {@code XrSession}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader, ##XrFrameEndInfo, ##XrQuaternionf, #EndFrame()
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_CUBE_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrCompositionLayerFlags("layerFlags", "any flags to apply to this layer.")
-    XrSpace("space", "the {@code XrSpace} in which the {@code orientation} of the cube layer is evaluated over time.")
-    XrEyeVisibility("eyeVisibility", "the eye represented by this layer.")
-    XrSwapchain("swapchain", "the swapchain, which <b>must</b> have been created with a ##XrSwapchainCreateInfo{@code ::faceCount} of 6.")
-    uint32_t("imageArrayIndex", "the image array index, with 0 meaning the first or only array element.")
-    XrQuaternionf("orientation", "the orientation of the environment map in the {@code space}.")
+    Expression("#TYPE_COMPOSITION_LAYER_CUBE_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerFlags("layerFlags")
+    XrSpace("space")
+    XrEyeVisibility("eyeVisibility")
+    XrSwapchain("swapchain")
+    uint32_t("imageArrayIndex")
+    XrQuaternionf("orientation")
 }
 
 val XrCompositionLayerDepthInfoKHR = struct(Module.OPENXR, "XrCompositionLayerDepthInfoKHR") {
-    documentation =
-        """
-        Depth map layer info.
-
-        <h5>Description</h5>
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The window space depth values {@code minDepth} and {@code maxDepth} are akin to the parameters of {@code glDepthRange} that specify the mapping from normalized device coordinates into window space.
-        </div>
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        A reversed mapping of depth, such that points closer to the view have a window space depth that is greater than points further away can be achieved by making nearZ &gt; farZ.
-        </div>
-
-        ##XrCompositionLayerDepthInfoKHR contains the information needed to associate depth with the color information in a projection layer. When submitting depth images along with projection layers, add the ##XrCompositionLayerDepthInfoKHR to the {@code next} chain for all ##XrCompositionLayerProjectionView structures in the given layer.
-
-        The homogeneous transform from view space z to window space depth is given by the following matrix, where a = minDepth, b = maxDepth, n = nearZ, and f = farZ.
-
-        Homogeneous values are constructed from real values by appending a w component with value 1.0.
-
-        General homogeneous values are projected back to real space by dividing by the w component.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRCompositionLayerDepth XR_KHR_composition_layer_depth} extension <b>must</b> be enabled prior to using ##XrCompositionLayerDepthInfoKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code subImage} <b>must</b> be a valid ##XrSwapchainSubImage structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader, ##XrCompositionLayerProjection, ##XrCompositionLayerProjectionView, ##XrFrameEndInfo, ##XrSwapchainSubImage, #EndFrame()
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSwapchainSubImage("subImage", "identifies the depth image ##XrSwapchainSubImage to be associated with the color swapchain. The swapchain <b>must</b> have been created with a ##XrSwapchainCreateInfo{@code ::faceCount} of 1.")
-    float("minDepth", "{@code minDepth} and {@code maxDepth} are the window space depths that correspond to the near and far frustum planes, respectively. {@code minDepth} must be less than {@code maxDepth}. {@code minDepth} and {@code maxDepth} must be in the range [0, 1].")
-    float("maxDepth", "see {@code minDepth}")
-    float("nearZ", "{@code nearZ} and {@code farZ} are the positive distances in meters to the near and far frustum planes, respectively. {@code nearZ} and {@code farZ} <b>must</b> not be equal. {@code nearZ} and {@code farZ} <b>must</b> be in the range (0, +infinity].")
-    float("farZ", "see {@code nearZ}")
+    Expression("#TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSwapchainSubImage("subImage")
+    float("minDepth")
+    float("maxDepth")
+    float("nearZ")
+    float("farZ")
 }
 
 val XrVulkanSwapchainFormatListCreateInfoKHR = struct(Module.OPENXR, "XrVulkanSwapchainFormatListCreateInfoKHR") {
     javaImport("org.lwjgl.vulkan.*")
-    documentation =
-        """
-        A list of Vulkan view formats.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRVulkanSwapchainFormatList XR_KHR_vulkan_swapchain_format_list} extension <b>must</b> be enabled prior to using ##XrVulkanSwapchainFormatListCreateInfoKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code viewFormatCount} is not 0, {@code viewFormats} <b>must</b> be a pointer to an array of {@code viewFormatCount} valid {@code VkFormat} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSwapchain()
-        """
-
-    Expression("#TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("viewFormats", optional = true)..uint32_t("viewFormatCount", "the number of view formats passed in {@code viewFormats}.")
-    VkFormat.const.p("viewFormats", "an array of {@code VkFormat}.")
+    Expression("#TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("viewFormats", optional = true)..uint32_t("viewFormatCount")
+    VkFormat.const.p("viewFormats")
 }
 
 val XrEventDataPerfSettingsEXT = struct(Module.OPENXR, "XrEventDataPerfSettingsEXT", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        XrEventDataPerfSettingsEXT.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTPerformanceSettings XR_EXT_performance_settings} extension <b>must</b> be enabled prior to using ##XrEventDataPerfSettingsEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_PERF_SETTINGS_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_PERF_SETTINGS_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrPerfSettingsDomainEXT("domain", ": processing domain in which a threshold has been crossed")
-    XrPerfSettingsSubDomainEXT("subDomain", ": system area in which a threshold has been crossed")
-    XrPerfSettingsNotificationLevelEXT("fromLevel", ": enumerated notification level which has been exited")
-    XrPerfSettingsNotificationLevelEXT("toLevel", ": enumerated notification level which has been entered")
+    Expression("#TYPE_EVENT_DATA_PERF_SETTINGS_EXT")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrPerfSettingsDomainEXT("domain")
+    XrPerfSettingsSubDomainEXT("subDomain")
+    XrPerfSettingsNotificationLevelEXT("fromLevel")
+    XrPerfSettingsNotificationLevelEXT("toLevel")
 }
 
 val XrCompositionLayerCylinderKHR = struct(Module.OPENXR, "XrCompositionLayerCylinderKHR", parentStruct = XrCompositionLayerBaseHeader) {
-    documentation =
-        """
-        Cylindrical layer composition info.
-
-        <h5>Description</h5>
-        ##XrCompositionLayerCylinderKHR contains the information needed to render a texture onto a cylinder when calling #EndFrame(). ##XrCompositionLayerCylinderKHR is an alias type for the base struct ##XrCompositionLayerBaseHeader used in ##XrFrameEndInfo.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRCompositionLayerCylinder XR_KHR_composition_layer_cylinder} extension <b>must</b> be enabled prior to using ##XrCompositionLayerCylinderKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_CYLINDER_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code eyeVisibility} <b>must</b> be a valid {@code XrEyeVisibility} value</li>
-            <li>{@code subImage} <b>must</b> be a valid ##XrSwapchainSubImage structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader, ##XrFrameEndInfo, ##XrPosef, ##XrSwapchainSubImage, #EndFrame()
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_CYLINDER_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrCompositionLayerFlags("layerFlags", "specifies options for the layer.")
-    XrSpace("space", "the {@code XrSpace} in which the {@code pose} of the cylinder layer is evaluated over time.")
-    XrEyeVisibility("eyeVisibility", "the eye represented by this layer.")
-    XrSwapchainSubImage("subImage", "identifies the image ##XrSwapchainSubImage to use. The swapchain <b>must</b> have been created with a ##XrSwapchainCreateInfo{@code ::faceCount} of 1.")
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the center point of the view of the cylinder within the reference frame of the {@code space}.")
-    float("radius", "the non-negative radius of the cylinder. Values of zero or floating point positive infinity are treated as an infinite cylinder.")
-    float("centralAngle", "the angle of the visible section of the cylinder, based at 0 radians, in the range of <code>[0, 2π)</code>. It grows symmetrically around the 0 radian angle.")
-    float("aspectRatio", "the ratio of the visible cylinder section <code>width / height</code>. The height of the cylinder is given by: <code>(cylinder radius × cylinder angle) / aspectRatio</code>.")
+    Expression("#TYPE_COMPOSITION_LAYER_CYLINDER_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerFlags("layerFlags")
+    XrSpace("space")
+    XrEyeVisibility("eyeVisibility")
+    XrSwapchainSubImage("subImage")
+    XrPosef("pose")
+    float("radius")
+    float("centralAngle")
+    float("aspectRatio")
 }
 
 val XrCompositionLayerEquirectKHR = struct(Module.OPENXR, "XrCompositionLayerEquirectKHR", parentStruct = XrCompositionLayerBaseHeader) {
-    documentation =
-        """
-        Equirectangular layer composition info.
-
-        <h5>Description</h5>
-        ##XrCompositionLayerEquirectKHR contains the information needed to render an equirectangular image onto a sphere when calling #EndFrame(). ##XrCompositionLayerEquirectKHR is an alias type for the base struct ##XrCompositionLayerBaseHeader used in ##XrFrameEndInfo.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRCompositionLayerEquirect XR_KHR_composition_layer_equirect} extension <b>must</b> be enabled prior to using ##XrCompositionLayerEquirectKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_EQUIRECT_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code eyeVisibility} <b>must</b> be a valid {@code XrEyeVisibility} value</li>
-            <li>{@code subImage} <b>must</b> be a valid ##XrSwapchainSubImage structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader, ##XrFrameEndInfo, ##XrPosef, ##XrSwapchainSubImage, ##XrVector2f, #EndFrame()
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_EQUIRECT_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrCompositionLayerFlags("layerFlags", "specifies options for the layer.")
-    XrSpace("space", "the {@code XrSpace} in which the {@code pose} of the equirect layer is evaluated over time.")
-    XrEyeVisibility("eyeVisibility", "the eye represented by this layer.")
-    XrSwapchainSubImage("subImage", "identifies the image ##XrSwapchainSubImage to use. The swapchain <b>must</b> have been created with a ##XrSwapchainCreateInfo{@code ::faceCount} of 1.")
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the center point of the sphere onto which the equirect image data is mapped, relative to the reference frame of the {@code space}.")
-    float("radius", "the non-negative radius of the sphere onto which the equirect image data is mapped. Values of zero or floating point positive infinity are treated as an infinite sphere.")
-    XrVector2f("scale", "an ##XrVector2f indicating a scale of the texture coordinates after the mapping to 2D.")
-    XrVector2f("bias", "an ##XrVector2f indicating a bias of the texture coordinates after the mapping to 2D.")
+    Expression("#TYPE_COMPOSITION_LAYER_EQUIRECT_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerFlags("layerFlags")
+    XrSpace("space")
+    XrEyeVisibility("eyeVisibility")
+    XrSwapchainSubImage("subImage")
+    XrPosef("pose")
+    float("radius")
+    XrVector2f("scale")
+    XrVector2f("bias")
 }
 
 val XrDebugUtilsObjectNameInfoEXT = struct(Module.OPENXR, "XrDebugUtilsObjectNameInfoEXT") {
-    documentation =
-        """
-        Debug utils object name info.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>If {@code objectType} is #OBJECT_TYPE_UNKNOWN, {@code objectHandle} <b>must</b> not be #NULL_HANDLE</li>
-            <li>If {@code objectType} is not #OBJECT_TYPE_UNKNOWN, {@code objectHandle} <b>must</b> be #NULL_HANDLE or an OpenXR handle of the type associated with {@code objectType}</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTDebugUtils XR_EXT_debug_utils} extension <b>must</b> be enabled prior to using ##XrDebugUtilsObjectNameInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code objectType} <b>must</b> be a valid {@code XrObjectType} value</li>
-            <li>If {@code objectName} is not {@code NULL}, {@code objectName} <b>must</b> be a null-terminated UTF-8 string</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrDebugUtilsMessengerCallbackDataEXT, #SetDebugUtilsObjectNameEXT()
-        """
-
-    Expression("#TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrObjectType("objectType", "an {@code XrObjectType} specifying the type of the object to be named.")
-    uint64_t("objectHandle", "the object to be named.")
-    nullable..charUTF8.const.p("objectName", "a {@code NULL} terminated UTF-8 string specifying the name to apply to objectHandle.")
+    Expression("#TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrObjectType("objectType")
+    uint64_t("objectHandle")
+    nullable..charUTF8.const.p("objectName")
 }
 
 val XrDebugUtilsLabelEXT = struct(Module.OPENXR, "XrDebugUtilsLabelEXT") {
-    documentation =
-        """
-        Debug Utils Label.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTDebugUtils XR_EXT_debug_utils} extension <b>must</b> be enabled prior to using ##XrDebugUtilsLabelEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_DEBUG_UTILS_LABEL_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code labelName} <b>must</b> be a null-terminated UTF-8 string</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrDebugUtilsMessengerCallbackDataEXT, #SessionBeginDebugUtilsLabelRegionEXT(), #SessionInsertDebugUtilsLabelEXT()
-        """
-
-    Expression("#TYPE_DEBUG_UTILS_LABEL_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    charUTF8.const.p("labelName", "a {@code NULL} terminated UTF-8 string specifying the label name.")
+    Expression("#TYPE_DEBUG_UTILS_LABEL_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    charUTF8.const.p("labelName")
 }
 
 val XrDebugUtilsMessengerCallbackDataEXT = struct(Module.OPENXR, "XrDebugUtilsMessengerCallbackDataEXT") {
-    documentation =
-        """
-        Debug utils messenger callback data.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTDebugUtils XR_EXT_debug_utils} extension <b>must</b> be enabled prior to using ##XrDebugUtilsMessengerCallbackDataEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code messageId} is not {@code NULL}, {@code messageId} <b>must</b> be a null-terminated UTF-8 string</li>
-            <li>If {@code functionName} is not {@code NULL}, {@code functionName} <b>must</b> be a null-terminated UTF-8 string</li>
-            <li>{@code message} <b>must</b> be a null-terminated UTF-8 string</li>
-        </ul>
-
-        An ##XrDebugUtilsMessengerCallbackDataEXT is a messenger object that handles passing along debug messages to a provided debug callback.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        This structure should only be considered valid during the lifetime of the triggered callback.
-        </div>
-
-        The labels listed inside {@code sessionLabels} are organized in time order, with the most recently generated label appearing first, and the oldest label appearing last.
-
-        <h5>See Also</h5>
-        ##XrDebugUtilsLabelEXT, ##XrDebugUtilsObjectNameInfoEXT, #SubmitDebugUtilsMessageEXT()
-        """
-
-    Expression("#TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    nullable..charUTF8.const.p("messageId", "a {@code NULL} terminated string that identifies the message in a unique way. If the callback is triggered by a validation layer, this string corresponds the Valid Usage ID (VUID) that can be used to jump to the appropriate location in the OpenXR specification. This value <b>may</b> be {@code NULL} if no unique message identifier is associated with the message.")
-    nullable..charUTF8.const.p("functionName", "a {@code NULL} terminated string that identifies the OpenXR function that was executing at the time the message callback was triggered. This value <b>may</b> be {@code NULL} in cases where it is difficult to determine the originating OpenXR function.")
-    charUTF8.const.p("message", "a {@code NULL} terminated string detailing the trigger conditions.")
-    AutoSize("objects", optional = true)..uint32_t("objectCount", "a count of items contained in the {@code objects} array. This may be 0.")
-    nullable..XrDebugUtilsObjectNameInfoEXT.p("objects", "{@code NULL} or a pointer to an array of ##XrDebugUtilsObjectNameInfoEXT objects related to the detected issue. The array is roughly in order of importance, but the 0th element is always guaranteed to be the most important object for this message.")
-    AutoSize("sessionLabels", optional = true)..uint32_t("sessionLabelCount", "a count of items contained in the {@code sessionLabels} array. This may be 0.")
-    nullable..XrDebugUtilsLabelEXT.p("sessionLabels", "{@code NULL} or a pointer to an array of ##XrDebugUtilsLabelEXT active in the current {@code XrSession} at the time the callback was triggered. Refer to <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#ext_debug_utils-session-labels\">Session Labels</a> for more information.")
+    Expression("#TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    nullable..charUTF8.const.p("messageId")
+    nullable..charUTF8.const.p("functionName")
+    charUTF8.const.p("message")
+    AutoSize("objects", optional = true)..uint32_t("objectCount")
+    nullable..XrDebugUtilsObjectNameInfoEXT.p("objects")
+    AutoSize("sessionLabels", optional = true)..uint32_t("sessionLabelCount")
+    nullable..XrDebugUtilsLabelEXT.p("sessionLabels")
 }
 
 val XrDebugUtilsMessengerCreateInfoEXT = struct(Module.OPENXR, "XrDebugUtilsMessengerCreateInfoEXT") {
-    documentation =
-        """
-        Debug utils messenger create info.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code userCallback} <b>must</b> be a valid PFN_xrDebugUtilsMessengerCallbackEXT</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTDebugUtils XR_EXT_debug_utils} extension <b>must</b> be enabled prior to using ##XrDebugUtilsMessengerCreateInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code messageSeverities} <b>must</b> be a valid combination of {@code XrDebugUtilsMessageSeverityFlagBitsEXT} values</li>
-            <li>{@code messageSeverities} <b>must</b> not be 0</li>
-            <li>{@code messageTypes} <b>must</b> be a valid combination of {@code XrDebugUtilsMessageTypeFlagBitsEXT} values</li>
-            <li>{@code messageTypes} <b>must</b> not be 0</li>
-            <li>{@code userCallback} <b>must</b> be a valid ##XrDebugUtilsMessengerCallbackEXT value</li>
-        </ul>
-
-        For each {@code XrDebugUtilsMessengerEXT} that is created the ##XrDebugUtilsMessengerCreateInfoEXT{@code ::messageSeverities} and ##XrDebugUtilsMessengerCreateInfoEXT{@code ::messageTypes} determine when that ##XrDebugUtilsMessengerCreateInfoEXT{@code ::userCallback} is called. The process to determine if the user’s userCallback is triggered when an event occurs is as follows:
-
-        <ul>
-            <li>The runtime will perform a bitwise AND of the event’s {@code XrDebugUtilsMessageSeverityFlagBitsEXT} with the ##XrDebugUtilsMessengerCreateInfoEXT{@code ::messageSeverities} provided during creation of the {@code XrDebugUtilsMessengerEXT} object.</li>
-            <li>If this results in 0, the message is skipped.</li>
-            <li>The runtime will perform bitwise AND of the event’s {@code XrDebugUtilsMessageTypeFlagBitsEXT} with the ##XrDebugUtilsMessengerCreateInfoEXT{@code ::messageTypes} provided during the creation of the {@code XrDebugUtilsMessengerEXT} object.</li>
-            <li>If this results in 0, the message is skipped.</li>
-            <li>If the message of the current event is not skipped, the callback will be called with the message.</li>
-        </ul>
-
-        The callback will come directly from the component that detected the event, unless some other layer intercepts the calls for its own purposes (filter them in a different way, log to a system error log, etc.).
-
-        <h5>See Also</h5>
-        ##XrDebugUtilsMessengerCallbackEXT, #CreateDebugUtilsMessengerEXT()
-        """
-
-    Expression("#TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrDebugUtilsMessageSeverityFlagsEXT("messageSeverities", "a bitmask of {@code XrDebugUtilsMessageSeverityFlagBitsEXT} specifying which severity of event(s) that will cause this callback to be called.")
-    XrDebugUtilsMessageTypeFlagsEXT("messageTypes", "a combination of {@code XrDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) will cause this callback to be called.")
-    PFN_xrDebugUtilsMessengerCallbackEXT("userCallback", "the application defined callback function to call.")
-    nullable..opaque_p("userData", "arbitrary user data to be passed to the callback.")
+    Expression("#TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrDebugUtilsMessageSeverityFlagsEXT("messageSeverities")
+    XrDebugUtilsMessageTypeFlagsEXT("messageTypes")
+    PFN_xrDebugUtilsMessengerCallbackEXT("userCallback")
+    nullable..opaque_p("userData")
 }
 
 val XrGraphicsBindingOpenGLWin32KHR = struct(Module.OPENXR, "XrGraphicsBindingOpenGLWin32KHR") {
     javaImport("org.lwjgl.system.windows.*")
-    documentation =
-        """
-        The graphics binding structure to be passed at session creation to use OpenGL on Windows.
-
-        <h5>Description</h5>
-        When creating an OpenGL-backed {@code XrSession} on Microsoft Windows, the application will provide a pointer to an ##XrGraphicsBindingOpenGLWin32KHR in the {@code next} chain of the ##XrSessionCreateInfo. As no standardized way exists for OpenGL to create the graphics context on a specific GPU, the runtime <b>must</b> assume that the application uses the operating systems default GPU. If the GPU used by the runtime does not match the GPU on which the OpenGL context of the application got created, #CreateSession() <b>must</b> return #ERROR_GRAPHICS_DEVICE_INVALID.
-
-        The required window system configuration define to expose this structure type is #USE_PLATFORM_WIN32.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsBindingOpenGLWin32KHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code hDC} <b>must</b> be a valid {@code HDC} value</li>
-            <li>{@code hGLRC} <b>must</b> be a valid {@code HGLRC} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSession()
-        """
-
-    Expression("#TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    HDC("hDC", "a valid Windows HW device context handle.")
-    HGLRC("hGLRC", "a valid Windows OpenGL rendering context handle.")
+    Expression("#TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    HDC("hDC")
+    HGLRC("hGLRC")
 }
 
 val XrGraphicsBindingOpenGLXlibKHR = struct(Module.OPENXR, "XrGraphicsBindingOpenGLXlibKHR") {
     javaImport("org.lwjgl.system.linux.*")
     javaImport("org.lwjgl.opengl.*")
-    documentation =
-        """
-        The graphics binding structure to be passed at session creation to use OpenGL on X11 via Xlib.
-
-        <h5>Description</h5>
-        When creating an OpenGL-backed {@code XrSession} on any Linux/Unix platform that utilizes X11 and GLX, via the Xlib library, the application will provide a pointer to an ##XrGraphicsBindingOpenGLXlibKHR in the {@code next} chain of the ##XrSessionCreateInfo.
-
-        The required window system configuration define to expose this structure type is #USE_PLATFORM_XLIB.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsBindingOpenGLXlibKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code xDisplay} <b>must</b> be a pointer to a {@code Display} value</li>
-            <li>{@code glxFBConfig} <b>must</b> be a valid {@code GLXFBConfig} value</li>
-            <li>{@code glxDrawable} <b>must</b> be a valid {@code GLXDrawable} value</li>
-            <li>{@code glxContext} <b>must</b> be a valid {@code GLXContext} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSession()
-        """
-
-    Expression("#TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    Display.p("xDisplay", "a valid X11 {@code Display}.")
-    uint32_t("visualid", "a valid X11 visual identifier.")
-    GLXFBConfig("glxFBConfig", "a valid X11 OpenGL GLX {@code GLXFBConfig}.")
-    GLXDrawable("glxDrawable", "a valid X11 OpenGL GLX {@code GLXDrawable}.")
-    GLXContext("glxContext", "a valid X11 OpenGL GLX {@code GLXContext}.")
+    Expression("#TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    Display.p("xDisplay")
+    uint32_t("visualid")
+    GLXFBConfig("glxFBConfig")
+    GLXDrawable("glxDrawable")
+    GLXContext("glxContext")
 }
 
 val XrGraphicsBindingOpenGLXcbKHR = struct(Module.OPENXR, "XrGraphicsBindingOpenGLXcbKHR") {
-    documentation =
-        """
-        The graphics binding structure to be passed at session creation to use OpenGL on X11 via XCB.
-
-        <h5>Description</h5>
-        When creating an OpenGL-backed {@code XrSession} on any Linux/Unix platform that utilizes X11 and GLX, via the Xlib library, the application will provide a pointer to an ##XrGraphicsBindingOpenGLXcbKHR in the {@code next} chain of the ##XrSessionCreateInfo.
-
-        The required window system configuration define to expose this structure type is #USE_PLATFORM_XCB.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsBindingOpenGLXcbKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code connection} <b>must</b> be a pointer to an {@code xcb_connection_t} value</li>
-            <li>{@code fbconfigid} <b>must</b> be a valid {@code xcb_glx_fbconfig_t} value</li>
-            <li>{@code visualid} <b>must</b> be a valid {@code xcb_visualid_t} value</li>
-            <li>{@code glxDrawable} <b>must</b> be a valid {@code xcb_glx_drawable_t} value</li>
-            <li>{@code glxContext} <b>must</b> be a valid {@code xcb_glx_context_t} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSession()
-        """
-
-    Expression("#TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    xcb_connection_t.p("connection", "a valid {@code xcb_connection_t}.")
-    uint32_t("screenNumber", "an index indicating which screen should be used for rendering.")
-    xcb_glx_fbconfig_t("fbconfigid", "a valid XCB OpenGL GLX {@code xcb_glx_fbconfig_t}.")
-    xcb_visualid_t("visualid", "a valid XCB OpenGL GLX {@code xcb_visualid_t}.")
-    xcb_glx_drawable_t("glxDrawable", "a valid XCB OpenGL GLX {@code xcb_glx_drawable_t}.")
-    xcb_glx_context_t("glxContext", "a valid XCB OpenGL GLX {@code xcb_glx_context_t}.")
+    Expression("#TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    xcb_connection_t.p("connection")
+    uint32_t("screenNumber")
+    xcb_glx_fbconfig_t("fbconfigid")
+    xcb_visualid_t("visualid")
+    xcb_glx_drawable_t("glxDrawable")
+    xcb_glx_context_t("glxContext")
 }
 
 val XrGraphicsBindingOpenGLWaylandKHR = struct(Module.OPENXR, "XrGraphicsBindingOpenGLWaylandKHR") {
-    documentation =
-        """
-        The graphics binding structure to be passed at session creation to use OpenGL on Wayland.
-
-        <h5>Description</h5>
-        When creating an OpenGL-backed {@code XrSession} on any Linux/Unix platform that utilizes the Wayland protocol with its compositor, the application will provide a pointer to an ##XrGraphicsBindingOpenGLWaylandKHR in the {@code next} chain of the ##XrSessionCreateInfo.
-
-        The required window system configuration define to expose this structure type is #USE_PLATFORM_WAYLAND.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsBindingOpenGLWaylandKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code display} <b>must</b> be a pointer to a {@code wl_display} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSession()
-        """
-
-    Expression("#TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    wl_display.p("display", "a valid Wayland {@code wl_display}.")
+    Expression("#TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    wl_display.p("display")
 }
 
 val XrSwapchainImageOpenGLKHR = struct(Module.OPENXR, "XrSwapchainImageOpenGLKHR", mutable = false, parentStruct = XrSwapchainImageBaseHeader) {
-    documentation =
-        """
-        OpenGL-specific swapchain image structure.
-
-        <h5>Description</h5>
-        If a given session was created with a stext:XrGraphicsBindingOpenGL*KHR, the following conditions <b>must</b> apply.
-
-        <ul>
-            <li>Calls to #EnumerateSwapchainImages() on an {@code XrSwapchain} in that session <b>must</b> return an array of ##XrSwapchainImageOpenGLKHR structures.</li>
-            <li>Whenever an OpenXR function accepts an ##XrSwapchainImageBaseHeader pointer as a parameter in that session, the runtime <b>must</b> also accept a pointer to an ##XrSwapchainImageOpenGLKHR.</li>
-        </ul>
-
-        The OpenXR runtime <b>must</b> interpret the bottom-left corner of the swapchain image as the coordinate origin unless specified otherwise by extension functionality.
-
-        The OpenXR runtime <b>must</b> interpret the swapchain images in a clip space of positive Y pointing up, near Z plane at -1, and far Z plane at 1.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using ##XrSwapchainImageOpenGLKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSwapchainImageBaseHeader
-        """
-
-    Expression("#TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    uint32_t("image", "the OpenGL texture handle associated with this swapchain image.")
+    Expression("#TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    uint32_t("image")
 }
 
 val XrGraphicsRequirementsOpenGLKHR = struct(Module.OPENXR, "XrGraphicsRequirementsOpenGLKHR") {
-    documentation =
-        """
-        OpenGL API version requirements.
-
-        <h5>Description</h5>
-        ##XrGraphicsRequirementsOpenGLKHR is populated by #GetOpenGLGraphicsRequirementsKHR() with the runtime’s OpenGL API version requirements.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsRequirementsOpenGLKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetOpenGLGraphicsRequirementsKHR()
-        """
-
-    Expression("#TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVersion("minApiVersionSupported", "the minimum version of OpenGL that the runtime supports. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
-    XrVersion("maxApiVersionSupported", "the maximum version of OpenGL that the runtime has been tested on and is known to support. Newer OpenGL versions might work if they are compatible. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
+    Expression("#TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrVersion("minApiVersionSupported")
+    XrVersion("maxApiVersionSupported")
 }
 
 val XrGraphicsBindingVulkanKHR = struct(Module.OPENXR, "XrGraphicsBindingVulkanKHR") {
     javaImport("org.lwjgl.vulkan.*")
-    documentation =
-        """
-        The graphics binding structure to be passed at session creation to use Vulkan.
-
-        <h5>Description</h5>
-        When creating a Vulkan-backed {@code XrSession}, the application will provide a pointer to an ##XrGraphicsBindingVulkanKHR in the {@code next} chain of the ##XrSessionCreateInfo.
-
-        <h5>Valid Usage</h5>
-        <ul>
-            <li>{@code instance} <b>must</b> have enabled a Vulkan API version in the range specified by ##XrGraphicsBindingVulkanKHR</li>
-            <li>{@code instance} <b>must</b> have enabled all the instance extensions specified by #GetVulkanInstanceExtensionsKHR()</li>
-            <li>{@code physicalDevice} {@code VkPhysicalDevice} <b>must</b> match the device specified by #GetVulkanGraphicsDeviceKHR()</li>
-            <li>{@code device} <b>must</b> have enabled all the device extensions specified by #GetVulkanDeviceExtensionsKHR()</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRVulkanEnable XR_KHR_vulkan_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsBindingVulkanKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_BINDING_VULKAN_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code instance} <b>must</b> be a valid {@code VkInstance} value</li>
-            <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} value</li>
-            <li>{@code device} <b>must</b> be a valid {@code VkDevice} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSession()
-        """
-
-    Expression("#TYPE_GRAPHICS_BINDING_VULKAN_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    VkInstance("instance", "a valid Vulkan {@code VkInstance}.")
-    VkPhysicalDevice("physicalDevice", "a valid Vulkan {@code VkPhysicalDevice}.")
-    VkDevice("device", "a valid Vulkan {@code VkDevice}.")
-    uint32_t("queueFamilyIndex", "a valid queue family index on {@code device}.")
-    uint32_t("queueIndex", "a valid queue index on {@code device} to be used for synchronization.")
+    Expression("#TYPE_GRAPHICS_BINDING_VULKAN_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    VkInstance("instance")
+    VkPhysicalDevice("physicalDevice")
+    VkDevice("device")
+    uint32_t("queueFamilyIndex")
+    uint32_t("queueIndex")
 }
 
 val XrSwapchainImageVulkanKHR = struct(Module.OPENXR, "XrSwapchainImageVulkanKHR", mutable = false, parentStruct = XrSwapchainImageBaseHeader) {
     javaImport("org.lwjgl.vulkan.*")
-    documentation =
-        """
-        Vulkan-specific swapchain image structure.
-
-        <h5>Description</h5>
-        If a given session was created with ##XrGraphicsBindingVulkanKHR, the following conditions <b>must</b> apply.
-
-        <ul>
-            <li>Calls to #EnumerateSwapchainImages() on an {@code XrSwapchain} in that session <b>must</b> return an array of ##XrSwapchainImageVulkanKHR structures.</li>
-            <li>Whenever an OpenXR function accepts an ##XrSwapchainImageBaseHeader pointer as a parameter in that session, the runtime <b>must</b> also accept a pointer to an ##XrSwapchainImageVulkanKHR.</li>
-        </ul>
-
-        The OpenXR runtime <b>must</b> interpret the top-left corner of the swapchain image as the coordinate origin unless specified otherwise by extension functionality.
-
-        The OpenXR runtime <b>must</b> interpret the swapchain images in a clip space of positive Y pointing down, near Z plane at 0, and far Z plane at 1.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRVulkanEnable XR_KHR_vulkan_enable} extension <b>must</b> be enabled prior to using ##XrSwapchainImageVulkanKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSwapchainImageFoveationVulkanFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSwapchainImageBaseHeader
-        """
-
-    Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
+    Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type").mutable()
     PointerSetter(
         "XrSwapchainImageFoveationVulkanFB",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    VkImage("image", "a valid Vulkan {@code VkImage} to use.")
+    )..nullable..opaque_p("next").mutable()
+    VkImage("image")
 }
 
 val XrGraphicsRequirementsVulkanKHR = struct(Module.OPENXR, "XrGraphicsRequirementsVulkanKHR") {
-    documentation =
-        """
-        Vulkan API version requirements.
-
-        <h5>Description</h5>
-        ##XrGraphicsRequirementsVulkanKHR is populated by #GetVulkanGraphicsRequirementsKHR() with the runtime’s Vulkan API version requirements.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRVulkanEnable XR_KHR_vulkan_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsRequirementsVulkanKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetVulkanGraphicsRequirements2KHR(), #GetVulkanGraphicsRequirementsKHR()
-        """
-
-    Expression("#TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVersion("minApiVersionSupported", "the minimum Vulkan Instance API version that the runtime supports. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
-    XrVersion("maxApiVersionSupported", "the maximum Vulkan Instance API version that the runtime has been tested on and is known to support. Newer Vulkan Instance API versions might work if they are compatible. Uses #XR_MAKE_VERSION() on major and minor API version, ignoring any patch version component.")
+    Expression("#TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrVersion("minApiVersionSupported")
+    XrVersion("maxApiVersionSupported")
 }
 
 val XrSystemEyeGazeInteractionPropertiesEXT = struct(Module.OPENXR, "XrSystemEyeGazeInteractionPropertiesEXT", mutable = false) {
-    documentation =
-        """
-        Eye gaze interaction system properties.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTEyeGazeInteraction XR_EXT_eye_gaze_interaction} extension <b>must</b> be enabled prior to using ##XrSystemEyeGazeInteractionPropertiesEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsEyeGazeInteraction", "the runtime <b>must</b> set this value to #TRUE when eye gaze sufficient for use cases such as aiming or targeting is supported by the current device, otherwise the runtime <b>must</b> set this to #FALSE.")
+    Expression("#TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsEyeGazeInteraction")
 }
 
 val XrEyeGazeSampleTimeEXT = struct(Module.OPENXR, "XrEyeGazeSampleTimeEXT") {
-    documentation =
-        """
-        Eye gaze sample time structure.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTEyeGazeInteraction XR_EXT_eye_gaze_interaction} extension <b>must</b> be enabled prior to using ##XrEyeGazeSampleTimeEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_EYE_GAZE_SAMPLE_TIME_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_EYE_GAZE_SAMPLE_TIME_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrTime("time", "when in time the eye gaze pose is expressed.")
+    Expression("#TYPE_EYE_GAZE_SAMPLE_TIME_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrTime("time")
 }
 
 val XrVisibilityMaskKHR = struct(Module.OPENXR, "XrVisibilityMaskKHR") {
-    documentation =
-        """
-        Visibility Mask.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRVisibilityMask XR_KHR_visibility_mask} extension <b>must</b> be enabled prior to using ##XrVisibilityMaskKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_VISIBILITY_MASK_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertices} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector2f structures</li>
-            <li>If {@code indexCapacityInput} is not 0, {@code indices} <b>must</b> be a pointer to an array of {@code indexCapacityInput} {@code uint32_t} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVector2f, #GetVisibilityMaskKHR()
-        """
-
-    Expression("#TYPE_VISIBILITY_MASK_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput", "the capacity of the {@code vertices} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("vertexCountOutput", "filled in by the runtime with the count of vertices written or the required capacity in the case that {@code vertexCapacityInput} or {@code indexCapacityInput} is insufficient.")
-    nullable..XrVector2f.p("vertices", "an array of vertices filled in by the runtime that specifies mask coordinates in the z=-1 plane of the rendered view—​i.e. one meter in front of the view. When rendering the mask for use in a projection layer, these vertices must be transformed by the application’s projection matrix used for the respective ##XrCompositionLayerProjectionView.")
-    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput", "the capacity of the {@code indices} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("indexCountOutput", "filled in by the runtime with the count of indices written or the required capacity in the case that {@code vertexCapacityInput} or {@code indexCapacityInput} is insufficient.")
-    nullable..uint32_t.p("indices", "an array of indices filled in by the runtime, specifying the indices of the mask geometry in the {@code vertices} array.")
+    Expression("#TYPE_VISIBILITY_MASK_KHR")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrVector2f.p("vertices")
+    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput")
+    uint32_t("indexCountOutput")
+    nullable..uint32_t.p("indices")
 }
 
 val XrEventDataVisibilityMaskChangedKHR = struct(Module.OPENXR, "XrEventDataVisibilityMaskChangedKHR", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Visibility Mask.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRVisibilityMask XR_KHR_visibility_mask} extension <b>must</b> be enabled prior to using ##XrEventDataVisibilityMaskChangedKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrSession("session", "the {@code XrSession} for which the view mask has changed.")
-    XrViewConfigurationType("viewConfigurationType", "the view configuration whose mask has changed.")
-    uint32_t("viewIndex", "the individual view within the view configuration to which the change refers.")
+    Expression("#TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrSession("session")
+    XrViewConfigurationType("viewConfigurationType")
+    uint32_t("viewIndex")
 }
 
 val XrSessionCreateInfoOverlayEXTX = struct(Module.OPENXR, "XrSessionCreateInfoOverlayEXTX") {
-    documentation =
-        """
-        Session creation extension struct providing overlay session parameters.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTXOverlay XR_EXTX_overlay} extension <b>must</b> be enabled prior to using ##XrSessionCreateInfoOverlayEXTX</li>
-            <li>{@code type} <b>must</b> be #TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code createFlags} <b>must</b> be 0</li>
-        </ul>
-        """
-
-    Expression("#TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrOverlaySessionCreateFlagsEXTX("createFlags", "0 or one or more {@code XrOverlaySessionCreateFlagBitsEXTX} which indicate various characteristics desired for the overlay session.")
-    uint32_t("sessionLayersPlacement", "a value indicating the desired placement of the session’s composition layers in terms of other sessions.")
+    Expression("#TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrOverlaySessionCreateFlagsEXTX("createFlags")
+    uint32_t("sessionLayersPlacement")
 }
 
 val XrEventDataMainSessionVisibilityChangedEXTX = struct(Module.OPENXR, "XrEventDataMainSessionVisibilityChangedEXTX", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Event representing main session visibility change.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code visible} is an {@code XrBool32} which indicates if the main session is now visible or is not.</li>
-            <li>{@code flags} is 0 or one or more {@code XrOverlayMainSessionFlagBitsEXTX} which indicates various state information for the main session.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTXOverlay XR_EXTX_overlay} extension <b>must</b> be enabled prior to using ##XrEventDataMainSessionVisibilityChangedEXTX</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX")..XrStructureType("type", "").mutable()
-    nullable..opaque_const_p("next", "").mutable()
-    XrBool32("visible", "")
-    XrOverlayMainSessionFlagsEXTX("flags", "")
+    Expression("#TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrBool32("visible")
+    XrOverlayMainSessionFlagsEXTX("flags")
 }
 
 val XrCompositionLayerColorScaleBiasKHR = struct(Module.OPENXR, "XrCompositionLayerColorScaleBiasKHR") {
-    documentation =
-        """
-        defines color scale and bias for layer textures.
-
-        <h5>Description</h5>
-        ##XrCompositionLayerColorScaleBiasKHR contains the information needed to scale and bias the color of layer textures.
-
-        The ##XrCompositionLayerColorScaleBiasKHR structure <b>can</b> be applied by applications to composition layers by adding an instance of the struct to the ##XrCompositionLayerBaseHeader{@code ::next} list.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRCompositionLayerColorScaleBias XR_KHR_composition_layer_color_scale_bias} extension <b>must</b> be enabled prior to using ##XrCompositionLayerColorScaleBiasKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrColor4f, ##XrCompositionLayerBaseHeader
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrColor4f("colorScale", "an ##XrColor4f which will modulate the color sourced from the images.")
-    XrColor4f("colorBias", "an ##XrColor4f which will offset the color sourced from the images.")
+    Expression("#TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrColor4f("colorScale")
+    XrColor4f("colorBias")
 }
 
 val XrSpatialAnchorCreateInfoMSFT = struct(Module.OPENXR, "XrSpatialAnchorCreateInfoMSFT") {
-    documentation =
-        """
-        Information to create a spatial anchor.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSpatialAnchor XR_MSFT_spatial_anchor} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorCreateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateSpatialAnchorMSFT()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("space", "a handle to the {@code XrSpace} in which {@code pose} is specified.")
-    XrPosef("pose", "the ##XrPosef within {@code space} at {@code time} that specifies the point in the real world used to initialize the new anchor.")
-    XrTime("time", "the {@code XrTime} at which {@code pose} will be evaluated within {@code space}.")
+    Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("space")
+    XrPosef("pose")
+    XrTime("time")
 }
 
 val XrSpatialAnchorSpaceCreateInfoMSFT = struct(Module.OPENXR, "XrSpatialAnchorSpaceCreateInfoMSFT") {
-    documentation =
-        """
-        Information to create a space from a spatial anchor.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSpatialAnchor XR_MSFT_spatial_anchor} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorSpaceCreateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHOR_SPACE_CREATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code anchor} <b>must</b> be a valid {@code XrSpatialAnchorMSFT} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateSpatialAnchorSpaceMSFT()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHOR_SPACE_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpatialAnchorMSFT("anchor", "a handle to an {@code XrSpatialAnchorMSFT} previously created with #CreateSpatialAnchorMSFT().")
-    XrPosef("poseInAnchorSpace", "an ##XrPosef defining the position and orientation of the new space’s origin relative to the anchor’s natural origin.")
+    Expression("#TYPE_SPATIAL_ANCHOR_SPACE_CREATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialAnchorMSFT("anchor")
+    XrPosef("poseInAnchorSpace")
 }
 
 val XrCompositionLayerImageLayoutFB = struct(Module.OPENXR, "XrCompositionLayerImageLayoutFB") {
-    documentation =
-        """
-        specifies image layout for composition layers.
-
-        <h5>Description</h5>
-        ##XrCompositionLayerImageLayoutFB contains additional flags used to change the interpretation of the image layout for a composition layer.
-
-        To specify the additional flags, you <b>must</b> create a ##XrCompositionLayerImageLayoutFB structure and pass it via the ##XrCompositionLayerBaseHeader structure’s {@code next} parameter.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBCompositionLayerImageLayout XR_FB_composition_layer_image_layout} extension <b>must</b> be enabled prior to using ##XrCompositionLayerImageLayoutFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerImageLayoutFlagBitsFB} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrCompositionLayerImageLayoutFlagsFB("flags", "a bitmask of {@code XrCompositionLayerImageLayoutFlagBitsFB}.")
+    Expression("#TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrCompositionLayerImageLayoutFlagsFB("flags")
 }
 
 val XrCompositionLayerAlphaBlendFB = struct(Module.OPENXR, "XrCompositionLayerAlphaBlendFB") {
-    documentation =
-        """
-        specifies blend factors for composition layers.
-
-        <h5>Description</h5>
-        ##XrCompositionLayerAlphaBlendFB provides applications with explicit control over source and destination blend factors.
-
-        The ##XrCompositionLayerAlphaBlendFB structure <b>must</b> be provided in the {@code next} chain of the ##XrCompositionLayerBaseHeader structure.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBCompositionLayerAlphaBlend XR_FB_composition_layer_alpha_blend} extension <b>must</b> be enabled prior to using ##XrCompositionLayerAlphaBlendFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code srcFactorColor} <b>must</b> be a valid {@code XrBlendFactorFB} value</li>
-            <li>{@code dstFactorColor} <b>must</b> be a valid {@code XrBlendFactorFB} value</li>
-            <li>{@code srcFactorAlpha} <b>must</b> be a valid {@code XrBlendFactorFB} value</li>
-            <li>{@code dstFactorAlpha} <b>must</b> be a valid {@code XrBlendFactorFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrBlendFactorFB("srcFactorColor", "specifies the source color blend factor.")
-    XrBlendFactorFB("dstFactorColor", "specifies the destination color blend factor.")
-    XrBlendFactorFB("srcFactorAlpha", "specifies the source alpha blend factor.")
-    XrBlendFactorFB("dstFactorAlpha", "specifies the destination alpha blend factor.")
+    Expression("#TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrBlendFactorFB("srcFactorColor")
+    XrBlendFactorFB("dstFactorColor")
+    XrBlendFactorFB("srcFactorAlpha")
+    XrBlendFactorFB("dstFactorAlpha")
 }
 
 val XrViewConfigurationDepthRangeEXT = struct(Module.OPENXR, "XrViewConfigurationDepthRangeEXT") {
-    documentation =
-        """
-        View configuration depth range information.
-
-        <h5>Description</h5>
-        When enumerating the view configurations with #EnumerateViewConfigurationViews(), the application <b>can</b> provide a pointer to an ##XrViewConfigurationDepthRangeEXT in the {@code next} chain of ##XrViewConfigurationView.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTViewConfigurationDepthRange XR_EXT_view_configuration_depth_range} extension <b>must</b> be enabled prior to using ##XrViewConfigurationDepthRangeEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrViewConfigurationView, #EnumerateViewConfigurationViews()
-        """
-
-    Expression("#TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    float("recommendedNearZ", "the recommended minimum positive distance in meters that content should be rendered for the view to achieve the best user experience.")
-    float("minNearZ", "the absolute minimum positive distance in meters that content should be rendered for the view.")
-    float("recommendedFarZ", "the recommended maximum positive distance in meters that content should be rendered for the view to achieve the best user experience.")
-    float("maxFarZ", "the absolute maximum positive distance in meters that content should be rendered for the view.")
+    Expression("#TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    float("recommendedNearZ")
+    float("minNearZ")
+    float("recommendedFarZ")
+    float("maxFarZ")
 }
 
 val XrGraphicsBindingEGLMNDX = struct(Module.OPENXR, "XrGraphicsBindingEGLMNDX") {
     javaImport("org.lwjgl.egl.*")
-    documentation =
-        """
-        The graphics binding structure to be passed at session creation to EGL.
-
-        <h5>Description</h5>
-        When creating an EGL based {@code XrSession}, the application will provide a pointer to an ##XrGraphicsBindingEGLMNDX structure in the {@code next} chain of the ##XrSessionCreateInfo.
-
-        The required window system configuration define to expose this structure type is #USE_PLATFORM_EGL.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MNDXEGLEnable XR_MNDX_egl_enable} extension <b>must</b> be enabled prior to using ##XrGraphicsBindingEGLMNDX</li>
-            <li>{@code type} <b>must</b> be #TYPE_GRAPHICS_BINDING_EGL_MNDX</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code getProcAddress} <b>must</b> be a valid {@code PFN_xrEglGetProcAddressMNDX} value</li>
-            <li>{@code display} <b>must</b> be a valid {@code EGLDisplay} value</li>
-            <li>{@code config} <b>must</b> be a valid {@code EGLConfig} value</li>
-            <li>{@code context} <b>must</b> be a valid {@code EGLContext} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSession()
-        """
-
-    Expression("#TYPE_GRAPHICS_BINDING_EGL_MNDX")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    PFN_xrEglGetProcAddressMNDX("getProcAddress", "a valid function pointer to {@code eglGetProcAddress}.")
-    EGLDisplay("display", "a valid EGL {@code EGLDisplay}.")
-    EGLConfig("config", "a valid EGL {@code EGLConfig}.")
-    EGLContext("context", "a valid EGL {@code EGLContext}.")
+    Expression("#TYPE_GRAPHICS_BINDING_EGL_MNDX")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    PFN_xrEglGetProcAddressMNDX("getProcAddress")
+    EGLDisplay("display")
+    EGLConfig("config")
+    EGLContext("context")
 }
 
 val XrSpatialGraphNodeSpaceCreateInfoMSFT = struct(Module.OPENXR, "XrSpatialGraphNodeSpaceCreateInfoMSFT") {
     javaImport("static org.lwjgl.openxr.MSFTSpatialGraphBridge.*")
-    documentation =
-        """
-        The information to create space from a spatial graph node.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSpatialGraphBridge XR_MSFT_spatial_graph_bridge} extension <b>must</b> be enabled prior to using ##XrSpatialGraphNodeSpaceCreateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code nodeType} <b>must</b> be a valid {@code XrSpatialGraphNodeTypeMSFT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateSpatialGraphNodeSpaceMSFT()
-        """
-
-    Expression("#TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpatialGraphNodeTypeMSFT("nodeType", "an {@code XrSpatialGraphNodeTypeMSFT} specifying the spatial node type.")
-    uint8_t("nodeId", "a global unique identifier (a.k.a. GUID or 16 byte array), representing the spatial node that is being tracked.")["XR_GUID_SIZE_MSFT"]
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the new space’s origin within the natural reference frame of the spatial graph node.")
+    Expression("#TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialGraphNodeTypeMSFT("nodeType")
+    uint8_t("nodeId")["XR_GUID_SIZE_MSFT"]
+    XrPosef("pose")
 }
 
 val XrSpatialGraphStaticNodeBindingCreateInfoMSFT = struct(Module.OPENXR, "XrSpatialGraphStaticNodeBindingCreateInfoMSFT") {
-    documentation =
-        """
-        The information to create a spatial graph static node binding handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSpatialGraphBridge XR_MSFT_spatial_graph_bridge} extension <b>must</b> be enabled prior to using ##XrSpatialGraphStaticNodeBindingCreateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_GRAPH_STATIC_NODE_BINDING_CREATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #TryCreateSpatialGraphStaticNodeBindingMSFT()
-        """
-
-    Expression("#TYPE_SPATIAL_GRAPH_STATIC_NODE_BINDING_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSpace("space", "a handle to the {@code XrSpace} in which {@code poseInSpace} is specified.")
-    XrPosef("poseInSpace", "the ##XrPosef within {@code space} at {@code time}.")
-    XrTime("time", "the {@code XrTime} at which {@code poseInSpace} will be evaluated within {@code space}.")
+    Expression("#TYPE_SPATIAL_GRAPH_STATIC_NODE_BINDING_CREATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("space")
+    XrPosef("poseInSpace")
+    XrTime("time")
 }
 
 val XrSpatialGraphNodeBindingPropertiesGetInfoMSFT = struct(Module.OPENXR, "XrSpatialGraphNodeBindingPropertiesGetInfoMSFT") {
-    documentation =
-        """
-        The information to get node binding properties.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSpatialGraphBridge XR_MSFT_spatial_graph_bridge} extension <b>must</b> be enabled prior to using ##XrSpatialGraphNodeBindingPropertiesGetInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_GET_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSpatialGraphNodeBindingPropertiesMSFT()
-        """
-
-    Expression("#TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_GET_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    Expression("#TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_GET_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrSpatialGraphNodeBindingPropertiesMSFT = struct(Module.OPENXR, "XrSpatialGraphNodeBindingPropertiesMSFT") {
     javaImport("static org.lwjgl.openxr.MSFTSpatialGraphBridge.*")
-    documentation =
-        """
-        The spatial graph node binding properties.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSpatialGraphBridge XR_MSFT_spatial_graph_bridge} extension <b>must</b> be enabled prior to using ##XrSpatialGraphNodeBindingPropertiesMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #GetSpatialGraphNodeBindingPropertiesMSFT()
-        """
-
-    Expression("#TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    uint8_t("nodeId", "a global unique identifier (a.k.a. GUID or 16 byte array), representing the spatial graph node.")["XR_GUID_SIZE_MSFT"]
-    XrPosef("poseInNodeSpace", "an ##XrPosef defining the pose in the underlying node’s space.")
+    Expression("#TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    uint8_t("nodeId")["XR_GUID_SIZE_MSFT"]
+    XrPosef("poseInNodeSpace")
 }
 
 val XrSystemHandTrackingPropertiesEXT = struct(Module.OPENXR, "XrSystemHandTrackingPropertiesEXT", mutable = false) {
-    documentation =
-        """
-        System property for hand tracking.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using ##XrSystemHandTrackingPropertiesEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        If a runtime returns #FALSE for {@code supportsHandTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateHandTrackerEXT().
-        """
-
-    Expression("#TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsHandTracking", "an {@code XrBool32}, indicating if current system is capable of hand tracking input.")
+    Expression("#TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsHandTracking")
 }
 
 val XrHandTrackerCreateInfoEXT = struct(Module.OPENXR, "XrHandTrackerCreateInfoEXT") {
-    documentation =
-        """
-        Information to create a hand joints handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using ##XrHandTrackerCreateInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_TRACKER_CREATE_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrHandPoseTypeInfoMSFT, ##XrHandTrackingDataSourceInfoEXT</li>
-            <li>{@code hand} <b>must</b> be a valid {@code XrHandEXT} value</li>
-            <li>{@code handJointSet} <b>must</b> be a valid {@code XrHandJointSetEXT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateHandTrackerEXT()
-        """
-
-    Expression("#TYPE_HAND_TRACKER_CREATE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_HAND_TRACKER_CREATE_INFO_EXT")..XrStructureType("type")
     PointerSetter(
         "XrHandPoseTypeInfoMSFT", "XrHandTrackingDataSourceInfoEXT",
         prepend = true
-    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrHandEXT("hand", "an {@code XrHandEXT} which describes which hand the tracker is tracking.")
-    XrHandJointSetEXT("handJointSet", "an {@code XrHandJointSetEXT} describe the set of hand joints to retrieve.")
+    )..nullable..opaque_const_p("next")
+    XrHandEXT("hand")
+    XrHandJointSetEXT("handJointSet")
 }
 
 val XrHandJointsLocateInfoEXT = struct(Module.OPENXR, "XrHandJointsLocateInfoEXT") {
-    documentation =
-        """
-        Describes the information to locate hand joints.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using ##XrHandJointsLocateInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_JOINTS_LOCATE_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrHandJointsMotionRangeInfoEXT</li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #LocateHandJointsEXT()
-        """
-
-    Expression("#TYPE_HAND_JOINTS_LOCATE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_HAND_JOINTS_LOCATE_INFO_EXT")..XrStructureType("type")
     PointerSetter(
         "XrHandJointsMotionRangeInfoEXT",
         prepend = true
-    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("baseSpace", "an {@code XrSpace} within which the returned hand joint locations will be represented.")
-    XrTime("time", "an {@code XrTime} at which to locate the hand joints.")
+    )..nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
 }
 
 val XrHandJointLocationEXT = struct(Module.OPENXR, "XrHandJointLocationEXT") {
-    documentation =
-        """
-        Describes the location and radius of a hand joint.
-
-        <h5>Description</h5>
-        If the returned {@code locationFlags} has #SPACE_LOCATION_POSITION_VALID_BIT set, the returned radius <b>must</b> be a positive value.
-
-        If the returned {@code locationFlags} has #SPACE_LOCATION_POSITION_VALID_BIT unset, the returned radius value is undefined and should be avoided.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using ##XrHandJointLocationEXT</li>
-            <li>{@code locationFlags} <b>must</b> be 0 or a valid combination of {@code XrSpaceLocationFlagBits} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandJointLocationsEXT, ##XrPosef
-        """
-
-    XrSpaceLocationFlags("locationFlags", "a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data. If none of the bits are set, no other fields in this structure <b>should</b> be considered to be valid or meaningful.")
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the origin of a hand joint within the reference frame of the corresponding ##XrHandJointsLocateInfoEXT{@code ::baseSpace}.")
-    float("radius", "a {@code float} value radius of the corresponding joint in units of meters.")
+    XrSpaceLocationFlags("locationFlags")
+    XrPosef("pose")
+    float("radius")
 }
 
 val XrHandJointVelocityEXT = struct(Module.OPENXR, "XrHandJointVelocityEXT") {
-    documentation =
-        """
-        Describes the velocity of a hand joint.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using ##XrHandJointVelocityEXT</li>
-            <li>{@code velocityFlags} <b>must</b> be a valid combination of {@code XrSpaceVelocityFlagBits} values</li>
-            <li>{@code velocityFlags} <b>must</b> not be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandJointVelocitiesEXT, ##XrVector3f
-        """
-
-    XrSpaceVelocityFlags("velocityFlags", "a bitfield, with bit masks defined in {@code XrSpaceVelocityFlagBits}, to indicate which members contain valid data. If none of the bits are set, no other fields in this structure <b>should</b> be considered to be valid or meaningful.")
-    XrVector3f("linearVelocity", "the relative linear velocity of the hand joint with respect to and expressed in the reference frame of the corresponding ##XrHandJointsLocateInfoEXT{@code ::baseSpace}, in units of meters per second.")
-    XrVector3f("angularVelocity", "the relative angular velocity of the hand joint with respect to the corresponding ##XrHandJointsLocateInfoEXT{@code ::baseSpace}. The vector’s direction is expressed in the reference frame of the corresponding ##XrHandJointsLocateInfoEXT{@code ::baseSpace} and is parallel to the rotational axis of the hand joint. The vector’s magnitude is the relative angular speed of the hand joint in radians per second. The vector follows the right-hand rule for torque/rotation.")
+    XrSpaceVelocityFlags("velocityFlags")
+    XrVector3f("linearVelocity")
+    XrVector3f("angularVelocity")
 }
 
 val XrHandJointLocationsEXT = struct(Module.OPENXR, "XrHandJointLocationsEXT") {
-    documentation =
-        """
-        Returns the hand joint locations.
-
-        <h5>Description</h5>
-        The application <b>must</b> allocate the memory for the output array {@code jointLocations} that can contain at least {@code jointCount} of ##XrHandJointLocationEXT.
-
-        The application <b>must</b> set {@code jointCount} as described by the {@code XrHandJointSetEXT} when creating the {@code XrHandTrackerEXT} otherwise the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
-
-        The runtime <b>must</b> return {@code jointLocations} representing the range of motion of a human hand, without any obstructions. Input systems that obstruct the movement of the user’s hand (e.g.: a held controller preventing the user from making a fist) or that have only limited ability to track finger positions <b>must</b> use the information available to them to emulate an unobstructed range of motion.
-
-        The runtime <b>must</b> update the {@code jointLocations} array ordered so that the application can index elements using the corresponding hand joint enum (e.g. {@code XrHandJointEXT}) as described by {@code XrHandJointSetEXT} when creating the {@code XrHandTrackerEXT}. For example, when the {@code XrHandTrackerEXT} is created with #HAND_JOINT_SET_DEFAULT_EXT, the application <b>must</b> set the {@code jointCount} to #HAND_JOINT_COUNT_EXT, and the runtime <b>must</b> fill the {@code jointLocations} array ordered so that it may be indexed by the {@code XrHandJointEXT} enum.
-
-        If the returned {@code isActive} is true, the runtime <b>must</b> return all joint locations with both #SPACE_LOCATION_POSITION_VALID_BIT and #SPACE_LOCATION_ORIENTATION_VALID_BIT set. Although, in this case, some joint space locations <b>may</b> be untracked (i.e. #SPACE_LOCATION_POSITION_TRACKED_BIT or #SPACE_LOCATION_ORIENTATION_TRACKED_BIT is unset).
-
-        If the returned {@code isActive} is false, it indicates the hand tracker did not detect the hand input or the application lost input focus. In this case, the runtime <b>must</b> return all {@code jointLocations} with neither #SPACE_LOCATION_POSITION_VALID_BIT nor #SPACE_LOCATION_ORIENTATION_VALID_BIT set.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using ##XrHandJointLocationsEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_JOINT_LOCATIONS_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrHandJointVelocitiesEXT, ##XrHandTrackingAimStateFB, ##XrHandTrackingCapsulesStateFB, ##XrHandTrackingDataSourceStateEXT, ##XrHandTrackingScaleFB</li>
-            <li>{@code jointLocations} <b>must</b> be a pointer to an array of {@code jointCount} ##XrHandJointLocationEXT structures</li>
-            <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandJointLocationEXT, #LocateHandJointsEXT()
-        """
-
-    Expression("#TYPE_HAND_JOINT_LOCATIONS_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_HAND_JOINT_LOCATIONS_EXT")..XrStructureType("type")
     PointerSetter(
         "XrHandJointVelocitiesEXT", "XrHandTrackingAimStateFB", "XrHandTrackingCapsulesStateFB", "XrHandTrackingDataSourceStateEXT", "XrHandTrackingScaleFB",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain, such as ##XrHandJointVelocitiesEXT.")
-    XrBool32("isActive", "an {@code XrBool32} indicating if the hand tracker is actively tracking.")
-    AutoSize("jointLocations")..uint32_t("jointCount", "a {@code uint32_t} describing the count of elements in {@code jointLocations} array.")
-    XrHandJointLocationEXT.p("jointLocations", "an array of ##XrHandJointLocationEXT receiving the returned hand joint locations.")
+    )..nullable..opaque_p("next")
+    XrBool32("isActive")
+    AutoSize("jointLocations")..uint32_t("jointCount")
+    XrHandJointLocationEXT.p("jointLocations")
 }
 
 val XrHandJointVelocitiesEXT = struct(Module.OPENXR, "XrHandJointVelocitiesEXT") {
-    documentation =
-        """
-        Returns the hand joint velocities.
-
-        <h5>Description</h5>
-        The application <b>must</b> allocate the memory for the output array {@code jointVelocities} that can contain at least {@code jointCount} of ##XrHandJointVelocityEXT.
-
-        The application <b>must</b> input {@code jointCount} as described by the {@code XrHandJointSetEXT} when creating the {@code XrHandTrackerEXT}. Otherwise, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
-
-        The runtime <b>must</b> update the {@code jointVelocities} array in the order so that the application can index elements using the corresponding hand joint enum (e.g. {@code XrHandJointEXT}) as described by the {@code XrHandJointSetEXT} when creating the {@code XrHandTrackerEXT}. For example, when the {@code XrHandTrackerEXT} is created with #HAND_JOINT_SET_DEFAULT_EXT, the application <b>must</b> set the {@code jointCount} to #HAND_JOINT_COUNT_EXT, and the returned {@code jointVelocities} array <b>must</b> be ordered to be indexed by enum {@code XrHandJointEXT} enum.
-
-        If the returned ##XrHandJointLocationsEXT{@code ::isActive} is false, it indicates the hand tracker did not detect a hand input or the application lost input focus. In this case, the runtime <b>must</b> return all {@code jointVelocities} with neither #SPACE_VELOCITY_LINEAR_VALID_BIT nor #SPACE_VELOCITY_ANGULAR_VALID_BIT set.
-
-        If an ##XrHandJointVelocitiesEXT structure is chained to ##XrHandJointLocationsEXT{@code ::next}, the returned ##XrHandJointLocationsEXT{@code ::isActive} is true, and the velocity is observed or can be calculated by the runtime, the runtime <b>must</b> fill in the linear velocity of each hand joint within the reference frame of ##XrHandJointsLocateInfoEXT{@code ::baseSpace} and set the #SPACE_VELOCITY_LINEAR_VALID_BIT. Similarly, if an ##XrHandJointVelocitiesEXT structure is chained to ##XrHandJointLocationsEXT{@code ::next}, the returned ##XrHandJointLocationsEXT{@code ::isActive} is true, and the <em>angular velocity</em> is observed or can be calculated by the runtime, the runtime <b>must</b> fill in the angular velocity of each joint within the reference frame of ##XrHandJointsLocateInfoEXT{@code ::baseSpace} and set the #SPACE_VELOCITY_ANGULAR_VALID_BIT.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using ##XrHandJointVelocitiesEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_JOINT_VELOCITIES_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code jointVelocities} <b>must</b> be a pointer to an array of {@code jointCount} ##XrHandJointVelocityEXT structures</li>
-            <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandJointLocationsEXT, ##XrHandJointVelocityEXT
-        """
-
-    Expression("#TYPE_HAND_JOINT_VELOCITIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("jointVelocities")..uint32_t("jointCount", "a {@code uint32_t} describing the number of elements in {@code jointVelocities} array.")
-    XrHandJointVelocityEXT.p("jointVelocities", "an array of ##XrHandJointVelocityEXT receiving the returned hand joint velocities.")
+    Expression("#TYPE_HAND_JOINT_VELOCITIES_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("jointVelocities")..uint32_t("jointCount")
+    XrHandJointVelocityEXT.p("jointVelocities")
 }
 
 val XrSystemHandTrackingMeshPropertiesMSFT = struct(Module.OPENXR, "XrSystemHandTrackingMeshPropertiesMSFT", mutable = false) {
-    documentation =
-        """
-        System property for hand tracking mesh.
-
-        <h5>Description</h5>
-        If a runtime returns #FALSE for {@code supportsHandTrackingMesh}, the system does not support hand tracking mesh input, and therefore <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateHandMeshSpaceMSFT() and #UpdateHandMeshMSFT(). The application <b>should</b> avoid using hand mesh functionality when {@code supportsHandTrackingMesh} is #FALSE.
-
-        If a runtime returns #TRUE for {@code supportsHandTrackingMesh}, the system supports hand tracking mesh input. In this case, the runtime <b>must</b> return a positive number for {@code maxHandMeshIndexCount} and {@code maxHandMeshVertexCount}. An application <b>should</b> use {@code maxHandMeshIndexCount} and {@code maxHandMeshVertexCount} to preallocate hand mesh buffers and reuse them in their render loop when calling #UpdateHandMeshMSFT() every frame.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrSystemHandTrackingMeshPropertiesMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties, #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsHandTrackingMesh", "an {@code XrBool32}, indicating if current system is capable of hand tracking mesh input.")
-    uint32_t("maxHandMeshIndexCount", "a {@code uint32_t} returns the maximum count of indices that will be returned from the hand tracker.")
-    uint32_t("maxHandMeshVertexCount", "a {@code uint32_t} returns the maximum count of vertices that will be returned from the hand tracker.")
+    Expression("#TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsHandTrackingMesh")
+    uint32_t("maxHandMeshIndexCount")
+    uint32_t("maxHandMeshVertexCount")
 }
 
 val XrHandMeshSpaceCreateInfoMSFT = struct(Module.OPENXR, "XrHandMeshSpaceCreateInfoMSFT") {
-    documentation =
-        """
-        The information to create a hand mesh space.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandMeshSpaceCreateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code handPoseType} <b>must</b> be a valid {@code XrHandPoseTypeMSFT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateHandMeshSpaceMSFT()
-        """
-
-    Expression("#TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrHandPoseTypeMSFT("handPoseType", "an {@code XrHandPoseTypeMSFT} used to specify the type of hand this mesh is tracking. Indices and vertices returned from #UpdateHandMeshMSFT() for a hand type will be relative to the corresponding space create with the same hand type.")
-    XrPosef("poseInHandMeshSpace", "an ##XrPosef defining the position and orientation of the new space’s origin within the natural reference frame of the hand mesh space.")
+    Expression("#TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrHandPoseTypeMSFT("handPoseType")
+    XrPosef("poseInHandMeshSpace")
 }
 
 val XrHandMeshUpdateInfoMSFT = struct(Module.OPENXR, "XrHandMeshUpdateInfoMSFT") {
-    documentation =
-        """
-        The information to update a hand mesh.
-
-        <h5>Description</h5>
-        A runtime <b>may</b> not maintain a full history of hand mesh data, therefore the returned ##XrHandMeshMSFT might return data that’s not exactly corresponding to the {@code time} input. If the runtime cannot return any tracking data for the given {@code time} at all, it <b>must</b> set ##XrHandMeshMSFT{@code ::isActive} to #FALSE for the call to #UpdateHandMeshMSFT(). Otherwise, if the runtime returns ##XrHandMeshMSFT{@code ::isActive} as #TRUE, the data in ##XrHandMeshMSFT must be valid to use.
-
-        An application can choose different {@code handPoseType} values to query the hand mesh data. The returned hand mesh <b>must</b> be consistent to the hand joint space location on the same {@code XrHandTrackerEXT} when using the same {@code XrHandPoseTypeMSFT}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandMeshUpdateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_MESH_UPDATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code handPoseType} <b>must</b> be a valid {@code XrHandPoseTypeMSFT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #UpdateHandMeshMSFT()
-        """
-
-    Expression("#TYPE_HAND_MESH_UPDATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrTime("time", "the {@code XrTime} that describes the time for which the application wishes to query the hand mesh state.")
-    XrHandPoseTypeMSFT("handPoseType", "an {@code XrHandPoseTypeMSFT} which describes the type of hand pose of the hand mesh to update.")
+    Expression("#TYPE_HAND_MESH_UPDATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrTime("time")
+    XrHandPoseTypeMSFT("handPoseType")
 }
 
 val XrHandMeshIndexBufferMSFT = struct(Module.OPENXR, "XrHandMeshIndexBufferMSFT") {
-    documentation =
-        """
-        The index buffer of a hand mesh.
-
-        <h5>Description</h5>
-        An application <b>should</b> preallocate the indices array using the ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshIndexCount} returned from #GetSystemProperties(). In this way, the application can avoid possible insufficient buffer sizees for each query, and therefore avoid reallocating memory each frame.
-
-        The input {@code indexCapacityInput} <b>must</b> not be 0, and {@code indices} <b>must</b> not be {@code NULL}, or else the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE on calls to the #UpdateHandMeshMSFT() function.
-
-        If the input {@code indexCapacityInput} is not sufficient to contain all output indices, the runtime <b>must</b> return #ERROR_SIZE_INSUFFICIENT on calls to #UpdateHandMeshMSFT(), not change the content in {@code indexBufferKey} and {@code indices}, and return 0 for {@code indexCountOutput}.
-
-        If the input {@code indexCapacityInput} is equal to or larger than the ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshIndexCount} returned from #GetSystemProperties(), the runtime <b>must</b> not return #ERROR_SIZE_INSUFFICIENT error on #UpdateHandMeshMSFT() because of insufficient index buffer size.
-
-        If the input {@code indexBufferKey} is 0, the capacity of indices array is sufficient, and hand mesh tracking is active, the runtime <b>must</b> return the latest non-zero {@code indexBufferKey}, and fill in {@code indexCountOutput} and {@code indices}.
-
-        If the input {@code indexBufferKey} is not 0, the runtime <b>can</b> either return without changing {@code indexCountOutput} or content in {@code indices}, and return #FALSE for ##XrHandMeshMSFT{@code ::indexBufferChanged} indicating the indices are not changed; or return a new non-zero {@code indexBufferKey} and fill in latest data in {@code indexCountOutput} and {@code indices}, and return #TRUE for ##XrHandMeshMSFT{@code ::indexBufferChanged} indicating the indices are updated to a newer version.
-
-        An application <b>can</b> keep the ##XrHandMeshIndexBufferMSFT structure for each frame in a frame loop and use the returned {@code indexBufferKey} to identify different triangle list topology described in {@code indices}. The application can therefore avoid unnecessary processing of indices, such as coping them to GPU memory.
-
-        The runtime <b>must</b> return the same {@code indexBufferKey} for the same {@code XrHandTrackerEXT} at a given time, regardless of the input {@code XrHandPoseTypeMSFT} in ##XrHandMeshUpdateInfoMSFT. This ensures the index buffer has the same mesh topology and allows the application to reason about vertices across different hand pose types. For example, the application <b>can</b> build a procedure to perform UV mapping on vertices of a hand mesh using #HAND_POSE_TYPE_REFERENCE_OPEN_PALM_MSFT, and apply the resultant UV data on vertices to the mesh returned from the same hand tracker using #HAND_POSE_TYPE_TRACKED_MSFT.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandMeshIndexBufferMSFT</li>
-            <li>If {@code indexCapacityInput} is not 0, {@code indices} <b>must</b> be a pointer to an array of {@code indexCapacityInput} {@code uint32_t} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandMeshMSFT, ##XrSystemHandTrackingMeshPropertiesMSFT, #UpdateHandMeshMSFT()
-        """
-
-    uint32_t("indexBufferKey", "a {@code uint32_t} serving as the key of the returned index buffer content or 0 to indicate a request to retrieve the latest indices regardless of existing content in {@code indices}.")
-    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput", "a positive {@code uint32_t} describes the capacity of the {@code indices} array.")
-    uint32_t("indexCountOutput", "a {@code uint32_t} returned by the runtime with the count of indices written in {@code indices}.")
-    nullable..uint32_t.p("indices", "an array of indices filled in by the runtime, specifying the indices of the triangles list in the vertex buffer.")
+    uint32_t("indexBufferKey")
+    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput")
+    uint32_t("indexCountOutput")
+    nullable..uint32_t.p("indices")
 }
 
 val XrHandMeshVertexMSFT = struct(Module.OPENXR, "XrHandMeshVertexMSFT") {
-    documentation =
-        """
-        The vertex of hand mesh.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandMeshVertexMSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandMeshVertexBufferMSFT, ##XrVector3f, #UpdateHandMeshMSFT()
-        """
-
-    XrVector3f("position", "an ##XrVector3f structure representing the position of the vertex in the hand mesh space, measured in meters.")
-    XrVector3f("normal", "an ##XrVector3f structure representing the unweighted normal of the triangle surface at the vertex as a unit vector in hand mesh space.")
+    XrVector3f("position")
+    XrVector3f("normal")
 }
 
 val XrHandMeshVertexBufferMSFT = struct(Module.OPENXR, "XrHandMeshVertexBufferMSFT") {
-    documentation =
-        """
-        The vertex buffer of a hand mesh.
-
-        <h5>Description</h5>
-        An application <b>should</b> preallocate the vertices array using the ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshVertexCount} returned from #GetSystemProperties(). In this way, the application can avoid possible insufficient buffer sizes for each query, and therefore avoid reallocating memory each frame.
-
-        The input {@code vertexCapacityInput} <b>must</b> not be 0, and {@code vertices} <b>must</b> not be {@code NULL}, or else the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE on calls to the #UpdateHandMeshMSFT() function.
-
-        If the input {@code vertexCapacityInput} is not sufficient to contain all output vertices, the runtime <b>must</b> return #ERROR_SIZE_INSUFFICIENT on calls to the #UpdateHandMeshMSFT(), do not change content in {@code vertexUpdateTime} and {@code vertices}, and return 0 for {@code vertexCountOutput}.
-
-        If the input {@code vertexCapacityInput} is equal to or larger than the ##XrSystemHandTrackingMeshPropertiesMSFT{@code ::maxHandMeshVertexCount} returned from #GetSystemProperties(), the runtime <b>must</b> not return #ERROR_SIZE_INSUFFICIENT on calls to the #UpdateHandMeshMSFT() because of insufficient vertex buffer size.
-
-        If the input {@code vertexUpdateTime} is 0, and the capacity of the vertices array is sufficient, and hand mesh tracking is active, the runtime <b>must</b> return the latest non-zero {@code vertexUpdateTime}, and fill in the {@code vertexCountOutput} and {@code vertices} fields.
-
-        If the input {@code vertexUpdateTime} is not 0, the runtime <b>can</b> either return without changing {@code vertexCountOutput} or the content in {@code vertices}, and return #FALSE for ##XrHandMeshMSFT{@code ::vertexBufferChanged} indicating the vertices are not changed; or return a new non-zero {@code vertexUpdateTime} and fill in latest data in {@code vertexCountOutput} and {@code vertices} and return #TRUE for ##XrHandMeshMSFT{@code ::vertexBufferChanged} indicating the vertices are updated to a newer version.
-
-        An application <b>can</b> keep the ##XrHandMeshVertexBufferMSFT structure for each frame in frame loop and use the returned {@code vertexUpdateTime} to detect the changes of the content in {@code vertices}. The application can therefore avoid unnecessary processing of vertices, such as coping them to GPU memory.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandMeshVertexBufferMSFT</li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertices} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrHandMeshVertexMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandMeshMSFT, ##XrHandMeshVertexMSFT, ##XrSystemHandTrackingMeshPropertiesMSFT, #UpdateHandMeshMSFT()
-        """
-
-    XrTime("vertexUpdateTime", "an {@code XrTime} representing the time when the runtime receives the vertex buffer content or 0 to indicate a request to retrieve latest vertices regardless of existing content in {@code vertices}.")
-    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput", "a positive {@code uint32_t} describes the capacity of the {@code vertices} array.")
-    uint32_t("vertexCountOutput", "a {@code uint32_t} filled in by the runtime with the count of vertices written in {@code vertices}.")
-    nullable..XrHandMeshVertexMSFT.p("vertices", "an array of ##XrHandMeshVertexMSFT filled in by the runtime, specifying the vertices of the hand mesh including the position and normal vector in the hand mesh space.")
+    XrTime("vertexUpdateTime")
+    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrHandMeshVertexMSFT.p("vertices")
 }
 
 val XrHandMeshMSFT = struct(Module.OPENXR, "XrHandMeshMSFT") {
-    documentation =
-        """
-        The data of a hand mesh.
-
-        <h5>Description</h5>
-        When the returned {@code isActive} value is #FALSE, the runtime indicates the hand is not actively tracked, for example, the hand is outside of sensor’s range, or the input focus is taken away from the application. When the runtime returns #FALSE to {@code isActive}, it <b>must</b> set {@code indexBufferChanged} and {@code vertexBufferChanged} to #FALSE, and <b>must</b> not change the content in {@code indexBuffer} or {@code vertexBuffer},
-
-        When the returned {@code isActive} value is #TRUE, the hand tracking mesh represented in {@code indexBuffer} and {@code vertexBuffer} are updated to the latest data of the ##XrHandMeshUpdateInfoMSFT{@code ::time} given to the #UpdateHandMeshMSFT() function. The runtime <b>must</b> set {@code indexBufferChanged} and {@code vertexBufferChanged} to reflect whether the index or vertex buffer’s content are changed during the update. In this way, the application can easily avoid unnecessary processing of buffers when there’s no new data.
-
-        The hand mesh is represented in triangle lists and each triangle’s vertices are in clockwise order when looking from outside of the hand. When hand tracking is active, i.e. when {@code isActive} is returned as #TRUE, the returned {@code indexBuffer.indexCountOutput} value <b>must</b> be positive and multiple of 3, and {@code vertexBuffer.vertexCountOutput} value <b>must</b> be equal to or larger than 3.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandMeshMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_MESH_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code indexBuffer} <b>must</b> be a valid ##XrHandMeshIndexBufferMSFT structure</li>
-            <li>{@code vertexBuffer} <b>must</b> be a valid ##XrHandMeshVertexBufferMSFT structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandMeshIndexBufferMSFT, ##XrHandMeshVertexBufferMSFT, #UpdateHandMeshMSFT()
-        """
-
-    Expression("#TYPE_HAND_MESH_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBool32("isActive", "an {@code XrBool32} indicating if the current hand tracker is active.")
-    XrBool32("indexBufferChanged", "an {@code XrBool32} indicating if the {@code indexBuffer} content was changed during the update.")
-    XrBool32("vertexBufferChanged", "an {@code XrBool32} indicating if the {@code vertexBuffer} content was changed during the update.")
-    XrHandMeshIndexBufferMSFT("indexBuffer", "an ##XrHandMeshIndexBufferMSFT returns the index buffer of the tracked hand mesh.")
-    XrHandMeshVertexBufferMSFT("vertexBuffer", "an ##XrHandMeshVertexBufferMSFT returns the vertex buffer of the tracked hand mesh.")
+    Expression("#TYPE_HAND_MESH_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrBool32("isActive")
+    XrBool32("indexBufferChanged")
+    XrBool32("vertexBufferChanged")
+    XrHandMeshIndexBufferMSFT("indexBuffer")
+    XrHandMeshVertexBufferMSFT("vertexBuffer")
 }
 
 val XrHandPoseTypeInfoMSFT = struct(Module.OPENXR, "XrHandPoseTypeInfoMSFT") {
-    documentation =
-        """
-        Describes what hand pose type for the hand joint tracking.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandPoseTypeInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_POSE_TYPE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code handPoseType} <b>must</b> be a valid {@code XrHandPoseTypeMSFT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandTrackerCreateInfoEXT, #CreateHandTrackerEXT()
-        """
-
-    Expression("#TYPE_HAND_POSE_TYPE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrHandPoseTypeMSFT("handPoseType", "an {@code XrHandPoseTypeMSFT} that describes the type of hand pose of the hand tracking.")
+    Expression("#TYPE_HAND_POSE_TYPE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrHandPoseTypeMSFT("handPoseType")
 }
 
 val XrSecondaryViewConfigurationSessionBeginInfoMSFT = struct(Module.OPENXR, "XrSecondaryViewConfigurationSessionBeginInfoMSFT") {
-    documentation =
-        """
-        Describes an extension structure to #BeginSession() indicating supported view configuration types.
-
-        <h5>Description</h5>
-        If there are any duplicated view configuration types in the array of {@code enabledViewConfigurationTypes}, the runtime <b>must</b> return error #ERROR_VALIDATION_FAILURE.
-
-        If there are any primary view configuration types in the array of {@code enabledViewConfigurationTypes}, the runtime <b>must</b> return error #ERROR_VALIDATION_FAILURE.
-
-        If there are any secondary view configuration types not returned by #EnumerateViewConfigurations() in the array of {@code enabledViewConfigurationTypes}, the runtime <b>must</b> return error #ERROR_VIEW_CONFIGURATION_TYPE_UNSUPPORTED.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension <b>must</b> be enabled prior to using ##XrSecondaryViewConfigurationSessionBeginInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code enabledViewConfigurationTypes} <b>must</b> be a pointer to an array of {@code viewConfigurationCount} valid {@code XrViewConfigurationType} values</li>
-            <li>The {@code viewConfigurationCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSessionBeginInfo
-        """
-
-    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("enabledViewConfigurationTypes")..uint32_t("viewConfigurationCount", "the number of elements in {@code enabledViewConfigurationTypes}")
-    XrViewConfigurationType.const.p("enabledViewConfigurationTypes", "an array of enabled secondary view configuration types that application supports.")
+    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("enabledViewConfigurationTypes")..uint32_t("viewConfigurationCount")
+    XrViewConfigurationType.const.p("enabledViewConfigurationTypes")
 }
 
 val XrSecondaryViewConfigurationStateMSFT = struct(Module.OPENXR, "XrSecondaryViewConfigurationStateMSFT") {
-    documentation =
-        """
-        Returns the state of an enabled secondary view configuration.
-
-        <h5>Description</h5>
-        When a secondary view configuration becomes active, the application <b>should</b> render its secondary views as soon as possible, by getting their view transforms and FOV using #LocateViews() and then submitting composition layers to #EndFrame() through the ##XrSecondaryViewConfigurationFrameEndInfoMSFT extension structure. When a secondary view configuration changes from inactive to active, the runtime <b>may</b> change ##XrViewConfigurationView of the given view configuration such as the recommended image width or height. An application <b>should</b> query for latest ##XrViewConfigurationView through #EnumerateViewConfigurationViews() function for the secondary view configuration and consider recreating swapchain images if necessary. The runtime <b>must</b> not change the ##XrViewConfigurationView, including recommended image width and height of a secondary view configuration when {@code active} remains true until the secondary view configuration deactivated or the session has ended.
-
-        If necessary, the application <b>can</b> take longer than a frame duration to prepare by calling #EndFrame() without submitting layers for that secondary view configuration until ready. The runtime <b>should</b> delay the underlying scenario managed by the secondary view configuration until the application begins submitting frames with layers for that configuration. The active secondary view configuration composed output is undefined if the application stops submitting frames with layers for a secondary view configuration while {@code active} remains true.
-
-        When the runtime intends to conclude a secondary view configuration, for example when user stops video capture, the runtime makes the view configuration inactive by setting the corresponding {@code active} in the ##XrSecondaryViewConfigurationStateMSFT structure to false.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension <b>must</b> be enabled prior to using ##XrSecondaryViewConfigurationStateMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFrameState, ##XrSecondaryViewConfigurationFrameStateMSFT
-        """
-
-    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrViewConfigurationType("viewConfigurationType", "an {@code XrViewConfigurationType} that represents the returned state.")
-    XrBool32("active", "an {@code XrBool32} returns whether the secondary view configuration is active and displaying frames to users.")
+    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrViewConfigurationType("viewConfigurationType")
+    XrBool32("active")
 }
 
 val XrSecondaryViewConfigurationFrameStateMSFT = struct(Module.OPENXR, "XrSecondaryViewConfigurationFrameStateMSFT") {
-    documentation =
-        """
-        Extension structure to xrWaitFrame to return a list of secondary view configuration states.
-
-        <h5>Description</h5>
-        The array size {@code viewConfigurationCount} in the ##XrSecondaryViewConfigurationFrameStateMSFT structure <b>must</b> be the same as the array size enabled through ##XrSecondaryViewConfigurationSessionBeginInfoMSFT when calling #BeginSession() earlier, otherwise the runtime <b>must</b> return error #ERROR_VALIDATION_FAILURE.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension <b>must</b> be enabled prior to using ##XrSecondaryViewConfigurationFrameStateMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code viewConfigurationStates} <b>must</b> be a pointer to an array of {@code viewConfigurationCount} ##XrSecondaryViewConfigurationStateMSFT structures</li>
-            <li>The {@code viewConfigurationCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFrameState, ##XrSecondaryViewConfigurationStateMSFT
-        """
-
-    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("viewConfigurationStates")..uint32_t("viewConfigurationCount", "the number of elements in {@code viewConfigurationStates}.")
-    XrSecondaryViewConfigurationStateMSFT.p("viewConfigurationStates", "an array of ##XrSecondaryViewConfigurationStateMSFT structures.")
+    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("viewConfigurationStates")..uint32_t("viewConfigurationCount")
+    XrSecondaryViewConfigurationStateMSFT.p("viewConfigurationStates")
 }
 
 val XrSecondaryViewConfigurationLayerInfoMSFT = struct(Module.OPENXR, "XrSecondaryViewConfigurationLayerInfoMSFT") {
-    documentation =
-        """
-        Describe an array of composition layers to be submitted to given {@code XrViewConfigurationType}.
-
-        <h5>Description</h5>
-        This structure is similar to the ##XrFrameEndInfo structure, with an extra {@code XrViewConfigurationType} field to specify the view configuration for which the submitted layers will be rendered.
-
-        The application <b>should</b> render its content for both the primary and secondary view configurations using the same ##XrFrameState{@code ::predictedDisplayTime} reported by #WaitFrame(). The runtime <b>must</b> treat both the primary views and secondary views as being submitted for the same ##XrViewLocateInfo{@code ::displayTime} specified in the call to #EndFrame().
-
-        For layers such as quad layers whose content is identical across view configurations, the application <b>can</b> submit the same ##XrCompositionLayerBaseHeader structures to multiple view configurations in the same #EndFrame() function call.
-
-        For each frame, the application <b>should</b> only render and submit layers for the secondary view configurations that were active that frame, as indicated in the ##XrSecondaryViewConfigurationFrameStateMSFT filled in for that frame’s #WaitFrame() call. The runtime <b>must</b> ignore composition layers submitted for an inactive view configuration.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension <b>must</b> be enabled prior to using ##XrSecondaryViewConfigurationLayerInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
-            <li>{@code environmentBlendMode} <b>must</b> be a valid {@code XrEnvironmentBlendMode} value</li>
-            <li>{@code layers} <b>must</b> be a pointer to an array of {@code layerCount} valid ##XrCompositionLayerBaseHeader-based structures. See also: ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerPassthroughFB, ##XrCompositionLayerPassthroughHTC, ##XrCompositionLayerProjection, ##XrCompositionLayerQuad</li>
-            <li>The {@code layerCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader, ##XrSecondaryViewConfigurationFrameEndInfoMSFT, #EndFrame()
-        """
-
-    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrViewConfigurationType("viewConfigurationType", "{@code XrViewConfigurationType} to which the composition layers will be displayed.")
-    XrEnvironmentBlendMode("environmentBlendMode", "the {@code XrEnvironmentBlendMode} value representing the desired <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#rendering-environment-blend-mode\">environment blend mode</a> for this view configuration.")
-    AutoSize("layers")..uint32_t("layerCount", "the number of composition layers in this frame for the secondary view configuration type. The maximum supported layer count is identified by ##XrSystemGraphicsProperties::maxLayerCount. If layerCount is greater than the maximum supported layer count then #ERROR_LAYER_LIMIT_EXCEEDED is returned.")
-    XrCompositionLayerBaseHeader.const.p.const.p("layers", "a pointer to an array of ##XrCompositionLayerBaseHeader pointers.")
+    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrViewConfigurationType("viewConfigurationType")
+    XrEnvironmentBlendMode("environmentBlendMode")
+    AutoSize("layers")..uint32_t("layerCount")
+    XrCompositionLayerBaseHeader.const.p.const.p("layers")
 }
 
 val XrSecondaryViewConfigurationFrameEndInfoMSFT = struct(Module.OPENXR, "XrSecondaryViewConfigurationFrameEndInfoMSFT") {
-    documentation =
-        """
-        Submit an array of ##XrSecondaryViewConfigurationLayerInfoMSFT, one for each secondary view configuration.
-
-        <h5>Description</h5>
-        The view configuration type in each ##XrSecondaryViewConfigurationLayerInfoMSFT must be one of the view configurations enabled when calling #BeginSession() in ##XrSecondaryViewConfigurationSessionBeginInfoMSFT, or else the runtime <b>must</b> return error #ERROR_SECONDARY_VIEW_CONFIGURATION_TYPE_NOT_ENABLED_MSFT.
-
-        The view configuration type in each ##XrSecondaryViewConfigurationLayerInfoMSFT must not be the primary view configuration in this session, or else the runtime <b>must</b> return error #ERROR_LAYER_INVALID. The primary view configuration layers continue to be submitted through ##XrFrameEndInfo directly.
-
-        If the view configuration is not active, as indicated in ##XrSecondaryViewConfigurationFrameStateMSFT, the composition layers submitted to this view configuration <b>may</b> be ignored by the runtime. Applications <b>should</b> avoid rendering into secondary views when the view configuration is inactive.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension <b>must</b> be enabled prior to using ##XrSecondaryViewConfigurationFrameEndInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code viewConfigurationLayersInfo} <b>must</b> be a pointer to an array of {@code viewConfigurationCount} valid ##XrSecondaryViewConfigurationLayerInfoMSFT structures</li>
-            <li>The {@code viewConfigurationCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSecondaryViewConfigurationLayerInfoMSFT, #EndFrame()
-        """
-
-    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("viewConfigurationLayersInfo")..uint32_t("viewConfigurationCount", "the number of elements in {@code viewConfigurationLayersInfo}.")
-    XrSecondaryViewConfigurationLayerInfoMSFT.const.p("viewConfigurationLayersInfo", "an array of ##XrSecondaryViewConfigurationLayerInfoMSFT, containing composition layers to be submitted for the specified active view configuration.")
+    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("viewConfigurationLayersInfo")..uint32_t("viewConfigurationCount")
+    XrSecondaryViewConfigurationLayerInfoMSFT.const.p("viewConfigurationLayersInfo")
 }
 
 val XrSecondaryViewConfigurationSwapchainCreateInfoMSFT = struct(Module.OPENXR, "XrSecondaryViewConfigurationSwapchainCreateInfoMSFT") {
-    documentation =
-        """
-        Hint to runtime that the created swapchain image will be used for given secondary view configuration.
-
-        <h5>Description</h5>
-        If this structure is not present in the ##XrSwapchainCreateInfo next chain when calling #CreateSwapchain(), the runtime <b>should</b> optimize the created swapchain for the primary view configuration of the session.
-
-        If the application submits a swapchain image created with one view configuration type to a composition layer for another view configuration, the runtime <b>may</b> need to copy the resource across view configurations. However, the runtime <b>must</b> correctly compose the image regardless which view configuration type was hinted when swapchain image was created.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension <b>must</b> be enabled prior to using ##XrSecondaryViewConfigurationSwapchainCreateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSwapchainCreateInfo
-        """
-
-    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrViewConfigurationType("viewConfigurationType", "the secondary view configuration type the application is intending to use this swapchain for.")
+    Expression("#TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrViewConfigurationType("viewConfigurationType")
 }
 
 val XrControllerModelKeyStateMSFT = struct(Module.OPENXR, "XrControllerModelKeyStateMSFT") {
-    documentation =
-        """
-        The model key state for a controller.
-
-        <h5>Description</h5>
-        The {@code modelKey} value for the session represents a unique controller model that can be retrieved from #LoadControllerModelMSFT() function. Therefore, the application <b>can</b> use {@code modelKey} to cache the returned data from #LoadControllerModelMSFT() for the session.
-
-        A {@code modelKey} value of #NULL_CONTROLLER_MODEL_KEY_MSFT, represents an invalid model key and indicates there is no controller model yet available. The application <b>should</b> keep calling #GetControllerModelKeyMSFT() because the model <b>may</b> become available at a later point.
-
-        The returned {@code modelKey} value depends on an active action binding to the corresponding subpathname:/grip/pose of the controller. Therefore, the application <b>must</b> have provided a valid action set containing an action for subpathname:/grip/pose, and have successfully completed an #SyncActions() call, in order to obtain a valid {@code modelKey}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using ##XrControllerModelKeyStateMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetControllerModelKeyMSFT()
-        """
-
-    Expression("#TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrControllerModelKeyMSFT("modelKey", "the model key corresponding to the controller render model being queried.")
+    Expression("#TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrControllerModelKeyMSFT("modelKey")
 }
 
 val XrControllerModelNodePropertiesMSFT = struct(Module.OPENXR, "XrControllerModelNodePropertiesMSFT") {
     javaImport("static org.lwjgl.openxr.MSFTControllerModel.*")
-    documentation =
-        """
-        Describes the controller model node properties.
-
-        <h5>Description</h5>
-        The node can be located in the glTF node hierarchy by finding the node(s) with the matching node name and parent node name. If the {@code parentNodeName} is empty, the matching will be solely based on the {@code nodeName}.
-
-        If there are multiple nodes in the glTF file matches the condition above, the first matching node using depth-first traversal in the glTF scene <b>should</b> be animated and the rest <b>should</b> be ignored.
-
-        The runtime <b>must</b> not return any {@code nodeName} or {@code parentNodeName} that does not match any glTF nodes in the corresponding controller model.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using ##XrControllerModelNodePropertiesMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code parentNodeName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to #MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT</li>
-            <li>{@code nodeName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to #MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrControllerModelPropertiesMSFT, #GetControllerModelPropertiesMSFT(), #LoadControllerModelMSFT()
-        """
-
-    Expression("#TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    charUTF8("parentNodeName", "the name of the parent node in the provided glTF file. The parent name <b>may</b> be empty if it should not be used to locate this node.")["XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT"]
-    charUTF8("nodeName", "the name of this node in the provided glTF file.")["XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT"]
+    Expression("#TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    charUTF8("parentNodeName")["XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT"]
+    charUTF8("nodeName")["XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT"]
 }
 
 val XrControllerModelPropertiesMSFT = struct(Module.OPENXR, "XrControllerModelPropertiesMSFT") {
-    documentation =
-        """
-        Describes the properties of a controller model.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using ##XrControllerModelPropertiesMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code nodeCapacityInput} is not 0, {@code nodeProperties} <b>must</b> be a pointer to an array of {@code nodeCapacityInput} ##XrControllerModelNodePropertiesMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrControllerModelNodePropertiesMSFT, #GetControllerModelPropertiesMSFT(), #LoadControllerModelMSFT()
-        """
-
-    Expression("#TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("nodeProperties", optional = true)..uint32_t("nodeCapacityInput", "the capacity of the {@code nodeProperties} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("nodeCountOutput", "filled in by the runtime with the count of elements in {@code nodeProperties} array, or returns the required capacity in the case that {@code nodeCapacityInput} is insufficient.")
-    nullable..XrControllerModelNodePropertiesMSFT.p("nodeProperties", "a pointer to an application-allocated array that will be filled with the ##XrControllerModelNodePropertiesMSFT values. It <b>can</b> be {@code NULL} if {@code nodeCapacityInput} is 0.")
+    Expression("#TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("nodeProperties", optional = true)..uint32_t("nodeCapacityInput")
+    uint32_t("nodeCountOutput")
+    nullable..XrControllerModelNodePropertiesMSFT.p("nodeProperties")
 }
 
 val XrControllerModelNodeStateMSFT = struct(Module.OPENXR, "XrControllerModelNodeStateMSFT") {
-    documentation =
-        """
-        Describes the state of a node in a controller model.
-
-        <h5>Description</h5>
-        The state is corresponding to the glTF node identified by the ##XrControllerModelNodePropertiesMSFT{@code ::nodeName} and ##XrControllerModelNodePropertiesMSFT{@code ::parentNodeName} of the node property at the same array index in the ##XrControllerModelPropertiesMSFT{@code ::nodeProperties} in ##XrControllerModelPropertiesMSFT.
-
-        The {@code nodePose} is based on the user’s interaction on the controller at the latest #SyncActions(), represented as the ##XrPosef of the node in it’s parent node space.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using ##XrControllerModelNodeStateMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrControllerModelStateMSFT, ##XrPosef, #GetControllerModelStateMSFT()
-        """
-
-    Expression("#TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrPosef("nodePose", "an ##XrPosef of the node in its parent node space.")
+    Expression("#TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrPosef("nodePose")
 }
 
 val XrControllerModelStateMSFT = struct(Module.OPENXR, "XrControllerModelStateMSFT") {
-    documentation =
-        """
-        Describes the state of a controller model.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using ##XrControllerModelStateMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_CONTROLLER_MODEL_STATE_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code nodeCapacityInput} is not 0, {@code nodeStates} <b>must</b> be a pointer to an array of {@code nodeCapacityInput} ##XrControllerModelNodeStateMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrControllerModelNodeStateMSFT, #GetControllerModelStateMSFT()
-        """
-
-    Expression("#TYPE_CONTROLLER_MODEL_STATE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("nodeStates", optional = true)..uint32_t("nodeCapacityInput", "the capacity of the {@code nodeStates} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("nodeCountOutput", "filled in by the runtime with the count of elements in {@code nodeStates} array, or returns the required capacity in the case that {@code nodeCapacityInput} is insufficient.")
-    nullable..XrControllerModelNodeStateMSFT.p("nodeStates", "a pointer to an application-allocated array that will be filled with the ##XrControllerModelNodeStateMSFT values. It <b>can</b> be {@code NULL} if {@code nodeCapacityInput} is 0.")
+    Expression("#TYPE_CONTROLLER_MODEL_STATE_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("nodeStates", optional = true)..uint32_t("nodeCapacityInput")
+    uint32_t("nodeCountOutput")
+    nullable..XrControllerModelNodeStateMSFT.p("nodeStates")
 }
 
 val XrViewConfigurationViewFovEPIC = struct(Module.OPENXR, "XrViewConfigurationViewFovEPIC") {
-    documentation =
-        """
-        View Configuration Field-of-View.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EPICViewConfigurationFov XR_EPIC_view_configuration_fov} extension <b>must</b> be enabled prior to using ##XrViewConfigurationViewFovEPIC</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFovf
-        """
-
-    Expression("#TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrFovf("recommendedFov", "the recommended field-of-view based on the current user IPD.")
-    XrFovf("maxMutableFov", "the maximum field-of-view that the runtime can display.")
+    Expression("#TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFovf("recommendedFov")
+    XrFovf("maxMutableFov")
 }
 
 val XrHolographicWindowAttachmentMSFT = struct(Module.OPENXR, "XrHolographicWindowAttachmentMSFT") {
-    documentation =
-        """
-        The holographic window binding structure which can be passed at session creation.
-
-        <h5>Description</h5>
-        When creating a holographic window-backed {@code XrSession}, the application provides a pointer to an ##XrHolographicWindowAttachmentMSFT in the {@code next} chain of the ##XrSessionCreateInfo.
-
-        The session state of a holographic window-backed {@code XrSession} will only reach #SESSION_STATE_VISIBLE when the provided CoreWindow is made visible. If the CoreWindow is for a secondary app view, the application must programmatically request to make the CoreWindow visible (e.g. with {@code ApplicationViewSwitcher.TryShowAsStandaloneAsync} or {@code ApplicationViewSwitcher.SwitchAsync}).
-
-        The app <b>must</b> not call #CreateSession() while the specified CoreWindow thread is blocked, otherwise the call <b>may</b> deadlock.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTHolographicWindowAttachment XR_MSFT_holographic_window_attachment} extension <b>must</b> be enabled prior to using ##XrHolographicWindowAttachmentMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code holographicSpace} <b>must</b> be a pointer to an {@code IUnknown} value</li>
-            <li>{@code coreWindow} <b>must</b> be a pointer to an {@code IUnknown} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSession()
-        """
-
-    Expression("#TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    IUnknown.p("holographicSpace", "a pointer to a valid {@code Windows}.Graphics.Holographic.HolographicSpace.")
-    IUnknown.p("coreWindow", "a pointer to a valid {@code Windows}.UI.Core.CoreWindow.")
+    Expression("#TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    IUnknown.p("holographicSpace")
+    IUnknown.p("coreWindow")
 }
 
 val XrCompositionLayerReprojectionInfoMSFT = struct(Module.OPENXR, "XrCompositionLayerReprojectionInfoMSFT") {
-    documentation =
-        """
-        The information to help reprojection of a projection layer.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTCompositionLayerReprojection XR_MSFT_composition_layer_reprojection} extension <b>must</b> be enabled prior to using ##XrCompositionLayerReprojectionInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code reprojectionMode} <b>must</b> be a valid {@code XrReprojectionModeMSFT} value</li>
-        </ul>
-
-        When the application chained this structure when calling #EndFrame(), the {@code reprojectionMode} <b>must</b> be one of the supported {@code XrReprojectionModeMSFT} returned by #EnumerateReprojectionModesMSFT() function for the corresponding {@code XrViewConfigurationType}. Otherwise, the runtime <b>must</b> return error #ERROR_REPROJECTION_MODE_UNSUPPORTED_MSFT on the #EndFrame() function.
-
-        The runtime <b>must</b> only use the given information for the corresponding frame in #EndFrame() function, and it <b>must</b> not affect other frames.
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerProjection
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrReprojectionModeMSFT("reprojectionMode", "an {@code XrReprojectionModeMSFT} enum providing a hint to the reprojection mode to the corresponding projection layer.")
+    Expression("#TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrReprojectionModeMSFT("reprojectionMode")
 }
 
 val XrCompositionLayerReprojectionPlaneOverrideMSFT = struct(Module.OPENXR, "XrCompositionLayerReprojectionPlaneOverrideMSFT") {
-    documentation =
-        """
-        Describe the parameters to override the reprojection plane.
-
-        <h5>Description</h5>
-        A runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if the {@code normal} vector deviates by more than 1% from unit length.
-
-        Adding a reprojection plane override <b>may</b> benefit various reprojection modes including #REPROJECTION_MODE_DEPTH_MSFT, #REPROJECTION_MODE_PLANAR_FROM_DEPTH_MSFT and #REPROJECTION_MODE_PLANAR_MANUAL_MSFT.
-
-        When application choose #REPROJECTION_MODE_ORIENTATION_ONLY_MSFT mode, the reprojection plane override <b>may</b> be ignored by the runtime.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTCompositionLayerReprojection XR_MSFT_composition_layer_reprojection} extension <b>must</b> be enabled prior to using ##XrCompositionLayerReprojectionPlaneOverrideMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVector3f
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrVector3f("position", "describes the position of the focus plane represented in the corresponding ##XrCompositionLayerProjection{@code ::space}.")
-    XrVector3f("normal", "a unit vector describes the focus plane normal represented in the corresponding ##XrCompositionLayerProjection{@code ::space}.")
-    XrVector3f("velocity", "a velocity of the position in the corresponding ##XrCompositionLayerProjection{@code ::space} measured in meters per second.")
+    Expression("#TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrVector3f("position")
+    XrVector3f("normal")
+    XrVector3f("velocity")
 }
 
 val XrSwapchainStateBaseHeaderFB = struct(Module.OPENXR, "XrSwapchainStateBaseHeaderFB") {
-    documentation =
-        """
-        Base header for swapchain update state.
-
-        <h5>Description</h5>
-        The ##XrSwapchainStateBaseHeaderFB is a base structure that can be overridden by a specific stext:XrSwapchainState* child structure.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSwapchainUpdateState XR_FB_swapchain_update_state} extension <b>must</b> be enabled prior to using ##XrSwapchainStateBaseHeaderFB</li>
-            <li>{@code type} <b>must</b> be one of the following XrStructureType values: #TYPE_SWAPCHAIN_STATE_FOVEATION_FB, #TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB, #TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSwapchainStateFB(), #UpdateSwapchainFB()
-        """
-
-    XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrStructureType("type")
+    nullable..opaque_p("next")
 }
 
 val XrCompositionLayerSecureContentFB = struct(Module.OPENXR, "XrCompositionLayerSecureContentFB") {
-    documentation =
-        """
-        specifies secure content mode for composition layers.
-
-        <h5>Description</h5>
-        ##XrCompositionLayerSecureContentFB contains additional flags to indicate a composition layer contains secure content and must not be written to external outputs.
-
-        If both #COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB and #COMPOSITION_LAYER_SECURE_CONTENT_REPLACE_LAYER_BIT_FB are set, #COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB will take precedence.
-
-        To specify the additional flags, you <b>must</b> create a ##XrCompositionLayerSecureContentFB structure and pass it via the ##XrCompositionLayerBaseHeader structure’s {@code next} parameter.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBCompositionLayerSecureContent XR_FB_composition_layer_secure_content} extension <b>must</b> be enabled prior to using ##XrCompositionLayerSecureContentFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrCompositionLayerSecureContentFlagBitsFB} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrCompositionLayerSecureContentFlagsFB("flags", "a bitmask of {@code XrCompositionLayerSecureContentFlagBitsFB}.")
+    Expression("#TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerSecureContentFlagsFB("flags")
 }
 
 val XrBodyJointLocationFB = struct(Module.OPENXR, "XrBodyJointLocationFB") {
-    documentation =
-        """
-        Describes the location and radius of a body joint.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodyJointLocationFB</li>
-            <li>{@code locationFlags} <b>must</b> be a valid combination of {@code XrSpaceLocationFlagBits} values</li>
-            <li>{@code locationFlags} <b>must</b> not be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBodyJointLocationsFB, ##XrPosef
-        """
-
-    XrSpaceLocationFlags("locationFlags", "a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data. If none of the bits are set, no other fields in this structure <b>should</b> be considered to be valid or meaningful.")
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the origin of a body joint within the reference frame of the corresponding ##XrBodyJointsLocateInfoFB{@code ::baseSpace}.")
+    XrSpaceLocationFlags("locationFlags")
+    XrPosef("pose")
 }
 
 val XrSystemBodyTrackingPropertiesFB = struct(Module.OPENXR, "XrSystemBodyTrackingPropertiesFB", mutable = false) {
-    documentation =
-        """
-        System property for body tracking.
-
-        <h5>Description</h5>
-        If a runtime returns #FALSE for {@code supportsBodyTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateBodyTrackerFB().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using ##XrSystemBodyTrackingPropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsBodyTracking", "an {@code XrBool32}, indicating if current system is capable of receiving body tracking input.")
+    Expression("#TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsBodyTracking")
 }
 
 val XrBodyTrackerCreateInfoFB = struct(Module.OPENXR, "XrBodyTrackerCreateInfoFB") {
-    documentation =
-        """
-        Information to create a body joints handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodyTrackerCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_BODY_TRACKER_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code bodyJointSet} <b>must</b> be a valid {@code XrBodyJointSetFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateBodyTrackerFB()
-        """
-
-    Expression("#TYPE_BODY_TRACKER_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBodyJointSetFB("bodyJointSet", "an {@code XrBodyJointSetFB} that describes the set of body joints to retrieve.")
+    Expression("#TYPE_BODY_TRACKER_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBodyJointSetFB("bodyJointSet")
 }
 
 val XrBodySkeletonJointFB = struct(Module.OPENXR, "XrBodySkeletonJointFB") {
-    documentation =
-        """
-        Describes the location and position of a joint in the skeleton hierarchy.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodySkeletonJointFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBodySkeletonFB, ##XrPosef
-        """
-
-    int32_t("joint", "an index of a joint using the corresponding body joint enum (e.g. {@code XrBodyJointFB}).")
-    int32_t("parentJoint", "an index of a parent joint of that joint, using the corresponding body joint enum (e.g. {@code XrBodyJointFB}).")
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the origin of a body joint within the reference frame of the corresponding ##XrBodyJointsLocateInfoFB{@code ::baseSpace}.")
+    int32_t("joint")
+    int32_t("parentJoint")
+    XrPosef("pose")
 }
 
 val XrBodySkeletonFB = struct(Module.OPENXR, "XrBodySkeletonFB") {
-    documentation =
-        """
-        Returns the body skeleton hierarchy.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if {@code jointCount} does not equal to the number of joints defined by the {@code XrBodyJointSetFB} used to create the {@code XrBodyTrackerFB}.
-
-        The runtime <b>must</b> return {@code joints} representing the default pose of the current estimation regarding the user’s skeleton.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodySkeletonFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_BODY_SKELETON_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code joints} <b>must</b> be a pointer to an array of {@code jointCount} ##XrBodySkeletonJointFB structures</li>
-            <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBodySkeletonJointFB, #GetBodySkeletonFB()
-        """
-
-    Expression("#TYPE_BODY_SKELETON_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("joints")..uint32_t("jointCount", "an {@code uint32_t} describing the count of elements in {@code joints} array.")
-    XrBodySkeletonJointFB.p("joints", "an application-allocated array of ##XrBodySkeletonJointFB that will be filled with skeleton joint elements.")
+    Expression("#TYPE_BODY_SKELETON_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("joints")..uint32_t("jointCount")
+    XrBodySkeletonJointFB.p("joints")
 }
 
 val XrBodyJointsLocateInfoFB = struct(Module.OPENXR, "XrBodyJointsLocateInfoFB") {
-    documentation =
-        """
-        Describes the information to locate body joints.
-
-        <h5>Description</h5>
-        Callers <b>should</b> request a time equal to the predicted display time for the rendered frame. The system will employ appropriate modeling to support body tracking at this time.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodyJointsLocateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_BODY_JOINTS_LOCATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #LocateBodyJointsFB()
-        """
-
-    Expression("#TYPE_BODY_JOINTS_LOCATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("baseSpace", "an {@code XrSpace} within which the returned body joint locations will be represented.")
-    XrTime("time", "an {@code XrTime} at which to locate the body joints.")
+    Expression("#TYPE_BODY_JOINTS_LOCATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
 }
 
 val XrBodyJointLocationsFB = struct(Module.OPENXR, "XrBodyJointLocationsFB") {
-    documentation =
-        """
-        Returns the body joint locations.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if {@code jointCount} does not equal to the number of joints defined by the {@code XrBodyJointSetFB} used to create the {@code XrBodyTrackerFB}.
-
-        The runtime <b>must</b> return {@code jointLocations} representing the range of human body motion, without any obstructions. Input systems that either obstruct the movement of the user’s body (for example, a held controller preventing the user from making a fist) or input systems that have only limited ability to track finger positions <b>must</b> use the information available to them to emulate an unobstructed range of motion.
-
-        The runtime <b>must</b> update the {@code jointLocations} array ordered so that it is indexed using the corresponding body joint enum (e.g. {@code XrBodyJointFB}) as described by {@code XrBodyJointSetFB} when creating the {@code XrBodyTrackerFB}. For example, when the {@code XrBodyTrackerFB} is created with #BODY_JOINT_SET_DEFAULT_FB, the application <b>must</b> set the {@code jointCount} to #BODY_JOINT_COUNT_FB, and the runtime <b>must</b> fill the {@code jointLocations} array ordered so that it is indexed by the {@code XrBodyJointFB} enum.
-
-        If the returned {@code isActive} is true, the runtime <b>must</b> return all joint locations with both #SPACE_LOCATION_POSITION_VALID_BIT and #SPACE_LOCATION_ORIENTATION_VALID_BIT set. However, in this case, some joint space locations <b>may</b> be untracked (i.e. #SPACE_LOCATION_POSITION_TRACKED_BIT or #SPACE_LOCATION_ORIENTATION_TRACKED_BIT is unset).
-
-        If the returned {@code isActive} is false, it indicates that the body tracker did not detect the body input, the application lost input focus, or the consent for body tracking was denied by the user. In this case, the runtime <b>must</b> return all {@code jointLocations} with neither #SPACE_LOCATION_POSITION_VALID_BIT nor #SPACE_LOCATION_ORIENTATION_VALID_BIT set.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodyJointLocationsFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_BODY_JOINT_LOCATIONS_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code jointLocations} <b>must</b> be a pointer to an array of {@code jointCount} ##XrBodyJointLocationFB structures</li>
-            <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBodyJointLocationFB, #LocateBodyJointsFB()
-        """
-
-    Expression("#TYPE_BODY_JOINT_LOCATIONS_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBool32("isActive", "an {@code XrBool32} indicating if the body tracker is actively tracking.")
-    float("confidence", "a {@code float} between 0 and 1 which represents the confidence for the returned body pose. A value of 0 means there is no confidence in the pose returned, and a value of 1 means maximum confidence in the returned body pose.")
-    AutoSize("jointLocations")..uint32_t("jointCount", "a {@code uint32_t} describing the count of elements in {@code jointLocations} array.")
-    XrBodyJointLocationFB.p("jointLocations", "an application-allocated array of ##XrBodyJointLocationFB that will be filled with joint locations.")
-    uint32_t("skeletonChangedCount", "an output {@code uint32_t} incremental counter indicating that the skeleton scale proportions have changed. #GetBodySkeletonFB() <b>can</b> be called when this counter increases to get the latest body proportions/scale.")
-    XrTime("time", "an {@code XrTime} time at which the returned joints are tracked. Equals the time at which the joints were requested if the interpolation at the time was successful.")
+    Expression("#TYPE_BODY_JOINT_LOCATIONS_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrBool32("isActive")
+    float("confidence")
+    AutoSize("jointLocations")..uint32_t("jointCount")
+    XrBodyJointLocationFB.p("jointLocations")
+    uint32_t("skeletonChangedCount")
+    XrTime("time")
 }
 
 val _XrBindingModificationBaseHeaderKHR = struct(Module.OPENXR, "XrBindingModificationBaseHeaderKHR")
 val XrInteractionProfileDpadBindingEXT = struct(Module.OPENXR, "XrInteractionProfileDpadBindingEXT", parentStruct = _XrBindingModificationBaseHeaderKHR) {
-    documentation =
-        """
-        Interaction profile dpad binding.
-
-        <h5>Description</h5>
-        The ##XrInteractionProfileDpadBindingEXT structure is an input struct that defines how to use any two-axis input to provide dpad-like functionality to the application. The struct <b>must</b> be added for each input that should be treated as a dpad to the ##XrBindingModificationsKHR{@code ::bindingModifications} array in the ##XrBindingModificationsKHR structure (See {@link KHRBindingModification XR_KHR_binding_modification} extension).
-
-        Runtimes are free to ignore any of the fields when not obeying the bindings, but <b>may</b> use it for automatic rebindings of actions.
-
-        The implementation <b>must</b> return #ERROR_VALIDATION_FAILURE from #SuggestInteractionProfileBindings() if any of the following are true:
-
-        <ul>
-            <li>{@code forceThreshold} or {@code forceThresholdReleased} are outside the half-open range <code>(0, 1]</code></li>
-            <li><code>forceThreshold &lt; forceThresholdReleased</code></li>
-            <li>{@code centerRegion} is outside the exclusive range <code>(0, 1)</code></li>
-            <li>{@code wedgeAngle} outside the half-open range <code>[0, π)</code></li>
-        </ul>
-
-        If more than one ##XrInteractionProfileDpadBindingEXT is provided for the same input identifier, including top level path (e.g. pathname:/user/hand/left/input/thumbstick), and two or more of them specify the same actionset, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE. If the same input identifier, including top level path, is used for more than one action set, in addition to inputs being <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#input-action-sets">suppressed by higher priority action sets</a>, haptic events from dpads are also suppressed.
-
-        For example, a Valve Index controller binding with a "Walking" action set can have a dpad on each of:
-
-        <ul>
-            <li>left thumbstick</li>
-            <li>right thumbstick</li>
-            <li>left trackpad</li>
-            <li>right trackpad</li>
-        </ul>
-
-        Another action set can also have a dpad active on each of those inputs, and they can have different settings. If both action sets are active, the higher priority one trumps the lower priority one, and the lower priority one is suppressed.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTDpadBinding XR_EXT_dpad_binding} extension <b>must</b> be enabled prior to using ##XrInteractionProfileDpadBindingEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code actionSet} <b>must</b> be a valid {@code XrActionSet} handle</li>
-            <li>If {@code onHaptic} is not {@code NULL}, {@code onHaptic} <b>must</b> be a pointer to a valid ##XrHapticBaseHeader-based structure. See also: ##XrHapticAmplitudeEnvelopeVibrationFB, ##XrHapticPcmVibrationFB, ##XrHapticVibration</li>
-            <li>If {@code offHaptic} is not {@code NULL}, {@code offHaptic} <b>must</b> be a pointer to a valid ##XrHapticBaseHeader-based structure. See also: ##XrHapticAmplitudeEnvelopeVibrationFB, ##XrHapticPcmVibrationFB, ##XrHapticVibration</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBindingModificationBaseHeaderKHR, ##XrHapticBaseHeader, #SuggestInteractionProfileBindings()
-        """
-
-    Expression("#TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrPath("binding", "the input path used for the specified actions in the suggested binding list to be used as a dpad. E.g. path:/user/hand/right/input/thumbstick")
-    XrActionSet("actionSet", "the action set for which this dpad will be active. The implementation <b>must</b> use the parameters from this structure for any actions from this action set that are bound to one of the dpad subpaths for this input path.")
-    float("forceThreshold", "a number in the half-open range <code>(0, 1]</code> representing the force value threshold at or above which (≥) a dpad input will transition from inactive to active.")
-    float("forceThresholdReleased", "a number in the half-open range <code>(0, 1]</code> representing the force value threshold strictly below which (&lt;) a dpad input will transition from active to inactive.")
-    float("centerRegion", "defines the center region of the thumbstick or trackpad. This is the radius, in the input value space, of a logically circular region in the center of the input, in the range <code>(0, 1)</code>.")
-    float("wedgeAngle", "indicates the angle in radians of each direction region and is a value in the half-open range <code>[0, π)</code>.")
-    XrBool32("isSticky", "indicates that the implementation will latch the first region that is activated and continue to indicate that the binding for that region is true until the user releases the input underlying the virtual dpad.")
-    nullable..XrHapticBaseHeader.const.p("onHaptic", "the haptic output that the runtime <b>must</b> trigger when the binding changes from false to true. If this field is {@code NULL}, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of ##XrHapticBaseHeader.")
-    nullable..XrHapticBaseHeader.const.p("offHaptic", "the haptic output that the runtime <b>must</b> trigger when the binding changes from true to false. If this field is NULL, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of ##XrHapticBaseHeader.")
+    Expression("#TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPath("binding")
+    XrActionSet("actionSet")
+    float("forceThreshold")
+    float("forceThresholdReleased")
+    float("centerRegion")
+    float("wedgeAngle")
+    XrBool32("isSticky")
+    nullable..XrHapticBaseHeader.const.p("onHaptic")
+    nullable..XrHapticBaseHeader.const.p("offHaptic")
 }
 
 val XrInteractionProfileAnalogThresholdVALVE = struct(Module.OPENXR, "XrInteractionProfileAnalogThresholdVALVE", parentStruct = _XrBindingModificationBaseHeaderKHR) {
-    documentation =
-        """
-        Interaction profile dpad binding.
-
-        <h5>Description</h5>
-        Applications can also chain a single ##XrInteractionProfileAnalogThresholdVALVE structure on the next chain of any #SuggestInteractionProfileBindings() call. Runtimes <b>must</b> support this kind of chaining. This method of specifying analog thresholds is deprecated however, and should not be used by any new applications.
-
-        If a threshold struct is present for a given conversion, the runtime <b>must</b> use those thresholds instead of applying its own whenever it is using the binding suggested by the application.
-
-        {@code onThreshold} and {@code offThreshold} permit allow the application to specify that it wants hysteresis to be applied to the threshold operation. If {@code onThreshold} is smaller than {@code offThreshold}, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
-
-        {@code onHaptic} and {@code offHaptic} allow the application to specify that it wants automatic haptic feedback to be generated when the boolean output of the threshold operation changes from false to true or vice versa. If these fields are not NULL, the runtime <b>must</b> trigger a haptic output with the specified characteristics. If the device has multiple haptic outputs, the runtime <b>should</b> use the haptic output that is most appropriate for the specified input path.
-
-        If a suggested binding with {@code action} and {@code binding} is not in the binding list for this interaction profile, the runtime <b>must</b> return #ERROR_PATH_UNSUPPORTED.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link VALVEAnalogThreshold XR_VALVE_analog_threshold} extension <b>must</b> be enabled prior to using ##XrInteractionProfileAnalogThresholdVALVE</li>
-            <li>{@code type} <b>must</b> be #TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code action} <b>must</b> be a valid {@code XrAction} handle</li>
-            <li>If {@code onHaptic} is not {@code NULL}, {@code onHaptic} <b>must</b> be a pointer to a valid ##XrHapticBaseHeader-based structure. See also: ##XrHapticAmplitudeEnvelopeVibrationFB, ##XrHapticPcmVibrationFB, ##XrHapticVibration</li>
-            <li>If {@code offHaptic} is not {@code NULL}, {@code offHaptic} <b>must</b> be a pointer to a valid ##XrHapticBaseHeader-based structure. See also: ##XrHapticAmplitudeEnvelopeVibrationFB, ##XrHapticPcmVibrationFB, ##XrHapticVibration</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHapticBaseHeader
-        """
-
-    Expression("#TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrAction("action", "the handle of an action in the suggested binding list.")
-    XrPath("binding", "the input path used for the specified action in the suggested binding list.")
-    float("onThreshold", "the value between 0.0 and 1.0 at which the runtime <b>must</b> consider the binding to be true. The binding must remain true until the input analog value falls below {@code offThreshold}.")
-    float("offThreshold", "the value between 0.0 and 1.0 at which the runtime <b>must</b> consider the binding to be false if it was previous true.")
-    nullable..XrHapticBaseHeader.const.p("onHaptic", "the haptic output that the runtime <b>must</b> trigger when the binding changes from false to true. If this field is NULL, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of ##XrHapticBaseHeader.")
-    nullable..XrHapticBaseHeader.const.p("offHaptic", "the haptic output that the runtime <b>must</b> trigger when the binding changes from true to false. If this field is NULL, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of ##XrHapticBaseHeader.")
+    Expression("#TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAction("action")
+    XrPath("binding")
+    float("onThreshold")
+    float("offThreshold")
+    nullable..XrHapticBaseHeader.const.p("onHaptic")
+    nullable..XrHapticBaseHeader.const.p("offHaptic")
 }
 
 val XrHandJointsMotionRangeInfoEXT = struct(Module.OPENXR, "XrHandJointsMotionRangeInfoEXT") {
-    documentation =
-        """
-        Chains to XrHandJointsLocateInfoEXT to specify final hand tracking grip pose.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandJointsMotionRange XR_EXT_hand_joints_motion_range} extension <b>must</b> be enabled prior to using ##XrHandJointsMotionRangeInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code handJointsMotionRange} <b>must</b> be a valid {@code XrHandJointsMotionRangeEXT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandJointsLocateInfoEXT
-        """
-
-    Expression("#TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrHandJointsMotionRangeEXT("handJointsMotionRange", "an {@code XrHandJointsMotionRangeEXT} that defines the hand joint range of motion the application wants.")
+    Expression("#TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrHandJointsMotionRangeEXT("handJointsMotionRange")
 }
 
 val XrLoaderInitInfoBaseHeaderKHR = struct(Module.OPENXR, "XrLoaderInitInfoBaseHeaderKHR") {
-    documentation =
-        """
-        Initializes OpenXR loader.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRLoaderInit XR_KHR_loader_init} extension <b>must</b> be enabled prior to using ##XrLoaderInitInfoBaseHeaderKHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #InitializeLoaderKHR()
-        """
-
-    XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrVulkanInstanceCreateInfoKHR = struct(Module.OPENXR, "XrVulkanInstanceCreateInfoKHR") {
     javaImport("org.lwjgl.vulkan.*")
-    documentation =
-        """
-        Vulkan Instance Create Info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} extension <b>must</b> be enabled prior to using ##XrVulkanInstanceCreateInfoKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code createFlags} <b>must</b> be 0</li>
-            <li>{@code pfnGetInstanceProcAddr} <b>must</b> be a valid {@code PFN_vkGetInstanceProcAddr} value</li>
-            <li>{@code vulkanCreateInfo} <b>must</b> be a pointer to a valid {@code VkInstanceCreateInfo} value</li>
-            <li>If {@code vulkanAllocator} is not {@code NULL}, {@code vulkanAllocator} <b>must</b> be a pointer to a valid {@code VkAllocationCallbacks} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateVulkanInstanceKHR()
-        """
-
-    Expression("#TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension")
-    XrSystemId("systemId", "an {@code XrSystemId} handle for the system which will be used to create a session.")
-    XrVulkanInstanceCreateFlagsKHR("createFlags", "a bitmask of {@code XrVulkanInstanceCreateFlagBitsKHR}")
-    PFN_vkGetInstanceProcAddr("pfnGetInstanceProcAddr", "a function pointer to {@code vkGetInstanceProcAddr} or a compatible entry point.")
-    VkInstanceCreateInfo.const.p("vulkanCreateInfo", "the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkInstanceCreateInfo.html\">{@code VkInstanceCreateInfo} as specified by Vulkan</a>.")
-    nullable..VkAllocationCallbacks.const.p("vulkanAllocator", "the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkAllocationCallbacks.html\">{@code VkAllocationCallbacks} as specified by Vulkan</a>.")
+    Expression("#TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSystemId("systemId")
+    XrVulkanInstanceCreateFlagsKHR("createFlags")
+    PFN_vkGetInstanceProcAddr("pfnGetInstanceProcAddr")
+    VkInstanceCreateInfo.const.p("vulkanCreateInfo")
+    nullable..VkAllocationCallbacks.const.p("vulkanAllocator")
 }
 
 val XrVulkanDeviceCreateInfoKHR = struct(Module.OPENXR, "XrVulkanDeviceCreateInfoKHR") {
     javaImport("org.lwjgl.vulkan.*")
-    documentation =
-        """
-        Vulkan Device Create Info.
-
-        <h5>Description</h5>
-        If the {@code vulkanPhysicalDevice} parameter does not match the output of #GetVulkanGraphicsDeviceKHR(), then the runtime <b>must</b> return #ERROR_HANDLE_INVALID.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} extension <b>must</b> be enabled prior to using ##XrVulkanDeviceCreateInfoKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_VULKAN_DEVICE_CREATE_INFO_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code createFlags} <b>must</b> be 0</li>
-            <li>{@code pfnGetInstanceProcAddr} <b>must</b> be a valid {@code PFN_vkGetInstanceProcAddr} value</li>
-            <li>{@code vulkanPhysicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} value</li>
-            <li>{@code vulkanCreateInfo} <b>must</b> be a pointer to a valid {@code VkDeviceCreateInfo} value</li>
-            <li>If {@code vulkanAllocator} is not {@code NULL}, {@code vulkanAllocator} <b>must</b> be a pointer to a valid {@code VkAllocationCallbacks} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateVulkanDeviceKHR()
-        """
-
-    Expression("#TYPE_VULKAN_DEVICE_CREATE_INFO_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSystemId("systemId", "an {@code XrSystemId} handle for the system which will be used to create a session.")
-    XrVulkanDeviceCreateFlagsKHR("createFlags", "a bitmask of {@code XrVulkanDeviceCreateFlagBitsKHR}")
-    PFN_vkGetInstanceProcAddr("pfnGetInstanceProcAddr", "a function pointer to {@code vkGetInstanceProcAddr} or a compatible entry point.")
-    VkPhysicalDevice("vulkanPhysicalDevice", "<b>must</b> match #GetVulkanGraphicsDeviceKHR().")
-    VkDeviceCreateInfo.const.p("vulkanCreateInfo", "the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDeviceCreateInfo.html\">{@code VkDeviceCreateInfo} as specified by Vulkan</a>.")
-    nullable..VkAllocationCallbacks.const.p("vulkanAllocator", "the <a href=\"https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkAllocationCallbacks.html\">{@code VkAllocationCallbacks} as specified by Vulkan</a>.")
+    Expression("#TYPE_VULKAN_DEVICE_CREATE_INFO_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSystemId("systemId")
+    XrVulkanDeviceCreateFlagsKHR("createFlags")
+    PFN_vkGetInstanceProcAddr("pfnGetInstanceProcAddr")
+    VkPhysicalDevice("vulkanPhysicalDevice")
+    VkDeviceCreateInfo.const.p("vulkanCreateInfo")
+    nullable..VkAllocationCallbacks.const.p("vulkanAllocator")
 }
 
 val XrGraphicsBindingVulkan2KHR = struct(Module.OPENXR, "XrGraphicsBindingVulkan2KHR", alias = XrGraphicsBindingVulkanKHR) {
     javaImport("org.lwjgl.vulkan.*")
-    documentation = "See ##XrGraphicsBindingVulkanKHR."
-
-    Expression("#TYPE_GRAPHICS_BINDING_VULKAN_KHR")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
-    VkInstance("instance", "")
-    VkPhysicalDevice("physicalDevice", "")
-    VkDevice("device", "")
-    uint32_t("queueFamilyIndex", "")
-    uint32_t("queueIndex", "")
+    Expression("#TYPE_GRAPHICS_BINDING_VULKAN_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    VkInstance("instance")
+    VkPhysicalDevice("physicalDevice")
+    VkDevice("device")
+    uint32_t("queueFamilyIndex")
+    uint32_t("queueIndex")
 }
 
 val XrVulkanGraphicsDeviceGetInfoKHR = struct(Module.OPENXR, "XrVulkanGraphicsDeviceGetInfoKHR") {
     javaImport("org.lwjgl.vulkan.*")
-    documentation =
-        """
-        Vulkan Graphics Device Get Info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRVulkanEnable2 XR_KHR_vulkan_enable2} extension <b>must</b> be enabled prior to using ##XrVulkanGraphicsDeviceGetInfoKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code vulkanInstance} <b>must</b> be a valid {@code VkInstance} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetVulkanGraphicsDevice2KHR()
-        """
-
-    Expression("#TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSystemId("systemId", "an {@code XrSystemId} handle for the system which will be used to create a session.")
-    VkInstance("vulkanInstance", "a valid Vulkan {@code VkInstance}.")
+    Expression("#TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSystemId("systemId")
+    VkInstance("vulkanInstance")
 }
 
 val XrSwapchainImageVulkan2KHR = struct(Module.OPENXR, "XrSwapchainImageVulkan2KHR", mutable = false, alias = XrSwapchainImageVulkanKHR) {
     javaImport("org.lwjgl.vulkan.*")
-    documentation = "See ##XrSwapchainImageVulkanKHR."
-
-    Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type", "").mutable()
-    nullable..opaque_p("next", "").mutable()
-    VkImage("image", "")
+    Expression("#TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    VkImage("image")
 }
 
 val XrGraphicsRequirementsVulkan2KHR = struct(Module.OPENXR, "XrGraphicsRequirementsVulkan2KHR", alias = XrGraphicsRequirementsVulkanKHR) {
-    documentation = "See ##XrGraphicsRequirementsVulkanKHR."
-
-    Expression("#TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR")..XrStructureType("type", "")
-    nullable..opaque_p("next", "")
-    XrVersion("minApiVersionSupported", "")
-    XrVersion("maxApiVersionSupported", "")
+    Expression("#TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrVersion("minApiVersionSupported")
+    XrVersion("maxApiVersionSupported")
 }
 
 val XrCompositionLayerEquirect2KHR = struct(Module.OPENXR, "XrCompositionLayerEquirect2KHR", parentStruct = XrCompositionLayerBaseHeader) {
-    documentation =
-        """
-        Equirectangular layer composition info.
-
-        <h5>Description</h5>
-        ##XrCompositionLayerEquirect2KHR contains the information needed to render an equirectangular image onto a sphere when calling #EndFrame(). ##XrCompositionLayerEquirect2KHR is an alias type for the base struct ##XrCompositionLayerBaseHeader used in ##XrFrameEndInfo.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRCompositionLayerEquirect2 XR_KHR_composition_layer_equirect2} extension <b>must</b> be enabled prior to using ##XrCompositionLayerEquirect2KHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code eyeVisibility} <b>must</b> be a valid {@code XrEyeVisibility} value</li>
-            <li>{@code subImage} <b>must</b> be a valid ##XrSwapchainSubImage structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader, ##XrFrameEndInfo, ##XrPosef, ##XrSwapchainSubImage, #EndFrame()
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrCompositionLayerFlags("layerFlags", "specifies options for the layer.")
-    XrSpace("space", "the {@code XrSpace} in which the {@code pose} of the equirect layer is evaluated over time.")
-    XrEyeVisibility("eyeVisibility", "the eye represented by this layer.")
-    XrSwapchainSubImage("subImage", "identifies the image ##XrSwapchainSubImage to use. The swapchain <b>must</b> have been created with a ##XrSwapchainCreateInfo{@code ::faceCount} of 1.")
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the center point of the sphere onto which the equirect image data is mapped, relative to the reference frame of the {@code space}.")
-    float("radius", "the non-negative radius of the sphere onto which the equirect image data is mapped. Values of zero or floating point positive infinity are treated as an infinite sphere.")
-    float("centralHorizontalAngle", "defines the visible horizontal angle of the sphere, based at 0 radians, in the range of <code>[0, 2π]</code>. It grows symmetrically around the 0 radian angle.")
-    float("upperVerticalAngle", "defines the upper vertical angle of the visible portion of the sphere, in the range of <code>[-π/2, π/2]</code>.")
-    float("lowerVerticalAngle", "defines the lower vertical angle of the visible portion of the sphere, in the range of <code>[-π/2, π/2]</code>.")
+    Expression("#TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerFlags("layerFlags")
+    XrSpace("space")
+    XrEyeVisibility("eyeVisibility")
+    XrSwapchainSubImage("subImage")
+    XrPosef("pose")
+    float("radius")
+    float("centralHorizontalAngle")
+    float("upperVerticalAngle")
+    float("lowerVerticalAngle")
 }
 
 val XrUuidMSFT = struct(Module.OPENXR, "XrUuidMSFT") {
-    documentation =
-        """
-        Universally Unique Identifier.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrUuidMSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentMSFT, ##XrSceneComponentParentFilterInfoMSFT, ##XrSceneComponentsLocateInfoMSFT, ##XrSerializedSceneFragmentDataGetInfoMSFT, #GetSceneMarkerDecodedStringMSFT(), #GetSceneMarkerRawDataMSFT()
-        """
-
-    uint8_t("bytes", "a 128-bit Variant-1 Universally Unique Identifier.")[16]
+    uint8_t("bytes")[16]
 }
 
 val XrSceneObserverCreateInfoMSFT = struct(Module.OPENXR, "XrSceneObserverCreateInfoMSFT") {
-    documentation =
-        """
-        The information to create a scene observer handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneObserverCreateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSceneObserverMSFT()
-        """
-
-    Expression("#TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrSceneCreateInfoMSFT = struct(Module.OPENXR, "XrSceneCreateInfoMSFT") {
-    documentation =
-        """
-        The information to create a scene handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneCreateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_CREATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSceneMSFT()
-        """
-
-    Expression("#TYPE_SCENE_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SCENE_CREATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrSceneSphereBoundMSFT = struct(Module.OPENXR, "XrSceneSphereBoundMSFT") {
-    documentation =
-        """
-        Describe a scene sphere bounds.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if {@code radius} is not a finite positive value.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneSphereBoundMSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneBoundsMSFT, ##XrVector3f
-        """
-
-    XrVector3f("center", "an ##XrVector3f representing the center of the sphere bound within the reference frame of the corresponding ##XrSceneBoundsMSFT{@code ::space}.")
-    float("radius", "the finite positive radius of the sphere bound.")
+    XrVector3f("center")
+    float("radius")
 }
 
 val XrSceneOrientedBoxBoundMSFT = struct(Module.OPENXR, "XrSceneOrientedBoxBoundMSFT") {
-    documentation =
-        """
-        Describe a scene oriented box bounds.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if any component of {@code extents} is not finite or less than or equal to zero.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneOrientedBoxBoundMSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, ##XrSceneBoundsMSFT, ##XrVector3f
-        """
-
-    XrPosef("pose", "an ##XrPosef defining the center position and orientation of the oriented bounding box bound within the reference frame of the corresponding ##XrSceneBoundsMSFT{@code ::space}.")
-    XrVector3f("extents", "an ##XrVector3f defining the edge-to-edge length of the box along each dimension with {@code pose} as the center.")
+    XrPosef("pose")
+    XrVector3f("extents")
 }
 
 val XrSceneFrustumBoundMSFT = struct(Module.OPENXR, "XrSceneFrustumBoundMSFT") {
-    documentation =
-        """
-        Describe a scene frustum bounds.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if {@code farDistance} is less than or equal to zero. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if the {@code fov} angles are not between between <code>-π/2</code> and <code>π/2</code> exclusively.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneFrustumBoundMSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFovf, ##XrPosef, ##XrSceneBoundsMSFT
-        """
-
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the tip of the frustum bound within the reference frame of the corresponding ##XrSceneBoundsMSFT{@code ::space}.")
-    XrFovf("fov", "an ##XrFovf for the four sides of the frustum bound where ##XrFovf{@code ::angleLeft} and ##XrFovf{@code ::angleRight} are along the X axis and ##XrFovf{@code ::angleUp} and ##XrFovf{@code ::angleDown} are along the Y axis of the frustum bound space.")
-    float("farDistance", "the positive distance of the far plane of the frustum bound along the -Z direction of the frustum bound space.")
+    XrPosef("pose")
+    XrFovf("fov")
+    float("farDistance")
 }
 
 val XrSceneBoundsMSFT = struct(Module.OPENXR, "XrSceneBoundsMSFT") {
-    documentation =
-        """
-        The scene bounds.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneBoundsMSFT</li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>If {@code sphereCount} is not 0, {@code spheres} <b>must</b> be a pointer to an array of {@code sphereCount} ##XrSceneSphereBoundMSFT structures</li>
-            <li>If {@code boxCount} is not 0, {@code boxes} <b>must</b> be a pointer to an array of {@code boxCount} ##XrSceneOrientedBoxBoundMSFT structures</li>
-            <li>If {@code frustumCount} is not 0, {@code frustums} <b>must</b> be a pointer to an array of {@code frustumCount} ##XrSceneFrustumBoundMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrNewSceneComputeInfoMSFT, ##XrSceneFrustumBoundMSFT, ##XrSceneOrientedBoxBoundMSFT, ##XrSceneSphereBoundMSFT, #ComputeNewSceneMSFT()
-        """
-
-    XrSpace("space", "a handle to the {@code XrSpace} in which the bounds are specified.")
-    XrTime("time", "the {@code XrTime} at which the bounds will be evaluated within {@code space}.")
-    AutoSize("spheres", optional = true)..uint32_t("sphereCount", "the number of sphere bounds.")
-    nullable..XrSceneSphereBoundMSFT.const.p("spheres", "an array of ##XrSceneSphereBoundMSFT.")
-    AutoSize("boxes", optional = true)..uint32_t("boxCount", "the number of oriented box bounds.")
-    nullable..XrSceneOrientedBoxBoundMSFT.const.p("boxes", "an array of ##XrSceneOrientedBoxBoundMSFT.")
-    AutoSize("frustums", optional = true)..uint32_t("frustumCount", "the number of frustum bounds.")
-    nullable..XrSceneFrustumBoundMSFT.const.p("frustums", "an array of ##XrSceneFrustumBoundMSFT.")
+    XrSpace("space")
+    XrTime("time")
+    AutoSize("spheres", optional = true)..uint32_t("sphereCount")
+    nullable..XrSceneSphereBoundMSFT.const.p("spheres")
+    AutoSize("boxes", optional = true)..uint32_t("boxCount")
+    nullable..XrSceneOrientedBoxBoundMSFT.const.p("boxes")
+    AutoSize("frustums", optional = true)..uint32_t("frustumCount")
+    nullable..XrSceneFrustumBoundMSFT.const.p("frustums")
 }
 
 val XrNewSceneComputeInfoMSFT = struct(Module.OPENXR, "XrNewSceneComputeInfoMSFT") {
-    documentation =
-        """
-        The information to compute a new scene.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrNewSceneComputeInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_NEW_SCENE_COMPUTE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrVisualMeshComputeLodInfoMSFT</li>
-            <li>{@code requestedFeatures} <b>must</b> be a pointer to an array of {@code requestedFeatureCount} valid {@code XrSceneComputeFeatureMSFT} values</li>
-            <li>{@code consistency} <b>must</b> be a valid {@code XrSceneComputeConsistencyMSFT} value</li>
-            <li>{@code bounds} <b>must</b> be a valid ##XrSceneBoundsMSFT structure</li>
-            <li>The {@code requestedFeatureCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneBoundsMSFT, #ComputeNewSceneMSFT()
-        """
-
-    Expression("#TYPE_NEW_SCENE_COMPUTE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_NEW_SCENE_COMPUTE_INFO_MSFT")..XrStructureType("type")
     PointerSetter(
         "XrVisualMeshComputeLodInfoMSFT",
         prepend = true
-    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("requestedFeatures")..uint32_t("requestedFeatureCount", "the number of features.")
-    XrSceneComputeFeatureMSFT.const.p("requestedFeatures", "an array of {@code XrSceneComputeFeatureMSFT}.")
-    XrSceneComputeConsistencyMSFT("consistency", "indicates the requested {@code XrSceneComputeConsistencyMSFT}, trading off speed against the quality of the resulting scene.")
-    XrSceneBoundsMSFT("bounds", "an ##XrSceneBoundsMSFT representing the culling volume. Scene components entirely outside this volume <b>should</b> culled.")
+    )..nullable..opaque_const_p("next")
+    AutoSize("requestedFeatures")..uint32_t("requestedFeatureCount")
+    XrSceneComputeFeatureMSFT.const.p("requestedFeatures")
+    XrSceneComputeConsistencyMSFT("consistency")
+    XrSceneBoundsMSFT("bounds")
 }
 
 val XrVisualMeshComputeLodInfoMSFT = struct(Module.OPENXR, "XrVisualMeshComputeLodInfoMSFT") {
-    documentation =
-        """
-        Visual mesh compute level of detail info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrVisualMeshComputeLodInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code lod} <b>must</b> be a valid {@code XrMeshComputeLodMSFT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrNewSceneComputeInfoMSFT, #ComputeNewSceneMSFT()
-        """
-
-    Expression("#TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrMeshComputeLodMSFT("lod", "the requested mesh level of detail specified by {@code XrMeshComputeLodMSFT}.")
+    Expression("#TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrMeshComputeLodMSFT("lod")
 }
 
 val XrSceneComponentMSFT = struct(Module.OPENXR, "XrSceneComponentMSFT") {
-    documentation =
-        """
-        Scene component.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> set {@code parentId} to either zero or a valid ##XrUuidMSFT that corresponds to a scene component of type #SCENE_COMPONENT_TYPE_OBJECT_MSFT that exists in the {@code XrSceneMSFT}.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The parent scene object is intended to allow scene components to be grouped. For example, the scene object for a wall might have multiple scene component children like #SCENE_COMPONENT_TYPE_PLANE_MSFT, #SCENE_COMPONENT_TYPE_VISUAL_MESH_MSFT, and #SCENE_COMPONENT_TYPE_COLLIDER_MESH_MSFT. Those child scene components would be alternative representations of the same wall.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneComponentMSFT</li>
-            <li>{@code componentType} <b>must</b> be a valid {@code XrSceneComponentTypeMSFT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentsMSFT, ##XrUuidMSFT
-        """
-
-    XrSceneComponentTypeMSFT("componentType", "the {@code XrSceneComponentTypeMSFT} of the scene component.")
-    XrUuidMSFT("id", "the ##XrUuidMSFT of the scene component.")
-    XrUuidMSFT("parentId", "the ##XrUuidMSFT of the parent scene object. If the scene component does not have a parent, then {@code parentId} will be equal to zero.")
-    XrTime("updateTime", "the {@code XrTime} that this scene component was last updated.")
+    XrSceneComponentTypeMSFT("componentType")
+    XrUuidMSFT("id")
+    XrUuidMSFT("parentId")
+    XrTime("updateTime")
 }
 
 val XrSceneComponentsMSFT = struct(Module.OPENXR, "XrSceneComponentsMSFT") {
-    documentation =
-        """
-        Scene components.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneComponentsMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_COMPONENTS_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSceneMarkerQRCodesMSFT, ##XrSceneMarkersMSFT, ##XrSceneMeshesMSFT, ##XrSceneObjectsMSFT, ##XrScenePlanesMSFT</li>
-            <li>If {@code componentCapacityInput} is not 0, {@code components} <b>must</b> be a pointer to an array of {@code componentCapacityInput} ##XrSceneComponentMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentMSFT, #GetSceneComponentsMSFT()
-        """
-
-    Expression("#TYPE_SCENE_COMPONENTS_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_SCENE_COMPONENTS_MSFT")..XrStructureType("type")
     PointerSetter(
         "XrSceneMarkerQRCodesMSFT", "XrSceneMarkersMSFT", "XrSceneMeshesMSFT", "XrSceneObjectsMSFT", "XrScenePlanesMSFT",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("components", optional = true)..uint32_t("componentCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("componentCountOutput", "a pointer to the count of components, or a pointer to the required capacity in the case that {@code componentCapacityInput} is insufficient.")
-    nullable..XrSceneComponentMSFT.p("components", "an array of ##XrSceneComponentMSFT.")
+    )..nullable..opaque_p("next")
+    AutoSize("components", optional = true)..uint32_t("componentCapacityInput")
+    uint32_t("componentCountOutput")
+    nullable..XrSceneComponentMSFT.p("components")
 }
 
 val XrSceneComponentsGetInfoMSFT = struct(Module.OPENXR, "XrSceneComponentsGetInfoMSFT") {
-    documentation =
-        """
-        The information to get the scene components.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneComponentsGetInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_COMPONENTS_GET_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSceneComponentParentFilterInfoMSFT, ##XrSceneMarkerTypeFilterMSFT, ##XrSceneObjectTypesFilterInfoMSFT, ##XrScenePlaneAlignmentFilterInfoMSFT</li>
-            <li>{@code componentType} <b>must</b> be a valid {@code XrSceneComponentTypeMSFT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSceneComponentsMSFT()
-        """
-
-    Expression("#TYPE_SCENE_COMPONENTS_GET_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_SCENE_COMPONENTS_GET_INFO_MSFT")..XrStructureType("type")
     PointerSetter(
         "XrSceneComponentParentFilterInfoMSFT", "XrSceneMarkerTypeFilterMSFT", "XrSceneObjectTypesFilterInfoMSFT", "XrScenePlaneAlignmentFilterInfoMSFT",
         prepend = true
-    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSceneComponentTypeMSFT("componentType", "the scene component type requested.")
+    )..nullable..opaque_const_p("next")
+    XrSceneComponentTypeMSFT("componentType")
 }
 
 val XrSceneComponentLocationMSFT = struct(Module.OPENXR, "XrSceneComponentLocationMSFT") {
-    documentation =
-        """
-        Describes the location of a scene component.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneComponentLocationMSFT</li>
-            <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrSpaceLocationFlagBits} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, ##XrSceneComponentLocationsMSFT
-        """
-
-    XrSpaceLocationFlags("flags", "a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data.")
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the scene component within the reference frame of the corresponding ##XrSceneComponentsLocateInfoMSFT{@code ::baseSpace}.")
+    XrSpaceLocationFlags("flags")
+    XrPosef("pose")
 }
 
 val XrSceneComponentLocationsMSFT = struct(Module.OPENXR, "XrSceneComponentLocationsMSFT") {
-    documentation =
-        """
-        Returns the scene component locations.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneComponentLocationsMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_COMPONENT_LOCATIONS_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code locationCount} is not 0, {@code locations} <b>must</b> be a pointer to an array of {@code locationCount} ##XrSceneComponentLocationMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentLocationMSFT, #LocateSceneComponentsMSFT()
-        """
-
-    Expression("#TYPE_SCENE_COMPONENT_LOCATIONS_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("locations", optional = true)..uint32_t("locationCount", "a {@code uint32_t} describing the count of elements in the {@code locations} array.")
-    nullable..XrSceneComponentLocationMSFT.p("locations", "an array of ##XrSceneComponentLocationMSFT scene component locations.")
+    Expression("#TYPE_SCENE_COMPONENT_LOCATIONS_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("locations", optional = true)..uint32_t("locationCount")
+    nullable..XrSceneComponentLocationMSFT.p("locations")
 }
 
 val XrSceneComponentsLocateInfoMSFT = struct(Module.OPENXR, "XrSceneComponentsLocateInfoMSFT") {
-    documentation =
-        """
-        Describes the information to locate scene components.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneComponentsLocateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>If {@code componentIdCount} is not 0, {@code componentIds} <b>must</b> be a pointer to an array of {@code componentIdCount} ##XrUuidMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidMSFT, #LocateSceneComponentsMSFT()
-        """
-
-    Expression("#TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("baseSpace", "an {@code XrSpace} within which the scene components will be located.")
-    XrTime("time", "an {@code XrTime} at which to locate the scene components.")
-    AutoSize("componentIds", optional = true)..uint32_t("componentIdCount", "a {@code uint32_t} describing the count of elements in the {@code componentIds} array.")
-    nullable..XrUuidMSFT.const.p("componentIds", "an array of ##XrUuidMSFT identifiers for the scene components to location.")
+    Expression("#TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
+    AutoSize("componentIds", optional = true)..uint32_t("componentIdCount")
+    nullable..XrUuidMSFT.const.p("componentIds")
 }
 
 val XrSceneObjectMSFT = struct(Module.OPENXR, "XrSceneObjectMSFT") {
-    documentation =
-        """
-        Scene object.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneObjectMSFT</li>
-            <li>{@code objectType} <b>must</b> be a valid {@code XrSceneObjectTypeMSFT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneObjectsMSFT
-        """
-
-    XrSceneObjectTypeMSFT("objectType", "the type of the object specified by {@code XrSceneObjectTypeMSFT}.")
+    XrSceneObjectTypeMSFT("objectType")
 }
 
 val XrSceneObjectsMSFT = struct(Module.OPENXR, "XrSceneObjectsMSFT") {
-    documentation =
-        """
-        Scene objects.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> only set ##XrSceneObjectMSFT{@code ::objectType} to any of the following {@code XrSceneObjectTypeMSFT} values:
-
-        <ul>
-            <li>#SCENE_OBJECT_TYPE_UNCATEGORIZED_MSFT</li>
-            <li>#SCENE_OBJECT_TYPE_BACKGROUND_MSFT</li>
-            <li>#SCENE_OBJECT_TYPE_WALL_MSFT</li>
-            <li>#SCENE_OBJECT_TYPE_FLOOR_MSFT</li>
-            <li>#SCENE_OBJECT_TYPE_CEILING_MSFT</li>
-            <li>#SCENE_OBJECT_TYPE_PLATFORM_MSFT</li>
-            <li>#SCENE_OBJECT_TYPE_INFERRED_MSFT</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneObjectsMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_OBJECTS_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code sceneObjectCount} is not 0, {@code sceneObjects} <b>must</b> be a pointer to an array of {@code sceneObjectCount} ##XrSceneObjectMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentsMSFT, ##XrSceneObjectMSFT
-        """
-
-    Expression("#TYPE_SCENE_OBJECTS_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("sceneObjects", optional = true)..uint32_t("sceneObjectCount", "a {@code uint32_t} describing the count of elements in the {@code sceneObjects} array.")
-    nullable..XrSceneObjectMSFT.p("sceneObjects", "an array of ##XrSceneObjectMSFT.")
+    Expression("#TYPE_SCENE_OBJECTS_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("sceneObjects", optional = true)..uint32_t("sceneObjectCount")
+    nullable..XrSceneObjectMSFT.p("sceneObjects")
 }
 
 val XrSceneComponentParentFilterInfoMSFT = struct(Module.OPENXR, "XrSceneComponentParentFilterInfoMSFT") {
-    documentation =
-        """
-        Scene component parent filter.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return only scene components with matching {@code parentId}. If {@code parentId} is zero then the runtime <b>must</b> return only scene components that do not have a parent.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneComponentParentFilterInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentsGetInfoMSFT, ##XrUuidMSFT
-        """
-
-    Expression("#TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrUuidMSFT("parentId", "the ##XrUuidMSFT of the parent scene component to filter by.")
+    Expression("#TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrUuidMSFT("parentId")
 }
 
 val XrSceneObjectTypesFilterInfoMSFT = struct(Module.OPENXR, "XrSceneObjectTypesFilterInfoMSFT") {
-    documentation =
-        """
-        Scene object types filter.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return only scene components that match any of the {@code XrSceneObjectTypeMSFT} in {@code objectTypes}. If a scene component does not have an {@code XrSceneObjectTypeMSFT} then the parent’s {@code XrSceneObjectTypeMSFT} value will be used for the comparison if it exists.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneObjectTypesFilterInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code objectTypeCount} is not 0, {@code objectTypes} <b>must</b> be a pointer to an array of {@code objectTypeCount} valid {@code XrSceneObjectTypeMSFT} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentsGetInfoMSFT
-        """
-
-    Expression("#TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("objectTypes", optional = true)..uint32_t("objectTypeCount", "a {@code uint32_t} describing the count of elements in the {@code objectTypes} array.")
-    nullable..XrSceneObjectTypeMSFT.const.p("objectTypes", "an array of {@code XrSceneObjectTypeMSFT} to filter by.")
+    Expression("#TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("objectTypes", optional = true)..uint32_t("objectTypeCount")
+    nullable..XrSceneObjectTypeMSFT.const.p("objectTypes")
 }
 
 val XrScenePlaneMSFT = struct(Module.OPENXR, "XrScenePlaneMSFT") {
-    documentation =
-        """
-        Scene plane.
-
-        <h5>Description</h5>
-        The {@code size} of a plane refers to the plane’s size in the <code>x-y</code> plane of the plane’s coordinate system. A plane with a position of {0,0,0}, rotation of {0,0,0,1} (no rotation), and an extent of {1,1} refers to a 1 meter x 1 meter plane centered at {0,0,0} with its front face normal vector pointing towards the +Z direction in the plane component’s space. For planes with an alignment of #SCENE_PLANE_ALIGNMENT_TYPE_VERTICAL_MSFT, the +Y direction <b>must</b> point up away from the direction of gravity.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        OpenXR uses an X-Y plane with +Z as the plane normal but other APIs may use an X-Z plane with +Y as the plane normal. The X-Y plane can be converted to an X-Z plane by rotating <code>-π/2</code> radians around the +X axis.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrScenePlaneMSFT</li>
-            <li>{@code alignment} <b>must</b> be a valid {@code XrScenePlaneAlignmentTypeMSFT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExtent2Df, ##XrScenePlanesMSFT
-        """
-
-    XrScenePlaneAlignmentTypeMSFT("alignment", "the alignment type of the plane specified by {@code XrScenePlaneAlignmentTypeMSFT}.")
-    XrExtent2Df("size", "the 2D size of the plane’s extent, where ##XrExtent2Df{@code ::width} is the width of the plane along the X axis, and ##XrExtent2Df{@code ::height} is the height of the plane along the Y axis.")
-    uint64_t("meshBufferId", "the {@code uint64_t} identifier that specifies the scene mesh buffer of this plane’s triangle mesh. If {@code meshBufferId} is zero then this plane does not have a mesh. The triangles in a planar mesh are coplanar.")
-    XrBool32("supportsIndicesUint16", "#TRUE if the mesh supports reading 16-bit unsigned indices.")
+    XrScenePlaneAlignmentTypeMSFT("alignment")
+    XrExtent2Df("size")
+    uint64_t("meshBufferId")
+    XrBool32("supportsIndicesUint16")
 }
 
 val XrScenePlanesMSFT = struct(Module.OPENXR, "XrScenePlanesMSFT") {
-    documentation =
-        """
-        Scene planes.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrScenePlanesMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_PLANES_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code scenePlaneCount} is not 0, {@code scenePlanes} <b>must</b> be a pointer to an array of {@code scenePlaneCount} ##XrScenePlaneMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentsMSFT, ##XrScenePlaneMSFT
-        """
-
-    Expression("#TYPE_SCENE_PLANES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("scenePlanes", optional = true)..uint32_t("scenePlaneCount", "a {@code uint32_t} describing the count of elements in the ##XrScenePlaneMSFT array.")
-    nullable..XrScenePlaneMSFT.p("scenePlanes", "an array of ##XrScenePlaneMSFT.")
+    Expression("#TYPE_SCENE_PLANES_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("scenePlanes", optional = true)..uint32_t("scenePlaneCount")
+    nullable..XrScenePlaneMSFT.p("scenePlanes")
 }
 
 val XrScenePlaneAlignmentFilterInfoMSFT = struct(Module.OPENXR, "XrScenePlaneAlignmentFilterInfoMSFT") {
-    documentation =
-        """
-        Plane alignment filter.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return only scene components that match one of the {@code XrScenePlaneAlignmentTypeMSFT} values passed in {@code alignments}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrScenePlaneAlignmentFilterInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code alignmentCount} is not 0, {@code alignments} <b>must</b> be a pointer to an array of {@code alignmentCount} valid {@code XrScenePlaneAlignmentTypeMSFT} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentsGetInfoMSFT
-        """
-
-    Expression("#TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("alignments", optional = true)..uint32_t("alignmentCount", "a {@code uint32_t} describing the count of elements in the {@code alignments} array.")
-    nullable..XrScenePlaneAlignmentTypeMSFT.const.p("alignments", "an array of {@code XrScenePlaneAlignmentTypeMSFT} to filter by.")
+    Expression("#TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("alignments", optional = true)..uint32_t("alignmentCount")
+    nullable..XrScenePlaneAlignmentTypeMSFT.const.p("alignments")
 }
 
 val XrSceneMeshMSFT = struct(Module.OPENXR, "XrSceneMeshMSFT") {
-    documentation =
-        """
-        Scene mesh.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneMeshMSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneMeshesMSFT
-        """
-
-    uint64_t("meshBufferId", "the {@code uint64_t} identifier that specifies the scene mesh buffer. If {@code meshBufferId} is zero then this scene component does not have mesh data of corresponding {@code XrSceneComponentTypeMSFT} in #GetSceneComponentsMSFT(){@code ::getInfo}.")
-    XrBool32("supportsIndicesUint16", "#TRUE if the mesh supports reading 16-bit unsigned indices.")
+    uint64_t("meshBufferId")
+    XrBool32("supportsIndicesUint16")
 }
 
 val XrSceneMeshesMSFT = struct(Module.OPENXR, "XrSceneMeshesMSFT") {
-    documentation =
-        """
-        Scene meshes.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneMeshesMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_MESHES_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code sceneMeshCount} is not 0, {@code sceneMeshes} <b>must</b> be a pointer to an array of {@code sceneMeshCount} ##XrSceneMeshMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneComponentsMSFT, ##XrSceneMeshMSFT
-        """
-
-    Expression("#TYPE_SCENE_MESHES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("sceneMeshes", optional = true)..uint32_t("sceneMeshCount", "a {@code uint32_t} describing the count of elements in the {@code sceneMeshes} array.")
-    nullable..XrSceneMeshMSFT.p("sceneMeshes", "an array of ##XrSceneMeshMSFT.")
+    Expression("#TYPE_SCENE_MESHES_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("sceneMeshes", optional = true)..uint32_t("sceneMeshCount")
+    nullable..XrSceneMeshMSFT.p("sceneMeshes")
 }
 
 val XrSceneMeshBuffersGetInfoMSFT = struct(Module.OPENXR, "XrSceneMeshBuffersGetInfoMSFT") {
-    documentation =
-        """
-        The information to get the scene mesh buffer data.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneMeshBuffersGetInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSceneMeshBuffersMSFT()
-        """
-
-    Expression("#TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    uint64_t("meshBufferId", "the {@code uint64_t} identifier that specifies the scene mesh buffer to read.")
+    Expression("#TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    uint64_t("meshBufferId")
 }
 
 val XrSceneMeshBuffersMSFT = struct(Module.OPENXR, "XrSceneMeshBuffersMSFT") {
-    documentation =
-        """
-        Scene mesh buffers.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneMeshBuffersMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_MESH_BUFFERS_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneMeshIndicesUint16MSFT, ##XrSceneMeshIndicesUint32MSFT, ##XrSceneMeshVertexBufferMSFT, #GetSceneMeshBuffersMSFT()
-        """
-
-    Expression("#TYPE_SCENE_MESH_BUFFERS_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    Expression("#TYPE_SCENE_MESH_BUFFERS_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
 }
 
 val XrSceneMeshVertexBufferMSFT = struct(Module.OPENXR, "XrSceneMeshVertexBufferMSFT") {
-    documentation =
-        """
-        Scene mesh vertex buffer.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneMeshVertexBufferMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertices} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector3f structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneMeshBuffersMSFT, ##XrVector3f, #GetSceneMeshBuffersMSFT()
-        """
-
-    Expression("#TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("vertexCountOutput", "the count of vertices, or the required capacity in the case that {@code vertexCapacityInput} is insufficient.")
-    nullable..XrVector3f.p("vertices", "an array of ##XrVector3f filled in by the runtime returns the position of vertices in the mesh component’s space.")
+    Expression("#TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrVector3f.p("vertices")
 }
 
 val XrSceneMeshIndicesUint32MSFT = struct(Module.OPENXR, "XrSceneMeshIndicesUint32MSFT") {
-    documentation =
-        """
-        Scene mesh 32-bit indices.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneMeshIndicesUint32MSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_MESH_INDICES_UINT32_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code indexCapacityInput} is not 0, {@code indices} <b>must</b> be a pointer to an array of {@code indexCapacityInput} {@code uint32_t} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneMeshBuffersMSFT, #GetSceneMeshBuffersMSFT()
-        """
-
-    Expression("#TYPE_SCENE_MESH_INDICES_UINT32_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("indexCountOutput", "the count of indices, or the required capacity in the case that {@code indexCapacityInput} is insufficient.")
-    nullable..uint32_t.p("indices", "an array of triangle indices filled in by the runtime, specifying the indices of the scene mesh buffer in the vertices array. The triangle indices <b>must</b> be returned in counter-clockwise order and three indices denote one triangle.")
+    Expression("#TYPE_SCENE_MESH_INDICES_UINT32_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput")
+    uint32_t("indexCountOutput")
+    nullable..uint32_t.p("indices")
 }
 
 val XrSceneMeshIndicesUint16MSFT = struct(Module.OPENXR, "XrSceneMeshIndicesUint16MSFT") {
-    documentation =
-        """
-        Scene mesh 16-bit indices.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using ##XrSceneMeshIndicesUint16MSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_MESH_INDICES_UINT16_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code indexCapacityInput} is not 0, {@code indices} <b>must</b> be a pointer to an array of {@code indexCapacityInput} {@code uint16_t} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneMeshBuffersMSFT, #GetSceneMeshBuffersMSFT()
-        """
-
-    Expression("#TYPE_SCENE_MESH_INDICES_UINT16_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("indexCountOutput", "a pointer to the count of indices, or a pointer to the required capacity in the case that {@code indexCapacityInput} is insufficient.")
-    nullable..uint16_t.p("indices", "an array of triangle indices filled in by the runtime, specifying the indices of the scene mesh buffer in the vertices array. The triangle indices <b>must</b> be returned in counter-clockwise order and three indices denote one triangle.")
+    Expression("#TYPE_SCENE_MESH_INDICES_UINT16_MSFT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput")
+    uint32_t("indexCountOutput")
+    nullable..uint16_t.p("indices")
 }
 
 val XrSerializedSceneFragmentDataGetInfoMSFT = struct(Module.OPENXR, "XrSerializedSceneFragmentDataGetInfoMSFT") {
-    documentation =
-        """
-        The information to get the serialized scene fragment data.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstandingSerialization XR_MSFT_scene_understanding_serialization} extension <b>must</b> be enabled prior to using ##XrSerializedSceneFragmentDataGetInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidMSFT, #GetSerializedSceneFragmentDataMSFT()
-        """
-
-    Expression("#TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrUuidMSFT("sceneFragmentId", "the ##XrUuidMSFT of the serialized scene fragment that was previously read from #GetSceneComponentsMSFT() with #SCENE_COMPONENT_TYPE_SERIALIZED_SCENE_FRAGMENT_MSFT.")
+    Expression("#TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrUuidMSFT("sceneFragmentId")
 }
 
 val XrDeserializeSceneFragmentMSFT = struct(Module.OPENXR, "XrDeserializeSceneFragmentMSFT") {
-    documentation =
-        """
-        Deserialize Scene Fragment.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstandingSerialization XR_MSFT_scene_understanding_serialization} extension <b>must</b> be enabled prior to using ##XrDeserializeSceneFragmentMSFT</li>
-            <li>If {@code bufferSize} is not 0, {@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} {@code uint8_t} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneDeserializeInfoMSFT
-        """
-
-    AutoSize("buffer", optional = true)..uint32_t("bufferSize", "the size of the {@code buffer} array.")
-    nullable..uint8_t.const.p("buffer", "an array of {@code uint_8} data for the scene fragment to be deserialized.")
+    AutoSize("buffer", optional = true)..uint32_t("bufferSize")
+    nullable..uint8_t.const.p("buffer")
 }
 
 val XrSceneDeserializeInfoMSFT = struct(Module.OPENXR, "XrSceneDeserializeInfoMSFT") {
-    documentation =
-        """
-        The information to deserialize a binary scene.
-
-        <h5>Description</h5>
-        If the scene fragments are not in the same order as returned by #GetSceneComponentsMSFT() or the runtime failed to deserialized the binary data then #GetSceneComputeStateMSFT() <b>must</b> return #SCENE_COMPUTE_STATE_COMPLETED_WITH_ERROR_MSFT.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneUnderstandingSerialization XR_MSFT_scene_understanding_serialization} extension <b>must</b> be enabled prior to using ##XrSceneDeserializeInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_DESERIALIZE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code fragmentCount} is not 0, {@code fragments} <b>must</b> be a pointer to an array of {@code fragmentCount} valid ##XrDeserializeSceneFragmentMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrDeserializeSceneFragmentMSFT, #DeserializeSceneMSFT()
-        """
-
-    Expression("#TYPE_SCENE_DESERIALIZE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("fragments", optional = true)..uint32_t("fragmentCount", "the count of ##XrDeserializeSceneFragmentMSFT structures in the {@code fragments} array.")
-    nullable..XrDeserializeSceneFragmentMSFT.const.p("fragments", "an array of ##XrDeserializeSceneFragmentMSFT.")
+    Expression("#TYPE_SCENE_DESERIALIZE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("fragments", optional = true)..uint32_t("fragmentCount")
+    nullable..XrDeserializeSceneFragmentMSFT.const.p("fragments")
 }
 
 val XrEventDataDisplayRefreshRateChangedFB = struct(Module.OPENXR, "XrEventDataDisplayRefreshRateChangedFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Event representing display refresh rate change.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBDisplayRefreshRate XR_FB_display_refresh_rate} extension <b>must</b> be enabled prior to using ##XrEventDataDisplayRefreshRateChangedFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetDisplayRefreshRateFB()
-        """
-
-    Expression("#TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    float("fromDisplayRefreshRate", "the previous display refresh rate.")
-    float("toDisplayRefreshRate", "the new display refresh rate.")
+    Expression("#TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    float("fromDisplayRefreshRate")
+    float("toDisplayRefreshRate")
 }
 
 val XrViveTrackerPathsHTCX = struct(Module.OPENXR, "XrViveTrackerPathsHTCX", mutable = false) {
-    documentation =
-        """
-        Struct contains two paths of VIVE tracker.
-
-        <h5>Description</h5>
-        The ##XrViveTrackerPathsHTCX structure contains two paths of VIVE tracker.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCXViveTrackerInteraction XR_HTCX_vive_tracker_interaction} extension <b>must</b> be enabled prior to using ##XrViveTrackerPathsHTCX</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIVE_TRACKER_PATHS_HTCX</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrEventDataViveTrackerConnectedHTCX, #EnumerateViveTrackerPathsHTCX()
-        """
-
-    Expression("#TYPE_VIVE_TRACKER_PATHS_HTCX")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrPath("persistentPath", "the unique path of the VIVE tracker which is persistent over the lifetime of the hardware.")
-    XrPath("rolePath", "the path of the VIVE tracker role. This <b>may</b> be #NULL_PATH if the role is not assigned.")
+    Expression("#TYPE_VIVE_TRACKER_PATHS_HTCX")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrPath("persistentPath")
+    XrPath("rolePath")
 }
 
 val XrEventDataViveTrackerConnectedHTCX = struct(Module.OPENXR, "XrEventDataViveTrackerConnectedHTCX", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Event representing a new VIVE tracker connected.
-
-        <h5>Description</h5>
-        Receiving the ##XrEventDataViveTrackerConnectedHTCX event structure indicates that a new VIVE tracker was connected or its role changed. It is received via #PollEvent().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCXViveTrackerInteraction XR_HTCX_vive_tracker_interaction} extension <b>must</b> be enabled prior to using ##XrEventDataViveTrackerConnectedHTCX</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrViveTrackerPathsHTCX, #PollEvent()
-        """
-
-    Expression("#TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrViveTrackerPathsHTCX.p("paths", "contains two paths of the connected VIVE tracker.")
+    Expression("#TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrViveTrackerPathsHTCX.p("paths")
 }
 
 val XrSystemFacialTrackingPropertiesHTC = struct(Module.OPENXR, "XrSystemFacialTrackingPropertiesHTC", mutable = false) {
-    documentation =
-        """
-        System property for facial tracking.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of two of the facial tracking by extending the ##XrSystemProperties with ##XrSystemFacialTrackingPropertiesHTC structure when calling #GetSystemProperties().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFacialTracking XR_HTC_facial_tracking} extension <b>must</b> be enabled prior to using ##XrSystemFacialTrackingPropertiesHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        If a runtime returns #FALSE for {@code supportEyeFacialTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialTrackerHTC() with #FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC set for {@code XrFacialTrackingTypeHTC} in ##XrFacialTrackerCreateInfoHTC. Similarly, if a runtime returns #FALSE for {@code supportLipFacialTracking} the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialTrackerHTC() with #FACIAL_TRACKING_TYPE_LIP_DEFAULT_HTC set for {@code XrFacialTrackingTypeHTC} in ##XrFacialTrackerCreateInfoHTC.
-        """
-
-    Expression("#TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportEyeFacialTracking", "indicates if the current system is capable of generating eye expressions.")
-    XrBool32("supportLipFacialTracking", "indicates if the current system is capable of generating lip expressions.")
+    Expression("#TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportEyeFacialTracking")
+    XrBool32("supportLipFacialTracking")
 }
 
 val XrFacialExpressionsHTC = struct(Module.OPENXR, "XrFacialExpressionsHTC") {
-    documentation =
-        """
-        Returns the expression data.
-
-        <h5>Description</h5>
-        ##XrFacialExpressionsHTC structure returns data of a lip facial expression or an eye facial expression.
-
-        An application <b>must</b> preallocate the output {@code expressionWeightings} array that can contain at least {@code expressionCount} of {@code float}. {@code expressionCount} <b>must</b> be at least #FACIAL_EXPRESSION_LIP_COUNT_HTC for #FACIAL_TRACKING_TYPE_LIP_DEFAULT_HTC, and at least #FACIAL_EXPRESSION_EYE_COUNT_HTC for #FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC.
-
-        The application <b>must</b> set {@code expressionCount} as described by the {@code XrFacialTrackingTypeHTC} when creating the {@code XrFacialTrackerHTC} otherwise the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
-
-        The runtime <b>must</b> update the {@code expressionWeightings} array ordered so that the application can index elements using the corresponding facial tracker enum (e.g. {@code XrEyeExpressionHTC} or {@code XrLipExpressionHTC}) as described by {@code XrFacialTrackingTypeHTC} when creating the {@code XrFacialTrackerHTC}. For example, when the {@code XrFacialTrackerHTC} is created with {@code XrFacialTrackerHTC}{@code ::facialTrackingType} set to #FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC, the application <b>must</b> set the {@code expressionCount} to #FACIAL_EXPRESSION_EYE_COUNT_HTC, and the runtime <b>must</b> fill the {@code expressionWeightings} array ordered with eye expression data so that it can be indexed by the {@code XrEyeExpressionHTC} enum.
-
-        If the returned {@code isActive} is true, the runtime <b>must</b> fill the {@code expressionWeightings} array ordered.
-
-        If the returned {@code isActive} is false, it indicates the facial tracker did not detect the corresponding facial input or the application lost input focus.
-
-        If the input {@code expressionCount} is not sufficient to contain all output indices, the runtime <b>must</b> return #ERROR_SIZE_INSUFFICIENT on calls to #GetFacialExpressionsHTC() and not change the content in {@code expressionWeightings}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFacialTracking XR_HTC_facial_tracking} extension <b>must</b> be enabled prior to using ##XrFacialExpressionsHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACIAL_EXPRESSIONS_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code expressionWeightings} <b>must</b> be a pointer to a {@code float} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetFacialExpressionsHTC()
-        """
-
-    Expression("#TYPE_FACIAL_EXPRESSIONS_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBool32("isActive", "an {@code XrBool32} indicating if the facial tracker is active.")
-    XrTime("sampleTime", "when in time the expression is expressed.")
-    uint32_t("expressionCount", "a {@code uint32_t} describing the count of elements in {@code expressionWeightings} array.")
-    float.p("expressionWeightings", "a {@code float} array filled in by the runtime, specifying the weightings for each blend shape.")
+    Expression("#TYPE_FACIAL_EXPRESSIONS_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("isActive")
+    XrTime("sampleTime")
+    uint32_t("expressionCount")
+    float.p("expressionWeightings")
 }
 
 val XrFacialTrackerCreateInfoHTC = struct(Module.OPENXR, "XrFacialTrackerCreateInfoHTC") {
-    documentation =
-        """
-        Information to create a facial tracker handle.
-
-        <h5>Description</h5>
-        The ##XrFacialTrackerCreateInfoHTC structure describes the information to create an {@code XrFacialTrackerHTC} handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFacialTracking XR_HTC_facial_tracking} extension <b>must</b> be enabled prior to using ##XrFacialTrackerCreateInfoHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACIAL_TRACKER_CREATE_INFO_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code facialTrackingType} <b>must</b> be a valid {@code XrFacialTrackingTypeHTC} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateFacialTrackerHTC()
-        """
-
-    Expression("#TYPE_FACIAL_TRACKER_CREATE_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrFacialTrackingTypeHTC("facialTrackingType", "an {@code XrFacialTrackingTypeHTC} which describes which type of facial tracking should be used for this handle.")
+    Expression("#TYPE_FACIAL_TRACKER_CREATE_INFO_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFacialTrackingTypeHTC("facialTrackingType")
 }
 
 val XrSystemColorSpacePropertiesFB = struct(Module.OPENXR, "XrSystemColorSpacePropertiesFB", mutable = false) {
-    documentation =
-        """
-        System property for color space.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBColorSpace XR_FB_color_space} extension <b>must</b> be enabled prior to using ##XrSystemColorSpacePropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrColorSpaceFB("colorSpace", "the native color space of the XR device.")
+    Expression("#TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrColorSpaceFB("colorSpace")
 }
 
 val XrVector4sFB = struct(Module.OPENXR, "XrVector4sFB") {
-    documentation =
-        """
-        A four component short integer vector.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code x} is the {@code x} component of the vector.</li>
-            <li>{@code y} is the {@code y} component of the vector.</li>
-            <li>{@code z} is the {@code z} component of the vector.</li>
-            <li>{@code w} is the {@code w} component of the vector.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBHandTrackingMesh XR_FB_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrVector4sFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandTrackingMeshFB
-        """
-
-    int16_t("x", "")
-    int16_t("y", "")
-    int16_t("z", "")
-    int16_t("w", "")
+    int16_t("x")
+    int16_t("y")
+    int16_t("z")
+    int16_t("w")
 }
 
 val XrHandTrackingMeshFB = struct(Module.OPENXR, "XrHandTrackingMeshFB") {
-    documentation =
-        """
-        A container of mesh data.
-
-        <h5>Description</h5>
-        All arrays are application-allocated, and all <b>may</b> be {@code NULL} if any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is 0.
-
-        The data in a fully-populated ##XrHandTrackingMeshFB is immutable during the lifetime of the corresponding {@code XrInstance}, and is intended to be retrieved once then used in combination with data changing per-frame retrieved from #LocateHandJointsEXT().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBHandTrackingMesh XR_FB_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandTrackingMeshFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_TRACKING_MESH_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code jointCapacityInput} is not 0, {@code jointBindPoses} <b>must</b> be a pointer to an array of {@code jointCapacityInput} ##XrPosef structures</li>
-            <li>If {@code jointCapacityInput} is not 0, {@code jointRadii} <b>must</b> be a pointer to an array of {@code jointCapacityInput} {@code float} values</li>
-            <li>If {@code jointCapacityInput} is not 0, {@code jointParents} <b>must</b> be a pointer to an array of {@code jointCapacityInput} {@code XrHandJointEXT} values</li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertexPositions} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector3f structures</li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertexNormals} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector3f structures</li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertexUVs} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector2f structures</li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertexBlendIndices} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector4sFB structures</li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertexBlendWeights} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector4f structures</li>
-            <li>If {@code indexCapacityInput} is not 0, {@code indices} <b>must</b> be a pointer to an array of {@code indexCapacityInput} {@code int16_t} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, ##XrVector2f, ##XrVector3f, ##XrVector4f, ##XrVector4sFB, #GetHandMeshFB()
-        """
-
-    Expression("#TYPE_HAND_TRACKING_MESH_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("jointBindPoses", "jointRadii", "jointParents", optional = true)..uint32_t("jointCapacityInput", "the capacity of the joint data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("jointCountOutput", "filled in by the runtime with the count of joint data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is insufficient.")
-    nullable..XrPosef.p("jointBindPoses", "an array of poses that matches what is returned by #LocateHandJointsEXT() which describes the hand skeleton’s bind pose.")
-    nullable..float.p("jointRadii", "an array of joint radii at bind pose.")
-    nullable..XrHandJointEXT.p("jointParents", "an array of joint parents to define a bone hierarchy for the hand skeleton.")
-    AutoSize("vertexPositions", "vertexNormals", "vertexUVs", "vertexBlendIndices", "vertexBlendWeights", optional = true)..uint32_t("vertexCapacityInput", "the capacity of the vertex data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("vertexCountOutput", "filled in by the runtime with the count of vertex data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is insufficient.")
-    nullable..XrVector3f.p("vertexPositions", "an array of 3D vertex positions.")
-    nullable..XrVector3f.p("vertexNormals", "an array of 3D vertex normals.")
-    nullable..XrVector2f.p("vertexUVs", "an array of texture coordinates for this vertex.")
-    nullable..XrVector4sFB.p("vertexBlendIndices", "an array of bone blend indices.")
-    nullable..XrVector4f.p("vertexBlendWeights", "an array of bone blend weights.")
-    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput", "the capacity of the index data arrays in this structure, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("indexCountOutput", "filled in by the runtime with the count of index data elements written, or the required capacity in the case that any of {@code jointCapacityInput}, {@code vertexCapacityInput}, or {@code indexCapacityInput} is insufficient.")
-    nullable..int16_t.p("indices", "an array of triangle indices.")
+    Expression("#TYPE_HAND_TRACKING_MESH_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("jointBindPoses", "jointRadii", "jointParents", optional = true)..uint32_t("jointCapacityInput")
+    uint32_t("jointCountOutput")
+    nullable..XrPosef.p("jointBindPoses")
+    nullable..float.p("jointRadii")
+    nullable..XrHandJointEXT.p("jointParents")
+    AutoSize("vertexPositions", "vertexNormals", "vertexUVs", "vertexBlendIndices", "vertexBlendWeights", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrVector3f.p("vertexPositions")
+    nullable..XrVector3f.p("vertexNormals")
+    nullable..XrVector2f.p("vertexUVs")
+    nullable..XrVector4sFB.p("vertexBlendIndices")
+    nullable..XrVector4f.p("vertexBlendWeights")
+    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput")
+    uint32_t("indexCountOutput")
+    nullable..int16_t.p("indices")
 }
 
 val XrHandTrackingScaleFB = struct(Module.OPENXR, "XrHandTrackingScaleFB", mutable = false) {
-    documentation =
-        """
-        The information to query and modify hand joint overall scale.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBHandTrackingMesh XR_FB_hand_tracking_mesh} extension <b>must</b> be enabled prior to using ##XrHandTrackingScaleFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_TRACKING_SCALE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_HAND_TRACKING_SCALE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    float("sensorOutput", "an output value: the currently measured scale as otherwise applied without passing this structure.")
-    float("currentOutput", "an output value: the effective output that the bind skeleton is getting on the current call, which <b>may</b> be subject to filtering, scaling, or validation.")
-    XrBool32("overrideHandScale", "indicates whether the runtime <b>must</b> scale the output of this #LocateHandJointsEXT() call according to {@code overrideValueInput}")
-    float("overrideValueInput", "an <b>optional</b> input value, enabled only when the {@code overrideHandScale} parameter is set. Setting this to 1.0 and setting {@code overrideHandScale} to {@code true} will give the joints in mesh binding scale.")
+    Expression("#TYPE_HAND_TRACKING_SCALE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    float("sensorOutput")
+    float("currentOutput")
+    XrBool32("overrideHandScale")
+    float("overrideValueInput")
 }
 
 val XrHandTrackingAimStateFB = struct(Module.OPENXR, "XrHandTrackingAimStateFB", mutable = false) {
-    documentation =
-        """
-        Current aiming gesture state for the hand.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBHandTrackingAim XR_FB_hand_tracking_aim} extension <b>must</b> be enabled prior to using ##XrHandTrackingAimStateFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_TRACKING_AIM_STATE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef
-        """
-
-    Expression("#TYPE_HAND_TRACKING_AIM_STATE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrHandTrackingAimFlagsFB("status", "a bitmask of {@code XrHandTrackingAimFlagBitsFB} describing the availability and state of other signals.")
-    XrPosef("aimPose", "a system-determined \"aim\" pose, similar in intent and convention to the <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#semantic-paths-aim-pose\">aim poses</a> used with the action system, based on hand data.")
-    float("pinchStrengthIndex", "the current pinching strength for the index finger of this hand. Range is 0.0 to 1.0, with 1.0 meaning index and thumb are fully touching.")
-    float("pinchStrengthMiddle", "the current pinching strength for the middle finger of this hand. Range is 0.0 to 1.0, with 1.0 meaning middle and thumb are fully touching.")
-    float("pinchStrengthRing", "the current pinching strength for the ring finger of this hand. Range is 0.0 to 1.0, with 1.0 meaning ring and thumb are fully touching.")
-    float("pinchStrengthLittle", "the current pinching strength for the little finger of this hand. Range is 0.0 to 1.0, with 1.0 meaning little and thumb are fully touching.")
+    Expression("#TYPE_HAND_TRACKING_AIM_STATE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrHandTrackingAimFlagsFB("status")
+    XrPosef("aimPose")
+    float("pinchStrengthIndex")
+    float("pinchStrengthMiddle")
+    float("pinchStrengthRing")
+    float("pinchStrengthLittle")
 }
 
 val XrHandCapsuleFB = struct(Module.OPENXR, "XrHandCapsuleFB", mutable = false) {
     javaImport("static org.lwjgl.openxr.FBHandTrackingCapsules.*")
-    documentation =
-        """
-        A 3D capsule defined by two points and a radius.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code points} are the two points defining the capsule length.</li>
-            <li>{@code radius} is the radius of the capsule.</li>
-            <li>{@code joint} is the hand joint that drives this capsule’s transform. Multiple capsules <b>may</b> be attached to the same joint.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBHandTrackingCapsules XR_FB_hand_tracking_capsules} extension <b>must</b> be enabled prior to using ##XrHandCapsuleFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandTrackingCapsulesStateFB, ##XrVector3f
-        """
-
-    XrVector3f("points", "")["XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB"]
-    float("radius", "")
-    XrHandJointEXT("joint", "")
+    XrVector3f("points")["XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB"]
+    float("radius")
+    XrHandJointEXT("joint")
 }
 
 val XrHandTrackingCapsulesStateFB = struct(Module.OPENXR, "XrHandTrackingCapsulesStateFB", mutable = false) {
     javaImport("static org.lwjgl.openxr.FBHandTrackingCapsules.*")
-    documentation =
-        """
-        A list of capsules associated to hand joints.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBHandTrackingCapsules XR_FB_hand_tracking_capsules} extension <b>must</b> be enabled prior to using ##XrHandTrackingCapsulesStateFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_TRACKING_CAPSULES_STATE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandCapsuleFB
-        """
-
-    Expression("#TYPE_HAND_TRACKING_CAPSULES_STATE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrHandCapsuleFB("capsules", "an array of capsules.")["XR_HAND_TRACKING_CAPSULE_COUNT_FB"]
+    Expression("#TYPE_HAND_TRACKING_CAPSULES_STATE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrHandCapsuleFB("capsules")["XR_HAND_TRACKING_CAPSULE_COUNT_FB"]
 }
 
 val XrSystemSpatialEntityPropertiesFB = struct(Module.OPENXR, "XrSystemSpatialEntityPropertiesFB", mutable = false) {
-    documentation =
-        """
-        Properties object retrieved as part of next chain from xrGetSystemProperties.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of spatial entity operations by extending the ##XrSystemProperties with ##XrSystemSpatialEntityPropertiesFB structure when calling #GetSystemProperties().
-
-        If a runtime returns #FALSE for {@code supportsSpatialEntity}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #GetSpaceUuidFB().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using ##XrSystemSpatialEntityPropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrBool32("supportsSpatialEntity", "a boolean value that determines if spatial entities are supported by the system.")
+    Expression("#TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrBool32("supportsSpatialEntity")
 }
 
 val XrSpatialAnchorCreateInfoFB = struct(Module.OPENXR, "XrSpatialAnchorCreateInfoFB") {
-    documentation =
-        """
-        Parameters to create a new spatial anchor.
-
-        <h5>Description</h5>
-        Parameters to create a new spatial anchor.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHOR_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateSpatialAnchorFB()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("space", "the {@code XrSpace} handle to the reference space that defines the {@code poseInSpace} of the anchor to be defined.")
-    XrPosef("poseInSpace", "the ##XrPosef location and orientation of the Spatial Anchor in the specified reference space.")
-    XrTime("time", "the {@code XrTime} timestamp associated with the specified pose.")
+    Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("space")
+    XrPosef("poseInSpace")
+    XrTime("time")
 }
 
 val XrSpaceComponentStatusSetInfoFB = struct(Module.OPENXR, "XrSpaceComponentStatusSetInfoFB") {
-    documentation =
-        """
-        Request info to enable or disable an entity.
-
-        <h5>Description</h5>
-        Enables or disables the specified component for the specified spatial entity.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using ##XrSpaceComponentStatusSetInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code componentType} <b>must</b> be a valid {@code XrSpaceComponentTypeFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #SetSpaceComponentStatusFB()
-        """
-
-    Expression("#TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpaceComponentTypeFB("componentType", "the component whose status is to be set.")
-    XrBool32("enabled", "the value to set the component to.")
-    XrDuration("timeout", "the number of nanoseconds before the operation should be cancelled. A value of #INFINITE_DURATION indicates to never time out. See <a href=\"https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\\#fundamentals-duration\">duration</a> for more details.")
+    Expression("#TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpaceComponentTypeFB("componentType")
+    XrBool32("enabled")
+    XrDuration("timeout")
 }
 
 val XrSpaceComponentStatusFB = struct(Module.OPENXR, "XrSpaceComponentStatusFB", mutable = false) {
-    documentation =
-        """
-        Current status of an entity.
-
-        <h5>Description</h5>
-        It holds information on the current state of a component.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using ##XrSpaceComponentStatusFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_COMPONENT_STATUS_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSpaceComponentStatusFB()
-        """
-
-    Expression("#TYPE_SPACE_COMPONENT_STATUS_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("enabled", "a boolean value that determines if a component is currently enabled or disabled.")
-    XrBool32("changePending", "a boolean value that determines if the component’s enabled state is about to change.")
+    Expression("#TYPE_SPACE_COMPONENT_STATUS_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("enabled")
+    XrBool32("changePending")
 }
 
 val XrUuidEXT = struct(Module.OPENXR, "XrUuidEXT", alias = XrUuid) {
     javaImport("static org.lwjgl.openxr.XR10.*")
-    documentation = "See ##XrUuid."
-
-    uint8_t("data", "")["XR_UUID_SIZE"]
+    uint8_t("data")["XR_UUID_SIZE"]
 }
 
 val XrEventDataSpatialAnchorCreateCompleteFB = struct(Module.OPENXR, "XrEventDataSpatialAnchorCreateCompleteFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Result of request to create a new spatial anchor.
-
-        <h5>Description</h5>
-        It describes the result of a request to create a new spatial anchor. Once this event is posted, it is the applications responsibility to take ownership of the {@code XrSpace}. The {@code XrSession} passed into #CreateSpatialAnchorFB() is the parent handle of the newly created {@code XrSpace}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using ##XrEventDataSpatialAnchorCreateCompleteFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrEventDataBaseHeader, ##XrEventDataBuffer, ##XrUuidEXT, #PollEvent()
-        """
-
-    Expression("#TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrAsyncRequestIdFB("requestId", "the ID of the asynchronous request used to create a new spatial anchor.")
-    XrResult("result", "an {@code XrResult} that determines if the request succeeded or if an error occurred.")
-    XrSpace("space", "the {@code XrSpace} handle to the newly created spatial anchor.")
-    XrUuidEXT("uuid", "the UUID of the newly created spatial anchor.")
+    Expression("#TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
+    XrSpace("space")
+    XrUuidEXT("uuid")
 }
 
 val XrEventDataSpaceSetStatusCompleteFB = struct(Module.OPENXR, "XrEventDataSpaceSetStatusCompleteFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Result of request to enable or disable a component.
-
-        <h5>Description</h5>
-        It describes the result of a request to enable or disable a component of a spatial entity.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using ##XrEventDataSpaceSetStatusCompleteFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT
-        """
-
-    Expression("#TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrAsyncRequestIdFB("requestId", "the ID of the asynchronous request used to enable or disable a component.")
-    XrResult("result", "an {@code XrResult} that describes whether the request succeeded or if an error occurred.")
-    XrSpace("space", "the {@code XrSpace} handle to the spatial entity.")
-    XrUuidEXT("uuid", "the UUID of the spatial entity.")
-    XrSpaceComponentTypeFB("componentType", "the type of component being enabled or disabled.")
-    XrBool32("enabled", "a boolean value indicating whether the component is now enabled or disabled.")
+    Expression("#TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
+    XrSpace("space")
+    XrUuidEXT("uuid")
+    XrSpaceComponentTypeFB("componentType")
+    XrBool32("enabled")
 }
 
 val XrFoveationProfileCreateInfoFB = struct(Module.OPENXR, "XrFoveationProfileCreateInfoFB") {
-    documentation =
-        """
-        The information to create a foveation profile.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFoveation XR_FB_foveation} extension <b>must</b> be enabled prior to using ##XrFoveationProfileCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_FOVEATION_PROFILE_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrFoveationLevelProfileCreateInfoFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateFoveationProfileFB()
-        """
-
-    Expression("#TYPE_FOVEATION_PROFILE_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_FOVEATION_PROFILE_CREATE_INFO_FB")..XrStructureType("type")
     PointerSetter(
         "XrFoveationLevelProfileCreateInfoFB",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    )..nullable..opaque_p("next")
 }
 
 val XrSwapchainCreateInfoFoveationFB = struct(Module.OPENXR, "XrSwapchainCreateInfoFoveationFB") {
-    documentation =
-        """
-        The information to create a swapchain supporting foveation.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFoveation XR_FB_foveation} extension <b>must</b> be enabled prior to using ##XrSwapchainCreateInfoFoveationFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrSwapchainCreateFoveationFlagBitsFB} values</li>
-        </ul>
-        """
-
-    Expression("#TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSwapchainCreateFoveationFlagsFB("flags", "a bitmask of {@code XrSwapchainCreateFoveationFlagBitsFB} which indicate various characteristics for how foveation is enabled on the swapchain.")
+    Expression("#TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrSwapchainCreateFoveationFlagsFB("flags")
 }
 
 val XrSwapchainStateFoveationFB = struct(Module.OPENXR, "XrSwapchainStateFoveationFB", parentStruct = XrSwapchainStateBaseHeaderFB) {
-    documentation =
-        """
-        Foveation swapchain state,xrefs=.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFoveation XR_FB_foveation} extension <b>must</b> be enabled prior to using ##XrSwapchainStateFoveationFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SWAPCHAIN_STATE_FOVEATION_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0</li>
-            <li>{@code profile} <b>must</b> be a valid {@code XrFoveationProfileFB} handle</li>
-        </ul>
-        """
-
-    Expression("#TYPE_SWAPCHAIN_STATE_FOVEATION_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSwapchainStateFoveationFlagsFB("flags", "a bitmask of {@code XrSwapchainStateFoveationFlagBitsFB} which indicate various characteristics of how and when the foveation properties of the swapchain <b>must</b> be updated.")
-    XrFoveationProfileFB("profile", "an {@code XrFoveationProfileFB} defining the desired foveation properties to be applied to the swapchain.")
+    Expression("#TYPE_SWAPCHAIN_STATE_FOVEATION_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrSwapchainStateFoveationFlagsFB("flags")
+    XrFoveationProfileFB("profile")
 }
 
 val XrFoveationLevelProfileCreateInfoFB = struct(Module.OPENXR, "XrFoveationLevelProfileCreateInfoFB") {
-    documentation =
-        """
-        The information to create a foveation profile for foveation levels.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFoveationConfiguration XR_FB_foveation_configuration} extension <b>must</b> be enabled prior to using ##XrFoveationLevelProfileCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrFoveationEyeTrackedProfileCreateInfoMETA</li>
-            <li>{@code level} <b>must</b> be a valid {@code XrFoveationLevelFB} value</li>
-            <li>{@code dynamic} <b>must</b> be a valid {@code XrFoveationDynamicFB} value</li>
-        </ul>
-        """
-
-    Expression("#TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB")..XrStructureType("type")
     PointerSetter(
         "XrFoveationEyeTrackedProfileCreateInfoMETA",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrFoveationLevelFB("level", "the maximum desired foveation level.")
-    float("verticalOffset", "the desired vertical offset in degrees for the center of the foveation pattern.")
-    XrFoveationDynamicFB("dynamic", "the desired dynamic foveation setting.")
+    )..nullable..opaque_p("next")
+    XrFoveationLevelFB("level")
+    float("verticalOffset")
+    XrFoveationDynamicFB("dynamic")
 }
 
 val XrSystemKeyboardTrackingPropertiesFB = struct(Module.OPENXR, "XrSystemKeyboardTrackingPropertiesFB", mutable = false) {
-    documentation =
-        """
-        Information from the system about tracked keyboard support.
-
-        <h5>Description</h5>
-        ##XrSystemKeyboardTrackingPropertiesFB is populated with information from the system about tracked keyboard support.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using ##XrSystemKeyboardTrackingPropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties
-        """
-
-    Expression("#TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrBool32("supportsKeyboardTracking", "defines whether the system supports the tracked keyboard feature.")
+    Expression("#TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsKeyboardTracking")
 }
 
 val XrKeyboardTrackingDescriptionFB = struct(Module.OPENXR, "XrKeyboardTrackingDescriptionFB", mutable = false) {
     javaImport("static org.lwjgl.openxr.FBKeyboardTracking.*")
-    documentation =
-        """
-        Description of a trackable keyboard.
-
-        <h5>Description</h5>
-        ##XrKeyboardTrackingDescriptionFB describes a trackable keyboard and its associated metadata.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using ##XrKeyboardTrackingDescriptionFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVector3f, #QuerySystemTrackedKeyboardFB()
-        """
-
-    uint64_t("trackedKeyboardId", "abstract identifier describing the type of keyboard.")
-    XrVector3f("size", "bounding box.")
-    XrKeyboardTrackingFlagsFB("flags", "additional information on the type of keyboard available. If #KEYBOARD_TRACKING_EXISTS_BIT_FB is not set there is no keyboard.")
-    charUTF8("name", "human readable keyboard identifier.")["XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB"]
+    uint64_t("trackedKeyboardId")
+    XrVector3f("size")
+    XrKeyboardTrackingFlagsFB("flags")
+    charUTF8("name")["XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB"]
 }
 
 val XrKeyboardSpaceCreateInfoFB = struct(Module.OPENXR, "XrKeyboardSpaceCreateInfoFB") {
-    documentation =
-        """
-        Input data needed by the system to start tracking a keyboard.
-
-        <h5>Description</h5>
-        ##XrKeyboardSpaceCreateInfoFB describes a request for the system needed to create a trackable {@code XrSpace} associated with the keyboard.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using ##XrKeyboardSpaceCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_KEYBOARD_SPACE_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateKeyboardSpaceFB()
-        """
-
-    Expression("#TYPE_KEYBOARD_SPACE_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    uint64_t("trackedKeyboardId", "abstract identifier describing the type of keyboard to track.")
+    Expression("#TYPE_KEYBOARD_SPACE_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    uint64_t("trackedKeyboardId")
 }
 
 val XrKeyboardTrackingQueryFB = struct(Module.OPENXR, "XrKeyboardTrackingQueryFB") {
-    documentation =
-        """
-        Input data needed to determine which type of tracked keyboard to query for.
-
-        <h5>Description</h5>
-        ##XrKeyboardTrackingQueryFB specifies input data needed to determine which type of tracked keyboard to query for.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using ##XrKeyboardTrackingQueryFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_KEYBOARD_TRACKING_QUERY_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrKeyboardTrackingQueryFlagBitsFB} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #QuerySystemTrackedKeyboardFB()
-        """
-
-    Expression("#TYPE_KEYBOARD_TRACKING_QUERY_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrKeyboardTrackingQueryFlagsFB("flags", "a bitmask of {@code XrKeyboardTrackingQueryFlagsFB}.")
+    Expression("#TYPE_KEYBOARD_TRACKING_QUERY_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrKeyboardTrackingQueryFlagsFB("flags")
 }
 
 val XrTriangleMeshCreateInfoFB = struct(Module.OPENXR, "XrTriangleMeshCreateInfoFB") {
-    documentation =
-        """
-        The information to create a triangle mesh.
-
-        <h5>Description</h5>
-        Mesh buffers <b>can</b> be updated between #TriangleMeshBeginUpdateFB() and #TriangleMeshEndUpdateFB() calls.
-
-        If the mesh is non-mutable, {@code vertexBuffer} <b>must</b> be a pointer to an array of {@code vertexCount} ##XrVector3f structures. If the mesh is non-mutable, {@code indexBuffer} <b>must</b> be a pointer to an array of 3 * {@code triangleCount} {@code uint32_t} vertex indices.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBTriangleMesh XR_FB_triangle_mesh} extension <b>must</b> be enabled prior to using ##XrTriangleMeshCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_TRIANGLE_MESH_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrTriangleMeshFlagBitsFB} values</li>
-            <li>{@code windingOrder} <b>must</b> be a valid {@code XrWindingOrderFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVector3f, #CreateTriangleMeshFB()
-        """
-
-    Expression("#TYPE_TRIANGLE_MESH_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrTriangleMeshFlagsFB("flags", "a bitmask of {@code XrTriangleMeshFlagBitsFB} that specify behavior.")
-    XrWindingOrderFB("windingOrder", "the {@code XrWindingOrderFB} value defining the winding order of the mesh triangles.")
-    uint32_t("vertexCount", "the number of vertices in the mesh. In the case of the mutable mesh, the value is treated as the maximum number of vertices the mesh will be able to represent at any time in its lifecycle. The actual number of vertices can vary and is defined when #TriangleMeshEndUpdateFB() is called.")
-    nullable..XrVector3f.const.p("vertexBuffer", "a pointer to the vertex data. The size of the array must be {@code vertexCount} elements. When the mesh is mutable ({@code ({@code flags} &amp; #TRIANGLE_MESH_MUTABLE_BIT_FB) != 0}), the {@code vertexBuffer} parameter <b>must</b> be {@code NULL} and mesh data <b>must</b> be populated separately.")
-    uint32_t("triangleCount", "the number of triangles in the mesh. In the case of the mutable mesh, the value is treated as the maximum number of triangles the mesh will be able to represent at any time in its lifecycle. The actual number of triangles can vary and is defined when #TriangleMeshEndUpdateFB() is called.")
-    nullable..uint32_t.const.p("indexBuffer", "the triangle indices. The size of the array must be {@code triangleCount} elements. When the mesh is mutable ({@code ({@code flags} &amp; #TRIANGLE_MESH_MUTABLE_BIT_FB) != 0}), the {@code indexBuffer} parameter <b>must</b> be {@code NULL} and mesh data <b>must</b> be populated separately.")
+    Expression("#TYPE_TRIANGLE_MESH_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrTriangleMeshFlagsFB("flags")
+    XrWindingOrderFB("windingOrder")
+    uint32_t("vertexCount")
+    nullable..XrVector3f.const.p("vertexBuffer")
+    uint32_t("triangleCount")
+    nullable..uint32_t.const.p("indexBuffer")
 }
 
 val XrSystemPassthroughPropertiesFB = struct(Module.OPENXR, "XrSystemPassthroughPropertiesFB", mutable = false) {
-    documentation =
-        """
-        A passthrough system property.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code supportsPassthrough} defines whether the system supports the passthrough feature.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrSystemPassthroughPropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB")..XrStructureType("type", "").mutable()
-    nullable..opaque_const_p("next", "").mutable()
-    XrBool32("supportsPassthrough", "")
+    Expression("#TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrBool32("supportsPassthrough")
 }
 
 val XrSystemPassthroughProperties2FB = struct(Module.OPENXR, "XrSystemPassthroughProperties2FB", mutable = false) {
-    documentation =
-        """
-        Passthrough system properties.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code capabilities} defines a set of features supported by the passthrough system.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrSystemPassthroughProperties2FB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB")..XrStructureType("type", "").mutable()
-    nullable..opaque_const_p("next", "").mutable()
-    XrPassthroughCapabilityFlagsFB("capabilities", "")
+    Expression("#TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrPassthroughCapabilityFlagsFB("capabilities")
 }
 
 val XrPassthroughCreateInfoFB = struct(Module.OPENXR, "XrPassthroughCreateInfoFB") {
-    documentation =
-        """
-        A create structure for passthrough.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code flags} is a bitmask of {@code XrPassthroughFlagBitsFB} that specify additional behavior.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrPassthroughCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrPassthroughFlagBitsFB} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreatePassthroughFB()
-        """
-
-    Expression("#TYPE_PASSTHROUGH_CREATE_INFO_FB")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
-    XrPassthroughFlagsFB("flags", "")
+    Expression("#TYPE_PASSTHROUGH_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPassthroughFlagsFB("flags")
 }
 
 val XrPassthroughLayerCreateInfoFB = struct(Module.OPENXR, "XrPassthroughLayerCreateInfoFB") {
-    documentation =
-        """
-        A create structure for passthrough layers.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code passthrough} an {@code XrPassthroughFB} handle.</li>
-            <li>{@code flags} {@code XrPassthroughFlagsFB} that specify additional behavior.</li>
-            <li>{@code purpose} {@code XrPassthroughLayerPurposeFB} that specifies the layer’s purpose.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrPassthroughLayerCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code passthrough} <b>must</b> be a valid {@code XrPassthroughFB} handle</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrPassthroughFlagBitsFB} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-            <li>{@code purpose} <b>must</b> be a valid {@code XrPassthroughLayerPurposeFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreatePassthroughLayerFB()
-        """
-
-    Expression("#TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
-    XrPassthroughFB("passthrough", "")
-    XrPassthroughFlagsFB("flags", "")
-    XrPassthroughLayerPurposeFB("purpose", "")
+    Expression("#TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPassthroughFB("passthrough")
+    XrPassthroughFlagsFB("flags")
+    XrPassthroughLayerPurposeFB("purpose")
 }
 
 val XrCompositionLayerPassthroughFB = struct(Module.OPENXR, "XrCompositionLayerPassthroughFB", parentStruct = XrCompositionLayerBaseHeader) {
-    documentation =
-        """
-        A composition layer for passthrough.
-
-        <h5>Description</h5>
-        It is a composition layer type that may be submitted in #EndFrame() where an ##XrCompositionLayerBaseHeader is specified, as a stand-in for the actual passthrough contents.
-
-        Errata: the third field of this structure is named {@code flags} rather than {@code layerFlags} as expected and as documented for for the parent type ##XrCompositionLayerBaseHeader.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrCompositionLayerPassthroughFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrCompositionLayerFlagBits} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code layerHandle} <b>must</b> be a valid {@code XrPassthroughLayerFB} handle</li>
-            <li>Both of {@code layerHandle} and {@code space} <b>must</b> have been created, allocated, or retrieved from the same {@code XrSession}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrCompositionLayerFlags("flags", "a bitmask of {@code XrCompositionLayerFlagBits} that specify additional behavior.")
-    XrSpace("space", "the {@code XrSpace} that specifies the layer’s space - <b>must</b> be #NULL_HANDLE.")
-    XrPassthroughLayerFB("layerHandle", "the {@code XrPassthroughLayerFB} that defines this layer’s behavior.")
+    Expression("#TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerFlags("flags")
+    XrSpace("space")
+    XrPassthroughLayerFB("layerHandle")
 }
 
 val XrGeometryInstanceCreateInfoFB = struct(Module.OPENXR, "XrGeometryInstanceCreateInfoFB") {
-    documentation =
-        """
-        A create structure for geometry instance.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code layer} is the {@code XrPassthroughLayerFB}.</li>
-            <li>{@code mesh} is the {@code XrTriangleMeshFB}.</li>
-            <li>{@code baseSpace} is the {@code XrSpace} that defines the geometry instance’s base space for transformations.</li>
-            <li>{@code pose} is the ##XrPosef that defines the geometry instance’s pose.</li>
-            <li>{@code scale} is the ##XrVector3f that defines the geometry instance’s scale.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrGeometryInstanceCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code layer} <b>must</b> be a valid {@code XrPassthroughLayerFB} handle</li>
-            <li>{@code mesh} <b>must</b> be a valid {@code XrTriangleMeshFB} handle</li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>Each of {@code baseSpace}, {@code layer}, and {@code mesh} <b>must</b> have been created, allocated, or retrieved from the same {@code XrSession}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, ##XrVector3f, #CreateGeometryInstanceFB()
-        """
-
-    Expression("#TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
-    XrPassthroughLayerFB("layer", "")
-    XrTriangleMeshFB("mesh", "")
-    XrSpace("baseSpace", "")
-    XrPosef("pose", "")
-    XrVector3f("scale", "")
+    Expression("#TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPassthroughLayerFB("layer")
+    XrTriangleMeshFB("mesh")
+    XrSpace("baseSpace")
+    XrPosef("pose")
+    XrVector3f("scale")
 }
 
 val XrGeometryInstanceTransformFB = struct(Module.OPENXR, "XrGeometryInstanceTransformFB") {
-    documentation =
-        """
-        A geometry transformation.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code baseSpace} is the {@code XrSpace} that defines the geometry instance’s base space for transformations.</li>
-            <li>{@code time} is the {@code XrTime} that define the time at which the transform is applied.</li>
-            <li>{@code pose} is the ##XrPosef that defines the geometry instance’s pose.</li>
-            <li>{@code scale} is the ##XrVector3f that defines the geometry instance’s scale.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrGeometryInstanceTransformFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, ##XrVector3f, #GeometryInstanceSetTransformFB()
-        """
-
-    Expression("#TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
-    XrSpace("baseSpace", "")
-    XrTime("time", "")
-    XrPosef("pose", "")
-    XrVector3f("scale", "")
+    Expression("#TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
+    XrPosef("pose")
+    XrVector3f("scale")
 }
 
 val XrPassthroughStyleFB = struct(Module.OPENXR, "XrPassthroughStyleFB") {
-    documentation =
-        """
-        A layer style.
-
-        <h5>Description</h5>
-        ##XrPassthroughStyleFB lets applications customize the appearance of passthrough layers. In addition to the parameters specified here, applications <b>may</b> add one of the following structures to the structure chain: ##XrPassthroughColorMapMonoToRgbaFB, ##XrPassthroughColorMapMonoToMonoFB, ##XrPassthroughBrightnessContrastSaturationFB. These structures are mutually exclusive. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if more than one of them are present in the structure chain.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrPassthroughStyleFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_STYLE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrPassthroughBrightnessContrastSaturationFB, ##XrPassthroughColorMapInterpolatedLutMETA, ##XrPassthroughColorMapLutMETA, ##XrPassthroughColorMapMonoToMonoFB, ##XrPassthroughColorMapMonoToRgbaFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrColor4f, #PassthroughLayerSetStyleFB()
-        """
-
-    Expression("#TYPE_PASSTHROUGH_STYLE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_PASSTHROUGH_STYLE_FB")..XrStructureType("type")
     PointerSetter(
         "XrPassthroughBrightnessContrastSaturationFB", "XrPassthroughColorMapInterpolatedLutMETA", "XrPassthroughColorMapLutMETA", "XrPassthroughColorMapMonoToMonoFB", "XrPassthroughColorMapMonoToRgbaFB",
         prepend = true
-    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    float("textureOpacityFactor", "the opacity of the passthrough imagery in the range [0, 1].")
-    XrColor4f("edgeColor", "the ##XrColor4f that defines the edge rendering color. Edges are detected in the original passthrough imagery and rendered on top of it. Edge rendering is disabled when the alpha value of {@code edgeColor} is zero.")
+    )..nullable..opaque_const_p("next")
+    float("textureOpacityFactor")
+    XrColor4f("edgeColor")
 }
 
 val XrPassthroughColorMapMonoToRgbaFB = struct(Module.OPENXR, "XrPassthroughColorMapMonoToRgbaFB") {
     javaImport("static org.lwjgl.openxr.FBPassthrough.*")
-    documentation =
-        """
-        A layer color map.
-
-        <h5>Description</h5>
-        ##XrPassthroughColorMapMonoToRgbaFB lets applications define a map which replaces each input luminance value in the passthrough imagery with an RGBA color value. The map is applied before any additional effects (such as edges) are rendered on top.
-
-        ##XrPassthroughColorMapMonoToRgbaFB is provided in the {@code next} chain of ##XrPassthroughStyleFB.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrPassthroughColorMapMonoToRgbaFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrColor4f
-        """
-
-    Expression("#TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrColor4f("textureColorMap", "an array of ##XrColor4f colors to which the passthrough imagery luminance values are mapped.")["XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB"]
+    Expression("#TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrColor4f("textureColorMap")["XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB"]
 }
 
 val XrPassthroughColorMapMonoToMonoFB = struct(Module.OPENXR, "XrPassthroughColorMapMonoToMonoFB") {
     javaImport("static org.lwjgl.openxr.FBPassthrough.*")
-    documentation =
-        """
-        A layer color map.
-
-        <h5>Description</h5>
-        ##XrPassthroughColorMapMonoToMonoFB lets applications define a map which replaces each input luminance value in the passthrough imagery with a grayscale color value defined in {@code textureColorMap}. The map is applied before any additional effects (such as edges) are rendered on top.
-
-        ##XrPassthroughColorMapMonoToMonoFB is provided in the {@code next} chain of ##XrPassthroughStyleFB.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrPassthroughColorMapMonoToMonoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    uint8_t("textureColorMap", "an array of {@code uint8_t} grayscale color values to which the passthrough luminance values are mapped.")["XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB"]
+    Expression("#TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    uint8_t("textureColorMap")["XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB"]
 }
 
 val XrPassthroughBrightnessContrastSaturationFB = struct(Module.OPENXR, "XrPassthroughBrightnessContrastSaturationFB") {
-    documentation =
-        """
-        A color adjustment for passthrough layers.
-
-        <h5>Description</h5>
-        ##XrPassthroughBrightnessContrastSaturationFB lets applications adjust the brightness, contrast, and saturation of passthrough layers. The adjustments only are applied before any additional effects (such as edges) are rendered on top.
-
-        The adjustments are applied in CIELAB color space (white point D65) using the following formulas:
-
-        <ul>
-            <li><code>L*' = clamp((L* - 50) × contrast + 50, 0, 100)</code></li>
-            <li><code>L*'' = clamp(L*' + brightness, 0, 100)</code></li>
-            <li><code>(a*', b*') = (a*, b*) × saturation</code></li>
-            <li>Resulting color: (L*'', a*', b*')</li>
-        </ul>
-
-        ##XrPassthroughBrightnessContrastSaturationFB is provided in the {@code next} chain of ##XrPassthroughStyleFB.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrPassthroughBrightnessContrastSaturationFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    float("brightness", "the brightness adjustment value in the range [-100, 100]. The neutral element is 0.")
-    float("contrast", "the contrast adjustment value in the range [0, Infinity]. The neutral element is 1.")
-    float("saturation", "the saturation adjustment value in the range [0, Infinity]. The neutral element is 1.")
+    Expression("#TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("brightness")
+    float("contrast")
+    float("saturation")
 }
 
 val XrEventDataPassthroughStateChangedFB = struct(Module.OPENXR, "XrEventDataPassthroughStateChangedFB") {
-    documentation =
-        """
-        An event for passthrough state changes.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code flags} {@code XrPassthroughStateChangedFlagsFB} that specify additional behavior.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using ##XrEventDataPassthroughStateChangedFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrPassthroughStateChangedFlagBitsFB} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
-    XrPassthroughStateChangedFlagsFB("flags", "")
+    Expression("#TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPassthroughStateChangedFlagsFB("flags")
 }
 
 val XrRenderModelPathInfoFB = struct(Module.OPENXR, "XrRenderModelPathInfoFB") {
-    documentation =
-        """
-        Supported model paths.
-
-        <h5>Description</h5>
-        ##XrRenderModelPathInfoFB contains a model path supported by the device when returned from #EnumerateRenderModelPathsFB(). This path can be used to request information about the render model for the connected device that the path represents using #GetRenderModelPropertiesFB().
-
-        <h5>Possible Render Model Paths</h5>
-        <ul>
-            <li>
-                Controller models with origin at the grip pose.
-                <ul>
-                    <li>pathname:/model_fb/controller/left</li>
-                    <li>pathname:/model_fb/controller/right</li>
-                </ul>
-            </li>
-            <li>
-                Keyboard models with origin at the center of its bounding box.
-                <ul>
-                    <li>pathname:/model_fb/keyboard/local</li>
-                    <li>pathname:/model_fb/keyboard/remote</li>
-                    <li>pathname:/model_meta/keyboard/virtual (if the {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension is enabled)</li>
-                </ul>
-            </li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelPathInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_PATH_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #EnumerateRenderModelPathsFB()
-        """
-
-    Expression("#TYPE_RENDER_MODEL_PATH_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrPath("path", "a valid {@code XrPath} used for retrieving model properties from #GetRenderModelPropertiesFB().")
+    Expression("#TYPE_RENDER_MODEL_PATH_INFO_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrPath("path")
 }
 
 val XrRenderModelPropertiesFB = struct(Module.OPENXR, "XrRenderModelPropertiesFB") {
     javaImport("static org.lwjgl.openxr.FBRenderModel.*")
-    documentation =
-        """
-        The information about the render model.
-
-        <h5>Description</h5>
-        ##XrRenderModelPropertiesFB contains information about the render model for a device. ##XrRenderModelPropertiesFB <b>must</b> be provided when calling #GetRenderModelPropertiesFB(). The {@code XrRenderModelKeyFB} included in the properties is a unique key for each render model that is valid across multiple instances and installs.
-
-        If the application decides to cache or save the render model in any way, {@code modelVersion} can be used to determine if the render model has changed. The application <b>should</b> then update its cached or saved version.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelPropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrRenderModelCapabilitiesRequestFB</li>
-            <li>{@code modelName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to #MAX_RENDER_MODEL_NAME_SIZE_FB</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrRenderModelFlagBitsFB} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetRenderModelPropertiesFB()
-        """
-
-    Expression("#TYPE_RENDER_MODEL_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_RENDER_MODEL_PROPERTIES_FB")..XrStructureType("type")
     PointerSetter(
         "XrRenderModelCapabilitiesRequestFB",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. ##XrRenderModelCapabilitiesRequestFB is a structure in this structure chain and <b>should</b> be linked when this structure is passed to #GetRenderModelPropertiesFB().")
-    uint32_t("vendorId", "the vendor id of the model.")
-    charUTF8("modelName", "the name of the model.")["XR_MAX_RENDER_MODEL_NAME_SIZE_FB"]
-    XrRenderModelKeyFB("modelKey", "the unique model key used to load the model in #LoadRenderModelFB().")
-    uint32_t("modelVersion", "the version number of the model.")
-    XrRenderModelFlagsFB("flags", "a bitmask of {@code XrRenderModelFlagsFB}. After a successful call to #GetRenderModelPropertiesFB(), flags must contain the support level of the model and no other support levels.")
+    )..nullable..opaque_p("next")
+    uint32_t("vendorId")
+    charUTF8("modelName")["XR_MAX_RENDER_MODEL_NAME_SIZE_FB"]
+    XrRenderModelKeyFB("modelKey")
+    uint32_t("modelVersion")
+    XrRenderModelFlagsFB("flags")
 }
 
 val XrRenderModelBufferFB = struct(Module.OPENXR, "XrRenderModelBufferFB") {
-    documentation =
-        """
-        The buffer containing the data for the render model.
-
-        <h5>Description</h5>
-        ##XrRenderModelBufferFB is used when loading the binary data for a render model. ##XrRenderModelBufferFB <b>must</b> be provided when calling #LoadRenderModelFB().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelBufferFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_BUFFER_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code bufferCapacityInput} is not 0, {@code buffer} <b>must</b> be a pointer to an array of {@code bufferCapacityInput} {@code uint8_t} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #LoadRenderModelFB()
-        """
-
-    Expression("#TYPE_RENDER_MODEL_BUFFER_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("buffer", optional = true)..uint32_t("bufferCapacityInput", "the capacity of the {@code buffer}, or 0 to retrieve the required capacity.")
-    uint32_t("bufferCountOutput", "the count of {@code uint8_t} {@code buffer} written, or the required capacity in the case that {@code bufferCapacityInput} is insufficient.")
-    nullable..uint8_t.p("buffer", "a pointer to an application-allocated array that will be filled with the render model binary data.")
+    Expression("#TYPE_RENDER_MODEL_BUFFER_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("buffer", optional = true)..uint32_t("bufferCapacityInput")
+    uint32_t("bufferCountOutput")
+    nullable..uint8_t.p("buffer")
 }
 
 val XrRenderModelLoadInfoFB = struct(Module.OPENXR, "XrRenderModelLoadInfoFB") {
-    documentation =
-        """
-        The information for which render model to load.
-
-        <h5>Description</h5>
-        ##XrRenderModelLoadInfoFB is used to provide information about which render model to load. ##XrRenderModelLoadInfoFB <b>must</b> be provided when calling #LoadRenderModelFB().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelLoadInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_LOAD_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #LoadRenderModelFB()
-        """
-
-    Expression("#TYPE_RENDER_MODEL_LOAD_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrRenderModelKeyFB("modelKey", "the unique model key for a connected device.")
+    Expression("#TYPE_RENDER_MODEL_LOAD_INFO_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrRenderModelKeyFB("modelKey")
 }
 
 val XrSystemRenderModelPropertiesFB = struct(Module.OPENXR, "XrSystemRenderModelPropertiesFB", mutable = false) {
-    documentation =
-        """
-        A render model system property.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
-            <li>{@code supportsRenderModelLoading} defines whether the system supports loading render models.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrSystemRenderModelPropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB")..XrStructureType("type", "").mutable()
-    nullable..opaque_p("next", "").mutable()
-    XrBool32("supportsRenderModelLoading", "")
+    Expression("#TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsRenderModelLoading")
 }
 
 val XrRenderModelCapabilitiesRequestFB = struct(Module.OPENXR, "XrRenderModelCapabilitiesRequestFB") {
-    documentation =
-        """
-        A render model system property.
-
-        <h5>Description</h5>
-        ##XrRenderModelCapabilitiesRequestFB contains information about the render capabilities requested for a model. ##XrRenderModelCapabilitiesRequestFB <b>must</b> be set in the structure chain of the {@code next} pointer on the ##XrRenderModelPropertiesFB passed into the #GetRenderModelPropertiesFB() call. The {@code flags} on ##XrRenderModelCapabilitiesRequestFB represent an acknowledgement of being able to handle the individual model capability levels. If no ##XrRenderModelCapabilitiesRequestFB is on the structure chain then the runtime <b>should</b> treat it as if a value of #RENDER_MODEL_SUPPORTS_GLTF_2_0_SUBSET_1_BIT_FB was set. If the runtime does not have a model available that matches any of the supports flags set, then it <b>must</b> return a #RENDER_MODEL_UNAVAILABLE_FB result.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using ##XrRenderModelCapabilitiesRequestFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrRenderModelFlagBitsFB} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-        </ul>
-        """
-
-    Expression("#TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrRenderModelFlagsFB("flags", "a bit mask of the model complexities that the application is able to support.")
+    Expression("#TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrRenderModelFlagsFB("flags")
 }
 
 val XrBindingModificationBaseHeaderKHR = struct(Module.OPENXR, "XrBindingModificationBaseHeaderKHR") {
-    documentation =
-        """
-        Base struct for all binding modifications.
-
-        <h5>Description</h5>
-        The ##XrBindingModificationBaseHeaderKHR is a base structure is overridden by stext:XrBindingModification* child structures.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRBindingModification XR_KHR_binding_modification} extension <b>must</b> be enabled prior to using ##XrBindingModificationBaseHeaderKHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBindingModificationsKHR, #SuggestInteractionProfileBindings()
-        """
-
-    XrStructureType("type", "the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or in this extension.")
+    XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrBindingModificationsKHR = struct(Module.OPENXR, "XrBindingModificationsKHR") {
-    documentation =
-        """
-        Suggested bindings with binding modification details.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link KHRBindingModification XR_KHR_binding_modification} extension <b>must</b> be enabled prior to using ##XrBindingModificationsKHR</li>
-            <li>{@code type} <b>must</b> be #TYPE_BINDING_MODIFICATIONS_KHR</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code bindingModificationCount} is not 0, {@code bindingModifications} <b>must</b> be a pointer to an array of {@code bindingModificationCount} valid ##XrBindingModificationBaseHeaderKHR-based structures. See also: ##XrInteractionProfileAnalogThresholdVALVE, ##XrInteractionProfileDpadBindingEXT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBindingModificationBaseHeaderKHR, #SuggestInteractionProfileBindings()
-        """
-
-    Expression("#TYPE_BINDING_MODIFICATIONS_KHR")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("bindingModifications", optional = true)..uint32_t("bindingModificationCount", "the number of binding modifications in the array pointed to by {@code bindingModifications}.")
-    nullable..XrBindingModificationBaseHeaderKHR.const.p.const.p("bindingModifications", "a pointer to an array of pointers to binding modification structures based on ##XrBindingModificationBaseHeaderKHR, that define all of the application’s suggested binding modifications for the specified interaction profile.")
+    Expression("#TYPE_BINDING_MODIFICATIONS_KHR")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("bindingModifications", optional = true)..uint32_t("bindingModificationCount")
+    nullable..XrBindingModificationBaseHeaderKHR.const.p.const.p("bindingModifications")
 }
 
 val XrViewLocateFoveatedRenderingVARJO = struct(Module.OPENXR, "XrViewLocateFoveatedRenderingVARJO") {
-    documentation =
-        """
-        Request foveated FoV.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return foveated field of view when {@code foveatedRenderingActive} is #TRUE.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link VARJOFoveatedRendering XR_VARJO_foveated_rendering} extension <b>must</b> be enabled prior to using ##XrViewLocateFoveatedRenderingVARJO</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrViewLocateInfo
-        """
-
-    Expression("#TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBool32("foveatedRenderingActive", "an {@code XrBool32}, indicating if runtime should return foveated FoV.")
+    Expression("#TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("foveatedRenderingActive")
 }
 
 val XrFoveatedViewConfigurationViewVARJO = struct(Module.OPENXR, "XrFoveatedViewConfigurationViewVARJO") {
-    documentation =
-        """
-        Foveated view configuration views.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link VARJOFoveatedRendering XR_VARJO_foveated_rendering} extension <b>must</b> be enabled prior to using ##XrFoveatedViewConfigurationViewVARJO</li>
-            <li>{@code type} <b>must</b> be #TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        For example:
-
-        <pre><code>
-￿XrInstance instance; // previously populated
-￿XrSystemId systemId; // previously populated
-￿XrViewConfigurationType viewConfigType; // Select XR_VIEW_CONFIGURATION_TYPE_PRIMARY_QUAD_VARJO
-￿
-￿XrSystemFoveatedRenderingPropertiesVARJO foveatedRenderingProperties{XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO};
-￿XrSystemProperties systemProperties{XR_TYPE_SYSTEM_PROPERTIES, &amp;foveatedRenderingProperties};
-￿CHK_XR(xrGetSystemProperties(instance, systemId, &amp;systemProperties));
-￿
-￿uint32_t viewCount;
-￿CHK_XR(xrEnumerateViewConfigurationViews(instance, systemId, viewConfigType, 0, &amp;viewCount, nullptr));
-￿// Non-foveated rendering views dimensions
-￿std::vector&lt;XrViewConfigurationView&gt; configViews(viewCount, {XR_TYPE_VIEW_CONFIGURATION_VIEW});
-￿CHK_XR(xrEnumerateViewConfigurationViews(instance, systemId, viewConfigType, viewCount, &amp;viewCount, configViews.data()));
-￿
-￿// Foveated rendering views dimensions
-￿std::vector&lt;XrViewConfigurationView&gt; foveatedViews;
-￿if (foveatedRenderingProperties.supportsFoveatedRendering &amp;&amp; viewConfigType == XR_VIEW_CONFIGURATION_TYPE_PRIMARY_QUAD_VARJO) {
-￿  std::vector&lt;XrFoveatedViewConfigurationViewVARJO&gt; requestFoveatedConfig{4, {XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO, nullptr, XR_TRUE}};
-￿  foveatedViews = std::vector&lt;XrViewConfigurationView&gt;{4, {XR_TYPE_VIEW_CONFIGURATION_VIEW}};
-￿  for (size_t i = 0; i &lt; 4; i++) {
-￿    foveatedViews[i].next = &amp;requestFoveatedConfig[i];
-￿  }
-￿  CHK_XR(xrEnumerateViewConfigurationViews(instance, systemId, viewConfigType, viewCount, &amp;viewCount, foveatedViews.data()));
-￿}</code></pre>
-
-        <h5>Note</h5>
-        Applications using this extension are encouraged to create two sets of swapchains or one big enough set of swapchains and two sets of viewports. One set will be used when rendering gaze is not available and other one will be used when foveated rendering and rendering gaze is available. Using foveated textures <b>may</b> not provide optimal visual quality when rendering gaze is not available.
-
-        <h5>See Also</h5>
-        ##XrViewConfigurationView
-        """
-
-    Expression("#TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBool32("foveatedRenderingActive", "an {@code XrBool32}, indicating if the runtime should return foveated view configuration view.")
+    Expression("#TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrBool32("foveatedRenderingActive")
 }
 
 val XrSystemFoveatedRenderingPropertiesVARJO = struct(Module.OPENXR, "XrSystemFoveatedRenderingPropertiesVARJO", mutable = false) {
-    documentation =
-        """
-        System property for foveated rendering.
-
-        <h5>Description</h5>
-        The runtime <b>should</b> return #TRUE for {@code supportsFoveatedRendering} when rendering gaze is available in the system. An application <b>should</b> avoid using foveated rendering functionality when {@code supportsFoveatedRendering} is #FALSE.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link VARJOFoveatedRendering XR_VARJO_foveated_rendering} extension <b>must</b> be enabled prior to using ##XrSystemFoveatedRenderingPropertiesVARJO</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsFoveatedRendering", "an {@code XrBool32}, indicating if current system is capable of performoning foveated rendering.")
+    Expression("#TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsFoveatedRendering")
 }
 
 val XrCompositionLayerDepthTestVARJO = struct(Module.OPENXR, "XrCompositionLayerDepthTestVARJO") {
-    documentation =
-        """
-        The structure to be passed when submitting layers to enable depth testing.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link VARJOCompositionLayerDepthTest XR_VARJO_composition_layer_depth_test} extension <b>must</b> be enabled prior to using ##XrCompositionLayerDepthTestVARJO</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #EndFrame()
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    float("depthTestRangeNearZ", "in a non-negative distance in meters that specifies the lower bound of the range where depth testing should be performed. Must be less than {@code depthTestRangeFarZ}. Value of zero means that there is no lower bound.")
-    float("depthTestRangeFarZ", "a positive distance in meters that specifies the upper bound of the range where depth testing should be performed. Must be greater than {@code depthTestRangeNearZ}. Value of floating point positive infinity means that there is no upper bound.")
+    Expression("#TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("depthTestRangeNearZ")
+    float("depthTestRangeFarZ")
 }
 
 val XrSystemMarkerTrackingPropertiesVARJO = struct(Module.OPENXR, "XrSystemMarkerTrackingPropertiesVARJO", mutable = false) {
-    documentation =
-        """
-        System property for marker tracking.
-
-        <h5>Description</h5>
-        An application <b>may</b> inspect whether the system is capable of marker tracking by chaining an ##XrSystemMarkerTrackingPropertiesVARJO structure to the ##XrSystemProperties structure when calling #GetSystemProperties().
-
-        The runtime <b>should</b> return #TRUE for {@code supportsMarkerTracking} when marker tracking is available in the system, otherwise #FALSE. Marker tracking calls <b>must</b> return #ERROR_FEATURE_UNSUPPORTED if marker tracking is not available in the system.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link VARJOMarkerTracking XR_VARJO_marker_tracking} extension <b>must</b> be enabled prior to using ##XrSystemMarkerTrackingPropertiesVARJO</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties, #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrBool32("supportsMarkerTracking", "an {@code XrBool32}, indicating if current system is capable of performing marker tracking.")
+    Expression("#TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsMarkerTracking")
 }
 
 val XrEventDataMarkerTrackingUpdateVARJO = struct(Module.OPENXR, "XrEventDataMarkerTrackingUpdateVARJO", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Structure representing marker tracking information.
-
-        <h5>Description</h5>
-        Receiving the ##XrEventDataMarkerTrackingUpdateVARJO event structure indicates that the tracking information has changed. The runtime <b>must</b> not send more than one event per frame per marker. The runtime <b>must</b> send an event if the marker has changed its state (active or inactive). The runtime <b>must</b> send an event if it has detected pose change of the active marker.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link VARJOMarkerTracking XR_VARJO_marker_tracking} extension <b>must</b> be enabled prior to using ##XrEventDataMarkerTrackingUpdateVARJO</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PollEvent()
-        """
-
-    Expression("#TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    uint64_t("markerId", "unique identifier of the marker that has been updated.")
-    XrBool32("isActive", "the tracking state of the marker.")
-    XrBool32("isPredicted", "the prediction state of the marker.")
-    XrTime("time", "the time of the marker update.")
+    Expression("#TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    uint64_t("markerId")
+    XrBool32("isActive")
+    XrBool32("isPredicted")
+    XrTime("time")
 }
 
 val XrMarkerSpaceCreateInfoVARJO = struct(Module.OPENXR, "XrMarkerSpaceCreateInfoVARJO") {
-    documentation =
-        """
-        Information to create a space from a spatial anchor.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link VARJOMarkerTracking XR_VARJO_marker_tracking} extension <b>must</b> be enabled prior to using ##XrMarkerSpaceCreateInfoVARJO</li>
-            <li>{@code type} <b>must</b> be #TYPE_MARKER_SPACE_CREATE_INFO_VARJO</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateMarkerSpaceVARJO()
-        """
-
-    Expression("#TYPE_MARKER_SPACE_CREATE_INFO_VARJO")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    uint64_t("markerId", "unique identifier of the marker.")
-    XrPosef("poseInMarkerSpace", "an ##XrPosef defining the position and orientation of the new space’s origin relative to the marker’s natural origin.")
+    Expression("#TYPE_MARKER_SPACE_CREATE_INFO_VARJO")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    uint64_t("markerId")
+    XrPosef("poseInMarkerSpace")
 }
 
 val XrFrameEndInfoML = struct(Module.OPENXR, "XrFrameEndInfoML") {
-    documentation =
-        """
-        Per frame configuration parameters.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLFrameEndInfo XR_ML_frame_end_info} extension <b>must</b> be enabled prior to using ##XrFrameEndInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_FRAME_END_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrFrameEndInfoFlagBitsML} values</li>
-        </ul>
-        """
-
-    Expression("#TYPE_FRAME_END_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    float("focusDistance", "the distance, in meters, to defined focus point for the client content. The focus distance is interpreted as the positive distance to the client-determined object of interest (relative to the forward vector of the Lightwear).")
-    XrFrameEndInfoFlagsML("flags", "a bitmask of {@code XrFrameEndInfoFlagsML}")
+    Expression("#TYPE_FRAME_END_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("focusDistance")
+    XrFrameEndInfoFlagsML("flags")
 }
 
 val XrGlobalDimmerFrameEndInfoML = struct(Module.OPENXR, "XrGlobalDimmerFrameEndInfoML") {
-    documentation =
-        """
-        Global Dimmer End Frame Information.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLGlobalDimmer XR_ML_global_dimmer} extension <b>must</b> be enabled prior to using ##XrGlobalDimmerFrameEndInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrGlobalDimmerFrameEndInfoFlagBitsML} values</li>
-        </ul>
-        """
-
-    Expression("#TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    float("dimmerValue", "a value between 0.0 (transparent) and 1.0 (opaque). The runtime <b>may</b> adjust the dimmerValue used during composition at the runtime’s discretion. This <b>may</b> be done for user safety, display performance, or other reasons. Values outside of the range are silently clamped.")
-    XrGlobalDimmerFrameEndInfoFlagsML("flags", "a bitmask of {@code XrGlobalDimmerFrameEndInfoFlagsML}")
+    Expression("#TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("dimmerValue")
+    XrGlobalDimmerFrameEndInfoFlagsML("flags")
 }
 
 val XrCoordinateSpaceCreateInfoML = struct(Module.OPENXR, "XrCoordinateSpaceCreateInfoML") {
-    documentation =
-        """
-        Structure used to create an XrSpace from a cfuid.
-
-        <h5>Description</h5>
-        ##XrCoordinateSpaceCreateInfoML is provided as input when calling #CreateSpaceFromCoordinateFrameUIDML() to convert a Magic Leap SDK generated {@code MLCoordinateFrameUID} to an {@code XrSpace}. The conversion only needs to be done once even if the underlying {@code MLCoordinateFrameUID} changes its pose.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLCompat XR_ML_compat} extension <b>must</b> be enabled prior to using ##XrCoordinateSpaceCreateInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_COORDINATE_SPACE_CREATE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code cfuid} <b>must</b> be a valid {@code MLCoordinateFrameUID} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateSpaceFromCoordinateFrameUIDML()
-        """
-
-    Expression("#TYPE_COORDINATE_SPACE_CREATE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    MLCoordinateFrameUID("cfuid", "the {@code MLCoordinateFrameUID} as generated by the non-OpenXR API in the Magic Leap SDK.")
-    XrPosef("poseInCoordinateSpace", "an ##XrPosef defining the position and orientation of the new space’s origin within the natural reference frame of the {@code cfuid}.")
+    Expression("#TYPE_COORDINATE_SPACE_CREATE_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    MLCoordinateFrameUID("cfuid")
+    XrPosef("poseInCoordinateSpace")
 }
 
 val XrSystemMarkerUnderstandingPropertiesML = struct(Module.OPENXR, "XrSystemMarkerUnderstandingPropertiesML", mutable = false) {
-    documentation =
-        """
-        System Property for Marker Understanding support.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrSystemMarkerUnderstandingPropertiesML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrBool32("supportsMarkerUnderstanding", "indicates whether marker detection and tracking is supported by this system.")
+    Expression("#TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsMarkerUnderstanding")
 }
 
 val XrMarkerDetectorCreateInfoML = struct(Module.OPENXR, "XrMarkerDetectorCreateInfoML") {
-    documentation =
-        """
-        Information to create a marker detection handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorCreateInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_CREATE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrMarkerDetectorAprilTagInfoML, ##XrMarkerDetectorArucoInfoML, ##XrMarkerDetectorCustomProfileInfoML, ##XrMarkerDetectorSizeInfoML</li>
-            <li>{@code profile} <b>must</b> be a valid {@code XrMarkerDetectorProfileML} value</li>
-            <li>{@code markerType} <b>must</b> be a valid {@code XrMarkerTypeML} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateMarkerDetectorML()
-        """
-
-    Expression("#TYPE_MARKER_DETECTOR_CREATE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_MARKER_DETECTOR_CREATE_INFO_ML")..XrStructureType("type")
     PointerSetter(
         "XrMarkerDetectorAprilTagInfoML", "XrMarkerDetectorArucoInfoML", "XrMarkerDetectorCustomProfileInfoML", "XrMarkerDetectorSizeInfoML",
         prepend = true
-    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrMarkerDetectorProfileML("profile", "the marker tracker profile to be used.")
-    XrMarkerTypeML("markerType", "the detector type that this tracker enables.")
+    )..nullable..opaque_const_p("next")
+    XrMarkerDetectorProfileML("profile")
+    XrMarkerTypeML("markerType")
 }
 
 val XrMarkerDetectorArucoInfoML = struct(Module.OPENXR, "XrMarkerDetectorArucoInfoML") {
-    documentation =
-        """
-        Information to create a marker detection handle for Aruco markers.
-
-        <h5>Description</h5>
-        This structure is required by the #MARKER_TYPE_ARUCO_ML detector.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorArucoInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_ARUCO_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code arucoDict} <b>must</b> be a valid {@code XrMarkerArucoDictML} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrMarkerDetectorCreateInfoML, #CreateMarkerDetectorML()
-        """
-
-    Expression("#TYPE_MARKER_DETECTOR_ARUCO_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrMarkerArucoDictML("arucoDict", "the ArUco dictionary name from which markers will be detected.")
+    Expression("#TYPE_MARKER_DETECTOR_ARUCO_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrMarkerArucoDictML("arucoDict")
 }
 
 val XrMarkerDetectorSizeInfoML = struct(Module.OPENXR, "XrMarkerDetectorSizeInfoML") {
-    documentation =
-        """
-        Information to create a marker detection handle for QR markers.
-
-        <h5>Description</h5>
-        Pose estimation accuracy depends on the accuracy of the specified {@code markerLength}.
-
-        This structure is used by #MARKER_TYPE_ARUCO_ML, #MARKER_TYPE_APRIL_TAG_ML, and #MARKER_TYPE_QR_ML detectors.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorSizeInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_SIZE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrMarkerDetectorCreateInfoML, #CreateMarkerDetectorML()
-        """
-
-    Expression("#TYPE_MARKER_DETECTOR_SIZE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    float("markerLength", "the physical length of one side of a marker.")
+    Expression("#TYPE_MARKER_DETECTOR_SIZE_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("markerLength")
 }
 
 val XrMarkerDetectorAprilTagInfoML = struct(Module.OPENXR, "XrMarkerDetectorAprilTagInfoML") {
-    documentation =
-        """
-        Information to create a marker detection handle for AprilTag markers.
-
-        <h5>Description</h5>
-        This structure is required by the #MARKER_TYPE_APRIL_TAG_ML detector.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorAprilTagInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code aprilTagDict} <b>must</b> be a valid {@code XrMarkerAprilTagDictML} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrMarkerDetectorCreateInfoML, #CreateMarkerDetectorML()
-        """
-
-    Expression("#TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrMarkerAprilTagDictML("aprilTagDict", "AprilTag Dictionary name from which markers will be detected.")
+    Expression("#TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrMarkerAprilTagDictML("aprilTagDict")
 }
 
 val XrMarkerDetectorCustomProfileInfoML = struct(Module.OPENXR, "XrMarkerDetectorCustomProfileInfoML") {
-    documentation =
-        """
-        A custom marker tracking profile.
-
-        <h5>Description</h5>
-        All marker detectors share some underlying hardware and resources, and thus not all combinations of profiles between multiple detectors are possible. If a profile (preset or custom) specified during marker detector creation is different from those used by existing marker detectors the runtime will attempt to honor the highest frame rate and fps requested.
-
-        CPU load due to marker tracking is a function of the chosen {@code XrMarkerTypeML}, {@code XrMarkerDetectorFpsML}, and {@code XrMarkerDetectorResolutionML}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorCustomProfileInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code fpsHint} <b>must</b> be a valid {@code XrMarkerDetectorFpsML} value</li>
-            <li>{@code resolutionHint} <b>must</b> be a valid {@code XrMarkerDetectorResolutionML} value</li>
-            <li>{@code cameraHint} <b>must</b> be a valid {@code XrMarkerDetectorCameraML} value</li>
-            <li>{@code cornerRefineMethod} <b>must</b> be a valid {@code XrMarkerDetectorCornerRefineMethodML} value</li>
-            <li>{@code fullAnalysisIntervalHint} <b>must</b> be a valid {@code XrMarkerDetectorFullAnalysisIntervalML} value</li>
-        </ul>
-        """
-
-    Expression("#TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrMarkerDetectorFpsML("fpsHint", "a suggestion of the category of frame rate for the detector to use.")
-    XrMarkerDetectorResolutionML("resolutionHint", "a suggestion of the category of camera resolution for the detector to use.")
-    XrMarkerDetectorCameraML("cameraHint", "a suggestion of the camera set for the detector to use")
-    XrMarkerDetectorCornerRefineMethodML("cornerRefineMethod", "selects a method for corner refinement for ArUco/AprilTag detectors. This member is ignored for detectors of other marker types.")
-    XrBool32("useEdgeRefinement", "specifies whether to run a refinement step that uses marker edges to generate even more accurate corners, but slow down tracking rate overall by consuming more compute. It affects ArUco/AprilTag markers only: this member is ignored for detectors of other marker types.")
-    XrMarkerDetectorFullAnalysisIntervalML("fullAnalysisIntervalHint", "the suggested interval between fully analyzed frames that introduce new detected markers, in addition to updating the state of already detected markers.")
+    Expression("#TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrMarkerDetectorFpsML("fpsHint")
+    XrMarkerDetectorResolutionML("resolutionHint")
+    XrMarkerDetectorCameraML("cameraHint")
+    XrMarkerDetectorCornerRefineMethodML("cornerRefineMethod")
+    XrBool32("useEdgeRefinement")
+    XrMarkerDetectorFullAnalysisIntervalML("fullAnalysisIntervalHint")
 }
 
 val XrMarkerDetectorSnapshotInfoML = struct(Module.OPENXR, "XrMarkerDetectorSnapshotInfoML") {
-    documentation =
-        """
-        Marker snapshot parameters.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorSnapshotInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #SnapshotMarkerDetectorML()
-        """
-
-    Expression("#TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrMarkerDetectorStateML = struct(Module.OPENXR, "XrMarkerDetectorStateML", mutable = false) {
-    documentation =
-        """
-        Marker state query parameters.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerDetectorStateML</li>
-            <li>{@code type} <b>must</b> be #TYPE_MARKER_DETECTOR_STATE_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetMarkerDetectorStateML()
-        """
-
-    Expression("#TYPE_MARKER_DETECTOR_STATE_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrMarkerDetectorStatusML("state", "the current state of the marker detector.")
+    Expression("#TYPE_MARKER_DETECTOR_STATE_ML")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrMarkerDetectorStatusML("state")
 }
 
 val XrMarkerSpaceCreateInfoML = struct(Module.OPENXR, "XrMarkerSpaceCreateInfoML") {
-    documentation =
-        """
-        Specify marker space creation parameters.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using ##XrMarkerSpaceCreateInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_MARKER_SPACE_CREATE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code markerDetector} <b>must</b> be a valid {@code XrMarkerDetectorML} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateMarkerSpaceML()
-        """
-
-    Expression("#TYPE_MARKER_SPACE_CREATE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrMarkerDetectorML("markerDetector", "the detector object to retrieve marker information from.")
-    XrMarkerML("marker", "the marker atom to be examined.")
-    XrPosef("poseInMarkerSpace", "the offset from the marker’s origin of the new {@code XrSpace}. The origin of each marker is located at its center.")
+    Expression("#TYPE_MARKER_SPACE_CREATE_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrMarkerDetectorML("markerDetector")
+    XrMarkerML("marker")
+    XrPosef("poseInMarkerSpace")
 }
 
 val XrLocalizationMapML = struct(Module.OPENXR, "XrLocalizationMapML") {
     javaImport("static org.lwjgl.openxr.MLLocalizationMap.*")
-    documentation =
-        """
-        Information on the localization map.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrLocalizationMapML</li>
-            <li>{@code type} <b>must</b> be #TYPE_LOCALIZATION_MAP_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to #MAX_LOCALIZATION_MAP_NAME_LENGTH_ML</li>
-            <li>If {@code mapType} is not 0, {@code mapType} <b>must</b> be a valid {@code XrLocalizationMapTypeML} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrEventDataLocalizationChangedML, ##XrUuidEXT, #EnableLocalizationEventsML(), #QueryLocalizationMapsML()
-        """
-
-    Expression("#TYPE_LOCALIZATION_MAP_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    charUTF8("name", "a human readable name of the localization map, as a null terminated UTF-8 string. This name is set outside of this extension.")["XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML"]
-    XrUuidEXT("mapUuid", "the ##XrUuidEXT of the localization map.")
-    XrLocalizationMapTypeML("mapType", "the {@code XrLocalizationMapTypeML} of the map.")
+    Expression("#TYPE_LOCALIZATION_MAP_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    charUTF8("name")["XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML"]
+    XrUuidEXT("mapUuid")
+    XrLocalizationMapTypeML("mapType")
 }
 
 val XrEventDataLocalizationChangedML = struct(Module.OPENXR, "XrEventDataLocalizationChangedML", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Event containing the current localization map state.
-
-        <h5>Description</h5>
-        By default the runtime does not send these events but calling #EnableLocalizationEventsML() function enables the events. When this function is called the ##XrEventDataLocalizationChangedML event will always be posted to the event queue, regardless of whether the map localization state has changed. This allows the application to synchronize with the current state.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        The arrival of the event is asynchronous to this call.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrEventDataLocalizationChangedML</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrLocalizationMapML, #EnableLocalizationEventsML()
-        """
-
-    Expression("#TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrSession("session", "the session to which this change event applies.")
-    XrLocalizationMapStateML("state", "the current {@code XrLocalizationMapStateML} of the map.")
-    XrLocalizationMapML("map", "the ##XrLocalizationMapML of the current map.")
-    XrLocalizationMapConfidenceML("confidence", "the {@code XrLocalizationMapConfidenceML} of the current map.")
-    XrLocalizationMapErrorFlagsML("errorFlags", "a a bitwise-OR of zero or more of the bits defined in {@code XrLocalizationMapErrorFlagBitsML} in the case that the localization map has low confidence.")
+    Expression("#TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrSession("session")
+    XrLocalizationMapStateML("state")
+    XrLocalizationMapML("map")
+    XrLocalizationMapConfidenceML("confidence")
+    XrLocalizationMapErrorFlagsML("errorFlags")
 }
 
 val XrLocalizationMapQueryInfoBaseHeaderML = struct(Module.OPENXR, "XrLocalizationMapQueryInfoBaseHeaderML") {
-    documentation =
-        """
-        Enumeration filter for the available localization maps.
-
-        <h5>Description</h5>
-        Currently no filters are available.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrLocalizationMapQueryInfoBaseHeaderML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #QueryLocalizationMapsML()
-        """
-
-    XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrMapLocalizationRequestInfoML = struct(Module.OPENXR, "XrMapLocalizationRequestInfoML") {
-    documentation =
-        """
-        Information required to request a localization map.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrMapLocalizationRequestInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, #RequestMapLocalizationML()
-        """
-
-    Expression("#TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrUuidEXT("mapUuid", "the ##XrUuidEXT of the localization map to request. This mapUuid <b>can</b> be obtained via #QueryLocalizationMapsML().")
+    Expression("#TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrUuidEXT("mapUuid")
 }
 
 val XrLocalizationMapImportInfoML = struct(Module.OPENXR, "XrLocalizationMapImportInfoML") {
-    documentation =
-        """
-        Data of a previously exported localization map.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrLocalizationMapImportInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code data} <b>must</b> be a pointer to an array of {@code size} char values</li>
-            <li>The {@code size} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #ImportLocalizationMapML()
-        """
-
-    Expression("#TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("data")..uint32_t("size", "the size in bytes of the data member.")
-    char.p("data", "the byte data of the previously exported localization map.")
+    Expression("#TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("data")..uint32_t("size")
+    char.p("data")
 }
 
 val XrLocalizationEnableEventsInfoML = struct(Module.OPENXR, "XrLocalizationEnableEventsInfoML") {
-    documentation =
-        """
-        Information to enable localization map events.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using ##XrLocalizationEnableEventsInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #EnableLocalizationEventsML()
-        """
-
-    Expression("#TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrBool32("enabled", "the flag to enable/disable localization status events.")
+    Expression("#TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("enabled")
 }
 
 val XrSpatialAnchorsCreateInfoBaseHeaderML = struct(Module.OPENXR, "XrSpatialAnchorsCreateInfoBaseHeaderML") {
-    documentation =
-        """
-        Base structure used in the creation of spatial anchors.
-
-        <h5>Description</h5>
-        This structure is not directly used in the API, please see ##XrSpatialAnchorsCreateInfoFromPoseML for an example of a child structure.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchors XR_ML_spatial_anchors} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsCreateInfoBaseHeaderML</li>
-            <li>{@code type} <b>must</b> be one of the following XrStructureType values: #TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML, #TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSpatialAnchorsAsyncML()
-        """
-
-    XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrSpatialAnchorsCreateInfoFromPoseML = struct(Module.OPENXR, "XrSpatialAnchorsCreateInfoFromPoseML", parentStruct = XrSpatialAnchorsCreateInfoBaseHeaderML) {
-    documentation =
-        """
-        Structure used to create a single anchors at a certain pose.
-
-        <h5>Description</h5>
-        Note that #CreateSpatialAnchorsCompleteML() <b>must</b> be called with ##XrCreateSpatialAnchorsCompletionML{@code ::spaceCount} set to 1 when using ##XrSpatialAnchorsCreateInfoFromPoseML to create a spatial anchor.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchors XR_ML_spatial_anchors} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsCreateInfoFromPoseML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateSpatialAnchorsAsyncML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSpace("baseSpace", "{@code baseSpace} {@code XrSpace} used to calculate the position of the anchor.")
-    XrPosef("poseInBaseSpace", "##XrPosef of the anchor to create.")
-    XrTime("time", "{@code time} {@code XrTime} to resolve the pose in the base space.")
+    Expression("#TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrPosef("poseInBaseSpace")
+    XrTime("time")
 }
 
 val _XrFutureCompletionBaseHeaderEXT = struct(Module.OPENXR, "XrFutureCompletionBaseHeaderEXT")
 val XrCreateSpatialAnchorsCompletionML = struct(Module.OPENXR, "XrCreateSpatialAnchorsCompletionML", parentStruct = _XrFutureCompletionBaseHeaderEXT) {
-    documentation =
-        """
-        Completion struct to retrieve the result of the anchor creation.
-
-        <h5>Future Return Codes</h5>
-        {@code futureResult} values:
-
-        <dl>
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-successcodes">Success</a></dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#SESSION_LOSS_PENDING</li>
-            </ul></dd>
-
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-errorcodes">Failure</a></dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_SESSION_LOST</li>
-                <li>#ERROR_OUT_OF_MEMORY</li>
-                <li>#ERROR_LIMIT_REACHED</li>
-                <li>#ERROR_SPATIAL_ANCHORS_SPACE_NOT_LOCATABLE_ML</li>
-                <li>#ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchors XR_ML_spatial_anchors} extension <b>must</b> be enabled prior to using ##XrCreateSpatialAnchorsCompletionML</li>
-            <li>{@code type} <b>must</b> be #TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code futureResult} is not 0, {@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
-            <li>If {@code spaceCount} is not 0, {@code spaces} <b>must</b> be a pointer to an array of {@code spaceCount} {@code XrSpace} handles</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSpatialAnchorsCompleteML()
-        """
-
-    Expression("#TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrResult("futureResult", "the {@code XrResult} of the create spatial anchor operation.")
-    AutoSize("spaces", optional = true)..uint32_t("spaceCount", "the number of elements in the {@code spaces} array. This <b>must</b> match the number of spaces requested to be created.")
-    nullable..XrSpace.p("spaces", "an array of {@code XrSpace} values to populate with the results of the anchor creation. If creation failed, the {@code XrSpace} values <b>must</b> be set to #NULL_HANDLE.")
+    Expression("#TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
+    AutoSize("spaces", optional = true)..uint32_t("spaceCount")
+    nullable..XrSpace.p("spaces")
 }
 
 val XrSpatialAnchorStateML = struct(Module.OPENXR, "XrSpatialAnchorStateML") {
-    documentation =
-        """
-        Structure describing the state of a spatial anchor.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchors XR_ML_spatial_anchors} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorStateML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHOR_STATE_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code confidence} is not 0, {@code confidence} <b>must</b> be a valid {@code XrSpatialAnchorConfidenceML} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSpatialAnchorStateML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHOR_STATE_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSpatialAnchorConfidenceML("confidence", "the {@code XrSpatialAnchorConfidenceML} of the anchor.")
+    Expression("#TYPE_SPATIAL_ANCHOR_STATE_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrSpatialAnchorConfidenceML("confidence")
 }
 
 val XrSpatialAnchorsCreateStorageInfoML = struct(Module.OPENXR, "XrSpatialAnchorsCreateStorageInfoML") {
-    documentation =
-        """
-        Information used to create a handle to interact with storage for spatial anchors.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain.</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsCreateStorageInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSpatialAnchorsStorageML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
+    Expression("#TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrSpatialAnchorsQueryInfoBaseHeaderML = struct(Module.OPENXR, "XrSpatialAnchorsQueryInfoBaseHeaderML") {
-    documentation =
-        """
-        Information used to query for anchors.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsQueryInfoBaseHeaderML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #QuerySpatialAnchorsAsyncML()
-        """
-
-    XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrSpatialAnchorsQueryInfoRadiusML = struct(Module.OPENXR, "XrSpatialAnchorsQueryInfoRadiusML", parentStruct = XrSpatialAnchorsQueryInfoBaseHeaderML) {
-    documentation =
-        """
-        Information used to query for anchors.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsQueryInfoRadiusML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpatialAnchorsQueryInfoBaseHeaderML, ##XrVector3f, #QuerySpatialAnchorsAsyncML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSpace("baseSpace", "the {@code XrSpace} to create the anchor relative to.")
-    XrVector3f("center", "the center of the query relative to the baseSpace.")
-    XrTime("time", "the time at which the pose <b>should</b> be resolved.")
-    float("radius", "the radius of the search area in meters.")
+    Expression("#TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrVector3f("center")
+    XrTime("time")
+    float("radius")
 }
 
 val XrSpatialAnchorsQueryCompletionML = struct(Module.OPENXR, "XrSpatialAnchorsQueryCompletionML", parentStruct = _XrFutureCompletionBaseHeaderEXT) {
-    documentation =
-        """
-        Completion structure to retrieve the result of the anchor query.
-
-        <h5>Future Return Codes</h5>
-        {@code futureResult} values:
-
-        <dl>
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-successcodes">Success</a></dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#SESSION_LOSS_PENDING</li>
-            </ul></dd>
-
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-errorcodes">Failure</a></dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_SESSION_LOST</li>
-                <li>#ERROR_OUT_OF_MEMORY</li>
-                <li>#ERROR_LIMIT_REACHED</li>
-                <li>#ERROR_VALIDATION_FAILURE</li>
-                <li>#ERROR_SPACE_NOT_LOCATABLE_EXT</li>
-                <li>#ERROR_SPATIAL_ANCHORS_SPACE_NOT_LOCATABLE_ML</li>
-                <li>#ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsQueryCompletionML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code futureResult} is not 0, {@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
-            <li>If {@code uuidCapacityInput} is not 0, {@code uuids} <b>must</b> be a pointer to an array of {@code uuidCapacityInput} ##XrUuidEXT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, #QuerySpatialAnchorsAsyncML(), #QuerySpatialAnchorsCompleteML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrResult("futureResult", "the {@code XrResult} of the asynchronous operation.")
-    AutoSize("uuids", optional = true)..uint32_t("uuidCapacityInput", "the capacity of the {@code uuids} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("uuidCountOutput", "the number of elements populated in {@code uuids}, or the required capacity in the case that {@code uuidCapacityInput} is insufficient.")
-    nullable..XrUuidEXT.p("uuids", "an array of ##XrUuidEXT.")
+    Expression("#TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
+    AutoSize("uuids", optional = true)..uint32_t("uuidCapacityInput")
+    uint32_t("uuidCountOutput")
+    nullable..XrUuidEXT.p("uuids")
 }
 
 val XrSpatialAnchorsCreateInfoFromUuidsML = struct(Module.OPENXR, "XrSpatialAnchorsCreateInfoFromUuidsML", parentStruct = XrSpatialAnchorsCreateInfoBaseHeaderML) {
-    documentation =
-        """
-        Structure used to create tracked spatial anchors from uuids.
-
-        <h5>Description</h5>
-        The {@code XrSpace} handle or handles returned via ##XrCreateSpatialAnchorsCompletionML{@code ::spaces} <b>must</b> be in the same order as {@code uuids}.
-
-        The ##XrCreateSpatialAnchorsCompletionML{@code ::spaceCount} field <b>must</b> match {@code uuidCount}. If not the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE in ##XrCreateSpatialAnchorsCompletionML{@code ::futureResult}.
-
-        If an anchor with a given UUID is not found, the runtime <b>must</b> return #NULL_HANDLE for the corresponding {@code XrSpace} handle(s) and return #SUCCESS in ##XrCreateSpatialAnchorsCompletionML{@code ::futureResult}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsCreateInfoFromUuidsML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code storage} <b>must</b> be a valid {@code XrSpatialAnchorsStorageML} handle</li>
-            <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} ##XrUuidEXT structures</li>
-            <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, #CreateSpatialAnchorsAsyncML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSpatialAnchorsStorageML("storage", "the {@code XrSpatialAnchorsStorageML} to use.")
-    AutoSize("uuids")..uint32_t("uuidCount", "the number of elements in the uuids array.")
-    XrUuidEXT.const.p("uuids", "pointer to an array of ##XrUuidEXT.")
+    Expression("#TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialAnchorsStorageML("storage")
+    AutoSize("uuids")..uint32_t("uuidCount")
+    XrUuidEXT.const.p("uuids")
 }
 
 val XrSpatialAnchorsPublishInfoML = struct(Module.OPENXR, "XrSpatialAnchorsPublishInfoML") {
-    documentation =
-        """
-        Structure used to list the anchors that need to be published.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsPublishInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code anchors} <b>must</b> be a pointer to an array of {@code anchorCount} valid {@code XrSpace} handles</li>
-            <li>The {@code anchorCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PublishSpatialAnchorsAsyncML(), #PublishSpatialAnchorsCompleteML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("anchors")..uint32_t("anchorCount", "the number of anchors in the anchors array.")
-    XrSpace.const.p("anchors", "an array of {@code XrSpace}.")
-    uint64_t("expiration", "an {@code uint64_t}, is the time in <b>seconds</b> since epoch after which these anchors <b>may</b> expire. The system <b>may</b> retain the anchors longer but <b>should</b> retain the anchors at least until this timestamp. Use 0 or #INFINITE_DURATION to create an anchor that does not expire.")
+    Expression("#TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("anchors")..uint32_t("anchorCount")
+    XrSpace.const.p("anchors")
+    uint64_t("expiration")
 }
 
 val XrSpatialAnchorsPublishCompletionML = struct(Module.OPENXR, "XrSpatialAnchorsPublishCompletionML", parentStruct = _XrFutureCompletionBaseHeaderEXT) {
-    documentation =
-        """
-        Completion structure to retrieve the result of the anchor creation.
-
-        <h5>Future Return Codes</h5>
-        {@code futureResult} values:
-
-        <dl>
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-successcodes">Success</a></dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#SESSION_LOSS_PENDING</li>
-            </ul></dd>
-
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-errorcodes">Failure</a></dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_SESSION_LOST</li>
-                <li>#ERROR_OUT_OF_MEMORY</li>
-                <li>#ERROR_LIMIT_REACHED</li>
-                <li>#ERROR_VALIDATION_FAILURE</li>
-                <li>#ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML</li>
-                <li>#ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsPublishCompletionML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSpatialAnchorsPublishCompletionDetailsML</li>
-            <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
-            <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} ##XrUuidEXT structures</li>
-            <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, #CreateSpatialAnchorsCompleteML(), #PublishSpatialAnchorsCompleteML(), #QuerySpatialAnchorsAsyncML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML")..XrStructureType("type")
     PointerSetter(
         "XrSpatialAnchorsPublishCompletionDetailsML",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrResult("futureResult", "the {@code XrResult} of the asynchronous operation.")
-    AutoSize("uuids")..uint32_t("uuidCount", "the capacity of the {@code uuids} array and <b>must</b> match the number of anchors passed to #PublishSpatialAnchorsAsyncML()")
-    XrUuidEXT.p("uuids", "an array of ##XrUuidEXT.")
+    )..nullable..opaque_p("next")
+    XrResult("futureResult")
+    AutoSize("uuids")..uint32_t("uuidCount")
+    XrUuidEXT.p("uuids")
 }
 
 val XrSpatialAnchorsDeleteInfoML = struct(Module.OPENXR, "XrSpatialAnchorsDeleteInfoML") {
-    documentation =
-        """
-        Structure used to list the anchors that need to be deleted.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsDeleteInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} ##XrUuidEXT structures</li>
-            <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, #DeleteSpatialAnchorsAsyncML(), #DeleteSpatialAnchorsCompleteML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("uuids")..uint32_t("uuidCount", "the number of UUIDs in the {@code uuids} array.")
-    XrUuidEXT.const.p("uuids", "an array of ##XrUuidEXT.")
+    Expression("#TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("uuids")..uint32_t("uuidCount")
+    XrUuidEXT.const.p("uuids")
 }
 
 val XrSpatialAnchorsDeleteCompletionML = struct(Module.OPENXR, "XrSpatialAnchorsDeleteCompletionML", parentStruct = _XrFutureCompletionBaseHeaderEXT) {
-    documentation =
-        """
-        Completion structure to retrieve the result of the anchor deletion.
-
-        <h5>Future Return Codes</h5>
-        {@code futureResult} values:
-
-        <dl>
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-successcodes">Success</a></dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#SESSION_LOSS_PENDING</li>
-            </ul></dd>
-
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-errorcodes">Failure</a></dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_SESSION_LOST</li>
-                <li>#ERROR_SPATIAL_ANCHORS_ANCHOR_NOT_FOUND_ML</li>
-                <li>#ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsDeleteCompletionML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSpatialAnchorsDeleteCompletionDetailsML</li>
-            <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #DeleteSpatialAnchorsAsyncML(), #DeleteSpatialAnchorsCompleteML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML")..XrStructureType("type")
     PointerSetter(
         "XrSpatialAnchorsDeleteCompletionDetailsML",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrResult("futureResult", "the {@code XrResult} of the asynchronous operation.")
+    )..nullable..opaque_p("next")
+    XrResult("futureResult")
 }
 
 val XrSpatialAnchorsUpdateExpirationInfoML = struct(Module.OPENXR, "XrSpatialAnchorsUpdateExpirationInfoML") {
-    documentation =
-        """
-        Structure used to list the anchors that need to be updated.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsUpdateExpirationInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} ##XrUuidEXT structures</li>
-            <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, #UpdateSpatialAnchorsExpirationAsyncML(), #UpdateSpatialAnchorsExpirationCompleteML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("uuids")..uint32_t("uuidCount", "the number of anchors in the anchors array.")
-    XrUuidEXT.const.p("uuids", "an array of ##XrUuidEXT.")
-    uint64_t("expiration", "an {@code uint64_t}, is the time in seconds since epoch after which these anchors <b>may</b> expire.")
+    Expression("#TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("uuids")..uint32_t("uuidCount")
+    XrUuidEXT.const.p("uuids")
+    uint64_t("expiration")
 }
 
 val XrSpatialAnchorsUpdateExpirationCompletionML = struct(Module.OPENXR, "XrSpatialAnchorsUpdateExpirationCompletionML", parentStruct = _XrFutureCompletionBaseHeaderEXT) {
-    documentation =
-        """
-        Completion structure to retrieve the result of the anchor update.
-
-        <h5>Future Return Codes</h5>
-        {@code futureResult} values:
-
-        <dl>
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-successcodes">Success</a></dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#SESSION_LOSS_PENDING</li>
-            </ul></dd>
-
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-errorcodes">Failure</a></dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_SESSION_LOST</li>
-                <li>#ERROR_SPATIAL_ANCHORS_ANCHOR_NOT_FOUND_ML</li>
-                <li>#ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsUpdateExpirationCompletionML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSpatialAnchorsUpdateExpirationCompletionDetailsML</li>
-            <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #UpdateSpatialAnchorsExpirationAsyncML(), #UpdateSpatialAnchorsExpirationCompleteML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML")..XrStructureType("type")
     PointerSetter(
         "XrSpatialAnchorsUpdateExpirationCompletionDetailsML",
         prepend = true
-    )..nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrResult("futureResult", "the {@code XrResult} of the asynchronous operation.")
+    )..nullable..opaque_p("next")
+    XrResult("futureResult")
 }
 
 val XrSpatialAnchorCompletionResultML = struct(Module.OPENXR, "XrSpatialAnchorCompletionResultML") {
-    documentation =
-        """
-        Per Anchor Completion detail.
-
-        <h5>Anchor Operation Result Codes</h5>
-        {@code result} values:
-
-        <dl>
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-successcodes">Success</a></dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#SESSION_LOSS_PENDING</li>
-            </ul></dd>
-
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-errorcodes">Failure</a></dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_SESSION_LOST</li>
-                <li>#ERROR_OUT_OF_MEMORY</li>
-                <li>#ERROR_LIMIT_REACHED</li>
-                <li>#ERROR_VALIDATION_FAILURE</li>
-                <li>#ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML</li>
-                <li>#ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorCompletionResultML</li>
-            <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpatialAnchorsDeleteCompletionDetailsML, ##XrSpatialAnchorsPublishCompletionDetailsML, ##XrSpatialAnchorsPublishCompletionML, ##XrSpatialAnchorsUpdateExpirationCompletionDetailsML, ##XrUuidEXT
-        """
-
-    XrUuidEXT("uuid", "the UUID of the anchor.")
-    XrResult("result", "the result of the operation.")
+    XrUuidEXT("uuid")
+    XrResult("result")
 }
 
 val XrSpatialAnchorsPublishCompletionDetailsML = struct(Module.OPENXR, "XrSpatialAnchorsPublishCompletionDetailsML") {
-    documentation =
-        """
-        Completion structure to retrieve the per anchor result of the anchor creation.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsPublishCompletionDetailsML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code results} <b>must</b> be a pointer to an array of {@code resultCount} ##XrSpatialAnchorCompletionResultML structures</li>
-            <li>The {@code resultCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpatialAnchorCompletionResultML, ##XrSpatialAnchorsPublishCompletionML, #PublishSpatialAnchorsCompleteML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("results")..uint32_t("resultCount", "the capacity of the {@code results} array and <b>must</b> match the number of anchors passed to #PublishSpatialAnchorsAsyncML().")
-    XrSpatialAnchorCompletionResultML.p("results", "the per UUID status of the publish operation. The order of results in this array correspond to the async request order.")
+    Expression("#TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("results")..uint32_t("resultCount")
+    XrSpatialAnchorCompletionResultML.p("results")
 }
 
 val XrSpatialAnchorsDeleteCompletionDetailsML = struct(Module.OPENXR, "XrSpatialAnchorsDeleteCompletionDetailsML") {
-    documentation =
-        """
-        Completion structure to retrieve the per anchor result of the anchor deletion.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsDeleteCompletionDetailsML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code results} <b>must</b> be a pointer to an array of {@code resultCount} ##XrSpatialAnchorCompletionResultML structures</li>
-            <li>The {@code resultCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpatialAnchorCompletionResultML, ##XrSpatialAnchorsDeleteCompletionML, #DeleteSpatialAnchorsAsyncML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("results")..uint32_t("resultCount", "the capacity of the {@code results} array and <b>must</b> match the number of anchors passed to #DeleteSpatialAnchorsAsyncML()")
-    XrSpatialAnchorCompletionResultML.p("results", "the per UUID status of the delete operation. The order of results in this array correspond to the async request order.")
+    Expression("#TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("results")..uint32_t("resultCount")
+    XrSpatialAnchorCompletionResultML.p("results")
 }
 
 val XrSpatialAnchorsUpdateExpirationCompletionDetailsML = struct(Module.OPENXR, "XrSpatialAnchorsUpdateExpirationCompletionDetailsML") {
-    documentation =
-        """
-        Completion structure to retrieve the per anchor result of the anchor expiration update.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorsUpdateExpirationCompletionDetailsML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code results} <b>must</b> be a pointer to an array of {@code resultCount} ##XrSpatialAnchorCompletionResultML structures</li>
-            <li>The {@code resultCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpatialAnchorCompletionResultML, ##XrSpatialAnchorsUpdateExpirationCompletionML, #UpdateSpatialAnchorsExpirationAsyncML()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("results")..uint32_t("resultCount", "the capacity of the {@code results} array and <b>must</b> match the number of anchors passed to #UpdateSpatialAnchorsExpirationAsyncML()")
-    XrSpatialAnchorCompletionResultML.p("results", "the per UUID status of the update operation. The order of anchors in this array <b>must</b> match the async request order.")
+    Expression("#TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("results")..uint32_t("resultCount")
+    XrSpatialAnchorCompletionResultML.p("results")
 }
 
 val XrEventDataHeadsetFitChangedML = struct(Module.OPENXR, "XrEventDataHeadsetFitChangedML", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Event containing the latest headset fit state.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLUserCalibration XR_ML_user_calibration} extension <b>must</b> be enabled prior to using ##XrEventDataHeadsetFitChangedML</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #EnableUserCalibrationEventsML()
-        """
-
-    Expression("#TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrHeadsetFitStatusML("status", "the {@code XrHeadsetFitStatusML} headset fit status.")
-    XrTime("time", "the {@code XrTime} at which the {@code status} was captured.")
+    Expression("#TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrHeadsetFitStatusML("status")
+    XrTime("time")
 }
 
 val XrEventDataEyeCalibrationChangedML = struct(Module.OPENXR, "XrEventDataEyeCalibrationChangedML", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Event containing the latest eye calibration state.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLUserCalibration XR_ML_user_calibration} extension <b>must</b> be enabled prior to using ##XrEventDataEyeCalibrationChangedML</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #EnableUserCalibrationEventsML()
-        """
-
-    Expression("#TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrEyeCalibrationStatusML("status", "the {@code XrEyeCalibrationStatusML} eye calibration status.")
+    Expression("#TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrEyeCalibrationStatusML("status")
 }
 
 val XrUserCalibrationEnableEventsInfoML = struct(Module.OPENXR, "XrUserCalibrationEnableEventsInfoML") {
-    documentation =
-        """
-        Information to enable headset fit events.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLUserCalibration XR_ML_user_calibration} extension <b>must</b> be enabled prior to using ##XrUserCalibrationEnableEventsInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #EnableUserCalibrationEventsML()
-        """
-
-    Expression("#TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrBool32("enabled", "the flag to enable/disable user calibration events.")
+    Expression("#TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("enabled")
 }
 
 val XrSpatialAnchorPersistenceNameMSFT = struct(Module.OPENXR, "XrSpatialAnchorPersistenceNameMSFT") {
     javaImport("static org.lwjgl.openxr.MSFTSpatialAnchorPersistence.*")
-    documentation =
-        """
-        The name to identify a Spatial anchor persistence operations.
-
-        <h5>Description</h5>
-        If an ##XrSpatialAnchorPersistenceNameMSFT with an empty {@code name} value is passed to any function as a parameter, that function <b>must</b> return #ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorPersistenceNameMSFT</li>
-            <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to #MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT, ##XrSpatialAnchorPersistenceInfoMSFT, #ClearSpatialAnchorStoreMSFT(), #EnumeratePersistedSpatialAnchorNamesMSFT(), #UnpersistSpatialAnchorMSFT()
-        """
-
-    charUTF8("name", "a null terminated character array of size #MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT.")["XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT"]
+    charUTF8("name")["XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT"]
 }
 
 val XrSpatialAnchorPersistenceInfoMSFT = struct(Module.OPENXR, "XrSpatialAnchorPersistenceInfoMSFT") {
-    documentation =
-        """
-        Persistence info for a spatial anchor.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorPersistenceInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code spatialAnchorPersistenceName} <b>must</b> be a valid ##XrSpatialAnchorPersistenceNameMSFT structure</li>
-            <li>{@code spatialAnchor} <b>must</b> be a valid {@code XrSpatialAnchorMSFT} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpatialAnchorPersistenceNameMSFT, #PersistSpatialAnchorMSFT()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrSpatialAnchorPersistenceNameMSFT("spatialAnchorPersistenceName", "an ##XrSpatialAnchorPersistenceNameMSFT containing the name associated with the {@code XrSpatialAnchorMSFT} in the spatial anchor store.")
-    XrSpatialAnchorMSFT("spatialAnchor", "the {@code XrSpatialAnchorMSFT} that the application wishes to perform persistence operations on.")
+    Expression("#TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialAnchorPersistenceNameMSFT("spatialAnchorPersistenceName")
+    XrSpatialAnchorMSFT("spatialAnchor")
 }
 
 val XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT = struct(Module.OPENXR, "XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT") {
-    documentation =
-        """
-        Creation info for creating a spatial anchor handle from a persisted anchor.
-
-        <h5>Description</h5>
-        The {@code spatialAnchorPersistenceName} is a character array of maximum size #MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT, which <b>must</b> include a null terminator and <b>must</b> not be empty (i.e. the first element is the null terminator). If an empty {@code spatialAnchorPersistenceName} value is passed to any function as a parameter, that function <b>must</b> return #ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code spatialAnchorStore} <b>must</b> be a valid {@code XrSpatialAnchorStoreConnectionMSFT} handle</li>
-            <li>{@code spatialAnchorPersistenceName} <b>must</b> be a valid ##XrSpatialAnchorPersistenceNameMSFT structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpatialAnchorPersistenceNameMSFT, #CreateSpatialAnchorFromPersistedNameMSFT()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrSpatialAnchorStoreConnectionMSFT("spatialAnchorStore", "the {@code XrSpatialAnchorStoreConnectionMSFT} from which the spatial anchor will be loaded from.")
-    XrSpatialAnchorPersistenceNameMSFT("spatialAnchorPersistenceName", "the ##XrSpatialAnchorPersistenceNameMSFT associated with the {@code XrSpatialAnchorMSFT} in the spatial anchor store. This name is used to create an {@code XrSpatialAnchorMSFT} handle from a spatial anchor persisted in the spatial anchor store.")
+    Expression("#TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpatialAnchorStoreConnectionMSFT("spatialAnchorStore")
+    XrSpatialAnchorPersistenceNameMSFT("spatialAnchorPersistenceName")
 }
 
 val XrSceneMarkerMSFT = struct(Module.OPENXR, "XrSceneMarkerMSFT", mutable = false) {
-    documentation =
-        """
-        The properties of a scene marker.
-
-        <h5>Description</h5>
-        The ##XrSceneMarkerMSFT structure is an element in the array of ##XrSceneMarkersMSFT{@code ::sceneMarkers}.
-
-        Refer to the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#msft_scene_marker-qr-code-convention">QR code convention</a> for an example of marker’s center and size in the context of a QR code.
-
-        When the runtime updates the location or properties of an observed marker, the runtime <b>must</b> set the ##XrSceneMarkerMSFT{@code ::lastSeenTime} to the new timestamp of the update.
-
-        When the runtime cannot observe a previously observed ##XrSceneMarkerMSFT, the runtime <b>must</b> keep the previous {@code lastSeenTime} for the marker. Hence, the application <b>can</b> use the {@code lastSeenTime} to know how fresh the tracking information is for a given marker.
-
-        The {@code center} and {@code size} are measured in meters, relative to the ##XrPosef of the marker for the visual bound of the marker in XY plane, regardless of the marker type.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using ##XrSceneMarkerMSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExtent2Df, ##XrOffset2Df, ##XrSceneMarkersMSFT
-        """
-
-    XrSceneMarkerTypeMSFT("markerType", "an {@code XrSceneMarkerTypeMSFT} indicating the type of the marker.")
-    XrTime("lastSeenTime", "an {@code XrTime} indicating when the marker was seen last.")
-    XrOffset2Df("center", "an ##XrOffset2Df structure representing the location of the center of the axis-aligned bounding box of the marker in the XY plane of the marker’s coordinate system.")
-    XrExtent2Df("size", "an ##XrExtent2Df structure representing the width and height of the axis-aligned bounding box of the marker in the XY plane of the marker’s coordinate system.")
+    XrSceneMarkerTypeMSFT("markerType")
+    XrTime("lastSeenTime")
+    XrOffset2Df("center")
+    XrExtent2Df("size")
 }
 
 val XrSceneMarkersMSFT = struct(Module.OPENXR, "XrSceneMarkersMSFT") {
-    documentation =
-        """
-        Provide an array to retrieve scene marker properties.
-
-        <h5>Description</h5>
-        Once the application creates an {@code XrSceneMSFT} after a successful scene compute, it <b>can</b> retrieve the scene markers' properties by chaining ##XrSceneMarkersMSFT structure to the next pointer of ##XrSceneComponentsGetInfoMSFT when calling #GetSceneComponentsMSFT().
-
-        #GetSceneComponentsMSFT() follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the ##XrSceneComponentsMSFT structure to which an ##XrSceneMarkersMSFT structure <b>can</b> be chained.
-
-        The input {@code sceneMarkerCapacityInput} <b>must</b> be equal to or greater than the corresponding ##XrSceneComponentsMSFT::componentCapacityInput, otherwise the runtime <b>must</b> return #ERROR_SIZE_INSUFFICIENT.
-
-        The actual count of elements returned in the array {@code sceneMarkers} is consistent with the extended ##XrSceneComponentsMSFT structure and returned in ##XrSceneComponentsMSFT{@code ::componentCountOutput}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using ##XrSceneMarkersMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_MARKERS_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code sceneMarkerCapacityInput} is not 0, {@code sceneMarkers} <b>must</b> be a pointer to an array of {@code sceneMarkerCapacityInput} ##XrSceneMarkerMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneMarkerMSFT, #GetSceneComponentsMSFT()
-        """
-
-    Expression("#TYPE_SCENE_MARKERS_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. See also: ##XrSceneComponentsMSFT, ##XrSceneMarkerQRCodesMSFT")
-    AutoSize("sceneMarkers", optional = true)..uint32_t("sceneMarkerCapacityInput", "a {@code uint32_t} indicating the capacity of elements in the {@code sceneMarkers} array.")
-    nullable..XrSceneMarkerMSFT.p("sceneMarkers", "an array of ##XrSceneMarkerMSFT to fill with the properties of the markers.")
+    Expression("#TYPE_SCENE_MARKERS_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("sceneMarkers", optional = true)..uint32_t("sceneMarkerCapacityInput")
+    nullable..XrSceneMarkerMSFT.p("sceneMarkers")
 }
 
 val XrSceneMarkerTypeFilterMSFT = struct(Module.OPENXR, "XrSceneMarkerTypeFilterMSFT") {
-    documentation =
-        """
-        The information to filter marker query results.
-
-        <h5>Description</h5>
-        The application <b>can</b> filter the returned scene components to specific marker types by chaining ##XrSceneMarkerTypeFilterMSFT to the {@code next} pointer of ##XrSceneComponentsGetInfoMSFT when calling #GetSceneComponentsMSFT().
-
-        When ##XrSceneMarkerTypeFilterMSFT is provided to #GetSceneComponentsMSFT(), the runtime <b>must</b> only return scene components that match the requested types.
-
-        The application <b>must</b> provide a non-empty array of unique {@code markerTypes}, i.e. the {@code markerTypeCount} <b>must</b> be positive and the elements in the {@code markerTypes} array <b>must</b> not have duplicated values. Otherwise, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE for #GetSceneComponentsMSFT() function.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using ##XrSceneMarkerTypeFilterMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_MARKER_TYPE_FILTER_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code markerTypeCount} is not 0, {@code markerTypes} <b>must</b> be a pointer to an array of {@code markerTypeCount} {@code XrSceneMarkerTypeMSFT} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSceneComponentsMSFT()
-        """
-
-    Expression("#TYPE_SCENE_MARKER_TYPE_FILTER_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("markerTypes", optional = true)..uint32_t("markerTypeCount", "a {@code uint32_t} indicating the count of elements in the {@code markerTypes} array.")
-    nullable..XrSceneMarkerTypeMSFT.p("markerTypes", "an array of {@code XrSceneMarkerTypeMSFT} indicating the types of markers to return.")
+    Expression("#TYPE_SCENE_MARKER_TYPE_FILTER_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("markerTypes", optional = true)..uint32_t("markerTypeCount")
+    nullable..XrSceneMarkerTypeMSFT.p("markerTypes")
 }
 
 val XrSceneMarkerQRCodeMSFT = struct(Module.OPENXR, "XrSceneMarkerQRCodeMSFT", mutable = false) {
-    documentation =
-        """
-        Properties specific to QR Codes.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using ##XrSceneMarkerQRCodeMSFT</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneMarkerQRCodesMSFT, #GetSceneComponentsMSFT()
-        """
-
-    XrSceneMarkerQRCodeSymbolTypeMSFT("symbolType", "")
-    uint8_t("version", "")
+    XrSceneMarkerQRCodeSymbolTypeMSFT("symbolType")
+    uint8_t("version")
 }
 
 val XrSceneMarkerQRCodesMSFT = struct(Module.OPENXR, "XrSceneMarkerQRCodesMSFT") {
-    documentation =
-        """
-        Properties for QRCode marker.
-
-        <h5>Description</h5>
-        An ##XrSceneMarkerQRCodesMSFT structure can be chained to the {@code next} pointer of ##XrSceneComponentsMSFT when calling #GetSceneComponentsMSFT() function to retrieve the QR Code specific properties through an array of ##XrSceneMarkerQRCodeMSFT structures.
-
-        #GetSceneComponentsMSFT() follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the ##XrSceneComponentsMSFT structure to which an ##XrSceneMarkerQRCodesMSFT structure <b>can</b> be chained.
-
-        The {@code qrCodeCapacityInput} <b>must</b> be equal to or greater than the corresponding ##XrSceneComponentsMSFT::componentCapacityInput, otherwise the runtime <b>must</b> return the success code #ERROR_SIZE_INSUFFICIENT from #GetSceneComponentsMSFT().
-
-        The actual count of elements returned in the array {@code qrCodes} is consistent to the extended ##XrSceneComponentsMSFT structure and returned in ##XrSceneComponentsMSFT::componentCountOutput.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using ##XrSceneMarkerQRCodesMSFT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_MARKER_QR_CODES_MSFT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code qrCodeCapacityInput} is not 0, {@code qrCodes} <b>must</b> be a pointer to an array of {@code qrCodeCapacityInput} ##XrSceneMarkerQRCodeMSFT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSceneMarkerQRCodeMSFT, #GetSceneComponentsMSFT()
-        """
-
-    Expression("#TYPE_SCENE_MARKER_QR_CODES_MSFT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. See also: ##XrSceneComponentsMSFT, ##XrSceneMarkersMSFT")
-    AutoSize("qrCodes", optional = true)..uint32_t("qrCodeCapacityInput", "a {@code uint32_t} indicating the count of elements in the {@code qrCodes} array.")
-    nullable..XrSceneMarkerQRCodeMSFT.p("qrCodes", "an array of ##XrSceneMarkerQRCodeMSFT for the runtime to fill with the properties of the QR Codes.")
+    Expression("#TYPE_SCENE_MARKER_QR_CODES_MSFT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("qrCodes", optional = true)..uint32_t("qrCodeCapacityInput")
+    nullable..XrSceneMarkerQRCodeMSFT.p("qrCodes")
 }
 
 val XrSpaceQueryInfoBaseHeaderFB = struct(Module.OPENXR, "XrSpaceQueryInfoBaseHeaderFB") {
-    documentation =
-        """
-        Base structure for all query info structures.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrSpaceQueryInfoBaseHeaderFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_QUERY_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpaceQueryInfoFB, #QuerySpacesFB()
-        """
-
-    XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
+    XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrSpaceFilterInfoBaseHeaderFB = struct(Module.OPENXR, "XrSpaceFilterInfoBaseHeaderFB") {
-    documentation =
-        """
-        Base structure for all query filter structures.
-
-        <h5>Description</h5>
-        The ##XrSpaceFilterInfoBaseHeaderFB is a base structure that is not intended to be directly used, but forms a basis for specific filter info types. All filter info structures begin with the elements described in the ##XrSpaceFilterInfoBaseHeaderFB, and a filter info pointer <b>must</b> be cast to a pointer to ##XrSpaceFilterInfoBaseHeaderFB when populating ##XrSpaceQueryInfoFB{@code ::filter} and ##XrSpaceQueryInfoFB{@code ::excludeFilter} to pass to the #QuerySpacesFB() function.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrSpaceFilterInfoBaseHeaderFB</li>
-            <li>{@code type} <b>must</b> be one of the following XrStructureType values: #TYPE_SPACE_COMPONENT_FILTER_INFO_FB, #TYPE_SPACE_UUID_FILTER_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrSpaceStorageLocationFilterInfoFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpaceQueryInfoFB
-        """
-
-    XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    XrStructureType("type")
     PointerSetter(
         "XrSpaceStorageLocationFilterInfoFB",
         prepend = true
-    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. This base structure itself has no associated {@code XrStructureType} value.")
+    )..nullable..opaque_const_p("next")
 }
 
 val XrSpaceQueryInfoFB = struct(Module.OPENXR, "XrSpaceQueryInfoFB", parentStruct = XrSpaceQueryInfoBaseHeaderFB) {
-    documentation =
-        """
-        Query for entities and perform an action on any results.
-
-        <h5>Description</h5>
-        May be used to query for spaces and perform a specific action on the spaces returned. The available actions are enumerated in {@code XrSpaceQueryActionFB}. The filter info provided to the {@code filter} member of the struct is used as an inclusive filter. The filter info provided to the {@code excludeFilter} member of the structure is used to exclude spaces from the results returned from the filter. All spaces that match the criteria in {@code filter}, and that do not match the criteria in {@code excludeFilter}, <b>must</b> be included in the results returned. This is to allow for a more selective style query.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrSpaceQueryInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_QUERY_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code queryAction} <b>must</b> be a valid {@code XrSpaceQueryActionFB} value</li>
-            <li>If {@code filter} is not {@code NULL}, {@code filter} <b>must</b> be a pointer to a valid ##XrSpaceFilterInfoBaseHeaderFB-based structure. See also: ##XrSpaceComponentFilterInfoFB, ##XrSpaceUuidFilterInfoFB</li>
-            <li>If {@code excludeFilter} is not {@code NULL}, {@code excludeFilter} <b>must</b> be a pointer to a valid ##XrSpaceFilterInfoBaseHeaderFB-based structure. See also: ##XrSpaceComponentFilterInfoFB, ##XrSpaceUuidFilterInfoFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpaceFilterInfoBaseHeaderFB, ##XrSpaceQueryInfoBaseHeaderFB
-        """
-
-    Expression("#TYPE_SPACE_QUERY_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpaceQueryActionFB("queryAction", "the type of query to perform.")
-    uint32_t("maxResultCount", "the maximum number of entities to be found.")
-    XrDuration("timeout", "the number of nanoseconds before the operation should time out. A value of #INFINITE_DURATION indicates no timeout.")
-    nullable..XrSpaceFilterInfoBaseHeaderFB.const.p("filter", "NULL or a pointer to a valid structure based on ##XrSpaceFilterInfoBaseHeaderFB.")
-    nullable..XrSpaceFilterInfoBaseHeaderFB.const.p("excludeFilter", "NULL or a pointer to a valid structure based on ##XrSpaceFilterInfoBaseHeaderFB.")
+    Expression("#TYPE_SPACE_QUERY_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpaceQueryActionFB("queryAction")
+    uint32_t("maxResultCount")
+    XrDuration("timeout")
+    nullable..XrSpaceFilterInfoBaseHeaderFB.const.p("filter")
+    nullable..XrSpaceFilterInfoBaseHeaderFB.const.p("excludeFilter")
 }
 
 val XrSpaceStorageLocationFilterInfoFB = struct(Module.OPENXR, "XrSpaceStorageLocationFilterInfoFB") {
-    documentation =
-        """
-        Describes where a spatial entity is stored.
-
-        <h5>Description</h5>
-        Extends a query filter to limit a query to a specific storage location. Set the {@code next} pointer of an ##XrSpaceFilterInfoBaseHeaderFB to chain this extra filtering functionality.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrSpaceStorageLocationFilterInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code location} <b>must</b> be a valid {@code XrSpaceStorageLocationFB} value</li>
-        </ul>
-        """
-
-    Expression("#TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpaceStorageLocationFB("location", "the location to limit the query to.")
+    Expression("#TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpaceStorageLocationFB("location")
 }
 
 val XrSpaceUuidFilterInfoFB = struct(Module.OPENXR, "XrSpaceUuidFilterInfoFB", parentStruct = XrSpaceFilterInfoBaseHeaderFB) {
-    documentation =
-        """
-        Filters for entities with specific unique identifiers.
-
-        <h5>Description</h5>
-        The ##XrSpaceUuidFilterInfoFB structure is a filter an application <b>can</b> use to find {@code XrSpace} entities that match specified UUIDs, to include or exclude them from a query.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrSpaceUuidFilterInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_UUID_FILTER_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} ##XrUuidEXT structures</li>
-            <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpaceFilterInfoBaseHeaderFB, ##XrSpaceQueryInfoFB, ##XrUuidEXT
-        """
-
-    Expression("#TYPE_SPACE_UUID_FILTER_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("uuids")..uint32_t("uuidCount", "the number of UUIDs to be matched.")
-    XrUuidEXT.p("uuids", "an array of ##XrUuidEXT that contains the UUIDs to be matched.")
+    Expression("#TYPE_SPACE_UUID_FILTER_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("uuids")..uint32_t("uuidCount")
+    XrUuidEXT.p("uuids")
 }
 
 val XrSpaceComponentFilterInfoFB = struct(Module.OPENXR, "XrSpaceComponentFilterInfoFB", parentStruct = XrSpaceFilterInfoBaseHeaderFB) {
-    documentation =
-        """
-        Filters for entities with specific components enabled.
-
-        <h5>Description</h5>
-        The ##XrSpaceComponentFilterInfoFB structure is a filter an application <b>can</b> use to find {@code XrSpace} entities which have the {@code componentType} enabled, to include or exclude them from a query.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrSpaceComponentFilterInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_COMPONENT_FILTER_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code componentType} <b>must</b> be a valid {@code XrSpaceComponentTypeFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpaceFilterInfoBaseHeaderFB, ##XrSpaceQueryInfoFB
-        """
-
-    Expression("#TYPE_SPACE_COMPONENT_FILTER_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpaceComponentTypeFB("componentType", "the {@code XrSpaceComponentTypeFB} to query for.")
+    Expression("#TYPE_SPACE_COMPONENT_FILTER_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpaceComponentTypeFB("componentType")
 }
 
 val XrSpaceQueryResultFB = struct(Module.OPENXR, "XrSpaceQueryResultFB", mutable = false) {
-    documentation =
-        """
-        Query result.
-
-        <h5>Description</h5>
-        The ##XrSpaceQueryResultFB structure is a query result returned in the #RetrieveSpaceQueryResultsFB(){@code ::results} output parameter of the #RetrieveSpaceQueryResultsFB() function.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrSpaceQueryResultFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpaceQueryResultsFB, ##XrUuidEXT
-        """
-
-    XrSpace("space", "the {@code XrSpace} handle to the spatial entity found by the query.")
-    XrUuidEXT("uuid", "the UUID that identifies the entity.")
+    XrSpace("space")
+    XrUuidEXT("uuid")
 }
 
 val XrSpaceQueryResultsFB = struct(Module.OPENXR, "XrSpaceQueryResultsFB") {
-    documentation =
-        """
-        Used to retrieve query results.
-
-        <h5>Description</h5>
-        The ##XrSpaceQueryResultsFB structure is used by the #RetrieveSpaceQueryResultsFB() function to retrieve query results.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrSpaceQueryResultsFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_QUERY_RESULTS_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code resultCapacityInput} is not 0, {@code results} <b>must</b> be a pointer to an array of {@code resultCapacityInput} ##XrSpaceQueryResultFB structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpaceQueryResultFB, #RetrieveSpaceQueryResultsFB()
-        """
-
-    Expression("#TYPE_SPACE_QUERY_RESULTS_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("results", optional = true)..uint32_t("resultCapacityInput", "the capacity of the {@code results} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("resultCountOutput", "an output parameter containing the count of results retrieved, or returns the required capacity in the case that {@code resultCapacityInput} is insufficient.")
-    nullable..XrSpaceQueryResultFB.p("results", "a pointer to an array of results, but <b>can</b> be {@code NULL} if {@code resultCapacityInput} is 0.")
+    Expression("#TYPE_SPACE_QUERY_RESULTS_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("results", optional = true)..uint32_t("resultCapacityInput")
+    uint32_t("resultCountOutput")
+    nullable..XrSpaceQueryResultFB.p("results")
 }
 
 val XrEventDataSpaceQueryResultsAvailableFB = struct(Module.OPENXR, "XrEventDataSpaceQueryResultsAvailableFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Event indicating a query has produced results.
-
-        <h5>Description</h5>
-        It indicates a query request has produced some number of results. If a query yields results this event <b>must</b> be delivered before the ##XrEventDataSpaceQueryCompleteFB event is delivered. Call #RetrieveSpaceQueryResultsFB() to retrieve those results.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrEventDataSpaceQueryResultsAvailableFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrAsyncRequestIdFB("requestId", "the ID of the asynchronous query request.")
+    Expression("#TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
 }
 
 val XrEventDataSpaceQueryCompleteFB = struct(Module.OPENXR, "XrEventDataSpaceQueryCompleteFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Event indicating a query has finished.
-
-        <h5>Description</h5>
-        It indicates a query request has completed and specifies the request result. This event <b>must</b> be delivered when a query has completed, regardless of the number of results found. If any results have been found, then this event <b>must</b> be delivered after any ##XrEventDataSpaceQueryResultsAvailableFB events have been delivered.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using ##XrEventDataSpaceQueryCompleteFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrAsyncRequestIdFB("requestId", "the ID of the asynchronous query request.")
-    XrResult("result", "an {@code XrResult} that determines if the request succeeded or if an error occurred.")
+    Expression("#TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
 }
 
 val XrSpaceSaveInfoFB = struct(Module.OPENXR, "XrSpaceSaveInfoFB") {
-    documentation =
-        """
-        Parameters for a save operation.
-
-        <h5>Description</h5>
-        The ##XrSpaceSaveInfoFB structure contains information used to save the spatial entity.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityStorage XR_FB_spatial_entity_storage} extension <b>must</b> be enabled prior to using ##XrSpaceSaveInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_SAVE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code location} <b>must</b> be a valid {@code XrSpaceStorageLocationFB} value</li>
-            <li>{@code persistenceMode} <b>must</b> be a valid {@code XrSpacePersistenceModeFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #SaveSpaceFB()
-        """
-
-    Expression("#TYPE_SPACE_SAVE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("space", "the {@code XrSpace} handle to the space of the entity to be saved.")
-    XrSpaceStorageLocationFB("location", "the storage location.")
-    XrSpacePersistenceModeFB("persistenceMode", "the persistence mode.")
+    Expression("#TYPE_SPACE_SAVE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("space")
+    XrSpaceStorageLocationFB("location")
+    XrSpacePersistenceModeFB("persistenceMode")
 }
 
 val XrSpaceEraseInfoFB = struct(Module.OPENXR, "XrSpaceEraseInfoFB") {
-    documentation =
-        """
-        Parameters for an erase operation.
-
-        <h5>Description</h5>
-        The ##XrSpaceEraseInfoFB structure contains information used to erase the spatial entity.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityStorage XR_FB_spatial_entity_storage} extension <b>must</b> be enabled prior to using ##XrSpaceEraseInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_ERASE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code location} <b>must</b> be a valid {@code XrSpaceStorageLocationFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #EraseSpaceFB()
-        """
-
-    Expression("#TYPE_SPACE_ERASE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("space", "the {@code XrSpace} handle to the reference space that defines the entity to be erased.")
-    XrSpaceStorageLocationFB("location", "the storage location.")
+    Expression("#TYPE_SPACE_ERASE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("space")
+    XrSpaceStorageLocationFB("location")
 }
 
 val XrEventDataSpaceSaveCompleteFB = struct(Module.OPENXR, "XrEventDataSpaceSaveCompleteFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Describes the result of a save operation.
-
-        <h5>Description</h5>
-        The save result event contains the success of the save/write operation to the specified location, as well as the {@code XrSpace} handle on which the save operation was attempted on, the unique UUID, and the triggered async request ID from the initial calling function.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityStorage XR_FB_spatial_entity_storage} extension <b>must</b> be enabled prior to using ##XrEventDataSpaceSaveCompleteFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT
-        """
-
-    Expression("#TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrAsyncRequestIdFB("requestId", "the ID of the asynchronous request to save an entity.")
-    XrResult("result", "an {@code XrResult} that describes whether the request succeeded or if an error occurred.")
-    XrSpace("space", "the spatial entity being saved.")
-    XrUuidEXT("uuid", "the UUID for the spatial entity being saved.")
-    XrSpaceStorageLocationFB("location", "the location of the spatial entity being saved.")
+    Expression("#TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
+    XrSpace("space")
+    XrUuidEXT("uuid")
+    XrSpaceStorageLocationFB("location")
 }
 
 val XrEventDataSpaceEraseCompleteFB = struct(Module.OPENXR, "XrEventDataSpaceEraseCompleteFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Describes the result of a save operation.
-
-        <h5>Description</h5>
-        The erase result event contains the success of the erase operation from the specified storage location. It also provides the UUID of the entity and the async request ID from the initial calling function.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityStorage XR_FB_spatial_entity_storage} extension <b>must</b> be enabled prior to using ##XrEventDataSpaceEraseCompleteFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT
-        """
-
-    Expression("#TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrAsyncRequestIdFB("requestId", "the ID of the asynchronous request to erase an entity.")
-    XrResult("result", "an {@code XrResult} that describes whether the request succeeded or if an error occurred.")
-    XrSpace("space", "the spatial entity being erased.")
-    XrUuidEXT("uuid", "the UUID for the spatial entity being erased.")
-    XrSpaceStorageLocationFB("location", "the location of the spatial entity being erased.")
+    Expression("#TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
+    XrSpace("space")
+    XrUuidEXT("uuid")
+    XrSpaceStorageLocationFB("location")
 }
 
 val XrSwapchainImageFoveationVulkanFB = struct(Module.OPENXR, "XrSwapchainImageFoveationVulkanFB", mutable = false) {
     javaImport("org.lwjgl.vulkan.*")
-    documentation =
-        """
-        Profile with properties defining a foveation pattern.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFoveationVulkan XR_FB_foveation_vulkan} extension <b>must</b> be enabled prior to using ##XrSwapchainImageFoveationVulkanFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSwapchainImageVulkanKHR, #EnumerateSwapchainImages()
-        """
-
-    Expression("#TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    VkImage("image", "a valid Vulkan {@code VkImage} to use.")
-    uint32_t("width", "the horizontal width in pixels of the image.")
-    uint32_t("height", "the vertical height in pixels of the image.")
+    Expression("#TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    VkImage("image")
+    uint32_t("width")
+    uint32_t("height")
 }
 
 val XrSwapchainStateSamplerOpenGLESFB = struct(Module.OPENXR, "XrSwapchainStateSamplerOpenGLESFB", parentStruct = XrSwapchainStateBaseHeaderFB) {
     javaImport("org.lwjgl.egl.*")
-    documentation =
-        """
-        OpenGL ES-specific swapchain sampler state structure.
-
-        <h5>Description</h5>
-        When ##XrSwapchainStateSamplerOpenGLESFB is specified in the call to #UpdateSwapchainFB(), texture sampler state for all images in the {@code XrSwapchain} will be updated for both the application and compositor processes.
-
-        For most cases, the sampler state update is only required compositor-side, as that is where the swapchain images are sampled. For completeness, the application-side sampler state is additionally updated to support cases where the application may choose to directly sample the swapchain images.
-
-        Applications are expected to handle synchronization of the sampler state update with application-side rendering. Similarly, the compositor will synchronize the sampler state update with rendering of the next compositor frame.
-
-        An {@code EGLContext}, either the {@code EGLContext} bound during {@code XrSwapchain} creation or an {@code EGLContext} in the same share group, is required to be bound on the application calling thread. Current texture bindings may be altered by the call, including the active texture.
-
-        When ##XrSwapchainStateSamplerOpenGLESFB is specified in the call to #GetSwapchainStateFB(), the sampler state will be populated with the current swapchain sampler state.
-
-        To use ##XrSwapchainStateSamplerOpenGLESFB, #USE_GRAPHICS_API_OPENGL_ES must be defined before including {@code openxr_platform.h}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSwapchainUpdateStateOpenGLES XR_FB_swapchain_update_state_opengl_es} extension <b>must</b> be enabled prior to using ##XrSwapchainStateSamplerOpenGLESFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code minFilter} <b>must</b> be a valid {@code EGLenum} value</li>
-            <li>{@code magFilter} <b>must</b> be a valid {@code EGLenum} value</li>
-            <li>{@code wrapModeS} <b>must</b> be a valid {@code EGLenum} value</li>
-            <li>{@code wrapModeT} <b>must</b> be a valid {@code EGLenum} value</li>
-            <li>{@code swizzleRed} <b>must</b> be a valid {@code EGLenum} value</li>
-            <li>{@code swizzleGreen} <b>must</b> be a valid {@code EGLenum} value</li>
-            <li>{@code swizzleBlue} <b>must</b> be a valid {@code EGLenum} value</li>
-            <li>{@code swizzleAlpha} <b>must</b> be a valid {@code EGLenum} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrColor4f, #GetSwapchainStateFB(), #UpdateSwapchainFB()
-        """
-
-    Expression("#TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    EGLenum("minFilter", "a valid Android OpenGL ES {@code EGLenum}.")
-    EGLenum("magFilter", "a valid Android OpenGL ES {@code EGLenum}.")
-    EGLenum("wrapModeS", "a valid Android OpenGL ES {@code EGLenum}.")
-    EGLenum("wrapModeT", "a valid Android OpenGL ES {@code EGLenum}.")
-    EGLenum("swizzleRed", "a valid Android OpenGL ES {@code EGLenum}.")
-    EGLenum("swizzleGreen", "a valid Android OpenGL ES {@code EGLenum}.")
-    EGLenum("swizzleBlue", "a valid Android OpenGL ES {@code EGLenum}.")
-    EGLenum("swizzleAlpha", "a valid Android OpenGL ES {@code EGLenum}.")
-    float("maxAnisotropy", "a valid float used to represent max anisotropy.")
-    XrColor4f("borderColor", "an RGBA color to be used as border texels.")
+    Expression("#TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    EGLenum("minFilter")
+    EGLenum("magFilter")
+    EGLenum("wrapModeS")
+    EGLenum("wrapModeT")
+    EGLenum("swizzleRed")
+    EGLenum("swizzleGreen")
+    EGLenum("swizzleBlue")
+    EGLenum("swizzleAlpha")
+    float("maxAnisotropy")
+    XrColor4f("borderColor")
 }
 
 val XrSwapchainStateSamplerVulkanFB = struct(Module.OPENXR, "XrSwapchainStateSamplerVulkanFB", parentStruct = XrSwapchainStateBaseHeaderFB) {
     javaImport("org.lwjgl.vulkan.*")
-    documentation =
-        """
-        Vulkan-specific swapchain sampler state structure.
-
-        <h5>Description</h5>
-        When ##XrSwapchainStateSamplerVulkanFB is specified in the call to #UpdateSwapchainFB(), texture sampler state for all images in the {@code XrSwapchain} will be updated for the compositor process. For most cases, the sampler state update is only required compositor-side, as that is where the swapchain images are sampled. If the application requires sampling of the swapchain images, the application will be responsible for updating the texture state using normal Vulkan mechanisms and synchronizing appropriately with application-side rendering.
-
-        When ##XrSwapchainStateSamplerVulkanFB is specified in the call to #GetSwapchainStateFB(), the sampler state will be populated with the current swapchain sampler state.
-
-        To use ##XrSwapchainStateSamplerVulkanFB, #USE_GRAPHICS_API_VULKAN must be defined before including {@code openxr_platform.h}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSwapchainUpdateStateVulkan XR_FB_swapchain_update_state_vulkan} extension <b>must</b> be enabled prior to using ##XrSwapchainStateSamplerVulkanFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code minFilter} <b>must</b> be a valid {@code VkFilter} value</li>
-            <li>{@code magFilter} <b>must</b> be a valid {@code VkFilter} value</li>
-            <li>{@code mipmapMode} <b>must</b> be a valid {@code VkSamplerMipmapMode} value</li>
-            <li>{@code wrapModeS} <b>must</b> be a valid {@code VkSamplerAddressMode} value</li>
-            <li>{@code wrapModeT} <b>must</b> be a valid {@code VkSamplerAddressMode} value</li>
-            <li>{@code swizzleRed} <b>must</b> be a valid {@code VkComponentSwizzle} value</li>
-            <li>{@code swizzleGreen} <b>must</b> be a valid {@code VkComponentSwizzle} value</li>
-            <li>{@code swizzleBlue} <b>must</b> be a valid {@code VkComponentSwizzle} value</li>
-            <li>{@code swizzleAlpha} <b>must</b> be a valid {@code VkComponentSwizzle} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrColor4f, #GetSwapchainStateFB(), #UpdateSwapchainFB()
-        """
-
-    Expression("#TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    VkFilter("minFilter", "a valid Vulkan {@code VkFilter}.")
-    VkFilter("magFilter", "a valid Vulkan {@code VkFilter}.")
-    VkSamplerMipmapMode("mipmapMode", "a valid Vulkan {@code VkSamplerMipmapMode}.")
-    VkSamplerAddressMode("wrapModeS", "a valid Vulkan {@code VkSamplerAddressMode}.")
-    VkSamplerAddressMode("wrapModeT", "a valid Vulkan {@code VkSamplerAddressMode}.")
-    VkComponentSwizzle("swizzleRed", "a valid Vulkan {@code VkComponentSwizzle}.")
-    VkComponentSwizzle("swizzleGreen", "a valid Vulkan {@code VkComponentSwizzle}.")
-    VkComponentSwizzle("swizzleBlue", "a valid Vulkan {@code VkComponentSwizzle}.")
-    VkComponentSwizzle("swizzleAlpha", "a valid Vulkan {@code VkComponentSwizzle}.")
-    float("maxAnisotropy", "a valid float used to represent max anisotropy.")
-    XrColor4f("borderColor", "an RGBA color to be used as border texels.")
+    Expression("#TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    VkFilter("minFilter")
+    VkFilter("magFilter")
+    VkSamplerMipmapMode("mipmapMode")
+    VkSamplerAddressMode("wrapModeS")
+    VkSamplerAddressMode("wrapModeT")
+    VkComponentSwizzle("swizzleRed")
+    VkComponentSwizzle("swizzleGreen")
+    VkComponentSwizzle("swizzleBlue")
+    VkComponentSwizzle("swizzleAlpha")
+    float("maxAnisotropy")
+    XrColor4f("borderColor")
 }
 
 val XrSpaceShareInfoFB = struct(Module.OPENXR, "XrSpaceShareInfoFB") {
-    documentation =
-        """
-        Describes a request to share some number of spatial entities.
-
-        <h5>Description</h5>
-        The ##XrSpaceShareInfoFB structure describes a request to share one or more spatial entities with one or more users.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntitySharing XR_FB_spatial_entity_sharing} extension <b>must</b> be enabled prior to using ##XrSpaceShareInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_SHARE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code spaces} <b>must</b> be a pointer to an array of {@code spaceCount} {@code XrSpace} handles</li>
-            <li>{@code users} <b>must</b> be a pointer to an array of {@code userCount} {@code XrSpaceUserFB} handles</li>
-            <li>The {@code spaceCount} parameter <b>must</b> be greater than 0</li>
-            <li>The {@code userCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #ShareSpacesFB()
-        """
-
-    Expression("#TYPE_SPACE_SHARE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. {@code spaceCount} is the number of elements in the {@code spaces} list. {@code spaces} is a list containing all spatial entities to be shared. {@code userCount} is the number of elements in the {@code users} list. {@code users} is a list of the users with which the {@code spaces} will: be shared.")
-    AutoSize("spaces")..uint32_t("spaceCount", "")
-    XrSpace.p("spaces", "")
-    AutoSize("users")..uint32_t("userCount", "")
-    XrSpaceUserFB.p("users", "")
+    Expression("#TYPE_SPACE_SHARE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("spaces")..uint32_t("spaceCount")
+    XrSpace.p("spaces")
+    AutoSize("users")..uint32_t("userCount")
+    XrSpaceUserFB.p("users")
 }
 
 val XrEventDataSpaceShareCompleteFB = struct(Module.OPENXR, "XrEventDataSpaceShareCompleteFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Completion of request to share one or more spatial entities.
-
-        <h5>Description</h5>
-        It indicates that the request to share one or more spatial entities has completed. The application <b>can</b> use {@code result} to check if the request was successful or if an error occurred.
-
-        <h5>Result Codes</h5>
-        <dl>
-            <dt>On success, the value of this parameter is</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, the value of this parameter is</dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_SPACE_MAPPING_INSUFFICIENT_FB</li>
-                <li>#ERROR_SPACE_LOCALIZATION_FAILED_FB</li>
-                <li>#ERROR_SPACE_NETWORK_TIMEOUT_FB</li>
-                <li>#ERROR_SPACE_NETWORK_REQUEST_FAILED_FB</li>
-                <li>#ERROR_SPACE_CLOUD_STORAGE_DISABLED_FB</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntitySharing XR_FB_spatial_entity_sharing} extension <b>must</b> be enabled prior to using ##XrEventDataSpaceShareCompleteFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrAsyncRequestIdFB("requestId", "the ID of the asynchronous request used to share the spatial entities.")
-    XrResult("result", "an {@code XrResult} that describes whether the request succeeded or if an error occurred.")
+    Expression("#TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
 }
 
 val XrCompositionLayerSpaceWarpInfoFB = struct(Module.OPENXR, "XrCompositionLayerSpaceWarpInfoFB") {
-    documentation =
-        """
-        Composition Layer Space Warp structure.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return error #ERROR_VALIDATION_FAILURE if {@code nearZ} == {@code farZ}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpaceWarp XR_FB_space_warp} extension <b>must</b> be enabled prior to using ##XrCompositionLayerSpaceWarpInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerSpaceWarpInfoFlagBitsFB} values</li>
-            <li>{@code motionVectorSubImage} <b>must</b> be a valid ##XrSwapchainSubImage structure</li>
-            <li>{@code depthSubImage} <b>must</b> be a valid ##XrSwapchainSubImage structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader, ##XrCompositionLayerProjection, ##XrCompositionLayerProjectionView, ##XrFrameEndInfo, ##XrPosef, ##XrSwapchainSubImage, #EndFrame()
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrCompositionLayerSpaceWarpInfoFlagsFB("layerFlags", "a bitmask of {@code XrCompositionLayerSpaceWarpInfoFlagsFB}.")
-    XrSwapchainSubImage("motionVectorSubImage", "identifies the motion vector image ##XrSwapchainSubImage to be associated with the submitted layer ##XrCompositionLayerProjection.")
-    XrPosef("appSpaceDeltaPose", "the incremental application-applied transform, if any, since the previous frame that affects the view. When artificial locomotion (scripted movement, teleportation, etc.) happens, the application might transform the whole ##XrCompositionLayerProjection::space from one application space pose to another pose between frames. The pose should be identity when there is no ##XrCompositionLayerProjection::space transformation in application.")
-    XrSwapchainSubImage("depthSubImage", "identifies the depth image ##XrSwapchainSubImage to be associated with motionVectorSubImage. The swapchain should be created with #SWAPCHAIN_USAGE_SAMPLED_BIT | #SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT.")
-    float("minDepth", "{@code minDepth} and {@code maxDepth} are the range of depth values the depth swapchain could have, in the range of <code>[0.0,1.0]</code>. This is akin to min and max values of OpenGL’s {@code glDepthRange}, but with the requirement here that <code>maxDepth ≥ minDepth</code>.")
-    float("maxDepth", "see {@code minDepth}")
-    float("nearZ", "the positive distance in meters of the {@code minDepth} value in the depth swapchain. Applications <b>may</b> use a {@code nearZ} that is greater than {@code farZ} to indicate depth values are reversed. {@code nearZ} can be infinite.")
-    float("farZ", "the positive distance in meters of the {@code maxDepth} value in the depth swapchain. {@code farZ} can be infinite.")
+    Expression("#TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerSpaceWarpInfoFlagsFB("layerFlags")
+    XrSwapchainSubImage("motionVectorSubImage")
+    XrPosef("appSpaceDeltaPose")
+    XrSwapchainSubImage("depthSubImage")
+    float("minDepth")
+    float("maxDepth")
+    float("nearZ")
+    float("farZ")
 }
 
 val XrSystemSpaceWarpPropertiesFB = struct(Module.OPENXR, "XrSystemSpaceWarpPropertiesFB", mutable = false) {
-    documentation =
-        """
-        Composition Layer Space Warp structure.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpaceWarp XR_FB_space_warp} extension <b>must</b> be enabled prior to using ##XrSystemSpaceWarpPropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties
-        """
-
-    Expression("#TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    uint32_t("recommendedMotionVectorImageRectWidth", "recommended motion vector and depth image width")
-    uint32_t("recommendedMotionVectorImageRectHeight", "recommended motion vector and depth image height")
+    Expression("#TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    uint32_t("recommendedMotionVectorImageRectWidth")
+    uint32_t("recommendedMotionVectorImageRectHeight")
 }
 
 val XrHapticAmplitudeEnvelopeVibrationFB = struct(Module.OPENXR, "XrHapticAmplitudeEnvelopeVibrationFB", parentStruct = XrHapticBaseHeader) {
-    documentation =
-        """
-        Haptic Effect Description.
-
-        <h5>Member Descriptions</h5>
-        <ul>
-            <li>{@code type} is the {@code XrStructureType} of this structure.</li>
-            <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain.</li>
-            <li>{@code duration} is the duration of the haptic effect in nanoseconds. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-duration">duration</a> for more details.</li>
-            <li>{@code amplitudeCount} is the number of samples in the buffer.</li>
-            <li>{@code amplitudes} is the pointer to a float array that contains the samples.</li>
-        </ul>
-
-        The runtime <b>should</b> resample the provided samples in the {@code amplitudes}, and maintain an internal buffer which <b>should</b> be of #MAX_HAPTIC_AMPLITUDE_ENVELOPE_SAMPLES_FB length. The resampling <b>should</b> happen based on the {@code duration}, {@code amplitudeCount}, and the device’s sample rate.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBHapticAmplitudeEnvelope XR_FB_haptic_amplitude_envelope} extension <b>must</b> be enabled prior to using ##XrHapticAmplitudeEnvelopeVibrationFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code amplitudes} <b>must</b> be a pointer to an array of {@code amplitudeCount} {@code float} values</li>
-            <li>The {@code amplitudeCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-        """
-
-    Expression("#TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
-    XrDuration("duration", "")
-    AutoSize("amplitudes")..uint32_t("amplitudeCount", "")
-    float.const.p("amplitudes", "")
+    Expression("#TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrDuration("duration")
+    AutoSize("amplitudes")..uint32_t("amplitudeCount")
+    float.const.p("amplitudes")
 }
 
 val XrExtent3DfFB = struct(Module.OPENXR, "XrExtent3DfFB", alias = XrExtent3Df) {
-    documentation = "See ##XrExtent3Df."
-
-    float("width", "")
-    float("height", "")
-    float("depth", "")
+    float("width")
+    float("height")
+    float("depth")
 }
 
 val XrOffset3DfFB = struct(Module.OPENXR, "XrOffset3DfFB") {
-    documentation =
-        """
-        Represents a point of 3D space.
-
-        <h5>Description</h5>
-        This structure is used for component values that may be fractional (floating-point). If used to represent physical distances, values must be in meters.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using ##XrOffset3DfFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrRect3DfFB
-        """
-
-    float("x", "the floating-point offset in the x direction.")
-    float("y", "the floating-point offset in the y direction.")
-    float("z", "the floating-point offset in the z direction.")
+    float("x")
+    float("y")
+    float("z")
 }
 
 val XrRect3DfFB = struct(Module.OPENXR, "XrRect3DfFB") {
-    documentation =
-        """
-        Represents a rectangular prism containing a region of space.
-
-        <h5>Description</h5>
-        This structure is used for component values that may be fractional (floating-point).
-
-        The bounding box is defined by an {@code offset} and {@code extent}. The {@code offset} refers to the coordinate of the minimum corner of the box in the local space of the {@code XrSpace}; that is, the corner whose coordinate has the minimum value on each axis. The {@code extent} refers to the dimensions of the box along each axis. The maximum corner can therefore be computed as <code>offset extent</code>.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using ##XrRect3DfFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExtent3DfFB, ##XrOffset3DfFB, #GetSpaceBoundingBox3DFB()
-        """
-
-    XrOffset3DfFB("offset", "the ##XrOffset3DfFB specifying the rectangle offset.")
-    XrExtent3DfFB("extent", "the ##XrExtent3DfFB specifying the rectangle extent.")
+    XrOffset3DfFB("offset")
+    XrExtent3DfFB("extent")
 }
 
 val XrSemanticLabelsFB = struct(Module.OPENXR, "XrSemanticLabelsFB") {
-    documentation =
-        """
-        Provides application with semantic usage of a spatial entity.
-
-        <h5>Description</h5>
-        This structure is used by the #GetSpaceSemanticLabelsFB() function to provide the application with the intended usage of the spatial entity.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using ##XrSemanticLabelsFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SEMANTIC_LABELS_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code bufferCapacityInput} is not 0, {@code buffer} <b>must</b> be a pointer to an array of {@code bufferCapacityInput} char values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSpaceSemanticLabelsFB()
-        """
-
-    Expression("#TYPE_SEMANTIC_LABELS_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain, such as ##XrSemanticLabelsSupportInfoFB.")
-    AutoSize("buffer", optional = true)..uint32_t("bufferCapacityInput", "the capacity of the {@code buffer} array, in bytes, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("bufferCountOutput", "the count of bytes written, or the required capacity in the case that {@code bufferCapacityInput} is insufficient.")
-    nullable..char.p("buffer", "a pointer to an array of bytes, but can be {@code NULL} if {@code bufferCapacityInput} is 0. Multiple labels represented by raw string, separated by a comma without spaces.")
+    Expression("#TYPE_SEMANTIC_LABELS_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("buffer", optional = true)..uint32_t("bufferCapacityInput")
+    uint32_t("bufferCountOutput")
+    nullable..char.p("buffer")
 }
 
 val XrRoomLayoutFB = struct(Module.OPENXR, "XrRoomLayoutFB") {
-    documentation =
-        """
-        Provides additional context of a spatial entity representing a room.
-
-        <h5>Description</h5>
-        This structure is used by the #GetSpaceRoomLayoutFB() function to provide the application with the ##XrUuidEXT handles representing the various surfaces of a room.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using ##XrRoomLayoutFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_ROOM_LAYOUT_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code wallUuidCapacityInput} is not 0, {@code wallUuids} <b>must</b> be a pointer to an array of {@code wallUuidCapacityInput} ##XrUuidEXT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, #GetSpaceRoomLayoutFB()
-        """
-
-    Expression("#TYPE_ROOM_LAYOUT_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrUuidEXT("floorUuid", "the UUID of the spatial entity representing the room floor")
-    XrUuidEXT("ceilingUuid", "the UUID of the spatial entity representing the room ceiling")
-    AutoSize("wallUuids", optional = true)..uint32_t("wallUuidCapacityInput", "the capacity of the {@code wallUuids} array, in number of UUIDs, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("wallUuidCountOutput", "the count of ##XrUuidEXT handles written, or the required capacity in the case that {@code wallUuidCapacityInput} is insufficient.")
-    nullable..XrUuidEXT.p("wallUuids", "a pointer to an array of ##XrUuidEXT handles, but can be {@code NULL} if {@code wallUuidCapacityInput} is 0.")
+    Expression("#TYPE_ROOM_LAYOUT_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrUuidEXT("floorUuid")
+    XrUuidEXT("ceilingUuid")
+    AutoSize("wallUuids", optional = true)..uint32_t("wallUuidCapacityInput")
+    uint32_t("wallUuidCountOutput")
+    nullable..XrUuidEXT.p("wallUuids")
 }
 
 val XrBoundary2DFB = struct(Module.OPENXR, "XrBoundary2DFB") {
-    documentation =
-        """
-        Provides additional context of a spatial entity representing a room.
-
-        <h5>Description</h5>
-        This structure is used by the #GetSpaceBoundary2DFB() function to provide the application with the ##XrVector2f vertices representing the a spatial entity with a boundary.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using ##XrBoundary2DFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_BOUNDARY_2D_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertices} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector2f structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVector2f, #GetSpaceBoundary2DFB()
-        """
-
-    Expression("#TYPE_BOUNDARY_2D_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput", "the capacity of the {@code vertices} array, in number of vertices, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("vertexCountOutput", "the count of ##XrVector2f written, or the required capacity in the case that {@code vertexCapacityInput} is insufficient.")
-    nullable..XrVector2f.p("vertices", "a pointer to an array of ##XrVector2f, but <b>can</b> be {@code NULL} if {@code vertexCapacityInput} is 0.")
+    Expression("#TYPE_BOUNDARY_2D_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrVector2f.p("vertices")
 }
 
 val XrSemanticLabelsSupportInfoFB = struct(Module.OPENXR, "XrSemanticLabelsSupportInfoFB") {
-    documentation =
-        """
-        Specifies additional behaviors of the xrGetSpaceSemanticLabelsFB function.
-
-        <h5>Description</h5>
-        The ##XrSemanticLabelsSupportInfoFB structure <b>may</b> be specified in the {@code next} chain of ##XrSemanticLabelsFB to specify additional behaviors of the #GetSpaceSemanticLabelsFB() function. The runtime <b>must</b> follow the behaviors specified in {@code flags} according to the descriptions of {@code XrSemanticLabelsSupportFlagBitsFB}. The runtime <b>must</b> return any semantic label that is not included in {@code recognizedLabels} as "OTHER" to the application. The runtime <b>must</b> follow this direction only if the runtime reports the ##XrExtensionProperties{@code ::extensionVersion} as 2 or greater, otherwise the runtime <b>must</b> ignore this as an unknown chained structure.
-
-        If the ##XrSemanticLabelsSupportInfoFB structure is not present in the {@code next} chain of ##XrSemanticLabelsFB, the runtime <b>may</b> return any semantic labels to the application.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using ##XrSemanticLabelsSupportInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrSemanticLabelsSupportFlagBitsFB} values</li>
-            <li>{@code recognizedLabels} <b>must</b> be a null-terminated UTF-8 string</li>
-        </ul>
-        """
-
-    Expression("#TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSemanticLabelsSupportFlagsFB("flags", "a bitmask of {@code XrSemanticLabelsSupportFlagBitsFB} that specifies additional behaviors.")
-    charUTF8.const.p("recognizedLabels", "a {@code NULL} terminated string that indicates a set of semantic labels recognized by the application. Each semantic label <b>must</b> be represented as a string and be separated by a comma without spaces. This field <b>must</b> include at least \"OTHER\" and <b>must</b> not be {@code NULL}.")
+    Expression("#TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSemanticLabelsSupportFlagsFB("flags")
+    charUTF8.const.p("recognizedLabels")
 }
 
 val XrDigitalLensControlALMALENCE = struct(Module.OPENXR, "XrDigitalLensControlALMALENCE") {
-    documentation =
-        """
-        The digital lens control structure to be passed to change state of DLVR API Layer.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link ALMALENCEDigitalLensControl XR_ALMALENCE_digital_lens_control} extension <b>must</b> be enabled prior to using ##XrDigitalLensControlALMALENCE</li>
-            <li>{@code type} <b>must</b> be #TYPE_DIGITAL_LENS_CONTROL_ALMALENCE</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrDigitalLensControlFlagBitsALMALENCE} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #SetDigitalLensControlALMALENCE()
-        """
-
-    Expression("#TYPE_DIGITAL_LENS_CONTROL_ALMALENCE")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "must be {@code NULL}. No such structures are defined in core OpenXR or this extension.")
-    XrDigitalLensControlFlagsALMALENCE("flags", "a bitmask of {@code XrDigitalLensControlFlagBitsALMALENCE} indicating various characteristics desired for the Digital Lens.")
+    Expression("#TYPE_DIGITAL_LENS_CONTROL_ALMALENCE")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrDigitalLensControlFlagsALMALENCE("flags")
 }
 
 val XrEventDataSceneCaptureCompleteFB = struct(Module.OPENXR, "XrEventDataSceneCaptureCompleteFB") {
-    documentation =
-        """
-        Event which occurs after a scene capture operation completes.
-
-        <h5>Description</h5>
-        The ##XrEventDataSceneCaptureCompleteFB structure is used by an application to instruct the system what to look for during a scene capture.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSceneCapture XR_FB_scene_capture} extension <b>must</b> be enabled prior to using ##XrEventDataSceneCaptureCompleteFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrAsyncRequestIdFB("requestId", "the ID of the asynchronous query request.")
-    XrResult("result", "an {@code XrResult} that indicates if the request succeeded or if an error occurred.")
+    Expression("#TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
 }
 
 val XrSceneCaptureRequestInfoFB = struct(Module.OPENXR, "XrSceneCaptureRequestInfoFB") {
-    documentation =
-        """
-        Describes how a scene capture should be conducted by the system.
-
-        <h5>Description</h5>
-        The ##XrSceneCaptureRequestInfoFB structure is used by an application to instruct the system what to look for during a scene capture. If the {@code request} parameter is {@code NULL}, then the runtime <b>must</b> conduct a default scene capture.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSceneCapture XR_FB_scene_capture} extension <b>must</b> be enabled prior to using ##XrSceneCaptureRequestInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SCENE_CAPTURE_REQUEST_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code requestByteCount} is not 0, {@code request} <b>must</b> be a pointer to an array of {@code requestByteCount} char values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #RequestSceneCaptureFB()
-        """
-
-    Expression("#TYPE_SCENE_CAPTURE_REQUEST_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("request", optional = true)..uint32_t("requestByteCount", "byte length of the {@code request} parameter.")
-    nullable..char.const.p("request", "a string which the application <b>can</b> use to specify which type of scene capture should be initiated by the runtime. The contents of buffer pointed to by the {@code request} parameter is runtime-specific.")
+    Expression("#TYPE_SCENE_CAPTURE_REQUEST_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("request", optional = true)..uint32_t("requestByteCount")
+    nullable..char.const.p("request")
 }
 
 val XrSpaceContainerFB = struct(Module.OPENXR, "XrSpaceContainerFB") {
-    documentation =
-        """
-        Represents a collection of other spaces, represented by UUIDs, contained by this space.
-
-        <h5>Description</h5>
-        The ##XrSpaceContainerFB structure <b>can</b> be used by an application to perform the two calls required to obtain information about which spatial entities are contained by a specified spatial entity.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityContainer XR_FB_spatial_entity_container} extension <b>must</b> be enabled prior to using ##XrSpaceContainerFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_CONTAINER_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code uuidCapacityInput} is not 0, {@code uuids} <b>must</b> be a pointer to an array of {@code uuidCapacityInput} ##XrUuidEXT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, #GetSpaceContainerFB()
-        """
-
-    Expression("#TYPE_SPACE_CONTAINER_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("uuids", optional = true)..uint32_t("uuidCapacityInput", "the capacity of the {@code uuids} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("uuidCountOutput", "an output parameter which will hold the number of UUIDs included in the output list, or the required capacity in the case that {@code uuidCapacityInput} is insufficient")
-    nullable..XrUuidEXT.p("uuids", "an output parameter which will hold a list of space UUIDs contained by the space to which the component is attached.")
+    Expression("#TYPE_SPACE_CONTAINER_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("uuids", optional = true)..uint32_t("uuidCapacityInput")
+    uint32_t("uuidCountOutput")
+    nullable..XrUuidEXT.p("uuids")
 }
 
 val XrFoveationEyeTrackedProfileCreateInfoMETA = struct(Module.OPENXR, "XrFoveationEyeTrackedProfileCreateInfoMETA") {
-    documentation =
-        """
-        The information to create a eye tracked foveation profile.
-
-        <h5>Description</h5>
-        ##XrFoveationEyeTrackedProfileCreateInfoMETA <b>can</b> be added to the {@code next} chain of ##XrFoveationLevelProfileCreateInfoFB in order to enable eye tracked foveation. The runtime <b>must</b> apply an eye tracked foveation pattern according to the parameters defined in the ##XrFoveationLevelProfileCreateInfoFB.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAFoveationEyeTracked XR_META_foveation_eye_tracked} extension <b>must</b> be enabled prior to using ##XrFoveationEyeTrackedProfileCreateInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0</li>
-        </ul>
-        """
-
-    Expression("#TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrFoveationEyeTrackedProfileCreateFlagsMETA("flags", "a bitmask of {@code XrFoveationEyeTrackedProfileCreateFlagBitsMETA} which indicate various characteristics for how eye tracked foveation is enabled on the swapchain.")
+    Expression("#TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFoveationEyeTrackedProfileCreateFlagsMETA("flags")
 }
 
 val XrFoveationEyeTrackedStateMETA = struct(Module.OPENXR, "XrFoveationEyeTrackedStateMETA", mutable = false) {
     javaImport("static org.lwjgl.openxr.METAFoveationEyeTracked.*")
-    documentation =
-        """
-        Foveation data returned from the runtime.
-
-        <h5>Description</h5>
-        ##XrFoveationEyeTrackedStateMETA <b>must</b> be provided when calling #GetFoveationEyeTrackedStateMETA(). The runtime <b>must</b> interpret ##XrFoveationEyeTrackedStateMETA without any additional structs in its {@code next} chain in order to query eye tracked foveation state, e.g. the center of the foveal region.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAFoveationEyeTracked XR_META_foveation_eye_tracked} extension <b>must</b> be enabled prior to using ##XrFoveationEyeTrackedStateMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_FOVEATION_EYE_TRACKED_STATE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVector2f, #GetFoveationEyeTrackedStateMETA()
-        """
-
-    Expression("#TYPE_FOVEATION_EYE_TRACKED_STATE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrVector2f("foveationCenter", "the center of the foveal region defined in NDC space in the range of -1 to 1 for both eyes.")["XR_FOVEATION_CENTER_SIZE_META"]
-    XrFoveationEyeTrackedStateFlagsMETA("flags", "a bitmask of {@code XrFoveationEyeTrackedStateFlagBitsMETA} which indicates various characteristics for current foveation state.")
+    Expression("#TYPE_FOVEATION_EYE_TRACKED_STATE_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrVector2f("foveationCenter")["XR_FOVEATION_CENTER_SIZE_META"]
+    XrFoveationEyeTrackedStateFlagsMETA("flags")
 }
 
 val XrSystemFoveationEyeTrackedPropertiesMETA = struct(Module.OPENXR, "XrSystemFoveationEyeTrackedPropertiesMETA", mutable = false) {
-    documentation =
-        """
-        Information about the current system support for eye tracked foveation.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of eye tracked foveation by extending the ##XrSystemProperties with ##XrSystemFoveationEyeTrackedPropertiesMETA structure when calling #GetSystemProperties().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAFoveationEyeTracked XR_META_foveation_eye_tracked} extension <b>must</b> be enabled prior to using ##XrSystemFoveationEyeTrackedPropertiesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsFoveationEyeTracked", "indicates if the current system is capable of eye tracked foveation.")
+    Expression("#TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsFoveationEyeTracked")
 }
 
 val XrSystemFaceTrackingPropertiesFB = struct(Module.OPENXR, "XrSystemFaceTrackingPropertiesFB", mutable = false) {
-    documentation =
-        """
-        System property for face tracking.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of receiving face tracking input by extending the ##XrSystemProperties with ##XrSystemFaceTrackingPropertiesFB structure when calling #GetSystemProperties().
-
-        If a runtime returns #FALSE for {@code supportsFaceTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFaceTrackerFB().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFaceTracking XR_FB_face_tracking} extension <b>must</b> be enabled prior to using ##XrSystemFaceTrackingPropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsFaceTracking", "an {@code XrBool32}, indicating if current system is capable of receiving face tracking input.")
+    Expression("#TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsFaceTracking")
 }
 
 val XrFaceTrackerCreateInfoFB = struct(Module.OPENXR, "XrFaceTrackerCreateInfoFB") {
-    documentation =
-        """
-        Information to create a facial expression handle.
-
-        <h5>Description</h5>
-        The ##XrFaceTrackerCreateInfoFB structure describes the information to create an {@code XrFaceTrackerFB} handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFaceTracking XR_FB_face_tracking} extension <b>must</b> be enabled prior to using ##XrFaceTrackerCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACE_TRACKER_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code faceExpressionSet} <b>must</b> be a valid {@code XrFaceExpressionSetFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateFaceTrackerFB()
-        """
-
-    Expression("#TYPE_FACE_TRACKER_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrFaceExpressionSetFB("faceExpressionSet", "an {@code XrFaceExpressionSetFB} that describe the set of blend shapes to retrieve.")
+    Expression("#TYPE_FACE_TRACKER_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFaceExpressionSetFB("faceExpressionSet")
 }
 
 val XrFaceExpressionInfoFB = struct(Module.OPENXR, "XrFaceExpressionInfoFB") {
-    documentation =
-        """
-        Describes the information to obtain facial expression.
-
-        <h5>Description</h5>
-        Callers <b>should</b> request a time equal to the predicted display time for the rendered frame. The system will employ appropriate modeling to provide expressions for this time.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFaceTracking XR_FB_face_tracking} extension <b>must</b> be enabled prior to using ##XrFaceExpressionInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACE_EXPRESSION_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetFaceExpressionWeightsFB()
-        """
-
-    Expression("#TYPE_FACE_EXPRESSION_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrTime("time", "an {@code XrTime} at which the facial expression weights are requested.")
+    Expression("#TYPE_FACE_EXPRESSION_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrTime("time")
 }
 
 val XrFaceExpressionStatusFB = struct(Module.OPENXR, "XrFaceExpressionStatusFB") {
-    documentation =
-        """
-        Describes the status of facial expression weights.
-
-        <h5>Description</h5>
-        If the returned {@code isValid} is #FALSE, then it indicates that the face tracker failed to track or lost track of the face, or the application lost focus, or the consent for face tracking was denied.
-
-        If the returned {@code isValid} is #TRUE, the runtime <b>must</b> return all weights (or all weights except eyes related weights, see {@code isEyeFollowingBlendshapesValid}).
-
-        If the returned {@code isEyeFollowingBlendshapesValid} is #FALSE, then it indicates that the eye tracking driving blendshapes with prefix {@code XR_FACE_EXPRESSION_EYES_LOOK_*} lost track or the consent for eye tracking was denied.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFaceTracking XR_FB_face_tracking} extension <b>must</b> be enabled prior to using ##XrFaceExpressionStatusFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFaceExpressionWeightsFB
-        """
-
-    XrBool32("isValid", "an {@code XrBool32} which indicates that the tracked expression weights are valid.")
-    XrBool32("isEyeFollowingBlendshapesValid", "an {@code XrBool32} which indicates if the 8 expression weights with prefix {@code XR_FACE_EXPRESSION_EYES_LOOK_*} are valid.")
+    XrBool32("isValid")
+    XrBool32("isEyeFollowingBlendshapesValid")
 }
 
 val XrFaceExpressionWeightsFB = struct(Module.OPENXR, "XrFaceExpressionWeightsFB") {
-    documentation =
-        """
-        Returns the facial expression.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if {@code weightCount} is not equal to the number of blend shapes defined by the {@code XrFaceExpressionSetFB} used to create the {@code XrFaceTrackerFB}.
-
-        The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if {@code confidenceCount} is not equal to the number of confidence areas defined by the {@code XrFaceExpressionSetFB} used to create the {@code XrFaceTrackerFB}.
-
-        The runtime <b>must</b> return {@code weights} representing the weights of blend shapes of current facial expression.
-
-        The runtime <b>must</b> update the {@code weights} array ordered so that the application <b>can</b> index elements using the corresponding facial expression enum (e.g. {@code XrFaceExpressionFB}) as described by {@code XrFaceExpressionSetFB} when creating the {@code XrFaceTrackerFB}. For example, when the {@code XrFaceTrackerFB} is created with #FACE_EXPRESSION_SET_DEFAULT_FB, the application sets the {@code weightCount} to #FACE_EXPRESSION_COUNT_FB, and the runtime <b>must</b> fill the {@code weights} array ordered so that it <b>can</b> be indexed by the {@code XrFaceExpressionFB} enum.
-
-        The runtime <b>must</b> update the {@code confidences} array ordered so that the application <b>can</b> index elements using the corresponding confidence area enum (e.g. {@code XrFaceConfidenceFB}) as described by {@code XrFaceExpressionSetFB} when creating the {@code XrFaceTrackerFB}. For example, when the {@code XrFaceTrackerFB} is created with #FACE_EXPRESSION_SET_DEFAULT_FB, the application sets the {@code confidenceCount} to #FACE_CONFIDENCE_COUNT_FB, and the runtime <b>must</b> fill the {@code confidences} array ordered so that it <b>can</b> be indexed by the {@code XrFaceConfidenceFB} enum.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFaceTracking XR_FB_face_tracking} extension <b>must</b> be enabled prior to using ##XrFaceExpressionWeightsFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACE_EXPRESSION_WEIGHTS_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code weights} <b>must</b> be a pointer to an array of {@code weightCount} {@code float} values</li>
-            <li>{@code confidences} <b>must</b> be a pointer to an array of {@code confidenceCount} {@code float} values</li>
-            <li>{@code status} <b>must</b> be a valid ##XrFaceExpressionStatusFB structure</li>
-            <li>The {@code weightCount} parameter <b>must</b> be greater than 0</li>
-            <li>The {@code confidenceCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFaceExpressionStatusFB, #GetFaceExpressionWeightsFB()
-        """
-
-    Expression("#TYPE_FACE_EXPRESSION_WEIGHTS_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("weights")..uint32_t("weightCount", "a {@code uint32_t} describing the count of elements in {@code weights} array.")
-    float.p("weights", "a pointer to an application-allocated array of {@code float} that will be filled with weights of facial expression blend shapes.")
-    AutoSize("confidences")..uint32_t("confidenceCount", "a {@code uint32_t} describing the count of elements in {@code confidences} array.")
-    float.p("confidences", "a pointer to an application-allocated array of {@code float} that will be filled with confidence of tracking specific parts of a face.")
-    XrFaceExpressionStatusFB("status", "the ##XrFaceExpressionStatusFB of validity status of the expression weights.")
-    XrTime("time", "an {@code XrTime} time at which the returned expression weights are tracked or extrapolated to. Equals the time at which the expression weights were requested if the extrapolating at the time was successful.")
+    Expression("#TYPE_FACE_EXPRESSION_WEIGHTS_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("weights")..uint32_t("weightCount")
+    float.p("weights")
+    AutoSize("confidences")..uint32_t("confidenceCount")
+    float.p("confidences")
+    XrFaceExpressionStatusFB("status")
+    XrTime("time")
 }
 
 val XrEyeGazeFB = struct(Module.OPENXR, "XrEyeGazeFB") {
-    documentation =
-        """
-        Describes the eye gaze direction.
-
-        <h5>Description</h5>
-        If the returned {@code isValid} is true, the runtime <b>must</b> return {@code gazePose} and {@code gazeConfidence}.
-
-        If the returned {@code isValid} is false, it indicates either the eye tracker did not detect the eye gaze or the application lost input focus.
-
-        The eye gaze pose is natively oriented with +Y up, +X to the right, and -Z forward and not gravity-aligned, similar to the #REFERENCE_SPACE_TYPE_VIEW.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBEyeTrackingSocial XR_FB_eye_tracking_social} extension <b>must</b> be enabled prior to using ##XrEyeGazeFB</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrEyeGazesFB, ##XrPosef
-        """
-
-    XrBool32("isValid", "an {@code XrBool32} indicating if the returned gazePose is valid. Callers <b>should</b> check the validity of pose prior to use.")
-    XrPosef("gazePose", "an ##XrPosef describing the position and orientation of the user’s eye. The pose is represented in the coordinate system provided by ##XrEyeGazesInfoFB{@code ::baseSpace}.")
-    float("gazeConfidence", "a {@code float} value between 0 and 1 that represents the confidence for eye pose. A value of 0 represents no confidence in the pose returned, and a value of 1 means maximum confidence in the returned eye pose.")
+    XrBool32("isValid")
+    XrPosef("gazePose")
+    float("gazeConfidence")
 }
 
 val XrEyeTrackerCreateInfoFB = struct(Module.OPENXR, "XrEyeTrackerCreateInfoFB") {
-    documentation =
-        """
-        Information to create an eye gaze handle.
-
-        <h5>Description</h5>
-        The ##XrEyeTrackerCreateInfoFB structure describes the information to create an {@code XrEyeTrackerFB} handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBEyeTrackingSocial XR_FB_eye_tracking_social} extension <b>must</b> be enabled prior to using ##XrEyeTrackerCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EYE_TRACKER_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateEyeTrackerFB()
-        """
-
-    Expression("#TYPE_EYE_TRACKER_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_EYE_TRACKER_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrEyeGazesInfoFB = struct(Module.OPENXR, "XrEyeGazesInfoFB") {
-    documentation =
-        """
-        Describes the information to get eye gaze.
-
-        <h5>Description</h5>
-        The application <b>should</b> request a time equal to the predicted display time for the rendered frame. The system will employ appropriate modeling to provide eye gaze at this time.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBEyeTrackingSocial XR_FB_eye_tracking_social} extension <b>must</b> be enabled prior to using ##XrEyeGazesInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EYE_GAZES_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetEyeGazesFB()
-        """
-
-    Expression("#TYPE_EYE_GAZES_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("baseSpace", "an {@code XrSpace} within which the returned eye poses will be represented.")
-    XrTime("time", "an {@code XrTime} at which the eye gaze information is requested.")
+    Expression("#TYPE_EYE_GAZES_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
 }
 
 val XrSystemEyeTrackingPropertiesFB = struct(Module.OPENXR, "XrSystemEyeTrackingPropertiesFB", mutable = false) {
-    documentation =
-        """
-        System property for eye tracking.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of eye tracking input by extending the ##XrSystemProperties with ##XrSystemEyeTrackingPropertiesFB structure when calling #GetSystemProperties().
-
-        If a runtime returns #FALSE for {@code supportsEyeTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateEyeTrackerFB().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBEyeTrackingSocial XR_FB_eye_tracking_social} extension <b>must</b> be enabled prior to using ##XrSystemEyeTrackingPropertiesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsEyeTracking", "an {@code XrBool32}, indicating if the current system is capable of receiving eye tracking input.")
+    Expression("#TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsEyeTracking")
 }
 
 val XrEyeGazesFB = struct(Module.OPENXR, "XrEyeGazesFB") {
     javaImport("static org.lwjgl.openxr.FBEyeTrackingSocial.*")
-    documentation =
-        """
-        Returns the eye gaze directions.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBEyeTrackingSocial XR_FB_eye_tracking_social} extension <b>must</b> be enabled prior to using ##XrEyeGazesFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EYE_GAZES_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>Any given element of {@code gaze} <b>must</b> be a valid ##XrEyeGazeFB structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrEyeGazeFB, #GetEyeGazesFB()
-        """
-
-    Expression("#TYPE_EYE_GAZES_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrEyeGazeFB("gaze", "an array of ##XrEyeGazeFB receiving the returned eye gaze directions.")["XR_EYE_POSITION_COUNT_FB"]
-    XrTime("time", "an {@code XrTime} time at which the returned eye gaze is tracked or extrapolated to. Equals the time for which the eye gaze was requested if the interpolation at the time was successful.")
+    Expression("#TYPE_EYE_GAZES_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrEyeGazeFB("gaze")["XR_EYE_POSITION_COUNT_FB"]
+    XrTime("time")
 }
 
 val XrPassthroughKeyboardHandsIntensityFB = struct(Module.OPENXR, "XrPassthroughKeyboardHandsIntensityFB") {
-    documentation =
-        """
-        A struct for setting the level of intensity for hands in the passthrough layer.
-
-        <h5>Description</h5>
-        ##XrPassthroughKeyboardHandsIntensityFB describes intensities of passthrough hands, and is used as a parameter to #PassthroughLayerSetKeyboardHandsIntensityFB().
-
-        Each of the intensity values {@code leftHandIntensity} and {@code rightHandIntensity} <b>must</b> be in the range [0.0, 1.0]. The hand intensity value represents the level of visibility of rendered hand, the minimal value of the intensity 0.0 represents the fully transparent hand (not visible), the maximal value of 1.0 represented fully opaque hands (maximal visibility).
-
-        If either {@code leftHandIntensity} or {@code rightHandIntensity} is outside the range [0.0, 1.0], the runtime must return #ERROR_VALIDATION_FAILURE.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBPassthroughKeyboardHands XR_FB_passthrough_keyboard_hands} extension <b>must</b> be enabled prior to using ##XrPassthroughKeyboardHandsIntensityFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PassthroughLayerSetKeyboardHandsIntensityFB()
-        """
-
-    Expression("#TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    float("leftHandIntensity", "defines an intensity for the left tracked hand.")
-    float("rightHandIntensity", "defines an intensity for the right tracked hand.")
+    Expression("#TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("leftHandIntensity")
+    float("rightHandIntensity")
 }
 
 val XrCompositionLayerSettingsFB = struct(Module.OPENXR, "XrCompositionLayerSettingsFB") {
-    documentation =
-        """
-        specifies processing options for composition layers.
-
-        <h5>Description</h5>
-        ##XrCompositionLayerSettingsFB contains additional flags to indicate which processing steps to perform on a composition layer.
-
-        If both #COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB and #COMPOSITION_LAYER_SETTINGS_QUALITY_SUPER_SAMPLING_BIT_FB are set, #COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB will take precedence.
-
-        If both #COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB and #COMPOSITION_LAYER_SETTINGS_QUALITY_SHARPENING_BIT_FB are set, #COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB will take precedence.
-
-        To specify the additional flags, create an ##XrCompositionLayerSettingsFB structure and pass it via the ##XrCompositionLayerBaseHeader structure’s {@code next} parameter.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBCompositionLayerSettings XR_FB_composition_layer_settings} extension <b>must</b> be enabled prior to using ##XrCompositionLayerSettingsFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_SETTINGS_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code layerFlags} <b>must</b> be a valid combination of {@code XrCompositionLayerSettingsFlagBitsFB} values</li>
-            <li>{@code layerFlags} <b>must</b> not be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_SETTINGS_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrCompositionLayerSettingsFlagsFB("layerFlags", "a bitmask of {@code XrCompositionLayerSettingsFlagBitsFB}.")
+    Expression("#TYPE_COMPOSITION_LAYER_SETTINGS_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerSettingsFlagsFB("layerFlags")
 }
 
 val XrHapticPcmVibrationFB = struct(Module.OPENXR, "XrHapticPcmVibrationFB", parentStruct = XrHapticBaseHeader) {
-    documentation =
-        """
-        Haptic Effect Description.
-
-        <h5>Description</h5>
-        This structure describes a PCM haptic effect.
-
-        The runtime <b>may</b> resample the provided samples in the {@code buffer}, and maintain an internal buffer which <b>should</b> be of #MAX_HAPTIC_PCM_BUFFER_SIZE_FB length. The resampling <b>should</b> happen based on the {@code sampleRate} and the device’s sample rate.
-
-        If {@code append} is #TRUE and a preceding ##XrHapticPcmVibrationFB haptic effect on this action has not yet completed, then the runtime <b>must</b> finish playing the preceding samples and then play the new haptic effect. If a preceding haptic event on this action has not yet completed, and either the preceding effect is not an ##XrHapticPcmVibrationFB haptic effect or {@code append} is #FALSE, the runtime <b>must</b> cancel the preceding incomplete effects on that action and start playing the new haptic effect, as usual for the core specification.
-
-        When {@code append} is true and a preceding ##XrHapticPcmVibrationFB haptic effect on this action has not yet completed, then the application can provide a different {@code sampleRate} in the new haptic effect.
-
-        The runtime <b>must</b> populate the {@code samplesConsumed} with the count of the samples from {@code buffer} which were consumed. The {@code samplesConsumed} is populated before the #ApplyHapticFeedback() returns.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBHapticPcm XR_FB_haptic_pcm} extension <b>must</b> be enabled prior to using ##XrHapticPcmVibrationFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAPTIC_PCM_VIBRATION_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} {@code float} values</li>
-            <li>{@code samplesConsumed} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-            <li>The {@code bufferSize} parameter <b>must</b> be greater than 0</li>
-        </ul>
-        """
-
-    Expression("#TYPE_HAPTIC_PCM_VIBRATION_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("buffer")..uint32_t("bufferSize", "the number of samples in the buffer.")
-    float.const.p("buffer", "a pointer to a float array representing the PCM samples. If you consider the haptic effect as a sampled analog audio, then this buffer will contain the samples representing that effect. The values in this buffer are expected to be in the range [-1.0, 1.0].")
-    float("sampleRate", "the number of samples to be played per second, this is used to determine the duration of the haptic effect.")
-    XrBool32("append", "if set to #FALSE, any existing samples will be cleared and a new haptic effect will begin, if #TRUE, samples will be appended to the currently playing effect")
-    uint32_t.p("samplesConsumed", "a pointer to an unsigned integer; it is populated by runtime, to tell the application about how many samples were consumed from the input {@code buffer}")
+    Expression("#TYPE_HAPTIC_PCM_VIBRATION_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("buffer")..uint32_t("bufferSize")
+    float.const.p("buffer")
+    float("sampleRate")
+    XrBool32("append")
+    uint32_t.p("samplesConsumed")
 }
 
 val XrDevicePcmSampleRateStateFB = struct(Module.OPENXR, "XrDevicePcmSampleRateStateFB") {
-    documentation =
-        """
-        Information about the device sample rate.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBHapticPcm XR_FB_haptic_pcm} extension <b>must</b> be enabled prior to using ##XrDevicePcmSampleRateStateFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetDeviceSampleRateFB()
-        """
-
-    Expression("#TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    float("sampleRate", "the sample rate of the currently bound device which can play a haptic effect")
+    Expression("#TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    float("sampleRate")
 }
 
 val XrDevicePcmSampleRateGetInfoFB = struct(Module.OPENXR, "XrDevicePcmSampleRateGetInfoFB", alias = XrDevicePcmSampleRateStateFB) {
-    documentation = "See ##XrDevicePcmSampleRateStateFB."
-
-    Expression("#TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB")..XrStructureType("type", "")
-    nullable..opaque_p("next", "")
-    float("sampleRate", "")
+    Expression("#TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    float("sampleRate")
 }
 
 val XrCompositionLayerDepthTestFB = struct(Module.OPENXR, "XrCompositionLayerDepthTestFB") {
-    documentation =
-        """
-        specifies depth test for composition layer.
-
-        <h5>Description</h5>
-        To specify that a layer should be depth tested, a ##XrCompositionLayerDepthTestFB structure <b>must</b> be passed via the polymorphic ##XrCompositionLayerBaseHeader structure’s {@code next} parameter chain.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBCompositionLayerDepthTest XR_FB_composition_layer_depth_test} extension <b>must</b> be enabled prior to using ##XrCompositionLayerDepthTestFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code compareOp} <b>must</b> be a valid {@code XrCompareOpFB} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrBool32("depthMask", "a boolean indicating whether writes to the composition depth buffer are enabled.")
-    XrCompareOpFB("compareOp", "an enum that indicates which compare operation is used in the depth test.")
+    Expression("#TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("depthMask")
+    XrCompareOpFB("compareOp")
 }
 
 val XrLocalDimmingFrameEndInfoMETA = struct(Module.OPENXR, "XrLocalDimmingFrameEndInfoMETA") {
-    documentation =
-        """
-        Local dimming meta data for the current submitted frame.
-
-        <h5>Description</h5>
-        The ##XrLocalDimmingFrameEndInfoMETA is a structure that an application <b>can</b> chain in ##XrFrameEndInfo in order to request a local dimming mode.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METALocalDimming XR_META_local_dimming} extension <b>must</b> be enabled prior to using ##XrLocalDimmingFrameEndInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_LOCAL_DIMMING_FRAME_END_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code localDimmingMode} <b>must</b> be a valid {@code XrLocalDimmingModeMETA} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFrameEndInfo
-        """
-
-    Expression("#TYPE_LOCAL_DIMMING_FRAME_END_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrLocalDimmingModeMETA("localDimmingMode", "the local dimming mode for current submitted frame.")
+    Expression("#TYPE_LOCAL_DIMMING_FRAME_END_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrLocalDimmingModeMETA("localDimmingMode")
 }
 
 val XrPassthroughPreferencesMETA = struct(Module.OPENXR, "XrPassthroughPreferencesMETA", mutable = false) {
-    documentation =
-        """
-        Passthrough preferences.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> populate the ##XrPassthroughPreferencesMETA structure with the relevant information when the app calls #GetPassthroughPreferencesMETA().
-
-        Presence of the bit flag #PASSTHROUGH_PREFERENCE_DEFAULT_TO_ACTIVE_BIT_META does not indicate a guarantee that applications <b>can</b> enable and use passthrough in practice. The runtime <b>may</b> impose restrictions on passthrough usage (e.g. based on hardware availability or permission models) independently of the state of this flag bit. Apps <b>should</b> test for this flag explicitly, as more flag bits <b>may</b> be introduced in the future.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPassthroughPreferences XR_META_passthrough_preferences} extension <b>must</b> be enabled prior to using ##XrPassthroughPreferencesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_PREFERENCES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPassthroughPreferencesMETA()
-        """
-
-    Expression("#TYPE_PASSTHROUGH_PREFERENCES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrPassthroughPreferenceFlagsMETA("flags", "a bitmask of {@code XrPassthroughPreferenceFlagBitsMETA} describing boolean passthrough preferences.")
+    Expression("#TYPE_PASSTHROUGH_PREFERENCES_META")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrPassthroughPreferenceFlagsMETA("flags")
 }
 
 val XrSystemVirtualKeyboardPropertiesMETA = struct(Module.OPENXR, "XrSystemVirtualKeyboardPropertiesMETA", mutable = false) {
-    documentation =
-        """
-        Virtual Keyboard Properties structure.
-
-        <h5>Description</h5>
-        The struct is used for checking virtual keyboard support.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrSystemVirtualKeyboardPropertiesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties
-        """
-
-    Expression("#TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsVirtualKeyboard", "an {@code XrBool32} indicating if virtual keyboard is supported.")
+    Expression("#TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsVirtualKeyboard")
 }
 
 val XrVirtualKeyboardCreateInfoMETA = struct(Module.OPENXR, "XrVirtualKeyboardCreateInfoMETA") {
-    documentation =
-        """
-        Virtual keyboard creation info.
-
-        <h5>Description</h5>
-        The struct is used for keyboard creation. Empty with the intention of future extension.
-
-        The runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED if ##XrSystemVirtualKeyboardPropertiesMETA{@code ::supportsVirtualKeyboard} is #FALSE when checking the device compatibility.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrVirtualKeyboardCreateInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateVirtualKeyboardMETA()
-        """
-
-    Expression("#TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrVirtualKeyboardSpaceCreateInfoMETA = struct(Module.OPENXR, "XrVirtualKeyboardSpaceCreateInfoMETA") {
-    documentation =
-        """
-        Virtual keyboard space creation info.
-
-        <h5>Description</h5>
-        If {@code locationType} is set to #VIRTUAL_KEYBOARD_LOCATION_TYPE_CUSTOM_META, the runtime <b>must</b> use the value {@code poseInSpace} set by the application. Otherwise, the runtime <b>must</b> provide a default pose and ignore {@code poseInSpace}. In all cases, the runtime <b>must</b> default the scale to 1.0.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrVirtualKeyboardSpaceCreateInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code locationType} <b>must</b> be a valid {@code XrVirtualKeyboardLocationTypeMETA} value</li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #CreateVirtualKeyboardSpaceMETA()
-        """
-
-    Expression("#TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVirtualKeyboardLocationTypeMETA("locationType", "an {@code XrVirtualKeyboardLocationTypeMETA} enum providing the location type.")
-    XrSpace("space", "an {@code XrSpace} previously created by a function such as #CreateReferenceSpace().")
-    XrPosef("poseInSpace", "the desired pose if {@code locationType} is #VIRTUAL_KEYBOARD_LOCATION_TYPE_CUSTOM_META.")
+    Expression("#TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrVirtualKeyboardLocationTypeMETA("locationType")
+    XrSpace("space")
+    XrPosef("poseInSpace")
 }
 
 val XrVirtualKeyboardLocationInfoMETA = struct(Module.OPENXR, "XrVirtualKeyboardLocationInfoMETA") {
-    documentation =
-        """
-        Virtual keyboard location info.
-
-        <h5>Description</h5>
-        If {@code locationType} is set to #VIRTUAL_KEYBOARD_LOCATION_TYPE_CUSTOM_META, the runtime <b>must</b> use the values {@code poseInSpace} and {@code scale} set by the application. Otherwise, the runtime <b>must</b> provide a default pose and scale and ignore {@code poseInSpace} and {@code scale}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrVirtualKeyboardLocationInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code locationType} <b>must</b> be a valid {@code XrVirtualKeyboardLocationTypeMETA} value</li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #SuggestVirtualKeyboardLocationMETA()
-        """
-
-    Expression("#TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVirtualKeyboardLocationTypeMETA("locationType", "an {@code XrVirtualKeyboardLocationTypeMETA} enum providing the location type.")
-    XrSpace("space", "an {@code XrSpace} previously created by a function such as #CreateReferenceSpace().")
-    XrPosef("poseInSpace", "the desired pose if {@code locationType} is #VIRTUAL_KEYBOARD_LOCATION_TYPE_CUSTOM_META.")
-    float("scale", "a {@code float} value of the desired multiplicative scale between 0.0 and 1.0 if {@code locationType} is #VIRTUAL_KEYBOARD_LOCATION_TYPE_CUSTOM_META.")
+    Expression("#TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrVirtualKeyboardLocationTypeMETA("locationType")
+    XrSpace("space")
+    XrPosef("poseInSpace")
+    float("scale")
 }
 
 val XrVirtualKeyboardModelVisibilitySetInfoMETA = struct(Module.OPENXR, "XrVirtualKeyboardModelVisibilitySetInfoMETA") {
-    documentation =
-        """
-        Virtual keyboard model visibility.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrVirtualKeyboardModelVisibilitySetInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #SetVirtualKeyboardModelVisibilityMETA()
-        """
-
-    Expression("#TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBool32("visible", "an {@code XrBool32} that controls whether to show or hide the keyboard.")
+    Expression("#TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("visible")
 }
 
 val XrVirtualKeyboardAnimationStateMETA = struct(Module.OPENXR, "XrVirtualKeyboardAnimationStateMETA") {
-    documentation =
-        """
-        State for a single animation.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrVirtualKeyboardAnimationStateMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVirtualKeyboardModelAnimationStatesMETA
-        """
-
-    Expression("#TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    int32_t("animationIndex", "the index of the animation to use for the render model.")
-    float("fraction", "the normalized value between the start and end time of the animation.")
+    Expression("#TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META")..XrStructureType("type")
+    nullable..opaque_p("next")
+    int32_t("animationIndex")
+    float("fraction")
 }
 
 val XrVirtualKeyboardModelAnimationStatesMETA = struct(Module.OPENXR, "XrVirtualKeyboardModelAnimationStatesMETA") {
-    documentation =
-        """
-        Virtual keyboard model animation states.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrVirtualKeyboardModelAnimationStatesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code stateCapacityInput} is not 0, {@code states} <b>must</b> be a pointer to an array of {@code stateCapacityInput} ##XrVirtualKeyboardAnimationStateMETA structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVirtualKeyboardAnimationStateMETA, #GetVirtualKeyboardModelAnimationStatesMETA()
-        """
-
-    Expression("#TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("states", optional = true)..uint32_t("stateCapacityInput", "the capacity of the {@code states} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("stateCountOutput", "filled in by the runtime with the count of ##XrVirtualKeyboardAnimationStateMETA written or the required capacity in the case that {@code stateCapacityInput} is insufficient.")
-    nullable..XrVirtualKeyboardAnimationStateMETA.p("states", "the array of ##XrVirtualKeyboardAnimationStateMETA to apply to the model.")
+    Expression("#TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("states", optional = true)..uint32_t("stateCapacityInput")
+    uint32_t("stateCountOutput")
+    nullable..XrVirtualKeyboardAnimationStateMETA.p("states")
 }
 
 val XrVirtualKeyboardTextureDataMETA = struct(Module.OPENXR, "XrVirtualKeyboardTextureDataMETA") {
-    documentation =
-        """
-        Virtual keyboard texture data.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrVirtualKeyboardTextureDataMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code bufferCapacityInput} is not 0, {@code buffer} <b>must</b> be a pointer to an array of {@code bufferCapacityInput} {@code uint8_t} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetVirtualKeyboardTextureDataMETA()
-        """
-
-    Expression("#TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    uint32_t("textureWidth", "the pixel width of the texture to be updated.")
-    uint32_t("textureHeight", "the pixel height of the texture to be updated.")
-    AutoSize("buffer", optional = true)..uint32_t("bufferCapacityInput", "the capacity of {@code buffer}, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("bufferCountOutput", "filled in by the runtime with the byte count written or the required capacity in the case that {@code bufferCapacityInput} is insufficient.")
-    nullable..uint8_t.p("buffer", "the pixel data in linear color space, RGBA 8-bit unsigned normalized integer format (i.e. GL_RGBA8 in OpenGL, VK_FORMAT_R8G8B8A8_UNORM in Vulkan).")
+    Expression("#TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META")..XrStructureType("type")
+    nullable..opaque_p("next")
+    uint32_t("textureWidth")
+    uint32_t("textureHeight")
+    AutoSize("buffer", optional = true)..uint32_t("bufferCapacityInput")
+    uint32_t("bufferCountOutput")
+    nullable..uint8_t.p("buffer")
 }
 
 val XrVirtualKeyboardInputInfoMETA = struct(Module.OPENXR, "XrVirtualKeyboardInputInfoMETA") {
-    documentation =
-        """
-        Virtual keyboard input info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrVirtualKeyboardInputInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code inputSource} <b>must</b> be a valid {@code XrVirtualKeyboardInputSourceMETA} value</li>
-            <li>If {@code inputSpace} is not #NULL_HANDLE, {@code inputSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code inputState} <b>must</b> be 0 or a valid combination of {@code XrVirtualKeyboardInputStateFlagBitsMETA} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, #SendVirtualKeyboardInputMETA()
-        """
-
-    Expression("#TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVirtualKeyboardInputSourceMETA("inputSource", "an enum of {@code XrVirtualKeyboardInputSourceMETA} describing the source device and input mode type.")
-    nullable..XrSpace("inputSpace", "an {@code XrSpace} previously created by a function such as #CreateReferenceSpace().")
-    XrPosef("inputPoseInSpace", "an ##XrPosef defining the position and orientation of the input’s source pose within the natural reference frame of the input space.")
-    XrVirtualKeyboardInputStateFlagsMETA("inputState", "a bitmask of {@code XrVirtualKeyboardInputStateFlagsMETA} describing the button or pinch state of the {@code inputSource}.")
+    Expression("#TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrVirtualKeyboardInputSourceMETA("inputSource")
+    nullable..XrSpace("inputSpace")
+    XrPosef("inputPoseInSpace")
+    XrVirtualKeyboardInputStateFlagsMETA("inputState")
 }
 
 val XrVirtualKeyboardTextContextChangeInfoMETA = struct(Module.OPENXR, "XrVirtualKeyboardTextContextChangeInfoMETA") {
-    documentation =
-        """
-        Virtual keyboard text context change info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrVirtualKeyboardTextContextChangeInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code textContext} <b>must</b> be a null-terminated UTF-8 string</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #ChangeVirtualKeyboardTextContextMETA()
-        """
-
-    Expression("#TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    charUTF8.const.p("textContext", "a pointer to a {@code char} buffer, should contain prior input text context terminated with a null character.")
+    Expression("#TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    charUTF8.const.p("textContext")
 }
 
 val XrEventDataVirtualKeyboardCommitTextMETA = struct(Module.OPENXR, "XrEventDataVirtualKeyboardCommitTextMETA") {
     javaImport("static org.lwjgl.openxr.METAVirtualKeyboard.*")
-    documentation =
-        """
-        Commit text event.
-
-        <h5>Description</h5>
-        The ##XrEventDataVirtualKeyboardCommitTextMETA event <b>must</b> be sent by the runtime when a character or string is input by the keyboard. The application <b>should</b> append to the text field that the keyboard is editing.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrEventDataVirtualKeyboardCommitTextMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code keyboard} <b>must</b> be a valid {@code XrVirtualKeyboardMETA} handle</li>
-            <li>{@code text} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to #MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PollEvent()
-        """
-
-    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVirtualKeyboardMETA("keyboard", "the {@code XrVirtualKeyboardMETA} this event belongs to.")
-    charUTF8("text", "the text string input by the keyboard.")["XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META"]
+    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrVirtualKeyboardMETA("keyboard")
+    charUTF8("text")["XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META"]
 }
 
 val XrEventDataVirtualKeyboardBackspaceMETA = struct(Module.OPENXR, "XrEventDataVirtualKeyboardBackspaceMETA") {
-    documentation =
-        """
-        Backspace key event.
-
-        <h5>Description</h5>
-        The ##XrEventDataVirtualKeyboardBackspaceMETA event <b>must</b> be sent by the runtime when the [Backspace] key is pressed. The application <b>should</b> update the text field that the keyboard is editing.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrEventDataVirtualKeyboardBackspaceMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code keyboard} <b>must</b> be a valid {@code XrVirtualKeyboardMETA} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PollEvent()
-        """
-
-    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVirtualKeyboardMETA("keyboard", "the {@code XrVirtualKeyboardMETA} this event belongs to.")
+    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrVirtualKeyboardMETA("keyboard")
 }
 
 val XrEventDataVirtualKeyboardEnterMETA = struct(Module.OPENXR, "XrEventDataVirtualKeyboardEnterMETA") {
-    documentation =
-        """
-        Enter key event.
-
-        <h5>Description</h5>
-        The ##XrEventDataVirtualKeyboardEnterMETA event <b>must</b> be sent by the runtime when the [Enter] key is pressed. The application <b>should</b> respond accordingly (e.g. newline, accept, etc).
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrEventDataVirtualKeyboardEnterMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code keyboard} <b>must</b> be a valid {@code XrVirtualKeyboardMETA} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PollEvent()
-        """
-
-    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVirtualKeyboardMETA("keyboard", "the {@code XrVirtualKeyboardMETA} this event belongs to.")
+    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrVirtualKeyboardMETA("keyboard")
 }
 
 val XrEventDataVirtualKeyboardShownMETA = struct(Module.OPENXR, "XrEventDataVirtualKeyboardShownMETA") {
-    documentation =
-        """
-        Keyboard shown event.
-
-        <h5>Description</h5>
-        The ##XrEventDataVirtualKeyboardShownMETA event <b>must</b> be sent when the runtime has shown the keyboard render model (via animation). The application <b>should</b> update its state accordingly (e.g. update UI, pause simulation, etc).
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrEventDataVirtualKeyboardShownMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code keyboard} <b>must</b> be a valid {@code XrVirtualKeyboardMETA} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PollEvent()
-        """
-
-    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVirtualKeyboardMETA("keyboard", "the {@code XrVirtualKeyboardMETA} this event belongs to.")
+    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrVirtualKeyboardMETA("keyboard")
 }
 
 val XrEventDataVirtualKeyboardHiddenMETA = struct(Module.OPENXR, "XrEventDataVirtualKeyboardHiddenMETA") {
-    documentation =
-        """
-        Keyboard hidden event.
-
-        <h5>Description</h5>
-        The ##XrEventDataVirtualKeyboardHiddenMETA event <b>must</b> be sent when the keyboard render model is hidden by the runtime (via animation). The application <b>should</b> update its state accordingly (e.g. update UI, resume simulation, etc).
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using ##XrEventDataVirtualKeyboardHiddenMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code keyboard} <b>must</b> be a valid {@code XrVirtualKeyboardMETA} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PollEvent()
-        """
-
-    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrVirtualKeyboardMETA("keyboard", "the {@code XrVirtualKeyboardMETA} this event belongs to.")
+    Expression("#TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrVirtualKeyboardMETA("keyboard")
 }
 
 val XrExternalCameraIntrinsicsOCULUS = struct(Module.OPENXR, "XrExternalCameraIntrinsicsOCULUS") {
-    documentation =
-        """
-        Camera intrintics state.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link OCULUSExternalCamera XR_OCULUS_external_camera} extension <b>must</b> be enabled prior to using ##XrExternalCameraIntrinsicsOCULUS</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExtent2Di, ##XrExternalCameraOCULUS, ##XrFovf
-        """
-
-    XrTime("lastChangeTime", "the {@code XrTime} when this camera’s intrinsics last changed.")
-    XrFovf("fov", "the ##XrFovf for this camera’s viewport.")
-    float("virtualNearPlaneDistance", "the near plane distance of the virtual camera used to match the external camera")
-    float("virtualFarPlaneDistance", "the far plane distance of the virtual camera used to match the external camera")
-    XrExtent2Di("imageSensorPixelResolution", "the ##XrExtent2Di specifying the camera’s resolution (in pixels).")
+    XrTime("lastChangeTime")
+    XrFovf("fov")
+    float("virtualNearPlaneDistance")
+    float("virtualFarPlaneDistance")
+    XrExtent2Di("imageSensorPixelResolution")
 }
 
 val XrExternalCameraExtrinsicsOCULUS = struct(Module.OPENXR, "XrExternalCameraExtrinsicsOCULUS") {
-    documentation =
-        """
-        Camera extrinsics state.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link OCULUSExternalCamera XR_OCULUS_external_camera} extension <b>must</b> be enabled prior to using ##XrExternalCameraExtrinsicsOCULUS</li>
-            <li>{@code cameraStatusFlags} <b>must</b> be 0 or a valid combination of {@code XrExternalCameraStatusFlagBitsOCULUS} values</li>
-            <li>{@code attachedToDevice} <b>must</b> be a valid {@code XrExternalCameraAttachedToDeviceOCULUS} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExternalCameraOCULUS, ##XrPosef
-        """
-
-    XrTime("lastChangeTime", "the {@code XrTime} when this camera’s extrinsics last changed.")
-    XrExternalCameraStatusFlagsOCULUS("cameraStatusFlags", "the {@code XrExternalCameraStatusFlagsOCULUS} for this camera’s status.")
-    XrExternalCameraAttachedToDeviceOCULUS("attachedToDevice", "the {@code XrExternalCameraAttachedToDeviceOCULUS} for the device this camera is attached to")
-    XrPosef("relativePose", "the ##XrPosef for offset of the camera from the device that the camera is attached to")
+    XrTime("lastChangeTime")
+    XrExternalCameraStatusFlagsOCULUS("cameraStatusFlags")
+    XrExternalCameraAttachedToDeviceOCULUS("attachedToDevice")
+    XrPosef("relativePose")
 }
 
 val XrExternalCameraOCULUS = struct(Module.OPENXR, "XrExternalCameraOCULUS", mutable = false) {
     javaImport("static org.lwjgl.openxr.OCULUSExternalCamera.*")
-    documentation =
-        """
-        Camera intrintics state.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link OCULUSExternalCamera XR_OCULUS_external_camera} extension <b>must</b> be enabled prior to using ##XrExternalCameraOCULUS</li>
-            <li>{@code type} <b>must</b> be #TYPE_EXTERNAL_CAMERA_OCULUS</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExternalCameraExtrinsicsOCULUS, ##XrExternalCameraIntrinsicsOCULUS, #EnumerateExternalCamerasOCULUS()
-        """
-
-    Expression("#TYPE_EXTERNAL_CAMERA_OCULUS")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    charUTF8("name", "a null-terminated UTF-8 string containing a camera identifier: VID (vendor ID), PID (product ID), and serial number")["XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS"]
-    XrExternalCameraIntrinsicsOCULUS("intrinsics", "the ##XrExternalCameraIntrinsicsOCULUS for the camera")
-    XrExternalCameraExtrinsicsOCULUS("extrinsics", "the ##XrExternalCameraExtrinsicsOCULUS for the camera")
+    Expression("#TYPE_EXTERNAL_CAMERA_OCULUS")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    charUTF8("name")["XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS"]
+    XrExternalCameraIntrinsicsOCULUS("intrinsics")
+    XrExternalCameraExtrinsicsOCULUS("extrinsics")
 }
 
 val XrVulkanSwapchainCreateInfoMETA = struct(Module.OPENXR, "XrVulkanSwapchainCreateInfoMETA") {
     javaImport("org.lwjgl.vulkan.*")
-    documentation =
-        """
-        Debug utils object name info.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED if any bit of either {@code additionalCreateFlags} or {@code additionalUsageFlags} is not supported.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAVulkanSwapchainCreateInfo XR_META_vulkan_swapchain_create_info} extension <b>must</b> be enabled prior to using ##XrVulkanSwapchainCreateInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code additionalCreateFlags} <b>must</b> be a valid {@code VkImageCreateFlags} value</li>
-            <li>{@code additionalUsageFlags} <b>must</b> be a valid {@code VkImageUsageFlags} value</li>
-        </ul>
-        """
-
-    Expression("#TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    VkImageCreateFlags("additionalCreateFlags", "a bitmask of {@code VkImageCreateFlags} describing additional parameters of an image.")
-    VkImageUsageFlags("additionalUsageFlags", "a bitmask of {@code VkImageUsageFlags} describing additional parameters of an image.")
+    Expression("#TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    VkImageCreateFlags("additionalCreateFlags")
+    VkImageUsageFlags("additionalUsageFlags")
 }
 
 val XrPerformanceMetricsStateMETA = struct(Module.OPENXR, "XrPerformanceMetricsStateMETA") {
-    documentation =
-        """
-        Performance metrics enable state.
-
-        <h5>Description</h5>
-        ##XrPerformanceMetricsStateMETA is provided as input when calling #SetPerformanceMetricsStateMETA() to enable or disable the performance metrics system. ##XrPerformanceMetricsStateMETA is populated as an output parameter when calling #GetPerformanceMetricsStateMETA() to query if the performance metrics system is enabled.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPerformanceMetrics XR_META_performance_metrics} extension <b>must</b> be enabled prior to using ##XrPerformanceMetricsStateMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_PERFORMANCE_METRICS_STATE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPerformanceMetricsStateMETA(), #SetPerformanceMetricsStateMETA()
-        """
-
-    Expression("#TYPE_PERFORMANCE_METRICS_STATE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBool32("enabled", "set to #TRUE to indicate the performance metrics system is enabled, #FALSE otherwise, when getting state. When setting state, set to #TRUE to enable the performance metrics system and #FALSE to disable it.")
+    Expression("#TYPE_PERFORMANCE_METRICS_STATE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("enabled")
 }
 
 val XrPerformanceMetricsCounterMETA = struct(Module.OPENXR, "XrPerformanceMetricsCounterMETA") {
-    documentation =
-        """
-        Performance metrics counter value.
-
-        <h5>Description</h5>
-        ##XrPerformanceMetricsCounterMETA is populated by calling #QueryPerformanceMetricsCounterMETA() to query real-time performance metrics counter information.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPerformanceMetrics XR_META_performance_metrics} extension <b>must</b> be enabled prior to using ##XrPerformanceMetricsCounterMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_PERFORMANCE_METRICS_COUNTER_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code counterFlags} <b>must</b> be 0 or a valid combination of {@code XrPerformanceMetricsCounterFlagBitsMETA} values</li>
-            <li>{@code counterUnit} <b>must</b> be a valid {@code XrPerformanceMetricsCounterUnitMETA} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #QueryPerformanceMetricsCounterMETA()
-        """
-
-    Expression("#TYPE_PERFORMANCE_METRICS_COUNTER_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrPerformanceMetricsCounterFlagsMETA("counterFlags", "a bitmask of {@code XrPerformanceMetricsCounterFlagBitsMETA} describing the validity of value members.")
-    XrPerformanceMetricsCounterUnitMETA("counterUnit", "a enum of {@code XrPerformanceMetricsCounterUnitMETA} describing the measurement unit.")
-    uint32_t("uintValue", "the counter value in {@code uint32_t} format. It is valid if {@code counterFlags} contains #PERFORMANCE_METRICS_COUNTER_UINT_VALUE_VALID_BIT_META.")
-    float("floatValue", "the counter value in {@code float} format. It is valid if {@code counterFlags} contains #PERFORMANCE_METRICS_COUNTER_FLOAT_VALUE_VALID_BIT_META.")
+    Expression("#TYPE_PERFORMANCE_METRICS_COUNTER_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPerformanceMetricsCounterFlagsMETA("counterFlags")
+    XrPerformanceMetricsCounterUnitMETA("counterUnit")
+    uint32_t("uintValue")
+    float("floatValue")
 }
 
 val XrSpaceListSaveInfoFB = struct(Module.OPENXR, "XrSpaceListSaveInfoFB") {
-    documentation =
-        """
-        Parameters for a list save operation.
-
-        <h5>Description</h5>
-        The ##XrSpaceListSaveInfoFB structure contains information used to save multiple spatial entities.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityStorageBatch XR_FB_spatial_entity_storage_batch} extension <b>must</b> be enabled prior to using ##XrSpaceListSaveInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_LIST_SAVE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code spaces} <b>must</b> be a pointer to an array of {@code spaceCount} {@code XrSpace} handles</li>
-            <li>{@code location} <b>must</b> be a valid {@code XrSpaceStorageLocationFB} value</li>
-            <li>The {@code spaceCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #SaveSpaceListFB()
-        """
-
-    Expression("#TYPE_SPACE_LIST_SAVE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("spaces")..uint32_t("spaceCount", "the number of spatial entities to save.")
-    XrSpace.p("spaces", "a list of {@code XrSpace} handles for the entities to be saved.")
-    XrSpaceStorageLocationFB("location", "the storage location.")
+    Expression("#TYPE_SPACE_LIST_SAVE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("spaces")..uint32_t("spaceCount")
+    XrSpace.p("spaces")
+    XrSpaceStorageLocationFB("location")
 }
 
 val XrEventDataSpaceListSaveCompleteFB = struct(Module.OPENXR, "XrEventDataSpaceListSaveCompleteFB", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        Describes the completion of a save list operation.
-
-        <h5>Description</h5>
-        This completion event indicates that a request to save a list of {@code XrSpace} objects has completed. The application <b>can</b> use {@code result} to check if the request was successful or if an error occurred.
-
-        <h5>Result Codes</h5>
-        <dl>
-            <dt>On success, the value of this parameter is</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, the value of this parameter is</dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_SPACE_MAPPING_INSUFFICIENT_FB</li>
-                <li>#ERROR_SPACE_LOCALIZATION_FAILED_FB</li>
-                <li>#ERROR_SPACE_NETWORK_TIMEOUT_FB</li>
-                <li>#ERROR_SPACE_NETWORK_REQUEST_FAILED_FB</li>
-                <li>#ERROR_SPACE_CLOUD_STORAGE_DISABLED_FB</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityStorageBatch XR_FB_spatial_entity_storage_batch} extension <b>must</b> be enabled prior to using ##XrEventDataSpaceListSaveCompleteFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrAsyncRequestIdFB("requestId", "the ID of the asynchronous request to save an entity.")
-    XrResult("result", "an {@code XrResult} that describes whether the request succeeded or if an error occurred.")
+    Expression("#TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
 }
 
 val XrSpaceUserCreateInfoFB = struct(Module.OPENXR, "XrSpaceUserCreateInfoFB") {
-    documentation =
-        """
-        Describes a user.
-
-        <h5>Description</h5>
-        The ##XrSpaceUserCreateInfoFB structure describes a user with which the application <b>can</b> interact.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBSpatialEntityUser XR_FB_spatial_entity_user} extension <b>must</b> be enabled prior to using ##XrSpaceUserCreateInfoFB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_USER_CREATE_INFO_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateSpaceUserFB()
-        """
-
-    Expression("#TYPE_SPACE_USER_CREATE_INFO_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpaceUserIdFB("userId", "the user ID with which the application can reference.")
+    Expression("#TYPE_SPACE_USER_CREATE_INFO_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpaceUserIdFB("userId")
 }
 
 val XrSystemHeadsetIdPropertiesMETA = struct(Module.OPENXR, "XrSystemHeadsetIdPropertiesMETA", mutable = false) {
-    documentation =
-        """
-        get headset model id from xrGetSystemProperties.
-
-        <h5>Description</h5>
-        An application <b>can</b> get a corresponding headset UUID of the headset model by chaining an ##XrSystemHeadsetIdPropertiesMETA structure to the ##XrSystemProperties when calling #GetSystemProperties().
-
-        The UUID returned in the ##XrSystemHeadsetIdPropertiesMETA structure is an opaque UUID that identifies a runtime / headset model combo.
-
-        The runtime <b>should</b> always return the same UUID for a given headset model for the entire lifetime of that product.
-
-        The runtime <b>may</b> report a different UUID to some applications for compatibility purposes.
-
-        This is in contrast to the ##XrSystemProperties{@code ::systemName} field which is not required to be consistent across product renames.
-
-        This is intended to be a temporary feature that will be deprecated along with its extension as soon as motivating use cases are resolved in a better way. See the disclaimer at the start of the {@link METAHeadsetId XR_META_headset_id} extension documentation for more details.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAHeadsetId XR_META_headset_id} extension <b>must</b> be enabled prior to using ##XrSystemHeadsetIdPropertiesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrUuidEXT("id", "the ##XrUuidEXT corresponding to the headset model.")
+    Expression("#TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrUuidEXT("id")
 }
 
 val XrRecommendedLayerResolutionMETA = struct(Module.OPENXR, "XrRecommendedLayerResolutionMETA", mutable = false) {
-    documentation =
-        """
-        The structure returned by the runtime, containing resolution and whether the recommendation is valid.
-
-        <h5>Description</h5>
-        If the runtime does not wish to make a recommendation, {@code isValid} <b>must</b> be #FALSE and {@code recommendedImageDimensions} <b>must</b> be {0,0}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METARecommendedLayerResolution XR_META_recommended_layer_resolution} extension <b>must</b> be enabled prior to using ##XrRecommendedLayerResolutionMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_RECOMMENDED_LAYER_RESOLUTION_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExtent2Di, #GetRecommendedLayerResolutionMETA()
-        """
-
-    Expression("#TYPE_RECOMMENDED_LAYER_RESOLUTION_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrExtent2Di("recommendedImageDimensions", "the ##XrExtent2Di recommended image dimensions of the layer.")
-    XrBool32("isValid", "the {@code XrBool32} boolean returned by the runtime which indicates whether the runtime returned a valid recommendation or does not have any recommendations to make.")
+    Expression("#TYPE_RECOMMENDED_LAYER_RESOLUTION_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrExtent2Di("recommendedImageDimensions")
+    XrBool32("isValid")
 }
 
 val XrRecommendedLayerResolutionGetInfoMETA = struct(Module.OPENXR, "XrRecommendedLayerResolutionGetInfoMETA") {
-    documentation =
-        """
-        The structure provided by the application to the runtime, describing the information required for a recommendation to be made.
-
-        <h5>Description</h5>
-        If {@code predictedDisplayTime} is older than the predicted display time returned from most recent #WaitFrame() then, the runtime <b>must</b> return #ERROR_TIME_INVALID.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METARecommendedLayerResolution XR_META_recommended_layer_resolution} extension <b>must</b> be enabled prior to using ##XrRecommendedLayerResolutionGetInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code layer} <b>must</b> be a pointer to a valid ##XrCompositionLayerBaseHeader-based structure. See also: ##XrCompositionLayerCubeKHR, ##XrCompositionLayerCylinderKHR, ##XrCompositionLayerEquirect2KHR, ##XrCompositionLayerEquirectKHR, ##XrCompositionLayerPassthroughFB, ##XrCompositionLayerPassthroughHTC, ##XrCompositionLayerProjection, ##XrCompositionLayerQuad</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader, #GetRecommendedLayerResolutionMETA()
-        """
-
-    Expression("#TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrCompositionLayerBaseHeader.const.p("layer", "a pointer to a structure based on ##XrCompositionLayerBaseHeader, describing the layer for which the application wants a runtime-recommended swapchain resolution. Layers with multiple views <b>may</b> scale the views to match the scaled swapchain resolution.")
-    XrTime("predictedDisplayTime", "the {@code XrTime} that the application intends to submit the layer for.")
+    Expression("#TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrCompositionLayerBaseHeader.const.p("layer")
+    XrTime("predictedDisplayTime")
 }
 
 val XrPassthroughColorLutDataMETA = struct(Module.OPENXR, "XrPassthroughColorLutDataMETA") {
-    documentation =
-        """
-        Passthrough color LUT data.
-
-        <h5>Description</h5>
-        ##XrPassthroughColorLutDataMETA defines the LUT data for a color LUT. This structure is used when creating and updating color LUTs.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using ##XrPassthroughColorLutDataMETA</li>
-            <li>{@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} {@code uint8_t} values</li>
-            <li>The {@code bufferSize} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPassthroughColorLutCreateInfoMETA, ##XrPassthroughColorLutUpdateInfoMETA
-        """
-
-    AutoSize("buffer")..uint32_t("bufferSize", "the number of bytes contained in the buffer data.")
-    uint8_t.const.p("buffer", "a pointer to a memory block of {@code bufferSize} bytes that contains the LUT data.")
+    AutoSize("buffer")..uint32_t("bufferSize")
+    uint8_t.const.p("buffer")
 }
 
 val XrPassthroughColorLutCreateInfoMETA = struct(Module.OPENXR, "XrPassthroughColorLutCreateInfoMETA") {
-    documentation =
-        """
-        Passthrough color LUT creation info.
-
-        <h5>Description</h5>
-        {@code resolution} <b>must</b> be a power of 2, otherwise the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE. The runtime <b>may</b> impose a limit on the maximum supported resolution, which is indicated in ##XrSystemPassthroughColorLutPropertiesMETA. If {@code resolution} exceeds that limit, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
-
-        {@code data} contains a 3-dimensional array which defines an output color for each RGB input color. The input color is scaled to be in the range <code>[0, resolution]</code>. For an RGBA LUT, the RGBA tuple of output colors for an input color <code>(R<sub>in</sub>, G<sub>in</sub>, B<sub>in</sub>)</code> is found in the four bytes starting at the offset <code>4 * (R<sub>in</sub> + G<sub>in</sub> * resolution + B<sub>in</sub> * resolution<sup>2</sup>)</code>. For an RGB LUT, the RGB tuple of output colors for an input color <code>(R<sub>in</sub>, G<sub>in</sub>, B<sub>in</sub>)</code> is found in the three bytes starting at the offset <code>3 * (R<sub>in</sub> + G<sub>in</sub> * resolution + B<sub>in</sub> * resolution<sup>2</sup>)</code>.
-
-        Color LUT data <b>must</b> be specified and interpreted in sRGB color space.
-
-        Runtimes <b>must</b> employ trilinear interpolation of neighboring color values if the resolution of the color LUT is smaller than the bit depth of the input colors.
-
-        The value of ##XrPassthroughColorLutDataMETA{@code ::bufferSize} in {@code data} <b>must</b> be equal to <code>resolution<sup>3</sup> * bytesPerElement</code>, where <code>bytesPerElement</code> is either 3 or 4 depending on {@code channels}. Otherwise, the runtime <b>must</b> return #ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using ##XrPassthroughColorLutCreateInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code channels} <b>must</b> be a valid {@code XrPassthroughColorLutChannelsMETA} value</li>
-            <li>{@code data} <b>must</b> be a valid ##XrPassthroughColorLutDataMETA structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPassthroughColorLutDataMETA, #CreatePassthroughColorLutMETA()
-        """
-
-    Expression("#TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrPassthroughColorLutChannelsMETA("channels", "defines the color channels expected in one LUT element. The number of bytes expected per LUT element is 3 for #PASSTHROUGH_COLOR_LUT_CHANNELS_RGB_META and 4 for #PASSTHROUGH_COLOR_LUT_CHANNELS_RGBA_META.")
-    uint32_t("resolution", "the number of LUT elements per input channel. The total number of elements in the LUT is <code>resolution<sup>3</sup></code>.")
-    XrPassthroughColorLutDataMETA("data", "contains the data the LUT is initialized with.")
+    Expression("#TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPassthroughColorLutChannelsMETA("channels")
+    uint32_t("resolution")
+    XrPassthroughColorLutDataMETA("data")
 }
 
 val XrPassthroughColorLutUpdateInfoMETA = struct(Module.OPENXR, "XrPassthroughColorLutUpdateInfoMETA") {
-    documentation =
-        """
-        Passthrough color LUT update info.
-
-        <h5>Description</h5>
-        The LUT data <b>may</b> be updated for an existing color LUT, while channels and resolution remain constant after creation. Hence, the value of ##XrPassthroughColorLutDataMETA{@code ::bufferSize} in {@code data} <b>must</b> be equal to the buffer size specified at creation. Otherwise, the runtime <b>must</b> return #ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using ##XrPassthroughColorLutUpdateInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code data} <b>must</b> be a valid ##XrPassthroughColorLutDataMETA structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPassthroughColorLutDataMETA, #UpdatePassthroughColorLutMETA()
-        """
-
-    Expression("#TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrPassthroughColorLutDataMETA("data", "contains the updated LUT data.")
+    Expression("#TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPassthroughColorLutDataMETA("data")
 }
 
 val XrPassthroughColorMapLutMETA = struct(Module.OPENXR, "XrPassthroughColorMapLutMETA") {
-    documentation =
-        """
-        A color map defined by a LUT.
-
-        <h5>Description</h5>
-        ##XrPassthroughColorMapLutMETA lets applications apply a color LUT to a passthrough layer. Other Passthrough style elements (such as edges) <b>must</b> not be affected by color LUTs.
-
-        Applications <b>may</b> use {@code weight} to efficiently blend between the original colors and the mapped colors. The blend is computed as <code>(1 - weight) * C<sub>in</sub> + weight * colorLut [C<sub>in</sub>]</code>.
-
-        ##XrPassthroughColorMapLutMETA is provided in the {@code next} chain of ##XrPassthroughStyleFB when calling #PassthroughLayerSetStyleFB(). Subsequent calls to #PassthroughLayerSetStyleFB() with ##XrPassthroughColorMapLutMETA in the {@code next} chain update the color LUT for that layer. Subsequent calls to #PassthroughLayerSetStyleFB() without this ##XrPassthroughColorMapLutMETA (or ##XrPassthroughColorMapInterpolatedLutMETA) in the next chain disable color LUTs for that layer.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using ##XrPassthroughColorMapLutMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_COLOR_MAP_LUT_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code colorLut} <b>must</b> be a valid {@code XrPassthroughColorLutMETA} handle</li>
-        </ul>
-        """
-
-    Expression("#TYPE_PASSTHROUGH_COLOR_MAP_LUT_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrPassthroughColorLutMETA("colorLut", "an {@code XrPassthroughColorLutMETA}.")
-    float("weight", "a factor in the range <code>[0, 1]</code> which defines the linear blend between the original and the mapped colors for the output color.")
+    Expression("#TYPE_PASSTHROUGH_COLOR_MAP_LUT_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPassthroughColorLutMETA("colorLut")
+    float("weight")
 }
 
 val XrPassthroughColorMapInterpolatedLutMETA = struct(Module.OPENXR, "XrPassthroughColorMapInterpolatedLutMETA") {
-    documentation =
-        """
-        A color map defined by the interpolation between two LUTs.
-
-        <h5>Description</h5>
-        ##XrPassthroughColorMapInterpolatedLutMETA lets applications apply the interpolation between two color LUTs to a passthrough layer. Applications <b>may</b> use this feature to smoothly transition between two color LUTs. Other Passthrough style elements (such as edges) <b>must</b> not be affected by color LUTs.
-
-        The blend between {@code sourceColorLut} and {@code targetColorLut} is computed as <code>(1 - weight) * sourceColorLut [C<sub>in</sub>] + weight * targetColorLut [C<sub>in</sub>]</code>.
-
-        ##XrPassthroughColorMapInterpolatedLutMETA is provided in the {@code next} chain of ##XrPassthroughStyleFB when calling #PassthroughLayerSetStyleFB(). Subsequent calls to #PassthroughLayerSetStyleFB() with ##XrPassthroughColorMapInterpolatedLutMETA in the next chain update the color LUT for that layer. Subsequent calls to #PassthroughLayerSetStyleFB() without this ##XrPassthroughColorMapInterpolatedLutMETA (or ##XrPassthroughColorMapLutMETA) in the next chain disable color LUTs for that layer.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using ##XrPassthroughColorMapInterpolatedLutMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code sourceColorLut} <b>must</b> be a valid {@code XrPassthroughColorLutMETA} handle</li>
-            <li>{@code targetColorLut} <b>must</b> be a valid {@code XrPassthroughColorLutMETA} handle</li>
-            <li>Both of {@code sourceColorLut} and {@code targetColorLut} <b>must</b> have been created, allocated, or retrieved from the same {@code XrPassthroughFB}</li>
-        </ul>
-        """
-
-    Expression("#TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrPassthroughColorLutMETA("sourceColorLut", "the initial {@code XrPassthroughColorLutMETA}.")
-    XrPassthroughColorLutMETA("targetColorLut", "the final {@code XrPassthroughColorLutMETA}.")
-    float("weight", "a factor in the range <code>[0, 1]</code> which defines the linear blend between the initial and the final color LUT.")
+    Expression("#TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPassthroughColorLutMETA("sourceColorLut")
+    XrPassthroughColorLutMETA("targetColorLut")
+    float("weight")
 }
 
 val XrSystemPassthroughColorLutPropertiesMETA = struct(Module.OPENXR, "XrSystemPassthroughColorLutPropertiesMETA", mutable = false) {
-    documentation =
-        """
-        Passthrough color LUT system properties.
-
-        <h5>Description</h5>
-        When the {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension is enabled, an application <b>may</b> pass in an ##XrSystemPassthroughColorLutPropertiesMETA structure in next chain structure when calling #GetSystemProperties() to acquire information about the connected system.
-
-        The runtime <b>must</b> populate the ##XrSystemPassthroughColorLutPropertiesMETA structure with the relevant information to the ##XrSystemProperties returned by the #GetSystemProperties() call.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using ##XrSystemPassthroughColorLutPropertiesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties
-        """
-
-    Expression("#TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    uint32_t("maxColorLutResolution", "Maximum value for ##XrPassthroughColorLutCreateInfoMETA{@code ::resolution} supported by the system. Runtimes implementing this extension <b>must</b> support a value of at least 32 for this property.")
+    Expression("#TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    uint32_t("maxColorLutResolution")
 }
 
 val XrSpaceTriangleMeshGetInfoMETA = struct(Module.OPENXR, "XrSpaceTriangleMeshGetInfoMETA") {
-    documentation =
-        """
-        Input parameter to the xrGetSpaceTriangleMeshMETA function.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METASpatialEntityMesh XR_META_spatial_entity_mesh} extension <b>must</b> be enabled prior to using ##XrSpaceTriangleMeshGetInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSpaceTriangleMeshMETA()
-        """
-
-    Expression("#TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrSpaceTriangleMeshMETA = struct(Module.OPENXR, "XrSpaceTriangleMeshMETA", mutable = false) {
-    documentation =
-        """
-        Output parameter to the xrGetSpaceTriangleMeshMETA function.
-
-        <h5>Description</h5>
-        The ##XrSpaceTriangleMeshMETA structure <b>can</b> be used by the application to perform the two calls required to obtain a triangle mesh associated to a specified spatial entity.
-
-        The output values written in the {@code indices} array represent indices of vertices: Three consecutive elements represent a triangle with a counter-clockwise winding order.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METASpatialEntityMesh XR_META_spatial_entity_mesh} extension <b>must</b> be enabled prior to using ##XrSpaceTriangleMeshMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_TRIANGLE_MESH_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVector3f, #GetSpaceTriangleMeshMETA()
-        """
-
-    Expression("#TYPE_SPACE_TRIANGLE_MESH_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput", "an input parameter for the application to specify the capacity of the {@code vertices} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("vertexCountOutput", "an output parameter that will hold the number of vertices written in the output array, or the required capacity in the case that {@code vertexCapacityInput} is insufficient. The returned value <b>must</b> be equal to or larger than 3.")
-    nullable..XrVector3f.p("vertices", "a pointer to an array of ##XrVector3f, but <b>can</b> be {@code NULL} if {@code vertexCapacityInput} is 0. The vertices are defined in the coordinate frame of {@code XrSpace} to which this struct is associated.")
-    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput", "an input parameter for the application to specify the capacity of the {@code indices} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("indexCountOutput", "an output parameter that will hold the number of indices written in the output array, or the required capacity in the case that {@code indexCapacityInput} is insufficient. The returned value <b>must</b> be a multiple of 3.")
-    nullable..uint32_t.p("indices", "a pointer to an array of {@code uint32_t}, but <b>can</b> be {@code NULL} if {@code indexCapacityInput} is 0. Each element refers to a vertex in {@code vertices}.")
+    Expression("#TYPE_SPACE_TRIANGLE_MESH_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrVector3f.p("vertices")
+    AutoSize("indices", optional = true)..uint32_t("indexCapacityInput")
+    uint32_t("indexCountOutput")
+    nullable..uint32_t.p("indices")
 }
 
 val XrEventDataPassthroughLayerResumedMETA = struct(Module.OPENXR, "XrEventDataPassthroughLayerResumedMETA", mutable = false, parentStruct = XrEventDataBaseHeader) {
-    documentation =
-        """
-        An event that is triggered after a passthrough layer is resumed by client.
-
-        <h5>Description</h5>
-        Runtimes <b>must</b> queue the event exactly once when first presenting passthrough after an app successfully calls one of the following:
-
-        <ul>
-            <li>#PassthroughLayerResumeFB()</li>
-            <li>#CreatePassthroughLayerFB() with flag #PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB set</li>
-        </ul>
-
-        The passthrough layer state is reset when the app calls #PassthroughLayerPauseFB().
-
-        Runtimes <b>must</b> queue the event again, if #PassthroughLayerPauseFB() is followed by #PassthroughLayerResumeFB(). During the transition from paused to resumed state, the event is queued exactly once when passthrough has been presented for the first time. If the passthrough feature is not active during the transition, for example because it has been paused using #PassthroughPauseFB(), the event is queued when passthrough becomes active.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAPassthroughLayerResumedEvent XR_META_passthrough_layer_resumed_event} extension <b>must</b> be enabled prior to using ##XrEventDataPassthroughLayerResumedMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrEventDataBaseHeader, #PollEvent()
-        """
-
-    Expression("#TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrPassthroughLayerFB("layer", "an {@code XrPassthroughLayerFB} for which the event has been triggered.")
+    Expression("#TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META")..XrStructureType("type").mutable()
+    nullable..opaque_const_p("next").mutable()
+    XrPassthroughLayerFB("layer")
 }
 
 val XrSystemFaceTrackingProperties2FB = struct(Module.OPENXR, "XrSystemFaceTrackingProperties2FB", mutable = false) {
-    documentation =
-        """
-        System property for face tracking.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of receiving face tracking input by extending the ##XrSystemProperties with ##XrSystemFaceTrackingProperties2FB structure when calling #GetSystemProperties().
-
-        If an application calls #CreateFaceTracker2FB() only with unsupported ##XrFaceTrackerCreateInfo2FB{@code ::requestedDataSources}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFaceTracker2FB(). For example, if an application calls #CreateFaceTracker2FB() only with #FACE_TRACKING_DATA_SOURCE2_AUDIO_FB in ##XrFaceTrackerCreateInfo2FB{@code ::requestedDataSources} when the runtime returns #FALSE for {@code supportsAudioFaceTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFaceTracker2FB().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFaceTracking2 XR_FB_face_tracking2} extension <b>must</b> be enabled prior to using ##XrSystemFaceTrackingProperties2FB</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsVisualFaceTracking", "an {@code XrBool32}, indicating if the current system is capable of receiving face tracking input that is estimated based on visual data source.")
-    XrBool32("supportsAudioFaceTracking", "an {@code XrBool32}, indicating if the current system is capable of receiving face tracking input that is estimated based on audio data source.")
+    Expression("#TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsVisualFaceTracking")
+    XrBool32("supportsAudioFaceTracking")
 }
 
 val XrFaceTrackerCreateInfo2FB = struct(Module.OPENXR, "XrFaceTrackerCreateInfo2FB") {
-    documentation =
-        """
-        Information to create a facial expression handle.
-
-        <h5>Description</h5>
-        The ##XrFaceTrackerCreateInfo2FB structure describes the information to create an {@code XrFaceTracker2FB} handle.
-
-        Runtimes <b>may</b> support a variety of data sources for estimations of facial expression, and some runtimes and devices <b>may</b> use data from multiple data sources. The application tells the runtime all data sources that the runtime <b>may</b> use to provide facial expressions for the application.
-
-        Because the device setting <b>may</b> change during a running session, the runtime <b>may</b> return a valid {@code XrFaceTracker2FB} handle even if the device is unable to estimate facial expression using the data sources requested by the application’s call to #CreateFaceTracker2FB(). The runtime <b>must</b> instead return #ERROR_FEATURE_UNSUPPORTED from #CreateFaceTracker2FB(), if for example the runtime believes it will never be able to satisfy the request.
-
-        If {@code requestedDataSourceCount} is 0, the runtime <b>may</b> choose any supported data source, preferably one that is more expressive than the others.
-
-        If any value in {@code requestedDataSources} is duplicated the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE from the call to #CreateFaceTracker2FB().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFaceTracking2 XR_FB_face_tracking2} extension <b>must</b> be enabled prior to using ##XrFaceTrackerCreateInfo2FB</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACE_TRACKER_CREATE_INFO2_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code faceExpressionSet} <b>must</b> be a valid {@code XrFaceExpressionSet2FB} value</li>
-            <li>If {@code requestedDataSourceCount} is not 0, {@code requestedDataSources} <b>must</b> be a pointer to an array of {@code requestedDataSourceCount} {@code XrFaceTrackingDataSource2FB} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateFaceTracker2FB()
-        """
-
-    Expression("#TYPE_FACE_TRACKER_CREATE_INFO2_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrFaceExpressionSet2FB("faceExpressionSet", "an {@code XrFaceExpressionSet2FB} that describes the set of blend shapes to retrieve.")
-    AutoSize("requestedDataSources", optional = true)..uint32_t("requestedDataSourceCount", "the number of elements in the {@code requestedDataSources} array.")
-    nullable..XrFaceTrackingDataSource2FB.p("requestedDataSources", "an array of {@code XrFaceTrackingDataSource2FB} that the application accepts. The order of values in the array has no significance.")
+    Expression("#TYPE_FACE_TRACKER_CREATE_INFO2_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFaceExpressionSet2FB("faceExpressionSet")
+    AutoSize("requestedDataSources", optional = true)..uint32_t("requestedDataSourceCount")
+    nullable..XrFaceTrackingDataSource2FB.p("requestedDataSources")
 }
 
 val XrFaceExpressionInfo2FB = struct(Module.OPENXR, "XrFaceExpressionInfo2FB") {
-    documentation =
-        """
-        Describes the information to obtain facial expression.
-
-        <h5>Description</h5>
-        The ##XrFaceExpressionInfo2FB structure describes the information to obtain facial expression. The application <b>should</b> pass a time equal to the predicted display time for the rendered frame. The system <b>must</b> employ appropriate modeling to provide expressions for this time.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFaceTracking2 XR_FB_face_tracking2} extension <b>must</b> be enabled prior to using ##XrFaceExpressionInfo2FB</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACE_EXPRESSION_INFO2_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetFaceExpressionWeights2FB()
-        """
-
-    Expression("#TYPE_FACE_EXPRESSION_INFO2_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrTime("time", "an {@code XrTime} at which the facial expression weights are requested.")
+    Expression("#TYPE_FACE_EXPRESSION_INFO2_FB")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrTime("time")
 }
 
 val XrFaceExpressionWeights2FB = struct(Module.OPENXR, "XrFaceExpressionWeights2FB") {
-    documentation =
-        """
-        Returns the facial expression.
-
-        <h5>Description</h5>
-        ##XrFaceExpressionWeights2FB structure returns the facial expression.
-
-        The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if {@code weightCount} is not equal to the number of blend shapes defined by the {@code XrFaceExpressionSet2FB} used to create the {@code XrFaceTracker2FB}.
-
-        The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if {@code confidenceCount} is not equal to the number of confidence areas defined by the {@code XrFaceExpressionSet2FB} used to create the {@code XrFaceTracker2FB}.
-
-        The runtime <b>must</b> return {@code weights} representing the weights of blend shapes of current facial expression.
-
-        The runtime <b>must</b> update the {@code weights} array ordered so that the application <b>can</b> index elements using the corresponding facial expression enum (e.g. {@code XrFaceExpression2FB}) as described by {@code XrFaceExpressionSet2FB} when creating the {@code XrFaceTracker2FB}. For example, when the {@code XrFaceTracker2FB} is created with #FACE_EXPRESSION_SET2_DEFAULT_FB, the application sets the {@code weightCount} to #FACE_EXPRESSION2_COUNT_FB, and the runtime <b>must</b> fill the {@code weights} array ordered so that it <b>can</b> be indexed by the {@code XrFaceExpression2FB} enum.
-
-        The runtime <b>must</b> update the {@code confidences} array ordered so that the application <b>can</b> index elements using the corresponding confidence area enum (e.g. {@code XrFaceConfidence2FB}) as described by {@code XrFaceExpressionSet2FB} when creating the {@code XrFaceTracker2FB}. For example, when the {@code XrFaceTracker2FB} is created with #FACE_EXPRESSION_SET2_DEFAULT_FB, the application sets the {@code confidenceCount} to #FACE_CONFIDENCE2_COUNT_FB, and the runtime <b>must</b> fill the {@code confidences} array ordered so that it <b>can</b> be indexed by the {@code XrFaceConfidence2FB} enum.
-
-        The runtime <b>must</b> set {@code isValid} to #FALSE and it <b>must</b> also set all elements of {@code weights} to zero, if one of the following is true:
-
-        <ul>
-            <li>the face tracker failed to track or lost track of the face</li>
-            <li>the application lost focus</li>
-            <li>the consent for face tracking was denied</li>
-            <li>the runtime is unable to estimate facial expression from the data sources specified when #CreateFaceTracker2FB() function was called</li>
-        </ul>
-
-        If the returned {@code isValid} is #TRUE, the runtime <b>must</b> return all weights (or all weights except eyes related weights, see {@code isEyeFollowingBlendshapesValid}).
-
-        The runtime <b>must</b> set {@code isEyeFollowingBlendshapesValid} to #FALSE and it <b>must</b> also set 8 expression weights with prefix {@code XR_FACE_EXPRESSION2_EYES_LOOK_*} to zero, if one of the following is true:
-
-        <ul>
-            <li>the eye tracking driving blendshapes with prefix {@code XR_FACE_EXPRESSION2_EYES_LOOK_*} lost track</li>
-            <li>the consent for eye tracking was denied</li>
-        </ul>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link FBFaceTracking2 XR_FB_face_tracking2} extension <b>must</b> be enabled prior to using ##XrFaceExpressionWeights2FB</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACE_EXPRESSION_WEIGHTS2_FB</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code weights} <b>must</b> be a pointer to an array of {@code weightCount} {@code float} values</li>
-            <li>{@code confidences} <b>must</b> be a pointer to an array of {@code confidenceCount} {@code float} values</li>
-            <li>{@code dataSource} <b>must</b> be a valid {@code XrFaceTrackingDataSource2FB} value</li>
-            <li>The {@code weightCount} parameter <b>must</b> be greater than 0</li>
-            <li>The {@code confidenceCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetFaceExpressionWeights2FB()
-        """
-
-    Expression("#TYPE_FACE_EXPRESSION_WEIGHTS2_FB")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("weights")..uint32_t("weightCount", "a {@code uint32_t} describing the count of elements in {@code weights} array.")
-    float.p("weights", "a pointer to an application-allocated array of {@code float} that will be filled with weights of facial expression blend shapes.")
-    AutoSize("confidences")..uint32_t("confidenceCount", "a {@code uint32_t} describing the count of elements in {@code confidences} array.")
-    float.p("confidences", "a pointer to an application-allocated array of {@code float} that will be filled with confidence of tracking specific parts of a face.")
-    XrBool32("isValid", "an {@code XrBool32} which indicates that the tracked expression weights are valid.")
-    XrBool32("isEyeFollowingBlendshapesValid", "an {@code XrBool32} which indicates if the 8 expression weights with prefix {@code XR_FACE_EXPRESSION2_EYES_LOOK_*} are valid.")
-    XrFaceTrackingDataSource2FB("dataSource", "an {@code XrFaceTrackingDataSource2FB} which indicates the data source that was used to estimate the facial expression.")
-    XrTime("time", "an {@code XrTime} time at which the returned expression weights are tracked or extrapolated to. Equals the time at which the expression weights were requested if the extrapolating at the time was successful.")
+    Expression("#TYPE_FACE_EXPRESSION_WEIGHTS2_FB")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("weights")..uint32_t("weightCount")
+    float.p("weights")
+    AutoSize("confidences")..uint32_t("confidenceCount")
+    float.p("confidences")
+    XrBool32("isValid")
+    XrBool32("isEyeFollowingBlendshapesValid")
+    XrFaceTrackingDataSource2FB("dataSource")
+    XrTime("time")
 }
 
 val XrSystemSpatialEntitySharingPropertiesMETA = struct(Module.OPENXR, "XrSystemSpatialEntitySharingPropertiesMETA", mutable = false) {
-    documentation =
-        """
-        spatial entity sharing system properties.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of Spatial Entity Sharing by extending the ##XrSystemProperties with ##XrSystemSpatialEntitySharingPropertiesMETA structure when calling #GetSystemProperties().
-
-        If a runtime returns #FALSE for {@code supportsSpatialEntitySharing}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #ShareSpacesMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METASpatialEntitySharing XR_META_spatial_entity_sharing} extension <b>must</b> be enabled prior to using ##XrSystemSpatialEntitySharingPropertiesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_SPATIAL_ENTITY_SHARING_PROPERTIES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties, #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_SPATIAL_ENTITY_SHARING_PROPERTIES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrBool32("supportsSpatialEntitySharing", "an {@code XrBool32} specifying if the spatial entity sharing is supported.")
+    Expression("#TYPE_SYSTEM_SPATIAL_ENTITY_SHARING_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsSpatialEntitySharing")
 }
 
 val XrShareSpacesRecipientBaseHeaderMETA = struct(Module.OPENXR, "XrShareSpacesRecipientBaseHeaderMETA") {
-    documentation =
-        """
-        Information about share spatial entity request.
-
-        <h5>Description</h5>
-        ##XrShareSpacesRecipientBaseHeaderMETA is designed to be an abstract base struct which is to be extended by other structures.
-
-        Any valid structure that identifies ##XrShareSpacesRecipientBaseHeaderMETA as its parent structure <b>may</b> be provided anywhere a valid ##XrShareSpacesRecipientBaseHeaderMETA is specified to be passed.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METASpatialEntitySharing XR_META_spatial_entity_sharing} extension <b>must</b> be enabled prior to using ##XrShareSpacesRecipientBaseHeaderMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrShareSpacesInfoMETA, #ShareSpacesMETA()
-        """
-
-    XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrShareSpacesInfoMETA = struct(Module.OPENXR, "XrShareSpacesInfoMETA") {
-    documentation =
-        """
-        Information about share spatial entity request.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METASpatialEntitySharing XR_META_spatial_entity_sharing} extension <b>must</b> be enabled prior to using ##XrShareSpacesInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SHARE_SPACES_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code spaces} <b>must</b> be a pointer to an array of {@code spaceCount} {@code XrSpace} handles</li>
-            <li>{@code recipientInfo} <b>must</b> be a pointer to a valid ##XrShareSpacesRecipientBaseHeaderMETA-based structure. See also: ##XrShareSpacesRecipientGroupsMETA</li>
-            <li>The {@code spaceCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrShareSpacesRecipientBaseHeaderMETA, #ShareSpacesMETA()
-        """
-
-    Expression("#TYPE_SHARE_SPACES_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    AutoSize("spaces")..uint32_t("spaceCount", "the count spaces populated in the {@code spaces} field of this request.")
-    XrSpace.p("spaces", "an array pointer of type {@code XrSpace} containing all spaces to be shared")
-    XrShareSpacesRecipientBaseHeaderMETA.const.p("recipientInfo", "a structure based on ##XrShareSpacesRecipientBaseHeaderMETA, defining the target recipient of the shared spaces.")
+    Expression("#TYPE_SHARE_SPACES_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("spaces")..uint32_t("spaceCount")
+    XrSpace.p("spaces")
+    XrShareSpacesRecipientBaseHeaderMETA.const.p("recipientInfo")
 }
 
 val XrEventDataShareSpacesCompleteMETA = struct(Module.OPENXR, "XrEventDataShareSpacesCompleteMETA") {
-    documentation =
-        """
-        share spatial entity complete event.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METASpatialEntitySharing XR_META_spatial_entity_sharing} extension <b>must</b> be enabled prior to using ##XrEventDataShareSpacesCompleteMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_SHARE_SPACES_COMPLETE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #ShareSpacesMETA()
-        """
-
-    Expression("#TYPE_EVENT_DATA_SHARE_SPACES_COMPLETE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrAsyncRequestIdFB("requestId", "an {@code XrAsyncRequestIdFB} that identifies which request this event is referring to.")
-    XrResult("result", "an {@code XrResult} that specifies the request result. The valid {@code result} values are: #SUCCESS, #ERROR_RUNTIME_FAILURE, #ERROR_SPACE_NETWORK_TIMEOUT_FB, and #ERROR_SPACE_NETWORK_REQUEST_FAILED_FB.")
+    Expression("#TYPE_EVENT_DATA_SHARE_SPACES_COMPLETE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
 }
 
 val XrEnvironmentDepthProviderCreateInfoMETA = struct(Module.OPENXR, "XrEnvironmentDepthProviderCreateInfoMETA") {
-    documentation =
-        """
-        XrEnvironmentDepthProviderCreateInfoMETA.
-
-        <h5>Description</h5>
-        The ##XrEnvironmentDepthProviderCreateInfoMETA structure provides creation options for the {@code XrEnvironmentDepthProviderMETA} when passed to #CreateEnvironmentDepthProviderMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using ##XrEnvironmentDepthProviderCreateInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code createFlags} <b>must</b> be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateEnvironmentDepthProviderMETA()
-        """
-
-    Expression("#TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrEnvironmentDepthProviderCreateFlagsMETA("createFlags", "0 or one or more {@code XrEnvironmentDepthProviderCreateFlagBitsMETA}.")
+    Expression("#TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrEnvironmentDepthProviderCreateFlagsMETA("createFlags")
 }
 
 val XrEnvironmentDepthSwapchainCreateInfoMETA = struct(Module.OPENXR, "XrEnvironmentDepthSwapchainCreateInfoMETA") {
-    documentation =
-        """
-        XrEnvironmentDepthSwapchainCreateInfoMETA.
-
-        <h5>Description</h5>
-        ##XrEnvironmentDepthSwapchainCreateInfoMETA contains creation options for the readable depth swapchain, and is passed to #CreateEnvironmentDepthSwapchainMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using ##XrEnvironmentDepthSwapchainCreateInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code createFlags} <b>must</b> be 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateEnvironmentDepthSwapchainMETA()
-        """
-
-    Expression("#TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrEnvironmentDepthSwapchainCreateFlagsMETA("createFlags", "a bitmask of {@code XrEnvironmentDepthSwapchainCreateFlagBitsMETA}.")
+    Expression("#TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrEnvironmentDepthSwapchainCreateFlagsMETA("createFlags")
 }
 
 val XrEnvironmentDepthSwapchainStateMETA = struct(Module.OPENXR, "XrEnvironmentDepthSwapchainStateMETA") {
-    documentation =
-        """
-        XrEnvironmentDepthSwapchainStateMETA.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using ##XrEnvironmentDepthSwapchainStateMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetEnvironmentDepthSwapchainStateMETA()
-        """
-
-    Expression("#TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    uint32_t("width", "the width of the image.")
-    uint32_t("height", "the height of the image.")
+    Expression("#TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META")..XrStructureType("type")
+    nullable..opaque_p("next")
+    uint32_t("width")
+    uint32_t("height")
 }
 
 val XrEnvironmentDepthImageAcquireInfoMETA = struct(Module.OPENXR, "XrEnvironmentDepthImageAcquireInfoMETA") {
-    documentation =
-        """
-        XrEnvironmentDepthImageAcquireInfoMETA.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using ##XrEnvironmentDepthImageAcquireInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #AcquireEnvironmentDepthImageMETA()
-        """
-
-    Expression("#TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("space", "an {@code XrSpace} defining the reference frame of the returned pose in ##XrEnvironmentDepthImageMETA.")
-    XrTime("displayTime", "an {@code XrTime} specifying the time used to compute the pose for the returned pose in ##XrEnvironmentDepthImageMETA. Clients <b>should</b> pass their predicted display time for the current frame.")
+    Expression("#TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("space")
+    XrTime("displayTime")
 }
 
 val XrEnvironmentDepthImageViewMETA = struct(Module.OPENXR, "XrEnvironmentDepthImageViewMETA") {
-    documentation =
-        """
-        XrEnvironmentDepthImageViewMETA.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using ##XrEnvironmentDepthImageViewMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrEnvironmentDepthImageMETA, ##XrFovf, ##XrPosef
-        """
-
-    Expression("#TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrFovf("fov", "an ##XrFovf specifying the field of view used to generate this view. The view is never flipped horizontally nor vertically.")
-    XrPosef("pose", "an ##XrPosef specifying the pose from which the depth map was rendered. The reference frame is specified in ##XrEnvironmentDepthImageAcquireInfoMETA.")
+    Expression("#TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFovf("fov")
+    XrPosef("pose")
 }
 
 val XrEnvironmentDepthImageMETA = struct(Module.OPENXR, "XrEnvironmentDepthImageMETA") {
-    documentation =
-        """
-        XrEnvironmentDepthImageMETA.
-
-        <h5>Description</h5>
-        Depth is provided as textures in the same format as described in the {@link KHRCompositionLayerDepth XR_KHR_composition_layer_depth} extension.
-
-        The frustum’s Z-planes are placed at {@code nearZ} and {@code farZ} meters. When {@code farZ} is less than {@code nearZ}, an infinite projection matrix is used.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using ##XrEnvironmentDepthImageMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_ENVIRONMENT_DEPTH_IMAGE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>Any given element of {@code views} <b>must</b> be a valid ##XrEnvironmentDepthImageViewMETA structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrEnvironmentDepthImageViewMETA, #AcquireEnvironmentDepthImageMETA()
-        """
-
-    Expression("#TYPE_ENVIRONMENT_DEPTH_IMAGE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    uint32_t("swapchainIndex", "the index of the acquired texture in the depth swapchain.")
-    float("nearZ", "the distance to the near Z plane in meters.")
-    float("farZ", "the distance to the far Z plane in meters.")
-    XrEnvironmentDepthImageViewMETA("views", "an array of two ##XrEnvironmentDepthImageViewMETA, one for each eye, where index 0 is left eye and index 1 is the right eye.")[2]
+    Expression("#TYPE_ENVIRONMENT_DEPTH_IMAGE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    uint32_t("swapchainIndex")
+    float("nearZ")
+    float("farZ")
+    XrEnvironmentDepthImageViewMETA("views")[2]
 }
 
 val XrEnvironmentDepthHandRemovalSetInfoMETA = struct(Module.OPENXR, "XrEnvironmentDepthHandRemovalSetInfoMETA") {
-    documentation =
-        """
-        XrEnvironmentDepthHandRemovalSetInfoMETA.
-
-        <h5>Description</h5>
-        This structure contains options passed to #SetEnvironmentDepthHandRemovalMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using ##XrEnvironmentDepthHandRemovalSetInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #SetEnvironmentDepthHandRemovalMETA()
-        """
-
-    Expression("#TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBool32("enabled", "#TRUE or #FALSE to enable/disable hand removal from the depth map, respectively.")
+    Expression("#TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("enabled")
 }
 
 val XrSystemEnvironmentDepthPropertiesMETA = struct(Module.OPENXR, "XrSystemEnvironmentDepthPropertiesMETA", mutable = false) {
-    documentation =
-        """
-        System property for environment depth.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of supporting environment depth by extending the ##XrSystemProperties with ##XrSystemEnvironmentDepthPropertiesMETA structure when calling #GetSystemProperties().
-
-        If and only if a runtime returns #FALSE for {@code supportsEnvironmentDepth}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateEnvironmentDepthProviderMETA().
-
-        If and only if a runtime returns #FALSE for {@code supportsHandRemoval}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #SetEnvironmentDepthHandRemovalMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using ##XrSystemEnvironmentDepthPropertiesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsEnvironmentDepth", "an {@code XrBool32} indicating if current system supports environment depth.")
-    XrBool32("supportsHandRemoval", "an {@code XrBool32} indicating if current system supports hand removal.")
+    Expression("#TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsEnvironmentDepth")
+    XrBool32("supportsHandRemoval")
 }
 
 val XrPassthroughCreateInfoHTC = struct(Module.OPENXR, "XrPassthroughCreateInfoHTC") {
-    documentation =
-        """
-        Information to create a passthrough handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCPassthrough XR_HTC_passthrough} extension <b>must</b> be enabled prior to using ##XrPassthroughCreateInfoHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_CREATE_INFO_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code form} <b>must</b> be a valid {@code XrPassthroughFormHTC} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreatePassthroughHTC()
-        """
-
-    Expression("#TYPE_PASSTHROUGH_CREATE_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "NULL or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrPassthroughFormHTC("form", "{@code form} {@code XrPassthroughFormHTC} that specifies the form of passthrough.")
+    Expression("#TYPE_PASSTHROUGH_CREATE_INFO_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPassthroughFormHTC("form")
 }
 
 val XrPassthroughColorHTC = struct(Module.OPENXR, "XrPassthroughColorHTC") {
-    documentation =
-        """
-        The alpha value of the passthrough.
-
-        <h5>Description</h5>
-        The application <b>can</b> specify the ##XrPassthroughColorHTC to adjust the alpha value of the passthrough. The range is between 0.0f and 1.0f, 1.0f means opaque.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCPassthrough XR_HTC_passthrough} extension <b>must</b> be enabled prior to using ##XrPassthroughColorHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_COLOR_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerPassthroughHTC
-        """
-
-    Expression("#TYPE_PASSTHROUGH_COLOR_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    float("alpha", "the alpha value of the passthrough in the range [0, 1].")
+    Expression("#TYPE_PASSTHROUGH_COLOR_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    float("alpha")
 }
 
 val XrPassthroughMeshTransformInfoHTC = struct(Module.OPENXR, "XrPassthroughMeshTransformInfoHTC") {
-    documentation =
-        """
-        The information of mesh and transformation of the passthrough.
-
-        <h5>Description</h5>
-        The ##XrPassthroughMeshTransformInfoHTC structure describes the mesh and transformation.
-
-        The application <b>must</b> specify the ##XrPassthroughMeshTransformInfoHTC in the {@code next} chain of ##XrCompositionLayerPassthroughHTC if the specified form of passthrough layer previously created by #CreatePassthroughHTC() is #PASSTHROUGH_FORM_PROJECTED_HTC.
-
-        Passing ##XrPassthroughMeshTransformInfoHTC updates the projected mesh information in the runtime for passthrough layer composition.
-
-        If ##XrPassthroughMeshTransformInfoHTC is not set correctly, runtime <b>must</b> return error #ERROR_VALIDATION_FAILURE when #EndFrame() is called with composition layer ##XrCompositionLayerPassthroughHTC.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCPassthrough XR_HTC_passthrough} extension <b>must</b> be enabled prior to using ##XrPassthroughMeshTransformInfoHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code vertices} <b>must</b> be a pointer to an array of {@code vertexCount} ##XrVector3f structures</li>
-            <li>{@code indices} <b>must</b> be a pointer to an array of {@code indexCount} {@code uint32_t} values</li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>The {@code vertexCount} parameter <b>must</b> be greater than 0</li>
-            <li>The {@code indexCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, ##XrVector3f
-        """
-
-    Expression("#TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("vertices")..uint32_t("vertexCount", "the count of vertices array in the mesh.")
-    XrVector3f.const.p("vertices", "an array of ##XrVector3f. The size of the array <b>must</b> be equal to vertexCount.")
-    AutoSize("indices")..uint32_t("indexCount", "the count of indices array in the mesh.")
-    uint32_t.const.p("indices", "an array of triangle indices. The size of the array <b>must</b> be equal to indexCount.")
-    XrSpace("baseSpace", "the {@code XrSpace} that defines the projected passthrough’s base space for transformations.")
-    XrTime("time", "the {@code XrTime} that defines the time at which the transform is applied.")
-    XrPosef("pose", "the ##XrPosef that defines the pose of the mesh")
-    XrVector3f("scale", "the ##XrVector3f that defines the scale of the mesh")
+    Expression("#TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("vertices")..uint32_t("vertexCount")
+    XrVector3f.const.p("vertices")
+    AutoSize("indices")..uint32_t("indexCount")
+    uint32_t.const.p("indices")
+    XrSpace("baseSpace")
+    XrTime("time")
+    XrPosef("pose")
+    XrVector3f("scale")
 }
 
 val XrCompositionLayerPassthroughHTC = struct(Module.OPENXR, "XrCompositionLayerPassthroughHTC", parentStruct = XrCompositionLayerBaseHeader) {
-    documentation =
-        """
-        A composition layer for passthrough.
-
-        <h5>Description</h5>
-        The application <b>can</b> create an ##XrCompositionLayerPassthroughHTC structure with the created {@code passthrough} and the corresponding information. A pointer to ##XrCompositionLayerPassthroughHTC <b>may</b> be submitted in #EndFrame() as a pointer to the base structure ##XrCompositionLayerBaseHeader, in the desired layer order, to request the runtime to composite a passthrough layer into the final frame output.
-
-        If the passthrough form specified to #CreatePassthroughHTC() is #PASSTHROUGH_FORM_PROJECTED_HTC, ##XrPassthroughMeshTransformInfoHTC <b>must</b> appear in the {@code next} chain. If they are absent, the runtime <b>must</b> return error #ERROR_VALIDATION_FAILURE.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCPassthrough XR_HTC_passthrough} extension <b>must</b> be enabled prior to using ##XrCompositionLayerPassthroughHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrPassthroughMeshTransformInfoHTC</li>
-            <li>{@code layerFlags} <b>must</b> be a valid combination of {@code XrCompositionLayerFlagBits} values</li>
-            <li>{@code layerFlags} <b>must</b> not be 0</li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code passthrough} <b>must</b> be a valid {@code XrPassthroughHTC} handle</li>
-            <li>{@code color} <b>must</b> be a valid ##XrPassthroughColorHTC structure</li>
-            <li>Both of {@code passthrough} and {@code space} <b>must</b> have been created, allocated, or retrieved from the same {@code XrSession}</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrCompositionLayerBaseHeader, ##XrPassthroughColorHTC
-        """
-
-    Expression("#TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC")..XrStructureType("type")
     PointerSetter(
         "XrPassthroughMeshTransformInfoHTC",
         prepend = true
-    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain, such as ##XrPassthroughMeshTransformInfoHTC.")
-    XrCompositionLayerFlags("layerFlags", "a bitmask of {@code XrCompositionLayerFlagBits} describing flags to apply to the layer.")
-    XrSpace("space", "the {@code XrSpace} that specifies the layer’s space - <b>must</b> be #NULL_HANDLE.")
-    XrPassthroughHTC("passthrough", "the {@code XrPassthroughHTC} previously created by #CreatePassthroughHTC().")
-    XrPassthroughColorHTC("color", "the ##XrPassthroughColorHTC describing the color information with the alpha value of the passthrough layer.")
+    )..nullable..opaque_const_p("next")
+    XrCompositionLayerFlags("layerFlags")
+    XrSpace("space")
+    XrPassthroughHTC("passthrough")
+    XrPassthroughColorHTC("color")
 }
 
 val XrFoveationApplyInfoHTC = struct(Module.OPENXR, "XrFoveationApplyInfoHTC") {
-    documentation =
-        """
-        Information for foveation applying.
-
-        <h5>Description</h5>
-        The application <b>should</b> set the following configurations in ##XrFoveationApplyInfoHTC:
-
-        <ul>
-            <li>The foveation mode to be applied.</li>
-            <li>The specified ##XrSwapchainSubImage to the corresponding view.</li>
-        </ul>
-
-        The {@code XrSwapchain}{@code ::faceCount} of the swapchain in ##XrSwapchainSubImage <b>must</b> be 1 since this extension does not support cubemaps.
-
-        If {@code mode} is #FOVEATION_MODE_DYNAMIC_HTC, the {@code next} chain for this structure <b>must</b> include ##XrFoveationDynamicModeInfoHTC structure.
-
-        If {@code mode} is #FOVEATION_MODE_CUSTOM_HTC, the {@code next} chain for this structure <b>must</b> include ##XrFoveationCustomModeInfoHTC structure.
-
-        The order of {@code subImages} <b>must</b> be the same order as in ##XrCompositionLayerProjectionView when submitted in #EndFrame().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFoveation XR_HTC_foveation} extension <b>must</b> be enabled prior to using ##XrFoveationApplyInfoHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_FOVEATION_APPLY_INFO_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: ##XrFoveationCustomModeInfoHTC, ##XrFoveationDynamicModeInfoHTC</li>
-            <li>{@code mode} <b>must</b> be a valid {@code XrFoveationModeHTC} value</li>
-            <li>{@code subImages} <b>must</b> be a pointer to an array of {@code subImageCount} ##XrSwapchainSubImage structures</li>
-            <li>The {@code subImageCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSwapchainSubImage, #ApplyFoveationHTC()
-        """
-
-    Expression("#TYPE_FOVEATION_APPLY_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
+    Expression("#TYPE_FOVEATION_APPLY_INFO_HTC")..XrStructureType("type")
     PointerSetter(
         "XrFoveationCustomModeInfoHTC", "XrFoveationDynamicModeInfoHTC",
         prepend = true
-    )..nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrFoveationModeHTC("mode", "an {@code XrFoveationModeHTC} enum describing the foveation mode.")
-    AutoSize("subImages")..uint32_t("subImageCount", "the count of {@code subImages} in the {@code subImages} array. This <b>must</b> be equal to the number of view poses returned by #LocateViews().")
-    XrSwapchainSubImage.p("subImages", "an array of ##XrSwapchainSubImage to apply foveated rendering.")
+    )..nullable..opaque_const_p("next")
+    XrFoveationModeHTC("mode")
+    AutoSize("subImages")..uint32_t("subImageCount")
+    XrSwapchainSubImage.p("subImages")
 }
 
 val XrFoveationConfigurationHTC = struct(Module.OPENXR, "XrFoveationConfigurationHTC") {
-    documentation =
-        """
-        Configuration of foveation.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFoveation XR_HTC_foveation} extension <b>must</b> be enabled prior to using ##XrFoveationConfigurationHTC</li>
-            <li>{@code level} <b>must</b> be a valid {@code XrFoveationLevelHTC} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFoveationCustomModeInfoHTC, ##XrVector2f
-        """
-
-    XrFoveationLevelHTC("level", "the pixel density drop level of periphery area specified by {@code XrFoveationLevelHTC} .")
-    float("clearFovDegree", "the value indicating the total horizontal and vertical field angle with the original pixel density level. {@code clearFovDegree} <b>must</b> be specified in degree, and <b>must</b> be in the range [0, 180].")
-    XrVector2f("focalCenterOffset", "the desired center offset of the field of view in NDC(normalized device coordinates) space. The x and y of {@code focalCenterOffset} <b>must</b> be in the range [-1, 1].")
+    XrFoveationLevelHTC("level")
+    float("clearFovDegree")
+    XrVector2f("focalCenterOffset")
 }
 
 val XrFoveationDynamicModeInfoHTC = struct(Module.OPENXR, "XrFoveationDynamicModeInfoHTC") {
-    documentation =
-        """
-        Configuration for dynamic mode.
-
-        <h5>Description</h5>
-        The application <b>must</b> chain an ##XrFoveationDynamicModeInfoHTC structure to ##XrFoveationApplyInfoHTC if dynamic mode is set.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFoveation XR_HTC_foveation} extension <b>must</b> be enabled prior to using ##XrFoveationDynamicModeInfoHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code dynamicFlags} <b>must</b> be 0 or a valid combination of {@code XrFoveationDynamicFlagBitsHTC} values</li>
-        </ul>
-        """
-
-    Expression("#TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrFoveationDynamicFlagsHTC("dynamicFlags", "a bitmask of {@code XrFoveationDynamicFlagBitsHTC} indicated which item <b>may</b> be changed during dynamic mode.")
+    Expression("#TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFoveationDynamicFlagsHTC("dynamicFlags")
 }
 
 val XrFoveationCustomModeInfoHTC = struct(Module.OPENXR, "XrFoveationCustomModeInfoHTC") {
-    documentation =
-        """
-        Configuration for custom mode.
-
-        <h5>Description</h5>
-        The application <b>must</b> chain an ##XrFoveationCustomModeInfoHTC structure to ##XrFoveationApplyInfoHTC to customize foveation if custom mode is set.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFoveation XR_HTC_foveation} extension <b>must</b> be enabled prior to using ##XrFoveationCustomModeInfoHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code configs} <b>must</b> be a pointer to an array of {@code configCount} valid ##XrFoveationConfigurationHTC structures</li>
-            <li>The {@code configCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFoveationConfigurationHTC
-        """
-
-    Expression("#TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("configs")..uint32_t("configCount", "a {@code uint32_t} describing the count of elements in the {@code configs} array, which <b>must</b> be the number of views.")
-    XrFoveationConfigurationHTC.const.p("configs", "an array of ##XrFoveationConfigurationHTC structure contains the custom foveation settings for the corresponding views.")
+    Expression("#TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("configs")..uint32_t("configCount")
+    XrFoveationConfigurationHTC.const.p("configs")
 }
 
 val XrSystemAnchorPropertiesHTC = struct(Module.OPENXR, "XrSystemAnchorPropertiesHTC", mutable = false) {
-    documentation =
-        """
-        System property for anchor.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of anchor functionality by chaining an ##XrSystemAnchorPropertiesHTC structure to the ##XrSystemProperties when calling #GetSystemProperties(). The runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED if ##XrSystemAnchorPropertiesHTC{@code ::supportsAnchor} was #FALSE.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCAnchor XR_HTC_anchor} extension <b>must</b> be enabled prior to using ##XrSystemAnchorPropertiesHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties, #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsAnchor", "indicates if current system is capable of anchor functionality.")
+    Expression("#TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsAnchor")
 }
 
 val XrSpatialAnchorNameHTC = struct(Module.OPENXR, "XrSpatialAnchorNameHTC") {
     javaImport("static org.lwjgl.openxr.HTCAnchor.*")
-    documentation =
-        """
-        The name of a spatial anchor.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCAnchor XR_HTC_anchor} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorNameHTC</li>
-            <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to #MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpatialAnchorCreateInfoHTC, #GetSpatialAnchorNameHTC()
-        """
-
-    charUTF8("name", "a null-terminated UTF-8 string whose length is less than or equal to #MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC.")["XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC"]
+    charUTF8("name")["XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC"]
 }
 
 val XrSpatialAnchorCreateInfoHTC = struct(Module.OPENXR, "XrSpatialAnchorCreateInfoHTC") {
-    documentation =
-        """
-        Information to create a spatial anchor.
-
-        <h5>Description</h5>
-        The {@code poseInSpace} is transformed into world space to specify the point in the real world. The anchor tracks changes of the reality and <b>may</b> not be affected by the changes of {@code space}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCAnchor XR_HTC_anchor} extension <b>must</b> be enabled prior to using ##XrSpatialAnchorCreateInfoHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>{@code name} <b>must</b> be a valid ##XrSpatialAnchorNameHTC structure</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPosef, ##XrSpatialAnchorNameHTC, #CreateSpatialAnchorHTC()
-        """
-
-    Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("space", "the {@code XrSpace} in which {@code poseInSpace} is specified.")
-    XrPosef("poseInSpace", "the ##XrPosef specifying the point in the real world within {@code space}.")
-    XrSpatialAnchorNameHTC("name", "the ##XrSpatialAnchorNameHTC containing the name of the anchor.")
+    Expression("#TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("space")
+    XrPosef("poseInSpace")
+    XrSpatialAnchorNameHTC("name")
 }
 
 val XrSystemBodyTrackingPropertiesHTC = struct(Module.OPENXR, "XrSystemBodyTrackingPropertiesHTC", mutable = false) {
-    documentation =
-        """
-        System property for body tracking.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of body tracking by extending the ##XrSystemProperties with ##XrSystemBodyTrackingPropertiesHTC structure when calling #GetSystemProperties().
-
-        If a runtime returns #FALSE for {@code supportsBodyTracking}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateBodyTrackerHTC().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using ##XrSystemBodyTrackingPropertiesHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties, #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrBool32("supportsBodyTracking", "indicates if the current system is capable of track individual body joints.")
+    Expression("#TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsBodyTracking")
 }
 
 val XrBodyTrackerCreateInfoHTC = struct(Module.OPENXR, "XrBodyTrackerCreateInfoHTC") {
-    documentation =
-        """
-        Information to create a body tracker handle.
-
-        <h5>Description</h5>
-        The ##XrBodyTrackerCreateInfoHTC structure describes the information to create an {@code XrBodyTrackerHTC} handle. If the supplied {@code bodyJointSet} is not valid, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE. .Valid Usage (Implicit)
-
-        <ul>
-            <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodyTrackerCreateInfoHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_BODY_TRACKER_CREATE_INFO_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code bodyJointSet} <b>must</b> be a valid {@code XrBodyJointSetHTC} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateBodyTrackerHTC()
-        """
-
-    Expression("#TYPE_BODY_TRACKER_CREATE_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrBodyJointSetHTC("bodyJointSet", "an {@code XrBodyJointSetHTC} value that describes the set of body joints to retrieve.")
+    Expression("#TYPE_BODY_TRACKER_CREATE_INFO_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBodyJointSetHTC("bodyJointSet")
 }
 
 val XrBodyJointsLocateInfoHTC = struct(Module.OPENXR, "XrBodyJointsLocateInfoHTC") {
-    documentation =
-        """
-        Describes the information to locate body joints.
-
-        <h5>Description</h5>
-        The ##XrBodyJointsLocateInfoHTC structure describes the information to locate individual body joints.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodyJointsLocateInfoHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_BODY_JOINTS_LOCATE_INFO_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #LocateBodyJointsHTC()
-        """
-
-    Expression("#TYPE_BODY_JOINTS_LOCATE_INFO_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("baseSpace", "an {@code XrSpace} within which the returned body joint locations will be represented.")
-    XrTime("time", "an {@code XrTime} at which to locate the body joints.")
+    Expression("#TYPE_BODY_JOINTS_LOCATE_INFO_HTC")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
 }
 
 val XrBodyJointLocationHTC = struct(Module.OPENXR, "XrBodyJointLocationHTC", mutable = false) {
-    documentation =
-        """
-        Describes the location and location flag of a body joint.
-
-        <h5>Description</h5>
-        ##XrBodyJointLocationHTC structure describes the position, orientation, and location flag of a body joint. It is populated by the runtime during a call to #LocateBodyJointsHTC().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodyJointLocationHTC</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBodyJointLocationsHTC, ##XrPosef
-        """
-
-    XrSpaceLocationFlags("locationFlags", "a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data. For those bits that are not set, reading the relevant fields in this structure and its nested structures <b>must</b> be defined, but the values are unspecified and not meaningful.")
-    XrPosef("pose", "an ##XrPosef describing the position and orientation of the origin of a body joint within the reference frame of the corresponding ##XrBodyJointsLocateInfoHTC{@code ::baseSpace}.")
+    XrSpaceLocationFlags("locationFlags")
+    XrPosef("pose")
 }
 
 val XrBodyJointLocationsHTC = struct(Module.OPENXR, "XrBodyJointLocationsHTC") {
-    documentation =
-        """
-        Returns the body joint data.
-
-        <h5>Description</h5>
-        The application <b>must</b> set {@code jointLocationCount} as appropriate for the chosen {@code XrBodyJointSetHTC} value when creating the {@code XrBodyTrackerHTC}. If {@code jointLocationCount} does not match the value associated with the supplied {@code XrBodyJointSetHTC} value, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE from #LocateBodyJointsHTC().
-
-        An application <b>must</b> allocate the output {@code jointLocations} array with a minimum capacity of {@code jointLocationCount} of ##XrBodyJointLocationHTC elements. If the application supplies a {@code NULL} value for {@code jointLocations}, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
-
-        The runtime <b>must</b> update the {@code jointLocations} array elements indexed using the corresponding body joint enumeration (e.g. {@code XrBodyJointHTC} for the joint set #BODY_JOINT_SET_FULL_HTC) as described by {@code XrBodyJointSetHTC} when creating the {@code XrBodyTrackerHTC}. For example, when the {@code XrBodyTrackerHTC} is created with #BODY_JOINT_SET_FULL_HTC, the runtime <b>must</b> fill the {@code jointLocations} array with body joint data indexed by the {@code XrBodyJointHTC} enumeration.
-
-        If the runtime returns {@code combinedLocationFlags} with #SPACE_LOCATION_POSITION_VALID_BIT and #SPACE_LOCATION_ORIENTATION_VALID_BIT set, it indicates that the body tracker detects the joint space locations. If the runtime returns {@code combinedLocationFlags} with neither #SPACE_LOCATION_POSITION_VALID_BIT nor #SPACE_LOCATION_ORIENTATION_VALID_BIT set, it indicates that the body tracker did not detect the joint space locations.
-
-        The purpose of the skeleton is to provide data about the body size. The calculation of the body size <b>may</b> be updated during a session. Each time the calculation of the size is changed, ##XrBodyJointLocationsHTC{@code ::skeletonGenerationId} is changed to indicate that a new skeleton <b>may</b> be retrieved. #GetBodySkeletonHTC() <b>can</b> be called with the specified skeletonGenerationId to get the corresponding skeleton.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodyJointLocationsHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_BODY_JOINT_LOCATIONS_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code combinedLocationFlags} <b>must</b> be 0 or a valid combination of {@code XrSpaceLocationFlagBits} values</li>
-            <li>{@code confidenceLevel} <b>must</b> be a valid {@code XrBodyJointConfidenceHTC} value</li>
-            <li>{@code jointLocations} <b>must</b> be a pointer to an array of {@code jointLocationCount} ##XrBodyJointLocationHTC structures</li>
-            <li>The {@code jointLocationCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBodyJointLocationHTC, #LocateBodyJointsHTC()
-        """
-
-    Expression("#TYPE_BODY_JOINT_LOCATIONS_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpaceLocationFlags("combinedLocationFlags", "a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, containing the bitwise OR of the location flags of all body joints.")
-    XrBodyJointConfidenceHTC("confidenceLevel", "an {@code XrBodyJointConfidenceHTC} value which indicates the confidence level for the returned body joint pose.")
-    AutoSize("jointLocations")..uint32_t("jointLocationCount", "a {@code uint32_t} describing the count of elements in {@code jointLocations} array.")
-    XrBodyJointLocationHTC.p("jointLocations", "an application-allocated ##XrBodyJointLocationHTC array filled in by the runtime specifying the locations for individual body joints.")
-    uint32_t("skeletonGenerationId", "a unique identifier, representing the skeleton which is generated when the tracking auto-calibrates the user skeleton scale and proportions.")
+    Expression("#TYPE_BODY_JOINT_LOCATIONS_HTC")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrSpaceLocationFlags("combinedLocationFlags")
+    XrBodyJointConfidenceHTC("confidenceLevel")
+    AutoSize("jointLocations")..uint32_t("jointLocationCount")
+    XrBodyJointLocationHTC.p("jointLocations")
+    uint32_t("skeletonGenerationId")
 }
 
 val XrBodySkeletonJointHTC = struct(Module.OPENXR, "XrBodySkeletonJointHTC") {
-    documentation =
-        """
-        Describes the location and position of a joint in the skeleton.
-
-        <h5>Description</h5>
-        ##XrBodySkeletonJointHTC structure describes the position, orientation of the joint in space, and position of the joint in the skeleton.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodySkeletonJointHTC</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBodySkeletonHTC, ##XrPosef
-        """
-
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the origin of a body joint within the reference frame of the corresponding #GetBodySkeletonHTC(){@code ::baseSpace}.")
+    XrPosef("pose")
 }
 
 val XrBodySkeletonHTC = struct(Module.OPENXR, "XrBodySkeletonHTC") {
-    documentation =
-        """
-        Returns the body skeleton.
-
-        <h5>Description</h5>
-        The ##XrBodySkeletonHTC structure is a container to represent the body skeleton in T-pose including each joint pose. The runtime <b>must</b> return #ERROR_VALIDATION_FAILURE if {@code jointCount} does not equal the number of joints associated with the {@code XrBodyJointSetHTC} value used to create the {@code XrBodyTrackerHTC}.
-
-        The application <b>must</b> allocate an array of at least {@code jointCount} elements for {@code joints}, to be populated by the runtime. If {@code joints} is {@code NULL}, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.
-
-        The runtime <b>must</b> return {@code joints} representing the default pose of the current estimation regarding the user’s skeleton.
-
-        The runtime <b>must</b> update the {@code joints} array ordered so that it is indexed using the corresponding body joint enumeration (e.g. {@code XrBodyJointHTC} for the joint set #BODY_JOINT_SET_FULL_HTC) as associated with the {@code XrBodyJointSetHTC} value used when creating the {@code XrBodyTrackerHTC}. For example, when the {@code XrBodyTrackerHTC} is created with #BODY_JOINT_SET_FULL_HTC, the runtime <b>must</b> fill the {@code joints} array indexed by the {@code XrBodyJointHTC} enumeration.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using ##XrBodySkeletonHTC</li>
-            <li>{@code type} <b>must</b> be #TYPE_BODY_SKELETON_HTC</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code joints} <b>must</b> be a pointer to an array of {@code jointCount} ##XrBodySkeletonJointHTC structures</li>
-            <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrBodySkeletonJointHTC, #GetBodySkeletonHTC()
-        """
-
-    Expression("#TYPE_BODY_SKELETON_HTC")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("joints")..uint32_t("jointCount", "an {@code uint32_t} describing the count of elements in {@code joints} array.")
-    XrBodySkeletonJointHTC.p("joints", "an application-allocated array of ##XrBodySkeletonJointHTC that will be filled with skeleton joint elements.")
+    Expression("#TYPE_BODY_SKELETON_HTC")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("joints")..uint32_t("jointCount")
+    XrBodySkeletonJointHTC.p("joints")
 }
 
 val XrActiveActionSetPriorityEXT = struct(Module.OPENXR, "XrActiveActionSetPriorityEXT") {
-    documentation =
-        """
-        Action set priority mapping.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTActiveActionSetPriority XR_EXT_active_action_set_priority} extension <b>must</b> be enabled prior to using ##XrActiveActionSetPriorityEXT</li>
-            <li>{@code actionSet} <b>must</b> be a valid {@code XrActionSet} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrActionsSyncInfo, ##XrActiveActionSetPrioritiesEXT, #SyncActions()
-        """
-
-    XrActionSet("actionSet", "the handle of the {@code XrActionSet} to set the priority number for.")
-    uint32_t("priorityOverride", "an integer specifying the priority of the action set while it is active.")
+    XrActionSet("actionSet")
+    uint32_t("priorityOverride")
 }
 
 val XrActiveActionSetPrioritiesEXT = struct(Module.OPENXR, "XrActiveActionSetPrioritiesEXT") {
-    documentation =
-        """
-        Active action set priority numbers.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTActiveActionSetPriority XR_EXT_active_action_set_priority} extension <b>must</b> be enabled prior to using ##XrActiveActionSetPrioritiesEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code actionSetPriorities} <b>must</b> be a pointer to an array of {@code actionSetPriorityCount} valid ##XrActiveActionSetPriorityEXT structures</li>
-            <li>The {@code actionSetPriorityCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        The runtime <b>must</b> ignore any priority numbers for action sets that were not specified as an active action set in the ##XrActionsSyncInfo structure as this would have no effect.
-
-        The priority numbers provided in ##XrActiveActionSetPriorityEXT <b>must</b> override the priority number of the active action set starting with the #SyncActions() call it is provided to, until the first subsequent call to #SyncActions().
-
-        When a subsequent call is made to #SyncActions() where an active action set does not have a corresponding priority number specified in the ##XrActiveActionSetPriorityEXT structure the priority number for that action set <b>must</b> revert back to the priority number provided in ##XrActionSetCreateInfo when that action set was created.
-
-        <h5>See Also</h5>
-        ##XrActionsSyncInfo, ##XrActiveActionSetPriorityEXT, #SyncActions()
-        """
-
-    Expression("#TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("actionSetPriorities")..uint32_t("actionSetPriorityCount", "an integer specifying the number of valid elements in the actionSetPriorities array.")
-    XrActiveActionSetPriorityEXT.const.p("actionSetPriorities", "a pointer to an array that maps action sets to their active priority numbers. If an action set is specified multiple times, the runtime <b>may</b> return #ERROR_VALIDATION_FAILURE from #SyncActions().")
+    Expression("#TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("actionSetPriorities")..uint32_t("actionSetPriorityCount")
+    XrActiveActionSetPriorityEXT.const.p("actionSetPriorities")
 }
 
 val XrSystemForceFeedbackCurlPropertiesMNDX = struct(Module.OPENXR, "XrSystemForceFeedbackCurlPropertiesMNDX", mutable = false) {
-    documentation =
-        """
-        System property for force feedback curl.
-
-        <h5>Description</h5>
-        An application <b>may</b> inspect whether the system is capable of force feedback by chaining an ##XrSystemForceFeedbackCurlPropertiesMNDX structure to the ##XrSystemProperties structure when calling #GetSystemProperties().
-
-        The runtime <b>should</b> return #TRUE for {@code supportsForceFeedbackCurl} when force feedback is available in the system, otherwise #FALSE. Force feedback calls <b>must</b> return #ERROR_FEATURE_UNSUPPORTED if force feedback is not available in the system.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MNDXForceFeedbackCurl XR_MNDX_force_feedback_curl} extension <b>must</b> be enabled prior to using ##XrSystemForceFeedbackCurlPropertiesMNDX</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties, #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrBool32("supportsForceFeedbackCurl", "an {@code XrBool32}, indicating if the current system is capable of performing force feedback.")
+    Expression("#TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsForceFeedbackCurl")
 }
 
 val XrForceFeedbackCurlApplyLocationMNDX = struct(Module.OPENXR, "XrForceFeedbackCurlApplyLocationMNDX") {
-    documentation =
-        """
-        Structure representing and containing information on how to apply force feedback to a single location.
-
-        <h5>Description</h5>
-        {@code value} is specified as a limit in a single direction. For example, if the value specified is 0.5, a location <b>must</b> have free movement from the point where it would be incapable of movement if {@code value} was 1, to 0.5 of the range the location is capable of moving.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MNDXForceFeedbackCurl XR_MNDX_force_feedback_curl} extension <b>must</b> be enabled prior to using ##XrForceFeedbackCurlApplyLocationMNDX</li>
-            <li>{@code location} <b>must</b> be a valid {@code XrForceFeedbackCurlLocationMNDX} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrForceFeedbackCurlApplyLocationsMNDX, #ApplyForceFeedbackCurlMNDX()
-        """
-
-    XrForceFeedbackCurlLocationMNDX("location", "represents the location to apply force feedback to.")
-    float("value", "a value from 0-1 representing the amount of force feedback to apply. The range of the value should represent the entire range the location is capable of moving through, with 1 representing making the location incapable of movement, and 0 being fully flexible. For example, in the case of a finger curl, setting {@code value} to 1 would prevent the finger from curling at all (fully extended), and 0 would allow the finger to have free range of movement, being able to curl fully.")
+    XrForceFeedbackCurlLocationMNDX("location")
+    float("value")
 }
 
 val XrForceFeedbackCurlApplyLocationsMNDX = struct(Module.OPENXR, "XrForceFeedbackCurlApplyLocationsMNDX") {
-    documentation =
-        """
-        Structure representing an array of locations to apply force feedback to.
-
-        <h5>Description</h5>
-        Contains an array of ##XrForceFeedbackCurlApplyLocationMNDX that contains information on locations to apply force feedback to.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MNDXForceFeedbackCurl XR_MNDX_force_feedback_curl} extension <b>must</b> be enabled prior to using ##XrForceFeedbackCurlApplyLocationsMNDX</li>
-            <li>{@code type} <b>must</b> be #TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code locations} <b>must</b> be a pointer to an array of {@code locationCount} ##XrForceFeedbackCurlApplyLocationMNDX structures</li>
-            <li>The {@code locationCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrForceFeedbackCurlApplyLocationMNDX, #ApplyForceFeedbackCurlMNDX()
-        """
-
-    Expression("#TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("locations")..uint32_t("locationCount", "the number of elements in the {@code locations} array.")
-    XrForceFeedbackCurlApplyLocationMNDX.p("locations", "a pointer to an array of locations to apply force feedback.")
+    Expression("#TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("locations")..uint32_t("locationCount")
+    XrForceFeedbackCurlApplyLocationMNDX.p("locations")
 }
 
 val XrHandTrackingDataSourceInfoEXT = struct(Module.OPENXR, "XrHandTrackingDataSourceInfoEXT") {
-    documentation =
-        """
-        Specify the data source to create the hand tracker.
-
-        <h5>Description</h5>
-        The ##XrHandTrackingDataSourceInfoEXT is a structure that an application <b>can</b> chain to ##XrHandTrackerCreateInfoEXT{@code ::next} to specify the hand tracking data sources that the application accepts.
-
-        Because the hand tracking device <b>may</b> change during a running session, the runtime <b>may</b> return a valid {@code XrHandTrackerEXT} handle even if there is no currently active hand tracking device or the active device does not safisty any or all data sources requested by the applications’s call to #CreateHandTrackerEXT(). The runtime <b>may</b> instead return #ERROR_FEATURE_UNSUPPORTED from #CreateHandTrackerEXT(), if for example the runtime believes it will never be able to satisfy the request.
-
-        If any value in {@code requestedDataSources} is duplicated, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE from the call to #CreateHandTrackerEXT(). If {@code requestedDataSourceCount} is 0, the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE from the call to #CreateHandTrackerEXT().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandTrackingDataSource XR_EXT_hand_tracking_data_source} extension <b>must</b> be enabled prior to using ##XrHandTrackingDataSourceInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code requestedDataSourceCount} is not 0, {@code requestedDataSources} <b>must</b> be a pointer to an array of {@code requestedDataSourceCount} {@code XrHandTrackingDataSourceEXT} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandTrackerCreateInfoEXT, #CreateHandTrackerEXT()
-        """
-
-    Expression("#TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("requestedDataSources", optional = true)..uint32_t("requestedDataSourceCount", "the number of elements in the {@code requestedDataSources} array.")
-    XrHandTrackingDataSourceEXT.p("requestedDataSources", "an array of {@code XrHandTrackingDataSourceEXT} that the application accepts.")
+    Expression("#TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("requestedDataSources", optional = true)..uint32_t("requestedDataSourceCount")
+    XrHandTrackingDataSourceEXT.p("requestedDataSources")
 }
 
 val XrHandTrackingDataSourceStateEXT = struct(Module.OPENXR, "XrHandTrackingDataSourceStateEXT") {
-    documentation =
-        """
-        Chains to ##XrHandJointLocationsEXT to get hand tracking data source state.
-
-        <h5>Description</h5>
-        ##XrHandTrackingDataSourceStateEXT is a structure that an application <b>can</b> chain to ##XrHandJointLocationsEXT{@code ::next} when calling #LocateHandJointsEXT() to retrieve the data source of the currently active hand tracking device.
-
-        When the returned {@code isActive} is {@code XR_FALSE}, it indicates the currently active hand tracking device does not support any of the requested data sources. In these cases, the runtime <b>must</b> also return no valid tracking locations for hand joints from this #LocateHandJointsEXT() function.
-
-        If the tracker was not created with ##XrHandTrackingDataSourceInfoEXT chained to ##XrHandTrackerCreateInfoEXT{@code ::next}, then the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE, if ##XrHandTrackingDataSourceStateEXT is passed in the call to #LocateHandJointsEXT().
-
-        If there is an active hand tracking device that is one of the specified ##XrHandTrackingDataSourceInfoEXT{@code ::requestedDataSources}, the runtime <b>must</b> set {@code isActive} to #TRUE. When the runtime sets {@code isActive} to #TRUE, the runtime <b>must</b> set {@code dataSource} indicate the active data source. The runtime <b>must</b> return a {@code dataSource} that is a subset of the ##XrHandTrackingDataSourceInfoEXT{@code ::requestedDataSources} when creating the corresponding hand tracker.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTHandTrackingDataSource XR_EXT_hand_tracking_data_source} extension <b>must</b> be enabled prior to using ##XrHandTrackingDataSourceStateEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code dataSource} <b>must</b> be a valid {@code XrHandTrackingDataSourceEXT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrHandJointLocationsEXT, #LocateHandJointsEXT()
-        """
-
-    Expression("#TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrBool32("isActive", "indicating there is an active data source")
-    XrHandTrackingDataSourceEXT("dataSource", "indicating the data source that was used to generate the hand tracking joints.")
+    Expression("#TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrBool32("isActive")
+    XrHandTrackingDataSourceEXT("dataSource")
 }
 
 val XrSystemPlaneDetectionPropertiesEXT = struct(Module.OPENXR, "XrSystemPlaneDetectionPropertiesEXT", mutable = false) {
-    documentation =
-        """
-        System Properties of the Plane Detection extension.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using ##XrSystemPlaneDetectionPropertiesEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties
-        """
-
-    Expression("#TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrPlaneDetectionCapabilityFlagsEXT("supportedFeatures", "a bitfield, with bit masks defined in {@code XrPlaneDetectionCapabilityFlagBitsEXT}.")
+    Expression("#TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrPlaneDetectionCapabilityFlagsEXT("supportedFeatures")
 }
 
 val XrPlaneDetectorCreateInfoEXT = struct(Module.OPENXR, "XrPlaneDetectorCreateInfoEXT") {
-    documentation =
-        """
-        Information to create a plane detection handle.
-
-        <h5>Description</h5>
-        The ##XrPlaneDetectorCreateInfoEXT structure describes the information to create an {@code XrPlaneDetectorEXT} handle.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using ##XrPlaneDetectorCreateInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_PLANE_DETECTOR_CREATE_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrPlaneDetectorFlagBitsEXT} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreatePlaneDetectorEXT()
-        """
-
-    Expression("#TYPE_PLANE_DETECTOR_CREATE_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrPlaneDetectorFlagsEXT("flags", "<b>must</b> be a valid combination of {@code XrPlaneDetectorFlagsEXT} flags or zero.")
+    Expression("#TYPE_PLANE_DETECTOR_CREATE_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrPlaneDetectorFlagsEXT("flags")
 }
 
 val XrExtent3DfEXT = struct(Module.OPENXR, "XrExtent3DfEXT", alias = XrExtent3Df) {
-    documentation = "See ##XrExtent3Df."
-
-    float("width", "")
-    float("height", "")
-    float("depth", "")
+    float("width")
+    float("height")
+    float("depth")
 }
 
 val XrPlaneDetectorBeginInfoEXT = struct(Module.OPENXR, "XrPlaneDetectorBeginInfoEXT") {
-    documentation =
-        """
-        Describes the information to detect planes.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using ##XrPlaneDetectorBeginInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-            <li>If {@code orientationCount} is not 0, {@code orientations} <b>must</b> be a pointer to an array of {@code orientationCount} valid {@code XrPlaneDetectorOrientationEXT} values</li>
-            <li>If {@code semanticTypeCount} is not 0, {@code semanticTypes} <b>must</b> be a pointer to an array of {@code semanticTypeCount} valid {@code XrPlaneDetectorSemanticTypeEXT} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExtent3DfEXT, ##XrPosef, #BeginPlaneDetectionEXT()
-        """
-
-    Expression("#TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSpace("baseSpace", "the {@code XrSpace} that the {@code boundingBoxPose} is defined in.")
-    XrTime("time", "an {@code XrTime} at which to detect the planes.")
-    AutoSize("orientations", optional = true)..uint32_t("orientationCount", "the number of elements in the {@code orientations}.")
-    nullable..XrPlaneDetectorOrientationEXT.const.p("orientations", "an array of {@code XrPlaneDetectorOrientationEXT}. If this field is null no orientation filtering is applied. If any orientations are present only planes with any of the orientation listed are returned.")
-    AutoSize("semanticTypes", optional = true)..uint32_t("semanticTypeCount", "the number of elements in the {@code semanticTypes}.")
-    nullable..XrPlaneDetectorSemanticTypeEXT.const.p("semanticTypes", "an array of {@code XrPlaneDetectorSemanticTypeEXT}. If this field is null no semantic type filtering is applied. If any semantic types are present only planes with matching semantic types are returned.")
-    uint32_t("maxPlanes", "the maximum number of planes the runtime <b>may</b> return. This number <b>must</b> be larger than 0. If the number is 0 the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE.")
-    float("minArea", "the minimum area in square meters a plane <b>must</b> have to be returned. A runtime <b>may</b> have a lower limit under which planes are not detected regardless of {@code minArea} and silently drop planes lower than the internal minimum.")
-    XrPosef("boundingBoxPose", "the pose of the center of the bounding box of the volume to use for detection in {@code baseSpace}.")
-    XrExtent3DfEXT("boundingBoxExtent", "the extent of the bounding box to use for detection. If any part of a plane falls within the bounding box it <b>should</b> be considered for inclusion subject to the other filters. This means that planes <b>may</b> extend beyond the bounding box. A runtime <b>may</b> have an upper limit on the detection range and silently clip the results to that internally.")
+    Expression("#TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
+    AutoSize("orientations", optional = true)..uint32_t("orientationCount")
+    nullable..XrPlaneDetectorOrientationEXT.const.p("orientations")
+    AutoSize("semanticTypes", optional = true)..uint32_t("semanticTypeCount")
+    nullable..XrPlaneDetectorSemanticTypeEXT.const.p("semanticTypes")
+    uint32_t("maxPlanes")
+    float("minArea")
+    XrPosef("boundingBoxPose")
+    XrExtent3DfEXT("boundingBoxExtent")
 }
 
 val XrPlaneDetectorGetInfoEXT = struct(Module.OPENXR, "XrPlaneDetectorGetInfoEXT") {
-    documentation =
-        """
-        Contains the plane retrieval information.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using ##XrPlaneDetectorGetInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_PLANE_DETECTOR_GET_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetPlaneDetectionsEXT()
-        """
-
-    Expression("#TYPE_PLANE_DETECTOR_GET_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSpace("baseSpace", "the plane pose will be relative to this {@code XrSpace} at {@code time}.")
-    XrTime("time", "the {@code XrTime} at which to evaluate the coordinates relative to the {@code baseSpace}.")
+    Expression("#TYPE_PLANE_DETECTOR_GET_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
 }
 
 val XrPlaneDetectorLocationEXT = struct(Module.OPENXR, "XrPlaneDetectorLocationEXT") {
-    documentation =
-        """
-        Describes the location of a plane.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using ##XrPlaneDetectorLocationEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_PLANE_DETECTOR_LOCATION_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code locationFlags} <b>must</b> be 0 or a valid combination of {@code XrSpaceLocationFlagBits} values</li>
-            <li>If {@code orientation} is not 0, {@code orientation} <b>must</b> be a valid {@code XrPlaneDetectorOrientationEXT} value</li>
-            <li>If {@code semanticType} is not 0, {@code semanticType} <b>must</b> be a valid {@code XrPlaneDetectorSemanticTypeEXT} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExtent2Df, ##XrPlaneDetectorLocationsEXT, ##XrPosef, #GetPlaneDetectionsEXT()
-        """
-
-    Expression("#TYPE_PLANE_DETECTOR_LOCATION_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    uint64_t("planeId", "a {@code uint64_t} unique identifier of the plane. The planeId <b>should</b> remain the same for the duration of the {@code XrPlaneDetectorEXT} handle for a physical plane. A runtime on occasion <b>may</b> assign a different id to the same physical plane, for example when several planes merge into one plane. {@code planeId} <b>must</b> remain valid until the next call to #BeginPlaneDetectionEXT() or #DestroyPlaneDetectorEXT(). This id is used by #GetPlanePolygonBufferEXT().")
-    XrSpaceLocationFlags("locationFlags", "a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data. If none of the bits are set, no other fields in this structure <b>should</b> be considered to be valid or meaningful.")
-    XrPosef("pose", "an ##XrPosef defining the position and orientation of the origin of a plane within the reference frame of the corresponding ##XrPlaneDetectorGetInfoEXT{@code ::baseSpace}.")
-    XrExtent2Df("extents", "the extent of the plane along the x-axis ({@code extents.width}) and y-axis ({@code extents.height}) centered on the {@code pose}.")
-    XrPlaneDetectorOrientationEXT("orientation", "the detected orientation of the plane.")
-    XrPlaneDetectorSemanticTypeEXT("semanticType", "{@code semanticType} {@code XrPlaneDetectorSemanticTypeEXT} type of the plane.")
-    uint32_t("polygonBufferCount", "the number of polygon buffers associated with this plane. If this is zero no polygon buffer was generated. The first polygon buffer is always the outside contour. If contours are requested with #PLANE_DETECTOR_ENABLE_CONTOUR_BIT_EXT this value <b>must</b> always be at least 1.")
+    Expression("#TYPE_PLANE_DETECTOR_LOCATION_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    uint64_t("planeId")
+    XrSpaceLocationFlags("locationFlags")
+    XrPosef("pose")
+    XrExtent2Df("extents")
+    XrPlaneDetectorOrientationEXT("orientation")
+    XrPlaneDetectorSemanticTypeEXT("semanticType")
+    uint32_t("polygonBufferCount")
 }
 
 val XrPlaneDetectorLocationsEXT = struct(Module.OPENXR, "XrPlaneDetectorLocationsEXT") {
-    documentation =
-        """
-        Contains the plane information.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using ##XrPlaneDetectorLocationsEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_PLANE_DETECTOR_LOCATIONS_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code planeLocationCapacityInput} is not 0, {@code planeLocations} <b>must</b> be a pointer to an array of {@code planeLocationCapacityInput} ##XrPlaneDetectorLocationEXT structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrPlaneDetectorLocationEXT, #GetPlaneDetectionsEXT()
-        """
-
-    Expression("#TYPE_PLANE_DETECTOR_LOCATIONS_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("planeLocations", optional = true)..uint32_t("planeLocationCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("planeLocationCountOutput", "the number of planes, or the required capacity in the case that {@code planeLocationCapacityInput} is insufficient.")
-    nullable..XrPlaneDetectorLocationEXT.p("planeLocations", "an array of ##XrPlaneDetectorLocationEXT. It <b>can</b> be {@code NULL} if {@code planeLocationCapacityInput} is 0.")
+    Expression("#TYPE_PLANE_DETECTOR_LOCATIONS_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("planeLocations", optional = true)..uint32_t("planeLocationCapacityInput")
+    uint32_t("planeLocationCountOutput")
+    nullable..XrPlaneDetectorLocationEXT.p("planeLocations")
 }
 
 val XrPlaneDetectorPolygonBufferEXT = struct(Module.OPENXR, "XrPlaneDetectorPolygonBufferEXT") {
-    documentation =
-        """
-        Plane polygon vertex buffer.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using ##XrPlaneDetectorPolygonBufferEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code vertexCapacityInput} is not 0, {@code vertices} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} ##XrVector2f structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrVector2f, #GetPlanePolygonBufferEXT()
-        """
-
-    Expression("#TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput", "the capacity of the array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("vertexCountOutput", "the count of {@code vertices} written, or the required capacity in the case that {@code vertexCapacityInput} is insufficient.")
-    nullable..XrVector2f.p("vertices", "an array of ##XrVector2f that <b>must</b> be filled by the runtime with the positions of the polygon vertices relative to the plane’s pose.")
+    Expression("#TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("vertices", optional = true)..uint32_t("vertexCapacityInput")
+    uint32_t("vertexCountOutput")
+    nullable..XrVector2f.p("vertices")
 }
 
 val XrFutureCancelInfoEXT = struct(Module.OPENXR, "XrFutureCancelInfoEXT") {
-    documentation =
-        """
-        Information on future to cancel.
-
-        <h5>Description</h5>
-        An ##XrFutureCancelInfoEXT describes which future to cancel.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTFuture XR_EXT_future} extension <b>must</b> be enabled prior to using ##XrFutureCancelInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_FUTURE_CANCEL_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CancelFutureEXT()
-        """
-
-    Expression("#TYPE_FUTURE_CANCEL_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrFutureEXT("future", "{@code XrFutureEXT} to cancel.")
+    Expression("#TYPE_FUTURE_CANCEL_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFutureEXT("future")
 }
 
 val XrFuturePollInfoEXT = struct(Module.OPENXR, "XrFuturePollInfoEXT") {
-    documentation =
-        """
-        Input for xrPollFutureEXT.
-
-        <h5>Description</h5>
-        An ##XrFuturePollInfoEXT structure is used to pass {@code future} to #PollFutureEXT().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTFuture XR_EXT_future} extension <b>must</b> be enabled prior to using ##XrFuturePollInfoEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_FUTURE_POLL_INFO_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PollFutureEXT()
-        """
-
-    Expression("#TYPE_FUTURE_POLL_INFO_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrFutureEXT("future", "the {@code XrFutureEXT} future being polled.")
+    Expression("#TYPE_FUTURE_POLL_INFO_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrFutureEXT("future")
 }
 
 val XrFutureCompletionBaseHeaderEXT = struct(Module.OPENXR, "XrFutureCompletionBaseHeaderEXT") {
-    documentation =
-        """
-        Base header for the result of an a future, returned by a future completion function.
-
-        <h5>Description</h5>
-        ##XrFutureCompletionBaseHeaderEXT is a base header for the result of a future completion function.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTFuture XR_EXT_future} extension <b>must</b> be enabled prior to using ##XrFutureCompletionBaseHeaderEXT</li>
-            <li>{@code type} <b>must</b> be one of the following XrStructureType values: #TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML, #TYPE_FUTURE_COMPLETION_EXT, #TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML, #TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML, #TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML, #TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML, #TYPE_WORLD_MESH_REQUEST_COMPLETION_ML, #TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-        """
-
-    XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrResult("futureResult", "{@code XrResult} of the async operation associated with future passed to the completion function.")
+    XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
 }
 
 val XrFutureCompletionEXT = struct(Module.OPENXR, "XrFutureCompletionEXT", parentStruct = XrFutureCompletionBaseHeaderEXT) {
-    documentation =
-        """
-        Implementation of the XrResult-only completion structure.
-
-        <h5>Description</h5>
-        This is a minimal implementation of ##XrFutureCompletionBaseHeaderEXT, containing only the fields present in the base header structure. It is intended for use by asynchronous operations that do not have other outputs or return values beyond an {@code XrResult} value, as the output parameter of their completion function.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTFuture XR_EXT_future} extension <b>must</b> be enabled prior to using ##XrFutureCompletionEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_FUTURE_COMPLETION_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-        """
-
-    Expression("#TYPE_FUTURE_COMPLETION_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrResult("futureResult", "{@code XrResult} of the async operation associated with future passed to the completion function.")
+    Expression("#TYPE_FUTURE_COMPLETION_EXT")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
 }
 
 val XrFuturePollResultEXT = struct(Module.OPENXR, "XrFuturePollResultEXT", mutable = false) {
-    documentation =
-        """
-        Result of xrPollFutureEXT.
-
-        <h5>Description</h5>
-        An ##XrFuturePollResultEXT structure is used to return the result of #PollFutureEXT().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTFuture XR_EXT_future} extension <b>must</b> be enabled prior to using ##XrFuturePollResultEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_FUTURE_POLL_RESULT_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #PollFutureEXT()
-        """
-
-    Expression("#TYPE_FUTURE_POLL_RESULT_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrFutureStateEXT("state", "the {@code XrFutureStateEXT} of the {@code XrFutureEXT} passed to #PollFutureEXT().")
+    Expression("#TYPE_FUTURE_POLL_RESULT_EXT")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrFutureStateEXT("state")
 }
 
 val XrEventDataUserPresenceChangedEXT = struct(Module.OPENXR, "XrEventDataUserPresenceChangedEXT") {
-    documentation =
-        """
-        Event notifying the change of user presence.
-
-        <h5>Description</h5>
-        The ##XrEventDataUserPresenceChangedEXT event is queued for retrieval using #PollEvent() when the user presence is changed, as well as when a session starts running.
-
-        Receiving ##XrEventDataUserPresenceChangedEXT with the {@code isUserPresent} is #TRUE indicates that the system has detected the presence of a user in the XR experience. For example, this may indicate that the user has put on the headset, or has entered the tracking area of a non-head-worn XR system.
-
-        Receiving ##XrEventDataUserPresenceChangedEXT with the {@code isUserPresent} is #FALSE indicates that the system has detected the absence of a user in the XR experience. For example, this may indicate that the user has removed the headset or has stepped away from the tracking area of a non-head-worn XR system.
-
-        The runtime <b>must</b> queue this event upon a successful call to the #BeginSession() function, regardless of the value of {@code isUserPresent}, so that the application can be in sync on the state when a session begins running.
-
-        The runtime <b>must</b> return a valid {@code XrSession} handle for <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#session-running">a running session</a>.
-
-        After the application calls #EndSession(), a <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#session-running">running session</a> is ended and the runtime <b>must</b> not enqueue any more user presence events. Therefore, the application will no longer observe any changes of the {@code isUserPresent} until another <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#session-running">running session</a>.
-
-        <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-        This extension does not require any specific correlation between user presence state and session state except that the ##XrEventDataUserPresenceChangedEXT event can not be observed without a running session. A runtime may choose to correlate the two states or keep them independent.
-        </div>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTUserPresence XR_EXT_user_presence} extension <b>must</b> be enabled prior to using ##XrEventDataUserPresenceChangedEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-        </ul>
-        """
-
-    Expression("#TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrSession("session", "the {@code XrSession} that is receiving the notification.")
-    XrBool32("isUserPresent", "an {@code XrBool32} value for new state of user presence after the change.")
+    Expression("#TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSession("session")
+    XrBool32("isUserPresent")
 }
 
 val XrSystemUserPresencePropertiesEXT = struct(Module.OPENXR, "XrSystemUserPresencePropertiesEXT", mutable = false) {
-    documentation =
-        """
-        Returns the system capability whether it supports user presence.
-
-        <h5>Description</h5>
-        The application <b>can</b> use the ##XrSystemUserPresencePropertiesEXT event in #GetSystemProperties() to detect if the given system supports the sensing of user presence.
-
-        If the system does not support user presence sensing, the runtime <b>must</b> return #FALSE for {@code supportsUserPresence} and <b>must</b> not queue the ##XrEventDataUserPresenceChangedEXT event for any session on this system.
-
-        In this case, an application typically assumes that the user is always present, as the runtime is unable to detect changes in user presence.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link EXTUserPresence XR_EXT_user_presence} extension <b>must</b> be enabled prior to using ##XrSystemUserPresencePropertiesEXT</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsUserPresence", "an {@code XrBool32} value that indicates whether the system supports user presence sensing.")
+    Expression("#TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsUserPresence")
 }
 
 val XrSpacesLocateInfoKHR = struct(Module.OPENXR, "XrSpacesLocateInfoKHR", alias = XrSpacesLocateInfo) {
-    documentation = "See ##XrSpacesLocateInfo."
-
-    Expression("#TYPE_SPACES_LOCATE_INFO")..XrStructureType("type", "")
-    nullable..opaque_const_p("next", "")
-    XrSpace("baseSpace", "")
-    XrTime("time", "")
-    AutoSize("spaces")..uint32_t("spaceCount", "")
-    XrSpace.const.p("spaces", "")
+    Expression("#TYPE_SPACES_LOCATE_INFO")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
+    AutoSize("spaces")..uint32_t("spaceCount")
+    XrSpace.const.p("spaces")
 }
 
 val XrSpaceLocationDataKHR = struct(Module.OPENXR, "XrSpaceLocationDataKHR", mutable = false, alias = XrSpaceLocationData) {
-    documentation = "See ##XrSpaceLocationData."
-
-    XrSpaceLocationFlags("locationFlags", "")
-    XrPosef("pose", "")
+    XrSpaceLocationFlags("locationFlags")
+    XrPosef("pose")
 }
 
 val XrSpaceLocationsKHR = struct(Module.OPENXR, "XrSpaceLocationsKHR", alias = XrSpaceLocations) {
-    documentation = "See ##XrSpaceLocations."
-
-    Expression("#TYPE_SPACE_LOCATIONS")..XrStructureType("type", "")
-    nullable..opaque_p("next", "")
-    AutoSize("locations")..uint32_t("locationCount", "")
-    XrSpaceLocationData.p("locations", "")
+    Expression("#TYPE_SPACE_LOCATIONS")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("locations")..uint32_t("locationCount")
+    XrSpaceLocationData.p("locations")
 }
 
 val XrSpaceVelocityDataKHR = struct(Module.OPENXR, "XrSpaceVelocityDataKHR", mutable = false, alias = XrSpaceVelocityData) {
-    documentation = "See ##XrSpaceVelocityData."
-
-    XrSpaceVelocityFlags("velocityFlags", "")
-    XrVector3f("linearVelocity", "")
-    XrVector3f("angularVelocity", "")
+    XrSpaceVelocityFlags("velocityFlags")
+    XrVector3f("linearVelocity")
+    XrVector3f("angularVelocity")
 }
 
 val XrSpaceVelocitiesKHR = struct(Module.OPENXR, "XrSpaceVelocitiesKHR", alias = XrSpaceVelocities) {
-    documentation = "See ##XrSpaceVelocities."
-
-    Expression("#TYPE_SPACE_VELOCITIES")..XrStructureType("type", "")
-    nullable..opaque_p("next", "")
-    AutoSize("velocities")..uint32_t("velocityCount", "")
-    XrSpaceVelocityData.p("velocities", "")
+    Expression("#TYPE_SPACE_VELOCITIES")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("velocities")..uint32_t("velocityCount")
+    XrSpaceVelocityData.p("velocities")
 }
 
 val XrSystemNotificationsSetInfoML = struct(Module.OPENXR, "XrSystemNotificationsSetInfoML") {
-    documentation =
-        """
-        Information for setting system notifications.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLSystemNotifications XR_ML_system_notifications} extension <b>must</b> be enabled prior to using ##XrSystemNotificationsSetInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_NOTIFICATIONS_SET_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #SetSystemNotificationsML()
-        """
-
-    Expression("#TYPE_SYSTEM_NOTIFICATIONS_SET_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrBool32("suppressNotifications", "a boolean flag for suppressing all system notifications.")
+    Expression("#TYPE_SYSTEM_NOTIFICATIONS_SET_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrBool32("suppressNotifications")
 }
 
 val XrWorldMeshDetectorCreateInfoML = struct(Module.OPENXR, "XrWorldMeshDetectorCreateInfoML") {
-    documentation =
-        """
-        Mesh Detector Create Info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshDetectorCreateInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateWorldMeshDetectorML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
+    Expression("#TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrWorldMeshBlockStateML = struct(Module.OPENXR, "XrWorldMeshBlockStateML") {
-    documentation =
-        """
-        Mesh block detection info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshBlockStateML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_BLOCK_STATE_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code status} <b>must</b> be a valid {@code XrWorldMeshBlockStatusML} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExtent3DfEXT, ##XrPosef, ##XrUuidEXT, ##XrWorldMeshStateRequestCompletionML, #RequestWorldMeshStateCompleteML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_BLOCK_STATE_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrUuidEXT("uuid", "the ##XrUuidEXT of the mesh block.")
-    XrPosef("meshBoundingBoxCenter", "the ##XrPosef of the mesh’s bounding box center.")
-    XrExtent3DfEXT("meshBoundingBoxExtents", "the ##XrExtent3DfEXT of the mesh’s bounding box.")
-    XrTime("lastUpdateTime", "the {@code XrTime} at which this mesh was last updated.")
-    XrWorldMeshBlockStatusML("status", "an {@code XrWorldMeshBlockStatusML} indicating the status of the mesh block.")
+    Expression("#TYPE_WORLD_MESH_BLOCK_STATE_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrUuidEXT("uuid")
+    XrPosef("meshBoundingBoxCenter")
+    XrExtent3DfEXT("meshBoundingBoxExtents")
+    XrTime("lastUpdateTime")
+    XrWorldMeshBlockStatusML("status")
 }
 
 val XrWorldMeshStateRequestInfoML = struct(Module.OPENXR, "XrWorldMeshStateRequestInfoML") {
-    documentation =
-        """
-        Mesh block detection info.
-
-        <h5>Description</h5>
-        Each mesh block <b>may</b> have a 'skirt' if #WORLD_MESH_DETECTOR_REMOVE_MESH_SKIRT_BIT_ML was not specified during the creation of the {@code XrWorldMeshDetectorML}. A skirt provides some overlap between adjacent mesh blocks. While a skirt improves coverage between blocks, it does not create a watertight mesh.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshStateRequestInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrExtent3DfEXT, ##XrPosef, #RequestWorldMeshStateAsyncML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSpace("baseSpace", "the base space used by the bounding box.")
-    XrTime("time", "the time at which the bounding box location is resolved.")
-    XrPosef("boundingBoxCenter", "the ##XrPosef of the bounding box center.")
-    XrExtent3DfEXT("boundingBoxExtents", "the ##XrExtent3DfEXT of the bounding box. These extents indicate the full size of the box, so an ##XrExtent3DfEXT of 1.0,1.0,1.0 has a volume of 1 cubic meter and the box’s center is at {@code boundingBoxCenter}.")
+    Expression("#TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("baseSpace")
+    XrTime("time")
+    XrPosef("boundingBoxCenter")
+    XrExtent3DfEXT("boundingBoxExtents")
 }
 
 val XrWorldMeshStateRequestCompletionML = struct(Module.OPENXR, "XrWorldMeshStateRequestCompletionML", parentStruct = XrFutureCompletionBaseHeaderEXT) {
-    documentation =
-        """
-        Mesh block detection info.
-
-        <h5>Future Return Codes</h5>
-        {@code futureResult} values:
-
-        <dl>
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-successcodes">Success</a></dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#SESSION_LOSS_PENDING</li>
-            </ul></dd>
-
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-errorcodes">Failure</a></dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_SESSION_LOST</li>
-                <li>#ERROR_OUT_OF_MEMORY</li>
-                <li>#ERROR_LIMIT_REACHED</li>
-                <li>#ERROR_WORLD_MESH_DETECTOR_SPACE_NOT_LOCATABLE_ML</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshStateRequestCompletionML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
-            <li>If {@code meshBlockStateCapacityInput} is not 0, {@code meshBlockStates} <b>must</b> be a pointer to an array of {@code meshBlockStateCapacityInput} ##XrWorldMeshBlockStateML structures</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrWorldMeshBlockStateML, #RequestWorldMeshStateCompleteML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrResult("futureResult", "the {@code XrResult} of the asynchronous operation.")
-    XrTime("timestamp", "the {@code XrTime} of the request.")
-    AutoSize("meshBlockStates", optional = true)..uint32_t("meshBlockStateCapacityInput", "the capacity of the {@code meshBlockStates} array, or 0 to indicate a request to retrieve the required capacity.")
-    uint32_t("meshBlockStateCountOutput", "filled in by the runtime with the count of mesh states written or the required capacity in the case that {@code meshBlockStateCapacityInput} is insufficient.")
-    nullable..XrWorldMeshBlockStateML.p("meshBlockStates", "a pointer to an array of ##XrWorldMeshBlockStateML.")
+    Expression("#TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
+    XrTime("timestamp")
+    AutoSize("meshBlockStates", optional = true)..uint32_t("meshBlockStateCapacityInput")
+    uint32_t("meshBlockStateCountOutput")
+    nullable..XrWorldMeshBlockStateML.p("meshBlockStates")
 }
 
 val XrWorldMeshBufferRecommendedSizeInfoML = struct(Module.OPENXR, "XrWorldMeshBufferRecommendedSizeInfoML") {
-    documentation =
-        """
-        Memory Allocation Info.
-
-        <h5>Description</h5>
-        The value for {@code maxBlockCount} <b>should</b> be populated ##XrWorldMeshStateRequestCompletionML{@code ::meshBlockStateCountOutput}. As long as the {@code maxBlockCount} is equal or larger to this ##XrWorldMeshStateRequestCompletionML{@code ::meshBlockStateCountOutput}, a memory block <b>may</b> be re-used for new requests.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshBufferRecommendedSizeInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetWorldMeshBufferRecommendSizeML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    uint32_t("maxBlockCount", "a {@code uint32_t} of the maximum number of blocks in the request.")
+    Expression("#TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    uint32_t("maxBlockCount")
 }
 
 val XrWorldMeshBufferSizeML = struct(Module.OPENXR, "XrWorldMeshBufferSizeML") {
-    documentation =
-        """
-        Memory Allocation Info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshBufferSizeML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_BUFFER_SIZE_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #AllocateWorldMeshBufferML(), #GetWorldMeshBufferRecommendSizeML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_BUFFER_SIZE_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    uint32_t("size", "a {@code uint32_t} indicating the number of bytes recommended.")
+    Expression("#TYPE_WORLD_MESH_BUFFER_SIZE_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    uint32_t("size")
 }
 
 val XrWorldMeshBufferML = struct(Module.OPENXR, "XrWorldMeshBufferML") {
-    documentation =
-        """
-        Memory Block Information.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshBufferML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_BUFFER_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} bytes</li>
-            <li>The {@code bufferSize} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #AllocateWorldMeshBufferML(), #FreeWorldMeshBufferML(), #RequestWorldMeshAsyncML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_BUFFER_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    AutoSize("buffer")..uint32_t("bufferSize", "a {@code uint32_t} indicating the size of the buffer in bytes.")
-    void.p("buffer", "a {@code void} memory block. This memory <b>may</b> be allocated using #AllocateWorldMeshBufferML() or otherwise.")
+    Expression("#TYPE_WORLD_MESH_BUFFER_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    AutoSize("buffer")..uint32_t("bufferSize")
+    void.p("buffer")
 }
 
 val XrWorldMeshBlockRequestML = struct(Module.OPENXR, "XrWorldMeshBlockRequestML") {
-    documentation =
-        """
-        Block Request Info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshBlockRequestML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_BLOCK_REQUEST_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code lod} <b>must</b> be a valid {@code XrWorldMeshDetectorLodML} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, ##XrWorldMeshGetInfoML, #RequestWorldMeshAsyncML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_BLOCK_REQUEST_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrUuidEXT("uuid", "the ##XrUuidEXT of the mesh block to retrieve.")
-    XrWorldMeshDetectorLodML("lod", "the {@code XrWorldMeshDetectorLodML} level of detail of the mesh to retrieve.")
+    Expression("#TYPE_WORLD_MESH_BLOCK_REQUEST_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrUuidEXT("uuid")
+    XrWorldMeshDetectorLodML("lod")
 }
 
 val XrWorldMeshGetInfoML = struct(Module.OPENXR, "XrWorldMeshGetInfoML") {
-    documentation =
-        """
-        Block Request Info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshGetInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_GET_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrWorldMeshDetectorFlagBitsML} values</li>
-            <li>{@code blocks} <b>must</b> be a pointer to an array of {@code blockCount} ##XrWorldMeshBlockRequestML structures</li>
-            <li>The {@code blockCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrWorldMeshBlockRequestML, #RequestWorldMeshAsyncML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_GET_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrWorldMeshDetectorFlagsML("flags", "are the detector flags defined by {@code XrWorldMeshDetectorFlagBitsML}.")
-    float("fillHoleLength", "Any hole which has perimeter (in meters) less than {@code fillHoleLength} will be filled. The maximum hole perimeter is limited to 5 meters, the runtime <b>must</b> clamp the value between 0 and 5 meters. Also the maximum area of the hole <b>should</b> not exceed 0.5 square meters. If the hole overlaps with neighboring mesh block(s), it will not be filled in.")
-    float("disconnectedComponentArea", "Any component that is disconnected from the main mesh which has an area (in square meters) less than {@code disconnectedComponentArea} will be removed. The maximum area is limited to 2 square meters, and the area needs to exist fully within a mesh block boundary without skirt. The runtime <b>must</b> clamp this value between 0 and 2 square meters.")
-    AutoSize("blocks")..uint32_t("blockCount", "a {@code uint32_t} indicating the number of elements in the {@code blocks} array.")
-    XrWorldMeshBlockRequestML.p("blocks", "an array of ##XrWorldMeshBlockRequestML.")
+    Expression("#TYPE_WORLD_MESH_GET_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrWorldMeshDetectorFlagsML("flags")
+    float("fillHoleLength")
+    float("disconnectedComponentArea")
+    AutoSize("blocks")..uint32_t("blockCount")
+    XrWorldMeshBlockRequestML.p("blocks")
 }
 
 val XrWorldMeshBlockML = struct(Module.OPENXR, "XrWorldMeshBlockML") {
-    documentation =
-        """
-        Block Vertex Data.
-
-        <h5>Description</h5>
-        {@code normalCount} <b>must</b> be equal to {@code vertexCount} if #WORLD_MESH_DETECTOR_COMPUTE_NORMALS_BIT_ML was specified during {@code XrWorldMeshDetectorML} creation, otherwise 0.
-
-        {@code confidenceCount} <b>must</b> be equal to {@code vertexCount} if #WORLD_MESH_DETECTOR_COMPUTE_CONFIDENCE_BIT_ML was specified during {@code XrWorldMeshDetectorML} creation, otherwise 0.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshBlockML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_BLOCK_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code blockResult} <b>must</b> be a valid {@code XrWorldMeshBlockResultML} value</li>
-            <li>{@code lod} <b>must</b> be a valid {@code XrWorldMeshDetectorLodML} value</li>
-            <li>{@code flags} <b>must</b> be a valid combination of {@code XrWorldMeshDetectorFlagBitsML} values</li>
-            <li>{@code flags} <b>must</b> not be 0</li>
-            <li>{@code indexBuffer} <b>must</b> be a pointer to an array of {@code indexCount} {@code uint16_t} values</li>
-            <li>{@code vertexBuffer} <b>must</b> be a pointer to an array of {@code vertexCount} ##XrVector3f structures</li>
-            <li>{@code normalBuffer} <b>must</b> be a pointer to an array of {@code normalCount} ##XrVector3f structures</li>
-            <li>{@code confidenceBuffer} <b>must</b> be a pointer to an array of {@code confidenceCount} {@code float} values</li>
-            <li>The {@code indexCount} parameter <b>must</b> be greater than 0</li>
-            <li>The {@code vertexCount} parameter <b>must</b> be greater than 0</li>
-            <li>The {@code normalCount} parameter <b>must</b> be greater than 0</li>
-            <li>The {@code confidenceCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuidEXT, ##XrVector3f, ##XrWorldMeshRequestCompletionML, #RequestWorldMeshCompleteML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_BLOCK_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrUuidEXT("uuid", "the ##XrUuidEXT of the mesh block")
-    XrWorldMeshBlockResultML("blockResult", "the {@code XrWorldMeshBlockResultML} of the mesh block.")
-    XrWorldMeshDetectorLodML("lod", "the {@code XrWorldMeshDetectorLodML} used to generated this mesh block.")
-    XrWorldMeshDetectorFlagsML("flags", "are the detector flags defined by {@code XrWorldMeshDetectorFlagBitsML}.")
-    AutoSize("indexBuffer")..uint32_t("indexCount", "the number of indices in the {@code indexBuffer}.")
-    uint16_t.p("indexBuffer", "the index buffer of type {@code uint16_t}. In the indexBuffer each value is the index of a vertex in the vertexBuffer. Three indices define one triangle. For example, the first triangle will have the vertices: {@code vertexBuffer[index[0]]}, {@code vertexBuffer[index[1]]}, {@code vertexBuffer[index[2]]}. Index order is defined by the #WORLD_MESH_DETECTOR_INDEX_ORDER_CW_BIT_ML flag.")
-    AutoSize("vertexBuffer")..uint32_t("vertexCount", "the number of vertices in the {@code vertexBuffer}.")
-    XrVector3f.p("vertexBuffer", "the vertex buffer of type ##XrVector3f. Vertex data will be provided in the ##XrWorldMeshStateRequestInfoML{@code ::baseSpace} at time ##XrWorldMeshBlockStateML{@code ::lastUpdateTime}.")
-    AutoSize("normalBuffer")..uint32_t("normalCount", "the number of normals in the {@code normalBuffer}.")
-    XrVector3f.p("normalBuffer", "the normal buffer of type ##XrVector3f.")
-    AutoSize("confidenceBuffer")..uint32_t("confidenceCount", "the number of confidence values in the {@code confidenceBuffer}.")
-    float.p("confidenceBuffer", "the confidence buffer of type {@code float} with range 0.0 - 1.0.")
+    Expression("#TYPE_WORLD_MESH_BLOCK_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrUuidEXT("uuid")
+    XrWorldMeshBlockResultML("blockResult")
+    XrWorldMeshDetectorLodML("lod")
+    XrWorldMeshDetectorFlagsML("flags")
+    AutoSize("indexBuffer")..uint32_t("indexCount")
+    uint16_t.p("indexBuffer")
+    AutoSize("vertexBuffer")..uint32_t("vertexCount")
+    XrVector3f.p("vertexBuffer")
+    AutoSize("normalBuffer")..uint32_t("normalCount")
+    XrVector3f.p("normalBuffer")
+    AutoSize("confidenceBuffer")..uint32_t("confidenceCount")
+    float.p("confidenceBuffer")
 }
 
 val XrWorldMeshRequestCompletionInfoML = struct(Module.OPENXR, "XrWorldMeshRequestCompletionInfoML") {
-    documentation =
-        """
-        Block Request Completion Info.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshRequestCompletionInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code meshSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #RequestWorldMeshCompleteML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrSpace("meshSpace", "the space used to express the vertex data in.")
-    XrTime("meshSpaceLocateTime", "the time used to locate the {@code meshSpace}.")
+    Expression("#TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrSpace("meshSpace")
+    XrTime("meshSpaceLocateTime")
 }
 
 val XrWorldMeshRequestCompletionML = struct(Module.OPENXR, "XrWorldMeshRequestCompletionML", parentStruct = XrFutureCompletionBaseHeaderEXT) {
-    documentation =
-        """
-        Block Request Completion.
-
-        <h5>Future Return Codes</h5>
-        {@code futureResult} values:
-
-        <dl>
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-successcodes">Success</a></dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#SESSION_LOSS_PENDING</li>
-            </ul></dd>
-
-            <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#fundamentals-errorcodes">Failure</a></dt>
-            <dd><ul>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_SESSION_LOST</li>
-                <li>#ERROR_OUT_OF_MEMORY</li>
-                <li>#ERROR_LIMIT_REACHED</li>
-            </ul></dd>
-        </dl>
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using ##XrWorldMeshRequestCompletionML</li>
-            <li>{@code type} <b>must</b> be #TYPE_WORLD_MESH_REQUEST_COMPLETION_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
-            <li>{@code blocks} <b>must</b> be a pointer to an array of {@code blockCount} ##XrWorldMeshBlockML structures</li>
-            <li>The {@code blockCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrWorldMeshBlockML, #RequestWorldMeshCompleteML()
-        """
-
-    Expression("#TYPE_WORLD_MESH_REQUEST_COMPLETION_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrResult("futureResult", "the {@code XrResult} of the asynchronous operation.")
-    AutoSize("blocks")..uint32_t("blockCount", "a {@code uint32_t} that <b>must</b> match ##XrWorldMeshGetInfoML::blockCount parameter.")
-    XrWorldMeshBlockML.p("blocks", "an array of ##XrWorldMeshBlockML structures containing the vertex data pointers.")
+    Expression("#TYPE_WORLD_MESH_REQUEST_COMPLETION_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrResult("futureResult")
+    AutoSize("blocks")..uint32_t("blockCount")
+    XrWorldMeshBlockML.p("blocks")
 }
 
 val XrSystemFacialExpressionPropertiesML = struct(Module.OPENXR, "XrSystemFacialExpressionPropertiesML", mutable = false) {
-    documentation =
-        """
-        System property for facial expression parsing.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of parsing facial blend shapes by extending the ##XrSystemProperties with ##XrSystemFacialExpressionPropertiesML structure when calling #GetSystemProperties().
-
-        If a runtime returns #FALSE for {@code supportsFacialExpression}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialExpressionClientML().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLFacialExpression XR_ML_facial_expression} extension <b>must</b> be enabled prior to using ##XrSystemFacialExpressionPropertiesML</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties, #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.").mutable()
-    XrBool32("supportsFacialExpression", "an {@code XrBool32}, indicating if current system is capable of parsing facial expressions enumerated in {@code XrFacialBlendShapeML}")
+    Expression("#TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsFacialExpression")
 }
 
 val XrFacialExpressionClientCreateInfoML = struct(Module.OPENXR, "XrFacialExpressionClientCreateInfoML") {
-    documentation =
-        """
-        Information to create a facial expression handle.
-
-        <h5>Description</h5>
-        Note that although the naming convention for {@code requestedCount} does not align with {@code requestedFacialBlendShapes}, they are coupled together.
-
-        The ##XrFacialExpressionClientCreateInfoML structure describes the information to create an {@code XrFacialExpressionClientML} handle.
-
-        An application specifies the blend shapes they want to query by creating an array of type {@code XrFacialBlendShapeML} and passing it to {@code requestedFacialBlendShapes} along with the corresponding {@code requestedCount}.
-
-        The application <b>can</b> also pass in {@code NULL} into {@code requestedFacialBlendShapes} to capture the entirety of {@code XrFacialBlendShapeML}. However, for performance reasons, it <b>may</b> be better to be explicit about what blend shapes to query for performance reasons since some blend shapes <b>may</b> be queried by the runtime at a greater frequency than other blend shapes.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLFacialExpression XR_ML_facial_expression} extension <b>must</b> be enabled prior to using ##XrFacialExpressionClientCreateInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>If {@code requestedCount} is not 0, {@code requestedFacialBlendShapes} <b>must</b> be a pointer to an array of {@code requestedCount} valid {@code XrFacialBlendShapeML} values</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateFacialExpressionClientML(), #DestroyFacialExpressionClientML()
-        """
-
-    Expression("#TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    AutoSize("requestedFacialBlendShapes", optional = true)..uint32_t("requestedCount", "the size of the {@code requestedFacialBlendShapes} array")
-    nullable..XrFacialBlendShapeML.const.p("requestedFacialBlendShapes", "a pointer to an application defined array containing the blend shapes for the runtime to target.")
+    Expression("#TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("requestedFacialBlendShapes", optional = true)..uint32_t("requestedCount")
+    nullable..XrFacialBlendShapeML.const.p("requestedFacialBlendShapes")
 }
 
 val XrFacialExpressionBlendShapeGetInfoML = struct(Module.OPENXR, "XrFacialExpressionBlendShapeGetInfoML") {
-    documentation =
-        """
-        Describes the information to obtain facial expression.
-
-        <h5>Description</h5>
-        The ##XrFacialExpressionBlendShapeGetInfoML structure specifies properties about blend shapes desired by an application. It <b>must</b> be passed into #GetFacialExpressionBlendShapePropertiesML() and is currently empty for future extensibility.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLFacialExpression XR_ML_facial_expression} extension <b>must</b> be enabled prior to using ##XrFacialExpressionBlendShapeGetInfoML</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #GetFacialExpressionBlendShapePropertiesML()
-        """
-
-    Expression("#TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
+    Expression("#TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrFacialExpressionBlendShapePropertiesML = struct(Module.OPENXR, "XrFacialExpressionBlendShapePropertiesML") {
-    documentation =
-        """
-        Contains information of a blend shape.
-
-        <h5>Description</h5>
-        ##XrFacialExpressionBlendShapePropertiesML structure holds the facial expression.
-
-        If {@code requestedFacialBlendShape} does not correspond to any {@code XrFacialBlendShapeML} passed into #CreateFacialExpressionClientML() then the #FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_VALID_BIT_ML and #FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_TRACKED_BIT_ML of {@code flags} <b>must</b> be unset. If the {@code requestedFacialBlendShape} is not available at sample time {@code time} then #FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_TRACKED_BIT_ML <b>must</b> be set to false.
-
-        The runtime <b>must</b> populate {@code weight} with the weight of the queried blend shape.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link MLFacialExpression XR_ML_facial_expression} extension <b>must</b> be enabled prior to using ##XrFacialExpressionBlendShapePropertiesML</li>
-            <li>{@code type} <b>must</b> be #TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code requestedFacialBlendShape} <b>must</b> be a valid {@code XrFacialBlendShapeML} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #CreateFacialExpressionClientML(), #GetFacialExpressionBlendShapePropertiesML()
-        """
-
-    Expression("#TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.")
-    XrFacialBlendShapeML("requestedFacialBlendShape", "the type of {@code XrFacialBlendShapeML} to query the runtime for.")
-    float("weight", "a {@code float} describing the weight of a facial expression’s blend shape.")
-    XrFacialExpressionBlendShapePropertiesFlagsML("flags", "an {@code XrFacialExpressionBlendShapePropertiesFlagsML} whose bits are specified in {@code XrFacialExpressionBlendShapePropertiesFlagBitsML}")
-    XrTime("time", "the {@code XrTime} that corresponds to the moment at which the {@code requestedFacialBlendShape} is captured.")
+    Expression("#TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML")..XrStructureType("type")
+    nullable..opaque_p("next")
+    XrFacialBlendShapeML("requestedFacialBlendShape")
+    float("weight")
+    XrFacialExpressionBlendShapePropertiesFlagsML("flags")
+    XrTime("time")
 }
 
 val XrColocationDiscoveryStartInfoMETA = struct(Module.OPENXR, "XrColocationDiscoveryStartInfoMETA") {
-    documentation =
-        """
-        start discovery information.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrColocationDiscoveryStartInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_COLOCATION_DISCOVERY_START_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #StartColocationDiscoveryMETA()
-        """
-
-    Expression("#TYPE_COLOCATION_DISCOVERY_START_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_COLOCATION_DISCOVERY_START_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrColocationDiscoveryStopInfoMETA = struct(Module.OPENXR, "XrColocationDiscoveryStopInfoMETA") {
-    documentation =
-        """
-        stop discovery information.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrColocationDiscoveryStopInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_COLOCATION_DISCOVERY_STOP_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #StopColocationDiscoveryMETA()
-        """
-
-    Expression("#TYPE_COLOCATION_DISCOVERY_STOP_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_COLOCATION_DISCOVERY_STOP_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrColocationAdvertisementStartInfoMETA = struct(Module.OPENXR, "XrColocationAdvertisementStartInfoMETA") {
-    documentation =
-        """
-        Information about start colocation visibility request.
-
-        <h5>Description</h5>
-        ##XrColocationAdvertisementStartInfoMETA is the input data for #StartColocationAdvertisementMETA(). Implicitly, while the application has an active advertisement, the runtime will retain a copy of the ##XrColocationAdvertisementStartInfoMETA submitted with #StartColocationAdvertisementMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrColocationAdvertisementStartInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} {@code uint8_t} values</li>
-            <li>The {@code bufferSize} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #StartColocationAdvertisementMETA()
-        """
-
-    Expression("#TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    AutoSize("buffer")..uint32_t("bufferSize", "the count of bytes used in the {@code buffer} array. If {@code bufferSize} is greater than #MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, then the runtime <b>must</b> return #ERROR_VALIDATION_FAILURE. The maximum supported count is #MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META.")
-    uint8_t.p("buffer", "a byte array which allows the application to define app buffer. It is the advertisement payload.")
+    Expression("#TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("buffer")..uint32_t("bufferSize")
+    uint8_t.p("buffer")
 }
 
 val XrColocationAdvertisementStopInfoMETA = struct(Module.OPENXR, "XrColocationAdvertisementStopInfoMETA") {
-    documentation =
-        """
-        Information about stop colocation advertisement request.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrColocationAdvertisementStopInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        #StopColocationAdvertisementMETA()
-        """
-
-    Expression("#TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
+    Expression("#TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
 }
 
 val XrEventDataStartColocationAdvertisementCompleteMETA = struct(Module.OPENXR, "XrEventDataStartColocationAdvertisementCompleteMETA") {
-    documentation =
-        """
-        Start colocation visibility complete event.
-
-        <h5>Description</h5>
-        This event conveys the results of the asynchronous operation started by #StopColocationAdvertisementMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrEventDataStartColocationAdvertisementCompleteMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrColocationAdvertisementStartInfoMETA, ##XrUuid, #StartColocationAdvertisementMETA()
-        """
-
-    Expression("#TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrAsyncRequestIdFB("advertisementRequestId", "an {@code XrAsyncRequestIdFB} that identifies which request this event is in response to. The runtime <b>must</b> ensure this value matches a {@code advertisementRequestId} returned during an #StartColocationAdvertisementMETA() call.")
-    XrResult("result", "an {@code XrResult} that specifies the request result. The valid {@code result} values are: #SUCCESS, #ERROR_RUNTIME_FAILURE, #COLOCATION_DISCOVERY_ALREADY_ADVERTISING_META, #ERROR_COLOCATION_DISCOVERY_NO_DISCOVERY_METHOD_META, and #ERROR_COLOCATION_DISCOVERY_NETWORK_FAILED_META. If the application already has an active colocation advertisement, the runtime <b>must</b> return #COLOCATION_DISCOVERY_ALREADY_ADVERTISING_META in this field.")
-    XrUuid("advertisementUuid", "an ##XrUuid which is discoverable by other physically colocated devices running the same application. The runtime <b>must</b> return a unique ##XrUuid which has not been returned in a previous ##XrEventDataStartColocationAdvertisementCompleteMETA event, if {@code result} is #SUCCESS.")
+    Expression("#TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAsyncRequestIdFB("advertisementRequestId")
+    XrResult("result")
+    XrUuid("advertisementUuid")
 }
 
 val XrEventDataStopColocationAdvertisementCompleteMETA = struct(Module.OPENXR, "XrEventDataStopColocationAdvertisementCompleteMETA") {
-    documentation =
-        """
-        Stop colocation advertisement complete event.
-
-        <h5>Description</h5>
-        This event conveys the results of the asynchronous operation started by #StopColocationAdvertisementMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrEventDataStopColocationAdvertisementCompleteMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_STOP_COLOCATION_ADVERTISEMENT_COMPLETE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrColocationAdvertisementStopInfoMETA
-        """
-
-    Expression("#TYPE_EVENT_DATA_STOP_COLOCATION_ADVERTISEMENT_COMPLETE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrAsyncRequestIdFB("requestId", "an {@code XrAsyncRequestIdFB} that identifies which request this event is in response to. The runtime <b>must</b> ensure this value matches a {@code requestId} returned during an #StopColocationAdvertisementMETA() call.")
-    XrResult("result", "an {@code XrResult} that specifies the request result. The valid {@code result} values are: #SUCCESS, #ERROR_RUNTIME_FAILURE, and #ERROR_COLOCATION_DISCOVERY_NETWORK_FAILED_META. If the application does not already have an active colocation advertisement, the runtime <b>must</b> return #SUCCESS.")
+    Expression("#TYPE_EVENT_DATA_STOP_COLOCATION_ADVERTISEMENT_COMPLETE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
 }
 
 val XrEventDataColocationAdvertisementCompleteMETA = struct(Module.OPENXR, "XrEventDataColocationAdvertisementCompleteMETA") {
-    documentation =
-        """
-        advertisement complete event.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> queue exactly one ##XrEventDataColocationAdvertisementCompleteMETA event whenever an active colocation advertisement is stopped. This includes if the colocation advertisement is stopped due to an application calling #StopColocationAdvertisementMETA(), or the runtime needs to stop the colocation advertisement for any reason. If the colocation advertisement is stopped due to an application calling #StopColocationAdvertisementMETA(), the runtime <b>must</b> queue the ##XrEventDataColocationAdvertisementCompleteMETA event before queuing the corresponding ##XrEventDataStopColocationAdvertisementCompleteMETA event. When the {@code XrSession} is destroyed, the runtime <b>must</b> stop all active advertisements started from the same {@code XrSession}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrEventDataColocationAdvertisementCompleteMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #StartColocationAdvertisementMETA(), #StopColocationAdvertisementMETA()
-        """
-
-    Expression("#TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrAsyncRequestIdFB("advertisementRequestId", "an {@code XrAsyncRequestIdFB} specifying the original start advertisement async request id. The runtime <b>must</b> return a value which matches a previously returned {@code advertisementRequestId} value from an #StartColocationAdvertisementMETA() request.")
-    XrResult("result", "an {@code XrResult} representing the advertisement process result. The valid {@code result} values are: #SUCCESS, #ERROR_RUNTIME_FAILURE, and #ERROR_COLOCATION_DISCOVERY_NO_DISCOVERY_METHOD_META.")
+    Expression("#TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAsyncRequestIdFB("advertisementRequestId")
+    XrResult("result")
 }
 
 val XrEventDataStartColocationDiscoveryCompleteMETA = struct(Module.OPENXR, "XrEventDataStartColocationDiscoveryCompleteMETA") {
-    documentation =
-        """
-        Colocation discovery start complete event.
-
-        <h5>Description</h5>
-        This event conveys the results of the asynchronous operation started by #StartColocationDiscoveryMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrEventDataStartColocationDiscoveryCompleteMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_START_COLOCATION_DISCOVERY_COMPLETE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #StartColocationDiscoveryMETA()
-        """
-
-    Expression("#TYPE_EVENT_DATA_START_COLOCATION_DISCOVERY_COMPLETE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrAsyncRequestIdFB("discoveryRequestId", "an {@code XrAsyncRequestIdFB} specifying the original start discovery async request id. The runtime <b>must</b> return a value which matches a previously returned {@code discoveryRequestId} value from an #StartColocationDiscoveryMETA() request.")
-    XrResult("result", "an {@code XrResult} representing the discovery process result. The valid {@code result} values are: #SUCCESS, #ERROR_RUNTIME_FAILURE, #ERROR_COLOCATION_DISCOVERY_NETWORK_FAILED_META, #ERROR_COLOCATION_DISCOVERY_NO_DISCOVERY_METHOD_META, and #COLOCATION_DISCOVERY_ALREADY_DISCOVERING_META. If the application already has an active colocation discovery, the runtime <b>must</b> return #COLOCATION_DISCOVERY_ALREADY_DISCOVERING_META in ##XrEventDataStartColocationDiscoveryCompleteMETA{@code ::result}.")
+    Expression("#TYPE_EVENT_DATA_START_COLOCATION_DISCOVERY_COMPLETE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAsyncRequestIdFB("discoveryRequestId")
+    XrResult("result")
 }
 
 val XrEventDataColocationDiscoveryResultMETA = struct(Module.OPENXR, "XrEventDataColocationDiscoveryResultMETA") {
     javaImport("static org.lwjgl.openxr.METAColocationDiscovery.*")
-    documentation =
-        """
-        Colocation discovery result.
-
-        <h5>Description</h5>
-        {@code advertisementUuid} and {@code buffer} are both considered the payload of colocated advertisements. The value of {@code advertisementUuid} matches the value returned in ##XrEventDataStartColocationAdvertisementCompleteMETA{@code ::advertisementUuid} on the advertising device.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrEventDataColocationDiscoveryResultMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>Any given element of {@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} {@code uint8_t} values</li>
-            <li>The {@code bufferSize} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuid, #StartColocationDiscoveryMETA()
-        """
-
-    Expression("#TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrAsyncRequestIdFB("discoveryRequestId", "an {@code XrAsyncRequestIdFB} specifying the original start discovery async request id. The runtime <b>must</b> return a value which matches a previously returned {@code discoveryRequestId} value from an #StartColocationDiscoveryMETA() request.")
-    XrUuid("advertisementUuid", "an ##XrUuid of the discovered colocated application.")
-    AutoSize("buffer")..uint32_t("bufferSize", "the count of bytes used in the {@code buffer} array.")
-    uint8_t("buffer", "a byte array which is the application <b>may</b> set when the application starts the advertisement.")["XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META"]
+    Expression("#TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAsyncRequestIdFB("discoveryRequestId")
+    XrUuid("advertisementUuid")
+    AutoSize("buffer")..uint32_t("bufferSize")
+    uint8_t("buffer")["XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META"]
 }
 
 val XrEventDataColocationDiscoveryCompleteMETA = struct(Module.OPENXR, "XrEventDataColocationDiscoveryCompleteMETA") {
-    documentation =
-        """
-        discovery complete event.
-
-        <h5>Description</h5>
-        The runtime <b>must</b> queue exactly one ##XrEventDataColocationDiscoveryCompleteMETA event whenever an active colocation discovery is stopped. This includes if the colocation discovery is stopped due to an application calling #StopColocationDiscoveryMETA(), or the runtime needs to stop the colocation discovery for any reason. When the {@code XrSession} is destroyed, the runtime <b>must</b> stop all active advertisements started from the same {@code XrSession}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrEventDataColocationDiscoveryCompleteMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_COLOCATION_DISCOVERY_COMPLETE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #StartColocationDiscoveryMETA(), #StopColocationDiscoveryMETA()
-        """
-
-    Expression("#TYPE_EVENT_DATA_COLOCATION_DISCOVERY_COMPLETE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrAsyncRequestIdFB("discoveryRequestId", "an {@code XrAsyncRequestIdFB} specifying the original start discovery async request id. The runtime <b>must</b> return a value which matches a previously returned {@code discoveryRequestId} value from an #StartColocationDiscoveryMETA() request.")
-    XrResult("result", "an {@code XrResult} representing the discovery process result. The valid {@code result} values are: #SUCCESS, #ERROR_RUNTIME_FAILURE, and #ERROR_COLOCATION_DISCOVERY_NO_DISCOVERY_METHOD_META.")
+    Expression("#TYPE_EVENT_DATA_COLOCATION_DISCOVERY_COMPLETE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAsyncRequestIdFB("discoveryRequestId")
+    XrResult("result")
 }
 
 val XrEventDataStopColocationDiscoveryCompleteMETA = struct(Module.OPENXR, "XrEventDataStopColocationDiscoveryCompleteMETA") {
-    documentation =
-        """
-        Colocation discovery stop complete event.
-
-        <h5>Description</h5>
-        This event conveys the results of the asynchronous operation started by #StopColocationDiscoveryMETA().
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrEventDataStopColocationDiscoveryCompleteMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
-        </ul>
-
-        <h5>See Also</h5>
-        #StopColocationDiscoveryMETA()
-        """
-
-    Expression("#TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    XrAsyncRequestIdFB("requestId", "an {@code XrAsyncRequestIdFB} that identifies which request this event is in response to. The runtime <b>must</b> ensure this value matches a {@code requestId} returned during an #StopColocationDiscoveryMETA() call.")
-    XrResult("result", "an {@code XrResult} representing the discovery process result. The valid {@code result} values are: #SUCCESS and #ERROR_RUNTIME_FAILURE. If the application does not already have an active colocation discovery, the runtime <b>must</b> return #SUCCESS.")
+    Expression("#TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrAsyncRequestIdFB("requestId")
+    XrResult("result")
 }
 
 val XrSystemColocationDiscoveryPropertiesMETA = struct(Module.OPENXR, "XrSystemColocationDiscoveryPropertiesMETA", mutable = false) {
-    documentation =
-        """
-        Colocation discovery system properties.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of colocation advertisement and discovery by extending the ##XrSystemProperties with ##XrSystemColocationDiscoveryPropertiesMETA structure when calling #GetSystemProperties().
-
-        If a runtime returns #FALSE for {@code supportsColocationDiscovery}, the runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED for all functions in the {@link METAColocationDiscovery XR_META_colocation_discovery} extension.
-
-        Colocation advertisement controls whether a device is discoverable using colocation discovery, so the term "colocation discovery" on its own is used here to refer to the combined capability of colocation advertisement and colocation discovery.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using ##XrSystemColocationDiscoveryPropertiesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-        """
-
-    Expression("#TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrBool32("supportsColocationDiscovery", "an {@code XrBool32} specifying if colocation discovery (and relatedly, colocation advertisement) is supported.")
+    Expression("#TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsColocationDiscovery")
 }
 
 val XrSystemSpatialEntityGroupSharingPropertiesMETA = struct(Module.OPENXR, "XrSystemSpatialEntityGroupSharingPropertiesMETA", mutable = false) {
-    documentation =
-        """
-        Group sharing system properties.
-
-        <h5>Description</h5>
-        An application <b>can</b> inspect whether the system is capable of group based sharing by extending the ##XrSystemProperties with ##XrSystemSpatialEntityGroupSharingPropertiesMETA structure when calling #GetSystemProperties().
-
-        In order to use ##XrShareSpacesRecipientGroupsMETA with #ShareSpacesMETA(), the system <b>must</b> also support {@link METASpatialEntitySharing XR_META_spatial_entity_sharing}. Please see {@link METASpatialEntitySharing XR_META_spatial_entity_sharing}’s section for how to check if {@link METASpatialEntitySharing XR_META_spatial_entity_sharing} is supported.
-
-        In order to use ##XrSpaceGroupUuidFilterInfoMETA with #QuerySpacesFB(), the system <b>must</b> also support {@link FBSpatialEntityQuery XR_FB_spatial_entity_query}. Please see {@link FBSpatialEntityQuery XR_FB_spatial_entity_query}’s section for how to check if {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} is supported.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METASpatialEntityGroupSharing XR_META_spatial_entity_group_sharing} extension <b>must</b> be enabled prior to using ##XrSystemSpatialEntityGroupSharingPropertiesMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SYSTEM_SPATIAL_ENTITY_GROUP_SHARING_PROPERTIES_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSystemProperties, #GetSystemProperties()
-        """
-
-    Expression("#TYPE_SYSTEM_SPATIAL_ENTITY_GROUP_SHARING_PROPERTIES_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.").mutable()
-    nullable..opaque_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.").mutable()
-    XrBool32("supportsSpatialEntityGroupSharing", "an {@code XrBool32} specifying if group sharing is supported.")
+    Expression("#TYPE_SYSTEM_SPATIAL_ENTITY_GROUP_SHARING_PROPERTIES_META")..XrStructureType("type").mutable()
+    nullable..opaque_p("next").mutable()
+    XrBool32("supportsSpatialEntityGroupSharing")
 }
 
 val XrShareSpacesRecipientGroupsMETA = struct(Module.OPENXR, "XrShareSpacesRecipientGroupsMETA", parentStruct = XrShareSpacesRecipientBaseHeaderMETA) {
-    documentation =
-        """
-        Information about the share spaces recipient.
-
-        <h5>Description</h5>
-        ##XrShareSpacesRecipientGroupsMETA implements the ##XrShareSpacesRecipientBaseHeaderMETA base type. Where #ShareSpacesMETA() specifies that a valid structure based on ##XrShareSpacesRecipientBaseHeaderMETA is to be passed, a valid ##XrShareSpacesRecipientGroupsMETA structure <b>may</b> be passed.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METASpatialEntityGroupSharing XR_META_spatial_entity_group_sharing} extension <b>must</b> be enabled prior to using ##XrShareSpacesRecipientGroupsMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-            <li>{@code groups} <b>must</b> be a pointer to an array of {@code groupCount} ##XrUuid structures</li>
-            <li>The {@code groupCount} parameter <b>must</b> be greater than 0</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrUuid
-        """
-
-    Expression("#TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.")
-    AutoSize("groups")..uint32_t("groupCount", "the number of elements in the {@code groups} list. The maximum supported count in a single request is 16.")
-    XrUuid.p("groups", "a list of ##XrUuid defined by the application, which the spaces will be shared with.")
+    Expression("#TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    AutoSize("groups")..uint32_t("groupCount")
+    XrUuid.p("groups")
 }
 
 val XrSpaceGroupUuidFilterInfoMETA = struct(Module.OPENXR, "XrSpaceGroupUuidFilterInfoMETA") {
-    documentation =
-        """
-        Filters for entities with specific unique identifiers.
-
-        <h5>Description</h5>
-        This structure is a space query filter for use with query functions introduced in the {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension.
-
-        To query spaces shared with a group, the application <b>can</b> include the ##XrSpaceGroupUuidFilterInfoMETA filter in the query filters when calling #QuerySpacesFB().
-
-        If ##XrSpaceGroupUuidFilterInfoMETA is passed into #QuerySpacesFB() and the group UUID is not found by the runtime, the runtime <b>must</b> return an #ERROR_SPACE_GROUP_NOT_FOUND_META as the ##XrEventDataSpaceQueryCompleteFB{@code ::result}.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link METASpatialEntityGroupSharing XR_META_spatial_entity_group_sharing} extension <b>must</b> be enabled prior to using ##XrSpaceGroupUuidFilterInfoMETA</li>
-            <li>{@code type} <b>must</b> be #TYPE_SPACE_GROUP_UUID_FILTER_INFO_META</li>
-            <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html\#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrSpaceFilterInfoBaseHeaderFB, ##XrSpaceQueryInfoFB, ##XrUuid
-        """
-
-    Expression("#TYPE_SPACE_GROUP_UUID_FILTER_INFO_META")..XrStructureType("type", "the {@code XrStructureType} of this structure.")
-    nullable..opaque_const_p("next", "{@code NULL} or a pointer to the next structure in a structure chain.")
-    XrUuid("groupUuid", "an ##XrUuid specifying which group UUID that the application wants to query for spaces shared within.")
+    Expression("#TYPE_SPACE_GROUP_UUID_FILTER_INFO_META")..XrStructureType("type")
+    nullable..opaque_const_p("next")
+    XrUuid("groupUuid")
 }
 
 val XrColor3fKHR = struct(Module.OPENXR, "XrColor3fKHR", alias = XrColor3f) {
-    documentation = "See ##XrColor3f."
-
-    float("r", "")
-    float("g", "")
-    float("b", "")
+    float("r")
+    float("g")
+    float("b")
 }
 
 val XrExtent3DfKHR = struct(Module.OPENXR, "XrExtent3DfKHR", alias = XrExtent3Df) {
-    documentation = "See ##XrExtent3Df."
-
-    float("width", "")
-    float("height", "")
-    float("depth", "")
+    float("width")
+    float("height")
+    float("depth")
 }
 
 val XrSpherefKHR = struct(Module.OPENXR, "XrSpherefKHR", alias = XrSpheref) {
-    documentation = "See ##XrSpheref."
-
-    XrPosef("center", "")
-    float("radius", "")
+    XrPosef("center")
+    float("radius")
 }
 
 val XrBoxfKHR = struct(Module.OPENXR, "XrBoxfKHR", alias = XrBoxf) {
-    documentation = "See ##XrBoxf."
-
-    XrPosef("center", "")
-    XrExtent3Df("extents", "")
+    XrPosef("center")
+    XrExtent3Df("extents")
 }
 
 val XrFrustumfKHR = struct(Module.OPENXR, "XrFrustumfKHR", alias = XrFrustumf) {
-    documentation = "See ##XrFrustumf."
-
-    XrPosef("pose", "")
-    XrFovf("fov", "")
-    float("nearZ", "")
-    float("farZ", "")
+    XrPosef("pose")
+    XrFovf("fov")
+    float("nearZ")
+    float("farZ")
 }

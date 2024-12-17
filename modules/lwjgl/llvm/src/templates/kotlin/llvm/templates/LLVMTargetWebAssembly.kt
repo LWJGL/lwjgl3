@@ -13,12 +13,10 @@ val LLVMTargetWebAssembly = "LLVMTargetWebAssembly".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
-    documentation = ""
-
-    void("InitializeWebAssemblyTargetInfo",   "", void())
-    void("InitializeWebAssemblyTarget",       "", void())
-    void("InitializeWebAssemblyTargetMC",     "", void())
-    void("InitializeWebAssemblyAsmPrinter",   "", void())
-    void("InitializeWebAssemblyAsmParser",    "", void())
-    void("InitializeWebAssemblyDisassembler", "", void())
+    void("InitializeWebAssemblyTargetInfo",   void())
+    void("InitializeWebAssemblyTarget",       void())
+    void("InitializeWebAssemblyTargetMC",     void())
+    void("InitializeWebAssemblyAsmPrinter",   void())
+    void("InitializeWebAssemblyAsmParser",    void())
+    void("InitializeWebAssemblyDisassembler", void())
 }

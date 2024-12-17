@@ -35,15 +35,14 @@ val ALcharUTF8 = CharType("ALchar", CharMapping.UTF8)
 val ALDEBUGPROCEXT = Module.OPENAL.callback {
     void(
         "EXTDebugProc",
-        "",
 
-        ALenum("source", ""),
-        ALenum("type", ""),
-        ALuint("id", ""),
-        ALenum("severity", ""),
-        AutoSize("message")..ALsizei("length", ""),
-        ALcharUTF8.const.p("message", ""),
-        nullable.."ALvoid".opaque.p("userParam", ""),
+        ALenum("source"),
+        ALenum("type"),
+        ALuint("id"),
+        ALenum("severity"),
+        AutoSize("message")..ALsizei("length"),
+        ALcharUTF8.const.p("message"),
+        nullable.."ALvoid".opaque.p("userParam"),
 
         nativeType = "ALDEBUGPROCEXT"
     )
@@ -54,25 +53,11 @@ val ALDEBUGPROCEXT = Module.OPENAL.callback {
 val ALBUFFERCALLBACKTYPESOFT = Module.OPENAL.callback {
     ALsizei(
         "SOFTCallbackBufferType",
-        "",
 
-        nullable.."ALvoid".opaque.p("userptr", "the same pointer provided to #BufferCallbackSOFT()"),
-        ALvoid.p("sampledata", "a pointer to the sample data buffer that should be filled in by the function"),
-        AutoSize("sampledata")..ALsizei(
-            "numbytes",
-            """
-            the number of bytes needed to fill the sample data buffer for this invocation.
+        nullable.."ALvoid".opaque.p("userptr"),
+        ALvoid.p("sampledata"),
+        AutoSize("sampledata")..ALsizei("numbytes"),
 
-            Guaranteed to be greater than 0 and a multiple of the frame size for the format.
-            """
-        ),
-
-        returnDoc =
-        """
-        the number of bytes actually written, which must be equal to or less than {@code numbytes}.
-
-        If the return value is less than {@code numbytes}, it's treated as the end of the buffer and the source will play any complete samples before stopping.
-        """,
         nativeType = "ALBUFFERCALLBACKTYPESOFT"
     )
 }
@@ -82,14 +67,13 @@ val ALBUFFERCALLBACKTYPESOFT = Module.OPENAL.callback {
 val ALEVENTPROCSOFT = Module.OPENAL.callback {
     void(
         "SOFTEventProc",
-        "",
 
-        ALenum("eventType", ""),
-        ALuint("object", ""),
-        ALuint("param", ""),
-        AutoSize("message")..ALsizei("length", ""),
-        ALcharASCII.const.p("message", ""),
-        nullable.."ALvoid".opaque.p("userParam", ""),
+        ALenum("eventType"),
+        ALuint("object"),
+        ALuint("param"),
+        AutoSize("message")..ALsizei("length"),
+        ALcharASCII.const.p("message"),
+        nullable.."ALvoid".opaque.p("userParam"),
 
         nativeType = "ALEVENTPROCSOFT"
     )

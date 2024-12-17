@@ -9,79 +9,15 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val EXT_shader_atomic_float = "EXTShaderAtomicFloat".nativeClassVK("EXT_shader_atomic_float", type = "device", postfix = "EXT") {
-    documentation =
-        """
-        This extension allows a shader to contain floating-point atomic operations on buffer, workgroup, and image memory. It also advertises the SPIR-V {@code AtomicFloat32AddEXT} and {@code AtomicFloat64AddEXT} capabilities that allows atomic addition on floating-points numbers. The supported operations include {@code OpAtomicFAddEXT}, {@code OpAtomicExchange}, {@code OpAtomicLoad} and {@code OpAtomicStore}.
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_EXT_shader_atomic_float}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>261</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
-
-            <dt><b>API Interactions</b></dt>
-            <dd><ul>
-                <li>Interacts with VkPhysicalDeviceShaderAtomicFloatFeaturesEXT::sparseImageFloat32AtomicAdd</li>
-                <li>Interacts with VkPhysicalDeviceShaderAtomicFloatFeaturesEXT::sparseImageFloat32Atomics</li>
-            </ul></dd>
-
-            <dt><b>SPIR-V Dependencies</b></dt>
-            <dd><ul>
-                <li><a href="https://htmlpreview.github.io/?https://github.com/KhronosGroup/SPIRV-Registry/blob/master/extensions/EXT/SPV_EXT_shader_atomic_float_add.html">SPV_EXT_shader_atomic_float_add</a></li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Vikram Kushwaha <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_shader_atomic_float]%20@vkushwaha-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_shader_atomic_float%20extension*">vkushwaha-nv</a></li>
-            </ul></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2020-07-15</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Interactions and External Dependencies</b></dt>
-            <dd><ul>
-                <li>This extension provides API support for <a href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GLSL_EXT_shader_atomic_float.txt">{@code GL_EXT_shader_atomic_float}</a></li>
-            </ul></dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Vikram Kushwaha, NVIDIA</li>
-                <li>Jeff Bolz, NVIDIA</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "EXT_SHADER_ATOMIC_FLOAT_SPEC_VERSION".."1"
     )
 
     StringConstant(
-        "The extension name.",
-
         "EXT_SHADER_ATOMIC_FLOAT_EXTENSION_NAME".."VK_EXT_shader_atomic_float"
     )
 
     EnumConstant(
-        "Extends {@code VkStructureType}.",
-
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT".."1000260000"
     )
 }

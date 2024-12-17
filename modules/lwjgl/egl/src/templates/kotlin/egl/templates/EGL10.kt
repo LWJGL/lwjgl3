@@ -8,12 +8,7 @@ import egl.*
 import org.lwjgl.generator.*
 
 val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
-    documentation =
-        "The core EGL 1.0 functionality."
-
     IntConstant(
-        "",
-
         "ALPHA_SIZE"..0x3021,
         "BAD_ACCESS"..0x3002,
         "BAD_ALLOC"..0x3003,
@@ -73,8 +68,6 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
     )
 
     LongConstant(
-        "Null values.",
-
         "NO_CONTEXT"..0L,
         "NO_DISPLAY"..0L,
         "NO_SURFACE"..0L
@@ -82,192 +75,171 @@ val EGL10 = "EGL10".nativeClassEGL("EGL10", postfix = "") {
 
     EGLBoolean(
         "ChooseConfig",
-        "",
 
-        EGLDisplay("dpy", ""),
-        nullable..noneTerminated..EGLint.const.p("attrib_list", ""),
-        nullable..EGLConfig.p("configs", ""),
-        AutoSize("configs")..EGLint("config_size", ""),
-        Check(1)..EGLint.p("num_config", "")
+        EGLDisplay("dpy"),
+        nullable..noneTerminated..EGLint.const.p("attrib_list"),
+        nullable..EGLConfig.p("configs"),
+        AutoSize("configs")..EGLint("config_size"),
+        Check(1)..EGLint.p("num_config")
     )
 
     EGLBoolean(
         "CopyBuffers",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", ""),
-        EGLNativePixmapType("target", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface"),
+        EGLNativePixmapType("target")
     )
 
     EGLContext(
         "CreateContext",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLConfig("config", ""),
-        nullable..EGLContext("share_context", ""),
-        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLConfig("config"),
+        nullable..EGLContext("share_context"),
+        nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 
     EGLSurface(
         "CreatePbufferSurface",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLConfig("config", ""),
-        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLConfig("config"),
+        nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 
     EGLSurface(
         "CreatePixmapSurface",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLConfig("config", ""),
-        EGLNativePixmapType("pixmap", ""),
-        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLConfig("config"),
+        EGLNativePixmapType("pixmap"),
+        nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 
     EGLSurface(
         "CreateWindowSurface",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLConfig("config", ""),
-        EGLNativeWindowType("win", ""),
-        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLConfig("config"),
+        EGLNativeWindowType("win"),
+        nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 
     EGLBoolean(
         "DestroyContext",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLContext("ctx", "")
+        EGLDisplay("dpy"),
+        EGLContext("ctx")
     )
 
     EGLBoolean(
         "DestroySurface",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface")
     )
 
     EGLBoolean(
         "GetConfigAttrib",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLConfig("config", ""),
-        EGLint("attribute", ""),
-        Check(1)..EGLint.p("value", "")
+        EGLDisplay("dpy"),
+        EGLConfig("config"),
+        EGLint("attribute"),
+        Check(1)..EGLint.p("value")
     )
 
     EGLBoolean(
         "GetConfigs",
-        "",
 
-        EGLDisplay("dpy", ""),
-        nullable..EGLConfig.p("configs", ""),
-        AutoSize("configs")..EGLint("config_size", ""),
-        Check(1)..EGLint.p("num_config", "")
+        EGLDisplay("dpy"),
+        nullable..EGLConfig.p("configs"),
+        AutoSize("configs")..EGLint("config_size"),
+        Check(1)..EGLint.p("num_config")
     )
 
-    EGLDisplay("GetCurrentDisplay", "", void())
+    EGLDisplay("GetCurrentDisplay", void())
 
     EGLSurface(
         "GetCurrentSurface",
-        "",
 
-        EGLint("readdraw", "")
+        EGLint("readdraw")
     )
 
     EGLDisplay(
         "GetDisplay",
-        "",
 
-        nullable..EGLNativeDisplayType("display_id", "")
+        nullable..EGLNativeDisplayType("display_id")
     )
 
-    EGLint("GetError", "", void())
+    EGLint("GetError", void())
 
     __eglMustCastToProperFunctionPointerType(
         "GetProcAddress",
-        "",
 
-        charASCII.const.p("procname", "")
+        charASCII.const.p("procname")
     )
 
     EGLBoolean(
         "Initialize",
-        "",
 
-        EGLDisplay("dpy", ""),
-        nullable..Check(1)..EGLint.p("major", ""),
-        nullable..Check(1)..EGLint.p("minor", "")
+        EGLDisplay("dpy"),
+        nullable..Check(1)..EGLint.p("major"),
+        nullable..Check(1)..EGLint.p("minor")
     )
 
     EGLBoolean(
         "MakeCurrent",
-        "",
 
-        EGLDisplay("dpy", ""),
-        nullable..EGLSurface("draw", ""),
-        nullable..EGLSurface("read", ""),
-        nullable..EGLContext("ctx", "")
+        EGLDisplay("dpy"),
+        nullable..EGLSurface("draw"),
+        nullable..EGLSurface("read"),
+        nullable..EGLContext("ctx")
     )
 
     EGLBoolean(
         "QueryContext",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLContext("ctx", ""),
-        EGLint("attribute", ""),
-        Check(1)..EGLint.p("value", "")
+        EGLDisplay("dpy"),
+        EGLContext("ctx"),
+        EGLint("attribute"),
+        Check(1)..EGLint.p("value")
     )
 
     charASCII.p(
         "QueryString",
-        "",
 
-        nullable..EGLDisplay("dpy", ""),
-        EGLint("name", "")
+        nullable..EGLDisplay("dpy"),
+        EGLint("name")
     )
 
     EGLBoolean(
         "QuerySurface",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", ""),
-        EGLint("attribute", ""),
-        Check(1)..EGLint.p("value", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface"),
+        EGLint("attribute"),
+        Check(1)..EGLint.p("value")
     )
 
     EGLBoolean(
         "SwapBuffers",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface")
     )
 
     EGLBoolean(
         "Terminate",
-        "",
 
-        EGLDisplay("dpy", "")
+        EGLDisplay("dpy")
     )
 
-    EGLBoolean("WaitGL", "", void())
+    EGLBoolean("WaitGL", void())
 
     EGLBoolean(
         "WaitNative",
-        "",
 
-        EGLint("engine", "")
+        EGLint("engine")
     )
 }

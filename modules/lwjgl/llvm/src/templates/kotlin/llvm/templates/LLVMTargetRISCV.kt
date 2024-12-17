@@ -13,14 +13,12 @@ val LLVMTargetRISCV = "LLVMTargetRISCV".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
-    documentation = ""
-
-    void("InitializeRISCVTargetInfo",   "", void())
-    void("InitializeRISCVTarget",       "", void())
-    void("InitializeRISCVTargetMC",     "", void())
+    void("InitializeRISCVTargetInfo",   void())
+    void("InitializeRISCVTarget",       void())
+    void("InitializeRISCVTargetMC",     void())
     IgnoreMissing..
-    void("InitializeRISCVTargetMCA",    "", void())
-    void("InitializeRISCVAsmPrinter",   "", void())
-    void("InitializeRISCVAsmParser",    "", void())
-    void("InitializeRISCVDisassembler", "", void())
+    void("InitializeRISCVTargetMCA",    void())
+    void("InitializeRISCVAsmPrinter",   void())
+    void("InitializeRISCVAsmParser",    void())
+    void("InitializeRISCVDisassembler", void())
 }

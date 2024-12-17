@@ -9,68 +9,15 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val EXT_primitive_topology_list_restart = "EXTPrimitiveTopologyListRestart".nativeClassVK("EXT_primitive_topology_list_restart", type = "device", postfix = "EXT") {
-    documentation =
-        """
-        This extension allows list primitives to use the primitive restart index value. This provides a more efficient implementation when layering OpenGL functionality on Vulkan by avoiding emulation which incurs data copies.
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_EXT_primitive_topology_list_restart}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>357</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
-
-            <dt><b>Special Use</b></dt>
-            <dd><ul>
-                <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#extendingvulkan-compatibility-specialuse">OpenGL / ES support</a></li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Shahbaz Youssefi <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_primitive_topology_list_restart]%20@syoussefi%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_primitive_topology_list_restart%20extension*">syoussefi</a></li>
-            </ul></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2021-01-11</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Courtney Goeltzenleuchter, Google</li>
-                <li>Shahbaz Youssefi, Google</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_SPEC_VERSION".."1"
     )
 
     StringConstant(
-        "The extension name.",
-
         "EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION_NAME".."VK_EXT_primitive_topology_list_restart"
     )
 
     EnumConstant(
-        "Extends {@code VkStructureType}.",
-
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT".."1000356000"
     )
 }

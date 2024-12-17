@@ -8,29 +8,16 @@ import egl.*
 import org.lwjgl.generator.*
 
 val KHR_stream_producer_eglsurface = "KHRStreamProducerEGLSurface".nativeClassEGL("KHR_stream_producer_eglsurface", postfix = KHR) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension allows an EGLSurface to be created as a producer of images to an EGLStream. Each call to eglSwapBuffers posts a new image frame into the
-        EGLStream.
-
-        Requires ${EGL12.core}.
-        """
-
     IntConstant(
-        "",
-
         "STREAM_BIT_KHR"..0x0800
     )
 
     EGLSurface(
         "CreateStreamProducerSurfaceKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLConfig("config", ""),
-        EGLStreamKHR("stream", ""),
-        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLConfig("config"),
+        EGLStreamKHR("stream"),
+        nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 }

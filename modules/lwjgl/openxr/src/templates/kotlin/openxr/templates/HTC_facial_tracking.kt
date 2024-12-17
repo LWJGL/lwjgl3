@@ -9,42 +9,25 @@ import org.lwjgl.generator.*
 import openxr.*
 
 val HTC_facial_tracking = "HTCFacialTracking".nativeClassXR("HTC_facial_tracking", type = "instance", postfix = "HTC") {
-    documentation =
-        """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_HTC_facial_tracking">XR_HTC_facial_tracking</a> extension.
-
-        This extension allows an application to track and integrate users' eye and lip movements, empowering developers to read intention and model facial expressions.
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "HTC_facial_tracking_SPEC_VERSION".."3"
     )
 
     StringConstant(
-        "The extension name.",
-
         "HTC_FACIAL_TRACKING_EXTENSION_NAME".."XR_HTC_facial_tracking"
     )
 
     EnumConstant(
-        "Extends {@code XrObjectType}.",
-
         "OBJECT_TYPE_FACIAL_TRACKER_HTC".."1000104000"
     )
 
     EnumConstant(
-        "Extends {@code XrStructureType}.",
-
         "TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC".."1000104000",
         "TYPE_FACIAL_TRACKER_CREATE_INFO_HTC".."1000104001",
         "TYPE_FACIAL_EXPRESSIONS_HTC".."1000104002"
     )
 
     EnumConstant(
-        "Extends {@code XrLipExpressionHTC}.",
-
         "LIP_EXPRESSION_MOUTH_SMILE_RIGHT_HTC".."12",
         "LIP_EXPRESSION_MOUTH_SMILE_LEFT_HTC".."13",
         "LIP_EXPRESSION_MOUTH_SAD_RIGHT_HTC".."14",
@@ -52,10 +35,6 @@ val HTC_facial_tracking = "HTCFacialTracking".nativeClassXR("HTC_facial_tracking
     )
 
     EnumConstant(
-        """
-        XrEyeExpressionHTC - The blend shapes of eye expression
-        """,
-
         "EYE_EXPRESSION_LEFT_BLINK_HTC".."0",
         "EYE_EXPRESSION_LEFT_WIDE_HTC".."1",
         "EYE_EXPRESSION_RIGHT_BLINK_HTC".."2",
@@ -73,10 +52,6 @@ val HTC_facial_tracking = "HTCFacialTracking".nativeClassXR("HTC_facial_tracking
     )
 
     EnumConstant(
-        """
-        XrLipExpressionHTC - The blend shapes of lip expression
-        """,
-
         "LIP_EXPRESSION_JAW_RIGHT_HTC".."0",
         "LIP_EXPRESSION_JAW_LEFT_HTC".."1",
         "LIP_EXPRESSION_JAW_FORWARD_HTC".."2",
@@ -117,171 +92,28 @@ val HTC_facial_tracking = "HTCFacialTracking".nativeClassXR("HTC_facial_tracking
     )
 
     EnumConstant(
-        """
-        XrFacialTrackingTypeHTC - Describes the type of facial tracking.
-
-        <h5>Enumerant Descriptions</h5>
-        <ul>
-            <li>#FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC — Specifies this handle will observe eye expressions, with values indexed by {@code XrEyeExpressionHTC} whose count is #FACIAL_EXPRESSION_EYE_COUNT_HTC.</li>
-            <li>#FACIAL_TRACKING_TYPE_LIP_DEFAULT_HTC — Specifies this handle will observe lip expressions, with values indexed by {@code XrLipExpressionHTC} whose count is #FACIAL_EXPRESSION_LIP_COUNT_HTC.</li>
-        </ul>
-
-        <h5>See Also</h5>
-        ##XrFacialTrackerCreateInfoHTC
-        """,
-
         "FACIAL_TRACKING_TYPE_EYE_DEFAULT_HTC".."1",
         "FACIAL_TRACKING_TYPE_LIP_DEFAULT_HTC".."2"
     )
 
     XrResult(
         "CreateFacialTrackerHTC",
-        """
-        Create an facial tracker handle.
 
-        <h5>C Specification</h5>
-        The #CreateFacialTrackerHTC() function is defined as
-
-        <pre><code>
-￿XrResult xrCreateFacialTrackerHTC(
-￿    XrSession                                   session,
-￿    const XrFacialTrackerCreateInfoHTC*         createInfo,
-￿    XrFacialTrackerHTC*                         facialTracker);</code></pre>
-
-        <h5>Description</h5>
-        An application <b>can</b> create an {@code XrFacialTrackerHTC} handle using #CreateFacialTrackerHTC().
-
-        If the system does not support eye tracking or lip tracking, runtime <b>must</b> return #ERROR_FEATURE_UNSUPPORTED from #CreateFacialTrackerHTC() according to the corresponding case. In this case, the runtime <b>must</b> return #FALSE for ##XrSystemFacialTrackingPropertiesHTC{@code ::supportEyeFacialTracking} or ##XrSystemFacialTrackingPropertiesHTC{@code ::supportLipFacialTracking} when the function #GetSystemProperties() is called, so that the application <b>may</b> avoid creating a facial tracker.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFacialTracking XR_HTC_facial_tracking} extension <b>must</b> be enabled prior to calling #CreateFacialTrackerHTC()</li>
-            <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-            <li>{@code createInfo} <b>must</b> be a pointer to a valid ##XrFacialTrackerCreateInfoHTC structure</li>
-            <li>{@code facialTracker} <b>must</b> be a pointer to an {@code XrFacialTrackerHTC} handle</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-                <li>#SESSION_LOSS_PENDING</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_FUNCTION_UNSUPPORTED</li>
-                <li>#ERROR_VALIDATION_FAILURE</li>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_HANDLE_INVALID</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_SESSION_LOST</li>
-                <li>#ERROR_OUT_OF_MEMORY</li>
-                <li>#ERROR_LIMIT_REACHED</li>
-                <li>#ERROR_FEATURE_UNSUPPORTED</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##XrFacialTrackerCreateInfoHTC, #DestroyFacialTrackerHTC()
-        """,
-
-        XrSession("session", "an {@code XrSession} in which the facial expression will be active."),
-        XrFacialTrackerCreateInfoHTC.const.p("createInfo", "the ##XrFacialTrackerCreateInfoHTC used to specify the facial tracking type."),
-        Check(1)..XrFacialTrackerHTC.p("facialTracker", "the returned {@code XrFacialTrackerHTC} handle.")
+        XrSession("session"),
+        XrFacialTrackerCreateInfoHTC.const.p("createInfo"),
+        Check(1)..XrFacialTrackerHTC.p("facialTracker")
     )
 
     XrResult(
         "DestroyFacialTrackerHTC",
-        """
-        Destroy a facial tracker handle.
 
-        <h5>C Specification</h5>
-        The #DestroyFacialTrackerHTC() function is defined as:
-
-        <pre><code>
-￿XrResult xrDestroyFacialTrackerHTC(
-￿    XrFacialTrackerHTC                          facialTracker);</code></pre>
-
-        <h5>Description</h5>
-        #DestroyFacialTrackerHTC() releases the {@code facialTracker} and the underlying resources when finished with facial tracking experiences.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFacialTracking XR_HTC_facial_tracking} extension <b>must</b> be enabled prior to calling #DestroyFacialTrackerHTC()</li>
-            <li>{@code facialTracker} <b>must</b> be a valid {@code XrFacialTrackerHTC} handle</li>
-        </ul>
-
-        <h5>Thread Safety</h5>
-        <ul>
-            <li>Access to {@code facialTracker}, and any child handles, <b>must</b> be externally synchronized</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_FUNCTION_UNSUPPORTED</li>
-                <li>#ERROR_HANDLE_INVALID</li>
-            </ul></dd>
-        </dl>
-        """,
-
-        XrFacialTrackerHTC("facialTracker", "an {@code XrFacialTrackerHTC} previously created by #CreateFacialTrackerHTC().")
+        XrFacialTrackerHTC("facialTracker")
     )
 
     XrResult(
         "GetFacialExpressionsHTC",
-        """
-        Retrieve facial expressions.
 
-        <h5>C Specification</h5>
-        The #GetFacialExpressionsHTC() function is defined as:
-
-        <pre><code>
-￿XrResult xrGetFacialExpressionsHTC(
-￿    XrFacialTrackerHTC                          facialTracker,
-￿    XrFacialExpressionsHTC*                     facialExpressions);</code></pre>
-
-        <h5>Description</h5>
-        #GetFacialExpressionsHTC() retrieves an array of values of blend shapes for a facial expression on a given time.
-
-        <h5>Valid Usage (Implicit)</h5>
-        <ul>
-            <li>The {@link HTCFacialTracking XR_HTC_facial_tracking} extension <b>must</b> be enabled prior to calling #GetFacialExpressionsHTC()</li>
-            <li>{@code facialTracker} <b>must</b> be a valid {@code XrFacialTrackerHTC} handle</li>
-            <li>{@code facialExpressions} <b>must</b> be a pointer to an ##XrFacialExpressionsHTC structure</li>
-        </ul>
-
-        <h5>Return Codes</h5>
-        <dl>
-            <dt>On success, this command returns</dt>
-            <dd><ul>
-                <li>#SUCCESS</li>
-            </ul></dd>
-
-            <dt>On failure, this command returns</dt>
-            <dd><ul>
-                <li>#ERROR_FUNCTION_UNSUPPORTED</li>
-                <li>#ERROR_VALIDATION_FAILURE</li>
-                <li>#ERROR_RUNTIME_FAILURE</li>
-                <li>#ERROR_HANDLE_INVALID</li>
-                <li>#ERROR_INSTANCE_LOST</li>
-                <li>#ERROR_TIME_INVALID</li>
-            </ul></dd>
-        </dl>
-
-        <h5>See Also</h5>
-        ##XrFacialExpressionsHTC
-        """,
-
-        XrFacialTrackerHTC("facialTracker", "an {@code XrFacialTrackerHTC} previously created by #CreateFacialTrackerHTC()."),
-        XrFacialExpressionsHTC.p("facialExpressions", "a pointer to ##XrFacialExpressionsHTC receiving the returned facial expressions.")
+        XrFacialTrackerHTC("facialTracker"),
+        XrFacialExpressionsHTC.p("facialExpressions")
     )
 }

@@ -8,23 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val EXT_texture_snorm = "EXTTextureSnorm".nativeClassGL("EXT_texture_snorm", postfix = EXT) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        Fixed-point textures in unextended OpenGL have integer components, but those values are taken to represent floating-point values in the range
-        [0.0,1.0]. These integer components are considered "unsigned normalized" integers. When such a texture is accessed by a shader or by fixed-function
-        fragment processing, floating-point values are returned in the range [0.0,1.0].
-
-        This extension provides a set of new "signed normalized" integer texture formats. These are taken to represent a floating-point value in the range
-        [-1.0,1.0] with an exact 0.0.
-
-        Requires ${GL30.core}.
-        """
-
     IntConstant(
-        "ccepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
-
         "RED_SNORM"..0x8F90,
         "RG_SNORM"..0x8F91,
         "RGB_SNORM"..0x8F92,
@@ -52,8 +36,6 @@ val EXT_texture_snorm = "EXTTextureSnorm".nativeClassGL("EXT_texture_snorm", pos
     )
 
     IntConstant(
-        "Returned by GetTexLevelParmeter.",
-
         "SIGNED_NORMALIZED"..0x8F9C
     )
 }

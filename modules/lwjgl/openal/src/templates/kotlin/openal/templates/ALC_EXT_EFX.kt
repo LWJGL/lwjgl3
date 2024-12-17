@@ -8,30 +8,17 @@ import org.lwjgl.generator.*
 import openal.*
 
 val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
-    documentation =
-        """
-        Native bindings to the $extensionName extension.
-
-        The Effects Extension is designed to provide a generic, cross-platform framework for adding advanced DSP effects to OpenAL.
-        """
-
     IntConstant(
-        "ALC tokens.",
-
         "ALC_EFX_MAJOR_VERSION"..0x20001,
         "ALC_EFX_MINOR_VERSION"..0x20002,
         "ALC_MAX_AUXILIARY_SENDS"..0x20003
     ).noPrefix()
 
     IntConstant(
-        "Listener properties.",
-
         "METERS_PER_UNIT"..0x20004
     )
 
     IntConstant(
-        "Source properties.",
-
         "DIRECT_FILTER"..0x20005,
         "AUXILIARY_SEND_FILTER"..0x20006,
         "AIR_ABSORPTION_FACTOR"..0x20007,
@@ -43,8 +30,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Auxiliary effect slot properties.",
-
         "EFFECTSLOT_NULL"..0x0000,
         "EFFECTSLOT_EFFECT"..0x0001,
         "EFFECTSLOT_GAIN"..0x0002,
@@ -52,8 +37,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Reverb effect parameters.",
-
         "REVERB_DENSITY"..0x0001,
         "REVERB_DIFFUSION"..0x0002,
         "REVERB_GAIN"..0x0003,
@@ -70,8 +53,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "EAX Reverb effect parameters.",
-
         "EAXREVERB_DENSITY"..0x0001,
         "EAXREVERB_DIFFUSION"..0x0002,
         "EAXREVERB_GAIN"..0x0003,
@@ -98,8 +79,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Chorus effect parameters.",
-
         "CHORUS_WAVEFORM"..0x0001,
         "CHORUS_PHASE"..0x0002,
         "CHORUS_RATE"..0x0003,
@@ -109,8 +88,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Distortion effect parameters.",
-
         "DISTORTION_EDGE"..0x0001,
         "DISTORTION_GAIN"..0x0002,
         "DISTORTION_LOWPASS_CUTOFF"..0x0003,
@@ -119,8 +96,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Echo effect parameters.",
-
         "ECHO_DELAY"..0x0001,
         "ECHO_LRDELAY"..0x0002,
         "ECHO_DAMPING"..0x0003,
@@ -129,8 +104,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Flanger effect parameters.",
-
         "FLANGER_WAVEFORM"..0x0001,
         "FLANGER_PHASE"..0x0002,
         "FLANGER_RATE"..0x0003,
@@ -140,16 +113,12 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Frequency shifter effect parameters.",
-
         "FREQUENCY_SHIFTER_FREQUENCY"..0x0001,
         "FREQUENCY_SHIFTER_LEFT_DIRECTION"..0x0002,
         "FREQUENCY_SHIFTER_RIGHT_DIRECTION"..0x0003
     )
 
     IntConstant(
-        "Vocal morpher effect parameters.",
-
         "VOCMORPHER_PHONEMEA"..0x0001,
         "VOCMORPHER_PHONEMEA_COARSE_TUNING"..0x0002,
         "VOCMORPHER_PHONEMEB"..0x0003,
@@ -159,23 +128,17 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Pitch shifter effect parameters.",
-
         "PITCH_SHIFTER_COARSE_TUNE"..0x0001,
         "PITCH_SHIFTER_FINE_TUNE"..0x0002
     )
 
     IntConstant(
-        "Ring modulator effect parameters.",
-
         "RING_MODULATOR_FREQUENCY"..0x0001,
         "RING_MODULATOR_HIGHPASS_CUTOFF"..0x0002,
         "RING_MODULATOR_WAVEFORM"..0x0003
     )
 
     IntConstant(
-        "Autowah effect parameters.",
-
         "AUTOWAH_ATTACK_TIME"..0x0001,
         "AUTOWAH_RELEASE_TIME"..0x0002,
         "AUTOWAH_RESONANCE"..0x0003,
@@ -183,14 +146,10 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Compressor effect parameters.",
-
         "COMPRESSOR_ONOFF"..0x0001
     )
 
     IntConstant(
-        "Equalizer effect parameters.",
-
         "EQUALIZER_LOW_GAIN"..0x0001,
         "EQUALIZER_LOW_CUTOFF"..0x0002,
         "EQUALIZER_MID1_GAIN"..0x0003,
@@ -204,16 +163,12 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Effect type effect parameters.",
-
         "EFFECT_FIRST_PARAMETER"..0x0000,
         "EFFECT_LAST_PARAMETER"..0x8000,
         "EFFECT_TYPE"..0x8001
     )
 
     IntConstant(
-        "Effect types",
-
         "EFFECT_NULL"..0x0000,
         "EFFECT_REVERB"..0x0001,
         "EFFECT_CHORUS"..0x0002,
@@ -231,38 +186,28 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Lowpass filter properties",
-
         "LOWPASS_GAIN"..0x0001,
         "LOWPASS_GAINHF"..0x0002
     )
 
     IntConstant(
-        "Highpass filter properties",
-
         "HIGHPASS_GAIN"..0x0001,
         "HIGHPASS_GAINLF"..0x0002
     )
 
     IntConstant(
-        "Bandpass filter properties",
-
         "BANDPASS_GAIN"..0x0001,
         "BANDPASS_GAINLF"..0x0002,
         "BANDPASS_GAINHF"..0x0003
     )
 
     IntConstant(
-        "Filter type",
-
         "FILTER_FIRST_PARAMETER"..0x0000,
         "FILTER_LAST_PARAMETER"..0x8000,
         "FILTER_TYPE"..0x8001
     )
 
     IntConstant(
-        "Filter types.",
-
         "FILTER_NULL"..0x0000,
         "FILTER_LOWPASS"..0x0001,
         "FILTER_HIGHPASS"..0x0002,
@@ -270,8 +215,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Source property value ranges and defaults",
-
         "MIN_AIR_ABSORPTION_FACTOR"..0.0f,
         "MAX_AIR_ABSORPTION_FACTOR"..10.0f,
         "DEFAULT_AIR_ABSORPTION_FACTOR"..0.0f,
@@ -284,8 +227,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Source property value ranges and defaults",
-
         "MIN_DIRECT_FILTER_GAINHF_AUTO"..0x0,
         "MAX_DIRECT_FILTER_GAINHF_AUTO"..0x1,
         "DEFAULT_DIRECT_FILTER_GAINHF_AUTO"..0x1,
@@ -298,16 +239,12 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Listener property value ranges and defaults.",
-
         "MIN_METERS_PER_UNIT".."0x0.000002P-126f",
         "MAX_METERS_PER_UNIT".."0x1.fffffeP+127f",
         "DEFAULT_METERS_PER_UNIT"..1.0f
     )
 
     FloatConstant(
-        "Reverb effect parameter ranges and defaults",
-
         "REVERB_MIN_DENSITY"..0.0f,
         "REVERB_MAX_DENSITY"..1.0f,
         "REVERB_DEFAULT_DENSITY"..1.0f,
@@ -347,16 +284,12 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Reverb effect parameter ranges and defaults",
-
         "REVERB_MIN_DECAY_HFLIMIT"..0x0,
         "REVERB_MAX_DECAY_HFLIMIT"..0x1,
         "REVERB_DEFAULT_DECAY_HFLIMIT"..0x1
     )
 
     FloatConstant(
-        "EAX reverb effect parameter ranges and defaults",
-
         "EAXREVERB_MIN_DENSITY"..0.0f,
         "EAXREVERB_MAX_DENSITY"..1.0f,
         "EAXREVERB_DEFAULT_DENSITY"..1.0f,
@@ -422,16 +355,12 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "EAX reverb effect parameter ranges and defaults",
-
         "EAXREVERB_MIN_DECAY_HFLIMIT"..0x0,
         "EAXREVERB_MAX_DECAY_HFLIMIT"..0x1,
         "EAXREVERB_DEFAULT_DECAY_HFLIMIT"..0x1
     )
 
     IntConstant(
-        "Chorus effect parameter ranges and defaults",
-
         "CHORUS_WAVEFORM_SINUSOID".."0",
         "CHORUS_WAVEFORM_TRIANGLE".."1",
         "CHORUS_MIN_WAVEFORM".."0",
@@ -443,8 +372,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Chorus effect parameter ranges and defaults",
-
         "CHORUS_MIN_RATE"..0.0f,
         "CHORUS_MAX_RATE"..10.0f,
         "CHORUS_DEFAULT_RATE"..1.1f,
@@ -460,8 +387,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Distortion effect parameter ranges and defaults",
-
         "DISTORTION_MIN_EDGE"..0.0f,
         "DISTORTION_MAX_EDGE"..1.0f,
         "DISTORTION_DEFAULT_EDGE"..0.2f,
@@ -480,8 +405,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Echo effect parameter ranges and defaults",
-
         "ECHO_MIN_DELAY"..0.0f,
         "ECHO_MAX_DELAY"..0.207f,
         "ECHO_DEFAULT_DELAY"..0.1f,
@@ -500,8 +423,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Flanger effect parameter ranges and defaults",
-
         "FLANGER_WAVEFORM_SINUSOID".."0",
         "FLANGER_WAVEFORM_TRIANGLE".."1",
         "FLANGER_MIN_WAVEFORM".."0",
@@ -513,8 +434,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Flanger effect parameter ranges and defaults",
-
         "FLANGER_MIN_RATE"..0.0f,
         "FLANGER_MAX_RATE"..10.0f,
         "FLANGER_DEFAULT_RATE"..0.27f,
@@ -530,16 +449,12 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Frequency shifter effect parameter ranges and defaults",
-
         "FREQUENCY_SHIFTER_MIN_FREQUENCY"..0.0f,
         "FREQUENCY_SHIFTER_MAX_FREQUENCY"..24000.0f,
         "FREQUENCY_SHIFTER_DEFAULT_FREQUENCY"..0.0f
     )
 
     IntConstant(
-        "Frequency shifter effect parameter ranges and defaults",
-
         "FREQUENCY_SHIFTER_MIN_LEFT_DIRECTION".."0",
         "FREQUENCY_SHIFTER_MAX_LEFT_DIRECTION".."2",
         "FREQUENCY_SHIFTER_DEFAULT_LEFT_DIRECTION".."0",
@@ -552,8 +467,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Vocal morpher effect parameter ranges and defaults",
-
         "VOCAL_MORPHER_MIN_PHONEMEA".."0",
         "VOCAL_MORPHER_MAX_PHONEMEA".."29",
         "VOCAL_MORPHER_DEFAULT_PHONEMEA".."0",
@@ -605,16 +518,12 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Vocal morpher effect parameter ranges and defaults",
-
         "VOCAL_MORPHER_MIN_RATE"..0.0f,
         "VOCAL_MORPHER_MAX_RATE"..10.0f,
         "VOCAL_MORPHER_DEFAULT_RATE"..1.41f
     )
 
     IntConstant(
-        "Pitch shifter effect parameter ranges and defaults",
-
         "PITCH_SHIFTER_MIN_COARSE_TUNE".."-12",
         "PITCH_SHIFTER_MAX_COARSE_TUNE".."12",
         "PITCH_SHIFTER_DEFAULT_COARSE_TUNE".."12",
@@ -624,8 +533,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Ring modulator effect parameter ranges and defaults",
-
         "RING_MODULATOR_MIN_FREQUENCY"..0.0f,
         "RING_MODULATOR_MAX_FREQUENCY"..8000.0f,
         "RING_MODULATOR_DEFAULT_FREQUENCY"..440.0f,
@@ -635,8 +542,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Ring modulator effect parameter ranges and defaults",
-
         "RING_MODULATOR_SINUSOID".."0",
         "RING_MODULATOR_SAWTOOTH".."1",
         "RING_MODULATOR_SQUARE".."2",
@@ -646,8 +551,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Autowah effect parameter ranges and defaults",
-
         "AUTOWAH_MIN_ATTACK_TIME"..0.0001f,
         "AUTOWAH_MAX_ATTACK_TIME"..1.0f,
         "AUTOWAH_DEFAULT_ATTACK_TIME"..0.06f,
@@ -663,16 +566,12 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     IntConstant(
-        "Compressor effect parameter ranges and defaults",
-
         "COMPRESSOR_MIN_ONOFF".."0",
         "COMPRESSOR_MAX_ONOFF".."1",
         "COMPRESSOR_DEFAULT_ONOFF".."1"
     )
 
     FloatConstant(
-        "Equalizer effect parameter ranges and defaults",
-
         "EQUALIZER_MIN_LOW_GAIN"..0.126f,
         "EQUALIZER_MAX_LOW_GAIN"..7.943f,
         "EQUALIZER_DEFAULT_LOW_GAIN"..1.0f,
@@ -706,8 +605,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Lowpass filter parameter ranges and defaults",
-
         "LOWPASS_MIN_GAIN"..0.0f,
         "LOWPASS_MAX_GAIN"..1.0f,
         "LOWPASS_DEFAULT_GAIN"..1.0f,
@@ -717,8 +614,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Highpass filter parameter ranges and defaults",
-
         "HIGHPASS_MIN_GAIN"..0.0f,
         "HIGHPASS_MAX_GAIN"..1.0f,
         "HIGHPASS_DEFAULT_GAIN"..1.0f,
@@ -728,8 +623,6 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
     )
 
     FloatConstant(
-        "Bandpass filter parameter ranges and defaults",
-
         "BANDPASS_MIN_GAIN"..0.0f,
         "BANDPASS_MAX_GAIN"..1.0f,
         "BANDPASS_DEFAULT_GAIN"..1.0f,
@@ -743,287 +636,254 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
     ALvoid(
         "GenEffects",
-        "Requests a number of effects.",
 
-        AutoSize("effects")..ALsizei("n", "the number of effects be to generated"),
-        ReturnParam..ALuint.p("effects", "the buffer that will receive the effects")
+        AutoSize("effects")..ALsizei("n"),
+        ReturnParam..ALuint.p("effects")
     ).directContext()
 
     ALvoid(
         "DeleteEffects",
-        "Deletes a number of effects.",
 
-        AutoSize("effects")..ALsizei("n", "the number of effects be to deleted"),
-        SingleValue("effect")..ALuint.p("effects", "the effect to delete")
+        AutoSize("effects")..ALsizei("n"),
+        SingleValue("effect")..ALuint.p("effects")
     ).directContext()
 
     ALboolean(
         "IsEffect",
-        "Verifies whether the given object name is an effect.",
 
-        ALuint("effect", "a value that may be a effect name")
+        ALuint("effect")
     ).directContext()
 
     ALvoid(
         "Effecti",
-        "Sets the integer value of an effect parameter.",
 
-        ALuint("effect", "the effect to modify"),
-        ALenum("param", "the parameter to modify"),
-        ALint("value", "the parameter value")
+        ALuint("effect"),
+        ALenum("param"),
+        ALint("value")
     ).directContext()
 
     ALvoid(
         "Effectiv",
-        "Pointer version of #Effecti().",
 
-        ALuint("effect", "the effect to modify"),
-        ALenum("param", "the parameter to modify"),
-        Check(1)..ALint.const.p("values", "the parameter values")
+        ALuint("effect"),
+        ALenum("param"),
+        Check(1)..ALint.const.p("values")
     ).directContext()
 
     ALvoid(
         "Effectf",
-        "Sets the float value of an effect parameter.",
 
-        ALuint("effect", "the effect to modify"),
-        ALenum("param", "the parameter to modify"),
-        ALfloat("value", "the parameter value")
+        ALuint("effect"),
+        ALenum("param"),
+        ALfloat("value")
     ).directContext()
 
     ALvoid(
         "Effectfv",
-        "Pointer version of #Effectf().",
 
-        ALuint("effect", "the effect to modify"),
-        ALenum("param", "the parameter to modify"),
-        Check(1)..ALfloat.const.p("values", "the parameter values")
+        ALuint("effect"),
+        ALenum("param"),
+        Check(1)..ALfloat.const.p("values")
     ).directContext()
 
     ALvoid(
         "GetEffecti",
-        "Returns the integer value of the specified effect parameter.",
 
-        ALuint("effect", "the effect to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALint.p("value", "the parameter value")
+        ALuint("effect"),
+        ALenum("param"),
+        Check(1)..ReturnParam..ALint.p("value")
     ).directContext()
 
     ALvoid(
         "GetEffectiv",
-        "Returns the integer values of the specified effect parameter.",
 
-        ALuint("effect", "the effect to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ALint.p("values", "the parameter values")
+        ALuint("effect"),
+        ALenum("param"),
+        Check(1)..ALint.p("values")
     ).directContext()
 
     ALvoid(
         "GetEffectf",
-        "Returns the float value of the specified effect parameter.",
 
-        ALuint("effect", "the effect to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
+        ALuint("effect"),
+        ALenum("param"),
+        Check(1)..ReturnParam..ALfloat.p("value")
     ).directContext()
 
     ALvoid(
         "GetEffectfv",
-        "Returns the float values of the specified effect parameter.",
 
-        ALuint("effect", "the effect to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ALfloat.p("values", "the parameter values")
+        ALuint("effect"),
+        ALenum("param"),
+        Check(1)..ALfloat.p("values")
     ).directContext()
 
     ALvoid(
         "GenFilters",
-        "Requests a number of filters.",
 
-        AutoSize("filters")..ALsizei("n", "the number of filters be to generated"),
-        ReturnParam..ALuint.p("filters", "the buffer that will receive the filters")
+        AutoSize("filters")..ALsizei("n"),
+        ReturnParam..ALuint.p("filters")
     ).directContext()
 
     ALvoid(
         "DeleteFilters",
-        "Deletes a number of filters.",
 
-        AutoSize("filters")..ALsizei("n", "the number of filters be to deleted"),
-        SingleValue("filter")..ALuint.p("filters", "the filter to delete")
+        AutoSize("filters")..ALsizei("n"),
+        SingleValue("filter")..ALuint.p("filters")
     ).directContext()
 
     ALboolean(
         "IsFilter",
-        "Verifies whether the given object name is a filter.",
 
-        ALuint("filter", "a value that may be a filter name")
+        ALuint("filter")
     ).directContext()
 
     ALvoid(
         "Filteri",
-        "Sets the integer value of a filter parameter.",
 
-        ALuint("filter", "the filter to modify"),
-        ALenum("param", "the parameter to modify"),
-        ALint("value", "the parameter value")
+        ALuint("filter"),
+        ALenum("param"),
+        ALint("value")
     ).directContext()
 
     ALvoid(
         "Filteriv",
-        "Pointer version of #Filteri().",
 
-        ALuint("filter", "the filter to modify"),
-        ALenum("param", "the parameter to modify"),
-        Check(1)..ALint.const.p("values", "the parameter values")
+        ALuint("filter"),
+        ALenum("param"),
+        Check(1)..ALint.const.p("values")
     ).directContext()
 
     ALvoid(
         "Filterf",
-        "Sets the float value of a filter parameter.",
 
-        ALuint("filter", "the filter to modify"),
-        ALenum("param", "the parameter to modify"),
-        ALfloat("value", "the parameter value")
+        ALuint("filter"),
+        ALenum("param"),
+        ALfloat("value")
     ).directContext()
 
     ALvoid(
         "Filterfv",
-        "Pointer version of #Filterf().",
 
-        ALuint("filter", "the filter to modify"),
-        ALenum("param", "the parameter to modify"),
-        Check(1)..ALfloat.const.p("values", "the parameter values")
+        ALuint("filter"),
+        ALenum("param"),
+        Check(1)..ALfloat.const.p("values")
     ).directContext()
 
     ALvoid(
         "GetFilteri",
-        "Returns the integer value of the specified filter parameter.",
 
-        ALuint("filter", "the filter to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALint.p("value", "the parameter value")
+        ALuint("filter"),
+        ALenum("param"),
+        Check(1)..ReturnParam..ALint.p("value")
     ).directContext()
 
     ALvoid(
         "GetFilteriv",
-        "Returns the integer values of the specified filter parameter.",
 
-        ALuint("filter", "the filter to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ALint.p("values", "the parameter values")
+        ALuint("filter"),
+        ALenum("param"),
+        Check(1)..ALint.p("values")
     ).directContext()
 
     ALvoid(
         "GetFilterf",
-        "Returns the float value of the specified filter parameter.",
 
-        ALuint("filter", "the effect to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
+        ALuint("filter"),
+        ALenum("param"),
+        Check(1)..ReturnParam..ALfloat.p("value")
     ).directContext()
 
     ALvoid(
         "GetFilterfv",
-        "Returns the float values of the specified filter parameter.",
 
-        ALuint("filter", "the effect to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ALfloat.p("values", "the parameter values")
+        ALuint("filter"),
+        ALenum("param"),
+        Check(1)..ALfloat.p("values")
     ).directContext()
 
     ALvoid(
         "GenAuxiliaryEffectSlots",
-        "Requests a number of effect slots.",
 
-        AutoSize("effectSlots")..ALsizei("n", "the number of effect slots be to generated"),
-        ReturnParam..ALuint.p("effectSlots", "the buffer that will receive the effect slots")
+        AutoSize("effectSlots")..ALsizei("n"),
+        ReturnParam..ALuint.p("effectSlots")
     ).directContext()
 
     ALvoid(
         "DeleteAuxiliaryEffectSlots",
-        "Deletes a number of effect slots.",
 
-        AutoSize("effectSlots")..ALsizei("n", "the number of effect slots be to deleted"),
-        SingleValue("effectSlot")..ALuint.p("effectSlots", "the effectSlot to delete")
+        AutoSize("effectSlots")..ALsizei("n"),
+        SingleValue("effectSlot")..ALuint.p("effectSlots")
     ).directContext()
 
     ALboolean(
         "IsAuxiliaryEffectSlot",
-        "Verifies whether the given object name is an effect slot.",
 
-        ALuint("effectSlot", "a value that may be an effect slot name")
+        ALuint("effectSlot")
     ).directContext()
 
     ALvoid(
         "AuxiliaryEffectSloti",
-        "Sets the integer value of an effect slot parameter.",
 
-        ALuint("effectSlot", "the effect slot to modify"),
-        ALenum("param", "the parameter to modify"),
-        ALint("value", "the parameter value")
+        ALuint("effectSlot"),
+        ALenum("param"),
+        ALint("value")
     ).directContext()
 
     ALvoid(
         "AuxiliaryEffectSlotiv",
-        "Pointer version of #AuxiliaryEffectSloti().",
 
-        ALuint("effectSlot", "the effect slot to modify"),
-        ALenum("param", "the parameter to modify"),
-        Check(1)..ALint.const.p("values", "the parameter values")
+        ALuint("effectSlot"),
+        ALenum("param"),
+        Check(1)..ALint.const.p("values")
     ).directContext()
 
     ALvoid(
         "AuxiliaryEffectSlotf",
-        "Sets the float value of an effect slot parameter.",
 
-        ALuint("effectSlot", "the effect slot to modify"),
-        ALenum("param", "the parameter to modify"),
-        ALfloat("value", "the parameter value")
+        ALuint("effectSlot"),
+        ALenum("param"),
+        ALfloat("value")
     ).directContext()
 
     ALvoid(
         "AuxiliaryEffectSlotfv",
-        "Pointer version of #AuxiliaryEffectSlotf().",
 
-        ALuint("effectSlot", "the effect slot to modify"),
-        ALenum("param", "the parameter to modify"),
-        Check(1)..ALfloat.const.p("values", "the parameter values")
+        ALuint("effectSlot"),
+        ALenum("param"),
+        Check(1)..ALfloat.const.p("values")
     ).directContext()
 
     ALvoid(
         "GetAuxiliaryEffectSloti",
-        "Returns the integer value of the specified effect slot parameter.",
 
-        ALuint("effectSlot", "the effect slot to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALint.p("value", "the parameter value")
+        ALuint("effectSlot"),
+        ALenum("param"),
+        Check(1)..ReturnParam..ALint.p("value")
     ).directContext()
 
     ALvoid(
         "GetAuxiliaryEffectSlotiv",
-        "Returns the integer values of the specified effect slot parameter.",
 
-        ALuint("effectSlot", "the effect slot to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ALint.p("values", "the parameter values")
+        ALuint("effectSlot"),
+        ALenum("param"),
+        Check(1)..ALint.p("values")
     ).directContext()
 
     ALvoid(
         "GetAuxiliaryEffectSlotf",
-        "Returns the float value of the specified filter parameter.",
 
-        ALuint("effectSlot", "the effect slot to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ReturnParam..ALfloat.p("value", "the parameter value")
+        ALuint("effectSlot"),
+        ALenum("param"),
+        Check(1)..ReturnParam..ALfloat.p("value")
     ).directContext()
 
     ALvoid(
         "GetAuxiliaryEffectSlotfv",
-        "Returns the float values of the specified effect slot parameter.",
 
-        ALuint("effectSlot", "the effect to query"),
-        ALenum("param", "the parameter to query"),
-        Check(1)..ALfloat.p("values", "the parameter values")
+        ALuint("effectSlot"),
+        ALenum("param"),
+        Check(1)..ALfloat.p("values")
     ).directContext()
 
     ALCBinding.addClass(this)

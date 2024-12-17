@@ -9,12 +9,7 @@ import org.lwjgl.generator.*
 
 val EGL14 = "EGL14".nativeClassEGL("EGL14", postfix = "") {
     extends = EGL13
-    documentation =
-        "The core EGL 1.4 functionality."
-
     IntConstant(
-        "",
-
         "MULTISAMPLE_RESOLVE_BOX_BIT"..0x0200,
         "MULTISAMPLE_RESOLVE"..0x3099,
         "MULTISAMPLE_RESOLVE_DEFAULT"..0x309A,
@@ -25,10 +20,8 @@ val EGL14 = "EGL14".nativeClassEGL("EGL14", postfix = "") {
     )
 
     LongConstant(
-        "",
-
         "DEFAULT_DISPLAY"..0L
     )
 
-    EGLContext("GetCurrentContext", "", void())
+    EGLContext("GetCurrentContext", void())
 }

@@ -9,23 +9,7 @@ import core.jni.*
 
 val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefix = "JNI", prefixMethod = "") {
     javaImport("java.lang.reflect.*")
-    documentation =
-        """
-        Bindings to the Java Native Interface (JNI).
-
-        The JNI is a native programming interface. It allows Java code that runs inside a Java Virtual Machine (VM) to interoperate with applications and
-        libraries written in other programming languages, such as C, C++, and assembly.
-
-        The most important benefit of the JNI is that it imposes no restrictions on the implementation of the underlying Java VM. Therefore, Java VM vendors
-        can add support for the JNI without affecting other parts of the VM. Programmers can write one version of a native application or library and expect it
-        to work with all Java VMs supporting the JNI.
-
-        LWJGL: Only functions that can reasonably be called from Java are exposed.
-        """
-
     IntConstant(
-        "JNI versions.",
-
         "VERSION_1_1"..0x00010001,
         "VERSION_1_2"..0x00010002,
         "VERSION_1_4"..0x00010004,
@@ -40,8 +24,6 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
     )
 
     EnumConstant(
-        "{@code jobjectRefType}: Return values from #GetObjectRefType().",
-
         "JNIInvalidRefType".."0",
         "JNILocalRefType".."1",
         "JNIGlobalRefType".."2",
@@ -49,137 +31,93 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
     ).noPrefix()
 
     IntConstant(
-        "jboolean constants.",
-
         "FALSE".."0",
         "TRUE".."1"
     )
 
     EnumConstant(
-        "Possible return values for JNI functions.",
-
-        "OK".enum("success ", "0"),
-        "ERR".enum("unknown error ", "(-1)"),
-        "EDETACHED".enum("thread detached from the VM ", "(-2)"),
-        "EVERSION".enum("JNI version error ", "(-3)"),
-        "ENOMEM".enum("not enough memory ", "(-4)"),
-        "EEXIST".enum("VM already created ", "(-5)"),
-        "EINVAL".enum("invalid arguments ", "(-6)")
+        "OK".enum("0"),
+        "ERR".enum("(-1)"),
+        "EDETACHED".enum("(-2)"),
+        "EVERSION".enum("(-3)"),
+        "ENOMEM".enum("(-4)"),
+        "EEXIST".enum("(-5)"),
+        "EINVAL".enum("(-6)")
     )
 
     IntConstant(
-        "Used in {@code ReleaseScalarArrayElements}.",
-
         "COMMIT".."1",
         "ABORT".."2"
     )
 
     jint(
         "GetVersion",
-        "Returns the version of the native method interface.",
 
-        JNI_ENV,
-
-        returnDoc = "the major version number in the higher 16 bits and the minor version number in the lower 16 bits"
+        JNI_ENV
     )
 
     jmethodID(
         "FromReflectedMethod",
-        "Converts a ##Method or ##Constructor object to a method ID.",
 
         JNI_ENV,
-        java_lang_reflect_Method("method", "")
+        java_lang_reflect_Method("method")
     )
 
     jfieldID(
         "FromReflectedField",
-        "Converts a ##Field to a field ID.",
 
         JNI_ENV,
-        java_lang_reflect_Field("field", "")
+        java_lang_reflect_Field("field")
     )
 
     java_lang_reflect_Method(
         "ToReflectedMethod",
-        "Converts a method ID derived from {@code cls} to a ##Method or ##Constructor object.",
 
         JNI_ENV,
-        jclass("cls", ""),
-        jmethodID("methodID", ""),
-        jboolean("isStatic", "must be set to #TRUE if the method ID refers to a static field, and # FALSE otherwise")
+        jclass("cls"),
+        jmethodID("methodID"),
+        jboolean("isStatic")
     )
 
     java_lang_reflect_Field(
         "ToReflectedField",
-        "Converts a field ID derived from {@code cls} to a ##Field object.",
 
         JNI_ENV,
-        jclass("cls", ""),
-        jfieldID("fieldID", ""),
-        jboolean("isStatic", "must be set to #TRUE if {@code fieldID} refers to a static field, and #FALSE otherwise")
+        jclass("cls"),
+        jfieldID("fieldID"),
+        jboolean("isStatic")
     )
 
     opaque_p(
         "NewGlobalRef",
-        """
-        Creates a new global reference to the object referred to by the {@code obj} argument. The {@code obj} argument may be a global or local reference.
-        Global references must be explicitly disposed of by calling #DeleteGlobalRef().
-        """,
 
         JNI_ENV,
-        jobject("obj", "a global or local reference"),
-
-        returnDoc = "a global reference, or #NULL if the system runs out of memory"
+        jobject("obj")
     )
 
     void(
         "DeleteGlobalRef",
-        "Deletes the global reference pointed to by {@code globalRef}.",
 
         JNI_ENV,
-        opaque_p("globalRef", "a global reference")
+        opaque_p("globalRef")
     )
 
     fun ArrayElementsRoutines(name: String, elementType: PrimitiveType, arrayType: JObjectType) {
         elementType.p(
             "Get${name}ArrayElements",
-            """
-            Returns the body of the primitive array. The result is valid until the #Release${name}ArrayElements() function is called. Since the returned array
-            may be a copy of the Java array, changes made to the returned array will not necessarily be reflected in the original array until
-            #Release${name}ArrayElements() is called.
-
-            If {@code isCopy} is not #NULL, then {@code *isCopy} is set to #TRUE if a copy is made; or it is set to #FALSE if no copy is made.
-            """,
 
             JNI_ENV,
-            AutoSizeResult("\$original.length")..arrayType("array", "the primitive array"),
-            Check(1)..nullable..jboolean.p("isCopy", "a pointer to a boolean"),
-
-            returnDoc = "a pointer to the array elements, or #NULL if the operation fails"
+            AutoSizeResult("\$original.length")..arrayType("array"),
+            Check(1)..nullable..jboolean.p("isCopy")
         )
 
         OffHeapOnly..void(
             "Release${name}ArrayElements",
-            """
-            Informs the VM that the native code no longer needs access to {@code elems}. The {@code elems} argument is a pointer derived from array using the
-            #Get${name}ArrayElements() function. If necessary, this function copies back all changes made to elems to the original array.
-
-            The {@code mode} argument provides information on how the array buffer should be released. {@code mode} has no effect if {@code elems} is not a
-            copy of the elements in array. Otherwise, mode has the following impact, as shown in the following table:
-            ${table(
-                tr(th("mode"), th("actions")),
-                tr(td("0"), td("copy back the content and free the elems buffer")),
-                tr(td("#COMMIT"), td("copy back the content but do not free the elems buffer")),
-                tr(td("#ABORT"), td("free the buffer without copying back the possible changes"))
-            )}
-            In most cases, programmers pass “0” to the mode argument to ensure consistent behavior for both pinned and copied arrays. The other options give
-            the programmer more control over memory management and should be used with extreme care.
-            """,
 
             JNI_ENV,
-            arrayType("array", "a Java array object"),
-            Unsafe..elementType.p("elems", "a pointer to array elements"),
-            jint("mode", "the release mode", "0 #COMMIT #ABORT")
+            arrayType("array"),
+            Unsafe..elementType.p("elems"),
+            jint("mode")
         )
     }
 
@@ -195,24 +133,22 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
     fun ArrayRegionRoutines(name: String, elementType: PrimitiveType, arrayType: JObjectType) {
         OffHeapOnly..void(
             "Get${name}ArrayRegion",
-            "Copies a region of a primitive array into a buffer.",
 
             JNI_ENV,
-            arrayType("array", "a Java array"),
-            jsize("start", "the starting index"),
-            AutoSize("buf")..jsize("len", "the number of elements to be copied"),
-            elementType.p("buf", "the destination buffer")
+            arrayType("array"),
+            jsize("start"),
+            AutoSize("buf")..jsize("len"),
+            elementType.p("buf")
         )
 
         OffHeapOnly..void(
             "Set${name}ArrayRegion",
-            "Copies back a region of a primitive array from a buffer.",
 
             JNI_ENV,
-            arrayType("array", "a Java array"),
-            jsize("start", "the starting index"),
-            AutoSize("buf")..jsize("len", "the number of elements to be copied"),
-            elementType.const.p("buf", "the source buffer")
+            arrayType("array"),
+            jsize("start"),
+            AutoSize("buf")..jsize("len"),
+            elementType.const.p("buf")
         )
     }
 
@@ -227,144 +163,85 @@ val JNINativeInterface = "JNINativeInterface".nativeClass(Module.CORE_JNI, prefi
 
     jint(
         "RegisterNatives",
-        """
-        Registers native methods with the class specified by the {@code targetClass} argument. The methods parameter specifies an array of JNINativeMethod
-        structures that contain the names, signatures, and function pointers of the native methods. The name and signature fields of the ##JNINativeMethod
-        structure are pointers to modified UTF-8 strings. The {@code nMethods} parameter specifies the number of native methods in the array.
-        """,
 
         JNI_ENV,
-        jclass("targetClass", ""),
-        JNINativeMethod.const.p("methods", "the native methods in the class"),
-        AutoSize("methods")..jint("nMethods", "the number of native methods in the class"),
-
-        returnDoc = "“0” on success; returns a negative value on failure"
+        jclass("targetClass"),
+        JNINativeMethod.const.p("methods"),
+        AutoSize("methods")..jint("nMethods")
     )
 
     jint(
         "UnregisterNatives",
-        """
-        Unregisters native methods of a class. The class goes back to the state before it was linked or registered with its native method functions.
-
-        This function should not be used in normal native code. Instead, it provides special programs a way to reload and relink native libraries.
-        """,
 
         JNI_ENV,
-        jclass("targetClass", "a Java class object"),
-
-        returnDoc = "“0” on success; returns a negative value on failure"
+        jclass("targetClass")
     )
 
     jint(
         "GetJavaVM",
-        """
-        Returns the Java VM interface (used in the Invocation API) associated with the current thread. The result is placed at the location pointed to by the
-        second argument, {@code vm}.
-        """,
 
         JNI_ENV,
-        Check(1)..JavaVM.p.p("vm", "a pointer to where the result should be placed")
+        Check(1)..JavaVM.p.p("vm")
     )
 
     void(
         "GetStringRegion",
-        "Copies {@code len} number of Unicode characters beginning at offset {@code start} to the given buffer {@code buf}.",
 
         JNI_ENV,
-        jstring("str", ""),
-        jsize("start", ""),
-        AutoSize("buf")..jsize("len", ""),
-        jchar.p("buf", "")
+        jstring("str"),
+        jsize("start"),
+        AutoSize("buf")..jsize("len"),
+        jchar.p("buf")
     )
 
     void(
         "GetStringUTFRegion",
-        """
-        Translates {@code len} number of Unicode characters beginning at offset start into modified UTF-8 encoding and place the result in the given buffer
-        {@code buf}.
-        """,
 
         JNI_ENV,
-        jstring("str", ""),
-        jsize("start", ""),
-        jsize("len", ""),
-        Check("len")..char.p("buf", "")
+        jstring("str"),
+        jsize("start"),
+        jsize("len"),
+        Check("len")..char.p("buf")
     )
 
     opaque_p(
         "NewWeakGlobalRef",
-        """
-        Creates a new weak global reference. Returns #NULL if {@code obj} refers to null, or if the VM runs out of memory. If the VM runs out of memory, an
-        {@code OutOfMemoryError} will be thrown.
-        """,
 
         JNI_ENV,
-        jobject("obj", "")
+        jobject("obj")
     )
 
     void(
         "DeleteWeakGlobalRef",
-        "Delete the VM resources needed for the given weak global reference.",
 
         JNI_ENV,
-        opaque_p("weakGlobalRef", "")
+        opaque_p("weakGlobalRef")
     )
 
     java_nio_ByteBuffer(
         "NewDirectByteBuffer",
-        """
-        Allocates and returns a direct {@code java.nio.ByteBuffer} referring to the block of memory starting at the memory address address and extending
-        capacity bytes.
-
-        Native code that calls this function and returns the resulting byte-buffer object to Java-level code should ensure that the buffer refers to a valid
-        region of memory that is accessible for reading and, if appropriate, writing. An attempt to access an invalid memory location from Java code will
-        either return an arbitrary value, have no visible effect, or cause an unspecified exception to be thrown.
-        """,
 
         JNI_ENV,
-        opaque_p("address", "the starting address of the memory region (must not be #NULL)"),
-        jlong("capacity", "the size in bytes of the memory region (must be positive)"),
-
-        returnDoc =
-        """
-        a local reference to the newly-instantiated {@code java.nio.ByteBuffer} object. Returns #NULL if an exception occurs, or if JNI access to direct
-        buffers is not supported by this virtual machine.
-        """
+        opaque_p("address"),
+        jlong("capacity")
     )
 
     opaque_p(
         "GetDirectBufferAddress",
-        """
-        Fetches and returns the starting address of the memory region referenced by the given direct {@code java.nio.Buffer}.
-
-        This function allows native code to access the same memory region that is accessible to Java code via the buffer object.
-        """,
 
         JNI_ENV,
-        java_nio_Buffer("buf", "a direct {@code java.nio.Buffer} object (must not be #NULL)"),
-
-        returnDoc =
-        """
-        the starting address of the memory region referenced by the buffer. Returns #NULL if the memory region is undefined, if the given object is not a
-        direct {@code java.nio.Buffer}, or if JNI access to direct buffers is not supported by this virtual machine.
-        """
+        java_nio_Buffer("buf")
     )
 
     jobjectRefType(
         "GetObjectRefType",
-        """
-        Returns the type of the object referred to by the {@code obj} argument. The argument {@code obj} can either be a local, global or weak global
-        reference.
-        """,
 
         JNI_ENV,
-        jobject("obj", "a local, global or weak global reference")
+        jobject("obj")
     )
 
     Code(nativeCall = "")..void(
         "noop",
-        "No-op JNI function for benchmarking.",
-
         void()
     )
 }

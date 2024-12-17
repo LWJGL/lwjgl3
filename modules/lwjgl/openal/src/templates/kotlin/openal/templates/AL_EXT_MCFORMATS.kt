@@ -8,11 +8,7 @@ import org.lwjgl.generator.*
 import openal.*
 
 val AL_EXT_MCFORMATS = "EXTMCFormats".nativeClassAL("EXT_MCFORMATS") {
-    documentation = "Native bindings to the $extensionName extension."
-
     IntConstant(
-        "Buffer formats.",
-
         "FORMAT_QUAD8"..0x1204,
         "FORMAT_QUAD16"..0x1205,
         "FORMAT_QUAD32"..0x1206,

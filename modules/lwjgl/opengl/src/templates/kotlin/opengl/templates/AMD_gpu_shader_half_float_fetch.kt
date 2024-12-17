@@ -8,19 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val AMD_gpu_shader_half_float_fetch = "AMDGPUShaderHalfFloatFetch".nativeClassGL("AMD_gpu_shader_half_float_fetch", postfix = AMD) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension was developed based on the {@code AMD_gpu_shader_half_float} extension to allow implementations supporting half-precision floating-point
-        both in shader texture functions and in shader image memory functions.
-
-        Requires ${GL40.core}, GLSL 4.00 and ${AMD_gpu_shader_half_float.link}.
-        """
-
     IntConstant(
-        "Returned by the {@code type} parameter of #GetActiveUniform() and #GetProgramResourceiv().",
-
         "FLOAT16_SAMPLER_1D_AMD"..0x91CE,
         "FLOAT16_SAMPLER_2D_AMD"..0x91CF,
         "FLOAT16_SAMPLER_3D_AMD"..0x91D0,

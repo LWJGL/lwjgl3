@@ -13,47 +13,36 @@ val LLVMAnalysis = "LLVMAnalysis".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
-    documentation = ""
-
     EnumConstant(
-        "",
-
-        "AbortProcessAction".enum("verifier will print to {@code stderr} and {@code abort()}", "0"),
-        "PrintMessageAction".enum("verifier will print to {@code stderr} and {@code return 1}"),
-        "ReturnStatusAction".enum("verifier will just {@code return 1}")
+        "AbortProcessAction".enum("0"),
+        "PrintMessageAction".enum,
+        "ReturnStatusAction".enum
     )
 
     LLVMBool(
         "VerifyModule",
-        """
-        Verifies that a module is valid, taking the specified action if not. Optionally returns a human-readable description of any invalid constructs.
-        {@code OutMessage} must be disposed with #DisposeMessage().
-        """,
 
-        LLVMModuleRef("M", ""),
-        LLVMVerifierFailureAction("Action", ""),
-        Check(1)..charUTF8.p.p("OutMessage", "")
+        LLVMModuleRef("M"),
+        LLVMVerifierFailureAction("Action"),
+        Check(1)..charUTF8.p.p("OutMessage")
     )
 
     LLVMBool(
         "VerifyFunction",
-        "Verifies that a single function is valid, taking the specified action. Useful for debugging.",
 
-        LLVMValueRef("Fn", ""),
-        LLVMVerifierFailureAction("Action", "")
+        LLVMValueRef("Fn"),
+        LLVMVerifierFailureAction("Action")
     )
 
     void(
         "ViewFunctionCFG",
-        "Open up a ghostview window that displays the CFG of the current function. Useful for debugging.",
 
-        LLVMValueRef("Fn", "")
+        LLVMValueRef("Fn")
     )
 
     void(
         "ViewFunctionCFGOnly",
-        "",
 
-        LLVMValueRef("Fn", "")
+        LLVMValueRef("Fn")
     )
 }

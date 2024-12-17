@@ -8,19 +8,7 @@ import egl.*
 import org.lwjgl.generator.*
 
 val KHR_lock_surface3 = "KHRLockSurface3".nativeClassEGL("KHR_lock_surface3", postfix = KHR) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension allows mapping color buffers of EGL surfaces into the client address space. This is useful primarily for software rendering on low-end
-        devices which do not support EGL client rendering APIs, although it may be implemented efficiently on more capable devices as well.
-
-        Requires ${EGL14.core}.
-        """
-
     IntConstant(
-        "",
-
         "READ_SURFACE_BIT_KHR"..0x0001,
         "WRITE_SURFACE_BIT_KHR"..0x0002,
         "LOCK_SURFACE_BIT_KHR"..0x0080,
@@ -47,28 +35,25 @@ val KHR_lock_surface3 = "KHRLockSurface3".nativeClassEGL("KHR_lock_surface3", po
 
     EGLBoolean(
         "LockSurfaceKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", ""),
-        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface"),
+        nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 
     EGLBoolean(
         "UnlockSurfaceKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface")
     )
 
     EGLBoolean(
         "QuerySurface64KHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSurface("surface", ""),
-        EGLint("attribute", ""),
-        Check(1)..EGLAttribKHR.p("value", "")
+        EGLDisplay("dpy"),
+        EGLSurface("surface"),
+        EGLint("attribute"),
+        Check(1)..EGLAttribKHR.p("value")
     )
 }

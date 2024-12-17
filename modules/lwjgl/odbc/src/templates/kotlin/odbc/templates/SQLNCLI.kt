@@ -10,28 +10,11 @@ import odbc.*
 val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = "SQL") {
     javaImport("static org.lwjgl.system.MemoryUtil.*")
 
-    documentation =
-        """
-        Native bindings to the ${url(
-            "https://docs.microsoft.com/en-us/sql/relational-databases/native-client/sql-server-native-client-programming",
-            "SQL Server Native Client"
-        )}.
-
-        Microsoft SQL Server Native Client is a single native dynamic link library (DLL) that contains the ODBC driver and OLE DB provider, which together
-        support applications using native-code APIs (ODBC, OLE DB and ADO) to access Microsoft SQL Server. SQL Server Native Client is a component of SQL
-        Server. It is also available for download from the Feature Pack for Microsoft SQL Server 2005 and Microsoft SQL Server 2008 Feature Pack. In SQL Server
-        Native Client, everything (APIs, TDS routines, and netlibs) is packaged into a single DLL.
-        """
-
     ShortConstant(
-        "Max SQL Server identifier length.",
-
         "MAX_SQLSERVERNAME".."128"
     )
 
     ShortConstant(
-        "Connection attributes.",
-
         "COPT_SS_BASE".."1200",
         "COPT_SS_REMOTE_PWD".."SQL_COPT_SS_BASE+1",
         "COPT_SS_USE_PROC_FOR_PREP".."SQL_COPT_SS_BASE+2",
@@ -79,8 +62,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "Statement attributes.",
-
         "SOPT_SS_BASE".."1225",
         "SOPT_SS_TEXTPTR_LOGGING".."SQL_SOPT_SS_BASE+0",
         "SOPT_SS_CURRENT_COMMAND".."SQL_SOPT_SS_BASE+1",
@@ -99,8 +80,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "#ColAttribute() &amp; #SetDescField()/#GetDescField() driver specific defines.",
-
         "CA_SS_BASE".."1200",
         "CA_SS_COLUMN_SSTYPE".."SQL_CA_SS_BASE+0",
         "CA_SS_COLUMN_UTYPE".."SQL_CA_SS_BASE+1",
@@ -140,14 +119,10 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "Defines returned by #ATTR_CURSOR_TYPE.",
-
         "CURSOR_FAST_FORWARD_ONLY".."8"
     )
 
     ShortConstant(
-        "Defines for use with #COPT_SS_USE_PROC_FOR_PREP.",
-
         "UP_OFF".."0",
         "UP_ON".."1",
         "UP_ON_DROP".."2",
@@ -155,110 +130,82 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "Defines for use with #COPT_SS_INTEGRATED_SECURITY - Pre-Connect Option only.",
-
         "IS_OFF".."0",
         "IS_ON".."1",
         "IS_DEFAULT".."SQL_IS_OFF"
     )
 
     ShortConstant(
-        "Defines for use with #COPT_SS_PRESERVE_CURSORS.",
-
         "PC_OFF".."0",
         "PC_ON".."1",
         "PC_DEFAULT".."SQL_PC_OFF"
     )
 
     LongConstant(
-        "Defines for use with #COPT_SS_USER_DATA.",
-
         "UD_NOTSET".."NULL"
     )
 
     ShortConstant(
-        "Defines for use with #COPT_SS_TRANSLATE.",
-
         "XL_OFF".."0",
         "XL_ON".."1",
         "XL_DEFAULT".."SQL_XL_ON"
     )
 
     ShortConstant(
-        "Defines for use with #COPT_SS_FALLBACK_CONNECT - Pre-Connect Option only.",
-
         "FB_OFF".."0",
         "FB_ON".."1",
         "FB_DEFAULT".."SQL_FB_OFF"
     )
 
     ShortConstant(
-        "Defines for use with #COPT_SS_BCP - Pre-Connect Option only.",
-
         "BCP_OFF".."0",
         "BCP_ON".."1",
         "BCP_DEFAULT".."SQL_BCP_OFF"
     )
 
     ShortConstant(
-        "Defines for use with #COPT_SS_QUOTED_IDENT.",
-
         "QI_OFF".."0",
         "QI_ON".."1",
         "QI_DEFAULT".."SQL_QI_ON"
     )
 
     ShortConstant(
-        "Defines for use with #COPT_SS_ANSI_NPW - Pre-Connect Option only.",
-
         "AD_OFF".."0",
         "AD_ON".."1",
         "AD_DEFAULT".."SQL_AD_ON"
     )
 
     ShortConstant(
-        "Defines for use with #COPT_SS_CONCAT_NULL - Pre-Connect Option only.",
-
         "CN_OFF".."0",
         "CN_ON".."1",
         "CN_DEFAULT".."SQL_CN_ON"
     )
 
     ShortConstant(
-        "Defines for use with #SOPT_SS_TEXTPTR_LOGGING.",
-
         "TL_OFF".."0",
         "TL_ON".."1",
         "TL_DEFAULT".."SQL_TL_ON"
     )
 
     ShortConstant(
-        "Defines for use with #SOPT_SS_HIDDEN_COLUMNS.",
-
         "HC_OFF".."0",
         "HC_ON".."1",
         "HC_DEFAULT".."SQL_HC_OFF"
     )
 
     ShortConstant(
-        "Defines for use with #SOPT_SS_NOBROWSETABLE.",
-
         "NB_OFF".."0",
         "NB_ON".."1",
         "NB_DEFAULT".."SQL_NB_OFF"
     )
 
     ShortConstant(
-        "Defines for use with #SOPT_SS_REGIONALIZE.",
-
         "RE_OFF".."0",
         "RE_ON".."1",
         "RE_DEFAULT".."SQL_RE_OFF"
     )
 
     ShortConstant(
-        "Defines for use with #SOPT_SS_CURSOR_OPTIONS.",
-
         "CO_OFF".."0",
         "CO_FFO".."1",
         "CO_AF".."2",
@@ -268,22 +215,16 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "#SOPT_SS_NOCOUNT_STATUS.",
-
         "NC_OFF".."0",
         "NC_ON".."1"
     )
 
     ShortConstant(
-        "#SOPT_SS_DEFER_PREPARE.",
-
         "DP_OFF".."0",
         "DP_ON".."1"
     )
 
     ShortConstant(
-        "#SOPT_SS_NAME_SCOPE.",
-
         "SS_NAME_SCOPE_TABLE".."0",
         "SS_NAME_SCOPE_TABLE_TYPE".."1",
         "SS_NAME_SCOPE_EXTENDED".."2",
@@ -292,62 +233,44 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "#COPT_SS_ENCRYPT.",
-
         "EN_OFF".."0",
         "EN_ON".."1"
     )
 
     ShortConstant(
-        "#COPT_SS_TRUST_SERVER_CERTIFICATE.",
-
         "TRUST_SERVER_CERTIFICATE_NO".."0",
         "TRUST_SERVER_CERTIFICATE_YES".."1"
     )
 
     ShortConstant(
-        "#COPT_SS_BROWSE_CONNECT.",
-
         "MORE_INFO_NO".."0",
         "MORE_INFO_YES".."1"
     )
 
     ShortConstant(
-        "#COPT_SS_BROWSE_CACHE_DATA.",
-
         "CACHE_DATA_NO".."0",
         "CACHE_DATA_YES".."1"
     )
 
     ShortConstant(
-        "#COPT_SS_RESET_CONNECTION.",
-
         "RESET_YES".."1"
     )
 
     ShortConstant(
-        "#COPT_SS_WARN_ON_CP_ERROR.",
-
         "WARN_NO".."0",
         "WARN_YES".."1"
     )
 
     ShortConstant(
-        "#COPT_SS_MARS_ENABLED.",
-
         "MARS_ENABLED_NO".."0",
         "MARS_ENABLED_YES".."1"
     )
 
     IntConstant(
-        "#TXN_ISOLATION_OPTION bitmasks.",
-
         "TXN_SS_SNAPSHOT"..0x00000020
     )
 
     ShortConstant(
-        "The following are defines for #CA_SS_COLUMN_SORT_ORDER.",
-
         "SS_ORDER_UNSPECIFIED".."0",
         "SS_DESCENDING_ORDER".."1",
         "SS_ASCENDING_ORDER".."2",
@@ -355,8 +278,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "Driver specific SQL data type defines.",
-
         "SS_VARIANT".."-150",
         "SS_UDT".."-151",
         "SS_XML".."-152",
@@ -366,24 +287,18 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "Local types to be used with #CA_SS_SERVER_TYPE.",
-
         "SS_TYPE_DEFAULT".."0",
         "SS_TYPE_SMALLDATETIME".."1",
         "SS_TYPE_DATETIME".."2"
     )
 
     ShortConstant(
-        "Extended C Types range 4000 and above.",
-
         "C_TYPES_EXTENDED"..0x04000.s,
         "C_SS_TIME2".."SQL_C_TYPES_EXTENDED+0",
         "C_SS_TIMESTAMPOFFSET".."SQL_C_TYPES_EXTENDED+1"
     )
 
     ShortConstant(
-        "New types for SQL 6.0 and later servers.",
-
         "SQLTEXT"..0x23.s,
         "SQLVARBINARY"..0x25.s,
         "SQLINTN"..0x26.s,
@@ -429,14 +344,10 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     ).noPrefix()
 
     ShortConstant(
-        "#SS_LENGTH_UNLIMITED is used to describe the max length of VARCHAR(max), VARBINARY(max), NVARCHAR(max), and XML columns.",
-
         "SS_LENGTH_UNLIMITED".."0"
     )
 
     ShortConstant(
-        "User Data Type definitions. Returned by #ColAttribute()/#CA_SS_COLUMN_UTYPE.",
-
         "SQLudtBINARY".."3",
         "SQLudtBIT".."16",
         "SQLudtBITN".."0",
@@ -469,8 +380,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     ).noPrefix()
 
     IntConstant(
-        "Aggregate operator types. Returned by #ColAttribute()/#CA_SS_COLUMN_OP.",
-
         "SQLAOPSTDEV"..0x30,
         "SQLAOPSTDEVP"..0x31,
         "SQLAOPVAR"..0x32,
@@ -485,8 +394,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     ).noPrefix()
 
     ShortConstant(
-        "#GetInfo() driver specific define.",
-
         "INFO_SS_FIRST".."1199",
         "INFO_SS_NETLIB_NAMEW".."SQL_INFO_SS_FIRST+0",
         "INFO_SS_NETLIB_NAMEA".."SQL_INFO_SS_FIRST+1",
@@ -495,8 +402,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "#GetDiagField() driver specific defines.",
-
         "DIAG_SS_BASE".."-1150",
         "DIAG_SS_MSGSTATE".."SQL_DIAG_SS_BASE",
         "DIAG_SS_SEVERITY".."SQL_DIAG_SS_BASE-1",
@@ -506,8 +411,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "#GetDiagField()/#DIAG_DYNAMIC_FUNCTION_CODE driver specific defines.",
-
         "DIAG_DFC_SS_BASE".."-200",
         "DIAG_DFC_SS_ALTER_DATABASE".."SQL_DIAG_DFC_SS_BASE-0",
         "DIAG_DFC_SS_CHECKPOINT".."SQL_DIAG_DFC_SS_BASE-1",
@@ -574,8 +477,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "Severity codes for #DIAG_SS_SEVERITY.",
-
         "EX_ANY".."0",
         "EX_INFO".."10",
         "EX_MAXISEVERITY".."EX_INFO",
@@ -599,35 +500,25 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     ).noPrefix()
 
     ShortConstant(
-        "Options for #COPT_SS_PERF_DATA and #COPT_SS_PERF_QUERY.",
-
         "PERF_START".."1",
         "PERF_STOP".."2"
     )
 
     StringConstant(
-        "Defines for #COPT_SS_PERF_DATA_LOG.",
-
         "SS_DL_DEFAULT".."STATS.LOG"
     )
 
     StringConstant(
-        "Defines for #COPT_SS_PERF_QUERY_LOG.",
-
         "SS_QL_DEFAULT".."QUERY.LOG"
     )
 
     ShortConstant(
-        "Defines for #COPT_SS_PERF_QUERY_INTERVAL.",
-
         "SS_QI_DEFAULT".."30000"
     )
 
     // BCP
 
     ShortConstant(
-        "BCP Return codes.",
-
         "SUCCEED".."1",
         "FAIL".."0",
         "SUCCEED_ABORT".."2",
@@ -635,15 +526,11 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "BCP Transfer directions.",
-
         "DB_IN".."1",
         "DB_OUT".."2"
     )
 
     ShortConstant(
-        "bcp_control option.",
-
         "BCPMAXERRS".."1",
         "BCPFIRST".."2",
         "BCPLAST".."3",
@@ -666,22 +553,16 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     ShortConstant(
-        "BCPFILECP values.",
-
         "BCPFILECP_ACP".."0",
         "BCPFILECP_OEMCP".."1",
         "BCPFILECP_RAW".."-1"
     )
 
     ShortConstant(
-        "bcp_collen definition.",
-
         "VARLEN_DATA".."-10"
     )
 
     IntConstant(
-        "BCP column format properties.",
-
         "BCP_FMT_TYPE"..0x01,
         "BCP_FMT_INDICATOR_LEN"..0x02,
         "BCP_FMT_DATA_LEN"..0x03,
@@ -692,8 +573,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )
 
     IntConstant(
-        "bcp_setbulkmode properties.",
-
         "BCP_OUT_CHARACTER_MODE"..0x01,
         "BCP_OUT_WIDE_CHARACTER_MODE"..0x02,
         "BCP_OUT_NATIVE_TEXT_MODE"..0x03,
@@ -712,8 +591,6 @@ val sqlncli = "SQLNCLI".nativeClass(Module.ODBC, prefix = "SQL", prefixMethod = 
     )*/
 
     IntConstant(
-        "The following facilitates opening a handle to a SQL filestream.",
-
         "FILESTREAM_READ".."0",
         "FILESTREAM_WRITE".."1",
         "FILESTREAM_READWRITE".."2",

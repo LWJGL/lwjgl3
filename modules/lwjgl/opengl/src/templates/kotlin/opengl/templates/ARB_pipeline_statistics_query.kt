@@ -8,28 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val ARB_pipeline_statistics_query = "ARBPipelineStatisticsQuery".nativeClassGL("ARB_pipeline_statistics_query", postfix = ARB) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension introduces new query types that allow applications to get statistics information about different parts of the pipeline:
-        ${ul(
-            "Number of vertices and primitives issued to the GL.",
-            "Number of times a vertex shader, tessellation evaluation shader, geometry shader, fragment shader, and compute shader was invoked.",
-            "Number of patches processed by the tessellation control shader stage.",
-            "Number of primitives emitted by a geometry shader.",
-            "Number of primitives that entered the primitive clipping stage.",
-            "Number of primitives that are output by the primitive clipping stage."
-        )}
-        Requires ${GL30.core}.
-        """
-
     IntConstant(
-        """
-        Accepted by the {@code target} parameter of #BeginQuery(), #EndQuery(), #GetQueryiv(),
-        #BeginQueryIndexed(), #EndQueryIndexed() and #GetQueryIndexediv().
-        """,
-
         "VERTICES_SUBMITTED_ARB"..0x82EE,
         "PRIMITIVES_SUBMITTED_ARB"..0x82EF,
         "VERTEX_SHADER_INVOCATIONS_ARB"..0x82F0,

@@ -70,7 +70,6 @@ val GLXBinding = Generator.register(object : APIBinding(
             "static org.lwjgl.system.Checks.*"
         )
 
-        documentation = "Defines the GLX capabilities of a connection."
     }
 
     override fun PrintWriter.generateJava() {

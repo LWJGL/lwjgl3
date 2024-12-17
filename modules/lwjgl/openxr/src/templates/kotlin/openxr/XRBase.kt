@@ -45,7 +45,7 @@ val XrSpaceUserIdFB = typedef(uint64_t, "XrSpaceUserIdFB")
 
 // XR_ML_compat
 val MLCoordinateFrameUID = struct(Module.OPENXR, "MLCoordinateFrameUID", mutable = false) {
-    uint64_t("data", "")[2]
+    uint64_t("data")[2]
 }
 
 // XR_ML_marker_understanding

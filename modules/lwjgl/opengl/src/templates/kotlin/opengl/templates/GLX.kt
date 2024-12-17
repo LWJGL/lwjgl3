@@ -13,11 +13,7 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
         "org.lwjgl.system.linux.*"
     )
 
-    documentation = "Native bindings to GLX."
-
     IntConstant(
-        "Errors.",
-
         "GLXBadContext".."0",
         "GLXBadContextState".."1",
         "GLXBadDrawable".."2",
@@ -34,8 +30,6 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
     ).noPrefix()
 
     IntConstant(
-        "Names for attributes to #GetConfig().",
-
         "USE_GL".."1",
         "BUFFER_SIZE".."2",
         "LEVEL".."3",
@@ -56,8 +50,6 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
     )
 
     IntConstant(
-        "Error return values from #GetConfig(). Success is indicated by a value of 0.",
-
         "BAD_SCREEN".."1",
         "BAD_ATTRIBUTE".."2",
         "NO_EXTENSION".."3",
@@ -71,172 +63,125 @@ val GLX = "GLX".nativeClass(Module.OPENGL, prefix = "GLX", prefixMethod = "glX",
 
     Bool(
         "QueryExtension",
-        "Ascertains if the GLX extension is defined for an X server.",
 
         DISPLAY,
-        Check(1)..int.p("error_base", "returns the value of the first error code"),
-        Check(1)..int.p("event_base", "returns the value of the first event code")
+        Check(1)..int.p("error_base"),
+        Check(1)..int.p("event_base")
     )
 
     Bool(
         "QueryVersion",
-        "Queries the GLX version supported.",
 
         DISPLAY,
-        Check(1)..int.p("major", "returns the major version"),
-        Check(1)..int.p("minor", "returns the minor version")
+        Check(1)..int.p("major"),
+        Check(1)..int.p("minor")
     )
 
     int(
         "GetConfig",
-        "Returns a description of an OpenGL attribute exported by a Visual.",
 
         DISPLAY,
-        Input..XVisualInfo.p("visual", "a pointer to an ##XVisualInfo structure"),
-        int("attribute", "the attribute to query"),
-        Check(1)..int.p("value", "returns the attribute value")
+        Input..XVisualInfo.p("visual"),
+        int("attribute"),
+        Check(1)..int.p("value")
     )
 
     XVisualInfo.p(
         "ChooseVisual",
-        "Finds a visual that matches the client’s specified attributes.",
 
         DISPLAY,
-        int("screen", "the screen number"),
-        nullable..NullTerminated..int.p("attrib_list", "a list of attributes terminated with {@code None}"),
-
-        returnDoc =
-        """
-        a pointer to an {@code XVisualInfo} structure describing the visual that best matches the specified attributes. If no matching visual exists, #NULL is
-        returned.
-        """
+        int("screen"),
+        nullable..NullTerminated..int.p("attrib_list")
     )
 
     GLXContext(
         "CreateContext",
-        "Creates an OpenGL context.",
 
         DISPLAY,
-        Input..XVisualInfo.p("visual", "a pointer to an ##XVisualInfo structure"),
-        nullable..GLXContext("share_list", "the GLXContext to share objects with"),
-        Bool("direct", "whether direct rendering is requested")
+        Input..XVisualInfo.p("visual"),
+        nullable..GLXContext("share_list"),
+        Bool("direct")
     )
 
     Bool(
         "MakeCurrent",
-        "Makes a context current in the current thread",
 
         DISPLAY,
-        nullable..GLXDrawable("draw", "the draw GLXdrawable"),
-        nullable..GLXContext("ctx", "the GLXContext to make current")
+        nullable..GLXDrawable("draw"),
+        nullable..GLXContext("ctx")
     )
 
     void(
         "CopyContext",
-        "Copies OpenGL rendering state from one context to another.",
 
         DISPLAY,
-        GLXContext("source", "the source GLXContext"),
-        GLXContext("dest", "the destination GLXContext"),
-        unsigned_long(
-            "mask",
-            "indicates which groups of state variables are to be copied; it contains the bitwise OR of the symbolic names for the attribute groups"
-        )
+        GLXContext("source"),
+        GLXContext("dest"),
+        unsigned_long("mask")
     )
 
     Bool(
         "IsDirect",
-        "Determines if an OpenGL rendering context is direct.",
 
         DISPLAY,
-        GLXContext("ctx", "the GLXContext to query")
+        GLXContext("ctx")
     )
 
     void(
         "DestroyContext",
-        """
-        Destroys an OpenGL context.
-
-        If {@code ctx} is still current to any thread, {@code ctx} is not destroyed until it is no longer current. In any event, the associated XID will be
-        destroyed and {@code ctx} cannot subsequently be made current to any thread.
-        """,
 
         DISPLAY,
-        GLXContext("ctx", "the GLXContext to destroy")
+        GLXContext("ctx")
     )
 
     GLXContext(
         "GetCurrentContext",
-        "Returns the GLXContext that is current in the current thread.",
         void()
     )
 
     GLXDrawable(
         "GetCurrentDrawable",
-        "Returns the XID of the current drawable used for rendering.",
         void()
     )
 
     void(
         "WaitGL",
-        """
-        Prevents X requests from executing until any outstanding OpenGL rendering is done.
-
-        OpenGL calls made prior to {@code glXWaitGL} are guaranteed to be executed before X rendering calls made after {@code glXWaitGL}. While the same result
-        can be achieved using #Finish(), {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
-        where the client and server are on separate machines.
-        """,
         void()
     )
 
     void(
         "WaitX",
-        """
-        Prevents the OpenGL command sequence from executing until any outstanding X requests are completed.
-
-        X rendering calls made prior to {@code glXWaitX} are guaranteed to be executed before OpenGL rendering calls made after {@code glXWaitX}. While the same
-        result can be achieved using {@code XSync()}, {@code glXWaitX} does not require a round trip to the server, and may therefore be more efficient.
-        """,
         void()
     )
 
     void(
         "SwapBuffers",
-        """
-        For drawables that are double buffered, makes the contexts of the back buffer potentially visible (i.e., become the contents of the front buffer).
-
-        The contents of the back buffer then become undefined. This operation is a no-op if draw was created with a non-double-buffered GLXFBConfig, or if draw
-        is a GLXPixmap.
-        """,
 
         DISPLAY,
-        GLXDrawable("draw", "a double buffered GLXDrawable")
+        GLXDrawable("draw")
     )
 
     void(
         "UseXFont",
-        "Provides a shortcut for using X fonts.",
 
-        Font("font", "the font to use"),
-        int("first", "the first glyph in the font to use"),
-        int("count", "the number of display lists to define"),
-        int("list_base", "the base list number")
+        Font("font"),
+        int("first"),
+        int("count"),
+        int("list_base")
     )
 
     GLXPixmap(
         "CreateGLXPixmap",
-        "Creates a GLXPixmap from a Pixmap.",
 
         DISPLAY,
-        Input..XVisualInfo.p("visual", "a pointer to a ##XVisualInfo structure"),
-        Pixmap("pixmap", "the Pixmap")
+        Input..XVisualInfo.p("visual"),
+        Pixmap("pixmap")
     )
 
     void(
         "DestroyGLXPixmap",
-        "Destroys a GLXPixmap.",
 
         DISPLAY,
-        GLXPixmap("pixmap", "the GLXPixmap to destroy.")
+        GLXPixmap("pixmap")
     )
 }

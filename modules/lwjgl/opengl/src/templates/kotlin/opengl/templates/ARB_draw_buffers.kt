@@ -8,19 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val ARB_draw_buffers = "ARBDrawBuffers".nativeClassGL("ARB_draw_buffers", postfix = ARB) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension extends ${ARB_fragment_program.link} and ${ARB_fragment_shader.link} to allow multiple output colors, and provides a mechanism for
-        directing those outputs to multiple color buffers.
-
-        Requires ${GL13.core}. ${GL20.promoted}
-        """
-
     IntConstant(
-        "Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
-
         "MAX_DRAW_BUFFERS_ARB"..0x8824,
         "DRAW_BUFFER0_ARB"..0x8825,
         "DRAW_BUFFER1_ARB"..0x8826,
@@ -42,16 +30,8 @@ val ARB_draw_buffers = "ARBDrawBuffers".nativeClassGL("ARB_draw_buffers", postfi
 
     void(
         "DrawBuffersARB",
-        "Defines the draw buffers to which all output colors are written.",
 
-        AutoSize("bufs")..GLsizei("n", "the number of buffers in {@code bufs}"),
-        GLenum.const.p(
-            "bufs",
-            "a buffer of symbolic constants specifying the buffer to which each output color is written",
-            """
-            #NONE #FRONT_LEFT #FRONT_RIGHT #BACK_LEFT #BACK_RIGHT #AUX0 #AUX1 #AUX2 #AUX3
-            #COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
-            """
-        )
+        AutoSize("bufs")..GLsizei("n"),
+        GLenum.const.p("bufs")
     )
 }

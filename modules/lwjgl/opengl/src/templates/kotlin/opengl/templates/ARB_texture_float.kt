@@ -8,20 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val ARB_texture_float = "ARBTextureFloat".nativeClassGL("ARB_texture_float", postfix = ARB) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension adds texture internal formats with 16- and 32-bit floating-point components. The 32-bit floating-point components are in the standard
-        IEEE float format. The 16-bit floating-point components have 1 sign bit, 5 exponent bits, and 10 mantissa bits. Floating-point components are clamped to
-        the limits of the range representable by their format.
-
-        ${GL30.promoted}
-        """
-
     IntConstant(
-        "Accepted by the {@code value} parameter of GetTexLevelParameter.",
-
         "TEXTURE_RED_TYPE_ARB"..0x8C10,
         "TEXTURE_GREEN_TYPE_ARB"..0x8C11,
         "TEXTURE_BLUE_TYPE_ARB"..0x8C12,
@@ -32,14 +19,10 @@ val ARB_texture_float = "ARBTextureFloat".nativeClassGL("ARB_texture_float", pos
     )
 
     IntConstant(
-        "Returned by the {@code params} parameter of GetTexLevelParameter.",
-
         "UNSIGNED_NORMALIZED_ARB"..0x8C17
     )
 
     IntConstant(
-        "Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
-
         "RGBA32F_ARB"..0x8814,
         "RGB32F_ARB"..0x8815,
         "ALPHA32F_ARB"..0x8816,

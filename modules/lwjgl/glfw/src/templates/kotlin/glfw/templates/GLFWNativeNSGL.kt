@@ -16,25 +16,10 @@ val GLFWNativeNSGL = "GLFWNativeNSGL".nativeClass(Module.GLFW, nativeSubPath = "
         "static org.lwjgl.system.MemoryUtil.*"
     )
 
-    documentation = "Native bindings to the GLFW library's NSGL native access functions."
-
     id(
         "GetNSGLContext",
-        """
-        Returns the {@code NSOpenGLContext} of the specified GLFW window.
 
-        Note: This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", "the GLFW window"),
-
-        returnDoc =
-        """
-        the {@code NSOpenGLContext} of the specified window, or nil if an error occurred.
-
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.0"
+        GLFWwindow.p("window")
     )
 
 }

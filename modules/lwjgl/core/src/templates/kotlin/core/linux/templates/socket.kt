@@ -12,31 +12,20 @@ val socket = "Socket".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
         "<sys/socket.h>",
         "<errno.h>"
     )
-    documentation = "Native bindings to &lt;sys/socket.h&gt;."
-
     // TODO:
 
     EnumConstant(
-        "The following constants should be used for the second parameter of {@code shutdown}.",
-
-        "SHUT_RD".enum("No more receptions.", "0"),
-        "SHUT_WR".enum("No more transmissions."),
-        "SHUT_RDWR".enum("No more receptions or transmissions.")
+        "SHUT_RD".enum("0"),
+        "SHUT_WR".enum,
+        "SHUT_RDWR".enum
     )
 
     int(
         "socket",
-        """
-        Create a new socket of type {@code __type} in domain {@code __domain}, using protocol {@code __protocol}.
-        
-        If {@code __protocol} is zero, one is chosen automatically.  
-        """,
 
         CaptureCallState.errno.param,
-        int("__domain", ""),
-        int("__type", ""),
-        int("__protocol", ""),
-
-        returnDoc = "a file descriptor for the new socket, or -1 for errors"
+        int("__domain"),
+        int("__type"),
+        int("__protocol")
     )
 }

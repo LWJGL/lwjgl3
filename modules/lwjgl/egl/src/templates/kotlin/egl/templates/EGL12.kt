@@ -9,12 +9,7 @@ import org.lwjgl.generator.*
 
 val EGL12 = "EGL12".nativeClassEGL("EGL12", postfix = "") {
     extends = EGL11
-    documentation =
-        "The core EGL 1.2 functionality."
-
     IntConstant(
-        "",
-
         "ALPHA_FORMAT"..0x3088,
         "ALPHA_FORMAT_NONPRE"..0x308B,
         "ALPHA_FORMAT_PRE"..0x308C,
@@ -48,25 +43,23 @@ val EGL12 = "EGL12".nativeClassEGL("EGL12", postfix = "") {
 
     EGLBoolean(
         "BindAPI",
-        "",
 
-        EGLenum("api", "")
+        EGLenum("api")
     )
 
-    EGLenum("QueryAPI", "", void())
+    EGLenum("QueryAPI", void())
 
     EGLSurface(
         "CreatePbufferFromClientBuffer",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLenum("buftype", ""),
-        EGLClientBuffer("buffer", ""),
-        EGLConfig("config", ""),
-        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLenum("buftype"),
+        EGLClientBuffer("buffer"),
+        EGLConfig("config"),
+        nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 
-    EGLBoolean("ReleaseThread", "", void())
+    EGLBoolean("ReleaseThread", void())
 
-    EGLBoolean("WaitClient", "", void())
+    EGLBoolean("WaitClient", void())
 }

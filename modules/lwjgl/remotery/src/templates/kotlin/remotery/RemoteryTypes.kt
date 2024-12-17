@@ -68,10 +68,10 @@ val rmtPropertyFlags = "rmtPropertyFlags".enumType
 // Callback function pointer types
 val rmtMallocPtr = Module.REMOTERY.callback {
     opaque_p(
-        "RMTMalloc", "",
+        "RMTMalloc",
 
-        opaque_p("mm_context", ""),
-        rmtU32("size", ""),
+        opaque_p("mm_context"),
+        rmtU32("size"),
 
         nativeType = "rmtMallocPtr"
     )
@@ -79,11 +79,11 @@ val rmtMallocPtr = Module.REMOTERY.callback {
 
 val rmtReallocPtr = Module.REMOTERY.callback {
     opaque_p(
-        "RMTRealloc", "",
+        "RMTRealloc",
 
-        opaque_p("mm_context", ""),
-        void.p("ptr", ""),
-        rmtU32("size", ""),
+        opaque_p("mm_context"),
+        void.p("ptr"),
+        rmtU32("size"),
 
         nativeType = "rmtReallocPtr"
     )
@@ -91,10 +91,10 @@ val rmtReallocPtr = Module.REMOTERY.callback {
 
 val rmtFreePtr = Module.REMOTERY.callback {
     void(
-        "RMTFree", "",
+        "RMTFree",
 
-        opaque_p("mm_context", ""),
-        void.p("ptr", ""),
+        opaque_p("mm_context"),
+        void.p("ptr"),
 
         nativeType = "rmtFreePtr"
     )
@@ -102,10 +102,10 @@ val rmtFreePtr = Module.REMOTERY.callback {
 
 val rmtInputHandlerPtr = Module.REMOTERY.callback {
     opaque_p(
-        "RMTInputHandler", "",
+        "RMTInputHandler",
 
-        charUTF8.const.p("text", ""),
-        opaque_p("context", ""),
+        charUTF8.const.p("text"),
+        opaque_p("context"),
 
         nativeType = "rmtInputHandlerPtr"
     )
@@ -113,10 +113,10 @@ val rmtInputHandlerPtr = Module.REMOTERY.callback {
 
 val rmtSampleTreeHandlerPtr = Module.REMOTERY.callback {
     void(
-        "RMTSampleTreeHandler", "",
+        "RMTSampleTreeHandler",
 
-        nullable..opaque_p("cbk_context", ""),
-        rmtSampleTree.p("sample_tree", ""),
+        nullable..opaque_p("cbk_context"),
+        rmtSampleTree.p("sample_tree"),
 
         nativeType = "rmtSampleTreeHandlerPtr"
     )
@@ -124,133 +124,89 @@ val rmtSampleTreeHandlerPtr = Module.REMOTERY.callback {
 
 val rmtPropertyHandlerPtr = Module.REMOTERY.callback {
     void(
-        "RMTPropertyHandler", "",
+        "RMTPropertyHandler",
 
-        nullable..opaque_p("cbk_context", ""),
-        _rmtProperty.p("root", ""),
+        nullable..opaque_p("cbk_context"),
+        _rmtProperty.p("root"),
 
         nativeType = "rmtPropertyHandlerPtr"
     )
 }
 
 val rmtSettings = struct(Module.REMOTERY, "RMTSettings", nativeName = "rmtSettings", skipBuffer = true) {
-    documentation = "Structure to fill in to modify Remotery default settings."
+    rmtU16("port")
+	rmtBool("reuse_open_port")
+    rmtBool("limit_connections_to_localhost")
+    rmtBool("enableThreadSampler")
+    rmtU32("msSleepBetweenServerUpdates")
+    rmtU32("messageQueueSizeInBytes")
+    rmtU32("maxNbMessagesPerUpdate")
 
-    rmtU16("port", "which port to listen for incoming connections on")
-	rmtBool(
-        "reuse_open_port",
-        """
-        when this server exits it can leave the port open in {@code TIME_WAIT} state for a while. This forces subsequent server bind attempts to fail when
-        restarting. If you find restarts fail repeatedly with bind attempts, set this to true to forcibly reuse the open port.
-        """
-    )
-    rmtBool(
-        "limit_connections_to_localhost",
-        """
-        Only allow connections on localhost?
+    rmtMallocPtr("_malloc")
+    rmtReallocPtr("realloc")
+    rmtFreePtr("_free")
+    nullable..opaque_p("mm_context")
 
-        For dev builds you may want to access your game from other devices but if you distribute a game to your players with Remotery active, probably best to
-        limit connections to localhost.
-        """
-    )
-    rmtBool(
-        "enableThreadSampler",
-        """
-        Whether to enable runtime thread sampling that discovers which processors a thread is running on.
+    nullable..rmtInputHandlerPtr("input_handler")
 
-        This will suspend and resume threads from outside repeatdly and inject code into each thread that automatically instruments the processor.
+    nullable..rmtSampleTreeHandlerPtr("sampletree_handler")
+    nullable..opaque_p("sampletree_context")
 
-        Default: Enabled 
-        """
-    )
-    rmtU32("msSleepBetweenServerUpdates", "how long to sleep between server updates, hopefully trying to give a little CPU back to other threads")
-    rmtU32("messageQueueSizeInBytes", "size of the internal message queues Remotery uses. Will be rounded to page granularity of 64k.")
-    rmtU32(
-        "maxNbMessagesPerUpdate",
-        """
-        if the user continuously pushes to the message queue, the server network code won't get a chance to update unless there's an upper-limit on how many
-        messages can be consumed per loop
-        """
-    )
+    nullable..rmtPropertyHandlerPtr("snapshot_callback")
+    nullable..opaque_p("snapshot_context")
 
-    rmtMallocPtr("_malloc", "callback pointer for memory allocation")
-    rmtReallocPtr("realloc", "callback pointer for memory allocation")
-    rmtFreePtr("_free", "callback pointer for memory allocation")
-    nullable..opaque_p("mm_context", "memory allocation context pointer")
+    nullable..opaque_p("input_handler_context")
 
-    nullable..rmtInputHandlerPtr("input_handler", "callback pointer for receiving input from the Remotery console")
-
-    nullable..rmtSampleTreeHandlerPtr("sampletree_handler", "callback pointer for traversing the sample tree graph")
-    nullable..opaque_p("sampletree_context", "")
-
-    nullable..rmtPropertyHandlerPtr("snapshot_callback", "callback pointer for traversing the property graph")
-    nullable..opaque_p("snapshot_context", "")
-
-    nullable..opaque_p("input_handler_context", "context pointer that gets sent to Remotery console callback function")
-
-    nullable..rmtPStr("logPath", "")
+    nullable..rmtPStr("logPath")
 }
 
 val rmtPropertyValue = union(Module.REMOTERY, "RMTPropertyValue", nativeName = "rmtPropertyValue") {
-    documentation = "A property value as a union of all its possible types."
-
-    rmtBool("Bool", "")
-    rmtS32("S32", "")
-    rmtU32("U32", "")
-    rmtF32("F32", "")
-    rmtS64("S64", "")
-    rmtU64("U64", "")
-    rmtF64("F64", "")
+    rmtBool("Bool")
+    rmtS32("S32")
+    rmtU32("U32")
+    rmtF32("F32")
+    rmtS64("S64")
+    rmtU64("U64")
+    rmtF64("F64")
 }
 
 val rmtProperty = struct(Module.REMOTERY, "RMTProperty", nativeName = "rmtProperty") {
-    documentation =
-        """
-        Definition of a property that should be stored globally.
+    rmtBool("initialised")
 
-        Note: Use the callback api and the {@code rmt_PropertyGetxxx} accessors to traverse this structure.
-        """
+    rmtPropertyType("type")
+    rmtPropertyFlags("flags")
 
-    rmtBool("initialised", "gets set to #TRUE after a property has been modified, when it gets initialised for the first time")
+    rmtPropertyValue("value")
 
-    rmtPropertyType("type", "runtime description")
-    rmtPropertyFlags("flags", "")
+    rmtPropertyValue("lastFrameValue")
 
-    rmtPropertyValue("value", "current value")
+    rmtPropertyValue("prevValue")
+    rmtU32("prevValueFrame")
 
-    rmtPropertyValue("lastFrameValue", "last frame value to see if previous value needs to be updated")
+    charUTF8.const.p("name")
+    charUTF8.const.p("description")
 
-    rmtPropertyValue("prevValue", "previous value only if it's different from the current value, and when it changed")
-    rmtU32("prevValueFrame", "")
+    rmtPropertyValue("defaultValue")
 
-    charUTF8.const.p("name", "text description")
-    charUTF8.const.p("description", "")
+    nullable.._rmtProperty.p("parent")
 
-    rmtPropertyValue("defaultValue", "default value for Reset calls")
+    nullable.._rmtProperty.p("firstChild")
+    nullable.._rmtProperty.p("lastChild")
+    nullable.._rmtProperty.p("nextSibling")
 
-    nullable.._rmtProperty.p("parent", "parent link specifically placed after default value so that variadic macro can initialise it")
+    rmtU32("nameHash")
 
-    nullable.._rmtProperty.p("firstChild", "links within the property tree")
-    nullable.._rmtProperty.p("lastChild", "links within the property tree")
-    nullable.._rmtProperty.p("nextSibling", "links within the property tree")
-
-    rmtU32("nameHash", "hash for efficient sending of properties to the viewer")
-
-    rmtU32("uniqueID", "unique, persistent ID among all properties")
+    rmtU32("uniqueID")
 }
 
 val rmtSampleIterator = struct(Module.REMOTERY, "RMTSampleIterator", nativeName = "rmtSampleIterator", mutable = false, skipBuffer = true) {
-    documentation = "Struct to hold iterator info."
-
-    rmtSample.p("sample", "")
-    rmtSample.p("initial", "").private()
+    rmtSample.p("sample")
+    rmtSample.p("initial").private()
 }
 
 val rmtPropertyIterator = struct(Module.REMOTERY, "RMTPropertyIterator", nativeName = "rmtPropertyIterator", mutable = false, skipBuffer = true) {
-    documentation = "Struct to hold iterator info."
-
-    rmtProperty.p("property", "")
-    rmtProperty.p("initial", "").private()
+    rmtProperty.p("property")
+    rmtProperty.p("initial").private()
 }
 
 // Metal
@@ -260,44 +216,25 @@ val id = "id".handle
 // Vulkan
 
 val rmtVulkanFunctions = struct(Module.REMOTERY, "RMTVulkanFunctions", nativeName = "rmtVulkanFunctions") {
-    documentation =
-        """
-        Function pointers to Vulkan functions
+    opaque_p("vkGetPhysicalDeviceProperties")
 
-        Untyped so that the Vulkan headers are not required.
-        """
-
-    opaque_p("vkGetPhysicalDeviceProperties", "")
-
-    opaque_p("vkQueueSubmit", "")
-    opaque_p("vkQueueWaitIdle", "")
-    opaque_p("vkCreateQueryPool", "")
-    opaque_p("vkDestroyQueryPool", "")
-    opaque_p(
-        "vkResetQueryPool",
-        "{@code vkResetQueryPool} (Vulkan 1.2+ with {@code hostQueryReset}) or {@code vkResetQueryPoolEXT} (VK_EXT_host_query_reset)"
-    )
-    opaque_p("vkGetQueryPoolResults", "")
-    opaque_p("vkCmdWriteTimestamp", "")
-    opaque_p("vkCreateSemaphore", "")
-    opaque_p("vkDestroySemaphore", "")
-    opaque_p(
-        "vkSignalSemaphore",
-        "{@code vkSignalSemaphore} (Vulkan 1.2+ with {@code timelineSemaphore}) or {@code vkSignalSemaphoreKHR} (VK_KHR_timeline_semaphore)"
-    )
-    opaque_p(
-        "vkGetSemaphoreCounterValue",
-        "{@code vkGetSemaphoreCounterValue} (Vulkan 1.2+ with {@code timelineSemaphore}) or {@code vkGetSemaphoreCounterValueKHR} (VK_KHR_timeline_semaphore)"
-    )
-    opaque_p(
-        "vkGetCalibratedTimestampsEXT",
-        "{@code vkGetCalibratedTimestampsKHR} (VK_KHR_calibrated_timestamps) or {@code vkGetCalibratedTimestampsEXT} (VK_EXT_calibrated_timestamps)"
-    )
+    opaque_p("vkQueueSubmit")
+    opaque_p("vkQueueWaitIdle")
+    opaque_p("vkCreateQueryPool")
+    opaque_p("vkDestroyQueryPool")
+    opaque_p("vkResetQueryPool")
+    opaque_p("vkGetQueryPoolResults")
+    opaque_p("vkCmdWriteTimestamp")
+    opaque_p("vkCreateSemaphore")
+    opaque_p("vkDestroySemaphore")
+    opaque_p("vkSignalSemaphore")
+    opaque_p("vkGetSemaphoreCounterValue")
+    opaque_p("vkGetCalibratedTimestampsEXT")
 }
 
 val rmtVulkanBind = struct(Module.REMOTERY, "RMTVulkanBind", nativeName = "rmtVulkanBind", mutable = false) {
-    "VkInstance".handle("instance", "The Vulkan instance, of type {@code VkInstance}")
-    "VkPhysicalDevice".handle("physical_device", "The physical Vulkan device, of type {@code VkPhysicalDevice}")
-    "VkDevice".handle("device", "The logical Vulkan device, of type {@code VkDevice}")
-    "VkQueue".handle("queue", "The queue command buffers are executed on for profiling, of type {@code VkQueue}")
+    "VkInstance".handle("instance")
+    "VkPhysicalDevice".handle("physical_device")
+    "VkDevice".handle("device")
+    "VkQueue".handle("queue")
 }

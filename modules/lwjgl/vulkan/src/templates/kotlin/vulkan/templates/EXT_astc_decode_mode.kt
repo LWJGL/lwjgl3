@@ -9,96 +9,15 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val EXT_astc_decode_mode = "EXTAstcDecodeMode".nativeClassVK("EXT_astc_decode_mode", type = "device", postfix = "EXT") {
-    documentation =
-        """
-        The existing specification requires that low dynamic range (LDR) ASTC textures are decompressed to FP16 values per component. In many cases, decompressing LDR textures to a lower precision intermediate result gives acceptable image quality. Source material for LDR textures is typically authored as 8-bit UNORM values, so decoding to FP16 values adds little value. On the other hand, reducing precision of the decoded result reduces the size of the decompressed data, potentially improving texture cache performance and saving power.
-
-        The goal of this extension is to enable this efficiency gain on existing ASTC texture data. This is achieved by giving the application the ability to select the intermediate decoding precision.
-
-        Three decoding options are provided:
-
-        <ul>
-            <li>Decode to #FORMAT_R16G16B16A16_SFLOAT precision: This is the default, and matches the required behavior in the core API.</li>
-            <li>Decode to #FORMAT_R8G8B8A8_UNORM precision: This is provided as an option in LDR mode.</li>
-            <li>Decode to #FORMAT_E5B9G9R9_UFLOAT_PACK32 precision: This is provided as an option in both LDR and HDR mode. In this mode, negative values cannot be represented and are clamped to zero. The alpha component is ignored, and the results are as if alpha was 1.0. This decode mode is optional and support can be queried via the physical device properties.</li>
-        </ul>
-
-        <h5>Example</h5>
-        Create an image view that decodes to #FORMAT_R8G8B8A8_UNORM precision:
-
-        <pre><code>
-￿    VkImageViewASTCDecodeModeEXT decodeMode =
-￿    {
-￿        .sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT,
-￿        .pNext = NULL,
-￿        .decodeMode = VK_FORMAT_R8G8B8A8_UNORM
-￿    };
-￿
-￿    VkImageViewCreateInfo createInfo =
-￿    {
-￿        .sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
-￿        .pNext = &amp;decodeMode,
-￿        // flags, image, viewType set to application-desired values
-￿        .format = VK_FORMAT_ASTC_8x8_UNORM_BLOCK,
-￿        // components, subresourceRange set to application-desired values
-￿    };
-￿
-￿    VkImageView imageView;
-￿    VkResult result = vkCreateImageView(
-￿        device,
-￿        &amp;createInfo,
-￿        NULL,
-￿        &amp;imageView);</code></pre>
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_EXT_astc_decode_mode}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>68</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>1</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Jan-Harald Fredriksen <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_astc_decode_mode]%20@janharaldfredriksen-arm%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_astc_decode_mode%20extension*">janharaldfredriksen-arm</a></li>
-            </ul></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2018-08-07</dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Jan-Harald Fredriksen, Arm</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "EXT_ASTC_DECODE_MODE_SPEC_VERSION".."1"
     )
 
     StringConstant(
-        "The extension name.",
-
         "EXT_ASTC_DECODE_MODE_EXTENSION_NAME".."VK_EXT_astc_decode_mode"
     )
 
     EnumConstant(
-        "Extends {@code VkStructureType}.",
-
         "STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT".."1000067000",
         "STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT".."1000067001"
     )

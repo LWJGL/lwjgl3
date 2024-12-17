@@ -13,12 +13,10 @@ val LLVMTargetPowerPC = "LLVMTargetPowerPC".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
-    documentation = ""
-
-    void("InitializePowerPCTargetInfo",   "", void())
-    void("InitializePowerPCTarget",       "", void())
-    void("InitializePowerPCTargetMC",     "", void())
-    void("InitializePowerPCAsmPrinter",   "", void())
-    void("InitializePowerPCAsmParser",    "", void())
-    void("InitializePowerPCDisassembler", "", void())
+    void("InitializePowerPCTargetInfo",   void())
+    void("InitializePowerPCTarget",       void())
+    void("InitializePowerPCTargetMC",     void())
+    void("InitializePowerPCAsmPrinter",   void())
+    void("InitializePowerPCAsmParser",    void())
+    void("InitializePowerPCDisassembler", void())
 }

@@ -12,11 +12,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
     extends = GLX12
     javaImport("org.lwjgl.system.linux.*")
 
-    documentation = "Native bindings to GLX 1.3."
-
     IntConstant(
-        "Added in GLX 1.3.",
-
         "WINDOW_BIT"..0x00000001,
         "PIXMAP_BIT"..0x00000002,
         "PBUFFER_BIT"..0x00000004,
@@ -77,147 +73,131 @@ val GLX13 = "GLX13".nativeClassGLX("GLX13") {
 
     GLXFBConfig.p(
         "GetFBConfigs",
-        "Returns the list of all GLXFBConfigs that are available on the specified screen.",
 
         DISPLAY,
-        int("screen", "the screen number"),
-        AutoSizeResult..int.p("nelements", "returns the number of GLXFBConfigs in the returned list")
+        int("screen"),
+        AutoSizeResult..int.p("nelements")
     )
 
     GLXFBConfig.p(
         "ChooseFBConfig",
-        "Returns a list of GLXFBConfigs that match a list of attributes.",
 
         DISPLAY,
-        int("screen", "the screen number"),
-        nullable..NullTerminated..int.const.p("attrib_list", "a list of attributes terminated with {@code None}"),
-        AutoSizeResult..int.p("nelements", "returns the number of GLXFBConfigs matched")
+        int("screen"),
+        nullable..NullTerminated..int.const.p("attrib_list"),
+        AutoSizeResult..int.p("nelements")
     )
 
     int(
         "GetFBConfigAttrib",
-        "Queries the value of a GLX attribute for a GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig("config", "the GLXFBConfig being queried"),
-        int("attribute", "the attribute to query"),
-        Check(1)..int.p("value", "the attribute value")
+        GLXFBConfig("config"),
+        int("attribute"),
+        Check(1)..int.p("value")
     )
 
     XVisualInfo.p(
         "GetVisualFromFBConfig",
-        "Retrieves the associated visual of a GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig("config", "the GLXFBConfig")
+        GLXFBConfig("config")
     )
 
     GLXWindow(
         "CreateWindow",
-        "Create an onscreen rendering area from an X Window and a desired GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig("config", "the GLXFBConfig"),
-        Window("win", "the X Window"),
-        nullable..NullTerminated..int.const.p("attrib_list", "a list of attributes terminated with {@code None}")
+        GLXFBConfig("config"),
+        Window("win"),
+        nullable..NullTerminated..int.const.p("attrib_list")
     )
 
     GLXPixmap(
         "CreatePixmap",
-        "Creates a GLXPixmap offscreen rendering area from an X Pixmap and a desired GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig("config", "the GLXFBConfig"),
-        Pixmap("pixmap", "the X Pixmap"),
-        nullable..NullTerminated..int.const.p("attrib_list", "a list of attributes terminated with {@code None}")
+        GLXFBConfig("config"),
+        Pixmap("pixmap"),
+        nullable..NullTerminated..int.const.p("attrib_list")
     )
 
     void(
         "DestroyPixmap",
-        "Destroys a GLXPixmap.",
 
         DISPLAY,
-        GLXPixmap("pixmap", "the GLXPixmap to destroy")
+        GLXPixmap("pixmap")
     )
 
     GLXPbuffer(
         "CreatePbuffer",
-        "Creates a GLXPbuffer from a GLXFBConfig.",
 
         DISPLAY,
-        GLXFBConfig("config", "the GLXFBConfig"),
-        nullable..NullTerminated..int.const.p("attrib_list", "a list of attributes terminated with {@code None}")
+        GLXFBConfig("config"),
+        nullable..NullTerminated..int.const.p("attrib_list")
     )
 
     void(
         "DestroyPbuffer",
-        "Destroys a GLXPbuffer.",
 
         DISPLAY,
-        GLXPbuffer("pbuf", "the GLXPbuffer to destroy")
+        GLXPbuffer("pbuf")
     )
 
     void(
         "QueryDrawable",
-        "Queries an attribute associated with a GLXDrawable.",
 
         DISPLAY,
-        GLXDrawable("draw", "the GLXDrawable being queried"),
-        int("attribute", "the attribute to query"),
-        ReturnParam..Check(1)..unsigned_int.p("value", "returns the attribute value")
+        GLXDrawable("draw"),
+        int("attribute"),
+        ReturnParam..Check(1)..unsigned_int.p("value")
     )
 
     GLXContext(
         "CreateNewContext",
-        "Creates an OpenGL rendering context.",
 
         DISPLAY,
-        GLXFBConfig("config", "the GLXFBConfig"),
-        int("render_type", "the render type"),
-        nullable..GLXContext("share_list", "a GLXContext to share objects with"),
-        Bool("direct", "whether direct rendering is requested")
+        GLXFBConfig("config"),
+        int("render_type"),
+        nullable..GLXContext("share_list"),
+        Bool("direct")
     )
     Bool(
         "MakeContextCurrent",
-        "Makes a GLXContext current in the current thread.",
 
         DISPLAY,
-        nullable..GLXDrawable("draw", "the draw GLXDrawable"),
-        nullable..GLXDrawable("read", "the read GLXDrawable"),
-        nullable..GLXContext("ctx", "the GLXContext")
+        nullable..GLXDrawable("draw"),
+        nullable..GLXDrawable("read"),
+        nullable..GLXContext("ctx")
     )
 
     GLXDrawable(
         "GetCurrentReadDrawable",
-        "Returns the current GLXDrawable used for reading in the current thread.",
         void()
     )
 
     int(
         "QueryContext",
-        "Queries the value of a GLXContext attribute.",
 
         DISPLAY,
-        GLXContext("ctx", "the GLXContext being queried"),
-        int("attribute", "the attribute to query"),
-        Check(1)..int.p("value", "returns the attribute value")
+        GLXContext("ctx"),
+        int("attribute"),
+        Check(1)..int.p("value")
     )
 
     void(
         "SelectEvent",
-        "Selects which GLX events should be received on a GLXDrawable.",
 
         DISPLAY,
-        GLXDrawable("draw", "the GLXDrawable"),
-        unsigned_long("event_mask", "the selection mask")
+        GLXDrawable("draw"),
+        unsigned_long("event_mask")
     )
 
     void(
         "GetSelectedEvent",
-        "Returns which GLX events are selected for a GLXDrawable.",
 
         DISPLAY,
-        GLXDrawable("draw", "the GLXDrawable"),
-        Check(1)..unsigned_long.p("event_mask", "returns the selection mask")
+        GLXDrawable("draw"),
+        Check(1)..unsigned_long.p("event_mask")
     )
 }

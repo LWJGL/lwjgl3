@@ -17,39 +17,33 @@ val UIlayoutFlags = "UIlayoutFlags".enumType
 val UIhandler = Module.NANOVG.callback {
     void(
         "UIHandler",
-        "handler callback; event is one of UI_EVENT_*",
 
-        int("item", ""),
-        UIevent("event", ""),
+        int("item"),
+        UIevent("event"),
 
         nativeType = "UIhandler"
     ) {
-        documentation = "Instances of this interface may be passed to the #SetHandler() method."
     }
 }
 
 val UIvec2 = struct(Module.NANOVG, "UIVec2", nativeName = "UIvec2") {
-    documentation = "for cursor positions, mainly"
-
     union {
-        int("v", "")[2]
+        int("v")[2]
         struct {
-            int("x", "")
-            int("y", "")
+            int("x")
+            int("y")
         }
     }
 }
 
 val UIrect = struct(Module.NANOVG, "UIRect", nativeName = "UIrect") {
-    documentation = "layout rectangle"
-
     union {
-        int("v", "")[4]
+        int("v")[4]
         struct {
-            int("x", "")
-            int("y", "")
-            int("w", "")
-            int("h", "")
+            int("x")
+            int("y")
+            int("w")
+            int("h")
         }
     }
 }
@@ -58,58 +52,44 @@ val UIrect = struct(Module.NANOVG, "UIRect", nativeName = "UIrect") {
 
 /*
 val UIData = struct(Module.NANOVG, "UIData") {
-    documentation = ""
-
-    int("subtype", "")
-    nullable..UIhandler("handler", "")
+    int("subtype")
+    nullable..UIhandler("handler")
 }
 
 val UIRectData = struct(Module.NANOVG, "UIRectData") {
-    documentation = ""
-
-    UIData("head", "")
-    nullable..charUTF8.const.p("label", "")
-    NVGcolor("color", "")
+    UIData("head")
+    nullable..charUTF8.const.p("label")
+    NVGcolor("color")
 }
 
 val UIButtonData = struct(Module.NANOVG, "UIButtonData") {
-    documentation = ""
-
-    UIData("head", "")
-    int("iconid", "")
-    nullable..charUTF8.const.p("label", "")
+    UIData("head")
+    int("iconid")
+    nullable..charUTF8.const.p("label")
 }
 
 val UICheckData = struct(Module.NANOVG, "UICheckData") {
-    documentation = ""
-
-    UIData("head", "")
-    nullable..charUTF8.const.p("label", "")
-    int.p("option", "")
+    UIData("head")
+    nullable..charUTF8.const.p("label")
+    int.p("option")
 }
 
 val UIRadioData = struct(Module.NANOVG, "UIRadioData") {
-    documentation = ""
-
-    UIData("head", "")
-    int("iconid", "")
-    nullable..charUTF8.const.p("label", "")
-    int.p("value", "")
+    UIData("head")
+    int("iconid")
+    nullable..charUTF8.const.p("label")
+    int.p("value")
 }
 
 val UISliderData = struct(Module.NANOVG, "UISliderData") {
-    documentation = ""
-
-    UIData("head", "")
-    nullable..charUTF8.const.p("label", "")
-    float.p("progress", "")
+    UIData("head")
+    nullable..charUTF8.const.p("label")
+    float.p("progress")
 }
 
 val UITextData = struct(Module.NANOVG, "UITextData") {
-    documentation = ""
-
-    UIData("head", "")
-    nullable..charUTF8.p("text", "")
-    int("maxsize", "")
+    UIData("head")
+    nullable..charUTF8.p("text")
+    int("maxsize")
 }
  */

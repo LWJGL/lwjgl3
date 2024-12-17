@@ -9,58 +9,19 @@ import opengl.*
 import core.windows.*
 
 val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_make_current_read", ARB) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        The association of a separate "read" and "draw" DC with the current context allows for preprocessing of image data in an "off screen" DC which is then
-        read into a visible DC for final display.
-
-        Requires ${WGL_ARB_extensions_string.link}.
-        """
-
     IntConstant(
-        "New errors returned by org.lwjgl.system.windows.WinBase#GetLastError().",
-
         "ERROR_INVALID_PIXEL_TYPE_ARB"..0x2043,
         "ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB"..0x2054
     ).noPrefix()
 
     BOOL(
         "MakeContextCurrentARB",
-        """
-        Associates the context {@code hglrc} with the device {@code drawDC} for draws and the device {@code readDC} for reads. All subsequent OpenGL calls made
-        by the calling thread are drawn on the device identified by {@code drawDC} and read on the device identified by {@code readDC}.
 
-        The {@code drawDC} and {@code readDC} parameters must refer to drawing surfaces supported by OpenGL. These parameters need not be the same {@code hdc}
-        that was passed to WGL#wglCreateContext() when {@code hglrc} was created. {@code drawDC} must have the same pixel format and be created on the same
-        physical device as the {@code hdc} that was passed into wglCreateContext. {@code readDC} must be created on the same device as the {@code hdc} that was
-        passed to wglCreateContext and it must support the same pixel type as the pixel format of the {@code hdc} that was passed to wglCreateContext.
-
-        If {@code wglMakeContextCurrentARB} is used to associate a different device for reads than for draws, the "read" device will be used for the following
-        OpenGL operations:
-        ${ol(
-            """
-            Any pixel data that are sourced based on the value of #READ_BUFFER. Note, that accumulation operations use the value of {@code READ_BUFFER}, but
-            are not allowed when a different device context is used for reads.  In this case, the accumulation operation will generate #INVALID_OPERATION.
-            """,
-            """
-            Any depth values that are retrieved by #ReadPixels(), #CopyPixels(), or any OpenGL extension that sources depth images from the frame buffer in the
-            manner of {@code ReadPixels} and {@code CopyPixels}.
-            """,
-            """
-            Any stencil values that are retrieved by {@code ReadPixels}, {@code CopyPixels}, or any OpenGL extension that sources stencil images from the
-            framebuffer in the manner of {@code ReadPixels} and {@code CopyPixels}.
-            """
-        )}
-        These frame buffer values are taken from the surface associated with the device context specified by {@code readDC}.
-        """,
-
-        HDC("drawDC", "the \"draw\" device context"),
-        HDC("readDC", "the \"read\" device context"),
-        HGLRC("hglrc", "the OpenGL context")
+        HDC("drawDC"),
+        HDC("readDC"),
+        HGLRC("hglrc")
     )
 
-    HDC("GetCurrentReadDCARB", "Returns the \"read\" device context for the current OpenGL context.", void())
+    HDC("GetCurrentReadDCARB", void())
 
 }

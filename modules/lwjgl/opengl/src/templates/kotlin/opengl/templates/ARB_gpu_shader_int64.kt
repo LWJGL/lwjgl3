@@ -8,28 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int64") {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        The extension introduces the following features for all shader types:
-        ${ul(
-            """
-            support for 64-bit scalar and vector integer data types, including uniform API, uniform buffer object, transform feedback, and shader input and
-            output support;
-            """,
-            "new built-in functions to pack and unpack 64-bit integer types into a two-component 32-bit integer vector;",
-            "new built-in functions to convert double-precision floating-point values to or from their 64-bit integer bit encodings;",
-            "vector relational functions supporting comparisons of vectors of 64-bit integer types; and",
-            "common functions abs, sign, min, max, clamp, and mix supporting arguments of 64-bit integer types."
-        )}
-
-        Requires ${GL40.link} and GLSL 4.00.
-        """
-
     IntConstant(
-        "Returned by the {@code type} parameter of GetActiveAttrib, GetActiveUniform, and GetTransformFeedbackVarying.",
-
         "INT64_ARB"..0x140E,
         "UNSIGNED_INT64_ARB"..0x140F,
         "INT64_VEC2_ARB"..0x8FE9,
@@ -41,12 +20,12 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
     )
 
     val args = arrayOf(
-        GLuint("program", "the program object"),
-        GLint("location", "the location of the uniform variable to be modified"),
-        GLint64("x", "the uniform x value"),
-        GLint64("y", "the uniform y value"),
-        GLint64("z", "the uniform z value"),
-        GLint64("w", "the uniform w value")
+        GLuint("program"),
+        GLint("location"),
+        GLint64("x"),
+        GLint64("y"),
+        GLint64("z"),
+        GLint64("w")
     )
 
     val autoSizes = arrayOf(
@@ -55,128 +34,109 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
         AutoSize(3, "value"),
         AutoSize(4, "value")
     )
-    val autoSizeDoc = "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."
 
     for (i in 1..4) {
-        val glslType = if (i == 1) "int64_t" else "i64vec$i"
-        val valueDoc = "a pointer to an array of {@code count} values that will be used to update the specified $glslType variable"
-
         // Uniform{1,2,3,4}i64ARB
         void(
             "Uniform${i}i64ARB",
-            "Specifies the value of an $glslType uniform variable for the current program object.",
             *args.copyOfRange(1, 2 + i)
         )
 
         // Uniform{1,2,3,4}i64vARB
         void(
             "Uniform${i}i64vARB",
-            "Specifies the value of a single $glslType uniform variable or a $glslType uniform variable array for the current program object.",
 
             args[1],
-            autoSizes[i - 1]..GLsizei("count", autoSizeDoc),
-            GLint64.p("value", valueDoc)
+            autoSizes[i - 1]..GLsizei("count"),
+            GLint64.p("value")
         )
 
         // ProgramUniform{1,2,3,4}i64ARB
         void(
             "ProgramUniform${i}i64ARB",
-            "Specifies the value of an $glslType uniform variable for the specified program object.",
             *args.copyOfRange(0, 2 + i)
         )
 
         // ProgramUniform{1,2,3,4}i64vARB
         void(
             "ProgramUniform${i}i64vARB",
-            "Specifies the value of a single $glslType uniform variable or a $glslType uniform variable array for the specified program object.",
 
             args[0],
             args[1],
-            autoSizes[i - 1]..GLsizei("count", autoSizeDoc),
-            GLint64.p("value", valueDoc)
+            autoSizes[i - 1]..GLsizei("count"),
+            GLint64.p("value")
         )
     }
 
-    args[2] = GLuint64("x", "the uniform x value")
-    args[3] = GLuint64("y", "the uniform y value")
-    args[4] = GLuint64("z", "the uniform z value")
-    args[5] = GLuint64("w", "the uniform w value")
+    args[2] = GLuint64("x")
+    args[3] = GLuint64("y")
+    args[4] = GLuint64("z")
+    args[5] = GLuint64("w")
 
     for (i in 1..4) {
-        val glslType = if (i == 1) "uint64_t" else "u64vec$i"
-        val valueDoc = "a pointer to an array of {@code count} values that will be used to update the specified $glslType variable"
-
         // Uniform{1,2,3,4}ui64ARB
         void(
             "Uniform${i}ui64ARB",
-            "Specifies the value of an $glslType uniform variable for the current program object.",
             *args.copyOfRange(1, 2 + i)
         )
 
         // Uniform{1,2,3,4}ui64vARB
         void(
             "Uniform${i}ui64vARB",
-            "Specifies the value of a single $glslType uniform variable or a $glslType uniform variable array for the current program object.",
 
             args[1],
-            autoSizes[i - 1]..GLsizei("count", autoSizeDoc),
-            GLuint64.const.p("value", valueDoc)
+            autoSizes[i - 1]..GLsizei("count"),
+            GLuint64.const.p("value")
         )
 
         // ProgramUniform{1,2,3,4}ui64ARB
         void(
             "ProgramUniform${i}ui64ARB",
-            "Specifies the value of an $glslType uniform variable for the current program object.",
             *args.copyOfRange(0, 2 + i)
         )
 
         // ProgramUniform{1,2,3,4}ui64vARB
         void(
             "ProgramUniform${i}ui64vARB",
-            "Specifies the value of a single $glslType uniform variable or a $glslType uniform variable array for the specified program object.",
 
             args[0],
             args[1],
-            autoSizes[i - 1]..GLsizei("count", autoSizeDoc),
-            GLuint64.const.p("value", valueDoc)
+            autoSizes[i - 1]..GLsizei("count"),
+            GLuint64.const.p("value")
         )
     }
 
     void(
         "GetUniformi64vARB",
-        "Returns the int64_t value(s) of a uniform variable.",
 
-        GLuint("program", "the program object to be queried"),
-        GLint("location", "the location of the uniform variable to be queried"),
-        ReturnParam..Check(1)..GLint64.p("params", "the value of the specified uniform variable")
+        GLuint("program"),
+        GLint("location"),
+        ReturnParam..Check(1)..GLint64.p("params")
     )
 
     void(
         "GetUniformui64vARB",
-        "Returns the uint64_t value(s) of a uniform variable.",
 
-        GLuint("program", "the program object to be queried"),
-        GLint("location", "the location of the uniform variable to be queried"),
-        ReturnParam..Check(1)..GLuint64.p("params", "the value of the specified uniform variable")
+        GLuint("program"),
+        GLint("location"),
+        ReturnParam..Check(1)..GLuint64.p("params")
     )
 
     void(
         "GetnUniformi64vARB",
-        "Robust version of #GetUniformi64vARB().",
 
-        GLuint("program", "the program object to be queried"),
-        GLint("location", "the location of the uniform variable to be queried"),
-        AutoSize("params")..GLsizei("bufSize", "the maximum number of values to write in {@code params}"),
-        ReturnParam..GLint64.p("params", "the value of the specified uniform variable")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize("params")..GLsizei("bufSize"),
+        ReturnParam..GLint64.p("params")
     )
 
     void(
         "GetnUniformui64vARB",
-        "Robust version of #GetUniformui64vARB().",
 
-        GLuint("program", "the program object to be queried"),
-        GLint("location", "the location of the uniform variable to be queried"),
-        AutoSize("params")..GLsizei("bufSize", "the maximum number of values to write in {@code params}"),
-        ReturnParam..GLuint64.p("params", "the value of the specified uniform variable")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize("params")..GLsizei("bufSize"),
+        ReturnParam..GLuint64.p("params")
     )
 }

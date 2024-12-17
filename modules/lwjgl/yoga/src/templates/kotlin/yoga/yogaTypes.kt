@@ -32,34 +32,24 @@ val YGUnit = "YGUnit".enumType
 val YGWrap = "YGWrap".enumType
 
 val YGSize = struct(Module.YOGA, "YGSize") {
-    float("width", "")
-    float("height", "")
+    float("width")
+    float("height")
 }
 
 val YGValue = struct(Module.YOGA, "YGValue") {
-    float("value", "")
-    YGUnit("unit", "")
+    float("value")
+    YGUnit("unit")
 }
 
 val YGMeasureFunc = Module.YOGA.callback {
     YGSize(
         "YGMeasureFunc",
-        """
-        Returns the computed dimensions of the node, following the constraints of {@code widthMode} and {@code heightMode}:
 
-        #MeasureModeUndefined: The parent has not imposed any constraint on the child. It can be whatever size it wants.
- 
-        #MeasureModeAtMost: The child can be as large as it wants up to the specified size.
- 
-        #MeasureModeExactly: The parent has determined an exact size for the child. The child is going to be given those bounds regardless of how big it wants
-        to be.
-        """,
-
-        YGNodeConstRef("node", ""),
-        float("width", ""),
-        YGMeasureMode("widthMode", ""),
-        float("height", ""),
-        YGMeasureMode("heightMode", ""),
+        YGNodeConstRef("node"),
+        float("width"),
+        YGMeasureMode("widthMode"),
+        float("height"),
+        YGMeasureMode("heightMode"),
 
         nativeType = "YGMeasureFunc"
     )
@@ -68,11 +58,10 @@ val YGMeasureFunc = Module.YOGA.callback {
 val YGBaselineFunc = Module.YOGA.callback {
     float(
         "YGBaselineFunc",
-        "Returns a defined offset to baseline (ascent).",
 
-        YGNodeConstRef("node", ""),
-        float("width", ""),
-        float("height", ""),
+        YGNodeConstRef("node"),
+        float("width"),
+        float("height"),
 
         nativeType = "YGBaselineFunc"
     )
@@ -81,9 +70,8 @@ val YGBaselineFunc = Module.YOGA.callback {
 val YGDirtiedFunc = Module.YOGA.callback {
     void(
         "YGDirtiedFunc",
-        "",
 
-        YGNodeConstRef("node", ""),
+        YGNodeConstRef("node"),
 
         nativeType = "YGDirtiedFunc"
     )
@@ -92,13 +80,12 @@ val YGDirtiedFunc = Module.YOGA.callback {
 val YGLogger = Module.YOGA.callback {
     int(
         "YGLogger",
-        "",
 
-        YGConfigConstRef("config", ""),
-        YGNodeConstRef("node", ""),
-        YGLogLevel("level", ""),
-        charUTF8.const.p("format", ""),
-        va_list("args", ""),
+        YGConfigConstRef("config"),
+        YGNodeConstRef("node"),
+        YGLogLevel("level"),
+        charUTF8.const.p("format"),
+        va_list("args"),
 
         nativeType = "YGLogger"
     )
@@ -107,11 +94,10 @@ val YGLogger = Module.YOGA.callback {
 val YGCloneNodeFunc = Module.YOGA.callback {
     YGNodeRef(
         "YGCloneNodeFunc",
-        "",
 
-        YGNodeConstRef("oldNode", ""),
-        YGNodeConstRef("owner", ""),
-        int("childIndex", ""),
+        YGNodeConstRef("oldNode"),
+        YGNodeConstRef("owner"),
+        int("childIndex"),
 
         nativeType = "YGCloneNodeFunc"
     )

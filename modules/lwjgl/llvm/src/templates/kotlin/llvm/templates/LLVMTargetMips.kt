@@ -13,12 +13,10 @@ val LLVMTargetMips = "LLVMTargetMips".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
-    documentation = ""
-
-    void("InitializeMipsTargetInfo",   "", void())
-    void("InitializeMipsTarget",       "", void())
-    void("InitializeMipsTargetMC",     "", void())
-    void("InitializeMipsAsmPrinter",   "", void())
-    void("InitializeMipsAsmParser",    "", void())
-    void("InitializeMipsDisassembler", "", void())
+    void("InitializeMipsTargetInfo",   void())
+    void("InitializeMipsTarget",       void())
+    void("InitializeMipsTargetMC",     void())
+    void("InitializeMipsAsmPrinter",   void())
+    void("InitializeMipsAsmParser",    void())
+    void("InitializeMipsDisassembler", void())
 }

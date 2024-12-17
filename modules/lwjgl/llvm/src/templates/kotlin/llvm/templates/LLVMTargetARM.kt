@@ -13,12 +13,10 @@ val LLVMTargetARM = "LLVMTargetARM".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
-    documentation = ""
-
-    void("InitializeARMTargetInfo",   "", void())
-    void("InitializeARMTarget",       "", void())
-    void("InitializeARMTargetMC",     "", void())
-    void("InitializeARMAsmPrinter",   "", void())
-    void("InitializeARMAsmParser",    "", void())
-    void("InitializeARMDisassembler", "", void())
+    void("InitializeARMTargetInfo",   void())
+    void("InitializeARMTarget",       void())
+    void("InitializeARMTargetMC",     void())
+    void("InitializeARMAsmPrinter",   void())
+    void("InitializeARMAsmParser",    void())
+    void("InitializeARMDisassembler", void())
 }

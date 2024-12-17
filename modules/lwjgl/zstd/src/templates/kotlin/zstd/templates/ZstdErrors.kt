@@ -14,11 +14,7 @@ val ZstdErrors = "ZstdErrors".nativeClass(Module.ZSTD, prefix = "ZSTD", prefixMe
 ENABLE_WARNINGS()""")*/
     nativeImport("zstd_errors.h")
 
-    documentation = "Native bindings to the experimental error code API of ${url("https://facebook.github.io/zstd/", "Zstandard")} (zstd)."
-
     EnumConstant(
-        "Error code. ({@code ZSTD_ErrorCode})",
-
         "error_no_error".."0",
         "error_GENERIC".."1",
         "error_prefix_unknown".."10",
@@ -58,15 +54,13 @@ ENABLE_WARNINGS()""")*/
 
     ZSTD_ErrorCode(
         "getErrorCode",
-        "",
 
-        size_t("functionResult", "")
+        size_t("functionResult")
     )
 
     Nonnull..charASCII.const.p(
         "getErrorString",
-        "",
 
-        ZSTD_ErrorCode("code", "")
+        ZSTD_ErrorCode("code")
     )
 }

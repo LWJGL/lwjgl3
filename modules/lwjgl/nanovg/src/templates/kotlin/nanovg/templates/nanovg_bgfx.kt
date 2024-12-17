@@ -13,88 +13,75 @@ val nanovg_bgfx = "NanoVGBGFX".dependsOn(Module.BGFX)?.nativeClass(Module.NANOVG
         writer.generateFunctionsClass(nativeClass, "\n$t/** Contains the function pointers loaded from bgfx. */")
     }
 }) {
-    documentation = "Implementation of the NanoVG API using bgfx."
-
     javaImport("static org.lwjgl.nanovg.NanoVG.*")
 
     EnumConstant(
-        "These are additional flags on top of NVGimageFlags.",
-
-        "IMAGE_NODELETE".enum("Do not delete GL texture handle.", "1<<16")
+        "IMAGE_NODELETE".enum("1<<16")
     )
 
     NVGcontext.p(
         "Create",
-        "",
 
-        int32_tb("_edgeaa", ""),
-        MapToInt..ViewId("_viewId", ""),
-        nullable..AllocatorI("_allocator", "")
+        int32_tb("_edgeaa"),
+        MapToInt..ViewId("_viewId"),
+        nullable..AllocatorI("_allocator")
     )
 
     void(
         "Delete",
-        "",
 
-        NVGcontext.p("_ctx", "")
+        NVGcontext.p("_ctx")
     )
 
     void(
         "SetViewId",
-        "",
 
-        NVGcontext.p("_ctx", ""),
-        MapToInt..ViewId("_viewId", "")
+        NVGcontext.p("_ctx"),
+        MapToInt..ViewId("_viewId")
     )
 
     uint16_t(
         "GetViewId",
-        "",
 
-        NVGcontext.p("_ctx", "")
+        NVGcontext.p("_ctx")
     )
 
     NVGLUframebufferBGFX.p(
         "luCreateFramebuffer",
-        "",
 
-        NVGcontext.p("_ctx", ""),
-        int32_t("_width", ""),
-        int32_t("_height", ""),
-        int32_t("imageFlags", "")
+        NVGcontext.p("_ctx"),
+        int32_t("_width"),
+        int32_t("_height"),
+        int32_t("imageFlags")
     )
 
     void(
         "luBindFramebuffer",
-        "",
 
-        Input..nullable..NVGLUframebufferBGFX.p("_framebuffer", "")
+        Input..nullable..NVGLUframebufferBGFX.p("_framebuffer")
     )
 
     void(
         "luDeleteFramebuffer",
-        "",
 
-        Input..NVGLUframebufferBGFX.p("_framebuffer", "")
+        Input..NVGLUframebufferBGFX.p("_framebuffer")
     )
 
     void(
         "luSetViewFramebuffer",
-        "",
 
-        MapToInt..ViewId("_view_id", ""),
-        Input..NVGLUframebufferBGFX.p("_framebuffer", "")
+        MapToInt..ViewId("_view_id"),
+        Input..NVGLUframebufferBGFX.p("_framebuffer")
     )
 
     void(
         "CreateBgfxTexture",
-        "",
 
-        NVGcontext.p("_ctx", ""),
-        TextureHandle("_id", ""),
-        int("_width", ""),
-        int("_height", ""),
-        int("flags", "")
+        NVGcontext.p("_ctx"),
+        TextureHandle("_id"),
+        int("_width"),
+        int("_height"),
+        int("flags")
     )
 
     // BGFX/NanoVG integration
@@ -103,13 +90,12 @@ val nanovg_bgfx = "NanoVGBGFX".dependsOn(Module.BGFX)?.nativeClass(Module.NANOVG
 
     private..void(
         "org_lwjgl_nanovg_setup",
-        "",
 
-        opaque_p("realloc", ""),
-        opaque_p("free", ""),
-        opaque_p("nvgCreateInternal", ""),
-        opaque_p("nvgInternalParams", ""),
-        opaque_p("nvgDeleteInternal", ""),
+        opaque_p("realloc"),
+        opaque_p("free"),
+        opaque_p("nvgCreateInternal"),
+        opaque_p("nvgInternalParams"),
+        opaque_p("nvgDeleteInternal"),
 
         noPrefix = true
     )

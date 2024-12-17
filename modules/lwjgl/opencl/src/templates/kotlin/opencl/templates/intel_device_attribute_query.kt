@@ -8,21 +8,7 @@ import org.lwjgl.generator.*
 import opencl.*
 
 val intel_device_attribute_query = "INTELDeviceAttributeQuery".nativeClassCL("intel_device_attribute_query", INTEL) {
-    documentation =
-        """
-        Native bindings to the $extensionLink extension.
-
-        This extension can be used to query additional information about Intel OpenCL devices. The additional information may be useful to tailor a specific
-        workload to the properties of the device.
-        """
-
     IntConstant(
-        """
-        Possible values accepted as the {@code param_name} parameter of #GetDeviceInfo(), depending on the device type and the extension version.
-
-        Additional queries may be added in subsequent versions of the extension.
-        """,
-
         "DEVICE_IP_VERSION_INTEL"..0x4250,
         "DEVICE_ID_INTEL"..0x4251,
         "DEVICE_NUM_SLICES_INTEL"..0x4252,
@@ -33,12 +19,6 @@ val intel_device_attribute_query = "INTELDeviceAttributeQuery".nativeClassCL("in
     )
 
     IntConstant(
-        """
-        Bitfield type describing the feature capabilities of a device. ({@code cl_device_feature_capabilities_intel})
-
-        Additional feature flags may be added in subsequent versions of the extension.
-        """,
-
         "DEVICE_FEATURE_FLAG_DP4A_INTEL".."1 << 0",
         "DEVICE_FEATURE_FLAG_DPAS_INTEL".."1 << 1"
     )

@@ -8,43 +8,18 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_blend_equation_advanced", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension adds a number of "advanced" blending equations that can be used to perform new color blending operations, many of which are more complex
-        than the standard blend modes provided by unextended OpenGL.
-
-        Provides the new blending equations, but guarantees defined results only if each sample is touched no more than once in any single rendering pass. The
-        command #BlendBarrierNV() is provided to indicate a boundary between passes.
-    
-        Requires ${GL20.core}.
-        """
-
     IntConstant(
-        """
-        Accepted by the {@code pname} parameter of BlendParameteriNV, GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
-        """,
-
         "BLEND_PREMULTIPLIED_SRC_NV"..0x9280,
         "BLEND_OVERLAP_NV"..0x9281
     )
 
     IntConstant(
-        """
-        Accepted by the {@code value} parameter of BlendParameteriNV when {@code pname} is BLEND_OVERLAP_NV.
-        """,
-
         "UNCORRELATED_NV"..0x8521,
         "DISJOINT_NV"..0x9283,
         "CONJOINT_NV"..0x9284
     )
 
     IntConstant(
-        """
-        Accepted by the {@code mode} parameter of BlendEquation and BlendEquationi.
-        """,
-
         "SRC_NV"..0x9286,
         "DST_NV"..0x9287,
         "SRC_OVER_NV"..0x9288,
@@ -95,35 +70,16 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_ble
 
     void(
         "BlendParameteriNV",
-        "",
 
-        GLenum("pname", ""),
-        GLint("value", "")
+        GLenum("pname"),
+        GLint("value")
     )
 
-    void(
-        "BlendBarrierNV",
-        ""
-    )
+    void("BlendBarrierNV")
 }
 
 val NV_blend_equation_advanced_coherent = "NVBlendEquationAdvancedCoherent".nativeClassGL("NV_blend_equation_advanced_coherent", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the ${registryLink("NV_blend_equation_advanced")} extension.
-
-        Similar to NV_blend_equation_advanced, but guarantees that blending is done coherently and in API primitive ordering. An enable is provided to allow
-        implementations to opt out of fully coherent blending and instead behave as though only NV_blend_equation_advanced were supported.
-
-        Requires ${GL20.core} and ${NV_blend_equation_advanced.link}.
-        """
-
     IntConstant(
-        """
-        Accepted by the {@code cap} parameter of Disable, Enable, and IsEnabled, and by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev
-        and GetInteger64v.
-        """,
-
         "BLEND_ADVANCED_COHERENT_NV"..0x9285
     )
 }

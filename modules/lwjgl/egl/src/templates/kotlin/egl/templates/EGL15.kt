@@ -9,12 +9,7 @@ import org.lwjgl.generator.*
 
 val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
     extends = EGL14
-    documentation =
-        "The core EGL 1.5 functionality."
-
     IntConstant(
-        "",
-
         "CONTEXT_MAJOR_VERSION"..0x3098,
         "CONTEXT_MINOR_VERSION"..0x30FB,
         "CONTEXT_OPENGL_PROFILE_MASK"..0x30FD,
@@ -58,8 +53,6 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
     )
 
     LongConstant(
-        "",
-
         "FOREVER".."0xFFFFFFFFFFFFFFFFL",
         "NO_SYNC"..0L,
         "NO_IMAGE"..0L
@@ -67,95 +60,85 @@ val EGL15 = "EGL15".nativeClassEGL("EGL15", postfix = "") {
 
     EGLSync(
         "CreateSync",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLenum("type", ""),
-        noneTerminated..EGLAttrib.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLenum("type"),
+        noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
     EGLBoolean(
         "DestroySync",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSync("sync", "")
+        EGLDisplay("dpy"),
+        EGLSync("sync")
     )
 
     EGLint(
         "ClientWaitSync",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSync("sync", ""),
-        EGLint("flags", ""),
-        EGLTime("timeout", "")
+        EGLDisplay("dpy"),
+        EGLSync("sync"),
+        EGLint("flags"),
+        EGLTime("timeout")
     )
 
     EGLBoolean(
         "GetSyncAttrib",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSync("sync", ""),
-        EGLint("attribute", ""),
-        Check(1)..EGLAttrib.const.p("value", "")
+        EGLDisplay("dpy"),
+        EGLSync("sync"),
+        EGLint("attribute"),
+        Check(1)..EGLAttrib.const.p("value")
     )
 
     EGLImage(
         "CreateImage",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLContext("ctx", ""),
-        EGLenum("target", ""),
-        EGLClientBuffer("buffer", ""),
-        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLContext("ctx"),
+        EGLenum("target"),
+        EGLClientBuffer("buffer"),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
     EGLBoolean(
         "DestroyImage",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLImage("image", "")
+        EGLDisplay("dpy"),
+        EGLImage("image")
     )
 
     EGLDisplay(
         "GetPlatformDisplay",
-        "",
 
-        EGLenum("platform", ""),
-        opaque_p("native_display", ""),
-        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
+        EGLenum("platform"),
+        opaque_p("native_display"),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
     EGLSurface(
         "CreatePlatformWindowSurface",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLConfig("config", ""),
-        opaque_p("native_window", ""),
-        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLConfig("config"),
+        opaque_p("native_window"),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
     EGLSurface(
         "CreatePlatformPixmapSurface",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLConfig("config", ""),
-        opaque_p("native_pixmap", ""),
-        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLConfig("config"),
+        opaque_p("native_pixmap"),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
     EGLBoolean(
         "WaitSync",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLSync("sync", ""),
-        EGLint("flags", "")
+        EGLDisplay("dpy"),
+        EGLSync("sync"),
+        EGLint("flags")
     )
 }

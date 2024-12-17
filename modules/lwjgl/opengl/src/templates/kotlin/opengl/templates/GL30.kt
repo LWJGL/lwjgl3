@@ -15,39 +15,8 @@ const val CONDITIONAL_RENDER_MODES =
 
 val GL30 = "GL30".nativeClassGL("GL30") {
     extends = GL21
-    documentation =
-        """
-        The OpenGL functionality up to version 3.0. Includes the deprecated symbols of the Compatibility Profile.
-
-        OpenGL 3.0 implementations are guaranteed to support at least versions 1.10, 1.20 and 1.30 of the shading language, although versions 1.10 and 1.20 are
-        deprecated in a forward-compatible context.
-
-        Extensions promoted to core in this release:
-        ${ul(
-            registryLinkTo("EXT", "gpu_shader4"),
-            registryLinkTo("NV", "conditional_render"),
-            registryLinkTo("APPLE", "flush_buffer_range"),
-            """
-            ${registryLinkTo("ARB", "color_buffer_float")}, ${registryLinkTo("NV", "depth_buffer_float")}, ${registryLinkTo("ARB", "texture_float")},
-            ${registryLinkTo("EXT", "packed_float")} and ${registryLinkTo("EXT", "texture_shared_exponent")}
-            """,
-            registryLinkTo("EXT", "framebuffer_object"),
-            "${registryLinkTo("NV", "half_float")} and ${registryLinkTo("ARB", "half_FLOAT_pixel")}",
-            "${registryLinkTo("EXT", "framebuffer_multisample")} and ${registryLinkTo("EXT", "framebuffer_blit")}",
-            registryLinkTo("EXT", "texture_integer"),
-            registryLinkTo("EXT", "texture_array"),
-            registryLinkTo("EXT", "packed_depth_stencil"),
-            registryLinkTo("EXT", "draw_buffers2"),
-            registryLinkTo("EXT", "texture_compression_rgtc"),
-            registryLinkTo("EXT", "transform_feedback"),
-            registryLinkTo("APPLE", "vertex_array_object"),
-            registryLinkTo("EXT", "framebuffer_sRGB")
-        )}
-        """
 
     IntConstant(
-        "GetTarget",
-
         "MAJOR_VERSION"..0x821B,
         "MINOR_VERSION"..0x821C,
         "NUM_EXTENSIONS"..0x821D,
@@ -57,8 +26,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Renamed tokens.",
-
         "COMPARE_REF_TO_TEXTURE".."GL14.GL_COMPARE_R_TO_TEXTURE",
 
         "CLIP_DISTANCE0".."GL11.GL_CLIP_PLANE0",
@@ -84,16 +51,10 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // EXT_gpu_shader4
 
     IntConstant(
-        """
-        Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, GetVertexAttribiv, GetVertexAttribIuiv and GetVertexAttribIiv.
-        """,
-
         "VERTEX_ATTRIB_ARRAY_INTEGER"..0x88FD
     )
 
     IntConstant(
-        "Returned by the {@code type} parameter of GetActiveUniform.",
-
         "SAMPLER_1D_ARRAY"..0x8DC0,
         "SAMPLER_2D_ARRAY"..0x8DC1,
         "SAMPLER_1D_ARRAY_SHADOW"..0x8DC3,
@@ -117,8 +78,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "MIN_PROGRAM_TEXEL_OFFSET"..0x8904,
         "MAX_PROGRAM_TEXEL_OFFSET"..0x8905
     )
@@ -161,8 +120,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // NV_conditional_render
 
     IntConstant(
-        "Accepted by the {@code mode} parameter of BeginConditionalRender.",
-
         "QUERY_WAIT"..0x8E13,
         "QUERY_NO_WAIT"..0x8E14,
         "QUERY_BY_REGION_WAIT"..0x8E15,
@@ -175,8 +132,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // ARB_map_buffer_range
 
     IntConstant(
-        "Accepted by the {@code access} parameter of MapBufferRange.",
-
         "MAP_READ_BIT"..0x0001,
         "MAP_WRITE_BIT"..0x0002,
         "MAP_INVALIDATE_RANGE_BIT"..0x0004,
@@ -186,8 +141,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBufferParameteriv.",
-
         "BUFFER_ACCESS_FLAGS"..0x911F,
         "BUFFER_MAP_LENGTH"..0x9120,
         "BUFFER_MAP_OFFSET"..0x9121
@@ -199,16 +152,12 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // ARB_color_buffer_float
 
     IntConstant(
-        "Accepted by the {@code target} parameter of ClampColor and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "CLAMP_VERTEX_COLOR"..0x891A,
         "CLAMP_FRAGMENT_COLOR"..0x891B,
         "CLAMP_READ_COLOR"..0x891C
     )
 
     IntConstant(
-        "Accepted by the {@code clamp} parameter of ClampColor.",
-
         "FIXED_ONLY"..0x891D
     )
 
@@ -217,29 +166,17 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // ARB_depth_buffer_float
 
     IntConstant(
-        """
-        Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorage, and
-        returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameteriv.
-        """,
-
         "DEPTH_COMPONENT32F"..0x8CAC,
         "DEPTH32F_STENCIL8"..0x8CAD
     )
 
     IntConstant(
-        """
-        Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
-        GetTexImage.
-        """,
-
         "FLOAT_32_UNSIGNED_INT_24_8_REV"..0x8DAD
     )
 
     // ARB_texture_float
 
     IntConstant(
-        "Accepted by the {@code value} parameter of GetTexLevelParameter.",
-
         "TEXTURE_RED_TYPE"..0x8C10,
         "TEXTURE_GREEN_TYPE"..0x8C11,
         "TEXTURE_BLUE_TYPE"..0x8C12,
@@ -250,14 +187,10 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Returned by the {@code params} parameter of GetTexLevelParameter.",
-
         "UNSIGNED_NORMALIZED"..0x8C17
     )
 
     IntConstant(
-        "Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
-
         "RGBA32F"..0x8814,
         "RGB32F"..0x8815,
         "RGBA16F"..0x881A,
@@ -267,70 +200,40 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // EXT_packed_float
 
     IntConstant(
-        "Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorage.",
-
         "R11F_G11F_B10F"..0x8C3A
     )
 
     IntConstant(
-        """
-        Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
-        TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
-        GetSeparableFilter, ColorTable, ColorSubTable, and GetColorTable.
-        """,
-
         "UNSIGNED_INT_10F_11F_11F_REV"..0x8C3B
     )
 
     // EXT_texture_shared_exponent
 
     IntConstant(
-        "Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorage.",
-
         "RGB9_E5"..0x8C3D
     )
 
     IntConstant(
-        """
-        Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
-        TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
-        GetSeparableFilter, ColorTable, ColorSubTable, and GetColorTable.
-        """,
-
         "UNSIGNED_INT_5_9_9_9_REV"..0x8C3E
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.",
-
         "TEXTURE_SHARED_SIZE"..0x8C3F
     )
 
     // ARB_framebuffer_object
 
     IntConstant(
-        """
-        Accepted by the {@code target} parameter of BindFramebuffer, CheckFramebufferStatus, FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and
-        GetFramebufferAttachmentParameteriv.
-        """,
-
         "FRAMEBUFFER"..0x8D40,
         "READ_FRAMEBUFFER"..0x8CA8,
         "DRAW_FRAMEBUFFER"..0x8CA9
     )
 
     IntConstant(
-        """
-        Accepted by the {@code target} parameter of BindRenderbuffer, RenderbufferStorage, and GetRenderbufferParameteriv, and returned by
-        GetFramebufferAttachmentParameteriv.
-        """,
-
         "RENDERBUFFER"..0x8D41
     )
 
     IntConstant(
-        "Accepted by the {@code internalformat} parameter of RenderbufferStorage.",
-
         "STENCIL_INDEX1"..0x8D46,
         "STENCIL_INDEX4"..0x8D47,
         "STENCIL_INDEX8"..0x8D48,
@@ -338,8 +241,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.",
-
         "RENDERBUFFER_WIDTH"..0x8D42,
         "RENDERBUFFER_HEIGHT"..0x8D43,
         "RENDERBUFFER_INTERNAL_FORMAT"..0x8D44,
@@ -353,8 +254,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
-
         "FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE"..0x8CD0,
         "FRAMEBUFFER_ATTACHMENT_OBJECT_NAME"..0x8CD1,
         "FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL"..0x8CD2,
@@ -371,15 +270,11 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Returned in {@code params} by GetFramebufferAttachmentParameteriv.",
-
         "FRAMEBUFFER_DEFAULT"..0x8218,
         "INDEX"..0x8222
     )
 
     IntConstant(
-        "Accepted by the {@code attachment} parameter of FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv.",
-
         "COLOR_ATTACHMENT0"..0x8CE0,
         "COLOR_ATTACHMENT1"..0x8CE1,
         "COLOR_ATTACHMENT2"..0x8CE2,
@@ -418,14 +313,10 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "MAX_SAMPLES"..0x8D57
     )
 
     IntConstant(
-        "Returned by CheckFramebufferStatus().",
-
         "FRAMEBUFFER_COMPLETE"..0x8CD5,
         "FRAMEBUFFER_INCOMPLETE_ATTACHMENT"..0x8CD6,
         "FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT"..0x8CD7,
@@ -437,8 +328,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv,  and GetDoublev.",
-
         "FRAMEBUFFER_BINDING"..0x8CA6,
         "DRAW_FRAMEBUFFER_BINDING"..0x8CA6,
         "READ_FRAMEBUFFER_BINDING"..0x8CAA,
@@ -448,42 +337,22 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Returned by GetError().",
-
         "INVALID_FRAMEBUFFER_OPERATION"..0x0506
     )
 
     IntConstant(
-        """
-        Accepted by the {@code format} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
-        GetTexImage, by the {@code type} parameter of CopyPixels, by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D,
-        CopyTexImage2D, and RenderbufferStorage, and returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameteriv.
-        """,
-
         "DEPTH_STENCIL"..0x84F9
     )
 
     IntConstant(
-        """
-        Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
-        GetTexImage.
-        """,
-
         "UNSIGNED_INT_24_8"..0x84FA
     )
 
     IntConstant(
-        """
-        Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorage, and
-        returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameteriv.
-        """,
-
         "DEPTH24_STENCIL8"..0x88F0
     )
 
     IntConstant(
-        "Accepted by the {@code value} parameter of GetTexLevelParameter.",
-
         "TEXTURE_STENCIL_SIZE"..0x88F1
     )
 
@@ -511,23 +380,12 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // ARB_half_float_pixel & ARB_half_float_vertex
 
     IntConstant(
-        """
-        Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, GetTexImage, TexSubImage1D, TexSubImage2D,
-        TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, GetConvolutionFilter, SeparableFilter2D, GetSeparableFilter,
-        ColorTable, ColorSubTable, and GetColorTable.
-
-        Accepted by the {@code type} argument of VertexPointer, NormalPointer, ColorPointer, SecondaryColorPointer, FogCoordPointer, TexCoordPointer, and
-        VertexAttribPointer.
-        """,
-
         "HALF_FLOAT"..0x140B
     )
 
     // EXT_texture_integer
 
     IntConstant(
-        "Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
-
         "RGBA32UI"..0x8D70,
         "RGB32UI"..0x8D71,
         "RGBA16UI"..0x8D76,
@@ -543,10 +401,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        """
-        Accepted by the {@code format} parameter of TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, DrawPixels and ReadPixels.
-        """,
-
         "RED_INTEGER"..0x8D94,
         "GREEN_INTEGER"..0x8D95,
         "BLUE_INTEGER"..0x8D96,
@@ -565,30 +419,19 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // EXT_texture_array
 
     IntConstant(
-        "Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, GenerateMipmap, and BindTexture.",
-
         "TEXTURE_1D_ARRAY"..0x8C18,
         "TEXTURE_2D_ARRAY"..0x8C1A
     )
 
     IntConstant(
-        "Accepted by the {@code target} parameter of TexImage3D, TexSubImage3D, CopyTexSubImage3D, CompressedTexImage3D, and CompressedTexSubImage3D.",
-
         "PROXY_TEXTURE_2D_ARRAY"..0x8C1B
     )
 
     IntConstant(
-        """
-        Accepted by the {@code target} parameter of TexImage2D, TexSubImage2D, CopyTexImage2D, CopyTexSubImage2D, CompressedTexImage2D, and
-        CompressedTexSubImage2D.
-        """,
-
         "PROXY_TEXTURE_1D_ARRAY"..0x8C19
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.",
-
         "TEXTURE_BINDING_1D_ARRAY"..0x8C1C,
         "TEXTURE_BINDING_2D_ARRAY"..0x8C1D,
         "MAX_ARRAY_TEXTURE_LAYERS"..0x88FF
@@ -606,11 +449,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // EXT_texture_compression_rgtc
 
     IntConstant(
-        """
-        Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2D and the {@code format} parameter of
-        CompressedTexSubImage2D.
-        """,
-
         "COMPRESSED_RED_RGTC1"..0x8DBB,
         "COMPRESSED_SIGNED_RED_RGTC1"..0x8DBC,
         "COMPRESSED_RG_RGTC2"..0x8DBD,
@@ -620,8 +458,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // ARB_texture_rg
 
     IntConstant(
-        "Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D.",
-
         "R8"..0x8229,
         "R16"..0x822A,
         "RG8"..0x822B,
@@ -648,72 +484,45 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     )
 
     IntConstant(
-        "Accepted by the {@code format} parameter of TexImage3D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and ReadPixels.",
-
         "RG_INTEGER"..0x8228
     )
 
     // EXT_transform_feedback
 
     IntConstant(
-        """
-        Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
-        BindBufferRange, BindBufferOffset and BindBufferBase.
-        """,
-
         "TRANSFORM_FEEDBACK_BUFFER"..0x8C8E
     )
 
     IntConstant(
-        "Accepted by the {@code param} parameter of GetIntegeri_v and GetBooleani_v.",
-
         "TRANSFORM_FEEDBACK_BUFFER_START"..0x8C84,
         "TRANSFORM_FEEDBACK_BUFFER_SIZE"..0x8C85
     )
 
     IntConstant(
-        """
-        Accepted by the {@code param} parameter of GetIntegeri_v and GetBooleani_v, and by the {@code pname} parameter of GetBooleanv,
-        GetDoublev, GetIntegerv, and GetFloatv.
-        """,
-
         "TRANSFORM_FEEDBACK_BUFFER_BINDING"..0x8C8F
     )
 
     IntConstant(
-        "Accepted by the {@code bufferMode} parameter of TransformFeedbackVaryings.",
-
         "INTERLEAVED_ATTRIBS"..0x8C8C,
         "SEPARATE_ATTRIBS"..0x8C8D
     )
 
     IntConstant(
-        "Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
-
         "PRIMITIVES_GENERATED"..0x8C87,
         "TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN"..0x8C88
     )
 
     IntConstant(
-        """
-        Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
-        GetDoublev.
-        """,
-
         "RASTERIZER_DISCARD"..0x8C89
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
-
         "MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS"..0x8C8A,
         "MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS"..0x8C8B,
         "MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS"..0x8C80
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetProgramiv.",
-
         "TRANSFORM_FEEDBACK_VARYINGS"..0x8C83,
         "TRANSFORM_FEEDBACK_BUFFER_MODE"..0x8C7F,
         "TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH"..0x8C76
@@ -729,8 +538,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // ARB_vertex_array_object
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "VERTEX_ARRAY_BINDING"..0x85B5
     )
 
@@ -742,11 +549,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
     // ARB_framebuffer_sRGB
 
     IntConstant(
-        """
-        Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
-        GetDoublev.
-        """,
-
         "FRAMEBUFFER_SRGB"..0x8DB9
     )
 }

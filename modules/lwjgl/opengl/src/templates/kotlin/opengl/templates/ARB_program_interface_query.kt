@@ -8,38 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val ARB_program_interface_query = "ARBProgramInterfaceQuery".nativeClassGL("ARB_program_interface_query") {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension provides a single unified set of query commands that can be used by applications to determine properties of various interfaces and
-        resources used by program objects to communicate with application code, fixed-function OpenGL pipeline stages, and other programs. In unextended OpenGL
-        4.2, there is a separate set of query commands for each different type of interface or resource used by the program. These different sets of queries are
-        structured nearly identically, but the queries for some interfaces have limited capability (e.g., there is no ability to enumerate fragment shader
-        outputs).
-
-        With the single set of query commands provided by this extension, a consistent set of queries is available for all interfaces, and a new interface can
-        be added without having to introduce a completely new set of query commands. These queries are intended to provide a superset of the capabilities
-        provided by similar queries in OpenGL 4.2, and should allow for the deprecation of the existing queries.
-
-        This extension defines two terms: interfaces and active resources. Each interface of a program object provides a way for the program to communicate with
-        application code, fixed-function OpenGL pipeline stages, and other programs. Examples of interfaces for a program object include inputs (receiving
-        values from vertex attributes or outputs of other programs), outputs (sending values to other programs or per-fragment operations), uniforms (receiving
-        values from API calls), uniform blocks (receiving values from bound buffer objects), subroutines and subroutine uniforms (receiving API calls to
-        indicate functions to call during program execution), and atomic counter buffers (holding values to be manipulated by atomic counter shader functions).
-        Each interface of a program has a set of active resources used by the program. For example, the resources of a program's input interface includes all
-        active input variables used by the first stage of the program. The resources of a program's uniform block interface consists of the set of uniform
-        blocks with at least one member used by any shader in the program.
-
-        Requires ${GL20.core}. ${GL43.promoted}
-        """
-
     IntConstant(
-        """
-        Accepted by the {@code programInterface} parameter of GetProgramInterfaceiv, GetProgramResourceIndex, GetProgramResourceName, GetProgramResourceiv,
-        GetProgramResourceLocation, and GetProgramResourceLocationIndex.
-        """,
-
         "UNIFORM"..0x92E1,
         "UNIFORM_BLOCK"..0x92E2,
         "PROGRAM_INPUT"..0x92E3,
@@ -62,8 +31,6 @@ val ARB_program_interface_query = "ARBProgramInterfaceQuery".nativeClassGL("ARB_
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetProgramInterfaceiv.",
-
         "ACTIVE_RESOURCES"..0x92F5,
         "MAX_NAME_LENGTH"..0x92F6,
         "MAX_NUM_ACTIVE_VARIABLES"..0x92F7,
@@ -71,8 +38,6 @@ val ARB_program_interface_query = "ARBProgramInterfaceQuery".nativeClassGL("ARB_
     )
 
     IntConstant(
-        "Accepted in the {@code props} array of GetProgramResourceiv.",
-
         "NAME_LENGTH"..0x92F9,
         "TYPE"..0x92FA,
         "ARRAY_SIZE"..0x92FB,

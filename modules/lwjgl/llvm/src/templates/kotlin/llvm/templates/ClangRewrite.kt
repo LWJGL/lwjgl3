@@ -14,61 +14,50 @@ val ClangRewrite = "ClangRewrite".nativeClass(
     binding = CLANG_BINDING
 ) {
     nativeImport("clang-c/Rewrite.h")
-    documentation = "Requires Clang 12 or higher."
-
     IgnoreMissing..CXRewriter(
         "create",
-        "Create {@code CXRewriter}.",
 
-        CXTranslationUnit("TU", "")
+        CXTranslationUnit("TU")
     )
 
     IgnoreMissing..void(
         "insertTextBefore",
-        "Insert the specified string at the specified location in the original buffer.",
 
-        CXRewriter("Rew", ""),
-        CXSourceLocation("Loc", ""),
-        charUTF8.const.p("Insert", "")
+        CXRewriter("Rew"),
+        CXSourceLocation("Loc"),
+        charUTF8.const.p("Insert")
     )
 
     IgnoreMissing..void(
         "replaceText",
-        "Replace the specified range of characters in the input with the specified replacement.",
 
-        CXRewriter("Rew", ""),
-        CXSourceRange("ToBeReplaced", ""),
-        charUTF8.const.p("Replacement", "")
+        CXRewriter("Rew"),
+        CXSourceRange("ToBeReplaced"),
+        charUTF8.const.p("Replacement")
     )
 
     IgnoreMissing..void(
         "removeText",
-        "Remove the specified range.",
 
-        CXRewriter("Rew", ""),
-        CXSourceRange("ToBeRemoved", "")
+        CXRewriter("Rew"),
+        CXSourceRange("ToBeRemoved")
     )
 
     IgnoreMissing..intb(
         "overwriteChangedFiles",
-        "Save all changed files to disk.",
 
-        CXRewriter("Rew", ""),
-
-        returnDoc = "1 if any files were not saved successfully, returns 0 otherwise"
+        CXRewriter("Rew")
     )
 
     IgnoreMissing..void(
         "writeMainFileToStdOut",
-        "Write out rewritten version of the main file to {@code stdout}.",
 
-        CXRewriter("Rew", "")
+        CXRewriter("Rew")
     )
 
     IgnoreMissing..void(
         "dispose",
-        "Free the given {@code CXRewriter}.",
 
-        CXRewriter("Rew", "")
+        CXRewriter("Rew")
     )
 }

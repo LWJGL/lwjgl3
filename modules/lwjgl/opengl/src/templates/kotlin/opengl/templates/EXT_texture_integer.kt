@@ -8,50 +8,11 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer", postfix = EXT) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        Fixed-point textures in unextended OpenGL have integer components, but those values are taken to represent floating-point values in the range [0,1].
-        These integer components are considered "normalized" integers. When such a texture is accessed by a shader or by fixed-function fragment processing,
-        floating-point values are returned.
-
-        This extension provides a set of new "unnormalized" integer texture formats. Formats with both signed and unsigned integers are provided. In these
-        formats, the components are treated as true integers. When such textures are accessed by a shader, actual integer values are returned.
-
-        Pixel operations that read from or write to a texture or color buffer with unnormalized integer components follow a path similar to that used for color
-        index pixel operations, except that more than one component may be provided at once. Integer values flow through the pixel processing pipe, and no pixel
-        transfer operations are performed. Integer format enumerants used for such operations indicate unnormalized integer data.
-
-        Textures or render buffers with unnormalized integer formats may also be attached to framebuffer objects to receive fragment color values written by a
-        fragment shader. Per-fragment operations that require floating-point color components, including multisample alpha operations, alpha test, blending, and
-        dithering, have no effect when the corresponding colors are written to an integer color buffer. The ${registryLinkTo("NV", "gpu_program4")} and
-        ${EXT_gpu_shader4.link} extensions add the capability to fragment programs and fragment shaders to write signed and unsigned integer output values.
-
-        This extension does not enforce type consistency for texture accesses or between fragment shaders and the corresponding framebuffer attachments. The
-        results of a texture lookup from an integer texture are undefined:
-        ${ul(
-            "for fixed-function fragment processing, or",
-            "for shader texture accesses expecting floating-point return values."
-        )}
-        The color components used for per-fragment operations and written into a color buffer are undefined:
-        ${ul(
-            "for fixed-function fragment processing with an integer color buffer,",
-            "for fragment shaders that write floating-point color components to an integer color buffer, or",
-            "for fragment shaders that write integer color components to a color buffer with floating point or normalized integer components."
-        )}
-        Requires ${GL20.core} and ${registryLinkTo("NV", "gpu_program4")} or ${EXT_gpu_shader4.link}. ${GL30.promoted}
-        """
-
     IntConstant(
-        "Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "RGBA_INTEGER_MODE_EXT"..0x8D9E
     )
 
     IntConstant(
-        "Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
-
         "RGBA32UI_EXT"..0x8D70,
         "RGB32UI_EXT"..0x8D71,
         "ALPHA32UI_EXT"..0x8D72,
@@ -91,10 +52,6 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
     )
 
     IntConstant(
-        """
-        Accepted by the {@code format} parameter of TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, DrawPixels and ReadPixels.
-        """,
-
         "RED_INTEGER_EXT"..0x8D94,
         "GREEN_INTEGER_EXT"..0x8D95,
         "BLUE_INTEGER_EXT"..0x8D96,
@@ -109,57 +66,51 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
     void(
         "ClearColorIiEXT",
-        "",
 
-        GLint("r", ""),
-        GLint("g", ""),
-        GLint("b", ""),
-        GLint("a", "")
+        GLint("r"),
+        GLint("g"),
+        GLint("b"),
+        GLint("a")
     )
 
     void(
         "ClearColorIuiEXT",
-        "",
 
-        GLuint("r", ""),
-        GLuint("g", ""),
-        GLuint("b", ""),
-        GLuint("a", "")
+        GLuint("r"),
+        GLuint("g"),
+        GLuint("b"),
+        GLuint("a")
     )
 
     void(
         "TexParameterIivEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        Check(1)..SingleValue("param")..GLint.p("params", "")
+        GLenum("target"),
+        GLenum("pname"),
+        Check(1)..SingleValue("param")..GLint.p("params")
     )
 
     void(
         "TexParameterIuivEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        Check(1)..SingleValue("param")..GLuint.p("params", "")
+        GLenum("target"),
+        GLenum("pname"),
+        Check(1)..SingleValue("param")..GLuint.p("params")
     )
 
     void(
         "GetTexParameterIivEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        Check(1)..ReturnParam..GLint.p("params", "")
+        GLenum("target"),
+        GLenum("pname"),
+        Check(1)..ReturnParam..GLint.p("params")
     )
 
     void(
         "GetTexParameterIuivEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        Check(1)..ReturnParam..GLuint.p("params", "")
+        GLenum("target"),
+        GLenum("pname"),
+        Check(1)..ReturnParam..GLuint.p("params")
     )
 }

@@ -111,7 +111,6 @@ val XR_BINDING_INSTANCE = Generator.register(object : APIBinding(Module.OPENXR, 
     init {
         javaImport("static org.lwjgl.system.Checks.*")
 
-        documentation = "Defines the capabilities of an OpenXR {@code XrInstance}."
     }
 
     override fun PrintWriter.generateJava() {

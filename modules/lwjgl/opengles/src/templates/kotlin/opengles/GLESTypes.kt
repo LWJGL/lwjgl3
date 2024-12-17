@@ -39,19 +39,17 @@ val GLsync = "GLsync".handle
 val GLDEBUGPROC = Module.OPENGLES.callback {
     void(
         "GLDebugMessageCallback",
-        "Will be called when a debug message is generated.",
 
-        GLenum("source", "the message source"),
-        GLenum("type", "the message type"),
-        GLuint("id", "the message ID"),
-        GLenum("severity", "the message severity"),
-        AutoSize("message")..GLsizei("length", "the message length, excluding the null-terminator"),
-        GLcharUTF8.const.p("message", "a pointer to the message string representation"),
-        void.const.p("userParam", "the user-specified value that was passed when calling #DebugMessageCallback()"),
+        GLenum("source"),
+        GLenum("type"),
+        GLuint("id"),
+        GLenum("severity"),
+        AutoSize("message")..GLsizei("length"),
+        GLcharUTF8.const.p("message"),
+        void.const.p("userParam"),
 
         nativeType = "GLDEBUGPROC"
     ) {
-        documentation = "Instances of this interface may be passed to the #DebugMessageCallback() method."
         additionalCode = """
     /**
      * Converts the specified {@link GLDebugMessageCallback} arguments to a String.
@@ -76,19 +74,17 @@ val GLeglClientBufferEXT = "GLeglClientBufferEXT".handle
 val GLDEBUGPROCKHR = Module.OPENGLES.callback {
     void(
         "GLDebugMessageKHRCallback",
-        "Will be called when a debug message is generated.",
 
-        GLenum("source", "the message source"),
-        GLenum("type", "the message type"),
-        GLuint("id", "the message ID"),
-        GLenum("severity", "the message severity"),
-        AutoSize("message")..GLsizei("length", "the message length, excluding the null-terminator"),
-        GLcharUTF8.const.p("message", "a pointer to the message string representation"),
-        void.const.p("userParam", "the user-specified value that was passed when calling #DebugMessageCallbackKHR()"),
+        GLenum("source"),
+        GLenum("type"),
+        GLuint("id"),
+        GLenum("severity"),
+        AutoSize("message")..GLsizei("length"),
+        GLcharUTF8.const.p("message"),
+        void.const.p("userParam"),
 
         nativeType = "GLDEBUGPROCKHR"
     ) {
-        documentation = "Instances of this interface may be passed to the #DebugMessageCallbackKHR() method."
         additionalCode = """
     /**
      * Converts the specified {@link GLDebugMessageKHRCallback} arguments to a String.

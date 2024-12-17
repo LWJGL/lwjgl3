@@ -38,207 +38,138 @@ val LLVMOrcLookupKind = "LLVMOrcLookupKind".enumType
 val LLVMOrcSymbolLookupFlags = "LLVMOrcSymbolLookupFlags".enumType
 
 val LLVMJITSymbolFlags = struct(Module.LLVM, "LLVMJITSymbolFlags") {
-    documentation = "Represents the linkage flags for a symbol definition."
-
-    uint8_t("GenericFlags", "")
-    uint8_t("TargetFlags", "")
+    uint8_t("GenericFlags")
+    uint8_t("TargetFlags")
 }
 
 val LLVMJITEvaluatedSymbol = struct(Module.LLVM, "LLVMJITEvaluatedSymbol") {
-    documentation = "Represents an evaluated symbol address and flags."
-
-    LLVMOrcExecutorAddress("Address", "")
-    LLVMJITSymbolFlags("Flags", "")
+    LLVMOrcExecutorAddress("Address")
+    LLVMJITSymbolFlags("Flags")
 }
 
 val LLVMOrcErrorReporterFunction = Module.LLVM.callback {
     void(
         "LLVMOrcErrorReporterFunction",
-        "Error reporter function.",
 
-        opaque_p("Ctx", ""),
-        LLVMErrorRef("Err", ""),
+        opaque_p("Ctx"),
+        LLVMErrorRef("Err"),
 
         nativeType = "LLVMOrcErrorReporterFunction"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcExecutionSessionSetErrorReporter() method."
     }
 }
 
 val LLVMOrcCSymbolFlagsMapPair = struct(Module.LLVM, "LLVMOrcCSymbolFlagsMapPair") {
-    documentation = "Represents a pair of a symbol name and {@code LLVMJITSymbolFlags}."
-
-    LLVMOrcSymbolStringPoolEntryRef("Name", "")
-    LLVMJITSymbolFlags("Flags", "")
+    LLVMOrcSymbolStringPoolEntryRef("Name")
+    LLVMJITSymbolFlags("Flags")
 }
 val LLVMOrcCSymbolFlagsMapPairs = typedef(LLVMOrcCSymbolFlagsMapPair.p, "LLVMOrcCSymbolFlagsMapPairs")
 
 val LLVMOrcCSymbolMapPair = struct(Module.LLVM, "LLVMOrcCSymbolMapPair") {
-    documentation = "Represents a pair of a symbol name and an evaluated symbol."
-
-    LLVMOrcSymbolStringPoolEntryRef("Name", "")
-    LLVMJITEvaluatedSymbol("Sym", "")
+    LLVMOrcSymbolStringPoolEntryRef("Name")
+    LLVMJITEvaluatedSymbol("Sym")
 }
 val LLVMOrcCSymbolMapPairs = typedef(LLVMOrcCSymbolMapPair.p, "LLVMOrcCSymbolMapPairs")
 
 val LLVMOrcCSymbolAliasMapEntry = struct(Module.LLVM, "LLVMOrcCSymbolAliasMapEntry") {
-    documentation = "Represents a {@code SymbolAliasMapEntry}"
-
-    LLVMOrcSymbolStringPoolEntryRef("Name", "")
-    LLVMJITSymbolFlags("Flags", "")
+    LLVMOrcSymbolStringPoolEntryRef("Name")
+    LLVMJITSymbolFlags("Flags")
 }
 
 val LLVMOrcCSymbolAliasMapPair = struct(Module.LLVM, "LLVMOrcCSymbolAliasMapPair") {
-    documentation = "Represents a pair of a symbol name and {@code SymbolAliasMapEntry}."
-
-    LLVMOrcSymbolStringPoolEntryRef("Name", "")
-    LLVMOrcCSymbolAliasMapEntry("Entry", "")
+    LLVMOrcSymbolStringPoolEntryRef("Name")
+    LLVMOrcCSymbolAliasMapEntry("Entry")
 }
 val LLVMOrcCSymbolAliasMapPairs = typedef(LLVMOrcCSymbolAliasMapPair.p, "LLVMOrcCSymbolAliasMapPairs")
 
 val LLVMOrcCSymbolsList = struct(Module.LLVM, "LLVMOrcCSymbolsList") {
-    documentation = "Represents a list of {@code LLVMOrcSymbolStringPoolEntryRef} and the associated length."
-
-    LLVMOrcSymbolStringPoolEntryRef.p("Symbols", "")
-    AutoSize("Symbols")..size_t("Length", "")
+    LLVMOrcSymbolStringPoolEntryRef.p("Symbols")
+    AutoSize("Symbols")..size_t("Length")
 }
 
 val LLVMOrcCDependenceMapPair = struct(Module.LLVM, "LLVMOrcCDependenceMapPair") {
-    documentation = "Represents a pair of a {@code JITDylib} and {@code LLVMOrcCSymbolsList}."
-
-    LLVMOrcJITDylibRef("JD", "")
-    LLVMOrcCSymbolsList("Names", "")
+    LLVMOrcJITDylibRef("JD")
+    LLVMOrcCSymbolsList("Names")
 }
 val LLVMOrcCDependenceMapPairs = typedef(LLVMOrcCDependenceMapPair.p, "LLVMOrcCDependenceMapPairs")
 
 val LLVMOrcCSymbolDependenceGroup = struct(Module.LLVM, "LLVMOrcCSymbolDependenceGroup") {
-    documentation = "A set of symbols that share dependencies."
-
-    LLVMOrcCSymbolsList("Symbols", "")
-    LLVMOrcCDependenceMapPairs("Dependencies", "")
-    AutoSize("Dependencies")..size_t("NumDependencies", "")
+    LLVMOrcCSymbolsList("Symbols")
+    LLVMOrcCDependenceMapPairs("Dependencies")
+    AutoSize("Dependencies")..size_t("NumDependencies")
 }
 
 val LLVMOrcCJITDylibSearchOrderElement = struct(Module.LLVM, "LLVMOrcCJITDylibSearchOrderElement") {
-    documentation = "An element type for a JITDylib search order."
-
-    LLVMOrcJITDylibRef("JD", "")
-    LLVMOrcJITDylibLookupFlags("JDLookupFlags", "")
+    LLVMOrcJITDylibRef("JD")
+    LLVMOrcJITDylibLookupFlags("JDLookupFlags")
 }
 val LLVMOrcCJITDylibSearchOrder = typedef(LLVMOrcCJITDylibSearchOrderElement.p, "LLVMOrcCJITDylibSearchOrder")
 
 val LLVMOrcCLookupSetElement = struct(Module.LLVM, "LLVMOrcCLookupSetElement") {
-    documentation = "An element type for a symbol lookup set."
-
-    LLVMOrcSymbolStringPoolEntryRef("Name", "")
-    LLVMOrcSymbolLookupFlags("LookupFlags", "")
+    LLVMOrcSymbolStringPoolEntryRef("Name")
+    LLVMOrcSymbolLookupFlags("LookupFlags")
 }
 val LLVMOrcCLookupSet = typedef(LLVMOrcCLookupSetElement.p, "LLVMOrcCLookupSet")
 
 val LLVMOrcMaterializationUnitMaterializeFunction = Module.LLVM.callback {
     void(
         "LLVMOrcMaterializationUnitMaterializeFunction",
-        """
-        A {@code MaterializationUnit} materialize callback.
 
-        Ownership of the {@code Ctx} and {@code MR} arguments passes to the callback which must adhere to the {@code LLVMOrcMaterializationResponsibilityRef}
-        contract (see comment for that type).
-
-        If this callback is called then the ##LLVMOrcMaterializationUnitDestroyFunction callback will NOT be called.
-        """,
-
-        opaque_p("Ctx", ""),
-        LLVMOrcMaterializationResponsibilityRef("MR", ""),
+        opaque_p("Ctx"),
+        LLVMOrcMaterializationResponsibilityRef("MR"),
 
         nativeType = "LLVMOrcMaterializationUnitMaterializeFunction"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcCreateCustomMaterializationUnit() method."
     }
 }
 
 val LLVMOrcMaterializationUnitDiscardFunction = Module.LLVM.callback {
     void(
         "LLVMOrcMaterializationUnitDiscardFunction",
-        """
-        A {@code MaterializationUnit} discard callback.
 
-        Ownership of {@code JD} and {@code Symbol} remain with the caller: These arguments should not be disposed of or released.
-        """,
-
-        opaque_p("Ctx", ""),
-        LLVMOrcJITDylibRef("JD", ""),
-        LLVMOrcSymbolStringPoolEntryRef("Symbol", ""),
+        opaque_p("Ctx"),
+        LLVMOrcJITDylibRef("JD"),
+        LLVMOrcSymbolStringPoolEntryRef("Symbol"),
 
         nativeType = "LLVMOrcMaterializationUnitDiscardFunction"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcCreateCustomMaterializationUnit() method."
     }
 }
 
 val LLVMOrcMaterializationUnitDestroyFunction = Module.LLVM.callback {
     void(
         "LLVMOrcMaterializationUnitDestroyFunction",
-        """
-        A {@code MaterializationUnit} destruction callback.
 
-        If a custom {@code MaterializationUnit} is destroyed before its {@code Materialize} function is called then this function will be called to provide an
-        opportunity for the underlying program representation to be destroyed.
-        """,
-
-        opaque_p("Ctx", ""),
+        opaque_p("Ctx"),
 
         nativeType = "LLVMOrcMaterializationUnitDestroyFunction"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcCreateCustomMaterializationUnit() method."
     }
 }
 
 val LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction = Module.LLVM.callback {
     LLVMErrorRef(
         "LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction",
-        """
-        A custom generator function.
 
-        This can be used to create a custom generator object using #OrcCreateCustomCAPIDefinitionGenerator(). The resulting object can be attached to a
-        {@code JITDylib}, via #OrcJITDylibAddGenerator(), to receive callbacks when lookups fail to match existing definitions.
-        """,
-
-        LLVMOrcDefinitionGeneratorRef("GeneratorObj", "will contain the address of the custom generator object"),
-        opaque_p("Ctx", "will contain the context object passed to {@code LLVMOrcCreateCustomCAPIDefinitionGenerator}."),
-        LLVMOrcLookupStateRef.p(
-            "LookupState",
-            """
-            will contain a pointer to an {@code LLVMOrcLookupStateRef} object.
-
-            This can optionally be modified to make the definition generation process asynchronous: If the {@code LookupStateRef} value is copied, and the
-            original {@code LLVMOrcLookupStateRef} set to null, the lookup will be suspended. Once the asynchronous definition process has been completed
-            clients must call {@code LLVMOrcLookupStateContinueLookup} to continue the lookup (this should be done unconditionally, even if errors have
-            occurred in the mean time, to free the lookup state memory and notify the query object of the failures). If {@code LookupState} is captured this
-            function must return #ErrorSuccess.
-            """
-        ),
-        LLVMOrcLookupKind("Kind", "can be inspected to determine the lookup kind (e.g. as-if-during-static-link, or as-if-during-dlsym)"),
-        LLVMOrcJITDylibRef("JD", "specifies which {@code JITDylib} the definitions should be generated into"),
-        LLVMOrcJITDylibLookupFlags("JDLookupFlags", "can be inspected to determine whether the original lookup included non-exported symbols"),
-        LLVMOrcCLookupSet("LookupSet", "contains the set of symbols that could not be found in {@code JD} already (the set of generation candidates)"),
-        AutoSize("LookupSet")..size_t("LookupSetSize", ""),
+        LLVMOrcDefinitionGeneratorRef("GeneratorObj"),
+        opaque_p("Ctx"),
+        LLVMOrcLookupStateRef.p("LookupState"),
+        LLVMOrcLookupKind("Kind"),
+        LLVMOrcJITDylibRef("JD"),
+        LLVMOrcJITDylibLookupFlags("JDLookupFlags"),
+        LLVMOrcCLookupSet("LookupSet"),
+        AutoSize("LookupSet")..size_t("LookupSetSize"),
 
         nativeType = "LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcCreateCustomCAPIDefinitionGenerator() method."
     }
 }
 
 val LLVMOrcDisposeCAPIDefinitionGeneratorFunction = Module.LLVM.callback {
     void(
         "LLVMOrcDisposeCAPIDefinitionGeneratorFunction",
-        """
-        Disposer for a custom generator.
 
-        Will be called by ORC when the {@code JITDylib} that the generator is attached to is destroyed.
-        """,
-
-        opaque_p("Ctx", ""),
+        opaque_p("Ctx"),
 
         nativeType = "LLVMOrcDisposeCAPIDefinitionGeneratorFunction"
     )
@@ -247,126 +178,84 @@ val LLVMOrcDisposeCAPIDefinitionGeneratorFunction = Module.LLVM.callback {
 val LLVMOrcSymbolPredicate = Module.LLVM.callback {
     int(
         "LLVMOrcSymbolPredicate",
-        "Predicate function for {@code SymbolStringPoolEntries}.",
 
-        opaque_p("Ctx", ""),
-        LLVMOrcSymbolStringPoolEntryRef("Sym", ""),
+        opaque_p("Ctx"),
+        LLVMOrcSymbolStringPoolEntryRef("Sym"),
 
         nativeType = "LLVMOrcSymbolPredicate"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcCreateDynamicLibrarySearchGeneratorForProcess() method."
     }
 }
 
 val LLVMOrcGenericIRModuleOperationFunction = Module.LLVM.callback {
     LLVMErrorRef(
         "LLVMOrcGenericIRModuleOperationFunction",
-        "A function for inspecting/mutating IR modules, suitable for use with #OrcThreadSafeModuleWithModuleDo().",
 
-        opaque_p("Ctx", ""),
-        LLVMModuleRef("M", ""),
+        opaque_p("Ctx"),
+        LLVMModuleRef("M"),
 
         nativeType = "LLVMOrcGenericIRModuleOperationFunction"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcThreadSafeModuleWithModuleDo() method."
     }
 }
 
 val LLVMOrcIRTransformLayerTransformFunction = Module.LLVM.callback {
     LLVMErrorRef(
         "LLVMOrcIRTransformLayerTransformFunction",
-        """
-        A function for applying transformations as part of an transform layer.
 
-        Implementations of this type are responsible for managing the lifetime of the {@code Module} pointed to by {@code ModInOut}: If the
-        {@code LLVMModuleRef} value is overwritten then the function is responsible for disposing of the incoming module. If the module is simply
-        accessed/mutated in-place then ownership returns to the caller and the function does not need to do any lifetime management.
-
-        Clients can call #OrcLLJITGetIRTransformLayer() to obtain the transform layer of a {@code LLJIT} instance, and use #OrcIRTransformLayerSetTransform()
-        to set the function. This can be used to override the default transform layer.
-        """,
-
-        opaque_p("Ctx", ""),
-        Check(1)..LLVMOrcThreadSafeModuleRef.p("ModInOut", ""),
-        LLVMOrcMaterializationResponsibilityRef("MR", ""),
+        opaque_p("Ctx"),
+        Check(1)..LLVMOrcThreadSafeModuleRef.p("ModInOut"),
+        LLVMOrcMaterializationResponsibilityRef("MR"),
 
         nativeType = "LLVMOrcIRTransformLayerTransformFunction"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcIRTransformLayerSetTransform() method."
     }
 }
 
 val LLVMOrcObjectTransformLayerTransformFunction = Module.LLVM.callback {
     LLVMErrorRef(
         "LLVMOrcObjectTransformLayerTransformFunction",
-        """
-        A function for applying transformations to an object file buffer.
 
-        Implementations of this type are responsible for managing the lifetime of the memory buffer pointed to by {@code ObjInOut}: If the
-        {@code LLVMMemoryBufferRef} value is overwritten then the function is responsible for disposing of the incoming buffer. If the buffer is simply
-        accessed/mutated in-place then ownership returns to the caller and the function does not need to do any lifetime management.
-
-        The transform is allowed to return an error, in which case the {@code ObjInOut} buffer should be disposed of and set to null.
-        """,
-
-        opaque_p("Ctx", ""),
-        Check(1)..LLVMMemoryBufferRef.p("ObjInOut", ""),
+        opaque_p("Ctx"),
+        Check(1)..LLVMMemoryBufferRef.p("ObjInOut"),
 
         nativeType = "LLVMOrcObjectTransformLayerTransformFunction"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcObjectTransformLayerSetTransform() method."
     }
 }
 
 val LLVMOrcExecutionSessionLookupHandleResultFunction = Module.LLVM.callback {
     void(
         "LLVMOrcExecutionSessionLookupHandleResultFunction",
-        """
-        Callback type for {@code ExecutionSession} lookups.
 
-        If {@code Err} is #ErrorSuccess then {@code Result} will contain a pointer to a list of ( {@code SymbolStringPtr}, {@code JITEvaluatedSymbol} ) pairs
-        of length {@code NumPairs}.
-
-        If {@code Err} is a failure value then {@code Result} and {@code Ctx} are undefined and should not be accessed. The callback is responsible for
-        handling the error value (e.g. by calling #GetErrorMessage() + #DisposeErrorMessage()).
-
-        The caller retains ownership of the {@code Result} array and will release all contained symbol names. Clients are responsible for retaining any symbol
-        names that they wish to hold after the function returns.
-        """,
-
-        LLVMErrorRef("Err", ""),
-        nullable..LLVMOrcCSymbolMapPairs("Result", ""),
-        AutoSize("Result")..size_t("NumPairs", ""),
-        nullable..opaque_p("Ctx", ""),
+        LLVMErrorRef("Err"),
+        nullable..LLVMOrcCSymbolMapPairs("Result"),
+        AutoSize("Result")..size_t("NumPairs"),
+        nullable..opaque_p("Ctx"),
 
         nativeType = "LLVMOrcExecutionSessionLookupHandleResultFunction"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcExecutionSessionLookup() method."
     }
 }
 
 val LLVMMemoryManagerCreateContextCallback = Module.LLVM.callback {
     void(
         "LLVMMemoryManagerCreateContextCallback",
-        "",
 
-        nullable..opaque_p("CtxCtx", ""),
+        nullable..opaque_p("CtxCtx"),
 
         nativeType = "LLVMMemoryManagerCreateContextCallback"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks() method."
     }
 }
 
 val LLVMMemoryManagerNotifyTerminatingCallback = Module.LLVM.callback {
     void(
         "LLVMMemoryManagerNotifyTerminatingCallback",
-        "",
 
-        nullable..opaque_p("CtxCtx", ""),
+        nullable..opaque_p("CtxCtx"),
 
         nativeType = "LLVMMemoryManagerNotifyTerminatingCallback"
     ) {
-        documentation = "Instances of this interface may be passed to the #OrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks() method."
     }
 }

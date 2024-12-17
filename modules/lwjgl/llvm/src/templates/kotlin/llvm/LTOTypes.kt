@@ -23,19 +23,15 @@ val lto_symbol_attributes = "lto_symbol_attributes".enumType
 val lto_diagnostic_handler_t = Module.LLVM.callback {
     void(
         "LTODiagnosticHandler",
-        "Diagnostic handler type.",
 
-        lto_codegen_diagnostic_severity_t("severity", "the severity"),
-        charUTF8.const.p("diag", "the actual diagnostic. The diagnostic is not prefixed by any of severity keyword, e.g., 'error: '."),
-        opaque_p("ctxt", "used to pass the context set with the diagnostic handler")
+        lto_codegen_diagnostic_severity_t("severity"),
+        charUTF8.const.p("diag"),
+        opaque_p("ctxt")
     ) {
-        documentation = "Instances of this interface may be passed to the #codegen_set_diagnostic_handler() method."
     }
 }
 
 val LTOObjectBuffer = struct(Module.LLVM, "LTOObjectBuffer", mutable = false) {
-    documentation = "Type to wrap a single object returned by {@code ThinLTO}."
-
-    char.const.p("Buffer", "")
-    AutoSize("Buffer")..size_t("Size", "")
+    char.const.p("Buffer")
+    AutoSize("Buffer")..size_t("Size")
 }

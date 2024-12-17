@@ -10,31 +10,18 @@ import remotery.*
 val RemoteryGL = "RemoteryGL".nativeClass(Module.REMOTERY, prefix = "RMT_") {
     remoteryIncludes("h")
 
-    documentation =
-        "Remotery profiling for OpenGL."
+    void("BindOpenGL")
 
-    void(
-        "BindOpenGL",
-        ""
-    )
-
-    void(
-        "UnbindOpenGL",
-        ""
-    )
+    void("UnbindOpenGL")
 
     Code(
         nativeCall = "${t}_rmt_BeginOpenGLSample(name, hash_cache);"
     )..void(
         "BeginOpenGLSample",
-        "",
 
-        rmtPStr("name", ""),
-        Check(1)..nullable..rmtU32.p("hash_cache", "")
+        rmtPStr("name"),
+        Check(1)..nullable..rmtU32.p("hash_cache")
     )
 
-    void(
-        "EndOpenGLSample",
-        ""
-    )
+    void("EndOpenGLSample")
 }

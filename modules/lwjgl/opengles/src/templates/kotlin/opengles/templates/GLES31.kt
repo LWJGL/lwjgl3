@@ -9,12 +9,7 @@ import opengles.*
 
 val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
     extends = GLES30
-    documentation =
-        "The core OpenGL ES 3.1 functionality."
-
     IntConstant(
-        "",
-
         "COMPUTE_SHADER"..0x91B9,
         "MAX_COMPUTE_UNIFORM_BLOCKS"..0x91BB,
         "MAX_COMPUTE_TEXTURE_IMAGE_UNITS"..0x91BC,
@@ -192,676 +187,608 @@ val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
 
     void(
         "DispatchCompute",
-        "",
 
-        GLuint("num_groups_x", ""),
-        GLuint("num_groups_y", ""),
-        GLuint("num_groups_z", "")
+        GLuint("num_groups_x"),
+        GLuint("num_groups_y"),
+        GLuint("num_groups_z")
     )
 
     void(
         "DispatchComputeIndirect",
-        "",
 
-        GLintptr("indirect", "")
+        GLintptr("indirect")
     )
 
     void(
         "DrawArraysIndirect",
-        "",
 
-        GLenum("mode", ""),
+        GLenum("mode"),
         RawPointer..Check("4 * 4")..MultiType(
             PointerMapping.DATA_INT
-        )..void.const.p("indirect", "")
+        )..void.const.p("indirect")
     )
 
     void(
         "DrawElementsIndirect",
-        "",
 
-        GLenum("mode", ""),
-        GLenum("type", ""),
+        GLenum("mode"),
+        GLenum("type"),
         RawPointer..Check("5 * 4")..MultiType(
             PointerMapping.DATA_INT
-        )..void.const.p("indirect", "")
+        )..void.const.p("indirect")
     )
 
     void(
         "FramebufferParameteri",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        GLint("param", "")
+        GLenum("target"),
+        GLenum("pname"),
+        GLint("param")
     )
 
     void(
         "GetFramebufferParameteriv",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p("params", "")
+        GLenum("target"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint.p("params")
     )
 
     void(
         "GetProgramInterfaceiv",
-        "",
 
-        GLuint("program", ""),
-        GLenum("programInterface", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p("params", "")
+        GLuint("program"),
+        GLenum("programInterface"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint.p("params")
     )
 
     GLuint(
         "GetProgramResourceIndex",
-        "",
 
-        GLuint("program", ""),
-        GLenum("programInterface", ""),
-        GLcharASCII.const.p("name", "")
+        GLuint("program"),
+        GLenum("programInterface"),
+        GLcharASCII.const.p("name")
     )
 
     void(
         "GetProgramResourceName",
-        "",
 
-        GLuint("program", ""),
-        GLenum("programInterface", ""),
-        GLuint("index", ""),
-        AutoSize("name")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p("length", ""),
+        GLuint("program"),
+        GLenum("programInterface"),
+        GLuint("index"),
+        AutoSize("name")..GLsizei("bufSize"),
+        Check(1)..nullable..GLsizei.p("length"),
         Return(
             "length",
             "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)"
-        )..GLcharASCII.p("name", "")
+        )..GLcharASCII.p("name")
     )
 
     void(
         "GetProgramResourceiv",
-        "",
 
-        GLuint("program", ""),
-        GLenum("programInterface", ""),
-        GLuint("index", ""),
-        AutoSize("props")..GLsizei("propCount", ""),
-        GLenum.const.p("props", ""),
-        AutoSize("params")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p("length", ""),
-        GLint.p("params", "")
+        GLuint("program"),
+        GLenum("programInterface"),
+        GLuint("index"),
+        AutoSize("props")..GLsizei("propCount"),
+        GLenum.const.p("props"),
+        AutoSize("params")..GLsizei("bufSize"),
+        Check(1)..nullable..GLsizei.p("length"),
+        GLint.p("params")
     )
 
     GLint(
         "GetProgramResourceLocation",
-        "",
 
-        GLuint("program", ""),
-        GLenum("programInterface", ""),
-        GLcharASCII.const.p("name", "")
+        GLuint("program"),
+        GLenum("programInterface"),
+        GLcharASCII.const.p("name")
     )
 
     void(
         "UseProgramStages",
-        "",
 
-        GLuint("pipeline", ""),
-        GLbitfield("stages", ""),
-        GLuint("program", "")
+        GLuint("pipeline"),
+        GLbitfield("stages"),
+        GLuint("program")
     )
 
     void(
         "ActiveShaderProgram",
-        "",
 
-        GLuint("pipeline", ""),
-        GLuint("program", "")
+        GLuint("pipeline"),
+        GLuint("program")
     )
 
     GLuint(
         "CreateShaderProgramv",
-        "",
 
-        GLenum("type", ""),
-        AutoSize("strings")..GLsizei("count", ""),
-        PointerArray(GLcharUTF8.p, "string")..GLcharUTF8.const.p.const.p("strings", "")
+        GLenum("type"),
+        AutoSize("strings")..GLsizei("count"),
+        PointerArray(GLcharUTF8.p, "string")..GLcharUTF8.const.p.const.p("strings")
     )
 
     void(
         "BindProgramPipeline",
-        "",
 
-        GLuint("pipeline", "")
+        GLuint("pipeline")
     )
 
     void(
         "DeleteProgramPipelines",
-        "",
 
-        AutoSize("pipelines")..GLsizei("n", ""),
-        SingleValue("pipeline")..GLuint.const.p("pipelines", "")
+        AutoSize("pipelines")..GLsizei("n"),
+        SingleValue("pipeline")..GLuint.const.p("pipelines")
     )
 
     void(
         "GenProgramPipelines",
-        "",
 
-        AutoSize("pipelines")..GLsizei("n", ""),
-        ReturnParam..GLuint.p("pipelines", "")
+        AutoSize("pipelines")..GLsizei("n"),
+        ReturnParam..GLuint.p("pipelines")
     )
 
     GLboolean(
         "IsProgramPipeline",
-        "",
 
-        GLuint("pipeline", "")
+        GLuint("pipeline")
     )
 
     void(
         "GetProgramPipelineiv",
-        "",
 
-        GLuint("pipeline", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p("params", "")
+        GLuint("pipeline"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint.p("params")
     )
 
     void(
         "ProgramUniform1i",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLint("v0", "")
+        GLuint("program"),
+        GLint("location"),
+        GLint("v0")
     )
 
     void(
         "ProgramUniform2i",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLint("v0", ""),
-        GLint("v1", "")
+        GLuint("program"),
+        GLint("location"),
+        GLint("v0"),
+        GLint("v1")
     )
 
     void(
         "ProgramUniform3i",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLint("v0", ""),
-        GLint("v1", ""),
-        GLint("v2", "")
+        GLuint("program"),
+        GLint("location"),
+        GLint("v0"),
+        GLint("v1"),
+        GLint("v2")
     )
 
     void(
         "ProgramUniform4i",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLint("v0", ""),
-        GLint("v1", ""),
-        GLint("v2", ""),
-        GLint("v3", "")
+        GLuint("program"),
+        GLint("location"),
+        GLint("v0"),
+        GLint("v1"),
+        GLint("v2"),
+        GLint("v3")
     )
 
     void(
         "ProgramUniform1ui",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLuint("v0", "")
+        GLuint("program"),
+        GLint("location"),
+        GLuint("v0")
     )
 
     void(
         "ProgramUniform2ui",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLuint("v0", ""),
-        GLuint("v1", "")
+        GLuint("program"),
+        GLint("location"),
+        GLuint("v0"),
+        GLuint("v1")
     )
 
     void(
         "ProgramUniform3ui",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLuint("v0", ""),
-        GLuint("v1", ""),
-        GLuint("v2", "")
+        GLuint("program"),
+        GLint("location"),
+        GLuint("v0"),
+        GLuint("v1"),
+        GLuint("v2")
     )
 
     void(
         "ProgramUniform4ui",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLuint("v0", ""),
-        GLuint("v1", ""),
-        GLuint("v2", ""),
-        GLuint("v3", "")
+        GLuint("program"),
+        GLint("location"),
+        GLuint("v0"),
+        GLuint("v1"),
+        GLuint("v2"),
+        GLuint("v3")
     )
 
     void(
         "ProgramUniform1f",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLfloat("v0", "")
+        GLuint("program"),
+        GLint("location"),
+        GLfloat("v0")
     )
 
     void(
         "ProgramUniform2f",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLfloat("v0", ""),
-        GLfloat("v1", "")
+        GLuint("program"),
+        GLint("location"),
+        GLfloat("v0"),
+        GLfloat("v1")
     )
 
     void(
         "ProgramUniform3f",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLfloat("v0", ""),
-        GLfloat("v1", ""),
-        GLfloat("v2", "")
+        GLuint("program"),
+        GLint("location"),
+        GLfloat("v0"),
+        GLfloat("v1"),
+        GLfloat("v2")
     )
 
     void(
         "ProgramUniform4f",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        GLfloat("v0", ""),
-        GLfloat("v1", ""),
-        GLfloat("v2", ""),
-        GLfloat("v3", "")
+        GLuint("program"),
+        GLint("location"),
+        GLfloat("v0"),
+        GLfloat("v1"),
+        GLfloat("v2"),
+        GLfloat("v3")
     )
 
     void(
         "ProgramUniform1iv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize("value")..GLsizei("count", ""),
-        GLint.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize("value")..GLsizei("count"),
+        GLint.const.p("value")
     )
 
     void(
         "ProgramUniform2iv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(2, "value")..GLsizei("count", ""),
-        GLint.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(2, "value")..GLsizei("count"),
+        GLint.const.p("value")
     )
 
     void(
         "ProgramUniform3iv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(3, "value")..GLsizei("count", ""),
-        GLint.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(3, "value")..GLsizei("count"),
+        GLint.const.p("value")
     )
 
     void(
         "ProgramUniform4iv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(4, "value")..GLsizei("count", ""),
-        GLint.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(4, "value")..GLsizei("count"),
+        GLint.const.p("value")
     )
 
     void(
         "ProgramUniform1uiv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize("value")..GLsizei("count", ""),
-        GLuint.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize("value")..GLsizei("count"),
+        GLuint.const.p("value")
     )
 
     void(
         "ProgramUniform2uiv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(2, "value")..GLsizei("count", ""),
-        GLuint.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(2, "value")..GLsizei("count"),
+        GLuint.const.p("value")
     )
 
     void(
         "ProgramUniform3uiv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(3, "value")..GLsizei("count", ""),
-        GLuint.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(3, "value")..GLsizei("count"),
+        GLuint.const.p("value")
     )
 
     void(
         "ProgramUniform4uiv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(4, "value")..GLsizei("count", ""),
-        GLuint.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(4, "value")..GLsizei("count"),
+        GLuint.const.p("value")
     )
 
     void(
         "ProgramUniform1fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize("value")..GLsizei("count", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize("value")..GLsizei("count"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniform2fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(2, "value")..GLsizei("count", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(2, "value")..GLsizei("count"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniform3fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(3, "value")..GLsizei("count", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(3, "value")..GLsizei("count"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniform4fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(4, "value")..GLsizei("count", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(4, "value")..GLsizei("count"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniformMatrix2fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(2 x 2, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(2 x 2, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniformMatrix3fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(3 x 3, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(3 x 3, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniformMatrix4fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(4 x 4, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(4 x 4, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniformMatrix2x3fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(2 x 3, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(2 x 3, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniformMatrix3x2fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(3 x 2, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(3 x 2, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniformMatrix2x4fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(2 x 4, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(2 x 4, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniformMatrix4x2fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(4 x 2, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(4 x 2, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniformMatrix3x4fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(3 x 4, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(3 x 4, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ProgramUniformMatrix4x3fv",
-        "",
 
-        GLuint("program", ""),
-        GLint("location", ""),
-        AutoSize(4 x 3, "value")..GLsizei("count", ""),
-        GLboolean("transpose", ""),
-        GLfloat.const.p("value", "")
+        GLuint("program"),
+        GLint("location"),
+        AutoSize(4 x 3, "value")..GLsizei("count"),
+        GLboolean("transpose"),
+        GLfloat.const.p("value")
     )
 
     void(
         "ValidateProgramPipeline",
-        "",
 
-        GLuint("pipeline", "")
+        GLuint("pipeline")
     )
 
     void(
         "GetProgramPipelineInfoLog",
-        "",
 
-        GLuint("pipeline", ""),
-        AutoSize("infoLog")..GLsizei("bufSize", ""),
-        Check(1)..nullable..GLsizei.p("length", ""),
+        GLuint("pipeline"),
+        AutoSize("infoLog")..GLsizei("bufSize"),
+        Check(1)..nullable..GLsizei.p("length"),
         Return(
             "length",
             "glGetProgramPipelinei(pipeline, GLES20.GL_INFO_LOG_LENGTH)",
             heapAllocate = true
-        )..GLcharUTF8.p("infoLog", "")
+        )..GLcharUTF8.p("infoLog")
     )
 
     void(
         "BindImageTexture",
-        "",
 
-        GLuint("unit", ""),
-        GLuint("texture", ""),
-        GLint("level", ""),
-        GLboolean("layered", ""),
-        GLint("layer", ""),
-        GLenum("access", ""),
-        GLenum("format", "")
+        GLuint("unit"),
+        GLuint("texture"),
+        GLint("level"),
+        GLboolean("layered"),
+        GLint("layer"),
+        GLenum("access"),
+        GLenum("format")
     )
 
     void(
         "GetBooleani_v",
-        "",
 
-        GLenum("target", ""),
-        GLuint("index", ""),
-        ReturnParam..Check(1)..GLboolean.p("data", "")
+        GLenum("target"),
+        GLuint("index"),
+        ReturnParam..Check(1)..GLboolean.p("data")
     )
 
     void(
         "MemoryBarrier",
-        "",
 
-        GLbitfield("barriers", "")
+        GLbitfield("barriers")
     )
 
     void(
         "MemoryBarrierByRegion",
-        "",
 
-        GLbitfield("barriers", "")
+        GLbitfield("barriers")
     )
 
     void(
         "TexStorage2DMultisample",
-        "",
 
-        GLenum("target", ""),
-        GLsizei("samples", ""),
-        GLenum("internalformat", ""),
-        GLsizei("width", ""),
-        GLsizei("height", ""),
-        GLboolean("fixedsamplelocations", "")
+        GLenum("target"),
+        GLsizei("samples"),
+        GLenum("internalformat"),
+        GLsizei("width"),
+        GLsizei("height"),
+        GLboolean("fixedsamplelocations")
     )
 
     void(
         "GetMultisamplefv",
-        "",
 
-        GLenum("pname", ""),
-        GLuint("index", ""),
-        ReturnParam..Check(1)..GLfloat.p("val", "")
+        GLenum("pname"),
+        GLuint("index"),
+        ReturnParam..Check(1)..GLfloat.p("val")
     )
 
     void(
         "SampleMaski",
-        "",
 
-        GLuint("maskNumber", ""),
-        GLbitfield("mask", "")
+        GLuint("maskNumber"),
+        GLbitfield("mask")
     )
 
     void(
         "GetTexLevelParameteriv",
-        "",
 
-        GLenum("target", ""),
-        GLint("level", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLint.p("params", "")
+        GLenum("target"),
+        GLint("level"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLint.p("params")
     )
 
     void(
         "GetTexLevelParameterfv",
-        "",
 
-        GLenum("target", ""),
-        GLint("level", ""),
-        GLenum("pname", ""),
-        ReturnParam..Check(1)..GLfloat.p("params", "")
+        GLenum("target"),
+        GLint("level"),
+        GLenum("pname"),
+        ReturnParam..Check(1)..GLfloat.p("params")
     )
 
     void(
         "BindVertexBuffer",
-        "",
 
-        GLuint("bindingindex", ""),
-        GLuint("buffer", ""),
-        GLintptr("offset", ""),
-        GLsizei("stride", "")
+        GLuint("bindingindex"),
+        GLuint("buffer"),
+        GLintptr("offset"),
+        GLsizei("stride")
     )
 
     void(
         "VertexAttribFormat",
-        "",
 
-        GLuint("attribindex", ""),
-        GLint("size", ""),
-        GLenum("type", ""),
-        GLboolean("normalized", ""),
-        GLuint("relativeoffset", "")
+        GLuint("attribindex"),
+        GLint("size"),
+        GLenum("type"),
+        GLboolean("normalized"),
+        GLuint("relativeoffset")
     )
 
     void(
         "VertexAttribIFormat",
-        "",
 
-        GLuint("attribindex", ""),
-        GLint("size", ""),
-        GLenum("type", ""),
-        GLuint("relativeoffset", "")
+        GLuint("attribindex"),
+        GLint("size"),
+        GLenum("type"),
+        GLuint("relativeoffset")
     )
 
     void(
         "VertexAttribBinding",
-        "",
 
-        GLuint("attribindex", ""),
-        GLuint("bindingindex", "")
+        GLuint("attribindex"),
+        GLuint("bindingindex")
     )
 
     void(
         "VertexBindingDivisor",
-        "",
 
-        GLuint("bindingindex", ""),
-        GLuint("divisor", "")
+        GLuint("bindingindex"),
+        GLuint("divisor")
     )
 }

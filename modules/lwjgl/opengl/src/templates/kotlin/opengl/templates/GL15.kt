@@ -28,21 +28,8 @@ const val QUERY_TARGETS =
 
 val GL15 = "GL15".nativeClassGL("GL15") {
     extends = GL14
-    documentation =
-        """
-        The OpenGL functionality up to version 1.5. Includes the deprecated symbols of the Compatibility Profile.
-
-        Extensions promoted to core in this release:
-        ${ul(
-            registryLinkTo("ARB", "vertex_buffer_object"),
-            registryLinkTo("ARB", "occlusion_query"),
-            registryLinkTo("EXT", "shadow_funcs")
-        )}
-        """
 
     IntConstant(
-        "New token names.",
-
         "FOG_COORD_SRC"..0x8450,
         "FOG_COORD"..0x8451,
         "CURRENT_FOG_COORD"..0x8453,
@@ -62,18 +49,11 @@ val GL15 = "GL15".nativeClassGL("GL15") {
     // ARB_vertex_buffer_object
 
     IntConstant(
-        """
-        Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData,
-        GetBufferParameteriv, and GetBufferPointerv.
-        """,
-
         "ARRAY_BUFFER"..0x8892,
         "ELEMENT_ARRAY_BUFFER"..0x8893
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "ARRAY_BUFFER_BINDING"..0x8894,
         "ELEMENT_ARRAY_BUFFER_BINDING"..0x8895,
         "VERTEX_ARRAY_BUFFER_BINDING"..0x8896,
@@ -88,14 +68,10 @@ val GL15 = "GL15".nativeClassGL("GL15") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetVertexAttribiv.",
-
         "VERTEX_ATTRIB_ARRAY_BUFFER_BINDING"..0x889F
     )
 
     IntConstant(
-        "Accepted by the {@code usage} parameter of BufferData.",
-
         "STREAM_DRAW"..0x88E0,
         "STREAM_READ"..0x88E1,
         "STREAM_COPY"..0x88E2,
@@ -108,16 +84,12 @@ val GL15 = "GL15".nativeClassGL("GL15") {
     )
 
     IntConstant(
-        "Accepted by the {@code access} parameter of MapBuffer.",
-
         "READ_ONLY"..0x88B8,
         "WRITE_ONLY"..0x88B9,
         "READ_WRITE"..0x88BA
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBufferParameteriv.",
-
         "BUFFER_SIZE"..0x8764,
         "BUFFER_USAGE"..0x8765,
         "BUFFER_ACCESS"..0x88BB,
@@ -125,8 +97,6 @@ val GL15 = "GL15".nativeClassGL("GL15") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBufferPointerv.",
-
         "BUFFER_MAP_POINTER"..0x88BD
     )
 
@@ -145,21 +115,15 @@ val GL15 = "GL15".nativeClassGL("GL15") {
     // ARB_occlusion_query
 
     IntConstant(
-        "Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
-
         "SAMPLES_PASSED"..0x8914
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetQueryiv.",
-
         "QUERY_COUNTER_BITS"..0x8864,
         "CURRENT_QUERY"..0x8865
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetQueryObjectiv and GetQueryObjectuiv.",
-
         "QUERY_RESULT"..0x8866,
         "QUERY_RESULT_AVAILABLE"..0x8867
     )

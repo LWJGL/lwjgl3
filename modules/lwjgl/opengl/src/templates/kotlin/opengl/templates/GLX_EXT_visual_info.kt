@@ -8,21 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info", EXT) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension allows the user to request a particular X visual type to be associated with a GLX visual, and allows the user to query the X visual type
-        underlying a GLX visual.
-
-        In addition, this extension provides a means to request a visual with a transparent pixel and to query whether a visual supports a transparent pixel
-        value and the value of the transparent pixel. Note that the notion of level and transparent pixels are orthogonal as both layer 1 and layer 0 visuals
-        may or may not have a transparent pixel value.
-        """
-
     IntConstant(
-        "Accepted by the {@code attrib} parameter of #GetConfig(), and by the {@code attrib_list} parameter of #ChooseVisual().",
-
         "X_VISUAL_TYPE_EXT"..0x22,
         "TRANSPARENT_TYPE_EXT"..0x23,
         "TRANSPARENT_INDEX_VALUE_EXT"..0x24,
@@ -33,11 +19,6 @@ val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info
     )
 
     IntConstant(
-        """
-        Returned by #GetConfig(), and accepted by the {@code attrib_list} parameter of #ChooseVisual() (following the
-        #X_VISUAL_TYPE_EXT token).
-        """,
-
         "TRUE_COLOR_EXT"..0x8002,
         "DIRECT_COLOR_EXT"..0x8003,
         "PSEUDO_COLOR_EXT"..0x8004,
@@ -47,11 +28,6 @@ val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info
     )
 
     IntConstant(
-        """
-        Returned by #GetConfig(), and accepted by the {@code attrib_list} parameter of #ChooseVisual() (following the
-        #TRANSPARENT_TYPE_EXT token).
-        """,
-
         "NONE_EXT"..0x8000,
         "TRANSPARENT_RGB_EXT"..0x8008,
         "TRANSPARENT_INDEX_EXT"..0x8009

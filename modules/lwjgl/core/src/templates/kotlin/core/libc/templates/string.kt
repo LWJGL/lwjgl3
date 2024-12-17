@@ -13,11 +13,8 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
 #endif""", beforeIncludes = true)
     nativeImport("<string.h>")
 
-    documentation = "Native bindings to string.h."
-
     opaque_p(
         "memset",
-        "Fills a memory area with a constant byte.",
 
         MultiType(
             PointerMapping.DATA_SHORT,
@@ -26,11 +23,9 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.p("dest", "pointer to the memory area to fill"),
-        int("c", "byte to set"),
-        AutoSize("dest")..size_t("count", "number of bytes to fill"),
-
-        returnDoc = "the value of {@code dest}"
+        )..void.p("dest"),
+        int("c"),
+        AutoSize("dest")..size_t("count")
     )
 
     customMethod("""
@@ -49,7 +44,6 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
 
     opaque_p(
         "memcpy",
-        "Copies bytes between memory areas that must not overlap.",
 
         MultiType(
             PointerMapping.DATA_SHORT,
@@ -58,7 +52,7 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.p("dest", "pointer to the destination memory area"),
+        )..void.p("dest"),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
@@ -66,10 +60,8 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.const.p("src", "pointer to the source memory area"),
-        AutoSize("src", "dest")..size_t("count", "the number of bytes to be copied"),
-
-        returnDoc = "the value of {@code dest}"
+        )..void.const.p("src"),
+        AutoSize("src", "dest")..size_t("count")
     )
 
     customMethod("""
@@ -91,12 +83,6 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
 
     opaque_p(
         "memmove",
-        """
-        Copies {@code count} bytes from memory area {@code src} to memory area {@code dest}.
-
-        The memory areas may overlap: copying takes place as though the bytes in {@code src} are first copied into a temporary array that does not overlap
-        {@code src} or {@code dest}, and the bytes are then copied from the temporary array to {@code dest}.
-        """,
 
         MultiType(
             PointerMapping.DATA_SHORT,
@@ -105,7 +91,7 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.p("dest", "pointer to the destination memory area"),
+        )..void.p("dest"),
         MultiType(
             PointerMapping.DATA_SHORT,
             PointerMapping.DATA_INT,
@@ -113,17 +99,14 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
             PointerMapping.DATA_FLOAT,
             PointerMapping.DATA_DOUBLE,
             byteArray = true
-        )..void.const.p("src", "pointer to the source memory area"),
-        AutoSize("src", "dest")..size_t("count", "the number of bytes to be copied"),
-
-        returnDoc = "the value of {@code dest}"
+        )..void.const.p("src"),
+        AutoSize("src", "dest")..size_t("count")
     )
 
     size_t(
         "strlen",
-        "",
 
-        NullTerminated..char.const.p("str", "")
+        NullTerminated..char.const.p("str")
     )
 
     customMethod("""
@@ -148,8 +131,7 @@ val string = "LibCString".nativeClass(Module.CORE_LIBC) {
 
     charASCII.p(
         "strerror",
-        "Returns string describing error number.",
 
-        int("errnum", "")
+        int("errnum")
     )
 }

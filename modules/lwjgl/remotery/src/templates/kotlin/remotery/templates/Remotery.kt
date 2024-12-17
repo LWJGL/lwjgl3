@@ -11,61 +11,10 @@ import remotery.*
 val _Remotery = "Remotery".nativeClass(Module.REMOTERY, prefix = "RMT_") {
     remoteryIncludes("c")
 
-    val COMMIT = "c3e8a2f38603c054be479bcefeaa54ad455dd4b9"
-    documentation =
-        """
-        Bindings to ${url("https://github.com/Celtoys/Remotery", "Remotery")}, a realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in
-        a web browser.
-
-        Supported features:
-        ${ul(
-            "Lightweight instrumentation of multiple threads running on the CPU and GPU.",
-            "Web viewer that runs in Chrome, Firefox and Safari; on Desktops, Mobiles or Tablets.",
-            "GPU UI rendering, bypassing the DOM completely, for real-time 60hz viewer updates at 10,000x the performance.",
-            "Automatic thread sampler that tells you what processor cores your threads are running on without requiring Administrator privileges.",
-            "Drop saved traces onto the Remotery window to load historical runs for inspection.",
-            "Console output for logging text.",
-            "Console input for sending commands to your game.",
-            "A Property API for recording named/typed values over time, alongside samples.",
-            "Profiles itself and shows how it's performing in the viewer."
-        )}
-
-        Supported Profiling Platforms:
-        ${ul(
-            "Windows 7/8/10/11/UWP (Hololens)",
-            "Linux",
-            "OSX",
-            "Android",
-            "Free BSD"
-        )}
-
-        Supported GPU Profiling APIs:
-        ${ul(
-            "OpenGL",
-            "CUDA",
-            "Metal"
-        )}
-
-        <b>LWJGL</b>: The current version of the Remotery bindings is compatible with commit
-        <a href="https://github.com/Celtoys/Remotery/tree/$COMMIT/vis">${COMMIT.substring(0, 7)}</a>. Run the following commands to clone the
-        Remotery repository at that commit:
-        ${codeBlock("""
-git clone --depth=1 https://github.com/Celtoys/Remotery.git
-cd Remotery
-git fetch --depth=1 origin $COMMIT
-git branch --no-track lwjgl $COMMIT
-git checkout lwjgl
-git branch -D @{-1}""")}
-
-        Now open {@code vis/index.html} in your favorite browser to view the profiler.
-        """
-
-    IntConstant("Boolean", "TRUE".."1")
-    IntConstant("Boolean", "FALSE".."0")
+    IntConstant("TRUE".."1")
+    IntConstant("FALSE".."0")
 
     EnumConstant(
-        "{@code rmtSampleType}",
-
         "SampleType_CPU".enum,
         "SampleType_CUDA".enum,
         "SampleType_D3D11".enum,
@@ -77,79 +26,73 @@ git branch -D @{-1}""")}
     )
 
     EnumConstant(
-        "All possible error codes ({@code rmtError}).",
-
         "ERROR_NONE".enum,
-        "ERROR_RECURSIVE_SAMPLE".enum("Not an error but an internal message to calling code"),
-        "ERROR_UNKNOWN".enum("An error with a message yet to be defined, only for internal error handling"),
-        "ERROR_INVALID_INPUT".enum("An invalid input to a function call was provided"),
-        "ERROR_RESOURCE_CREATE_FAIL".enum("Creation of an internal resource failed"),
-        "ERROR_RESOURCE_ACCESS_FAIL".enum("Access of an internal resource failed"),
-        "ERROR_TIMEOUT".enum("Internal system timeout"),
+        "ERROR_RECURSIVE_SAMPLE".enum,
+        "ERROR_UNKNOWN".enum,
+        "ERROR_INVALID_INPUT".enum,
+        "ERROR_RESOURCE_CREATE_FAIL".enum,
+        "ERROR_RESOURCE_ACCESS_FAIL".enum,
+        "ERROR_TIMEOUT".enum,
 
         // System errors
-        "ERROR_MALLOC_FAIL".enum("Malloc call within remotery failed"),
-        "ERROR_TLS_ALLOC_FAIL".enum("Attempt to allocate thread local storage failed"),
-        "ERROR_VIRTUAL_MEMORY_BUFFER_FAIL".enum("Failed to create a virtual memory mirror buffer"),
-        "ERROR_CREATE_THREAD_FAIL".enum("Failed to create a thread for the server"),
-        "ERROR_OPEN_THREAD_HANDLE_FAIL".enum("Failed to open a thread handle, given a thread id"),
+        "ERROR_MALLOC_FAIL".enum,
+        "ERROR_TLS_ALLOC_FAIL".enum,
+        "ERROR_VIRTUAL_MEMORY_BUFFER_FAIL".enum,
+        "ERROR_CREATE_THREAD_FAIL".enum,
+        "ERROR_OPEN_THREAD_HANDLE_FAIL".enum,
 
         // Network TCP/IP socket errors
-        "ERROR_SOCKET_INVALID_POLL".enum("Poll attempt on an invalid socket"),
-        "ERROR_SOCKET_SELECT_FAIL".enum("Server failed to call select on socket"),
-        "ERROR_SOCKET_POLL_ERRORS".enum("Poll notified that the socket has errors"),
-        "ERROR_SOCKET_SEND_FAIL".enum("Unrecoverable error occured while client/server tried to send data"),
-        "ERROR_SOCKET_RECV_NO_DATA".enum("No data available when attempting a receive"),
-        "ERROR_SOCKET_RECV_TIMEOUT".enum("Timed out trying to receive data"),
-        "ERROR_SOCKET_RECV_FAILED".enum("Unrecoverable error occured while client/server tried to receive data"),
+        "ERROR_SOCKET_INVALID_POLL".enum,
+        "ERROR_SOCKET_SELECT_FAIL".enum,
+        "ERROR_SOCKET_POLL_ERRORS".enum,
+        "ERROR_SOCKET_SEND_FAIL".enum,
+        "ERROR_SOCKET_RECV_NO_DATA".enum,
+        "ERROR_SOCKET_RECV_TIMEOUT".enum,
+        "ERROR_SOCKET_RECV_FAILED".enum,
 
         // WebSocket errors
-        "ERROR_WEBSOCKET_HANDSHAKE_NOT_GET".enum("WebSocket server handshake failed, not HTTP GET"),
-        "ERROR_WEBSOCKET_HANDSHAKE_NO_VERSION".enum("WebSocket server handshake failed, can't locate WebSocket version"),
-        "ERROR_WEBSOCKET_HANDSHAKE_BAD_VERSION".enum("WebSocket server handshake failed, unsupported WebSocket version"),
-        "ERROR_WEBSOCKET_HANDSHAKE_NO_HOST".enum("WebSocket server handshake failed, can't locate host"),
-        "ERROR_WEBSOCKET_HANDSHAKE_BAD_HOST".enum("WebSocket server handshake failed, host is not allowed to connect"),
-        "ERROR_WEBSOCKET_HANDSHAKE_NO_KEY".enum("WebSocket server handshake failed, can't locate WebSocket key"),
-        "ERROR_WEBSOCKET_HANDSHAKE_BAD_KEY".enum("WebSocket server handshake failed, WebSocket key is ill-formed"),
-        "ERROR_WEBSOCKET_HANDSHAKE_STRING_FAIL".enum("WebSocket server handshake failed, internal error, bad string code"),
-        "ERROR_WEBSOCKET_DISCONNECTED".enum("WebSocket server received a disconnect request and closed the socket"),
-        "ERROR_WEBSOCKET_BAD_FRAME_HEADER".enum("Couldn't parse WebSocket frame header"),
-        "ERROR_WEBSOCKET_BAD_FRAME_HEADER_SIZE".enum("Partially received wide frame header size"),
-        "ERROR_WEBSOCKET_BAD_FRAME_HEADER_MASK".enum("Partially received frame header data mask"),
-        "ERROR_WEBSOCKET_RECEIVE_TIMEOUT".enum("Timeout receiving frame header"),
+        "ERROR_WEBSOCKET_HANDSHAKE_NOT_GET".enum,
+        "ERROR_WEBSOCKET_HANDSHAKE_NO_VERSION".enum,
+        "ERROR_WEBSOCKET_HANDSHAKE_BAD_VERSION".enum,
+        "ERROR_WEBSOCKET_HANDSHAKE_NO_HOST".enum,
+        "ERROR_WEBSOCKET_HANDSHAKE_BAD_HOST".enum,
+        "ERROR_WEBSOCKET_HANDSHAKE_NO_KEY".enum,
+        "ERROR_WEBSOCKET_HANDSHAKE_BAD_KEY".enum,
+        "ERROR_WEBSOCKET_HANDSHAKE_STRING_FAIL".enum,
+        "ERROR_WEBSOCKET_DISCONNECTED".enum,
+        "ERROR_WEBSOCKET_BAD_FRAME_HEADER".enum,
+        "ERROR_WEBSOCKET_BAD_FRAME_HEADER_SIZE".enum,
+        "ERROR_WEBSOCKET_BAD_FRAME_HEADER_MASK".enum,
+        "ERROR_WEBSOCKET_RECEIVE_TIMEOUT".enum,
 
-        "ERROR_REMOTERY_NOT_CREATED".enum("Remotery object has not been created"),
-        "ERROR_SEND_ON_INCOMPLETE_PROFILE".enum("An attempt was made to send an in,complete profile tree to the client"),
+        "ERROR_REMOTERY_NOT_CREATED".enum,
+        "ERROR_SEND_ON_INCOMPLETE_PROFILE".enum,
 
         // CUDA error messages
-        "ERROR_CUDA_DEINITIALIZED".enum("This indicates that the CUDA driver is in the process of shutting down"),
-        "ERROR_CUDA_NOT_INITIALIZED".enum("This indicates that the CUDA driver has not been initialized with cuInit() or that initialization has failed"),
-        "ERROR_CUDA_INVALID_CONTEXT".enum("This most frequently indicates that there is no context bound to the current thread"),
-        "ERROR_CUDA_INVALID_VALUE".enum("This indicates that one or more of the parameters passed to the API call is not within an acceptable range of values"),
-        "ERROR_CUDA_INVALID_HANDLE".enum("This indicates that a resource handle passed to the API call was not valid"),
-        "ERROR_CUDA_OUT_OF_MEMORY".enum("The API call failed because it was unable to allocate enough memory to perform the requested operation"),
-        "ERROR_ERROR_NOT_READY".enum("This indicates that a resource handle passed to the API call was not valid"),
+        "ERROR_CUDA_DEINITIALIZED".enum,
+        "ERROR_CUDA_NOT_INITIALIZED".enum,
+        "ERROR_CUDA_INVALID_CONTEXT".enum,
+        "ERROR_CUDA_INVALID_VALUE".enum,
+        "ERROR_CUDA_INVALID_HANDLE".enum,
+        "ERROR_CUDA_OUT_OF_MEMORY".enum,
+        "ERROR_ERROR_NOT_READY".enum,
 
         // Direct3D 11 error messages
-        "ERROR_D3D11_FAILED_TO_CREATE_QUERY".enum("Failed to create query for sample"),
+        "ERROR_D3D11_FAILED_TO_CREATE_QUERY".enum,
 
         // OpenGL error messages
-        "ERROR_OPENGL_ERROR".enum("Generic OpenGL error, no need to expose detail since app will need an OpenGL error callback registered"),
+        "ERROR_OPENGL_ERROR".enum,
 
         "ERROR_CUDA_UNKNOWN".enum
     )
 
     EnumConstant(
-        "Flags that control property behaviour. ({@code rmtPropertyFlags})",
-
-        "PropertyFlags_NoFlags".enum("", "0"),
-        "PropertyFlags_FrameReset".enum("Reset property back to its default value on each new frame.")
+        "PropertyFlags_NoFlags".enum("0"),
+        "PropertyFlags_FrameReset".enum
     )
 
     EnumConstant(
-        "All possible property types that can be recorded and sent to the viewer. ({@code rmtPropertyType})",
-
-        "PropertyType_rmtGroup".enum("", "0"),
+        "PropertyType_rmtGroup".enum("0"),
         "PropertyType_rmtBool".enum,
         "PropertyType_rmtS32".enum,
         "PropertyType_rmtU32".enum,
@@ -159,307 +102,228 @@ git branch -D @{-1}""")}
         "PropertyType_rmtF64".enum
     )
 
-    val rmtSampleFlags = EnumConstant(
-        "{@code rmtSampleFlags}",
-
-        "RMTSF_None".enum("Default behaviour", "0"),
-        "RMTSF_Aggregate".enum("Search parent for same-named samples and merge timing instead of adding a new sample", "1"),
-        "RMTSF_Recursive".enum("Merge sample with parent if it's the same sample", "2"),
-        "RMTSF_Root".enum(
-            """
-            Set this flag on any of your root samples so that Remotery will assert if it ends up <b>not</b> being the root sample.
-    
-            This will quickly allow you to detect {@code Begin}/{@code End} mismatches causing a sample tree imbalance.
-            """,
-            "4"
-        ),
-        "RMTSF_SendOnClose".enum(
-            """,
-            Mainly for platforms other than Windows that don't support the thread sampler and can't detect stalling samples.
-    
-            Where you have a non-root sample that stays open indefinitely and never sends its contents to log/viewer. Send this sample to log/viewer when it
-            closes.  You can not have more than one sample open with this flag on the same thread at a time. This flag will be removed in a future version when all
-            platforms support stalling samples.
-            """,
-            "8"
-        )
-    ).noPrefix().javaDocLinks
+    EnumConstant(
+        "RMTSF_None".enum("0"),
+        "RMTSF_Aggregate".enum("1"),
+        "RMTSF_Recursive".enum("2"),
+        "RMTSF_Root".enum("4"),
+        "RMTSF_SendOnClose".enum("8")
+    ).noPrefix()
 
     rmtPStr(
         "GetLastErrorMessage",
-        "Gets the last error message issued on the calling thread",
 
         void()
     )
 
     rmtSettings.p(
         "Settings",
-        """
-        Retrieve and configure the global {@code rmtSettings} object.
-
-        This can be done before or after Remotery is initialised, however some fields are only referenced on initialisation.
-        """,
 
         void()
     )
 
     rmtError(
         "CreateGlobalInstance",
-        "Initialises Remotery and sets its internal global instance pointer.",
 
-        Check(1)..Remotery.p.p("remotery", "returns the pointer for further use")
+        Check(1)..Remotery.p.p("remotery")
     )
 
     void(
         "DestroyGlobalInstance",
-        "Shutsdown Remotery, requiring its pointer to be passed to ensure you are destroying the correct instance.",
 
-        Remotery.p("remotery", "")
+        Remotery.p("remotery")
     )
 
     void(
         "SetGlobalInstance",
-        """
-        For use in the presence of DLLs/SOs if each of them are linking Remotery statically.
-        
-        If Remotery is hosted in its own DLL and linked dynamically then there is no need to use this. Otherwise, pass the result of #CreateGlobalInstance()
-        from your main DLL to this in your other DLLs.
-        """,
 
-        Remotery.p("remotery", "")
+        Remotery.p("remotery")
     )
 
     Remotery.p(
         "GetGlobalInstance",
-        "Gets a pointer to the current global Remotery instance.",
 
         void()
     )
 
     void(
         "SetCurrentThreadName",
-        "",
 
-        rmtPStr("thread_name", "")
+        rmtPStr("thread_name")
     )
 
     void(
         "LogText",
-        "",
 
-        rmtPStr("text", "")
+        rmtPStr("text")
     )
 
     Code(
         nativeCall = "${t}_rmt_BeginCPUSample(name, flags, hash_cache);"
     )..void(
         "BeginCPUSample",
-        "",
 
-        rmtPStr("name", ""),
-        rmtU32("flags", "", rmtSampleFlags),
-        Check(1)..nullable..rmtU32.p(
-            "hash_cache",
-            """
-            Stores a pointer to a sample name's hash value.
-
-            Internally this is used to identify unique callstacks and it would be ideal that it's not recalculated each time the sample is used. This can be
-            statically cached at the point of call or stored elsewhere when dynamic names are required.
-
-            If #NULL then this call becomes more expensive, as it has to recalculate the hash of the name.
-            """
-        )
+        rmtPStr("name"),
+        rmtU32("flags"),
+        Check(1)..nullable..rmtU32.p("hash_cache")
     )
 
-    void(
-        "EndCPUSample",
-        ""
-    )
+    void("EndCPUSample")
 
     rmtError(
         "MarkFrame",
-        """
-        Used for both CPU and GPU profiling.
-
-        Essential to call this every frame, ever since D3D12/Vulkan support was added
-
-        D3D12/Vulkan Requirements: Don't sample any command lists that begin before this call and end after it
-        """,
 
         void()
     )
 
     rmtError(
         "PropertySnapshotAll",
-        "Sends all properties and their values to the viewer and log to file.",
 
         void()
     )
 
     void(
         "PropertyFrameResetAll",
-        "Resets all #PropertyFlags_FrameReset properties to their default value.",
 
         void()
     )
 
     void(
         "IterateChildren",
-        "",
 
-        rmtSampleIterator.p("iter", ""),
-        nullable..rmtSample.p("sample", "")
+        rmtSampleIterator.p("iter"),
+        nullable..rmtSample.p("sample")
     )
 
     rmtBool(
         "IterateNext",
-        "",
 
-        rmtSampleIterator.p("iter", "")
+        rmtSampleIterator.p("iter")
     )
 
     charUTF8.const.p(
         "SampleTreeGetThreadName",
-        "",
 
-        rmtSampleTree.p("sample_tree", "")
+        rmtSampleTree.p("sample_tree")
     )
 
     rmtSample.p(
         "SampleTreeGetRootSample",
-        "",
 
-        rmtSampleTree.p("sample_tree", "")
+        rmtSampleTree.p("sample_tree")
     )
 
     charUTF8.const.p(
         "SampleGetName",
-        "Should only called from within the sample tree callback, when the internal string lookup table is valid (i.e. on the main Remotery thread).",
 
-        rmtSample.p("sample", "")
+        rmtSample.p("sample")
     )
 
     rmtU32(
         "SampleGetNameHash",
-        "",
 
-        rmtSample.p("sample", "")
+        rmtSample.p("sample")
     )
 
     rmtU32(
         "SampleGetCallCount",
-        "",
 
-        rmtSample.p("sample", "")
+        rmtSample.p("sample")
     )
 
     rmtU64(
         "SampleGetStart",
-        "",
 
-        rmtSample.p("sample", "")
+        rmtSample.p("sample")
     )
 
     rmtU64(
         "SampleGetTime",
-        "",
 
-        rmtSample.p("sample", "")
+        rmtSample.p("sample")
     )
 
     rmtU64(
         "SampleGetSelfTime",
-        "",
 
-        rmtSample.p("sample", "")
+        rmtSample.p("sample")
     )
 
     void(
         "SampleGetColour",
-        "",
 
-        rmtSample.p("sample", ""),
-        Check(1)..rmtU8.p("r", ""),
-        Check(1)..rmtU8.p("g", ""),
-        Check(1)..rmtU8.p("b", "")
+        rmtSample.p("sample"),
+        Check(1)..rmtU8.p("r"),
+        Check(1)..rmtU8.p("g"),
+        Check(1)..rmtU8.p("b")
     )
 
     rmtSampleType(
         "SampleGetType",
-        "",
 
-        rmtSample.p("sample", "")
+        rmtSample.p("sample")
     )
 
     void(
         "PropertyIterateChildren",
-        "",
 
-        rmtPropertyIterator.p("iter", ""),
-        nullable..rmtProperty.p("sample", "")
+        rmtPropertyIterator.p("iter"),
+        nullable..rmtProperty.p("sample")
     )
 
     rmtBool(
         "PropertyIterateNext",
-        "",
 
-        rmtPropertyIterator.p("iter", "")
+        rmtPropertyIterator.p("iter")
     )
 
     rmtPropertyType(
         "PropertyGetType",
-        "",
 
-        rmtProperty.p("property", "")
+        rmtProperty.p("property")
     )
 
     charUTF8.const.p(
         "PropertyGetName",
-        "",
 
-        rmtProperty.p("property", "")
+        rmtProperty.p("property")
     )
 
     charUTF8.const.p(
         "PropertyGetDescription",
-        "",
 
-        rmtProperty.p("property", "")
+        rmtProperty.p("property")
     )
 
     rmtPropertyValue(
         "PropertyGetValue",
-        "",
 
-        rmtProperty.p("property", "")
+        rmtProperty.p("property")
     )
 
     void(
         "_rmt_PropertySetValue",
-        "",
 
-        rmtProperty.p("property", ""),
+        rmtProperty.p("property"),
 
         noPrefix = true
     )
 
     void(
         "_rmt_PropertyAddValue",
-        "",
 
-        rmtProperty.p("property", ""),
-        rmtPropertyValue("add_value", ""),
+        rmtProperty.p("property"),
+        rmtPropertyValue("add_value"),
 
         noPrefix = true
     )
 
     rmtU32(
         "_rmt_HashString32",
-        "",
 
-        charUTF8.const.p("s", ""),
-        int("len", ""),
-        rmtU32("seed", ""),
+        charUTF8.const.p("s"),
+        int("len"),
+        rmtU32("seed"),
 
         noPrefix = true
     )

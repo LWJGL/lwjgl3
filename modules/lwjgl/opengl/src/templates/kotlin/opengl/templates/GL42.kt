@@ -9,30 +9,8 @@ import opengl.*
 
 val GL42 = "GL42".nativeClassGL("GL42") {
     extends = GL41
-    documentation =
-        """
-        The OpenGL functionality up to version 4.2. Includes the deprecated symbols of the Compatibility Profile.
-
-        OpenGL 4.2 implementations support revision 4.20 of the OpenGL Shading Language.
-
-        Extensions promoted to core in this release:
-        ${ul(
-            registryLinkTo("ARB", "texture_compression_bptc"),
-            registryLinkTo("ARB", "compressed_texture_pixel_storage"),
-            registryLinkTo("ARB", "shader_atomic_counters"),
-            registryLinkTo("ARB", "texture_storage"),
-            registryLinkTo("ARB", "transform_feedback_instanced"),
-            registryLinkTo("ARB", "base_instance"),
-            registryLinkTo("ARB", "shader_image_load_store"),
-            "${registryLinkTo("ARB", "conservative_depth")} and ${registryLinkTo("ARB", "shading_language_420pack")}",
-            registryLinkTo("ARB", "internalformat_query"),
-            registryLinkTo("ARB", "map_buffer_alignment")
-        )}
-        """
 
     IntConstant(
-        "Renamed tokens.",
-
         "COPY_READ_BUFFER_BINDING".."GL31.GL_COPY_READ_BUFFER",
         "COPY_WRITE_BUFFER_BINDING".."GL31.GL_COPY_WRITE_BUFFER",
 
@@ -43,11 +21,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     // ARB_texture_compression_bptc
 
     IntConstant(
-        """
-        Accepted by the {@code internalformat} parameter of TexImage2D, TexImage3D, CopyTexImage2D, CopyTexImage3D, CompressedTexImage2D, and
-        CompressedTexImage3D and the {@code format} parameter of CompressedTexSubImage2D and CompressedTexSubImage3D.
-        """,
-
         "COMPRESSED_RGBA_BPTC_UNORM"..0x8E8C,
         "COMPRESSED_SRGB_ALPHA_BPTC_UNORM"..0x8E8D,
         "COMPRESSED_RGB_BPTC_SIGNED_FLOAT"..0x8E8E,
@@ -57,8 +30,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     // ARB_compressed_texture_pixel_storage
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of PixelStore[fi], GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
-
         "UNPACK_COMPRESSED_BLOCK_WIDTH"..0x9127,
         "UNPACK_COMPRESSED_BLOCK_HEIGHT"..0x9128,
         "UNPACK_COMPRESSED_BLOCK_DEPTH"..0x9129,
@@ -72,30 +43,19 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     // ARB_shader_atomic_counters
 
     IntConstant(
-        "Accepted by the {@code target} parameter of BindBufferBase and BindBufferRange.",
-
         "ATOMIC_COUNTER_BUFFER"..0x92C0
     )
 
     IntConstant(
-        """
-        Accepted by the {@code pname} parameter of GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, GetInteger64i_v, GetBooleanv, GetIntegerv,
-        GetInteger64v, GetFloatv, GetDoublev, and GetActiveAtomicCounterBufferiv.
-        """,
-
         "ATOMIC_COUNTER_BUFFER_BINDING"..0x92C1
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetIntegeri_64v.",
-
         "ATOMIC_COUNTER_BUFFER_START"..0x92C2,
         "ATOMIC_COUNTER_BUFFER_SIZE"..0x92C3
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetActiveAtomicCounterBufferiv.",
-
         "ATOMIC_COUNTER_BUFFER_DATA_SIZE"..0x92C4,
         "ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS"..0x92C5,
         "ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES"..0x92C6,
@@ -107,8 +67,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
-
         "MAX_VERTEX_ATOMIC_COUNTER_BUFFERS"..0x92CC,
         "MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS"..0x92CD,
         "MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS"..0x92CE,
@@ -126,20 +84,14 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetProgramiv.",
-
         "ACTIVE_ATOMIC_COUNTER_BUFFERS"..0x92D9
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetActiveUniformsiv.",
-
         "UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX"..0x92DA
     )
 
     IntConstant(
-        "Returned in {@code params} by GetActiveUniform and GetActiveUniformsiv.",
-
         "UNSIGNED_INT_ATOMIC_COUNTER"..0x92DB
     )
 
@@ -148,8 +100,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     // ARB_texture_storage
 
     IntConstant(
-        "Accepted by the {@code value} parameter of GetTexParameter{if}v.",
-
         "TEXTURE_IMMUTABLE_FORMAT"..0x912F
     )
 
@@ -171,8 +121,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     // ARB_shader_image_load_store
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
-
         "MAX_IMAGE_UNITS"..0x8F38,
         "MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS"..0x8F39,
         "MAX_IMAGE_SAMPLES"..0x906D,
@@ -185,8 +133,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     )
 
     IntConstant(
-        "Accepted by the {@code target} parameter of GetIntegeri_v and GetBooleani_v.",
-
         "IMAGE_BINDING_NAME"..0x8F3A,
         "IMAGE_BINDING_LEVEL"..0x8F3B,
         "IMAGE_BINDING_LAYERED"..0x8F3C,
@@ -196,8 +142,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     )
 
     IntConstant(
-        "Accepted by the {@code barriers} parameter of MemoryBarrier.",
-
         "VERTEX_ATTRIB_ARRAY_BARRIER_BIT"..0x00000001,
         "ELEMENT_ARRAY_BARRIER_BIT"..0x00000002,
         "UNIFORM_BARRIER_BIT"..0x00000004,
@@ -214,8 +158,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     )
 
     IntConstant(
-        "Returned by the {@code type} parameter of GetActiveUniform.",
-
         "IMAGE_1D"..0x904C,
         "IMAGE_2D"..0x904D,
         "IMAGE_3D"..0x904E,
@@ -252,17 +194,10 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     )
 
     IntConstant(
-        "Accepted by the {@code value} parameter of GetTexParameteriv, GetTexParameterfv, GetTexParameterIiv, and GetTexParameterIuiv.",
-
         "IMAGE_FORMAT_COMPATIBILITY_TYPE"..0x90C7
     )
 
     IntConstant(
-        """
-        Returned in the {@code data} parameter of GetTexParameteriv, GetTexParameterfv, GetTexParameterIiv, and GetTexParameterIuiv when {@code value} is
-        IMAGE_FORMAT_COMPATIBILITY_TYPE.
-        """,
-
         "IMAGE_FORMAT_COMPATIBILITY_BY_SIZE"..0x90C8,
         "IMAGE_FORMAT_COMPATIBILITY_BY_CLASS"..0x90C9
     )
@@ -273,8 +208,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     // ARB_internal_format_query
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetInternalformativ.",
-
         "NUM_SAMPLE_COUNTS"..0x9380
     )
 
@@ -283,8 +216,6 @@ val GL42 = "GL42".nativeClassGL("GL42") {
     // ARB_map_buffer_alignment
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
-
         "MIN_MAP_BUFFER_ALIGNMENT"..0x90BC
     )
 }

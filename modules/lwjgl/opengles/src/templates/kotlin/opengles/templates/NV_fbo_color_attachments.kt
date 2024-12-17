@@ -8,22 +8,11 @@ import org.lwjgl.generator.*
 import opengles.*
 
 val NV_fbo_color_attachments = "NVFboColorAttachments".nativeClassGLES("NV_fbo_color_attachments", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension increases the number of available framebuffer object color attachment points.
-        """
-
     IntConstant(
-        "Accepted by the {@code value} parameter of GetIntegerv.",
-
         "MAX_COLOR_ATTACHMENTS_NV"..0x8CDF
     )
 
     IntConstant(
-        "Accepted by the {@code attachment} parameter of FramebufferRenderbuffer, FramebufferTexture2D and GetFramebufferAttachmentParameteriv.",
-
         "COLOR_ATTACHMENT0_NV"..0x8CE0,
         "COLOR_ATTACHMENT1_NV"..0x8CE1,
         "COLOR_ATTACHMENT2_NV"..0x8CE2,

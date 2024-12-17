@@ -22,9 +22,9 @@ val meow_u128 = struct(
 }
 
 val meow_hash = union(Module.MEOW, "MeowHash", nativeName = "meow_hash", mutable = false) {
-    meow_u128("u128", "")
-    meow_u64("u64", "")[2]
-    meow_u32("u32", "")[4]
+    meow_u128("u128")
+    meow_u64("u64")[2]
+    meow_u32("u32")[4]
 }
 
 val meow_hash_state = struct(

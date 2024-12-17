@@ -21,60 +21,47 @@ val unistd = "UNISTD".nativeClass(Module.CORE_LINUX, nativeSubPath = "linux") {
 
 #define gettid() ((pid_t)syscall(SYS_gettid))""")
 
-    documentation = "Native bindings to &lt;unistd.h&gt;."
-
     EnumConstant(
-        "",
-
-        "_SC_OPEN_MAX".enum("", "4"),
-        "_SC_PAGE_SIZE".enum("", "30"),
-        "_SC_IOV_MAX".enum("", "60")
+        "_SC_OPEN_MAX".enum("4"),
+        "_SC_PAGE_SIZE".enum("30"),
+        "_SC_IOV_MAX".enum("60")
     )
 
     int(
         "close",
-        "",
 
         CaptureCallState.errno.param,
-        int("fd", "")
+        int("fd")
     )
 
     long(
         "sysconf",
-        "",
 
         CaptureCallState.errno.param,
-        int("name", "")
+        int("name")
     )
 
     ssize_t(
         "read",
-        "",
 
         CaptureCallState.errno.param,
-        int("fd", ""),
-        void.p("buf", ""),
-        AutoSize("buf")..size_t("count", "")
+        int("fd"),
+        void.p("buf"),
+        AutoSize("buf")..size_t("count")
     )
 
     pid_t(
         "getpid",
-        "",
-
         void()
     )
 
     pid_t(
         "getppid",
-        "",
-
         void()
     )
 
     pid_t(
         "gettid",
-        "",
-
         void()
     )
 }

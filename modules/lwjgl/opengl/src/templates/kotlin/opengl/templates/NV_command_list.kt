@@ -8,150 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val NV_command_list = "NVCommandList".nativeClassGL("NV_command_list", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension adds a few new features designed to provide very low overhead batching and replay of rendering commands and state changes:
-        ${ul(
-            "A state object, which stores a pre-validated representation of the state of (almost) the entire pipeline.",
-            """
-            A more flexible and extensible MultiDrawIndirect (MDI) type of mechanism, using a token-based command stream, allowing to setup binding state and
-            emit draw calls.
-            """,
-            "A set of functions to execute a list of the token-based command streams with state object changes interleaved with the streams.",
-            "Command lists enabling compilation and reuse of sequences of command streams and state object changes."
-        )}
-
-        Because state objects reflect the state of the entire pipeline, it is expected that they can be pre-validated and executed efficiently. It is also
-        expected that when state objects are combined into a command list, the command list can diff consecutive state objects to produce a reduced/ optimized
-        set of state changes specific to that transition.
-
-        The token-based command stream can also be stored in regular buffer objects and therefore be modified by the server itself. This allows more complex
-        work creation than the original MDI approach, which was limited to emitting draw calls only.
-
-        <h3>Command structures</h3>
-        ${codeBlock("""
-typedef struct {
-  uint  header;
-} TerminateSequenceCommandNV;
-
-typedef struct {
-  uint  header;
-} NOPCommandNV;
-
-typedef  struct {
-  uint  header;
-  uint  count;
-  uint  firstIndex;
-  uint  baseVertex;
-} DrawElementsCommandNV;
-
-typedef  struct {
-  uint  header;
-  uint  count;
-  uint  first;
-} DrawArraysCommandNV;
-
-typedef  struct {
-  uint  header;
-  uint  mode;
-  uint  count;
-  uint  instanceCount;
-  uint  firstIndex;
-  uint  baseVertex;
-  uint  baseInstance;
-} DrawElementsInstancedCommandNV;
-
-typedef  struct {
-  uint  header;
-  uint  mode;
-  uint  count;
-  uint  instanceCount;
-  uint  first;
-  uint  baseInstance;
-} DrawArraysInstancedCommandNV;
-
-typedef struct {
-  uint  header;
-  uint  addressLo;
-  uint  addressHi;
-  uint  typeSizeInByte;
-} ElementAddressCommandNV;
-
-typedef struct {
-  uint  header;
-  uint  index;
-  uint  addressLo;
-  uint  addressHi;
-} AttributeAddressCommandNV;
-
-typedef struct {
-  uint    header;
-  ushort  index;
-  ushort  stage;
-  uint    addressLo;
-  uint    addressHi;
-} UniformAddressCommandNV;
-
-typedef struct {
-  uint  header;
-  float red;
-  float green;
-  float blue;
-  float alpha;
-} BlendColorCommandNV;
-
-typedef struct {
-  uint  header;
-  uint  frontStencilRef;
-  uint  backStencilRef;
-} StencilRefCommandNV;
-
-typedef struct {
-  uint  header;
-  float lineWidth;
-} LineWidthCommandNV;
-
-typedef struct {
-  uint  header;
-  float scale;
-  float bias;
-} PolygonOffsetCommandNV;
-
-typedef struct {
-  uint  header;
-  float alphaRef;
-} AlphaRefCommandNV;
-
-typedef struct {
-  uint  header;
-  uint  x;
-  uint  y;
-  uint  width;
-  uint  height;
-} ViewportCommandNV; // only ViewportIndex 0
-
-typedef struct {
-  uint  header;
-  uint  x;
-  uint  y;
-  uint  width;
-  uint  height;
-} ScissorCommandNV; // only ViewportIndex 0
-
-typedef struct {
-  uint  header;
-  uint  frontFace; // 0 for CW, 1 for CCW
-} FrontFaceCommandNV;"""
-        )}
-
-        Tight packing is used for all structures.
-        """
-
-    val Commands = IntConstant(
-        "Used in DrawCommandsStates buffer formats, in GetCommandHeaderNV to return the header.",
-
+    IntConstant(
         "TERMINATE_SEQUENCE_COMMAND_NV"..0x0000,
         "NOP_COMMAND_NV"..0x0001,
         "DRAW_ELEMENTS_COMMAND_NV"..0x0002,
@@ -171,238 +28,136 @@ typedef struct {
         "VIEWPORT_COMMAND_NV"..0x0010,
         "SCISSOR_COMMAND_NV"..0x0011,
         "FRONT_FACE_COMMAND_NV"..0x0012
-    ).javaDocLinks
+    )
 
     void(
         "CreateStatesNV",
-        "Returns {@code n} previously unused state object names in {@code states}, and creates a state object in the initial state for each name.",
 
-        AutoSize("states")..GLsizei("n", "the number of state object names to create"),
-        ReturnParam..GLuint.p("states", "the buffer in which to write the created state object names")
+        AutoSize("states")..GLsizei("n"),
+        ReturnParam..GLuint.p("states")
     )
 
     void(
         "DeleteStatesNV",
-        """
-        Deletes {@code n} names of state objects given by {@code states}. Once a state object is deleted it has no contents and its name is again unused.
-        Unused names in {@code states} are silently ignored, as is the value zero.
-        """,
 
-        AutoSize("states")..GLsizei("n", "the number of state object names to delete"),
-        SingleValue("state")..GLuint.const.p("states", "the buffer from which to read the state object names to delete")
+        AutoSize("states")..GLsizei("n"),
+        SingleValue("state")..GLuint.const.p("states")
     )
 
     GLboolean(
         "IsStateNV",
-        "Returns true if the specified name corresponds to a state object.",
 
-        GLuint("state", "the object name to test")
+        GLuint("state")
     )
 
     void(
         "StateCaptureNV",
-        """
-        Captures the current state of the rendering pipeline into the object indicated by {@code state}.
 
-        The captured rendering state includes:
-        ${ul(
-            """
-            Vertex attribute enable state, formats, types, relative offsets and strides, but not bound vertex buffers or vertex unified addresses, nor their
-            offsets, nor bound index buffers/addresses.
-            """,
-            "Primitive state such as primitive restart and patch parameters, provoking vertex.",
-            "Immediate vertex attribute values as provided by glVertexAttrib* or glVertexAttribI*",
-            """
-            All active program binaries except compute (either from the active program pipeline or from UseProgram) with their current subroutine configuration
-            excluding all default-block uniform values.
-            """,
-            "Rasterization, multisample fragment operation, depth, stencil, and blending state.",
-            "Rasterization state such as line widths, stippling, polygon modes and offsets.",
-            "Viewport, scissor, and depth range state.",
-            """
-            Framebuffer attachment configuration: attachment state including attachment formats, drawbuffer state, and target/layer information, but not
-            including actual attachments or sizes of attachments (these are stored separately).
-            """,
-            "Framebuffer attachment textures (but not residency state)."
-        )}
-        """,
-
-        GLuint("state", "the state object into which to capture the current rendering state"),
-        GLenum(
-            "mode",
-            "the basic Begin mode that this state object must be used with",
-            "#POINTS #LINES #TRIANGLES #QUADS #LINES_ADJACENCY #TRIANGLES_ADJACENCY #PATCHES"
-        )
+        GLuint("state"),
+        GLenum("mode")
     )
 
     GLuint(
         "GetCommandHeaderNV",
-        "Returns the encoded 32bit header value for a given command; the returned value is implementation specific.",
 
-        GLenum("tokenID", "the command to query", Commands),
-        GLuint(
-            "size",
-            """
-            provided as basic consistency check, since the size of each structure is fixed and no padding is allowed. The value is the sum of the header and
-            the command specific structure.
-            """
-        )
+        GLenum("tokenID"),
+        GLuint("size")
     )
 
     GLushort(
         "GetStageIndexNV",
-        """
-        Returns the 16bit value for a specific shader stage; the returned value is implementation specific. The value is to be used with the stage field within
-        {@code UniformAddressCommandNV} tokens.
-        """,
 
-        GLenum("shadertype", "the shader stage type")
+        GLenum("shadertype")
     )
 
     void(
         "DrawCommandsNV",
-        """
-        Accepts arrays of buffer addresses as an array of offsets {@code indirects} into a buffer named by {@code buffer}, an array of command lengths in
-        {@code sizes}. All arrays have {@code count} entries.
-        """,
 
-        GLenum("primitiveMode", "the primitive mode"),
-        GLuint("buffer", "the buffer object name"),
-        GLintptr.const.p("indirects", "the array of offsets into the buffer"),
-        GLsizei.const.p("sizes", "the array of command lengths"),
-        AutoSize("indirects", "sizes")..GLuint("count", "the number of commands")
+        GLenum("primitiveMode"),
+        GLuint("buffer"),
+        GLintptr.const.p("indirects"),
+        GLsizei.const.p("sizes"),
+        AutoSize("indirects", "sizes")..GLuint("count")
     )
 
     void(
         "DrawCommandsAddressNV",
-        """
-        Accepts arrays of buffer addresses as an array of GPU addresses {@code indirects}, an array of sequence lengths in {@code sizes}. All arrays have
-        {@code count} entries.
-        """,
 
-        GLenum("primitiveMode", "the primitive mode"),
-        GLuint64.const.p("indirects", "the array of GPU addreses"),
-        GLsizei.const.p("sizes", "the array of command lengths"),
-        AutoSize("indirects", "sizes")..GLuint("count", "the number of commands")
+        GLenum("primitiveMode"),
+        GLuint64.const.p("indirects"),
+        GLsizei.const.p("sizes"),
+        AutoSize("indirects", "sizes")..GLuint("count")
     )
 
     void(
         "DrawCommandsStatesNV",
-        """
-        Accepts arrays of buffer addresses as an array of offsets {@code indirects} into a buffer named by {@code buffer}, an array of command lengths in
-        {@code sizes}, and an array of state object names in {@code states}, of which all names must be non-zero. Frame buffer object names are stored in
-        {@code fbos} and can be either zero or non-zero. All arrays have {@code count} entries. The residency of textures used as attachment inside the state
-        object's captured fbo or the passed fbo must managed explicitly.
-        """,
 
-        GLuint("buffer", "the buffer object name"),
-        GLintptr.const.p("indirects", "the array of offsets into the buffer"),
-        GLsizei.const.p("sizes", "the array of command lengths"),
-        GLuint.const.p("states", "the array of state object names"),
-        GLuint.const.p("fbos", "the array of framebuffer object names"),
-        AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count", "the number of commands")
+        GLuint("buffer"),
+        GLintptr.const.p("indirects"),
+        GLsizei.const.p("sizes"),
+        GLuint.const.p("states"),
+        GLuint.const.p("fbos"),
+        AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count")
     )
 
     void(
         "DrawCommandsStatesAddressNV",
-        """
-        Accepts arrays of buffer addresses as an array of GPU addresses {@code indirects}, an array of command lengths in {@code sizes}, and an array of state
-        object names in {@code states}, of which all names must be non-zero. Frame buffer object names are stored in {@code fbos} and can be either zero or
-        non-zero. All arrays have {@code count} entries. The residency of textures used as attachment inside the state object's captured fbo or the passed fbo
-        must managed explicitly.
-        """,
 
-        GLuint64.const.p("indirects", "the array of GPU addresses"),
-        GLsizei.const.p("sizes", "the array of command lengths"),
-        GLuint.const.p("states", "the array of state object names"),
-        GLuint.const.p("fbos", "the array of framebuffer object names"),
-        AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count", "the number of commands")
+        GLuint64.const.p("indirects"),
+        GLsizei.const.p("sizes"),
+        GLuint.const.p("states"),
+        GLuint.const.p("fbos"),
+        AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count")
     )
 
     void(
         "CreateCommandListsNV",
-        "Returns {@code n} previously unused command list names in {@code lists}, and creates a command list in the initial state for each name.",
 
-        AutoSize("lists")..GLsizei("n", "the number of command list names to create"),
-        ReturnParam..GLuint.p("lists", "the buffer in which to return the created command list names")
+        AutoSize("lists")..GLsizei("n"),
+        ReturnParam..GLuint.p("lists")
     )
 
     void(
         "DeleteCommandListsNV",
-        """
-        Deletes {@code n} command lists stored in {@code lists}. Once a command list is deleted it has no contents and its name is again unused. Unused names
-        in {@code lists} are silently ignored, as is the value zero.
-        """,
 
-        AutoSize("lists")..GLsizei("n", "the number of command list names to delete"),
-        SingleValue("list")..GLuint.const.p("lists", "the buffer from which to read the command list names to delete")
+        AutoSize("lists")..GLsizei("n"),
+        SingleValue("list")..GLuint.const.p("lists")
     )
 
     GLboolean(
         "IsCommandListNV",
-        "Returns true if the specified name corresponds to a command list.",
 
-        GLuint("list", "the object name to query")
+        GLuint("list")
     )
 
     void(
         "ListDrawCommandsStatesClientNV",
-        """
-        A list has multiple segments and each segment enqueues an ordered list of commands. This command enqueues the equivalent of the
-        DrawCommandsStatesClientNV commands into the list indicated by {@code list} on the segment indicated by {@code segment}.
 
-        A list has multiple segments and each segment enqueues an ordered list of command sequences. This command enqueues the equivalent of the
-        DrawCommandsStatesNV commands into the list indicated by {@code list} on the segment indicated by {@code segment} except that the sequence data is
-        copied from the sequences pointed to by the {@code indirects} pointer. The {@code indirects} pointer should point to a list of size {@code count} of
-        pointers, each of which should point to a command sequence.
-
-        The pre-validated state from {@code states} is saved into the command list, rather than a reference to the state object (i.e. the state objects or fbos
-        could be deleted and the command list would be unaffected). This includes native GPU addresses for all textures indirectly referenced through the fbos
-        passed or state objects' fbos attachments, therefore a recompile of the command list is required if such referenced textures change their allocation
-        (for example due to resizing), as well as explicit management of the residency of the textures prior #CallCommandListNV().
-
-        ListDrawCommandsStatesClientNV performs a by-value copy of the indirect data based on the provided client-side pointers. In this case the content is
-        fully immutable, while the buffer-based versions can change the content of the buffers at any later time.
-        """,
-
-        GLuint("list", "the command list"),
-        GLuint("segment", "the segment"),
-        void.const.p.p("indirects", "the array of GPU addresses"),
-        GLsizei.const.p("sizes", "the array of command lengths"),
-        GLuint.const.p("states", "the array of state object names"),
-        GLuint.const.p("fbos", "the array of framebuffer object names"),
-        AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count", "the number of commands")
+        GLuint("list"),
+        GLuint("segment"),
+        void.const.p.p("indirects"),
+        GLsizei.const.p("sizes"),
+        GLuint.const.p("states"),
+        GLuint.const.p("fbos"),
+        AutoSize("indirects", "sizes", "states", "fbos")..GLuint("count")
     )
 
     void(
         "CommandListSegmentsNV",
-        """
-        Indicates that {@code list} will have {@code segments} number of segments, each of which is a list of command sequences that it enqueues. This must be
-        called before any commands are enqueued. In the initial state, a command list has a single segment.
-        """,
 
-        GLuint("list", "the command list"),
-        GLuint("segments", "the number of ordered sequences of commands")
+        GLuint("list"),
+        GLuint("segments")
     )
 
     void(
         "CompileCommandListNV",
-        """
-        Makes the list indicated by {@code list} switch from allowing collection of commands to allowing its execution. At this time, the implementation may
-        generate optimized commands to transition between states as efficiently as possible.
-        """,
 
-        GLuint("list", "the command list to compile")
+        GLuint("list")
     )
 
     void(
         "CallCommandListNV",
-        """
-        Executes the command list indicated by {@code list}, which operates as if the DrawCommandsStates* commands were replayed in the order they were
-        enqueued on each segment, starting from segment zero and proceeding to the maximum segment. All buffer or texture resources' residency must be managed
-        explicitly, including texture attachments of the effective fbos during list enqueuing.
-        """,
 
-        GLuint("list", "the command list to call")
+        GLuint("list")
     )
 }

@@ -8,51 +8,11 @@ import egl.*
 import org.lwjgl.generator.*
 
 val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension defines a new object, the EGLStream, that can be used to efficiently transfer a sequence of image frames from one API to another. The
-        EGLStream has mechanisms that can help keep audio data synchronized to video data.
-
-        Each EGLStream is associated with a "producer" that generates image frames and inserts them into the EGLStream. The producer is responsible for
-        inserting each image frame into the EGLStream at the correct time so that the consumer can display the image frame for the appropriate period of time.
-
-        Each EGLStream is also associated with a "consumer" that retrieves image frames from the EGLStream. The consumer is responsible for noticing that an
-        image frame is available and displaying it (or otherwise consuming it). The consumer is also responsible for indicating the latency when that is
-        possible (the latency is the time that elapses between the time it is retrieved from the EGLStream until the time it is displayed to the user).
-
-        Some APIs are stream oriented (examples: OpenMAX IL, OpenMAX AL). These APIs may be connected directly to an EGLStream as a producer or consumer. Once
-        a stream oriented producer is "connected" to an EGLStream and "started" it may insert image frames into the EGLStream automatically with no further
-        interaction from the application. Likewise, once a stream oriented consumer is "connected" to an EGLStream and "started" it may retrieve image frames
-        from the EGLStream automatically with no further interaction from the application.
-
-        Some APIs are rendering oriented and require interaction with the application during the rendering of each frame (examples: OpenGL, OpenGL ES, OpenVG).
-        These APIs will not automatically insert or retrieve image frames into/from the EGLStream. Instead the application must take explicit action to cause a
-        rendering oriented producer to insert an image frame or to cause a rendering oriented consumer to retrieve an image frame.
-
-        The EGLStream conceptually operates as a mailbox. When the producer has a new image frame it empties the mailbox (discards the old contents) and
-        inserts the new image frame into the mailbox. The consumer retrieves the image frame from the mailbox and examines it. When the consumer is finished
-        examining the image frame it is either placed back in the mailbox (if the mailbox is empty) or discarded (if the mailbox is not empty).
-
-        Timing is mainly controlled by the producer. The consumer operated with a fixed latency that it indicates to the producer through the
-        EGL_CONSUMER_LATENCY_USEC_KHR attribute. The consumer is expected to notice when a new image frame is available in the EGLStream, retrieve it, and
-        display it to the user in the time indicated by EGL_CONSUMER_LATENCY_USEC_KHR. The producer controls when the image frame will be displayed by
-        inserting it into the stream at time T - EGL_CONSUMER_LATENCY_USEC_KHR where T is the time that the image frame is intended to appear to the user.
-
-        This extension does not cover the details of how a producer or a consumer works or is "connected" to an EGLStream. Different kinds of producers and
-        consumers work differently and are described in additional extension specifications.
-        """
-
     LongConstant(
-        "",
-
         "NO_STREAM_KHR"..0L
     )
 
     IntConstant(
-        "",
-
         "CONSUMER_LATENCY_USEC_KHR"..0x3210,
         "PRODUCER_FRAME_KHR"..0x3212,
         "CONSUMER_FRAME_KHR"..0x3213,
@@ -69,97 +29,85 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
 
     EGLStreamKHR(
         "CreateStreamKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        nullable..noneTerminated..EGLint.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        nullable..noneTerminated..EGLint.const.p("attrib_list")
     )
 
     EGLBoolean(
         "DestroyStreamKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLStreamKHR("stream", "")
+        EGLDisplay("dpy"),
+        EGLStreamKHR("stream")
     )
 
     EGLBoolean(
         "StreamAttribKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLStreamKHR("stream", ""),
-        EGLenum("attribute", ""),
-        EGLint("value", "")
+        EGLDisplay("dpy"),
+        EGLStreamKHR("stream"),
+        EGLenum("attribute"),
+        EGLint("value")
     )
 
     EGLBoolean(
         "QueryStreamKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLStreamKHR("stream", ""),
-        EGLenum("attribute", ""),
-        Check(1)..EGLint.p("value", "")
+        EGLDisplay("dpy"),
+        EGLStreamKHR("stream"),
+        EGLenum("attribute"),
+        Check(1)..EGLint.p("value")
     )
 
     EGLBoolean(
         "QueryStreamu64KHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLStreamKHR("stream", ""),
-        EGLenum("attribute", ""),
-        Check(1)..EGLuint64KHR.p("value", "")
+        EGLDisplay("dpy"),
+        EGLStreamKHR("stream"),
+        EGLenum("attribute"),
+        Check(1)..EGLuint64KHR.p("value")
     )
 }
 
 val KHR_stream_attrib = "KHRStreamAttrib".nativeClassEGL("KHR_stream_attrib", postfix = KHR) {
-    documentation = "See ${KHR_stream.link}."
-
     EGLStreamKHR(
         "CreateStreamAttribKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
     EGLBoolean(
         "SetStreamAttribKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLStreamKHR("stream", ""),
-        EGLenum("attribute", ""),
-        EGLAttrib("value", "")
+        EGLDisplay("dpy"),
+        EGLStreamKHR("stream"),
+        EGLenum("attribute"),
+        EGLAttrib("value")
     )
 
     EGLBoolean(
         "QueryStreamAttribKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLStreamKHR("stream", ""),
-        EGLenum("attribute", ""),
-        Check(1)..EGLAttrib.p("value", "")
+        EGLDisplay("dpy"),
+        EGLStreamKHR("stream"),
+        EGLenum("attribute"),
+        Check(1)..EGLAttrib.p("value")
     )
 
     EGLBoolean(
         "StreamConsumerAcquireAttribKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLStreamKHR("stream", ""),
-        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLStreamKHR("stream"),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 
     EGLBoolean(
         "StreamConsumerReleaseAttribKHR",
-        "",
 
-        EGLDisplay("dpy", ""),
-        EGLStreamKHR("stream", ""),
-        nullable..noneTerminated..EGLAttrib.const.p("attrib_list", "")
+        EGLDisplay("dpy"),
+        EGLStreamKHR("stream"),
+        nullable..noneTerminated..EGLAttrib.const.p("attrib_list")
     )
 }

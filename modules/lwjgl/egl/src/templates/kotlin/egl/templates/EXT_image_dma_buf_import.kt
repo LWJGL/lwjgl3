@@ -8,19 +8,7 @@ import egl.*
 import org.lwjgl.generator.*
 
 val EXT_image_dma_buf_import = "EXTImageDMABufImport".nativeClassEGL("EXT_image_dma_buf_import", postfix = EXT) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension allows creating an EGLImage from a Linux dma_buf file descriptor or multiple file descriptors in the case of multi-plane YUV images.
-
-        Requires ${EGL12.core} and ${KHR_image_base.link}. The EGL implementation must be running on a Linux kernel supporting the dma_buf buffer sharing
-        mechanism.
-        """
-
     IntConstant(
-        "",
-
         "LINUX_DMA_BUF_EXT"..0x3270,
         "LINUX_DRM_FOURCC_EXT"..0x3271,
         "DMA_BUF_PLANE0_FD_EXT"..0x3272,

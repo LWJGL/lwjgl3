@@ -79,15 +79,6 @@ private val CLBinding = Generator.register(object : APIBinding(
             "static org.lwjgl.system.Checks.*"
         )
 
-        documentation =
-            """
-            Defines the capabilities of an OpenCL platform or device.
-
-            The instance returned by {@link CL\#createPlatformCapabilities} exposes the functionality present on either the platform or any of its devices.
-            This is unlike the #PLATFORM_EXTENSIONS string, which returns only platform functionality, supported across all platform devices.
-
-            The instance returned by {@link CL\#createDeviceCapabilities} exposes only the functionality available on that particular device.
-            """
     }
 
     override fun PrintWriter.generateJava() {

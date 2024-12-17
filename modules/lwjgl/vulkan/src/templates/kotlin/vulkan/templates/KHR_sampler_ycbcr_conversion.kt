@@ -9,92 +9,15 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KHR_sampler_ycbcr_conversion", type = "device", postfix = "KHR") {
-    documentation =
-        """
-        The use of Y′C<sub>B</sub>C<sub>R</sub> sampler conversion is an area in 3D graphics not used by most Vulkan developers. It is mainly used for processing inputs from video decoders and cameras. The use of the extension assumes basic knowledge of Y′C<sub>B</sub>C<sub>R</sub> concepts.
-
-        This extension provides the ability to perform specified color space conversions during texture sampling operations for the Y′C<sub>B</sub>C<sub>R</sub> color space natively. It also adds a selection of multi-planar formats, image aspect plane, and the ability to bind memory to the planes of an image collectively or separately.
-
-        <h5>Promotion to Vulkan 1.1</h5>
-        All functionality in this extension is included in core Vulkan 1.1, with the KHR suffix omitted. However, if Vulkan 1.1 is supported and this extension is not, the {@code samplerYcbcrConversion} capability is optional. The original type, enum, and command names are still available as aliases of the core functionality.
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_KHR_sampler_ycbcr_conversion}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Device extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>157</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>14</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRMaintenance1 VK_KHR_maintenance1} and {@link KHRBindMemory2 VK_KHR_bind_memory2} and {@link KHRGetMemoryRequirements2 VK_KHR_get_memory_requirements2} and {@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1">Version 1.1</a></dd>
-
-            <dt><b>API Interactions</b></dt>
-            <dd><ul>
-                <li>Interacts with VK_EXT_debug_report</li>
-            </ul></dd>
-
-            <dt><b>Deprecation State</b></dt>
-            <dd><ul>
-                <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\#versions-1.1-promotions">Vulkan 1.1</a></li>
-            </ul></dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Andrew Garrard <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_KHR_sampler_ycbcr_conversion]%20@fluppeteer%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_KHR_sampler_ycbcr_conversion%20extension*">fluppeteer</a></li>
-            </ul></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2017-08-11</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Andrew Garrard, Samsung Electronics</li>
-                <li>Tobias Hector, Imagination Technologies</li>
-                <li>James Jones, NVIDIA</li>
-                <li>Daniel Koch, NVIDIA</li>
-                <li>Daniel Rakos, AMD</li>
-                <li>Romain Guy, Google</li>
-                <li>Jesse Hall, Google</li>
-                <li>Tom Cooksey, ARM Ltd</li>
-                <li>Jeff Leger, Qualcomm Technologies, Inc</li>
-                <li>Jan-Harald Fredriksen, ARM Ltd</li>
-                <li>Jan Outters, Samsung Electronics</li>
-                <li>Alon Or-bach, Samsung Electronics</li>
-                <li>Michael Worcester, Imagination Technologies</li>
-                <li>Jeff Bolz, NVIDIA</li>
-                <li>Tony Zlatinski, NVIDIA</li>
-                <li>Matthew Netsch, Qualcomm Technologies, Inc</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "KHR_SAMPLER_YCBCR_CONVERSION_SPEC_VERSION".."14"
     )
 
     StringConstant(
-        "The extension name.",
-
         "KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION_NAME".."VK_KHR_sampler_ycbcr_conversion"
     )
 
     EnumConstant(
-        "Extends {@code VkStructureType}.",
-
         "STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO_KHR".."1000156000",
         "STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO_KHR".."1000156001",
         "STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO_KHR".."1000156002",
@@ -104,14 +27,10 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
     )
 
     EnumConstant(
-        "Extends {@code VkObjectType}.",
-
         "OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR".."1000156000"
     )
 
     EnumConstant(
-        "Extends {@code VkFormat}.",
-
         "FORMAT_G8B8G8R8_422_UNORM_KHR".."1000156000",
         "FORMAT_B8G8R8G8_422_UNORM_KHR".."1000156001",
         "FORMAT_G8_B8_R8_3PLANE_420_UNORM_KHR".."1000156002",
@@ -149,22 +68,16 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
     )
 
     EnumConstant(
-        "Extends {@code VkImageAspectFlagBits}.",
-
         "IMAGE_ASPECT_PLANE_0_BIT_KHR".enum(0x00000010),
         "IMAGE_ASPECT_PLANE_1_BIT_KHR".enum(0x00000020),
         "IMAGE_ASPECT_PLANE_2_BIT_KHR".enum(0x00000040)
     )
 
     EnumConstant(
-        "Extends {@code VkImageCreateFlagBits}.",
-
         "IMAGE_CREATE_DISJOINT_BIT_KHR".enum(0x00000200)
     )
 
     EnumConstant(
-        "Extends {@code VkFormatFeatureFlagBits}.",
-
         "FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT_KHR".enum(0x00020000),
         "FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR".enum(0x00040000),
         "FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR".enum(0x00080000),
@@ -175,8 +88,6 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
     )
 
     EnumConstant(
-        "Extends {@code VkSamplerYcbcrModelConversion}.",
-
         "SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY_KHR".."0",
         "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY_KHR".."1",
         "SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709_KHR".."2",
@@ -185,42 +96,34 @@ val KHR_sampler_ycbcr_conversion = "KHRSamplerYcbcrConversion".nativeClassVK("KH
     )
 
     EnumConstant(
-        "Extends {@code VkSamplerYcbcrRange}.",
-
         "SAMPLER_YCBCR_RANGE_ITU_FULL_KHR".."0",
         "SAMPLER_YCBCR_RANGE_ITU_NARROW_KHR".."1"
     )
 
     EnumConstant(
-        "Extends {@code VkChromaLocation}.",
-
         "CHROMA_LOCATION_COSITED_EVEN_KHR".."0",
         "CHROMA_LOCATION_MIDPOINT_KHR".."1"
     )
 
     EnumConstant(
-        "Extends {@code VkDebugReportObjectTypeEXT}.",
-
         "DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_EXT".."1000156000",
         "DEBUG_REPORT_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION_KHR_EXT".."1000156000"
     )
 
     VkResult(
         "CreateSamplerYcbcrConversionKHR",
-        "See #CreateSamplerYcbcrConversion().",
 
-        VkDevice("device", "the logical device that creates the sampler Y′C<sub>B</sub>C<sub>R</sub> conversion."),
-        VkSamplerYcbcrConversionCreateInfo.const.p("pCreateInfo", "a pointer to a ##VkSamplerYcbcrConversionCreateInfo structure specifying the requested sampler Y′C<sub>B</sub>C<sub>R</sub> conversion."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter."),
-        Check(1)..VkSamplerYcbcrConversion.p("pYcbcrConversion", "a pointer to a {@code VkSamplerYcbcrConversion} handle in which the resulting sampler Y′C<sub>B</sub>C<sub>R</sub> conversion is returned.")
+        VkDevice("device"),
+        VkSamplerYcbcrConversionCreateInfo.const.p("pCreateInfo"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator"),
+        Check(1)..VkSamplerYcbcrConversion.p("pYcbcrConversion")
     )
 
     void(
         "DestroySamplerYcbcrConversionKHR",
-        "See #DestroySamplerYcbcrConversion().",
 
-        VkDevice("device", "the logical device that destroys the Y′C<sub>B</sub>C<sub>R</sub> conversion."),
-        VkSamplerYcbcrConversion("ycbcrConversion", "the conversion to destroy."),
-        nullable..VkAllocationCallbacks.const.p("pAllocator", "controls host memory allocation as described in the <a href=\"https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html\\#memory-allocation\">Memory Allocation</a> chapter.")
+        VkDevice("device"),
+        VkSamplerYcbcrConversion("ycbcrConversion"),
+        nullable..VkAllocationCallbacks.const.p("pAllocator")
     )
 }

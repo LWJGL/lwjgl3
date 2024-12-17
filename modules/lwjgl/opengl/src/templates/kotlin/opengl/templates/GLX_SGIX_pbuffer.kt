@@ -9,17 +9,7 @@ import opengl.*
 import core.linux.*
 
 val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension defines pixel buffers (GLXPbuffers, or pbuffer for short). GLXPbuffers are additional non-visible rendering buffers for an OpenGL
-        renderer.
-        """
-
     IntConstant(
-        "Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX().",
-
         "MAX_PBUFFER_WIDTH_SGIX"..0x8016,
         "MAX_PBUFFER_HEIGHT_SGIX"..0x8017,
         "MAX_PBUFFER_PIXELS_SGIX"..0x8018,
@@ -28,53 +18,35 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
     )
 
     IntConstant(
-        """
-        Returned by #GetFBConfigAttribSGIX() (when {@code attribute} is set to #DRAWABLE_TYPE_SGIX) and
-        accepted by the {@code attrib_list} parameter of #ChooseFBConfigSGIX() (following the
-        #DRAWABLE_TYPE_SGIX token).
-        """,
-
         "PBUFFER_BIT_SGIX"..0x00000004
     )
 
     IntConstant(
-        "Accepted by the {@code attrib_list} parameter of #CreateGLXPbufferSGIX() and by the {@code attribute} parameter of #QueryGLXPbufferSGIX().",
-
         "PRESERVED_CONTENTS_SGIX"..0x801B,
         "LARGEST_PBUFFER_SGIX"..0x801C
     )
 
     IntConstant(
-        "Accepted by the {@code attribute} parameter of #QueryGLXPbufferSGIX().",
-
         "WIDTH_SGIX"..0x801D,
         "HEIGHT_SGIX"..0x801E,
         "EVENT_MASK_SGIX"..0x801F
     )
 
     IntConstant(
-        "Accepted by the {@code mask} parameter of #SelectEventSGIX() and returned in the {@code mask} parameter of #GetSelectedEventSGIX().",
-
         "BUFFER_CLOBBER_MASK_SGIX"..0x08000000
     )
 
     IntConstant(
-        "Returned in the {@code event_type} field of a \"buffer clobber\" event.",
-
         "DAMAGED_SGIX"..0x8020,
         "SAVED_SGIX"..0x8021
     )
 
     IntConstant(
-        "Returned in the {@code draw_type} field of a \"buffer clobber\" event.",
-
         "WINDOW_SGIX"..0x8022,
         "PBUFFER_SGIX"..0x8023
     )
 
     IntConstant(
-        "Returned in the {@code mask} field of a \"buffer clobber\" event.",
-
         "FRONT_LEFT_BUFFER_BIT_SGIX"..0x00000001,
         "FRONT_RIGHT_BUFFER_BIT_SGIX"..0x00000002,
         "BACK_LEFT_BUFFER_BIT_SGIX"..0x00000004,
@@ -88,49 +60,44 @@ val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 
     GLXPbuffer(
         "CreateGLXPbufferSGIX",
-        "Creates a single GLXPbuffer and returns its XID.",
 
         DISPLAY,
-        GLXFBConfig("config", "the {@code GLXFBConfig}"),
-        unsigned_int("width", "the pbuffer width"),
-        unsigned_int("height", "the pbuffer height"),
-        nullable..NullTerminated..int.p("attrib_list", "an optional null-terminated list of attributes")
+        GLXFBConfig("config"),
+        unsigned_int("width"),
+        unsigned_int("height"),
+        nullable..NullTerminated..int.p("attrib_list")
     )
 
     void(
         "DestroyGLXPbufferSGIX",
-        "Destroys a GLXPbuffer.",
 
         DISPLAY,
-        GLXPbuffer("pbuf", "the pbuffer to destroy")
+        GLXPbuffer("pbuf")
     )
 
     void(
         "QueryGLXPbufferSGIX",
-        "Queries an attribute associated with a GLXPbuffer.",
 
         DISPLAY,
-        GLXPbuffer("pbuf", "the pbuffer being queried"),
-        int("attribute", "the attribute to query"),
-        Check(1)..unsigned_int.p("value", "returns the attribute value")
+        GLXPbuffer("pbuf"),
+        int("attribute"),
+        Check(1)..unsigned_int.p("value")
     )
 
     void(
         "SelectEventSGIX",
-        "Selects which GLX events should be received on a GLXdrawable.",
 
         DISPLAY,
-        GLXDrawable("drawable", "the GLXDrawable"),
-        unsigned_long("mask", "the selection mask")
+        GLXDrawable("drawable"),
+        unsigned_long("mask")
     )
 
     void(
         "GetSelectedEventSGIX",
-        "Returns which GLX events are selected for a GLXdrawable.",
 
         DISPLAY,
-        GLXDrawable("drawable", "the GLXDrawable"),
-        Check(1)..unsigned_long.p("mask", "returns the selection mask")
+        GLXDrawable("drawable"),
+        Check(1)..unsigned_long.p("mask")
     )
 
 }

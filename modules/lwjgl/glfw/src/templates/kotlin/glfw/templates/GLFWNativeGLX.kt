@@ -15,63 +15,22 @@ val GLFWNativeGLX = "GLFWNativeGLX".nativeClass(Module.GLFW, nativeSubPath = "li
         "static org.lwjgl.system.MemoryUtil.*"
     )
 
-    documentation = "Native bindings to the GLFW library's GLX native access functions."
-
     GLXContext(
         "GetGLXContext",
-        """
-        Returns the {@code GLXContext} of the specified window.
 
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", "a GLFW window"),
-
-        returnDoc =
-        """
-        the {@code GLXContext} of the specified window, or #NULL if an error occurred.
-
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.0"
+        GLFWwindow.p("window")
     )
 
     GLXWindow(
         "GetGLXWindow",
-        """
-        Returns the {@code GLXWindow} of the specified window.
 
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", "a GLFW window"),
-
-        returnDoc =
-        """
-        the {@code GLXWindow} of the specified window, or {@code None} if an error occurred.
-
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.2"
+        GLFWwindow.p("window")
     )
 
     GLXWindow(
         "GetGLXFBConfig",
-        """
-        Returns the {@code GLXFBConfig} that was chosen to create the specified window.
 
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", "a GLFW window"),
-
-        returnDoc =
-        """
-        the {@code GLXFBConfig} that was chosen to create the specified window, or #NULL if an error occurred.
-
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.4"
+        GLFWwindow.p("window")
     )
 
     customMethod("""

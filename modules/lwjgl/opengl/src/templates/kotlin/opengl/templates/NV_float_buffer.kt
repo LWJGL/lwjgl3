@@ -8,17 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val NV_float_buffer = "NVFloatBuffer".nativeClassGL("NV_float_buffer", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension builds upon NV_fragment_program to provide a framebuffer and texture format that allows fragment programs to read and write
-        unconstrained floating point data.
-        """
-
     IntConstant(
-        "Accepted by the {@code internalformat} parameter of TexImage2D and CopyTexImage2D.",
-
         "FLOAT_R_NV"..0x8880,
         "FLOAT_RG_NV"..0x8881,
         "FLOAT_RGB_NV"..0x8882,
@@ -34,33 +24,17 @@ val NV_float_buffer = "NVFloatBuffer".nativeClassGL("NV_float_buffer", postfix =
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.",
-
         "TEXTURE_FLOAT_COMPONENTS_NV"..0x888C
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "FLOAT_CLEAR_COLOR_VALUE_NV"..0x888D,
         "FLOAT_RGBA_MODE_NV"..0x888E
     )
 }
 
 val WGL_NV_float_buffer = "WGLNVFloatBuffer".nativeClassWGL("WGL_NV_float_buffer", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the ${registryLink("NV_float_buffer")} extension.
-
-        WGL functionality for ${NV_float_buffer.link}.
-        """
-
     IntConstant(
-        """
-        Accepted in the {@code piAttributes} array of wglGetPixelFormatAttribivARB and wglGetPixelFormatAttribfvARB and in the {@code piAttribIList} and
-        {@code pfAttribFList} arrays of wglChoosePixelFormatARB.
-        """,
-
         "FLOAT_COMPONENTS_NV"..0x20B0,
         "BIND_TO_TEXTURE_RECTANGLE_FLOAT_R_NV"..0x20B1,
         "BIND_TO_TEXTURE_RECTANGLE_FLOAT_RG_NV"..0x20B2,
@@ -69,11 +43,6 @@ val WGL_NV_float_buffer = "WGLNVFloatBuffer".nativeClassWGL("WGL_NV_float_buffer
     )
 
     IntConstant(
-        """
-        Accepted in the {@code piAttribIList} array of wglCreatePbufferARB and returned in the {@code value} parameter of wglQueryPbufferARB when
-        {@code iAttribute} is TEXTURE_FORMAT_ARB.
-        """,
-
         "TEXTURE_FLOAT_R_NV"..0x20B5,
         "TEXTURE_FLOAT_RG_NV"..0x20B6,
         "TEXTURE_FLOAT_RGB_NV"..0x20B7,
@@ -82,16 +51,7 @@ val WGL_NV_float_buffer = "WGLNVFloatBuffer".nativeClassWGL("WGL_NV_float_buffer
 }
 
 val GLX_NV_float_buffer = "GLXNVFloatBuffer".nativeClassGLX("GLX_NV_float_buffer", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the ${registryLink("NV_float_buffer")} extension.
-
-        GLX functionality for ${NV_float_buffer.link}.
-        """
-
     IntConstant(
-        "Accepted in the {@code value} array of glXGetFBConfigAttrib (and glXGetFBConfigAttribSGIX).",
-
         "FLOAT_COMPONENTS_NV"..0x20B0
     )
 }

@@ -12,10 +12,8 @@ val TextureHandle = typedef(uint16_t, "bgfx_texture_handle_t")
 val AllocatorI = "bgfx_allocator_interface_t".opaque.p
 
 val NVGLUframebufferBGFX = struct(Module.NANOVG, "NVGLUFramebufferBGFX", nativeName = "NVGLUframebuffer", mutable = false) {
-    documentation = "A framebuffer object."
-
-    NVGcontext.p("ctx", "")
-    typedef(uint16_t, "bgfx_frame_buffer_handle_t")("handle", "")
-    int("image", "")
-    ViewId("viewId", "")
+    NVGcontext.p("ctx")
+    typedef(uint16_t, "bgfx_frame_buffer_handle_t")("handle")
+    int("image")
+    ViewId("viewId")
 }

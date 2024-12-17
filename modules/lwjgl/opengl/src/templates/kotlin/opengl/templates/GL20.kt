@@ -11,41 +11,20 @@ const val SHADER_TYPES = "#VERTEX_SHADER #FRAGMENT_SHADER #GEOMETRY_SHADER #TESS
 
 val GL20 = "GL20".nativeClassGL("GL20") {
     extends = GL15
-    documentation =
-        """
-        The OpenGL functionality up to version 2.0. Includes the deprecated symbols of the Compatibility Profile.
-
-        Extensions promoted to core in this release:
-        ${ul(
-            registryLinkTo("ARB", "shader_objects"),
-            "${registryLinkTo("ARB", "vertex_shader")} and ${registryLinkTo("ARB", "fragment_shader")}",
-            registryLinkTo("ARB", "shading_language_100"),
-            registryLinkTo("ARB", "draw_buffers"),
-            registryLinkTo("ARB", "texture_non_power_of_two"),
-            registryLinkTo("ARB", "point_sprite"),
-            "${registryLinkTo("ATI", "separate_stencil")} and ${registryLinkTo("EXT", "stencil_two_side")}"
-        )}
-        """
 
     // ARB_shading_language_100
 
     IntConstant(
-        "Accepted by the {@code name} parameter of GetString.",
-
         "SHADING_LANGUAGE_VERSION"..0x8B8C
     )
 
     // ARB_shader_objects
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetInteger.",
-
         "CURRENT_PROGRAM"..0x8B8D
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetShaderiv.",
-
         "SHADER_TYPE"..0x8B4F,
         "DELETE_STATUS"..0x8B80,
         "COMPILE_STATUS"..0x8B81,
@@ -61,8 +40,6 @@ val GL20 = "GL20".nativeClassGL("GL20") {
     )
 
     IntConstant(
-        "Returned by the {@code type} parameter of GetActiveUniform.",
-
         "FLOAT_VEC2"..0x8B50,
         "FLOAT_VEC3"..0x8B51,
         "FLOAT_VEC4"..0x8B52,
@@ -130,14 +107,10 @@ val GL20 = "GL20".nativeClassGL("GL20") {
     // ARB_vertex_shader
 
     IntConstant(
-        "Accepted by the {@code type} argument of CreateShader and returned by the {@code params} parameter of GetShaderiv.",
-
         "VERTEX_SHADER"..0x8B31
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "MAX_VERTEX_UNIFORM_COMPONENTS"..0x8B4A,
         "MAX_VARYING_FLOATS"..0x8B4B,
         "MAX_VERTEX_ATTRIBS"..0x8869,
@@ -148,18 +121,11 @@ val GL20 = "GL20".nativeClassGL("GL20") {
     )
 
     IntConstant(
-        """
-        Accepted by the {@code cap} parameter of Disable, Enable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
-        GetDoublev.
-        """,
-
         "VERTEX_PROGRAM_POINT_SIZE"..0x8642,
         "VERTEX_PROGRAM_TWO_SIDE"..0x8643
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetVertexAttrib{dfi}v.",
-
         "VERTEX_ATTRIB_ARRAY_ENABLED"..0x8622,
         "VERTEX_ATTRIB_ARRAY_SIZE"..0x8623,
         "VERTEX_ATTRIB_ARRAY_STRIDE"..0x8624,
@@ -169,8 +135,6 @@ val GL20 = "GL20".nativeClassGL("GL20") {
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetVertexAttribPointerv.",
-
         "VERTEX_ATTRIB_ARRAY_POINTER"..0x8645
     )
 
@@ -224,28 +188,20 @@ val GL20 = "GL20".nativeClassGL("GL20") {
     // ARB_fragment_shader
 
     IntConstant(
-        "Accepted by the {@code type} argument of CreateShader and returned by the {@code params} parameter of GetShaderiv.",
-
         "FRAGMENT_SHADER"..0x8B30
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "MAX_FRAGMENT_UNIFORM_COMPONENTS"..0x8B49
     )
 
     IntConstant(
-        "Accepted by the {@code target} parameter of Hint and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "FRAGMENT_SHADER_DERIVATIVE_HINT"..0x8B8B
     )
 
     // ARB_draw_buffers
 
     IntConstant(
-        "Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
-
         "MAX_DRAW_BUFFERS"..0x8824,
         "DRAW_BUFFER0"..0x8825,
         "DRAW_BUFFER1"..0x8826,
@@ -270,32 +226,18 @@ val GL20 = "GL20".nativeClassGL("GL20") {
     // ARB_point_sprite
 
     IntConstant(
-        """
-        Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
-        GetDoublev, and by the {@code target} parameter of TexEnvi, TexEnviv, TexEnvf, TexEnvfv, GetTexEnviv, and GetTexEnvfv.
-        """,
-
         "POINT_SPRITE"..0x8861
     )
 
     IntConstant(
-        """
-        When the {@code target} parameter of TexEnvf, TexEnvfv, TexEnvi, TexEnviv, GetTexEnvfv, or GetTexEnviv is POINT_SPRITE, then the value of
-        {@code pname} may be.
-        """,
-
         "COORD_REPLACE"..0x8862
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of PointParameter{if}v.",
-
         "POINT_SPRITE_COORD_ORIGIN"..0x8CA0
     )
 
     IntConstant(
-        "Accepted by the {@code param} parameter of PointParameter{if}v.",
-
         "LOWER_LEFT"..0x8CA1,
         "UPPER_LEFT"..0x8CA2
     )
@@ -303,8 +245,6 @@ val GL20 = "GL20".nativeClassGL("GL20") {
     // EXT_blend_equation_separate
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
         "BLEND_EQUATION_RGB"..0x8009,
         "BLEND_EQUATION_ALPHA"..0x883D
     )
@@ -314,8 +254,6 @@ val GL20 = "GL20".nativeClassGL("GL20") {
     // ATI_separate_stencil
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetIntegerv.",
-
         "STENCIL_BACK_FUNC"..0x8800,
         "STENCIL_BACK_FAIL"..0x8801,
         "STENCIL_BACK_PASS_DEPTH_FAIL"..0x8802,

@@ -8,31 +8,12 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV_framebuffer_mixed_samples", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension allows multisample rendering with a raster and
-    depth/stencil sample count that is larger than the color sample count.
-    Rasterization and the results of the depth and stencil tests together
-    determine the portion of a pixel that is "covered".  It can be useful to
-    evaluate coverage at a higher frequency than color samples are stored.
-    This coverage is then "reduced" to a collection of covered color samples,
-    each having an opacity value corresponding to the fraction of the color
-    sample covered.  The opacity can optionally be blended into individual
-    color samples.
-        """
-
     IntConstant(
-        "Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.",
-
         "RASTER_MULTISAMPLE_EXT"..0x9327,
         "COVERAGE_MODULATION_TABLE_NV"..0x9331
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
-
         "RASTER_SAMPLES_EXT"..0x9328,
         "MAX_RASTER_SAMPLES_EXT"..0x9329,
         "RASTER_FIXED_SAMPLE_LOCATIONS_EXT"..0x932A,
@@ -53,24 +34,21 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 
     void(
         "CoverageModulationTableNV",
-        "",
 
-        AutoSize("v")..GLsizei("n", "The size of the coverage modulation table. Must be equal to the value of COVERAGE_MODULATION_TABLE_SIZE_NV."),
-        GLfloat.const.p("v", "")
+        AutoSize("v")..GLsizei("n"),
+        GLfloat.const.p("v")
     )
 
     void(
         "GetCoverageModulationTableNV",
-        "",
 
-        AutoSize("v")..GLsizei("bufsize", ""),
-        GLfloat.p("v", "")
+        AutoSize("v")..GLsizei("bufsize"),
+        GLfloat.p("v")
     )
 
     void(
         "CoverageModulationNV",
-        "",
 
-        GLenum("components", "")
+        GLenum("components")
     )
 }

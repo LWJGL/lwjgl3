@@ -8,73 +8,15 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuffer_object", postfix = EXT) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension defines a simple interface for drawing to rendering destinations other than the buffers provided to the GL by the window-system.
-
-        In this extension, these newly defined rendering destinations are known collectively as "framebuffer-attachable images". This extension provides a
-        mechanism for attaching framebuffer-attachable images to the GL framebuffer as one of the standard GL logical buffers: color, depth, and stencil.
-        (Attaching a framebuffer-attachable image to the accum logical buffer is left for a future extension to define). When a framebuffer-attachable image is
-        attached to the framebuffer, it is used as the source and destination of fragment operations.
-
-        By allowing the use of a framebuffer-attachable image as a rendering destination, this extension enables a form of "offscreen" rendering. Furthermore,
-        "render to texture" is supported by allowing the images of a texture to be used as framebuffer-attachable images. A particular image of a texture object
-        is selected for use as a framebuffer-attachable image by specifying the mipmap level, cube map face (for a cube map texture), and z-offset (for a 3D
-        texture) that identifies the image. The "render to texture" semantics of this extension are similar to performing traditional rendering to the
-        framebuffer, followed immediately by a call to CopyTexSubImage. However, by using this extension instead, an application can achieve the same effect,
-        but with the advantage that the GL can usually eliminate the data copy that would have been incurred by calling CopyTexSubImage.
-
-        This extension also defines a new GL object type, called a "renderbuffer", which encapsulates a single 2D pixel image. The image of renderbuffer can be
-        used as a framebuffer-attachable image for generalized offscreen rendering and it also provides a means to support rendering to GL logical buffer types
-        which have no corresponding texture format (stencil, accum, etc). A renderbuffer is similar to a texture in that both renderbuffers and textures can be
-        independently allocated and shared among multiple contexts. The framework defined by this extension is general enough that support for attaching images
-        from GL objects other than textures and renderbuffers could be added by layered extensions.
-
-        To facilitate efficient switching between collections of framebuffer-attachable images, this extension introduces another new GL object, called a
-        framebuffer object. A framebuffer object contains the state that defines the traditional GL framebuffer, including its set of images. Prior to this
-        extension, it was the window-system which defined and managed this collection of images, traditionally by grouping them into a "drawable". The
-        window-system API's would also provide a function (i.e., wglMakeCurrent, glXMakeCurrent, aglSetDrawable, etc.) to bind a drawable with a GL context (as
-        is done in the WGL_ARB_pbuffer extension). In this extension however, this functionality is subsumed by the GL and the GL provides the function
-        BindFramebufferEXT to bind a framebuffer object to the current context. Later, the context can bind back to the window-system-provided framebuffer in
-        order to display rendered content.
-
-        Previous extensions that enabled rendering to a texture have been much more complicated. One example is the combination of ARB_pbuffer and
-        ARB_render_texture, both of which are window-system extensions. This combination requires calling MakeCurrent, an operation that may be expensive, to
-        switch between the window and the pbuffer drawables. An application must create one pbuffer per renderable texture in order to portably use
-        ARB_render_texture. An application must maintain at least one GL context per texture format, because each context can only operate on a single
-        pixelformat or FBConfig. All of these characteristics make ARB_render_texture both inefficient and cumbersome to use.
-
-        EXT_framebuffer_object, on the other hand, is both simpler to use and more efficient than ARB_render_texture. The EXT_framebuffer_object API is
-        contained wholly within the GL API and has no (non-portable) window-system components. Under EXT_framebuffer_object, it is not necessary to create a
-        second GL context when rendering to a texture image whose format differs from that of the window. Finally, unlike the pbuffers of ARB_render_texture, a
-        single framebuffer object can facilitate rendering to an unlimited number of texture objects.
-
-        ${GL30.promoted}
-        """
-
     IntConstant(
-        """
-        Accepted by the {@code target} parameter of BindFramebufferEXT, CheckFramebufferStatusEXT, FramebufferTexture{1D|2D|3D}EXT, FramebufferRenderbufferEXT,
-        and GetFramebufferAttachmentParameterivEXT.
-        """,
-
         "FRAMEBUFFER_EXT"..0x8D40
     )
 
     IntConstant(
-        """
-        Accepted by the {@code target} parameter of BindRenderbufferEXT, RenderbufferStorageEXT, and GetRenderbufferParameterivEXT, and returned by
-        GetFramebufferAttachmentParameterivEXT.
-        """,
-
         "RENDERBUFFER_EXT"..0x8D41
     )
 
     IntConstant(
-        "Accepted by the {@code internalformat} parameter of RenderbufferStorageEXT.",
-
         "STENCIL_INDEX1_EXT"..0x8D46,
         "STENCIL_INDEX4_EXT"..0x8D47,
         "STENCIL_INDEX8_EXT"..0x8D48,
@@ -82,8 +24,6 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT.",
-
         "RENDERBUFFER_WIDTH_EXT"..0x8D42,
         "RENDERBUFFER_HEIGHT_EXT"..0x8D43,
         "RENDERBUFFER_INTERNAL_FORMAT_EXT"..0x8D44,
@@ -96,8 +36,6 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameterivEXT.",
-
         "FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT"..0x8CD0,
         "FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT"..0x8CD1,
         "FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT"..0x8CD2,
@@ -106,10 +44,6 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
     )
 
     IntConstant(
-        """
-        Accepted by the {@code attachment} parameter of FramebufferTexture{1D|2D|3D}EXT, FramebufferRenderbufferEXT, and GetFramebufferAttachmentParameterivEXT.
-        """,
-
         "COLOR_ATTACHMENT0_EXT"..0x8CE0,
         "COLOR_ATTACHMENT1_EXT"..0x8CE1,
         "COLOR_ATTACHMENT2_EXT"..0x8CE2,
@@ -131,8 +65,6 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
     )
 
     IntConstant(
-        "Returned by CheckFramebufferStatusEXT().",
-
         "FRAMEBUFFER_COMPLETE_EXT"..0x8CD5,
         "FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT"..0x8CD6,
         "FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT"..0x8CD7,
@@ -144,8 +76,6 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
     )
 
     IntConstant(
-        "Accepted by GetIntegerv().",
-
         "FRAMEBUFFER_BINDING_EXT"..0x8CA6,
         "RENDERBUFFER_BINDING_EXT"..0x8CA7,
         "MAX_COLOR_ATTACHMENTS_EXT"..0x8CDF,
@@ -153,157 +83,138 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
     )
 
     IntConstant(
-        "Returned by GetError().",
-
         "INVALID_FRAMEBUFFER_OPERATION_EXT"..0x0506
     )
 
     GLboolean(
         "IsRenderbufferEXT",
-        "",
 
-        GLuint("renderbuffer", "")
+        GLuint("renderbuffer")
     )
 
     void(
         "BindRenderbufferEXT",
-        "",
 
-        GLenum("target", ""),
-        GLuint("renderbuffer", "")
+        GLenum("target"),
+        GLuint("renderbuffer")
     )
 
     void(
         "DeleteRenderbuffersEXT",
-        "",
 
-        AutoSize("renderbuffers")..GLsizei("n", ""),
-        SingleValue("renderbuffer")..GLuint.const.p("renderbuffers", "")
+        AutoSize("renderbuffers")..GLsizei("n"),
+        SingleValue("renderbuffer")..GLuint.const.p("renderbuffers")
     )
 
     void(
         "GenRenderbuffersEXT",
-        "",
 
-        AutoSize("renderbuffers")..GLsizei("n", ""),
-        ReturnParam..GLuint.p("renderbuffers", "")
+        AutoSize("renderbuffers")..GLsizei("n"),
+        ReturnParam..GLuint.p("renderbuffers")
     )
 
     void(
         "RenderbufferStorageEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("internalformat", ""),
-        GLsizei("width", ""),
-        GLsizei("height", "")
+        GLenum("target"),
+        GLenum("internalformat"),
+        GLsizei("width"),
+        GLsizei("height")
     )
 
     void(
         "GetRenderbufferParameterivEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("pname", ""),
-        Check(1)..ReturnParam..GLint.p("params", "")
+        GLenum("target"),
+        GLenum("pname"),
+        Check(1)..ReturnParam..GLint.p("params")
     )
 
     GLboolean(
         "IsFramebufferEXT",
-        "",
 
-        GLuint("framebuffer", "")
+        GLuint("framebuffer")
     )
 
     void(
         "BindFramebufferEXT",
-        "",
 
-        GLenum("target", ""),
-        GLuint("framebuffer", "")
+        GLenum("target"),
+        GLuint("framebuffer")
     )
 
     void(
         "DeleteFramebuffersEXT",
-        "",
 
-        AutoSize("framebuffers")..GLsizei("n", ""),
-        SingleValue("framebuffer")..GLuint.const.p("framebuffers", "")
+        AutoSize("framebuffers")..GLsizei("n"),
+        SingleValue("framebuffer")..GLuint.const.p("framebuffers")
     )
 
     void(
         "GenFramebuffersEXT",
-        "",
 
-        AutoSize("framebuffers")..GLsizei("n", ""),
-        ReturnParam..GLuint.p("framebuffers", "")
+        AutoSize("framebuffers")..GLsizei("n"),
+        ReturnParam..GLuint.p("framebuffers")
     )
 
     GLenum(
         "CheckFramebufferStatusEXT",
-        "",
 
-        GLenum("target", "")
+        GLenum("target")
     )
 
     void(
         "FramebufferTexture1DEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("attachment", ""),
-        GLenum("textarget", ""),
-        GLuint("texture", ""),
-        GLint("level", "")
+        GLenum("target"),
+        GLenum("attachment"),
+        GLenum("textarget"),
+        GLuint("texture"),
+        GLint("level")
     )
 
     void(
         "FramebufferTexture2DEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("attachment", ""),
-        GLenum("textarget", ""),
-        GLuint("texture", ""),
-        GLint("level", "")
+        GLenum("target"),
+        GLenum("attachment"),
+        GLenum("textarget"),
+        GLuint("texture"),
+        GLint("level")
     )
 
     void(
         "FramebufferTexture3DEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("attachment", ""),
-        GLenum("textarget", ""),
-        GLuint("texture", ""),
-        GLint("level", ""),
-        GLint("zoffset", "")
+        GLenum("target"),
+        GLenum("attachment"),
+        GLenum("textarget"),
+        GLuint("texture"),
+        GLint("level"),
+        GLint("zoffset")
     )
 
     void(
         "FramebufferRenderbufferEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("attachment", ""),
-        GLenum("renderbuffertarget", ""),
-        GLuint("renderbuffer", "")
+        GLenum("target"),
+        GLenum("attachment"),
+        GLenum("renderbuffertarget"),
+        GLuint("renderbuffer")
     )
 
     void(
         "GetFramebufferAttachmentParameterivEXT",
-        "",
 
-        GLenum("target", ""),
-        GLenum("attachment", ""),
-        GLenum("pname", ""),
-        Check(1)..ReturnParam..GLint.p("params", "")
+        GLenum("target"),
+        GLenum("attachment"),
+        GLenum("pname"),
+        Check(1)..ReturnParam..GLint.p("params")
     )
 
     void(
         "GenerateMipmapEXT",
-        "",
 
-        GLenum("target", "")
+        GLenum("target")
     )
 }

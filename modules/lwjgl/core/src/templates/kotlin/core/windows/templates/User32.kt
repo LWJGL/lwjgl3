@@ -10,10 +10,7 @@ import core.windows.*
 val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows", binding = simpleBinding(Module.CORE_WINDOWS, "user32")) {
     nativeImport("WindowsLWJGL.h")
 
-    documentation = "Native bindings to WinUser.h and user32.dll."
-
     IntConstant(
-        "Window Styles",
         "WS_OVERLAPPED"..0x00000000,
         "WS_POPUP"..0x80000000.i,
         "WS_CHILD"..0x40000000,
@@ -48,7 +45,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "Extended Window Styles",
         "WS_EX_DLGMODALFRAME"..0x00000001,
         "WS_EX_NOPARENTNOTIFY"..0x00000004,
         "WS_EX_TOPMOST"..0x00000008,
@@ -85,12 +81,10 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "May be used in #CreateWindowEx() for the x, y, width, height parameters.",
         "CW_USEDEFAULT"..0x80000000.i
     )
 
     IntConstant(
-        "Class styles",
         "CS_VREDRAW"..0x0001,
         "CS_HREDRAW"..0x0002,
         "CS_DBLCLKS"..0x0008,
@@ -108,8 +102,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "Windows messages.",
-
         "WM_NULL"..0x0000,
         "WM_CREATE"..0x0001,
         "WM_DESTROY"..0x0002,
@@ -384,16 +376,12 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "#WM_ACTIVATE message {@code wParam} values.",
-
         "WA_ACTIVE".."1",
         "WA_CLICKACTIVE".."2",
         "WA_INACTIVE".."0"
     )
 
     IntConstant(
-        "#WM_SIZE message {@code wParam} values.",
-
         "SIZE_RESTORED".."0",
         "SIZE_MINIMIZED".."1",
         "SIZE_MAXIMIZED".."2",
@@ -402,8 +390,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "#WM_DEVICECHANGE message {@code wParam} params.",
-
         "DBT_APPYBEGIN"..0x0000,
         "DBT_APPYEND"..0x0001,
         "DBT_DEVNODES_CHANGED"..0x0007,
@@ -414,8 +400,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "System menu command values.",
-
         "SC_SIZE"..0xF000,
         "SC_MOVE"..0xF010,
         "SC_MINIMIZE"..0xF020,
@@ -439,8 +423,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "Key state masks for mouse messages.",
-
         "MK_LBUTTON"..0x0001,
         "MK_RBUTTON"..0x0002,
         "MK_SHIFT"..0x0004,
@@ -451,8 +433,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "Mouse position codes.",
-
         "HTERROR".."-2",
         "HTTRANSPARENT".."-1",
         "HTNOWHERE".."0",
@@ -484,9 +464,7 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "HTHELP".."21"
     )
 
-    val WindowLongOffsets = IntConstant(
-        "Window field offsets for #GetWindowLongPtr().",
-
+    IntConstant(
         "GWL_WNDPROC".."-4",
         "GWL_HINSTANCE".."-6",
         "GWL_HWNDPARENT".."-8",
@@ -494,11 +472,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GWL_EXSTYLE".."-20",
         "GWL_USERDATA".."-21",
         "GWL_ID".."-12"
-    ).javaDocLinks
+    )
 
-    val ShowWindowCommands = IntConstant(
-        "#ShowWindow() commands.",
-
+    IntConstant(
         "SW_HIDE".."0",
         "SW_SHOWNORMAL".."1",
         "SW_NORMAL".."1",
@@ -514,29 +490,20 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "SW_SHOWDEFAULT".."10",
         "SW_FORCEMINIMIZE".."11",
         "SW_MAX".."11"
-    ).javaDocLinks
+    )
 
-    val VirtualWindowHandles = LongConstant(
-        "Virtual window handles used by the #SetWindowPos() insertAfter argument.",
-
+    LongConstant(
         "HWND_TOP"..0L,
         "HWND_BOTTOM"..1L,
         "HWND_TOPMOST"..-1L,
         "HWND_NOTOPMOST"..-2L
-    ).javaDocLinks
+    )
 
     LongConstant(
-        """
-        Virtual window handle used by #PostMessage() that matches all top-level windows in the system, including disabled or invisible unowned windows,
-        overlapped windows, and pop-up windows.
-        """,
-
         "HWND_BROADCAST"..0xFFFFL
     )
 
-    val SizePosFlags = IntConstant(
-        "Window sizing and positiong flags used by the #SetWindowPos() flags argument.",
-
+    IntConstant(
         "SWP_NOSIZE"..0x0001,
         "SWP_NOMOVE"..0x0002,
         "SWP_NOZORDER"..0x0004,
@@ -554,11 +521,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
 
         "SWP_DEFERERASE"..0x2000,
         "SWP_ASYNCWINDOWPOS"..0x4000
-    ).javaDocLinks
+    )
 
-    val StandardIcons = IntConstant(
-        "Standard Icon IDs. Use with #LoadIcon().",
-
+    IntConstant(
         "IDI_APPLICATION".."32512",
         "IDI_HAND".."32513",
         "IDI_QUESTION".."32514",
@@ -569,11 +534,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "IDI_WARNING".."IDI_EXCLAMATION",
         "IDI_ERROR".."IDI_HAND",
         "IDI_INFORMATION".."IDI_ASTERISK"
-    ).javaDocLinks
+    )
 
-    val StandardCursors = IntConstant(
-        "Standard Cursor IDs. Use with #LoadCursor().",
-
+    IntConstant(
         "IDC_ARROW".."32512",
         "IDC_IBEAM".."32513",
         "IDC_WAIT".."32514",
@@ -590,11 +553,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "IDC_HAND".."32649",
         "IDC_APPSTARTING".."32650",
         "IDC_HELP".."32651"
-    ).javaDocLinks
+    )
 
-    val ClassLongOffsets = IntConstant(
-        "Class field offsets for #GetClassLongPtr().",
-
+    IntConstant(
         "GCL_MENUNAME".."-8",
         "GCL_HBRBACKGROUND".."-10",
         "GCL_HCURSOR".."-12",
@@ -606,11 +567,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "GCL_STYLE".."-26",
         "GCW_ATOM".."-32",
         "GCL_HICONSM".."-34"
-    ).javaDocLinks
+    )
 
     IntConstant(
-        "Queue status flags for {@code GetQueueStatus} and {@code MsgWaitForMultipleObjects}",
-
         "QS_KEY"..0x0001,
         "QS_MOUSEMOVE"..0x0002,
         "QS_MOUSEBUTTON"..0x0004,
@@ -628,8 +587,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "Remove message flags for #PeekMessage().",
-
         "PM_NOREMOVE"..0x0000,
         "PM_REMOVE"..0x0001,
         "PM_NOYIELD"..0x0002,
@@ -640,8 +597,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "Virtual Keys.",
-
         "VK_LBUTTON"..0x01,
         "VK_RBUTTON"..0x02,
         "VK_CANCEL"..0x03,
@@ -805,469 +760,210 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "XButton values.",
-
         "XBUTTON1"..0x0001,
         "XBUTTON2"..0x0002
     )
 
     IntConstant(
-        "Value for rolling one detent.",
-
         "WHEEL_DELTA".."120"
     )
 
     EnumConstant(
-        "Identifies the dots per inch (dpi) setting for a thread, process, or window. ({@code DPI_AWARENESS})",
-
-        "DPI_AWARENESS_INVALID".enum(
-            """
-            Invalid DPI awareness.
-
-            This is an invalid DPI awareness value.
-            """,
-            "-1"
-        ),
-        "DPI_AWARENESS_UNAWARE".enum(
-            """
-            DPI unaware.
-
-            This process does not scale for DPI changes and is always assumed to have a scale factor of 100% (96 DPI). It will be automatically scaled by the
-            system on any other DPI setting.
-            """,
-            "0"
-        ),
-        "DPI_AWARENESS_SYSTEM_AWARE".enum(
-            """
-            System DPI aware.
-
-            This process does not scale for DPI changes. It will query for the DPI once and use that value for the lifetime of the process. If the DPI changes,
-            the process will not adjust to the new DPI value. It will be automatically scaled up or down by the system when the DPI changes from the system
-            value.
-            """,
-            "1"
-        ),
-        "DPI_AWARENESS_PER_MONITOR_AWARE".enum(
-            """
-            Per monitor DPI aware.
-
-            This process checks for the DPI when it is created and adjusts the scale factor whenever the DPI changes. These processes are not automatically
-            scaled by the system.
-            """,
-            "2"
-        )
+        "DPI_AWARENESS_INVALID".enum("-1"),
+        "DPI_AWARENESS_UNAWARE".enum("0"),
+        "DPI_AWARENESS_SYSTEM_AWARE".enum("1"),
+        "DPI_AWARENESS_PER_MONITOR_AWARE".enum("2")
     )
 
     LongConstant(
-        """
-        DPI unaware.
-
-        This window does not scale for DPI changes and is always assumed to have a scale factor of 100% (96 DPI). It will be automatically scaled by the system
-        on any other DPI setting.
-        """,
-
-        "DPI_AWARENESS_CONTEXT_UNAWARE".."-1L"
-    )
-
-    LongConstant(
-        """
-        System DPI aware.
-
-        This window does not scale for DPI changes. It will query for the DPI once and use that value for the lifetime of the process. If the DPI changes, the
-        process will not adjust to the new DPI value. It will be automatically scaled up or down by the system when the DPI changes from the system value.
-        """,
-
-        "DPI_AWARENESS_CONTEXT_SYSTEM_AWARE".."-2L"
-    )
-
-    LongConstant(
-        """
-        Per monitor DPI aware.
-
-        This window checks for the DPI when it is created and adjusts the scale factor whenever the DPI changes. These processes are not automatically scaled
-        by the system.
-        """,
-
-        "DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE".."-3L"
-    )
-
-    LongConstant(
-        """
-        Also known as Per Monitor v2.
-
-        An advancement over the original per-monitor DPI awareness mode, which enables applications to access new DPI-related scaling behaviors on a per
-        top-level window basis.
-
-        Per Monitor v2 was made available in the Creators Update of Windows 10, and is not available on earlier versions of the operating system.
-
-        The additional behaviors introduced are as follows:
-        ${ul(
-            "Child window DPI change notifications - In Per Monitor v2 contexts, the entire window tree is notified of any DPI changes that occur.",
-            """
-            Scaling of non-client area - All windows will automatically have their non-client area drawn in a DPI sensitive fashion. Calls to
-            {@code EnableNonClientDpiScaling} are unnecessary.
-            """,
-            "Scaling of Win32 menus - All {@code NTUSER} menus created in Per Monitor v2 contexts will be scaling in a per-monitor fashion.",
-            "Dialog Scaling - Win32 dialogs created in Per Monitor v2 contexts will automatically respond to DPI changes.",
-            "Improved scaling of {@code comctl32} controls - Various {@code comctl32} controls have improved DPI scaling behavior in Per Monitor v2 contexts.",
-            """
-            Improved theming behavior - {@code UxTheme} handles opened in the context of a Per Monitor v2 window will operate in terms of the DPI associated
-            with that window.
-            """
-        )}
-        """,
-
+        "DPI_AWARENESS_CONTEXT_UNAWARE".."-1L",
+        "DPI_AWARENESS_CONTEXT_SYSTEM_AWARE".."-2L",
+        "DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE".."-3L",
         "DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2".."-4L"
     )
 
     NativeName("RegisterClassExW")..ATOM(
         "RegisterClassEx",
-        "Registers a window class for subsequent use in calls to the #CreateWindowEx() function.",
 
         CaptureCallState.GetLastError.param,
-        WNDCLASSEX.const.p(
-            "lpwcx",
-            "a ##WNDCLASSEX structure. You must fill the structure with the appropriate class attributes before passing it to the function."
-        )
+        WNDCLASSEX.const.p("lpwcx")
     )
 
     NativeName("UnregisterClassW")..BOOL(
         "UnregisterClass",
-        "Unregisters a window class, freeing the memory required for the class.",
 
         CaptureCallState.GetLastError.param,
-        LPCTSTR(
-            "lpClassName",
-            """
-            a null-terminated string or a class atom. If {@code lpClassName} is a string, it specifies the window class name. This class name must have been
-            registered by a previous call to the #RegisterClassEx() function. System classes, such as dialog box controls, cannot be unregistered. If this
-            parameter is an atom, it must be a class atom created by a previous call to the {@code RegisterClassEx} function. The atom must be in the low-order
-            word of {@code lpClassName}; the high-order word must be zero.
-            """
-        ),
-        nullable..HINSTANCE("hInstance", "a handle to the instance of the module that created the class")
+        LPCTSTR("lpClassName"),
+        nullable..HINSTANCE("hInstance")
     )
 
     NativeName("CreateWindowExW")..HWND(
         "CreateWindowEx",
-        "Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function.",
 
         CaptureCallState.GetLastError.param,
-        DWORD("dwExStyle", "the extended window style of the window being created"),
-        nullable..LPCTSTR(
-            "lpClassName",
-            "a null-terminated string or a class atom created by a previous call to the {@code RegisterClassEx} function."
-        ),
-        nullable..LPCTSTR(
-            "lpWindowName",
-            "the window name. If the window style specifies a title bar, the window title pointed to by {@code lpWindowName} is displayed in the title bar."
-        ),
-        DWORD("dwStyle", "the style of the window being created"),
-        int("x", "the initial horizontal position of the window"),
-        int("y", "the initial vertical position of the window"),
-        int("nWidth", "the width, in device units, of the window"),
-        int("nHeight", "the height, in device units, of the window"),
-        nullable..HWND(
-            "hWndParent",
-            "a handle to the parent or owner window of the window being created. To create a child window or an owned window, supply a valid window handle."
-        ),
-        nullable..HMENU("hMenu", "a handle to a menu, or specifies a child-window identifier, depending on the window style"),
-        nullable..HINSTANCE("hInstance", "a handle to the instance of the module to be associated with the window"),
-        nullable..LPVOID(
-            "lpParam",
-            """
-            a value to be passed to the window through the {@code CREATESTRUCT} structure ({@code createParams} member) pointed to by the {@code lParam} param
-            of the #WM_CREATE message.
-            """
-        )
+        DWORD("dwExStyle"),
+        nullable..LPCTSTR("lpClassName"),
+        nullable..LPCTSTR("lpWindowName"),
+        DWORD("dwStyle"),
+        int("x"),
+        int("y"),
+        int("nWidth"),
+        int("nHeight"),
+        nullable..HWND("hWndParent"),
+        nullable..HMENU("hMenu"),
+        nullable..HINSTANCE("hInstance"),
+        nullable..LPVOID("lpParam")
     )
 
     BOOL(
         "DestroyWindow",
-        """
-        Destroys the specified window. The function sends #WM_DESTROY and #WM_NCDESTROY messages to the window to deactivate it and remove the keyboard focus
-        from it. The function also destroys the window's menu, flushes the thread message queue, destroys timers, removes clipboard ownership, and breaks the
-        clipboard viewer chain (if the window is at the top of the viewer chain).
-
-        If the specified window is a parent or owner window, DestroyWindow automatically destroys the associated child or owned windows when it destroys the
-        parent or owner window. The function first destroys child or owned windows, and then it destroys the parent or owner window.
-        """,
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window to be destroyed")
+        HWND("hWnd")
     )
 
     NativeName("DefWindowProcW")..LRESULT(
         "DefWindowProc",
-        """
-        Calls the default window procedure to provide default processing for any window messages that an application does not process. This function ensures
-        that every message is processed. DefWindowProc is called with the same parameters received by the window procedure.
-        """,
 
-        HWND("hWnd", "a handle to the window that received the message"),
-        UINT("Msg", "the message"),
-        WPARAM("wParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter."),
-        LPARAM("lParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter.")
+        HWND("hWnd"),
+        UINT("Msg"),
+        WPARAM("wParam"),
+        LPARAM("lParam")
     )
 
     NativeName("CallWindowProcW")..LRESULT(
         "CallWindowProc",
-        "Passes message information to the specified window procedure.",
 
-        WNDPROC(
-            "lpPrevWndFunc",
-            """
-            the previous window procedure.
-
-            If this value is obtained by calling the #GetWindowLongPtr() function with the {@code nIndex} parameter set to #GWL_WNDPROC or {@code DWL_DLGPROC},
-            it is actually either the address of a window or dialog box procedure, or a special internal value meaningful only to {@code CallWindowProc}.
-            """
-        ),
-        HWND("hWnd", "a handle to the window procedure to receive the message"),
-        UINT("Msg", "the message"),
-        WPARAM("wParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter."),
-        LPARAM("lParam", "additional message information. The content of this parameter depends on the value of the {@code Msg} parameter.")
+        WNDPROC("lpPrevWndFunc"),
+        HWND("hWnd"),
+        UINT("Msg"),
+        WPARAM("wParam"),
+        LPARAM("lParam")
     )
 
     BOOL(
         "ShowWindow",
-        "Sets the specified window's show state.",
 
-        HWND("hWnd", "a handle to the window"),
-        int(
-            "nCmdShow",
-            """
-            controls how the window is to be shown. This parameter is ignored the first time an application calls {@code ShowWindow}, if the program that
-            launched the application provides a {@code STARTUPINFO} structure. Otherwise, the first time {@code ShowWindow} is called, the value should be the
-            value obtained by the {@code WinMain} function in its {@code nCmdShow} parameter. In subsequent calls, this parameter can be
-            """,
-            ShowWindowCommands, LinkMode.SINGLE_CNT
-        )
+        HWND("hWnd"),
+        int("nCmdShow")
     )
 
     BOOL(
         "UpdateWindow",
-        """
-        Updates the client area of the specified window by sending a #WM_PAINT message to the window if the window's update region is not empty. The function
-        sends a #WM_PAINT message directly to the window procedure of the specified window, bypassing the application queue. If the update region is empty, no
-        message is sent.
-        """,
 
-        HWND("hWnd", "handle to the window to be updated")
+        HWND("hWnd")
     )
 
     BOOL(
         "SetWindowPos",
-        """
-        Changes the size, position, and Z order of a child, pop-up, or top-level window. These windows are ordered according to their appearance on the screen.
-        The topmost window receives the highest rank and is the first window in the Z order.
-        """,
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window"),
-        nullable..HWND(
-            "hWndInsertAfter",
-            "a handle to the window to precede the positioned window in the Z order. This parameter must be a window handle or",
-            VirtualWindowHandles, LinkMode.SINGLE_CNT
-        ),
-        int("X", "the new position of the left side of the window, in client coordinates"),
-        int("Y", "the new position of the top of the window, in client coordinates"),
-        int("cx", "the new width of the window, in pixels"),
-        int("cy", "the new height of the window, in pixels"),
-        UINT("uFlags", "the window sizing and positioning flags", SizePosFlags, LinkMode.BITFIELD)
+        HWND("hWnd"),
+        nullable..HWND("hWndInsertAfter"),
+        int("X"),
+        int("Y"),
+        int("cx"),
+        int("cy"),
+        UINT("uFlags")
     )
 
     NativeName("SetWindowTextW")..BOOL(
         "SetWindowText",
-        """
-        Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed.
-        However, {@code SetWindowText} cannot change the text of a control in another application.
-        """,
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window or control whose text is to be changed"),
-        LPCTSTR("lpString", "the new title or control text")
+        HWND("hWnd"),
+        LPCTSTR("lpString")
     )
 
     val GetMessage = NativeName("GetMessageW")..BOOL(
         "GetMessage",
-        """
-        Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for
-        retrieval. Unlike GetMessage, the #PeekMessage() function does not wait for a message to be posted before returning.
-        """,
 
         CaptureCallState.GetLastError.param,
-        LPMSG("lpMsg", "a pointer to an ##MSG structure that receives message information from the thread's message queue"),
-        nullable..HWND(
-            "hWnd",
-            """
-            a handle to the window whose messages are to be retrieved. The window must belong to the current thread.
-
-            If {@code hWnd} is #NULL, {@code GetMessage} retrieves messages for any window that belongs to the current thread, and any messages on the current
-            thread's message queue whose {@code hwnd} value is #NULL (see the ##MSG structure). Therefore if {@code hWnd} is #NULL, both window messages and
-            thread messages are processed.
-
-            If {@code hWnd} is -1, {@code GetMessage} retrieves only messages on the current thread's message queue whose {@code hwnd} value is #NULL, that is,
-            thread messages as posted by #PostMessage() (when the {@code hWnd} parameter is #NULL) or {@code PostThreadMessage}.
-            """
-        ),
-        UINT("wMsgFilterMin", "the integer value of the lowest message value to be retrieved"),
-        UINT("wMsgFilterMax", "the integer value of the highest message value to be retrieved")
+        LPMSG("lpMsg"),
+        nullable..HWND("hWnd"),
+        UINT("wMsgFilterMin"),
+        UINT("wMsgFilterMax")
     )
 
     NativeName("PeekMessageW")..BOOL(
         "PeekMessage",
-        "Dispatches incoming sent messages, checks the thread message queue for a posted message, and retrieves the message (if any exist).",
 
-        LPMSG("lpMsg", "a pointer to an ##MSG structure that receives message information"),
+        LPMSG("lpMsg"),
         GetMessage["hWnd"],
         GetMessage["wMsgFilterMin"],
         GetMessage["wMsgFilterMax"],
-        UINT("wRemoveMsg", "specifies how messages are to be handled.", "#PM_NOREMOVE #PM_REMOVE #PM_NOYIELD")
+        UINT("wRemoveMsg")
     )
 
     BOOL(
         "TranslateMessage",
-        """
-        Translates virtual-key messages into character messages. The character messages are posted to the calling thread's message queue, to be read the next
-        time the thread calls the #GetMessage() or #PeekMessage() function.
-        """,
 
-        MSG.const.p(
-            "lpMsg",
-            """
-            an ##MSG structure that contains message information retrieved from the calling thread's message queue by using the #GetMessage() or #PeekMessage()
-            function.
-            """
-        )
+        MSG.const.p("lpMsg")
     )
 
     BOOL(
         "WaitMessage",
-        """
-        Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not
-        return until a new message is placed in the thread's message queue.
-        """,
 
         CaptureCallState.GetLastError.param
     )
 
     NativeName("DispatchMessageW")..LRESULT(
         "DispatchMessage",
-        "Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the #GetMessage() function.",
 
-        MSG.const.p("lpmsg", "a pointer to a structure that contains the message.")
+        MSG.const.p("lpmsg")
     )
 
     NativeName("PostMessageW")..BOOL(
         "PostMessage",
-        """
-        Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread
-        to process the message.
-        """,
 
         CaptureCallState.GetLastError.param,
-        nullable..HWND(
-            "hWnd",
-            """
-            a handle to the window whose window procedure is to receive the message. The following values have special meanings:
-            ${ul(
-                """
-                #HWND_BROADCAST - The message is posted to all top-level windows in the system, including disabled or invisible unowned windows, overlapped
-                windows, and pop-up windows. The message is not posted to child windows.
-                """,
-                "#NULL - The function behaves like a call to PostThreadMessage with the dwThreadId parameter set to the identifier of the current thread."
-            )}
-            """
-        ),
-        UINT("Msg", "the message to be posted"),
-        WPARAM("wParam", "additional message-specific information"),
-        LPARAM("lParam", "additional message-specific information")
+        nullable..HWND("hWnd"),
+        UINT("Msg"),
+        WPARAM("wParam"),
+        LPARAM("lParam")
     )
 
     NativeName("SendMessageW")..BOOL(
         "SendMessage",
-        """
-        Sends the specified message to a window or windows. The {@code SendMessage} function calls the window procedure for the specified window and does not
-        return until the window procedure has processed the message.
-        """,
 
         CaptureCallState.GetLastError.param,
-        HWND(
-            "hWnd",
-            """
-            a handle to the window whose window procedure will receive the message. If this parameter is #HWND_BROADCAST, the message is sent to all top-level
-            windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to
-            child windows.
-
-            Message sending is subject to UIPI. The thread of a process can send messages only to message queues of threads in processes of lesser or equal
-            integrity level.
-            """
-        ),
-        UINT("Msg", "the message to be sent"),
-        WPARAM("wParam", "additional message-specific information"),
-        LPARAM("lParam", "additional message-specific information")
+        HWND("hWnd"),
+        UINT("Msg"),
+        WPARAM("wParam"),
+        LPARAM("lParam")
     )
 
     BOOL(
         "AdjustWindowRectEx",
-        """
-        Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the
-        #CreateWindowEx() function to create a window whose client area is the desired size.
-        """,
 
         CaptureCallState.GetLastError.param,
-        LPRECT(
-            "lpRect",
-            """
-            a pointer to a ##RECT structure that contains the coordinates of the top-left and bottom-right corners of the desired client area. When the
-            function returns, the structure contains the coordinates of the top-left and bottom-right corners of the window to accommodate the desired client
-            area.
-            """
-        ),
-        DWORD("dwStyle", "the window style of the window whose required size is to be calculated. Note that you cannot specify the #WS_OVERLAPPED style."),
-        BOOL("bMenu", "indicates whether the window has a menu"),
-        DWORD("dwExStyle", "the extended window style of the window whose required size is to be calculated")
+        LPRECT("lpRect"),
+        DWORD("dwStyle"),
+        BOOL("bMenu"),
+        DWORD("dwExStyle")
     )
 
     BOOL(
         "GetWindowRect",
-        """
-        Retrieves the dimensions of the bounding rectangle of the specified window. The dimensions are given in screen coordinates that are relative to the
-        upper-left corner of the screen.
-        """,
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window"),
-        LPRECT("lpRect", "a pointer to a ##RECT structure that receives the screen coordinates of the upper-left and lower-right corners of the window")
+        HWND("hWnd"),
+        LPRECT("lpRect")
     )
 
     BOOL(
         "MoveWindow",
-        """
-        Changes the position and dimensions of the specified window. For a top-level window, the position and dimensions are relative to the upper-left corner
-        of the screen. For a child window, they are relative to the upper-left corner of the parent window's client area.
-        """,
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window"),
-        int("X", "the new position of the left side of the window"),
-        int("Y", "the new position of the top of the window"),
-        int("nWidth", "the new width of the window"),
-        int("nHeight", "the new height of the window"),
-        BOOL(
-            "bRepaint",
-            """
-            indicates whether the window is to be repainted. If this parameter is TRUE, the window receives a message. If the parameter is FALSE, no repainting
-            of any kind occurs. This applies to the client area, the nonclient area (including the title bar and scroll bars), and any part of the parent
-            window uncovered as a result of moving a child window.
-            """
-        )
+        HWND("hWnd"),
+        int("X"),
+        int("Y"),
+        int("nWidth"),
+        int("nHeight"),
+        BOOL("bRepaint")
     )
 
     IntConstant(
-        "##WINDOWPLACEMENT flags.",
-
         "WPF_SETMINPOSITION"..0x0001,
         "WPF_RESTORETOMAXIMIZED"..0x0002,
         "WPF_ASYNCWINDOWPLACEMENT"..0x0004
@@ -1275,234 +971,123 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
 
     BOOL(
         "GetWindowPlacement",
-        "Retrieves the show state and the restored, minimized, and maximized positions of the specified window.",
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window"),
-        Input..WINDOWPLACEMENT.p(
-            "lpwndpl",
-            """
-            a pointer to the ##WINDOWPLACEMENT structure that receives the show state and position information.
-
-            Before calling {@code GetWindowPlacement}, set the length member to WINDOWPLACEMENT#SIZEOF. {@code GetWindowPlacement} fails if
-            {@code lpwndpl->length} is not set correctly.
-            """
-        )
+        HWND("hWnd"),
+        Input..WINDOWPLACEMENT.p("lpwndpl")
     )
 
     BOOL(
         "SetWindowPlacement",
-        "Sets the show state and the restored, minimized, and maximized positions of the specified window.",
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window"),
-        WINDOWPLACEMENT.const.p(
-            "lpwndpl",
-            """
-            a pointer to the ##WINDOWPLACEMENT structure that specifies the new show state and window positions.
-
-            Before calling {@code SetWindowPlacement}, set the {@code length} member of the {@code WINDOWPLACEMENT} structure to WINDOWPLACEMENT#SIZEOF.
-            {@code SetWindowPlacement} fails if the length member is not set correctly.
-            """
-        )
+        HWND("hWnd"),
+        WINDOWPLACEMENT.const.p("lpwndpl")
     )
 
     BOOL(
         "IsWindowVisible",
-        "Determines the visibility state of the specified window.",
 
-        HWND("hWnd", "a handle to the window to be tested")
+        HWND("hWnd")
     )
 
     BOOL(
         "IsIconic",
-        "Determines whether the specified window is minimized (iconic).",
 
-        HWND("hWnd", "a handle to the window to be tested")
+        HWND("hWnd")
     )
 
     BOOL(
         "IsZoomed",
-        "Determines whether a window is maximized.",
 
-        HWND("hWnd", "a handle to the window to be tested")
+        HWND("hWnd")
     )
 
     BOOL(
         "BringWindowToTop",
-        """
-        Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the
-        top-level parent window associated with the child window is activated.
-        """,
 
-        HWND("hWnd", "a handle to the window to bring to the top of the Z order")
+        HWND("hWnd")
     )
 
     NativeName("Pointer.BITS64 ? \"SetWindowLongPtrW\" : \"SetWindowLongW\"")..LONG_PTR(
         "SetWindowLongPtr",
-        "Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
-        int(
-            "nIndex",
-            """
-            the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
-            of an integer. To set any other value, specify
-            """,
-            WindowLongOffsets, LinkMode.SINGLE_CNT
-        ),
-        LONG_PTR("dwNewLong", "the replacement value"),
-
-        returnDoc = "the previous value at the given {@code index}"
+        HWND("hWnd"),
+        int("nIndex"),
+        LONG_PTR("dwNewLong")
     )
 
     NativeName("Pointer.BITS64 ? \"GetWindowLongPtrW\" : \"GetWindowLongW\"")..LONG_PTR(
         "GetWindowLongPtr",
-        "Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.",
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
-        int(
-            "nIndex",
-            """
-            the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
-            of an integer. To set any other value, specify
-            """,
-            WindowLongOffsets, LinkMode.SINGLE_CNT
-        )
+        HWND("hWnd"),
+        int("nIndex")
     )
 
     NativeName("Pointer.BITS64 ? \"SetClassLongPtrW\" : \"SetClassLongW\"")..LONG_PTR(
         "SetClassLongPtr",
-        """
-        Replaces the specified value at the specified offset in the extra class memory or the ##WNDCLASSEX structure for the class to which the specified
-        window belongs.
-        """,
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
-        int(
-            "nIndex",
-            """
-            the value to be replaced. To set a value in the extra class memory, specify the positive, zero-based byte offset of the value to be set. Valid
-            values are in the range zero through the number of bytes of extra class memory, minus eight; for example, if you specified 24 or more bytes of
-            extra class memory, a value of 16 would be an index to the third integer. To set a value other than the ##WNDCLASSEX structure, specify
-            """,
-            ClassLongOffsets, LinkMode.SINGLE_CNT
-        ),
-        LONG_PTR("dwNewLong", "the replacement value"),
-
-        returnDoc =
-        """
-        if the function succeeds, the return value is the previous value of the specified offset. If this was not previously set, the return value is zero.
-
-        If the function fails, the return value is zero. To get extended error information, call #GetLastError().
-        """
+        HWND("hWnd"),
+        int("nIndex"),
+        LONG_PTR("dwNewLong")
     )
 
     NativeName("Pointer.BITS64 ? \"GetClassLongPtrW\" : \"GetClassLongW\"")..LONG_PTR(
         "GetClassLongPtr",
-        "Retrieves the specified value from the ##WNDCLASSEX structure associated with the specified window.",
 
         CaptureCallState.GetLastError.param,
-        HWND("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
-        int(
-            "nIndex",
-            """
-            the value to be retrieved. To retrieve a value from the extra class memory, specify the positive, zero-based byte offset of the value to be
-            retrieved. Valid values are in the range zero through the number of bytes of extra class memory, minus eight; for example, if you specified 24 or
-            more bytes of extra class memory, a value of 16 would be an index to the third integer. To retrieve any other value from the ##WNDCLASSEX
-            structure, specify
-            """,
-            ClassLongOffsets, LinkMode.SINGLE_CNT
-        )
+        HWND("hWnd"),
+        int("nIndex")
     )
 
     IntConstant(
-        "Actions for #SetLayeredWindowAttributes().",
-
         "LWA_COLORKEY"..0x00000001,
         "LWA_ALPHA"..0x00000002
     )
 
     BOOL(
         "SetLayeredWindowAttributes",
-        "",
 
         CaptureCallState.GetLastError.param,
-        HWND(
-            "hwnd",
-            """
-            a handle to the layered window. A layered window is created by specifying #WS_EX_LAYERED when creating the window with the #CreateWindowEx()
-            function or by setting #WS_EX_LAYERED via #SetWindowLongPtr() after the window has been created.
-            """
-        ),
-        COLORREF(
-            "crKey",
-            """
-            the transparency color key (0x00bbggrr) to be used when composing the layered window. All pixels painted by the window in this color will be
-            transparent.
-            """
-        ),
-        BYTE(
-            "bAlpha",
-            """
-            the alpha value used to describe the opacity of the layered window. When {@code bAlpha} is 0, the window is completely transparent. When
-            {@code bAlpha} is 255, the window is opaque.
-            """
-        ),
-        DWORD("dwFlags", "an action to be taken", "#LWA_COLORKEY #LWA_ALPHA", LinkMode.BITFIELD)
+        HWND("hwnd"),
+        COLORREF("crKey"),
+        BYTE("bAlpha"),
+        DWORD("dwFlags")
     )
 
     NativeName("LoadIconW")..HICON(
         "LoadIcon",
-        "Loads the specified icon resource from the executable (.exe) file associated with an application instance.",
 
         CaptureCallState.GetLastError.param,
-        nullable..HINSTANCE(
-            "instance",
-            """
-            a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be #NULL when a standard icon is
-            being loaded.
-            """
-        ),
-        LPCTSTR("iconName", "the name of the icon resource to be loaded or", StandardIcons, LinkMode.SINGLE_CNT)
+        nullable..HINSTANCE("instance"),
+        LPCTSTR("iconName")
     )
 
     NativeName("LoadCursorW")..HCURSOR(
         "LoadCursor",
-        "Loads the specified cursor resource from the executable (.EXE) file associated with an application instance.",
 
         CaptureCallState.GetLastError.param,
-        nullable..HINSTANCE("instance", "a handle to an instance of the module whose executable file contains the cursor to be loaded."),
-        LPCTSTR("cursorName", "the name of the cursor resource to be loaded or", StandardCursors, LinkMode.SINGLE_CNT)
+        nullable..HINSTANCE("instance"),
+        LPCTSTR("cursorName")
     )
 
     HDC(
         "GetDC",
-        """
-        Retrieves a handle to a device context (DC) for the client area of a specified window or for the entire screen. You can use the returned handle in
-        subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI.
-        """,
 
-        nullable..HWND("hWnd", "a handle to the window whose DC is to be retrieved. If this value is #NULL, GetDC retrieves the DC for the entire screen.")
+        nullable..HWND("hWnd")
     )
 
     BOOL(
         "ReleaseDC",
-        """
-        Releases a device context (DC), freeing it for use by other applications. The effect of the ReleaseDC function depends on the type of DC. It frees only
-        common and window DCs. It has no effect on class or private DCs.
-        """,
 
-        HWND("hWnd", "a handle to the window whose DC is to be released"),
-        HDC("hDC", "a handle to the DC to be released")
+        HWND("hWnd"),
+        HDC("hDC")
     )
 
-    val SystemMetrics = IntConstant(
-        "#GetSystemMetrics() codes.",
-
+    IntConstant(
         "SM_CXSCREEN".."0",
         "SM_CYSCREEN".."1",
         "SM_CXVSCROLL".."2",
@@ -1616,25 +1201,20 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
 
         "SM_DIGITIZER".."94",
         "SM_MAXIMUMTOUCHES".."95"
-    ).javaDocLinks
+    )
 
     int(
         "GetSystemMetrics",
-        "Retrieves the specified system metric or system configuration setting.",
 
-        int("index", "the system metric or configuration setting to be retrieved", SystemMetrics)
+        int("index")
     )
 
-    val TouchFlags = IntConstant(
-        "#RegisterTouchWindow() flags.",
-
+    IntConstant(
         "TWF_FINETOUCH"..0x00000001,
         "TWF_WANTPALM"..0x00000002
-    ).javaDocLinks
+    )
 
     IntConstant(
-        "Touch input flag values (TOUCHINPUT#dwFlags()).",
-
         "TOUCHEVENTF_MOVE"..0x0001,
         "TOUCHEVENTF_DOWN"..0x0002,
         "TOUCHEVENTF_UP"..0x0004,
@@ -1646,8 +1226,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "Touch input mask values (TOUCHINPUT#dwMask()).",
-
         "TOUCHINPUTMASKF_TIMEFROMSYSTEM"..0x0001,
         "TOUCHINPUTMASKF_EXTRAINFO"..0x0002,
         "TOUCHINPUTMASKF_CONTACTAREA"..0x0004
@@ -1655,178 +1233,82 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
 
     IgnoreMissing..BOOL(
         "RegisterTouchWindow",
-        """
-        Registers a window as being touch-capable.
-
-        {@code RegisterTouchWindow} must be called on every window that will be used for touch input. This means that if you have an application that has
-        multiple windows within it, {@code RegisterTouchWindow} must be called on every window in that application that uses touch features. Also, an
-        application can call {@code RegisterTouchWindow} any number of times for the same window if it desires to change the modifier flags. A window can be
-        marked as no longer requiring touch input using the #UnregisterTouchWindow() function.
-        """,
 
         CaptureCallState.GetLastError.param,
-        HWND(
-            "hWnd",
-            """
-            the handle of the window being registered. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified
-            window.
-            """
-        ),
-        ULONG(
-            "ulFlags",
-            "a set of bit flags that specify optional modifications. This field may contain 0 or",
-            TouchFlags, LinkMode.BITFIELD_CNT
-        ),
-
-        since = "Windows 7 (desktop apps only)"
+        HWND("hWnd"),
+        ULONG("ulFlags")
     )
 
     IgnoreMissing..BOOL(
         "UnregisterTouchWindow",
-        "Registers a window as no longer being touch-capable.",
 
         CaptureCallState.GetLastError.param,
-        HWND(
-            "hWnd",
-            "the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread does not own the specified window."
-        ),
-
-        since = "Windows 7 (desktop apps only)"
+        HWND("hWnd")
     )
 
     IgnoreMissing..BOOL(
         "IsTouchWindow",
-        "Checks whether a specified window is touch-capable and, optionally, retrieves the modifier flags set for the window's touch capability.",
 
-        HWND(
-            "hWnd",
-            """
-            the handle of the window. The function fails with {@code ERROR_ACCESS_DENIED} if the calling thread is not on the same desktop as the specified
-            window.
-            """
-        ),
-        Check(1)..nullable..PULONG(
-            "pulFlags",
-            "an optional address of the {@code ULONG} variable to receive the modifier flags for the specified window's touch capability."
-        ),
-
-        since = "Windows 7 (desktop apps only)"
+        HWND("hWnd"),
+        Check(1)..nullable..PULONG("pulFlags")
     )
 
     IgnoreMissing..BOOL(
         "GetTouchInputInfo",
-        "Retrieves detailed information about touch inputs associated with a particular touch input handle.",
 
         CaptureCallState.GetLastError.param,
-        HTOUCHINPUT(
-            "hTouchInput",
-            """
-            the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
-            not valid. Note that the handle is not valid after it has been used in a successful call to #CloseTouchInputHandle() or after it has been passed to
-            #DefWindowProc(), #PostMessage(), #SendMessage() or one of their variants.
-            """
-        ),
-        AutoSize("pInputs")..UINT(
-            "cInputs",
-            """
-            The number of structures in the {@code pInputs} array. This should ideally be at least equal to the number of touch points associated with the
-            message as indicated in the message {@code WPARAM}. If {@code cInputs} is less than the number of touch points, the function will still succeed and
-            populate the {@code pInputs} buffer with information about {@code cInputs} touch points.
-            """
-        ),
-        PTOUCHINPUT(
-            "pInputs",
-            "a pointer to an array of ##TOUCHINPUT structures to receive information about the touch points associated with the specified touch input handle"
-        ),
-        int(
-            "cbSize",
-            """
-            the size, in bytes, of a single ##TOUCHINPUT structure. If {@code cbSize} is not the size of a single {@code TOUCHINPUT} structure, the function
-            fails with {@code ERROR_INVALID_PARAMETER}.
-            """
-        ),
-
-        since = "Windows 7 (desktop apps only)"
+        HTOUCHINPUT("hTouchInput"),
+        AutoSize("pInputs")..UINT("cInputs"),
+        PTOUCHINPUT("pInputs"),
+        int("cbSize")
     )
 
     IgnoreMissing..BOOL(
         "CloseTouchInputHandle",
-        "Closes a touch input handle, frees process memory associated with it, and invalidates the handle.",
 
         CaptureCallState.GetLastError.param,
-        HTOUCHINPUT(
-            "hTouchInput",
-            """
-            the touch input handle received in the {@code LPARAM} of a touch message. The function fails with {@code ERROR_INVALID_HANDLE} if this handle is
-            not valid. Note that the handle is not valid after it has been used in a successful call to #CloseTouchInputHandle() or after it has been passed to
-            #DefWindowProc(), #PostMessage(), #SendMessage() or one of their variants.
-            """
-        ),
-
-        since = "Windows 7 (desktop apps only)"
-    )
-
-    val MonitorFromWindowFlags = IntConstant(
-        "#MonitorFromWindow() flags.",
-
-        "MONITOR_DEFAULTTONULL"..0x00000000,
-        "MONITOR_DEFAULTTOPRIMARY"..0x00000001,
-        "MONITOR_DEFAULTTONEAREST"..0x00000002
-    ).javaDocLinks
-
-    HMONITOR(
-        "MonitorFromWindow",
-        "Retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window.",
-
-        HWND("hWnd", "a handle to the window of interest"),
-        DWORD("dwFlags", "determines the function's return value if the window does not intersect any display monitor", MonitorFromWindowFlags)
+        HTOUCHINPUT("hTouchInput")
     )
 
     IntConstant(
-        "##MONITORINFOEX flags.",
+        "MONITOR_DEFAULTTONULL"..0x00000000,
+        "MONITOR_DEFAULTTOPRIMARY"..0x00000001,
+        "MONITOR_DEFAULTTONEAREST"..0x00000002
+    )
 
+    HMONITOR(
+        "MonitorFromWindow",
+
+        HWND("hWnd"),
+        DWORD("dwFlags")
+    )
+
+    IntConstant(
         "MONITORINFOF_PRIMARY"..0x00000001
     )
 
     NativeName("GetMonitorInfoW")..BOOL(
         "GetMonitorInfo",
-        "Retrieves information about a display monitor.",
 
-        HMONITOR("hMonitor", "a handle to the display monitor of interest"),
-        LPMONITORINFOEX(
-            "lpmi",
-            """
-            a pointer to a ##MONITORINFOEX structure that receives information about the specified display monitor.
-
-            You must set the {@code cbSize} member of the structure to MONITORINFOEX#SIZEOF before calling the {@code GetMonitorInfo} function. Doing so lets
-            the function determine the type of structure you are passing to it.
-            """
-        )
+        HMONITOR("hMonitor"),
+        LPMONITORINFOEX("lpmi")
     )
 
     IntConstant(
-        "Flag for #EnumDisplayDevices().",
-
         "EDD_GET_DEVICE_INTERFACE_NAME"..0x00000001
     )
 
-    val EnumDisplaySettingsMode = IntConstant(
-        "#EnumDisplaySettingsEx() mode.",
-
+    IntConstant(
         "ENUM_CURRENT_SETTINGS".."-1",
         "ENUM_REGISTRY_SETTINGS".."-2"
-    ).javaDocLinks
+    )
 
-    val EnumDisplaySettingsFlags = IntConstant(
-        "Flags for #EnumDisplaySettingsEx().",
-
+    IntConstant(
         "EDS_RAWMODE"..0x00000002,
         "EDS_ROTATEDMODE"..0x00000004
-    ).javaDocLinks
+    )
 
-    val ChangeDisplaySettingsFlags = IntConstant(
-        "Flags for #ChangeDisplaySettingsEx().",
-
+    IntConstant(
         "CDS_UPDATEREGISTRY"..0x00000001,
         "CDS_TEST"..0x00000002,
         "CDS_FULLSCREEN"..0x00000004,
@@ -1840,11 +1322,9 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "CDS_RESET"..0x40000000,
         "CDS_RESET_EX"..0x20000000,
         "CDS_NORESET"..0x10000000
-    ).javaDocLinks
+    )
 
-    val ChangeDisplaySettingsResults = IntConstant(
-        "Return values for #ChangeDisplaySettingsEx().",
-
+    IntConstant(
         "DISP_CHANGE_SUCCESSFUL".."0",
         "DISP_CHANGE_RESTART".."1",
         "DISP_CHANGE_FAILED".."-1",
@@ -1854,280 +1334,87 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
         "DISP_CHANGE_BADPARAM".."-5",
 
         "DISP_CHANGE_BADDUALVIEW".."-6" // _WIN32_WINNT >= 0x0501
-    ).javaDocLinks
+    )
 
     NativeName("EnumDisplayDevicesW")..BOOL(
         "EnumDisplayDevices",
-        "Obtains information about the display devices in the current session.",
 
-        nullable..LPCTSTR(
-            "lpDevice",
-            "the device name. If #NULL, function returns information for the display adapter(s) on the machine, based on {@code devNum}."
-        ),
-        DWORD(
-            "iDevNum",
-            """
-            an index value that specifies the display device of interest.
-
-            The operating system identifies each display device in the current session with an index value. The index values are consecutive integers, starting
-            at 0. If the current session has three display devices, for example, they are specified by the index values 0, 1, and 2.
-            """
-        ),
-        PDISPLAY_DEVICE(
-            "lpDisplayDevice",
-            """
-            a pointer to a ##DISPLAY_DEVICE structure that receives information about the display device specified by {@code iDevNum}.
-
-            Before calling {@code EnumDisplayDevices}, you must initialize the {@code cb} member of {@code DISPLAY_DEVICE} to the size, in bytes, of
-            {@code DISPLAY_DEVICE}.
-            """
-        ),
-        DWORD(
-            "dwFlags",
-            """
-            set this flag to #EDD_GET_DEVICE_INTERFACE_NAME to retrieve the device interface name for {@code GUID_DEVINTERFACE_MONITOR}, which is registered by
-            the operating system on a per monitor basis. The value is placed in the {@code DeviceID} member of the ##DISPLAY_DEVICE structure returned in
-            {@code lpDisplayDevice}. The resulting device interface name can be used with SetupAPI functions and serves as a link between GDI monitor devices
-            and SetupAPI monitor devices.
-            """
-        )
+        nullable..LPCTSTR("lpDevice"),
+        DWORD("iDevNum"),
+        PDISPLAY_DEVICE("lpDisplayDevice"),
+        DWORD("dwFlags")
     )
 
     NativeName("EnumDisplaySettingsExW")..BOOL(
         "EnumDisplaySettingsEx",
-        """
-        Retrieves information about one of the graphics modes for a display device. To retrieve information for all the graphics modes for a display device,
-        make a series of calls to this function.
-        """,
 
-        nullable..LPCTSTR(
-            "lpszDeviceName",
-            """
-            a pointer to a null-terminated string that specifies the display device about which graphics mode the function will obtain information.
-
-            This parameter is either #NULL or a DISPLAY_DEVICE#DeviceName() returned from #EnumDisplayDevices(). A #NULL value specifies the current display
-            device on the computer that the calling thread is running on.
-            """
-        ),
-        DWORD(
-            "iModeNum",
-            """
-            indicates the type of information to be retrieved.
-
-            Graphics mode indexes start at zero. To obtain information for all of a display device's graphics modes, make a series of calls to
-            {@code EnumDisplaySettingsEx}, as follows: Set {@code iModeNum} to zero for the first call, and increment {@code iModeNum} by one for each
-            subsequent call. Continue calling the function until the return value is zero.
-
-            When you call {@code EnumDisplaySettingsEx} with {@code iModeNum} set to zero, the operating system initializes and caches information about the
-            display device. When you call {@code EnumDisplaySettingsEx} with {@code iModeNum} set to a nonzero value, the function returns the information that
-            was cached the last time the function was called with {@code iModeNum} set to zero.
-
-            This value can be a graphics mode index or
-            """,
-            EnumDisplaySettingsMode,
-            LinkMode.SINGLE_CNT
-        ),
-        DEVMODE.p(
-            "lpDevMode",
-            """
-            a pointer to a ##DEVMODE structure into which the function stores information about the specified graphics mode. Before calling
-            {@code EnumDisplaySettingsEx}, set the {@code dmSize} member to DEVMODE#SIZEOF, and set the {@code dmDriverExtra} member to indicate the size, in
-            bytes, of the additional space available to receive private driver data.
-
-            The {@code EnumDisplaySettingsEx} function will populate the {@code dmFields} member of the {@code lpDevMode} and one or more other members of the
-            {@code DEVMODE} structure. To determine which members were set by the call to {@code EnumDisplaySettingsEx}, inspect the {@code dmFields} bitmask.
-            """
-        ),
-        DWORD("dwFlags", "this parameter can be", EnumDisplaySettingsFlags, LinkMode.SINGLE_CNT)
+        nullable..LPCTSTR("lpszDeviceName"),
+        DWORD("iModeNum"),
+        DEVMODE.p("lpDevMode"),
+        DWORD("dwFlags")
     )
 
     NativeName("ChangeDisplaySettingsExW")..LONG(
         "ChangeDisplaySettingsEx",
-        "Changes the settings of the specified display device to the specified graphics mode.",
 
-        nullable..LPCTSTR(
-            "lpszDeviceName",
-            """
-            a pointer to a null-terminated string that specifies the display device whose graphics mode will change. Only display device names as returned by
-            #EnumDisplayDevices() are valid.
-
-            The {@code lpszDeviceName} parameter can be #NULL. A #NULL value specifies the default display device. The default device can be determined by
-            calling {@code EnumDisplayDevices} and checking for the #DISPLAY_DEVICE_PRIMARY_DEVICE flag.
-            """
-        ),
-        nullable..DEVMODE.p(
-            "lpDevMode",
-            """
-            a pointer to a ##DEVMODE structure that describes the new graphics mode. If {@code lpDevMode} is #NULL, all the values currently in the registry
-            will be used for the display setting. Passing #NULL for the {@code lpDevMode} parameter and 0 for the {@code dwFlags} parameter is the easiest way
-            to return to the default mode after a dynamic mode change.
-
-            The {@code dmSize} member must be initialized to the size, in bytes, of the {@code DEVMODE} structure. The {@code dmDriverExtra} member must be
-            initialized to indicate the number of bytes of private driver data following the {@code DEVMODE} structure.
-            """
-        ),
-        nullable..HWND("hwnd", "reserved; must be #NULL"),
-        DWORD("dwflags", "indicates how the graphics mode should be changed", ChangeDisplaySettingsFlags),
-        nullable..LPVOID(
-            "lParam",
-            """
-            if {@code flags} is #CDS_VIDEOPARAMETERS, {@code lParam} is a pointer to a {@code VIDEOPARAMETERS} structure. Otherwise {@code lParam} must be #NULL.
-            """
-        ),
-
-        returnDoc = "one of the following values: $ChangeDisplaySettingsResults"
+        nullable..LPCTSTR("lpszDeviceName"),
+        nullable..DEVMODE.p("lpDevMode"),
+        nullable..HWND("hwnd"),
+        DWORD("dwflags"),
+        nullable..LPVOID("lParam")
     )
 
     BOOL(
         "GetCursorPos",
-        "Retrieves the position of the mouse cursor, in screen coordinates.",
 
-        LPPOINT("point", "a pointer to a {@link POINT} structure that receives the screen coordinates of the cursor")
+        LPPOINT("point")
     )
 
     BOOL(
         "SetCursorPos",
-        """
-        Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent #ClipCursor()
-        function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle.
-        """,
 
-        int("X", "the new x-coordinate of the cursor, in screen coordinates."),
-        int("Y", "the new y-coordinate of the cursor, in screen coordinates.")
+        int("X"),
+        int("Y")
     )
 
     BOOL(
         "ClipCursor",
-        """
-        Confines the cursor to a rectangular area on the screen. If a subsequent cursor position (set by the #SetCursorPos() function or the mouse) lies
-        outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area.
-        """,
 
-        nullable..RECT.const.p(
-            "rect",
-            """
-            a pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this
-            parameter is #NULL, the cursor is free to move anywhere on the screen.
-            """
-        )
+        nullable..RECT.const.p("rect")
     )
 
     int(
         "ShowCursor",
-        """
-        Displays or hides the cursor.
 
-        This function sets an internal display counter that determines whether the cursor should be displayed. The cursor is displayed only if the display
-        count is greater than or equal to 0. If a mouse is installed, the initial display count is 0. If no mouse is installed, the display count is –1.
-        """,
-
-        BOOL(
-            "show",
-            "If {@code show} is #TRUE, the display count is incremented by one. If {@code show} is #FALSE, the display count is decremented by one."
-        ),
-
-        returnDoc = "the new display counter"
+        BOOL("show")
     )
 
     HCURSOR(
         "SetCursor",
-        """
-        Sets the cursor shape.
 
-        The cursor is set only if the new cursor is different from the previous cursor; otherwise, the function returns immediately.
-
-        The cursor is a shared resource. A window should set the cursor shape only when the cursor is in its client area or when the window is capturing mouse
-        input. In systems without a mouse, the window should restore the previous cursor before the cursor leaves the client area or before it relinquishes
-        control to another window.
-
-        If your application must set the cursor while it is in a window, make sure the class cursor for the specified window's class is set to #NULL. If the
-        class cursor is not #NULL, the system restores the class cursor each time the mouse is moved.
-
-        The cursor is not shown on the screen if the internal cursor display count is less than zero. This occurs if the application uses the #ShowCursor()
-        function to hide the cursor more times than to show the cursor.
-        """,
-
-        nullable..HCURSOR(
-            "hCursor",
-            """
-            a handle to the cursor. The cursor must have been created by the {@code CreateCursor} function or loaded by the #LoadCursor() or {@code LoadImage}
-            function. If this parameter is #NULL, the cursor is removed from the screen.
-            """
-        ),
-
-        returnDoc = "the handle to the previous cursor, if there was one"
+        nullable..HCURSOR("hCursor")
     )
 
     BOOL(
         "ClientToScreen",
-        """
-        Converts the client-area coordinates of a specified point to screen coordinates.
-                    
-        The {@code ClientToScreen} function replaces the client-area coordinates in the ##POINT structure with the screen coordinates. The screen coordinates
-        are relative to the upper-left corner of the screen. Note, a screen-coordinate point that is above the window's client area has a negative
-        y-coordinate. Similarly, a screen coordinate to the left of a client area has a negative x-coordinate.
 
-        All coordinates are device coordinates.
-        """,
-
-        HWND("hWnd", "a handle to the window whose client area is used for the conversion"),
-        LPPOINT(
-            "lpPoint",
-            """
-            a pointer to a {@code POINT} structure that contains the client coordinates to be converted. The new screen coordinates are copied into this
-            structure if the function succeeds.
-            """
-        )
+        HWND("hWnd"),
+        LPPOINT("lpPoint")
     )
 
     SHORT(
         "GetAsyncKeyState",
-        """
-        Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to
-        {@code GetAsyncKeyState}.
-        
-        The {@code GetAsyncKeyState} function works with mouse buttons. However, it checks on the state of the physical mouse buttons, not on the logical mouse
-        buttons that the physical buttons are mapped to. For example, the call {@code GetAsyncKeyState(VK_LBUTTON)} always returns the state of the left
-        physical mouse button, regardless of whether it is mapped to the left or right logical mouse button. You can determine the system's current mapping of
-        physical mouse buttons to logical mouse buttons by calling {@code GetSystemMetrics(SM_SWAPBUTTON)} which returns #TRUE if the mouse buttons have been
-        swapped.
 
-        Although the least significant bit of the return value indicates whether the key has been pressed since the last query, due to the pre-emptive
-        multitasking nature of Windows, another application can call {@code GetAsyncKeyState} and receive the "recently pressed" bit instead of your
-        application. The behavior of the least significant bit of the return value is retained strictly for compatibility with 16-bit Windows applications
-        (which are non-preemptive) and should not be relied upon.
-
-        You can use the virtual-key code constants #VK_SHIFT, #VK_CONTROL, and #VK_MENU as values for the {@code vKey} parameter. This gives the state of the
-        SHIFT, CTRL, or ALT keys without distinguishing between left and right.
-        """,
-
-        int("vKey", "the virtual-key code. You can use left- and right-distinguishing constants to specify certain keys."),
-
-        returnDoc =
-        """
-        if the function succeeds, the return value specifies whether the key was pressed since the last call to {@code GetAsyncKeyState}, and whether the key
-        is currently up or down. If the most significant bit is set, the key is down, and if the least significant bit is set, the key was pressed after the
-        previous call to {@code GetAsyncKeyState}. However, you should not rely on this last behavior; for more information, see the Remarks.
-
-        The return value is zero for the following cases:
-        ${ul(
-            "The current desktop is not the active desktop",
-            "The foreground thread belongs to another process and the desktop does not allow the hook or the journal record."
-        )}
-        """
+        int("vKey")
     )
 
     IntConstant(
-        "The type of input event.",
-
         "INPUT_MOUSE".."0",
         "INPUT_KEYBOARD".."1",
         "INPUT_HARDWARE".."2"
     )
 
     IntConstant(
-        "##MOUSEINPUT flags.",
-
         "MOUSEEVENTF_ABSOLUTE"..0x8000,
         "MOUSEEVENTF_HWHEEL"..0x01000,
         "MOUSEEVENTF_MOVE"..0x0001,
@@ -2145,8 +1432,6 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
     )
 
     IntConstant(
-        "##KEYBDINPUT flags.",
-
         "KEYEVENTF_EXTENDEDKEY"..0x0001,
         "KEYEVENTF_KEYUP"..0x0002,
         "KEYEVENTF_SCANCODE"..0x0008,
@@ -2155,134 +1440,54 @@ val User32 = "User32".nativeClass(Module.CORE_WINDOWS, nativeSubPath = "windows"
 
     LPARAM(
         "GetMessageExtraInfo",
-        """
-        Retrieves the extra message information for the current thread.
-        
-        Extra message information is an application- or driver-defined value associated with the current thread's message queue.
-        """,
-
-        returnDoc = "the extra information. The meaning of the extra information is device specific."
+        void()
     )
 
     UINT(
         "SendInput",
-        """
-        Synthesizes keystrokes, mouse motions, and button clicks.
-        
-        This function is subject to UIPI. Applications are permitted to inject input only into applications that are at an equal or lesser integrity level.
 
-        The {@code SendInput} function inserts the events in the ##INPUT structures serially into the keyboard or mouse input stream. These events are not
-        interspersed with other keyboard or mouse input events inserted either by the user (with the keyboard or mouse) or by calls to {@code keybd_event},
-        {@code mouse_event}, or other calls to {@code SendInput}.
-
-        This function does not reset the keyboard's current state. Any keys that are already pressed when the function is called might interfere with the
-        events that this function generates. To avoid this problem, check the keyboard's state with the #GetAsyncKeyState() function and correct as necessary.
-
-        Because the touch keyboard uses the surrogate macros defined in {@code winnls.h} to send input to the system, a listener on the keyboard event hook
-        must decode input originating from the touch keyboard.
-
-        An accessibility application can use {@code SendInput} to inject keystrokes corresponding to application launch shortcut keys that are handled by the
-        shell. This functionality is not guaranteed to work for other types of applications.
-        """,
-
-        AutoSize("pInputs")..UINT("cInputs", "the number of structures in the {@code pInputs} array"),
-        LPINPUT("pInputs", "an array of {@code INPUT} structures. Each structure represents an event to be inserted into the keyboard or mouse input stream."),
-        int(
-            "cbSize",
-            "the size, in bytes, of an {@code INPUT} structure. If {@code cbSiz}e is not the size of an {@code INPUT} structure, the function fails."
-        ),
-
-        returnDoc =
-        """
-        the number of events that it successfully inserted into the keyboard or mouse input stream. If the function returns zero, the input was already blocked
-        by another thread. To get extended error information, call #GetLastError().
-
-        This function fails when it is blocked by UIPI. Note that neither GetLastError nor the return value will indicate the failure was caused by UIPI
-        blocking.
-        """
+        AutoSize("pInputs")..UINT("cInputs"),
+        LPINPUT("pInputs"),
+        int("cbSize")
     )
 
     IgnoreMissing..UINT(
         "GetDpiForSystem",
-        """
-        Returns the system DPI.
-
-        The return value will be dependent based upon the calling context. If the current thread has a {@code DPI_AWARENESS} value of #DPI_AWARENESS_UNAWARE,
-        the return value will be 96. That is because the current context always assumes a DPI of 96. For any other {@code DPI_AWARENESS} value, the return
-        value will be the actual system DPI.
-
-        You should not cache the system DPI, but should use {@code GetDpiForSystem} whenever you need the system DPI value.
-        """,
-
-        returnDoc = "the system DPI value",
-        since = "Windows 10"
+        void()
     )
 
     IgnoreMissing..UINT(
         "GetDpiForWindow",
-        "Returns the dots per inch (dpi) value for the associated window.",
 
-        HWND("hwnd", "the window you want to get information about"),
-
-        returnDoc =
-        "the DPI for the window which depends on the {@code DPI_AWARENESS} of the window. An invalid {@code hwnd} value will result in a return value of 0.",
-        since = "Windows 10"
+        HWND("hwnd")
     )
 
     IgnoreMissing.."DPI_AWARENESS".enumType(
         "GetAwarenessFromDpiAwarenessContext",
-        "Retrieves the {@code DPI_AWARENESS} value from a {@code DPI_AWARENESS_CONTEXT}.",
 
-        DPI_AWARENESS_CONTEXT("value", "the {@code DPI_AWARENESS_CONTEXT} you want to examine"),
-
-        returnDoc = "the {@code DPI_AWARENESS}. If the provided value is null or invalid, this method will return #DPI_AWARENESS_INVALID.",
-        since = "Windows 10"
+        DPI_AWARENESS_CONTEXT("value")
     )
 
     IgnoreMissing..DPI_AWARENESS_CONTEXT(
         "GetThreadDpiAwarenessContext",
-        """
-        Gets the {@code DPI_AWARENESS_CONTEXT} for the current thread.
-
-        If #SetThreadDpiAwarenessContext() was never called for this thread, then the return value will equal the default {@code DPI_AWARENESS_CONTEXT} for the
-        process.
-        """,
-
-        returnDoc = "the current {@code DPI_AWARENESS_CONTEXT} for the thread.",
-        since = "Windows 10"
+        void()
     )
 
     IgnoreMissing..DPI_AWARENESS_CONTEXT(
         "GetWindowDpiAwarenessContext",
-        "Returns the {@code DPI_AWARENESS_CONTEXT}  associated with a window.",
 
-        HWND("hwnd", "the window to query"),
-
-        returnDoc = "the {@code DPI_AWARENESS_CONTEXT} for the provided window. If the window is not valid, the return value is #NULL.",
-        since = "Windows 10"
+        HWND("hwnd")
     )
 
     IgnoreMissing..BOOL(
         "IsValidDpiAwarenessContext",
-        "Determines if a specified {@code DPI_AWARENESS_CONTEXT} is valid and supported by the current system.",
 
-        nullable..DPI_AWARENESS_CONTEXT("value", "the context that you want to determine if it is supported"),
-
-        returnDoc = "#TRUE if the provided context is supported, otherwise #FALSE",
-        since = "Windows 10"
+        nullable..DPI_AWARENESS_CONTEXT("value")
     )
 
     IgnoreMissing..DPI_AWARENESS_CONTEXT(
         "SetThreadDpiAwarenessContext",
-        "Set the DPI awareness for the current thread to the provided value.",
 
-        DPI_AWARENESS_CONTEXT("dpiContext", "the DPI awareness value to set"),
-
-        returnDoc =
-        """
-        The old {@code DPI_AWARENESS_CONTEXT} for the thread. If the {@code dpiContext} is invalid, the thread will not be updated and the return value will be
-        #NULL. You can use this value to restore the old {@code DPI_AWARENESS_CONTEXT} after overriding it with a predefined value.
-        """,
-        since = "Windows 10"
+        DPI_AWARENESS_CONTEXT("dpiContext")
     )
 }

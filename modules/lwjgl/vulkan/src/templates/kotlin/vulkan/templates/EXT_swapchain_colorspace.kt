@@ -9,62 +9,15 @@ import org.lwjgl.generator.*
 import vulkan.*
 
 val EXT_swapchain_colorspace = "EXTSwapchainColorspace".nativeClassVK("EXT_swapchain_colorspace", type = "instance", postfix = "EXT") {
-    documentation =
-        """
-        This extension expands {@code VkColorSpaceKHR} to add support for most standard color spaces beyond #COLOR_SPACE_SRGB_NONLINEAR_KHR. This extension also adds support for #COLOR_SPACE_PASS_THROUGH_EXT which allows applications to use color spaces not explicitly enumerated in {@code VkColorSpaceKHR}.
-
-        <dl>
-            <dt><b>Name String</b></dt>
-            <dd>{@code VK_EXT_swapchain_colorspace}</dd>
-
-            <dt><b>Extension Type</b></dt>
-            <dd>Instance extension</dd>
-
-            <dt><b>Registered Extension Number</b></dt>
-            <dd>105</dd>
-
-            <dt><b>Revision</b></dt>
-            <dd>5</dd>
-
-            <dt><b>Extension and Version Dependencies</b></dt>
-            <dd>{@link KHRSurface VK_KHR_surface}</dd>
-
-            <dt><b>Contact</b></dt>
-            <dd><ul>
-                <li>Courtney Goeltzenleuchter <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_swapchain_colorspace]%20@courtney-g%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_swapchain_colorspace%20extension*">courtney-g</a></li>
-            </ul></dd>
-        </dl>
-
-        <h5>Other Extension Metadata</h5>
-        <dl>
-            <dt><b>Last Modified Date</b></dt>
-            <dd>2019-04-26</dd>
-
-            <dt><b>IP Status</b></dt>
-            <dd>No known IP claims.</dd>
-
-            <dt><b>Contributors</b></dt>
-            <dd><ul>
-                <li>Courtney Goeltzenleuchter, Google</li>
-            </ul></dd>
-        </dl>
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION".."5"
     )
 
     StringConstant(
-        "The extension name.",
-
         "EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME".."VK_EXT_swapchain_colorspace"
     )
 
     EnumConstant(
-        "Extends {@code VkColorSpaceKHR}.",
-
         "COLOR_SPACE_DISPLAY_P3_NONLINEAR_EXT".."1000104001",
         "COLOR_SPACE_EXTENDED_SRGB_LINEAR_EXT".."1000104002",
         "COLOR_SPACE_DISPLAY_P3_LINEAR_EXT".."1000104003",

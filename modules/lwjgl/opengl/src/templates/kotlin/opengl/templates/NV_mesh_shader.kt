@@ -8,28 +8,12 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val NV_mesh_shader = "NVMeshShader".nativeClassGL("NV_mesh_shader", postfix = NV) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension provides a new mechanism allowing applications to use two new programmable shader types -- the task and mesh shader -- to generate
-        collections of geometric primitives to be processed by fixed-function primitive assembly and rasterization logic. When the task and mesh shaders are
-        drawn, they replace the standard programmable vertex processing pipeline, including vertex array attribute fetching, vertex shader processing,
-        tessellation, and the geometry shader processing.
-
-        Requires ${GL45.core}.
-        """
-
     IntConstant(
-        "Accepted by the {@code type} parameter of #CreateShader() and returned by the {@code params} parameter of #GetShaderiv().",
-
         "MESH_SHADER_NV"..0x9559,
         "TASK_SHADER_NV"..0x955A
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of #GetIntegerv(), #GetBooleanv(), #GetFloatv(), #GetDoublev() and #GetInteger64v().",
-
         "MAX_MESH_UNIFORM_BLOCKS_NV"..0x8E60,
         "MAX_MESH_TEXTURE_IMAGE_UNITS_NV"..0x8E61,
         "MAX_MESH_IMAGE_UNIFORMS_NV"..0x8E62,
@@ -60,15 +44,11 @@ val NV_mesh_shader = "NVMeshShader".nativeClassGL("NV_mesh_shader", postfix = NV
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of #GetIntegeri_v(), #GetBooleani_v(), #GetFloati_v(), #GetDoublei_v() and #GetInteger64i_v().",
-
         "MAX_MESH_WORK_GROUP_SIZE_NV"..0x953B,
         "MAX_TASK_WORK_GROUP_SIZE_NV"..0x953C
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of #GetProgramiv().",
-
         "MESH_WORK_GROUP_SIZE_NV"..0x953E,
         "TASK_WORK_GROUP_SIZE_NV"..0x953F,
         "MESH_VERTICES_OUT_NV"..0x9579,
@@ -77,32 +57,21 @@ val NV_mesh_shader = "NVMeshShader".nativeClassGL("NV_mesh_shader", postfix = NV
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of #GetActiveUniformBlockiv().",
-
         "UNIFORM_BLOCK_REFERENCED_BY_MESH_SHADER_NV"..0x959C,
         "UNIFORM_BLOCK_REFERENCED_BY_TASK_SHADER_NV"..0x959D
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of #GetActiveAtomicCounterBufferiv().",
-
         "ATOMIC_COUNTER_BUFFER_REFERENCED_BY_MESH_SHADER_NV"..0x959E,
         "ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TASK_SHADER_NV"..0x959F
     )
 
     IntConstant(
-        "Accepted in the {@code props} array of #GetProgramResourceiv().",
-
         "REFERENCED_BY_MESH_SHADER_NV"..0x95A0,
         "REFERENCED_BY_TASK_SHADER_NV"..0x95A1
     )
 
     IntConstant(
-        """
-        Accepted by the {@code programInterface} parameter of #GetProgramInterfaceiv(), #GetProgramResourceIndex(), #GetProgramResourceName(),
-        #GetProgramResourceiv(), #GetProgramResourceLocation(), and #GetProgramResourceLocationIndex().
-        """,
-
         "MESH_SUBROUTINE_NV"..0x957C,
         "TASK_SUBROUTINE_NV"..0x957D,
         "MESH_SUBROUTINE_UNIFORM_NV"..0x957E,
@@ -110,43 +79,37 @@ val NV_mesh_shader = "NVMeshShader".nativeClassGL("NV_mesh_shader", postfix = NV
     )
 
     IntConstant(
-        "Accepted by the {@code stages} parameter of #UseProgramStages().",
-
         "MESH_SHADER_BIT_NV"..0x00000040,
         "TASK_SHADER_BIT_NV"..0x00000080
     )
 
     void(
         "DrawMeshTasksNV",
-        "",
 
-        GLuint("first", ""),
-        GLuint("count", "")
+        GLuint("first"),
+        GLuint("count")
     )
 
     void(
         "DrawMeshTasksIndirectNV",
-        "",
 
-        GLintptr("indirect", "")
+        GLintptr("indirect")
     )
 
     void(
         "MultiDrawMeshTasksIndirectNV",
-        "",
 
-        GLintptr("indirect", ""),
-        GLsizei("drawcount", ""),
-        GLsizei("stride", "")
+        GLintptr("indirect"),
+        GLsizei("drawcount"),
+        GLsizei("stride")
     )
 
     void(
         "MultiDrawMeshTasksIndirectCountNV",
-        "",
 
-        GLintptr("indirect", ""),
-        GLintptr("drawcount", ""),
-        GLsizei("maxdrawcount", ""),
-        GLsizei("stride", "")
+        GLintptr("indirect"),
+        GLintptr("drawcount"),
+        GLsizei("maxdrawcount"),
+        GLsizei("stride")
     )
 }

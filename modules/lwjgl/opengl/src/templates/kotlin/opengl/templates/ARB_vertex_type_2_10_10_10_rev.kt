@@ -8,23 +8,7 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val ARB_vertex_type_2_10_10_10_rev = "ARBVertexType2_10_10_10_REV".nativeClassGL("ARB_vertex_type_2_10_10_10_rev") {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension adds two new vertex attribute data formats: a signed 2.10.10.10 and an unsigned 2.10.10.10 vertex data format. These vertex data formats
-        describe a 4 component stream which can be used to store normals or other attributes in a quantized form. Normals, tangents, binormals and other vertex
-        attributes can often be specified at reduced precision without introducing noticeable artifacts, reducing the amount of memory and memory bandwidth they consume.
-
-        ${GL33.promoted}
-        """
-
     IntConstant(
-        """
-        Accepted by the {@code type} parameter of VertexAttribPointer, VertexPointer, NormalPointer, ColorPointer, SecondaryColorPointer, TexCoordPointer,
-        VertexAttribP{1234}ui, VertexP*, TexCoordP*, MultiTexCoordP*, NormalP3ui, ColorP*, SecondaryColorP and VertexAttribP*.
-        """,
-
         "INT_2_10_10_10_REV"..0x8D9F
     )
 

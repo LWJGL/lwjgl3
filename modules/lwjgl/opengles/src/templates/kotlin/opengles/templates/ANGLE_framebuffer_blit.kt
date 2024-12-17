@@ -8,47 +8,28 @@ import org.lwjgl.generator.*
 import opengles.*
 
 val ANGLE_framebuffer_blit = "ANGLEFramebufferBlit".nativeClassGLES("ANGLE_framebuffer_blit", postfix = ANGLE) {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        This extension modifies framebuffer objects by splitting the framebuffer object binding point into separate DRAW and READ bindings. This allows copying
-        directly from one framebuffer to another. In addition, a new high performance blit function is added to facilitate these blits and perform some data
-        conversion where allowed.
-
-        Requires ${GLES20.core}.
-        """
-
     IntConstant(
-        """
-        Accepted by the {@code target} parameter of BindFramebuffer, CheckFramebufferStatus, FramebufferTexture2D, FramebufferTexture3DOES,
-        FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv.
-        """,
-
         "READ_FRAMEBUFFER_ANGLE"..0x8CA8,
         "DRAW_FRAMEBUFFER_ANGLE"..0x8CA9
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameters of GetIntegerv and GetFloatv.",
-
         "DRAW_FRAMEBUFFER_BINDING_ANGLE"..0x8CA6,
         "READ_FRAMEBUFFER_BINDING_ANGLE"..0x8CAA
     )
 
     void(
         "BlitFramebufferANGLE",
-        "",
 
-        GLint("srcX0", ""),
-        GLint("srcY0", ""),
-        GLint("srcX1", ""),
-        GLint("srcY1", ""),
-        GLint("dstX0", ""),
-        GLint("dstY0", ""),
-        GLint("dstX1", ""),
-        GLint("dstY1", ""),
-        GLbitfield("mask", ""),
-        GLenum("filter", "")
+        GLint("srcX0"),
+        GLint("srcY0"),
+        GLint("srcX1"),
+        GLint("srcY1"),
+        GLint("dstX0"),
+        GLint("dstY0"),
+        GLint("dstX1"),
+        GLint("dstY1"),
+        GLbitfield("mask"),
+        GLenum("filter")
     )
 }

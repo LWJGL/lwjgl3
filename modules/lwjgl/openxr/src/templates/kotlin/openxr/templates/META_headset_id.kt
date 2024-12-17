@@ -9,26 +9,15 @@ import org.lwjgl.generator.*
 import openxr.*
 
 val META_headset_id = "METAHeadsetId".nativeClassXR("META_headset_id", type = "instance", postfix = "META") {
-    documentation =
-        """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#META_headset_id">META_headset_id</a> extension.
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "META_headset_id_SPEC_VERSION".."2"
     )
 
     StringConstant(
-        "The extension name.",
-
         "META_HEADSET_ID_EXTENSION_NAME".."XR_META_headset_id"
     )
 
     EnumConstant(
-        "Extends {@code XrStructureType}.",
-
         "TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META".."1000245000"
     )
 }

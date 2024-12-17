@@ -9,22 +9,11 @@ import org.lwjgl.generator.*
 import openxr.*
 
 val HTC_vive_focus3_controller_interaction = "HTCViveFocus3ControllerInteraction".nativeClassXR("HTC_vive_focus3_controller_interaction", type = "instance", postfix = "HTC") {
-    documentation =
-        """
-        The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html\#XR_HTC_vive_focus3_controller_interaction">XR_HTC_vive_focus3_controller_interaction</a> extension.
-
-        This extension defines a new interaction profile for the VIVE Focus 3 Controller.
-        """
-
     IntConstant(
-        "The extension specification version.",
-
         "HTC_vive_focus3_controller_interaction_SPEC_VERSION".."2"
     )
 
     StringConstant(
-        "The extension name.",
-
         "HTC_VIVE_FOCUS3_CONTROLLER_INTERACTION_EXTENSION_NAME".."XR_HTC_vive_focus3_controller_interaction"
     )
 }

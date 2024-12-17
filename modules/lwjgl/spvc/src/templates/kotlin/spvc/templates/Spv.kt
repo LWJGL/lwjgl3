@@ -7,20 +7,18 @@ package spvc.templates
 import org.lwjgl.generator.*
 
 val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv", prefixMethod = "Spv") {
-    documentation = "Enumeration tokens for SPIR-V."
+    IntConstant(
+        "SPV_VERSION".."0x10600",
+        "SPV_REVISION".."1"
+    ).noPrefix()
 
-    IntConstant("", "SPV_VERSION".."0x10600").noPrefix()
-    IntConstant("", "SPV_REVISION".."1").noPrefix()
-
-    IntConstant("", "MagicNumber".."0x07230203")
-    IntConstant("", "Version".."0x00010600")
-    IntConstant("", "Revision".."1")
-    IntConstant("", "OpCodeMask".."0xffff")
-    IntConstant("", "WordCountShift".."16")
+    IntConstant("MagicNumber".."0x07230203")
+    IntConstant("Version".."0x00010600")
+    IntConstant("Revision".."1")
+    IntConstant("OpCodeMask".."0xffff")
+    IntConstant("WordCountShift".."16")
 
     EnumConstant(
-        "{@code SpvSourceLanguage}",
-
         "SourceLanguageUnknown".."0",
         "SourceLanguageESSL".."1",
         "SourceLanguageGLSL".."2",
@@ -33,8 +31,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvExecutionModel}",
-
         "ExecutionModelVertex".."0",
         "ExecutionModelTessellationControl".."1",
         "ExecutionModelTessellationEvaluation".."2",
@@ -62,8 +58,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvAddressingModel}",
-
         "AddressingModelLogical".."0",
         "AddressingModelPhysical32".."1",
         "AddressingModelPhysical64".."2",
@@ -73,8 +67,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvMemoryModel}",
-
         "MemoryModelSimple".."0",
         "MemoryModelGLSL450".."1",
         "MemoryModelOpenCL".."2",
@@ -84,8 +76,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvExecutionMode}",
-
         "ExecutionModeInvocations".."0",
         "ExecutionModeSpacingEqual".."1",
         "ExecutionModeSpacingFractionalEven".."2",
@@ -168,8 +158,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvStorageClass}",
-
         "StorageClassUniformConstant".."0",
         "StorageClassInput".."1",
         "StorageClassUniform".."2",
@@ -205,8 +193,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvDim}",
-
         "Dim1D".."0",
         "Dim2D".."1",
         "Dim3D".."2",
@@ -218,8 +204,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvSamplerAddressingMode}",
-
         "SamplerAddressingModeNone".."0",
         "SamplerAddressingModeClampToEdge".."1",
         "SamplerAddressingModeClamp".."2",
@@ -229,16 +213,12 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvSamplerFilterMode}",
-
         "SamplerFilterModeNearest".."0",
         "SamplerFilterModeLinear".."1",
         "SamplerFilterModeMax".."0x7fffffff",
     )
 
     EnumConstant(
-        "{@code SpvImageFormat}",
-
         "ImageFormatUnknown".."0",
         "ImageFormatRgba32f".."1",
         "ImageFormatRgba16f".."2",
@@ -285,8 +265,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvImageChannelOrder}",
-
         "ImageChannelOrderR".."0",
         "ImageChannelOrderA".."1",
         "ImageChannelOrderRG".."2",
@@ -311,8 +289,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvImageChannelDataType}",
-
         "ImageChannelDataTypeSnormInt8".."0",
         "ImageChannelDataTypeSnormInt16".."1",
         "ImageChannelDataTypeUnormInt8".."2",
@@ -334,8 +310,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvImageOperandsShift}",
-
         "ImageOperandsBiasShift".."0",
         "ImageOperandsLodShift".."1",
         "ImageOperandsGradShift".."2",
@@ -360,8 +334,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvImageOperandsMask}",
-
         "ImageOperandsMaskNone".."0",
         "ImageOperandsBiasMask".."0x00000001",
         "ImageOperandsLodMask".."0x00000002",
@@ -386,8 +358,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvFPFastMathModeShift}",
-
         "FPFastMathModeNotNaNShift".."0",
         "FPFastMathModeNotInfShift".."1",
         "FPFastMathModeNSZShift".."2",
@@ -399,8 +369,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvFPFastMathModeMask}",
-
         "FPFastMathModeMaskNone".."0",
         "FPFastMathModeNotNaNMask".."0x00000001",
         "FPFastMathModeNotInfMask".."0x00000002",
@@ -412,8 +380,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvFPRoundingMode}",
-
         "FPRoundingModeRTE".."0",
         "FPRoundingModeRTZ".."1",
         "FPRoundingModeRTP".."2",
@@ -422,8 +388,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvLinkageType}",
-
         "LinkageTypeExport".."0",
         "LinkageTypeImport".."1",
         "LinkageTypeLinkOnceODR".."2",
@@ -431,8 +395,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvAccessQualifier}",
-
         "AccessQualifierReadOnly".."0",
         "AccessQualifierWriteOnly".."1",
         "AccessQualifierReadWrite".."2",
@@ -440,8 +402,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvFunctionParameterAttribute}",
-
         "FunctionParameterAttributeZext".."0",
         "FunctionParameterAttributeSext".."1",
         "FunctionParameterAttributeByVal".."2",
@@ -454,8 +414,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvDecoration}",
-
         "DecorationRelaxedPrecision".."0",
         "DecorationSpecId".."1",
         "DecorationBlock".."2",
@@ -575,8 +533,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvBuiltIn}",
-
         "BuiltInPosition".."0",
         "BuiltInPointSize".."1",
         "BuiltInClipDistance".."3",
@@ -707,24 +663,18 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvSelectionControlShift}",
-
         "SelectionControlFlattenShift".."0",
         "SelectionControlDontFlattenShift".."1",
         "SelectionControlMax".."0x7fffffff",
     )
 
     EnumConstant(
-        "{@code SpvSelectionControlMask}",
-
         "SelectionControlMaskNone".."0",
         "SelectionControlFlattenMask".."0x00000001",
         "SelectionControlDontFlattenMask".."0x00000002"
     )
 
     EnumConstant(
-        "{@code SpvLoopControlShift}",
-
         "LoopControlUnrollShift".."0",
         "LoopControlDontUnrollShift".."1",
         "LoopControlDependencyInfiniteShift".."2",
@@ -746,8 +696,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvLoopControlMask}",
-
         "LoopControlMaskNone".."0",
         "LoopControlUnrollMask".."0x00000001",
         "LoopControlDontUnrollMask".."0x00000002",
@@ -769,8 +717,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvFunctionControlShift}",
-
         "FunctionControlInlineShift".."0",
         "FunctionControlDontInlineShift".."1",
         "FunctionControlPureShift".."2",
@@ -780,8 +726,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvFunctionControlMask}",
-
         "FunctionControlMaskNone".."0",
         "FunctionControlInlineMask".."0x00000001",
         "FunctionControlDontInlineMask".."0x00000002",
@@ -791,8 +735,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvMemorySemanticsShift}",
-
         "MemorySemanticsAcquireShift".."1",
         "MemorySemanticsReleaseShift".."2",
         "MemorySemanticsAcquireReleaseShift".."3",
@@ -814,8 +756,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvMemorySemanticsMask}",
-
         "MemorySemanticsMaskNone".."0",
         "MemorySemanticsAcquireMask".."0x00000002",
         "MemorySemanticsReleaseMask".."0x00000004",
@@ -837,8 +777,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvMemoryAccessShift}",
-
         "MemoryAccessVolatileShift".."0",
         "MemoryAccessAlignedShift".."1",
         "MemoryAccessNontemporalShift".."2",
@@ -854,8 +792,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvMemoryAccessMask}",
-
         "MemoryAccessMaskNone".."0",
         "MemoryAccessVolatileMask".."0x00000001",
         "MemoryAccessAlignedMask".."0x00000002",
@@ -871,8 +807,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvScope}",
-
         "ScopeCrossDevice".."0",
         "ScopeDevice".."1",
         "ScopeWorkgroup".."2",
@@ -885,8 +819,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvGroupOperation}",
-
         "GroupOperationReduce".."0",
         "GroupOperationInclusiveScan".."1",
         "GroupOperationExclusiveScan".."2",
@@ -898,8 +830,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvKernelEnqueueFlags}",
-
         "KernelEnqueueFlagsNoWait".."0",
         "KernelEnqueueFlagsWaitKernel".."1",
         "KernelEnqueueFlagsWaitWorkGroup".."2",
@@ -907,22 +837,16 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvKernelProfilingInfoShift}",
-
         "KernelProfilingInfoCmdExecTimeShift".."0",
         "KernelProfilingInfoMax".."0x7fffffff",
     )
 
     EnumConstant(
-        "{@code SpvKernelProfilingInfoMask}",
-
         "KernelProfilingInfoMaskNone".."0",
         "KernelProfilingInfoCmdExecTimeMask".."0x00000001"
     )
 
     EnumConstant(
-        "{@code SpvCapability}",
-
         "CapabilityMatrix".."0",
         "CapabilityShader".."1",
         "CapabilityGeometry".."2",
@@ -1156,8 +1080,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvRayFlagsShift}",
-
         "RayFlagsOpaqueKHRShift".."0",
         "RayFlagsNoOpaqueKHRShift".."1",
         "RayFlagsTerminateOnFirstHitKHRShift".."2",
@@ -1172,8 +1094,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvRayFlagsMask}",
-
         "RayFlagsMaskNone".."0",
         "RayFlagsOpaqueKHRMask".."0x00000001",
         "RayFlagsNoOpaqueKHRMask".."0x00000002",
@@ -1188,16 +1108,12 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvRayQueryIntersection}",
-
         "RayQueryIntersectionRayQueryCandidateIntersectionKHR".."0",
         "RayQueryIntersectionRayQueryCommittedIntersectionKHR".."1",
         "RayQueryIntersectionMax".."0x7fffffff",
     )
 
     EnumConstant(
-        "{@code SpvRayQueryCommittedIntersectionType}",
-
         "RayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionNoneKHR".."0",
         "RayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionTriangleKHR".."1",
         "RayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionGeneratedKHR".."2",
@@ -1205,16 +1121,12 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvRayQueryCandidateIntersectionType}",
-
         "RayQueryCandidateIntersectionTypeRayQueryCandidateIntersectionTriangleKHR".."0",
         "RayQueryCandidateIntersectionTypeRayQueryCandidateIntersectionAABBKHR".."1",
         "RayQueryCandidateIntersectionTypeMax".."0x7fffffff",
     )
 
     EnumConstant(
-        "{@code SpvFragmentShadingRateShift}",
-
         "FragmentShadingRateVertical2PixelsShift".."0",
         "FragmentShadingRateVertical4PixelsShift".."1",
         "FragmentShadingRateHorizontal2PixelsShift".."2",
@@ -1223,8 +1135,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvFragmentShadingRateMask}",
-
         "FragmentShadingRateMaskNone".."0",
         "FragmentShadingRateVertical2PixelsMask".."0x00000001",
         "FragmentShadingRateVertical4PixelsMask".."0x00000002",
@@ -1233,24 +1143,18 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvFPDenormMode}",
-
         "FPDenormModePreserve".."0",
         "FPDenormModeFlushToZero".."1",
         "FPDenormModeMax".."0x7fffffff"
     )
 
     EnumConstant(
-        "{@code SpvFPOperationMode}",
-
         "FPOperationModeIEEE".."0",
         "FPOperationModeALT".."1",
         "FPOperationModeMax".."0x7fffffff"
     )
 
     EnumConstant(
-        "{@code SpvQuantizationModes}",
-
         "QuantizationModesTRN".."0",
         "QuantizationModesTRN_ZERO".."1",
         "QuantizationModesRND".."2",
@@ -1263,8 +1167,6 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvOverflowModes}",
-
         "OverflowModesWRAP".."0",
         "OverflowModesSAT".."1",
         "OverflowModesSAT_ZERO".."2",
@@ -1273,16 +1175,12 @@ val Spv = "Spv".nativeClass(Module.SPVC, prefix = "Spv", prefixConstant = "Spv",
     )
 
     EnumConstant(
-        "{@code SpvPackedVectorFormat}",
-
         "PackedVectorFormatPackedVectorFormat4x8Bit".."0",
         "PackedVectorFormatPackedVectorFormat4x8BitKHR".."0",
         "PackedVectorFormatMax".."0x7fffffff"
     )
 
     EnumConstant(
-        "{@code SpvOp}",
-
         "OpNop".."0",
         "OpUndef".."1",
         "OpSourceContinued".."2",

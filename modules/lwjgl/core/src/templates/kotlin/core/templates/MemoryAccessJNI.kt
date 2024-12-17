@@ -13,13 +13,10 @@ val MemoryAccessJNI = "MemoryAccessJNI".nativeClass(Module.CORE) {
     )
 
     access = Access.INTERNAL
-    documentation = "Memory access utilities."
-
     Code(
         nativeCall = "${t}return (jint)sizeof(void *);"
     )..int(
         "getPointerSize",
-        "Returns the {@code sizeof(void *)}.",
         void()
     )
 
@@ -83,7 +80,6 @@ ${primitives
     ).forEach { (name, signature) ->
         macro..Address..signature.handle(
             name,
-            "Returns the address of the stdlib {@code $name} function.",
             void()
         )
     }
@@ -92,7 +88,6 @@ ${primitives
         nativeCall = "${t}return (jlong)(uintptr_t)&__aligned_alloc;"
     )..macro..Address.."void * (*) (size_t, size_t)".handle(
         "aligned_alloc",
-        "Returns the address of the stdlib {@code aligned_alloc} function.",
         void()
     )
 
@@ -100,24 +95,21 @@ ${primitives
         nativeCall = "${t}return (jlong)(uintptr_t)&__aligned_free;"
     )..macro..Address.."void (*) (void *)".handle(
         "aligned_free",
-        "Returns the address of the stdlib {@code aligned_free} function.",
         void()
     )
 
     for ((type, name, msg) in primitives)
         type(
             "get$name",
-            "Reads $msg from the specified memory address.",
 
-            opaque_p("ptr", "the memory address to read")
+            opaque_p("ptr")
         )
 
     for ((type, name, msg) in primitives)
         void(
             "put$name",
-            "Writes $msg to the specified memory address.",
 
-            opaque_p("ptr", "the memory address to write"),
-            type("value", "the value to write")
+            opaque_p("ptr"),
+            type("value")
         )
 }

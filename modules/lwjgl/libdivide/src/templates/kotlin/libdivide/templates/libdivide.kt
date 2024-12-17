@@ -11,29 +11,13 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     nativeImport("libdivide.h")
     javaImport("static org.lwjgl.system.MathUtil.*")
     javaImport("static org.lwjgl.system.MemoryUtil.*")
-    documentation =
-        """
-        Native bindings to ${url("https://libdivide.com/", "libdivide")}.
-
-        libdivide allows you to replace expensive integer divides with comparatively cheap multiplication and bitshifts. Compilers usually do this, but
-        only when the divisor is known at compile time. libdivide allows you to take advantage of it at runtime. The result is that integer division can become
-        faster - a lot faster.
-
-        <b>LWJGL</b>: This is a hybrid implementation. Divider recovery methods use standard JNI bindings. All {@code *_gen}, {@code *_do} &amp;
-        {@code *_get_algorithm} functions have been ported to pure Java. This eliminates the JNI overhead and enables the JVM to inline and further optimize
-        these methods.
-        """
 
     IntConstant(
-        "Library version.",
-
         "VERSION_MAJOR".."5",
         "VERSION_MINOR".."1"
     )
 
     EnumConstant(
-        "",
-
         "16_SHIFT_MASK".enum(0x1F),
         "32_SHIFT_MASK".enum(0x1F),
         "64_SHIFT_MASK".enum(0x3F),
@@ -41,7 +25,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         "NEGATIVE_DIVISOR".enum(0x80)
     )
 
-    NativeName("libdivide_s16_gen")..internal..libdivide_s16_t("s16_gen_ref", "", int16_t("denom", ""))
+    NativeName("libdivide_s16_gen")..internal..libdivide_s16_t("s16_gen_ref", int16_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_s16_t")
     public static LibDivideS16 libdivide_s16_gen(@NativeType("int16_t") short denom, @NativeType("struct libdivide_s16_t") LibDivideS16 __result) {
@@ -82,7 +66,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_u16_gen")..internal..libdivide_u16_t("u16_gen_ref", "", uint16_t("denom", ""))
+    NativeName("libdivide_u16_gen")..internal..libdivide_u16_t("u16_gen_ref", uint16_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_u16_t")
     public static LibDivideU16 libdivide_u16_gen(@NativeType("uint16_t") short denom, @NativeType("struct libdivide_u16_t") LibDivideU16 __result) {
@@ -121,7 +105,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     }""")
 
     
-    NativeName("libdivide_s32_gen")..internal..libdivide_s32_t("s32_gen_ref", "", int32_t("denom", ""))
+    NativeName("libdivide_s32_gen")..internal..libdivide_s32_t("s32_gen_ref", int32_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_s32_t")
     public static LibDivideS32 libdivide_s32_gen(@NativeType("int32_t") int denom, @NativeType("struct libdivide_s32_t") LibDivideS32 __result) {
@@ -162,7 +146,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_u32_gen")..internal..libdivide_u32_t("u32_gen_ref", "", uint32_t("denom", ""))
+    NativeName("libdivide_u32_gen")..internal..libdivide_u32_t("u32_gen_ref", uint32_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_u32_t")
     public static LibDivideU32 libdivide_u32_gen(@NativeType("uint32_t") int denom, @NativeType("struct libdivide_u32_t") LibDivideU32 __result) {
@@ -198,7 +182,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_s64_gen")..internal..libdivide_s64_t("s64_gen_ref", "", int64_t("denom", ""))
+    NativeName("libdivide_s64_gen")..internal..libdivide_s64_t("s64_gen_ref", int64_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_s64_t")
     public static LibDivideS64 libdivide_s64_gen(@NativeType("int64_t") long denom, @NativeType("struct libdivide_s64_t") LibDivideS64 __result) {
@@ -238,7 +222,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_u64_gen")..internal..libdivide_u64_t("u64_gen_ref", "", uint64_t("denom", ""))
+    NativeName("libdivide_u64_gen")..internal..libdivide_u64_t("u64_gen_ref", uint64_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_u64_t")
     public static LibDivideU64 libdivide_u64_gen(@NativeType("uint64_t") long denom, @NativeType("struct libdivide_u64_t") LibDivideU64 __result) {
@@ -273,7 +257,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_s16_branchfree_gen")..internal..libdivide_s16_branchfree_t("s16_branchfree_gen_ref", "", int16_t("denom", ""))
+    NativeName("libdivide_s16_branchfree_gen")..internal..libdivide_s16_branchfree_t("s16_branchfree_gen_ref", int16_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_s16_branchfree_t")
     public static LibDivideS16BranchFree libdivide_s16_branchfree_gen(@NativeType("int16_t") short denom, @NativeType("struct libdivide_s16_branchfree_t") LibDivideS16BranchFree __result) {
@@ -311,7 +295,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_u16_branchfree_gen")..internal..libdivide_u16_branchfree_t("u16_branchfree_gen_ref", "", uint16_t("denom", ""))
+    NativeName("libdivide_u16_branchfree_gen")..internal..libdivide_u16_branchfree_t("u16_branchfree_gen_ref", uint16_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_u16_branchfree_t")
     public static LibDivideU16BranchFree libdivide_u16_branchfree_gen(@NativeType("uint16_t") short denom, @NativeType("struct libdivide_u16_branchfree_t") LibDivideU16BranchFree __result) {
@@ -350,7 +334,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_s32_branchfree_gen")..internal..libdivide_s32_branchfree_t("s32_branchfree_gen_ref", "", int32_t("denom", ""))
+    NativeName("libdivide_s32_branchfree_gen")..internal..libdivide_s32_branchfree_t("s32_branchfree_gen_ref", int32_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_s32_branchfree_t")
     public static LibDivideS32BranchFree libdivide_s32_branchfree_gen(@NativeType("int32_t") int denom, @NativeType("struct libdivide_s32_branchfree_t") LibDivideS32BranchFree __result) {
@@ -388,7 +372,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_u32_branchfree_gen")..internal..libdivide_u32_branchfree_t("u32_branchfree_gen_ref", "", uint32_t("denom", ""))
+    NativeName("libdivide_u32_branchfree_gen")..internal..libdivide_u32_branchfree_t("u32_branchfree_gen_ref", uint32_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_u32_branchfree_t")
     public static LibDivideU32BranchFree libdivide_u32_branchfree_gen(@NativeType("uint32_t") int denom, @NativeType("struct libdivide_u32_branchfree_t") LibDivideU32BranchFree __result) {
@@ -425,7 +409,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_s64_branchfree_gen")..internal..libdivide_s64_branchfree_t("s64_branchfree_gen_ref", "", int64_t("denom", ""))
+    NativeName("libdivide_s64_branchfree_gen")..internal..libdivide_s64_branchfree_t("s64_branchfree_gen_ref", int64_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_s64_branchfree_t")
     public static LibDivideS64BranchFree libdivide_s64_branchfree_gen(@NativeType("int64_t") long denom, @NativeType("struct libdivide_s64_branchfree_t") LibDivideS64BranchFree __result) {
@@ -461,7 +445,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
     }
 """)
 
-    NativeName("libdivide_u64_branchfree_gen")..internal..libdivide_u64_branchfree_t("u64_branchfree_gen_ref", "", uint64_t("denom", ""))
+    NativeName("libdivide_u64_branchfree_gen")..internal..libdivide_u64_branchfree_t("u64_branchfree_gen_ref", uint64_t("denom"))
     customMethod("""
     @NativeType("struct libdivide_u64_branchfree_t")
     public static LibDivideU64BranchFree libdivide_u64_branchfree_gen(@NativeType("uint64_t") long denom, @NativeType("struct libdivide_u64_branchfree_t") LibDivideU64BranchFree __result) {
@@ -495,7 +479,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return __result;
     }""")
 
-    NativeName("libdivide_s16_do")..internal..int16_t("s16_do_ref", "", int16_t("numer", ""), libdivide_s16_t.const.p("denom", ""))
+    NativeName("libdivide_s16_do")..internal..int16_t("s16_do_ref", int16_t("numer"), libdivide_s16_t.const.p("denom"))
     customMethod(
         """
     public static short libdivide_s16_do(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_t const *") LibDivideS16 denom) { return libdivide_s16_do(numer, denom.magic(), denom.more()); }
@@ -522,7 +506,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         }
     }""")
 
-    NativeName("libdivide_u16_do")..internal..uint16_t("u16_do_ref", "", uint16_t("numer", ""), libdivide_u16_t.const.p("denom", ""))
+    NativeName("libdivide_u16_do")..internal..uint16_t("u16_do_ref", uint16_t("numer"), libdivide_u16_t.const.p("denom"))
     customMethod(
         """
     public static short libdivide_u16_do(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_t const *") LibDivideU16 denom) { return libdivide_u16_do(numer, denom.magic(), denom.more()); }
@@ -542,7 +526,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         }
     }""")
 
-    NativeName("libdivide_s32_do")..internal..int32_t("s32_do_ref", "", int32_t("numer", ""), libdivide_s32_t.const.p("denom", ""))
+    NativeName("libdivide_s32_do")..internal..int32_t("s32_do_ref", int32_t("numer"), libdivide_s32_t.const.p("denom"))
     customMethod(
         """
     public static int libdivide_s32_do(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) { return libdivide_s32_do(numer, denom.magic(), denom.more()); }
@@ -569,7 +553,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         }
     }""")
 
-    NativeName("libdivide_u32_do")..internal..uint32_t("u32_do_ref", "", uint32_t("numer", ""), libdivide_u32_t.const.p("denom", ""))
+    NativeName("libdivide_u32_do")..internal..uint32_t("u32_do_ref", uint32_t("numer"), libdivide_u32_t.const.p("denom"))
     customMethod(
         """
     public static int libdivide_u32_do(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) { return libdivide_u32_do(numer, denom.magic(), denom.more()); }
@@ -587,7 +571,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         }
     }""")
 
-    NativeName("libdivide_s64_do")..internal..int64_t("s64_do_ref", "", int64_t("numer", ""), libdivide_s64_t.const.p("denom", ""))
+    NativeName("libdivide_s64_do")..internal..int64_t("s64_do_ref", int64_t("numer"), libdivide_s64_t.const.p("denom"))
     customMethod(
         """
     public static long libdivide_s64_do(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) { return libdivide_s64_do(numer, denom.magic(), denom.more()); }
@@ -614,7 +598,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         }
     }""")
 
-    NativeName("libdivide_u64_do")..internal..uint64_t("u64_do_ref", "", uint64_t("numer", ""), libdivide_u64_t.const.p("denom", ""))
+    NativeName("libdivide_u64_do")..internal..uint64_t("u64_do_ref", uint64_t("numer"), libdivide_u64_t.const.p("denom"))
     customMethod(
         """
     public static long libdivide_u64_do(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) { return libdivide_u64_do(numer, denom.magic(), denom.more()); }
@@ -632,7 +616,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         }
     }""")
 
-    NativeName("libdivide_s16_branchfree_do")..internal..int16_t("s16_branchfree_do_ref", "", int16_t("numer", ""), libdivide_s16_branchfree_t.const.p("denom", ""))
+    NativeName("libdivide_s16_branchfree_do")..internal..int16_t("s16_branchfree_do_ref", int16_t("numer"), libdivide_s16_branchfree_t.const.p("denom"))
     customMethod(
         """
     public static short libdivide_s16_branchfree_do(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_branchfree_t const *") LibDivideS16BranchFree denom) { return libdivide_s16_branchfree_do(numer, denom.magic(), denom.more()); }
@@ -652,7 +636,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return (short)q;
     }""")
 
-    NativeName("libdivide_u16_branchfree_do")..internal..uint16_t("u16_branchfree_do_ref", "", uint16_t("numer", ""), libdivide_u16_branchfree_t.const.p("denom", ""))
+    NativeName("libdivide_u16_branchfree_do")..internal..uint16_t("u16_branchfree_do_ref", uint16_t("numer"), libdivide_u16_branchfree_t.const.p("denom"))
     customMethod(
         """
     public static short libdivide_u16_branchfree_do(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_branchfree_t const *") LibDivideU16BranchFree denom) { return libdivide_u16_branchfree_do(numer, denom.magic(), denom.more()); }
@@ -662,7 +646,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return (short)(t >>> more);
     }""")
     
-    NativeName("libdivide_s32_branchfree_do")..internal..int32_t("s32_branchfree_do_ref", "", int32_t("numer", ""), libdivide_s32_branchfree_t.const.p("denom", ""))
+    NativeName("libdivide_s32_branchfree_do")..internal..int32_t("s32_branchfree_do_ref", int32_t("numer"), libdivide_s32_branchfree_t.const.p("denom"))
     customMethod(
         """
     public static int libdivide_s32_branchfree_do(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_branchfree_t const *") LibDivideS32BranchFree denom) { return libdivide_s32_branchfree_do(numer, denom.magic(), denom.more()); }
@@ -682,7 +666,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return q;
     }""")
 
-    NativeName("libdivide_u32_branchfree_do")..internal..uint32_t("u32_branchfree_do_ref", "", uint32_t("numer", ""), libdivide_u32_branchfree_t.const.p("denom", ""))
+    NativeName("libdivide_u32_branchfree_do")..internal..uint32_t("u32_branchfree_do_ref", uint32_t("numer"), libdivide_u32_branchfree_t.const.p("denom"))
     customMethod(
         """
     public static int libdivide_u32_branchfree_do(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_branchfree_t const *") LibDivideU32BranchFree denom) { return libdivide_u32_branchfree_do(numer, denom.magic(), denom.more()); }
@@ -692,7 +676,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return t >>> more;
     }""")
 
-    NativeName("libdivide_s64_branchfree_do")..internal..int64_t("s64_branchfree_do_ref", "", int64_t("numer", ""), libdivide_s64_branchfree_t.const.p("denom", ""))
+    NativeName("libdivide_s64_branchfree_do")..internal..int64_t("s64_branchfree_do_ref", int64_t("numer"), libdivide_s64_branchfree_t.const.p("denom"))
     customMethod(
         """
     public static long libdivide_s64_branchfree_do(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_branchfree_t const *") LibDivideS64BranchFree denom) { return libdivide_s64_branchfree_do(numer, denom.magic(), denom.more()); }
@@ -711,7 +695,7 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return q;
     }""")
 
-    NativeName("libdivide_u64_branchfree_do")..internal..uint64_t("u64_branchfree_do_ref", "", uint64_t("numer", ""), libdivide_u64_branchfree_t.const.p("denom", ""))
+    NativeName("libdivide_u64_branchfree_do")..internal..uint64_t("u64_branchfree_do_ref", uint64_t("numer"), libdivide_u64_branchfree_t.const.p("denom"))
     customMethod(
         """
     public static long libdivide_u64_branchfree_do(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_branchfree_t const *") LibDivideU64BranchFree denom) { return libdivide_u64_branchfree_do(numer, denom.magic(), denom.more()); }
@@ -721,19 +705,19 @@ val libdivide = "LibDivide".nativeClass(Module.LIBDIVIDE, prefixConstant = "LIBD
         return t >>> more;
     }""")
 
-    int16_t("s16_recover", "", libdivide_s16_t.const.p("denom", ""))
-    uint16_t("u16_recover", "", libdivide_u16_t.const.p("denom", ""))
-    int32_t("s32_recover", "", libdivide_s32_t.const.p("denom", ""))
-    uint32_t("u32_recover", "", libdivide_u32_t.const.p("denom", ""))
-    int64_t("s64_recover", "", libdivide_s64_t.const.p("denom", ""))
-    uint64_t("u64_recover", "", libdivide_u64_t.const.p("denom", ""))
+    int16_t("s16_recover", libdivide_s16_t.const.p("denom"))
+    uint16_t("u16_recover", libdivide_u16_t.const.p("denom"))
+    int32_t("s32_recover", libdivide_s32_t.const.p("denom"))
+    uint32_t("u32_recover", libdivide_u32_t.const.p("denom"))
+    int64_t("s64_recover", libdivide_s64_t.const.p("denom"))
+    uint64_t("u64_recover", libdivide_u64_t.const.p("denom"))
 
-    int16_t("s16_branchfree_recover", "", libdivide_s16_branchfree_t.const.p("denom", ""))
-    uint16_t("u16_branchfree_recover", "", libdivide_u16_branchfree_t.const.p("denom", ""))
-    int32_t("s32_branchfree_recover", "", libdivide_s32_branchfree_t.const.p("denom", ""))
-    uint32_t("u32_branchfree_recover", "", libdivide_u32_branchfree_t.const.p("denom", ""))
-    int64_t("s64_branchfree_recover", "", libdivide_s64_branchfree_t.const.p("denom", ""))
-    uint64_t("u64_branchfree_recover", "", libdivide_u64_branchfree_t.const.p("denom", ""))
+    int16_t("s16_branchfree_recover", libdivide_s16_branchfree_t.const.p("denom"))
+    uint16_t("u16_branchfree_recover", libdivide_u16_branchfree_t.const.p("denom"))
+    int32_t("s32_branchfree_recover", libdivide_s32_branchfree_t.const.p("denom"))
+    uint32_t("u32_branchfree_recover", libdivide_u32_branchfree_t.const.p("denom"))
+    int64_t("s64_branchfree_recover", libdivide_s64_branchfree_t.const.p("denom"))
+    uint64_t("u64_branchfree_recover", libdivide_u64_branchfree_t.const.p("denom"))
 
     // Helper methods
 

@@ -9,11 +9,8 @@ import org.lwjgl.generator.*
 
 val pthread = "PThread".nativeClass(Module.CORE_LINUX, prefixMethod = "pthread_", nativeSubPath = "linux") {
     nativeImport("<pthread.h>")
-    documentation = "Native bindings to &lt;pthread.h&gt;."
-
     pthread_t(
         "self",
-        "",
 
         void()
     )

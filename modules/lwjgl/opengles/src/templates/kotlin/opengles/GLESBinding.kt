@@ -166,7 +166,6 @@ private val GLESBinding = register(object : APIBinding(
             "static org.lwjgl.system.Checks.*"
         )
 
-        documentation = "Defines the capabilities of an OpenGL ES context."
     }
 
     override fun PrintWriter.generateJava() {
@@ -262,7 +261,7 @@ fun String.nativeClassGLES(
     prefix: String = "GL",
     prefixMethod: String = prefix.lowercase(),
     postfix: String = "",
-    init: NativeClass.() -> Unit
+    init: (NativeClass.() -> Unit)? = null
 ) = nativeClass(
     Module.OPENGLES,
     templateName,
@@ -272,7 +271,9 @@ fun String.nativeClassGLES(
     postfix = postfix,
     binding = GLESBinding,
     init = {
-        init()
+        if (init != null) {
+            init()
+        }
         if (!skipNative) {
             nativeImport("opengles.h")
         }

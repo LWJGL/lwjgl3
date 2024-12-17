@@ -8,32 +8,11 @@ import org.lwjgl.generator.*
 import opengl.*
 
 val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_state_access") {
-    documentation =
-        """
-        Native bindings to the $registryLink extension.
-
-        In unextended OpenGL, most mutation of state contained in objects is through an indirection known as a binding. Objects are attached to a context
-        (either directly or indirectly via a container) and then commands to modify or query their state are issued on that context, indirecting through its
-        attachments and into the underlying object. This is known as `bind-to-edit'.
-
-        This extension derives from the GL_EXT_direct_state_access extension, which added accessors for most state on most objects, allowing it to be queried
-        and modified without the object needing to be bound to a context. In cases where a single property of an object is to be modified, directly accessing
-        its state can be more efficient than binding the object to the context and then indirecting through it. Further, directly accessing the state of objects
-        through their names rather than by bind-to-edit does not disturb the bindings of the current context, which is useful for tools, middleware and other
-        applications that are unaware of the outer state but it can also avoid cases of redundant state changes.
-
-        Requires ${GL20.core}. ${GL45C.promoted}
-        """
-
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetTextureParameter{if}v and GetTextureParameterI{i ui}v.",
-
         "TEXTURE_TARGET"..0x1006
     )
 
     IntConstant(
-        "Accepted by the {@code pname} parameter of GetQueryObjectiv.",
-
         "QUERY_TARGET"..0x82EA
     )
 

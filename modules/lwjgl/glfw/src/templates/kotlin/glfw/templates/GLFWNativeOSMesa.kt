@@ -15,71 +15,30 @@ val GLFWNativeOSMesa = "GLFWNativeOSMesa".nativeClass(Module.GLFW, prefix = "GLF
         "static org.lwjgl.system.MemoryUtil.*"
     )
 
-    documentation = "Native bindings to the GLFW library's GLX native access functions."
-
     intb(
         "GetOSMesaColorBuffer",
-        """
-        Retrieves the color buffer associated with the specified window.
 
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", "the window whose color buffer to retrieve"),
-        nullable..Check(1)..int.p("width", "where to store the width of the color buffer, or #NULL"),
-        nullable..Check(1)..int.p("height", "where to store the height of the color buffer, or #NULL"),
-        nullable..Check(1)..int.p("format", "where to store the OSMesa pixel format of the color buffer, or #NULL"),
-        nullable..Check(1)..void.p.p("buffer", "where to store the address of the color buffer, or #NULL"),
-
-        returnDoc =
-        """
-        #TRUE if successful, or #FALSE if an error occurred.
-        
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.3"
+        GLFWwindow.p("window"),
+        nullable..Check(1)..int.p("width"),
+        nullable..Check(1)..int.p("height"),
+        nullable..Check(1)..int.p("format"),
+        nullable..Check(1)..void.p.p("buffer")
     )
 
     int(
         "GetOSMesaDepthBuffer",
-        """
-        Retrieves the depth buffer associated with the specified window.
 
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", "the window whose depth buffer to retrieve"),
-        nullable..Check(1)..int.p("width", "where to store the width of the depth buffer, or #NULL"),
-        nullable..Check(1)..int.p("height", "where to store the height of the depth buffer, or #NULL"),
-        nullable..Check(1)..int.p("bytesPerValue", "where to store the number of bytes per depth buffer element, or #NULL"),
-        nullable..Check(1)..void.p.p("buffer", "where to store the address of the depth buffer, or #NULL"),
-
-        returnDoc =
-        """
-        #TRUE if successful, or #FALSE if an error occurred.
-        
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.3"
+        GLFWwindow.p("window"),
+        nullable..Check(1)..int.p("width"),
+        nullable..Check(1)..int.p("height"),
+        nullable..Check(1)..int.p("bytesPerValue"),
+        nullable..Check(1)..void.p.p("buffer")
     )
 
     "OSMesaContext".handle(
         "GetOSMesaContext",
-        """
-        Returns the {@code OSMesaContext} of the specified window.
 
-        This function may be called from any thread. Access is not synchronized.
-        """,
-
-        GLFWwindow.p("window", "the window whose context to retrieve"),
-
-        returnDoc =
-        """
-        the {@code OSMesaContext} of the specified window, or #NULL if an error occurred.
-        
-        Possible errors include #NO_WINDOW_CONTEXT and #NOT_INITIALIZED.
-        """,
-        since = "version 3.3"
+        GLFWwindow.p("window")
     )
 
     customMethod("""

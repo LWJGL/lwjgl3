@@ -13,14 +13,12 @@ val LLVMTargetX86 = "LLVMTargetX86".nativeClass(
     prefixMethod = "LLVM",
     binding = LLVM_BINDING_DELEGATE
 ) {
-    documentation = ""
-
-    void("InitializeX86TargetInfo",   "", void())
-    void("InitializeX86Target",       "", void())
-    void("InitializeX86TargetMC",     "", void())
+    void("InitializeX86TargetInfo",   void())
+    void("InitializeX86Target",       void())
+    void("InitializeX86TargetMC",     void())
     IgnoreMissing..
-    void("InitializeX86TargetMCA",    "", void())
-    void("InitializeX86AsmPrinter",   "", void())
-    void("InitializeX86AsmParser",    "", void())
-    void("InitializeX86Disassembler", "", void())
+    void("InitializeX86TargetMCA",    void())
+    void("InitializeX86AsmPrinter",   void())
+    void("InitializeX86AsmParser",    void())
+    void("InitializeX86Disassembler", void())
 }
