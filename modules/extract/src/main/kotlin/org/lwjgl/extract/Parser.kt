@@ -5,7 +5,6 @@
 package org.lwjgl.extract
 
 import org.lwjgl.llvm.*
-import org.lwjgl.llvm.ClangDocumentation.*
 import org.lwjgl.llvm.ClangIndex.*
 import org.lwjgl.system.*
 import org.lwjgl.system.MemoryStack.*
@@ -16,7 +15,7 @@ internal fun parseSimpleType(name: String, nativeName: String, type: String) = "
 internal fun parseTypedef(nativeName: String, type: CXType) = "val $nativeName = typedef(${type.lwjgl}, \"$nativeName\")"
 
 @OptIn(ExperimentalUnsignedTypes::class)
-private fun parseConstant(header: Header, nativeName: String, value: String, doc: Documentation?): String {
+private fun parseConstant(header: Header, nativeName: String, value: String): String {
     val noPrefix = !nativeName.startsWith(header.prefixConstant)
 
     val name = if (noPrefix) nativeName else nativeName.substring(header.prefixConstant.length)
@@ -79,23 +78,22 @@ private fun parseConstant(header: Header, nativeName: String, value: String, doc
         TODO()
     }
 
-    return "$t${type}Constant(${doc?.format("", "$t$t", "\n$t$t") ?: "\"\""}, \"$name\"..$v)${if (noPrefix) ".noPrefix()" else ""}"
+    return "$t${type}Constant(\"$name\"..$v)${if (noPrefix) ".noPrefix()" else ""}"
 }
 
-private fun parseStringConstant(header: Header, nativeName: String, value: String, doc: Documentation?): String {
+private fun parseStringConstant(header: Header, nativeName: String, value: String): String {
     val noPrefix = !nativeName.startsWith(header.prefixConstant)
 
     val name = if (noPrefix) nativeName else nativeName.substring(header.prefixConstant.length)
 
-    return "${t}StringConstant(${doc?.format("", "$t$t", "\n$t$t") ?: "\"\""}, \"$name\"..$value)${if (noPrefix) ".noPrefix()" else ""}"
+    return "${t}StringConstant(\"$name\"..$value)${if (noPrefix) ".noPrefix()" else ""}"
 }
 
 private val COLLAPSE_REGEX = "\\n\\s*".toRegex()
 
 internal class EnumConstant(
     val name: String,
-    val value: String,
-    val doc: Documentation
+    val value: String
 ) {
     fun toIntOrNull() =
         if (value.startsWith("0x")) {
@@ -108,7 +106,6 @@ internal class EnumConstant(
 internal class Enum(
     val name: String,
     private val typedef: Boolean,
-    val doc: Documentation,
     val constants: List<EnumConstant>
 ) {
     fun getTypedef(): String = parseSimpleType(name, if (typedef) name else "enum $name", "enumType")
@@ -116,30 +113,7 @@ internal class Enum(
     fun getDeclaration(context: ExtractionContext): String {
         val noPrefix = constants.any { !it.name.startsWith(context.header.prefixConstant) }
 
-        val typeDoc = if (name.isNotEmpty()) "({@code ${if (typedef) "" else "enum "}$name})" else ""
-        val enumDoc = if (typeDoc.isEmpty())
-            doc.format("$t$t")
-        else if (doc.doc.isEmpty())
-            "\"${typeDoc.substring(1, typeDoc.lastIndex)}\""
-        else
-            doc.doc.let { text ->
-                if (text.contains('\n')) {
-                    text.indexOf('.').let {
-                        // try to insert after brief description
-                        if (it != -1) {
-                            "${text.substring(0, it + 1)} $typeDoc${text.substring(it + 1)}"
-                        } else {
-                            "$text\n\n$typeDoc"
-                        }
-                    }.formatDocumentation("$t$t")
-                } else {
-                    "$text\n\n$typeDoc".formatDocumentation("$t$t")
-                }
-            }
-
         return """    EnumConstant(
-        $enumDoc,
-
         ${constants
             .mapIndexed { index, it ->
                 val renderValue = if (it.value.startsWith("0x") && it.value.length != 10) {
@@ -163,14 +137,7 @@ internal class Enum(
                 }
 
                 val n = "\"${if (noPrefix) it.name else it.name.substring(context.header.prefixConstant.length)}\""
-                val doc = it.doc.doc
-                if (doc.isEmpty() && v.isEmpty()) {
-                    "$n.enum"
-                } else if (!doc.contains('\n') && "$t$t".length + n.length + 7 + doc.length + 1 + v.length + (if (index == constants.lastIndex) 1 else 2) < 160) {
-                    "$n.enum(\"${it.doc.doc}\"$v)"
-                } else {
-                    "$n.enum(\n$t$t$t${doc.formatDocumentation("$t$t$t,", "$t$t$t")}${if (v.isEmpty()) "" else ",\n$t$t$t${v.substring(2)}"}\n$t$t)"
-                }
+                "$n.enum($v)"
             }
             .joinToString(",\n$t$t")}
     )${if (noPrefix) ".noPrefix()" else ""}"""
@@ -183,10 +150,6 @@ internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typede
     CXCursorVisitor.create { enumConstantDecl, _, _ ->
         val constantName = enumConstantDecl.spelling
 
-        val doc = stackPush().use { stack ->
-            clang_Cursor_getParsedComment(enumConstantDecl, CXComment.malloc(stack)).parse()
-        }
-
         val size = constants.size
         CXCursorVisitor.create { enumValue, _, _ ->
             constants.add(
@@ -194,8 +157,7 @@ internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typede
                     constantName,
                     context.getSource(enumValue).replace(COLLAPSE_REGEX, " ").let {
                         if (it.endsWith("U")) it.substring(0, it.lastIndex) else it
-                    },
-                    doc
+                    }
                 )
             )
             CXChildVisit_Continue
@@ -204,8 +166,7 @@ internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typede
             constants.add(
                 EnumConstant(
                     constantName,
-                    clang_getEnumConstantDeclUnsignedValue(enumConstantDecl).toString(),
-                    doc
+                    clang_getEnumConstantDeclUnsignedValue(enumConstantDecl).toString()
                     //parseExpression(tu, source, enumValue)
                 )
             )
@@ -213,18 +174,12 @@ internal fun CXCursor.parseEnum(context: ExtractionContext, name: String, typede
         CXChildVisit_Continue
     }.use { clang_visitChildren(this, it, NULL) }
 
-    stackPush().use { stack ->
-        val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack))
-            .parse()
-
-        return Enum(name, typedef, doc, constants)
-    }
+    return Enum(name, typedef, constants)
 }
 
 internal class Struct(
     private val name: String,
     private val typedef: Boolean,
-    internal val documentation: String,
     internal val kind: String,
     internal val members: String
 ) {
@@ -232,8 +187,6 @@ internal class Struct(
         return """val $name = $kind(Module.${context.header.module}, "$name"${
         if (typedef) "" else ", nativeName = \"struct $name\""
         }) {
-    documentation =${if (documentation.startsWith('\n')) "" else " "}$documentation
-
     $members
 }"""
     }
@@ -246,13 +199,7 @@ internal fun CXCursor.parseStruct(context: ExtractionContext, name: String, type
             if (members.isEmpty()) {
                 null
             } else {
-                stackPush().use { stack ->
-                    val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack))
-                        .parse()
-                        .doc
-                        .formatDocumentation("${t}documentation = ", "$t$t", "\n$t$t")
-                    Struct(name, typedef, doc, if (clang_getCursorKind(this) == CXCursor_UnionDecl) "union" else "struct", members)
-                }
+                Struct(name, typedef, if (clang_getCursorKind(this) == CXCursor_UnionDecl) "union" else "struct", members)
             }
         }
     }
@@ -273,7 +220,6 @@ private fun CXCursor.parseStructMembers(
         } else {
             stackPush().push().use { stack ->
                 val name = fieldDecl.spelling
-                val doc = clang_Cursor_getParsedComment(fieldDecl, CXComment.malloc(stack)).parse()
 
                 val type = clang_getCursorType(fieldDecl, CXType.malloc(stack))
                 when (type.kind()) {
@@ -289,7 +235,7 @@ private fun CXCursor.parseStructMembers(
                             members.removeAt(members.lastIndex)
                         } else {
                             type.lwjgl
-                        }, name, doc, indent
+                        }, name
                     ))
                     CXType_Record        -> {
                         val (recordType, recordName) = clang_getCursorType(fieldDecl, CXType.malloc(stack))
@@ -346,20 +292,15 @@ private fun CXCursor.parseStructMembers(
                                 } else {
                                     type.lwjgl
                                 }
-                            }, name, doc, indent
+                            }, name
                         ))
                     }
                     CXType_ConstantArray -> {
                         members.add(
-                            structMember(
-                                clang_getElementType(type, CXType.malloc(stack)).lwjgl.arrayDimension(clang_getArraySize(type)),
-                                name,
-                                doc,
-                                indent
-                            )
+                            structMember(clang_getElementType(type, CXType.malloc(stack)).lwjgl.arrayDimension(clang_getArraySize(type)), name)
                         )
                     }
-                    else                 -> members.add(structMember(type.lwjgl, name, doc, indent, clang_getFieldDeclBitWidth(fieldDecl)))
+                    else                 -> members.add(structMember(type.lwjgl, name, clang_getFieldDeclBitWidth(fieldDecl)))
                 }
                 Unit
             }
@@ -370,17 +311,7 @@ private fun CXCursor.parseStructMembers(
     return "${attributes.joinToString("\n", postfix = if (attributes.isEmpty()) "" else "\n$indent") { "// $it" }}${members.joinToString("\n$indent")}"
 }
 
-private fun structMember(type: String, name: String, doc: Documentation, indent: String, bitWidth: Int = -1): String {
-    val memberDoc = doc.doc.let { memberDoc ->
-        if (memberDoc.isEmpty()) {
-            ""
-        } else {
-            memberDoc.toString().trim().let {
-                "${it[0].lowercaseChar()}${it.substring(1, if (it.endsWith('.') && it.indexOf('.') == it.lastIndex) it.lastIndex else it.length)}"
-            }
-        }
-    }
-
+private fun structMember(type: String, name: String, bitWidth: Int = -1): String {
     val elementType: String
     val arrayDimensions: String
 
@@ -393,16 +324,7 @@ private fun structMember(type: String, name: String, doc: Documentation, indent:
         arrayDimensions = type.substring(arrayIndex)
     }
 
-    return if (!memberDoc.contains('\n') && elementType.lastIndexOf('\n').let {
-            if (it == -1)
-                elementType.length + indent.length
-            else
-                elementType.length - it
-        } + 2 + name.length + 4 + memberDoc.length + 2 + arrayDimensions.length < 160)
-        "$elementType(\"$name\", \"$memberDoc\"${if (bitWidth == -1) "" else ", bits = $bitWidth"})$arrayDimensions"
-    else {
-        "$elementType(\n$indent$t\"$name\",\n$indent$t${memberDoc.formatDocumentation("$indent$t")}${if (bitWidth == -1) "" else ",\n${indent}bits = $bitWidth"}\n$indent)$arrayDimensions"
-    }
+    return "$elementType(\"$name\"${if (bitWidth == -1) "" else ", bits = $bitWidth"})$arrayDimensions"
 }
 
 private fun CXCursor.anonymousFunctionProto(
@@ -423,13 +345,11 @@ private fun CXCursor.anonymousFunctionProto(
         CXChildVisit_Continue
     }.use { clang_visitChildren(this, it, NULL) }
 
-    val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack)).parse()
     val docIndent = "$indent$t$t"
 
     return """Module.$module.callback {
 $indent    ${clang_getResultType(proto, CXType.malloc(stack)).lwjgl}(
-$indent        /*FIXME:*/"$name",
-$indent        ${doc.format(docIndent)}${getFunctionArguments(module, proto, name, doc, docIndent, args)}${doc.formatReturnDoc()}
+$indent        /*FIXME:*/"$name"${getFunctionArguments(module, proto, name, docIndent, args)}
 $indent    ) {
 $indent        documentation = "$documentation"
 $indent    }
@@ -447,17 +367,12 @@ internal fun CXCursor.parseCallback(header: Header, type: CXType, name: String):
         CXChildVisit_Continue
     }.use { clang_visitChildren(this, it, NULL) }
 
-    val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack)).parse()
-
     """val $name = Module.${header.module}.callback {
     ${clang_getResultType(type, CXType.malloc(stack)).lwjgl}(
-        "$name",
-        ${doc.format("$t$t")}${getFunctionArguments(header.module, type, name, doc, "$t$t", args)},
+        "$name"${getFunctionArguments(header.module, type, name, "$t$t", args)},
 
-        nativeType = "$name"${doc.formatReturnDoc()}
-    ) {
-        documentation = "Instances of this interface may be passed to the #FIXME() method."
-    }
+        nativeType = "$name"
+    )
 }"""
 }
 
@@ -479,11 +394,8 @@ internal fun CXCursor.parseFunction(header: Header): String = stackPush().use { 
         CXChildVisit_Continue
     }.use { clang_visitChildren(this, it, NULL) }
 
-    val doc = clang_Cursor_getParsedComment(this, CXComment.malloc(stack)).parse()
-
     """    ${clang_getResultType(type, CXType.malloc(stack)).lwjgl}(
-        "$name",
-        ${doc.format("$t$t")}${getFunctionArguments(header.module, type, name, doc, "$t$t", args)}${doc.formatReturnDoc()}${
+        "$name"${getFunctionArguments(header.module, type, name, "$t$t", args)}${
     if (header.prefixMethod.isNotEmpty() && nativeName == name) ",\n\n$t${t}noPrefix = true" else ""}
     )""" // TODO: seeAlso
 }
@@ -492,7 +404,6 @@ private fun getFunctionArguments(
     module: String,
     functionType: CXType,
     functionName: String,
-    doc: Documentation,
     indent: String,
     args: ArrayList<CXCursor>
 ) = if (args.isEmpty())
@@ -505,20 +416,6 @@ else
             val argName = argSpelling.let {
                 if (it.isNotEmpty()) "\"$it\"" else "/*FIXME:*/\"\""
             }
-            val paramDoc = doc.params[argSpelling]
-                .let {
-                    if (it != null || doc.paramList.size <= i) {
-                        it
-                    } else {
-                        doc.paramList[i]
-                    }
-                }
-                .let { paramDoc ->
-                    if (paramDoc == null)
-                        ""
-                    else
-                        doc.formatParamDoc(paramDoc)
-                }
 
             val type = when (argType.kind()) {
                 CXType_ConstantArray -> {
@@ -537,20 +434,8 @@ else
                 }
                 else                 -> argType.lwjgl
             }
-            formatFunctionArgument(type, argName, paramDoc, indent, i == args.lastIndex)
+            "$type($argName)"
         }
-    }
-
-private fun formatFunctionArgument(type: String, name: String, doc: String, indent: String, last: Boolean): String =
-    if (!doc.contains('\n') && type.lastIndexOf('\n').let {
-            if (it == -1)
-                type.length + indent.length
-            else
-                type.length - it
-        } + 1 + name.length + 3 + doc.length + (if (last) 2 else 3) < 160) {
-        "$type($name, \"$doc\")"
-    } else {
-        "$type(\n$indent$t$name,\n$indent$t${doc.formatDocumentation("$indent$t")}\n$indent)"
     }
 
 internal fun CXCursor.parseMacro(
@@ -593,12 +478,12 @@ internal fun CXCursor.parseMacro(
                 val name = this.spelling
                 val spelling = clang_getTokenSpelling(context.tu, token, stack.str).str
                 when (clang_getTokenKind(token)) {
-                    CXToken_Identifier -> constants.add(parseConstant(context.header, name, spelling, null))
+                    CXToken_Identifier -> constants.add(parseConstant(context.header, name, spelling))
                     CXToken_Literal    -> constants.add(
                         if (spelling.startsWith('\"')) {
-                            parseStringConstant(context.header, name, spelling, null)
+                            parseStringConstant(context.header, name, spelling)
                         } else {
-                            parseConstant(context.header, name, if (negative) "-$spelling" else spelling, null)
+                            parseConstant(context.header, name, if (negative) "-$spelling" else spelling)
                         }
                     )
                 }

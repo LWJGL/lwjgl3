@@ -84,9 +84,6 @@ abstract class APIBinding(
         transforms: MutableMap<QualifiedType, Transform>
     ) = Unit
 
-    /** Can be overridden to generate binding-specific javadoc. If this function returns false, the default javadoc will be generated. */
-    open fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String) = false
-
     /** Can be overridden to implement a custom condition for checking the function address. */
     open fun shouldCheckFunctionAddress(function: Func) = apiCapabilities.ordinal > 1
 
@@ -189,8 +186,7 @@ class NativeClass internal constructor(
     internal val callingConvention: CallingConvention
 ) : GeneratorTargetNative(module, className, nativeSubPath) {
     companion object {
-        private val JDOC_LINK_PATTERN = """(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""".toRegex()
-        private val VOID_ARGS = Parameter(void, ANONYMOUS, "", "")
+        private val VOID_ARGS = Parameter(void, ANONYMOUS)
     }
 
     var extends: NativeClass? = null
@@ -217,7 +213,6 @@ class NativeClass internal constructor(
     val link get() = "{@link ${this.className} ${this.templateName}}"
 
     override fun processDocumentation(documentation: String, forcePackage: Boolean): String {
-        processSeeLinks("", "", forcePackage)
         return processDocumentation(documentation, prefixConstant, prefixMethod, forcePackage = forcePackage)
     }
 
@@ -267,14 +262,12 @@ class NativeClass internal constructor(
             .forEach { func ->
                 val multiTypeParams = func.parameters.filter { it.has<MultiType>() }
                 val autoSizeResultOutParams = func.parameters.count { it.isAutoSizeResultOut }
-                val documentation: ((Parameter) -> Boolean) -> String = { processDocumentation("Array version of: ${func.javaDocLink}").toJavaDoc() }
 
                 if (multiTypeParams.isEmpty() || func.parameters.any { it.isArrayParameter(autoSizeResultOutParams) }) {
                     val overload = Func(
                         returns = func.returns,
                         simpleName = func.simpleName,
                         name = func.name,
-                        documentation = documentation,
                         nativeClass = this@NativeClass,
                         parameters = func.parameters.asSequence().map {
                             if (it.isArrayParameter(autoSizeResultOutParams))
@@ -309,7 +302,6 @@ class NativeClass internal constructor(
                             returns = func.returns,
                             simpleName = func.simpleName,
                             name = func.name,
-                            documentation = documentation,
                             nativeClass = this@NativeClass,
                             parameters = func.parameters.asSequence().map {
                                 if (it.isArrayParameter(autoSizeResultOutParams))
@@ -520,9 +512,6 @@ class NativeClass internal constructor(
 
         preamble.printJava(this)
 
-        val documentation = super.documentation
-        if (!documentation.isNullOrBlank())
-            println(processDocumentation(documentation).toJavaDoc(indentation = ""))
         val isOpen = access === Access.PUBLIC && (hasFunctions || extends != null)
         print("${access.modifier}${if (isOpen) "" else "final "}class $className")
         extends.let {
@@ -649,8 +638,8 @@ class NativeClass internal constructor(
         this.init()
     }
 
-    operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>, see: Array<String>? = null, access: Access = Access.PUBLIC): ConstantBlock<T> {
-        val block = ConstantBlock(this@NativeClass, access, this, { processDocumentation(documentation) }, see, *constants)
+    operator fun <T : Any> ConstantType<T>.invoke(vararg constants: Constant<T>, access: Access = Access.PUBLIC): ConstantBlock<T> {
+        val block = ConstantBlock(this@NativeClass, access, this, *constants)
         constantBlocks.add(block)
         return block
     }
@@ -665,70 +654,46 @@ class NativeClass internal constructor(
 
     /** Adds a new enum constant. */
     val String.enum get() = Constant(this, EnumIntValue())
-    infix fun String.enum(documentation: String) =
-        Constant(this, EnumIntValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))
-    infix fun String.enum(value: Int) = Constant(this, EnumIntValue(value = value))
-    fun String.enum(documentation: String, value: Int) =
-        Constant(this, EnumIntValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, value))
-    fun String.enum(documentation: String, expression: String) =
-        Constant(this, EnumIntValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
+    fun String.enum(value: Int) =
+        Constant(this, EnumIntValue(value))
+    fun String.enum(expression: String) =
+        Constant(this, EnumIntValueExpression(expression))
 
     // TODO: this is ugly, try new DSL?
     val String.enumByte get() = Constant(this, EnumByteValue())
-    infix fun String.enumByte(documentation: String) =
-        Constant(this, EnumByteValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))
-    infix fun String.enum(value: Byte) = Constant(this, EnumByteValue(value = value))
-    fun String.enum(documentation: String, value: Byte) =
-        Constant(this, EnumByteValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, value))
-    fun String.enumByte(documentation: String, expression: String) =
-        Constant(this, EnumByteValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
+    fun String.enum(value: Byte) =
+        Constant(this, EnumByteValue(value))
+    fun String.enumByte(expression: String) =
+        Constant(this, EnumByteValueExpression(expression))
 
     val String.enumLong get() = Constant(this, EnumLongValue())
-    infix fun String.enumLong(documentation: String) =
-        Constant(this, EnumLongValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }))
-    infix fun String.enum(value: Long) = Constant(this, EnumLongValue(value = value))
-    fun String.enum(documentation: String, value: Long) =
-        Constant(this, EnumLongValue({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, value))
-    fun String.enumLong(documentation: String, expression: String) =
-        Constant(this, EnumLongValueExpression({ if (documentation.isEmpty()) null else processDocumentation(documentation) }, expression))
+    fun String.enum(value: Long) =
+        Constant(this, EnumLongValue(value))
+    fun String.enumLong(expression: String) =
+        Constant(this, EnumLongValueExpression(expression))
 
-    operator fun DataType.invoke(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) =
-        if (links.isEmpty() || !links.contains('+'))
-            Parameter(this, name, javadoc, links, linkMode)
-        else
-            Parameter(this, name) { linkMode.appendLinks(javadoc, linksFromRegex(links)) }
+    operator fun DataType.invoke(name: String) =
+        Parameter(this, name)
 
     operator fun VoidType.invoke() = VOID_ARGS
     operator fun VoidType.invoke(
         className: String,
-        functionDoc: String,
         vararg signature: Parameter,
         nativeType: String = ANONYMOUS,
-        returnDoc: String = "",
-        see: Array<String>? = null,
-        since: String = "",
         init: (CallbackFunction.() -> Unit)? = null
-    ) = createCallback(this, nativeType, className, functionDoc, returnDoc, see, since, init, *signature)
+    ) = createCallback(this, nativeType, className, init, *signature)
 
     operator fun DataType.invoke(
         className: String,
-        functionDoc: String,
         vararg signature: Parameter,
         nativeType: String = ANONYMOUS,
-        returnDoc: String = "",
-        see: Array<String>? = null,
-        since: String = "",
         init: (CallbackFunction.() -> Unit)? = null
-    ) = createCallback(this, nativeType, className, functionDoc, returnDoc, see, since, init, *signature)
+    ) = createCallback(this, nativeType, className, init, *signature)
 
     private fun createCallback(
         returns: NativeType,
         nativeType: String,
         className: String,
-        functionDoc: String,
-        returnDoc: String,
-        see: Array<String>?,
-        since: String,
         init: (CallbackFunction.() -> Unit)?,
         vararg signature: Parameter
     ): FunctionType {
@@ -741,7 +706,6 @@ class NativeClass internal constructor(
         ))
         if (init != null)
             callback.init()
-        callback.functionDoc = { it -> it.toJavaDoc(it.processDocumentation(functionDoc), it.signature.asSequence(), it.returns, returnDoc, see, since) }
         Generator.register(callback)
         Generator.register(CallbackInterface(callback))
         return FunctionType(callback)
@@ -776,32 +740,19 @@ class NativeClass internal constructor(
 
     operator fun VoidType.invoke(
         name: String,
-        documentation: String,
         vararg parameters: Parameter,
-        returnDoc: String = "",
-        see: Array<String>? = null,
-        since: String = "",
         noPrefix: Boolean = false
-    ) =
-        createFunction(ReturnValue(this), name, documentation, returnDoc, see, since, noPrefix, *parameters)
+    ) = createFunction(ReturnValue(this), name, noPrefix, *parameters)
 
     operator fun DataType.invoke(
         name: String,
-        documentation: String,
         vararg parameters: Parameter,
-        returnDoc: String = "",
-        see: Array<String>? = null,
-        since: String = "",
         noPrefix: Boolean = false
-    ) = createFunction(ReturnValue(this), name, documentation, returnDoc, see, since, noPrefix, *parameters)
+    ) = createFunction(ReturnValue(this), name, noPrefix, *parameters)
 
     private fun createFunction(
         returns: ReturnValue,
         name: String,
-        documentation: String,
-        returnDoc: String,
-        see: Array<String>?,
-        since: String,
         noPrefix: Boolean,
         vararg parameters: Parameter
     ): Func {
@@ -815,16 +766,6 @@ class NativeClass internal constructor(
             returns = returns,
             simpleName = if (noPrefix || (overload[0].isJavaIdentifierStart() && !JAVA_KEYWORDS.contains(overload))) overload else "$prefixMethod$overload",
             name = if (noPrefix) overload else "$prefixMethod$overload",
-            documentation = { parameterFilter ->
-                this@NativeClass.toJavaDoc(
-                    processDocumentation(documentation),
-                    params.asSequence().filter { it !== JNI_ENV && parameterFilter(it) },
-                    returns.nativeType,
-                    returnDoc,
-                    see,
-                    since
-                )
-            },
             nativeClass = this@NativeClass,
             parameters = params
         ))
@@ -859,7 +800,6 @@ class NativeClass internal constructor(
             returns = reference.returns,
             simpleName = reference.simpleName,
             name = reference.name,
-            documentation = { this.convertDocumentation(nativeClass, reference.name, reference.documentation(it)) },
             nativeClass = this,
             parameters = reference.parameters
         ).copyModifiers(reference)
@@ -875,28 +815,8 @@ class NativeClass internal constructor(
             it.copy()
     }
 
-    private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String) = documentation.replace(JDOC_LINK_PATTERN) { match ->
-        match.value.let {
-            val element = match.groupValues[1]
-            if ((
-                    referenceClass.prefixConstant.isNotEmpty() &&
-                    element.startsWith(referenceClass.prefixConstant) &&
-                    !constantLinks.containsKey(element.substring(referenceClass.prefixConstant.length))
-                ) || (referenceFunction != element && !this.functions.any { func -> func.name == element })
-                )
-                "${referenceClass.className}$it"
-            else
-                it
-        }
-    }
-
     fun getCapabilityJavadoc(): String {
-        val documentation = this.documentation
-        return when {
-            documentation == null -> "When true, {@code $templateName} is supported."
-            hasBody               -> "When true, {@link $className} is supported."
-            else                  -> processDocumentation(documentation)
-        }.toJavaDoc()
+        return "When true, {@code $templateName} is supported.".toJavaDoc()
     }
 
 }

@@ -609,6 +609,21 @@ enum class Module(
         """
         Contains bindings to ${url("https://github.com/Celtoys/Remotery", "Remotery")}, a realtime CPU/GPU profiler hosted in a single C file with a viewer
         that runs in a web browser.
+        ${{
+            val COMMIT = "c3e8a2f38603c054be479bcefeaa54ad455dd4b9"
+            """
+        <b>LWJGL</b>: The current version of the Remotery bindings is compatible with commit
+        <a href="https://github.com/Celtoys/Remotery/tree/$COMMIT/vis">${COMMIT.substring(0, 7)}</a>. Run the following commands to clone the
+        Remotery repository at that commit:
+        ${codeBlock("""
+git clone --depth=1 https://github.com/Celtoys/Remotery.git
+cd Remotery
+git fetch --depth=1 origin $COMMIT
+git branch --no-track lwjgl $COMMIT
+git checkout lwjgl
+git branch -D @{-1}""")}"""}()}
+
+        Now open {@code vis/index.html} in your favorite browser to view the profiler.
         """,
         library = JNILibrary.create("LibRemotery"),
         arrayOverloads = false
@@ -940,7 +955,6 @@ private class JNILibraryWithInit constructor(
             init {
                 this.access = Access.INTERNAL
                 this.cpp = this@JNILibraryWithInit.cpp
-                this.documentation = "Initializes the ${module.key} shared library."
                 javaImport("org.lwjgl.system.*")
                 if (setupAllocator)
                     javaImport("static org.lwjgl.system.MemoryUtil.*")
@@ -952,6 +966,7 @@ private class JNILibraryWithInit constructor(
 
             override fun PrintWriter.generateJava() {
                 generateJavaPreamble()
+                println("Initializes the ${module.key} shared library.".toJavaDoc(indentation = ""))
                 println(
                     """${access.modifier}final class $className {
 

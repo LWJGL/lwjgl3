@@ -88,10 +88,10 @@ public class TemplateFormatter {
 
         try {
             ClassLoader cl = getClass().getClassLoader();
-            frame.setIconImages(Arrays.asList(new Image[] {
+            frame.setIconImages(Arrays.asList(
                 ImageIO.read(Objects.requireNonNull(cl.getResource("lwjgl16.png"))),
                 ImageIO.read(Objects.requireNonNull(cl.getResource("lwjgl32.png")))
-            }));
+            ));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -210,10 +210,6 @@ public class TemplateFormatter {
         Pattern.MULTILINE | Pattern.DOTALL
     );
 
-    private static final Pattern COMMENT_CLEANUP = Pattern.compile("[\n\r]*(?:\\s*[*])?\\s+", Pattern.MULTILINE);
-    private static final Pattern CODE_CLEANUP    = Pattern.compile("<([^>]+)>");
-    private static final Pattern TOKEN_SPLIT     = Pattern.compile("(?<!@code)\\s+"); // Don't split code fragments
-
     private static final Pattern CONSTANT_PATTERN = Pattern.compile(
         DEFINE + "([0-9A-Za-z_]+)\\s+(" + CONSTANT_VALUE + ")[ \t]*" + COMMENT,
         Pattern.DOTALL
@@ -229,50 +225,11 @@ public class TemplateFormatter {
                 builder.append('\n');
             }
 
-            String description = blockMatcher.group(1);
-            if (description == null) {
-                description = blockMatcher.group(2) + '.';
-            }
-
-            description =
-                CODE_CLEANUP.matcher(
-                    COMMENT_CLEANUP.matcher(description).replaceAll(" ").trim()
-                ).replaceAll("{@code $1}");
-
             builder.append("    IntConstant(\n");
-            if (description.length() <= 160 - (4 + 4 + 2 + 1)) {
-                builder.append("        \"");
-                builder.append(description);
-                builder.append('\"');
-            } else {
-                builder.append("        \"\"\"\n");
-                builder.append("        ");
-
-                String[] tokens          = TOKEN_SPLIT.split(description);
-                int      MAX_LINE_LENGTH = 160 - (4 + 4);
-
-                int lineLength = 0;
-                for (String token : tokens) {
-                    lineLength += token.length();
-                    if (token.length() < lineLength) {
-                        if (MAX_LINE_LENGTH < 1 + lineLength) {
-                            builder.append("\n        ");
-                            lineLength = token.length();
-                        } else {
-                            builder.append(' ');
-                            lineLength++;
-                        }
-                    }
-
-                    builder.append(token);
-                }
-
-                builder.append("\n        \"\"\"");
-            }
-            builder.append(",\n\n");
 
             Matcher constantMatcher = CONSTANT_PATTERN.matcher(blockMatcher.group(3));
-            int     constCount      = 0;
+
+            int constCount = 0;
             while (constantMatcher.find()) {
                 if (0 < constCount++) {
                     builder.append(",\n");
@@ -321,11 +278,7 @@ public class TemplateFormatter {
                 builder.append('\n');
             }
 
-            builder
-                .append("    EnumConstant(\n")
-                .append("        \"")
-                .append(enumMatcher.group(1))
-                .append("\",\n\n");
+            builder.append("    EnumConstant(\n");
 
             Matcher constantMatcher = ENUM_VALUE_PATTERN.matcher(enumMatcher.group(2));
 
@@ -348,27 +301,27 @@ public class TemplateFormatter {
 
                     int i = validateInteger(intValue).intValue();
                     if (lastValue != null && (Long.decode(lastValue).intValue() + 1) == i) {
-                        builder.append("(\"\"");
+                        // contiguous value
                     } else {
                         if (intValue.startsWith("0x")) {
                             builder
-                                .append("(\"\", ")
-                                .append(intValue);
+                                .append("(")
+                                .append(intValue)
+                                .append(")");
                         } else {
                             builder
-                                .append("Expr(\"\", \"")
+                                .append("Expr(\"")
                                 .append(intValue)
-                                .append("\"");
+                                .append("\")");
                         }
                     }
                     lastValue = intValue;
                 } catch (NumberFormatException e) {
                     builder
-                        .append("Expr(\"\", \"")
+                        .append("Expr(\"")
                         .append(value.charAt(0) == '(' ? value.substring(1, value.length() - 1) : value)
-                        .append("\"");
+                        .append("\")");
                 }
-                builder.append(")");
             }
             builder.append("\n    )\n");
         }
@@ -424,7 +377,7 @@ public class TemplateFormatter {
     private static void formatType(Matcher paramMatcher, StringBuilder builder, String prefix) {
         // (un)signed
         if (paramMatcher.group(2) != null) {
-            builder.append(paramMatcher.group(2).trim() + "_");
+            builder.append(paramMatcher.group(2).trim()).append('_');
         }
         // type
         String type = paramMatcher.group(3);
@@ -463,11 +416,11 @@ public class TemplateFormatter {
                     }
                     // pointer
                     writePointer(builder, paramMatcher);
-                    builder.append("(\n");
-                    builder.append("        \"");
-                    builder.append(strip(paramMatcher.group(6), prefix));
-                    builder.append("\",\n");
-                    builder.append("        \"\"");
+                    builder
+                        .append("(\n")
+                        .append("        \"")
+                        .append(strip(paramMatcher.group(6), prefix))
+                        .append("\"");
 
                     paramCount = 0;
                     if ("void".equals(funcMatcher.group(1))) {
@@ -492,7 +445,7 @@ public class TemplateFormatter {
 
                     builder.append("(\"");
                     builder.append(paramMatcher.group(6));
-                    builder.append("\", \"\")");
+                    builder.append("\")");
                 }
             }
 

@@ -14,26 +14,20 @@ class CallbackFunction internal constructor(
     vararg val signature: Parameter
 ) : GeneratorTarget(module, className) {
 
-    internal var functionDoc: (CallbackFunction) -> String = { "" }
     var additionalCode = ""
     var callingConvention = module.callingConvention
 
-    internal fun nativeType(name: String, separator: String = ", ", prefix: String = "", postfix: String = "") =
-        "${returns.name} (*$name) (${if (signature.isEmpty()) "void" else signature.asSequence()
-            .joinToString(separator, prefix = prefix, postfix = postfix) { param ->
-                param.toNativeType(null).let {
-                    if (it.endsWith('*')) {
-                        "$it${param.name}"
-                    } else {
-                        "$it ${param.name}"
-                    }
-                }
-            }
+    internal fun getSignature(name: String) =
+        "${returns.name} (*${if (name === ANONYMOUS) "" else " $name"}) (${
+            if (signature.isEmpty()) "void" else signature.asSequence()
+                .joinToString(", ") { "${it.toNativeType(null)} ${it.name}" }
         })"
 
+    private val nativeTypeName = nativeType
     internal val nativeType = if (nativeType === ANONYMOUS)
-        "${returns.name} (*) (${if (signature.isEmpty()) "void" else signature.asSequence()
-            .joinToString(", ") { it.toNativeType(null) }
+        "${returns.name} (*) (${
+            if (signature.isEmpty()) "void" else signature.asSequence()
+                .joinToString(", ") { it.toNativeType(null) }
         })"
     else
         nativeType
@@ -52,7 +46,7 @@ class CallbackFunction internal constructor(
             }
             is PrimitiveType  -> when (mapping) {
                 PrimitiveMapping.BOOLEAN  -> "ffi_type_uint8"
-                PrimitiveMapping.BOOLEAN2  -> "ffi_type_uint16"
+                PrimitiveMapping.BOOLEAN2 -> "ffi_type_uint16"
                 PrimitiveMapping.BOOLEAN4 -> "ffi_type_uint32"
                 PrimitiveMapping.FLOAT    -> "ffi_type_float"
                 PrimitiveMapping.DOUBLE   -> "ffi_type_double"
@@ -81,33 +75,8 @@ class CallbackFunction internal constructor(
             else                     -> (mapping as PrimitiveMapping).javaMethodName.upperCaseFirst
         }
 
-    private fun PrintWriter.generateDocumentation(isClass: Boolean) {
-        val documentation = if (module === Module.VULKAN)
-            super.documentation
-        else {
-            val type =
-                """
-                <h3>Type</h3>
-
-                ${codeBlock(nativeType("{@link \\#invoke}", ",\n$t", "\n$t", "\n"))}
-                """
-
-            super.documentation.let {
-                if (it == null)
-                    type
-                else
-                    "$it\n\n$type"
-            }
-        }
-        if (documentation != null) {
-            println(processDocumentation(documentation.let {
-                if (isClass) {
-                    it.replace("Instances of this interface", "Instances of this class")
-                } else {
-                    it
-                }
-            }).toJavaDoc(indentation = "", see = see, since = since))
-        }
+    private fun PrintWriter.generateDocumentation() {
+        println("Callback function: {@link #invoke ${if (nativeTypeName === ANONYMOUS) "(* anonymous)" else nativeTypeName}}".toJavaDoc(indentation = ""))
     }
 
     override fun PrintWriter.generateJava() {
@@ -123,7 +92,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 """)
         preamble.printJava(this)
 
-        generateDocumentation(true)
+        generateDocumentation()
         println("""${access.modifier}abstract class $className extends Callback implements ${className}I {""")
         print("""
     /**
@@ -210,7 +179,7 @@ import static org.lwjgl.system.MemoryUtil.*;
         }
         println()
 
-        generateDocumentation(false)
+        generateDocumentation()
         print("""@FunctionalInterface
 @NativeType("$nativeType")
 ${access.modifier}interface ${className}I extends CallbackI {
@@ -254,12 +223,8 @@ ${access.modifier}interface ${className}I extends CallbackI {
         print("""
     }
 """)
-        val doc = functionDoc(this@CallbackFunction)
-        if (doc.isNotEmpty()) {
-            println()
-            print(doc)
-        }
         print("""
+    /** {@code ${getSignature(nativeTypeName)}} */
     ${if (returns is StructType) "void" else returns.annotate(returns.nativeMethodType)} invoke(${signature.asSequence()
             .map { "${it.nativeType.annotate(if (it.nativeType.mapping.isPseudoBoolean()) "boolean" else if (it.nativeType is StructType) it.nativeType.definition.className else it.nativeType.nativeMethodType)} ${it.name}" }
             .let { if (returns is StructType) it + "${returns.annotate(returns.javaMethodType)} $RESULT" else it }

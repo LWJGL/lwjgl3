@@ -191,7 +191,7 @@ internal fun parse(
 ) {
     val context = try {
         ExtractionContext(header, options, errors)
-    } catch (e: CompilationError) {
+    } catch (_: CompilationError) {
         return
     }
 
@@ -212,7 +212,7 @@ internal fun parse(
             TODO()
         }
         aggregateTypes.remove(declarationName)
-        aggregateTypes[name] = Struct(name, true, declaration.documentation, declaration.kind, declaration.members)
+        aggregateTypes[name] = Struct(name, true, declaration.kind, declaration.members)
     }
 
     fun enumTypedef(cursor: CXCursor, name: String) {
@@ -222,7 +222,7 @@ internal fun parse(
             TODO()
         }
         enums.remove(declarationName)
-        enums[name] = Enum(name, true, declaration.doc, declaration.constants)
+        enums[name] = Enum(name, true, declaration.constants)
     }
 
     stackPush().use { stack ->

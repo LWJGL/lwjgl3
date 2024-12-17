@@ -43,37 +43,19 @@ val DoubleConstant = ConstantType(Double::class) { "%sd".format(it) }
 
 val StringConstant = ConstantType(String::class) { if (it.contains(" + \"")) it else "\"$it\"" }
 
-abstract class EnumValue(val documentation: (() -> String?) = { null })
+abstract class EnumValue()
 
-open class EnumIntValue(
-    documentation: (() -> String?) = { null },
-    val value: Int? = null
-) : EnumValue(documentation)
-class EnumIntValueExpression(
-    documentation: () -> String?,
-    val expression: String
-) : EnumIntValue(documentation, null)
+open class EnumIntValue(val value: Int? = null) : EnumValue()
+class EnumIntValueExpression(val expression: String) : EnumIntValue(null)
 val EnumConstant = ConstantType(EnumIntValue::class) { "0x%X".format(it) }
 
 // TODO: this is ugly, try new DSL?
-open class EnumByteValue(
-    documentation: (() -> String?) = { null },
-    val value: Byte? = null
-) : EnumValue(documentation)
-class EnumByteValueExpression(
-    documentation: () -> String?,
-    val expression: String
-) : EnumByteValue(documentation, null)
+open class EnumByteValue(val value: Byte? = null) : EnumValue()
+class EnumByteValueExpression(val expression: String) : EnumByteValue(null)
 val EnumConstantByte = ConstantType(EnumByteValue::class) { "0x%X".format(it) }
 
-open class EnumLongValue(
-    documentation: (() -> String?) = { null },
-    val value: Long? = null
-) : EnumValue(documentation)
-class EnumLongValueExpression(
-    documentation: () -> String?,
-    val expression: String
-) : EnumLongValue(documentation, null)
+open class EnumLongValue(val value: Long? = null) : EnumValue()
+class EnumLongValueExpression(val expression: String) : EnumLongValue(null)
 val EnumConstantLong = ConstantType(EnumLongValue::class) { "0x%X".format(it) }
 
 open class Constant<out T : Any>(val name: String, val value: T?)
@@ -88,8 +70,6 @@ class ConstantBlock<T : Any>(
     val nativeClass: NativeClass,
     var access: Access,
     private val constantType: ConstantType<T>,
-    val documentation: () -> String,
-    val see: Array<String>?,
     vararg val constants: Constant<T>
 ) {
 
@@ -249,39 +229,7 @@ class ConstantBlock<T : Any>(
                 LongConstant
             }
 
-            ConstantBlock(nativeClass, access, constantTypeRender, documentation().let { doc ->
-                constants.asSequence()
-                    .mapNotNull {
-                        (if (it is ConstantExpression)
-                            null
-                        else
-                            (it.value as EnumValue).documentation()
-                        ).let { enumDoc ->
-                            val link = "#${getConstantName(it.name)}"
-                            if (enumDoc == null) {
-                                if ((doc.contains(link)) || constants.size == 1)
-                                    null
-                                else
-                                    "<li>{@link $link ${it.name}}</li>"
-                            } else
-                                "<li>{@link $link ${it.name}} - $enumDoc</li>"
-                        }
-                    }
-                    .joinToString("\n$t$t$t")
-                    .let { enumDoc ->
-                        {
-                            if (enumDoc.isEmpty())
-                                doc
-                            else
-                                """${if (doc.isEmpty()) "" else "$t$doc\n\n"}
-        <h5>Enum values:</h5>
-        <ul>
-            $enumDoc
-        </ul>
-        """
-                        }
-                    }
-            }, see, *rootBlock.toArray(emptyArray())).let {
+            ConstantBlock(nativeClass, access, constantTypeRender, *rootBlock.toArray(emptyArray())).let {
                 it.noPrefix = noPrefix
                 it.generate(writer)
             }
@@ -292,10 +240,6 @@ class ConstantBlock<T : Any>(
 
     private fun PrintWriter.generateBlock() {
         println()
-        val doc = documentation()
-        if (doc.isNotEmpty() || see != null)
-            println(doc.toJavaDoc(see = see))
-
         print("$t${access.modifier}static final ${constantType.javaType}")
 
         val indent = if (constants.size == 1) {
@@ -337,13 +281,4 @@ class ConstantBlock<T : Any>(
             print(constantType.print(constant.value!!))
     }
 
-    val javaDocLinks get() = javaDocLinks(null)
-    val javaDocLinksSkipCount get() = javaDocLinks { !it.name.endsWith("_COUNT") }
-
-    fun javaDocLinks(predicate: ((Constant<T>) -> Boolean)?) = constants.asSequence()
-        .let { constants ->
-            if (predicate == null) constants else constants.filter { predicate(it) }
-        }
-        .map { it.name }
-        .joinToString(" #", prefix = "#")
 }

@@ -1046,14 +1046,6 @@
             <arg line="--add-exports jdk.javadoc/com.sun.tools.doclets=ALL-UNNAMED" if:set="jdk11"/>
         </javadoc>
         <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${bin.javadoc}"/>
-
-        <java classname="org.lwjgl.system.JavadocPostProcess" failonerror="true">
-            <classpath path="${bin.generator}"/>
-
-            <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
-
-            <arg value="${bin.javadoc}"/>
-        </java>
     </target>
 
     <target name="upload-native" description="Uploads native build artifacts to build.lwjgl.org" depends="compile-native,-check-AWS-credentials">
@@ -1443,13 +1435,6 @@
             </javadoc>
             <get-quiet name="favicon" url="https://www.lwjgl.org/favicon.ico" dest="${release}/${module}/javadoc" unless:set="javadoc.skip"/>
 
-            <java classname="org.lwjgl.system.JavadocPostProcess" failonerror="true" unless:set="javadoc.skip">
-                <classpath path="${bin.generator}"/>
-
-                <jvmarg line="-Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8"/>
-
-                <arg value="${release}/${module}/javadoc"/>
-            </java>
             <zip destfile="${release}/${module}/${module}-javadoc.jar" basedir="${release}/${module}/javadoc" includes="**" level="9" unless:set="javadoc.skip"/>
             <delete dir="${release}/${module}/javadoc" unless:set="javadoc.skip"/>
 

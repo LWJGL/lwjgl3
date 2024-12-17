@@ -119,14 +119,13 @@ class Code(
 enum class CaptureCallState(val param: Parameter, val code: Code) {
     @Suppress("EnumEntryName")
     errno(
-        Check(1)..nullable..Parameter(int.p, "_errno", "optionally returns the {@code errno} value after this function is called"),
+        Check(1)..nullable..Parameter(int.p, "_errno"),
         Code(nativeAfterCall = "${t}if (_errno != NULL) *_errno = errno;")
     ),
     GetLastError(
         Check(1)..nullable..Parameter(
             IntegerType("DWORD", PrimitiveMapping.INT).p,
-            "_GetLastError",
-            "optionally returns the result of {@code GetLastError()} after this function is called"
+            "_GetLastError"
         ),
         Code(nativeAfterCall = "${t}if (_GetLastError != NULL) *_GetLastError = GetLastError();")
     );

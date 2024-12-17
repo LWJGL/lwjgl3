@@ -30,7 +30,7 @@ fun main() {
             Library.loadNative(ClangIndex::class.java, "org.lwjgl.llvm", Configuration.LLVM_CLANG_LIBRARY_NAME, "clang", "libclang").use {
                 Configuration.LLVM_CLANG_LIBRARY_NAME.set(it.path)
             }
-        } catch (ignored: Throwable) {
+        } catch (_: Throwable) {
         }
     }
 
@@ -48,7 +48,6 @@ class Application {
             Platform.LINUX   -> "so"
             Platform.MACOSX  -> "dylib"
             Platform.WINDOWS -> "dll"
-            else             -> throw UnsupportedOperationException()
         }
     }
 
@@ -113,7 +112,7 @@ class Application {
                 mainFileOnly = true,
                 ignoreSystemHeaders = false,
                 ignoreErrors = false,
-                parseAllComments = true,
+                parseAllComments = false,
                 parseTypes = true,
                 parseStructs = true,
                 parseConstants = true,
