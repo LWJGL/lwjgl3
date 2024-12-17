@@ -246,6 +246,11 @@ class Struct(
 
     fun setUsageOutput() {
         usageOutput = true
+        this.members.forEach {
+            if (it.nativeType is PointerType<*> && it.nativeType.elementType is StructType) {
+                it.nativeType.elementType.definition.setUsageOutput()
+            }
+        }
     }
 
     fun setUsageInput() {

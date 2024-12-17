@@ -34,7 +34,7 @@ val VRRenderModels = "VRRenderModels".nativeClass(
         "FreeRenderModel",
         "Frees a previously returned render model It is safe to call this on a null ptr.",
 
-        nullable..RenderModel_t.p("pRenderModel", "")
+        nullable..Input..RenderModel_t.p("pRenderModel", "")
     )
 
     EVRRenderModelError(

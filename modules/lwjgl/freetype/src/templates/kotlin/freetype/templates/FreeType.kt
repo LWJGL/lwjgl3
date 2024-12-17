@@ -1755,7 +1755,7 @@ val freetype = "FreeType".nativeClass(Module.FREETYPE, prefix = "FT", prefixMeth
         "",
 
         FT_Library("library", ""),
-        FT_MM_Var.p("amaster", "")
+        Input..FT_MM_Var.p("amaster", "")
     )
 
     FT_Error(
@@ -1847,7 +1847,7 @@ val freetype = "FreeType".nativeClass(Module.FREETYPE, prefix = "FT", prefixMeth
         "Get_Var_Axis_Flags",
         "",
 
-        FT_MM_Var.p("master", ""),
+        Input..FT_MM_Var.p("master", ""),
         FT_UInt("axis_index", ""),
         Check(1)..FT_UInt.p("flags", "")
     )

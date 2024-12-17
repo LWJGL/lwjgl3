@@ -299,6 +299,8 @@ class Func(
                         type.definition.setUsageInput()
                     else
                         type.definition.setUsageOutput()
+                } else if (type is PointerType<*> && type.elementType is StructType) {
+                    type.elementType.definition.setUsageResultPointer()
                 }
             }
 

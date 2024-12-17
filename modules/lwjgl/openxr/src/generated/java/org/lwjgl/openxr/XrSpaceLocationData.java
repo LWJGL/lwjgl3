@@ -9,9 +9,11 @@ import org.jspecify.annotations.*;
 
 import java.nio.*;
 
+import org.lwjgl.*;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 /**
  * Returns the data of a space.
@@ -32,7 +34,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link XrPosef XrPosef} {@link #pose};
  * }</code></pre>
  */
-public class XrSpaceLocationData extends Struct<XrSpaceLocationData> {
+public class XrSpaceLocationData extends Struct<XrSpaceLocationData> implements NativeResource {
 
     /** The struct size in bytes. */
     public static final int SIZEOF;
@@ -88,6 +90,22 @@ public class XrSpaceLocationData extends Struct<XrSpaceLocationData> {
 
     // -----------------------------------
 
+    /** Returns a new {@code XrSpaceLocationData} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed. */
+    public static XrSpaceLocationData malloc() {
+        return new XrSpaceLocationData(nmemAllocChecked(SIZEOF), null);
+    }
+
+    /** Returns a new {@code XrSpaceLocationData} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed. */
+    public static XrSpaceLocationData calloc() {
+        return new XrSpaceLocationData(nmemCallocChecked(1, SIZEOF), null);
+    }
+
+    /** Returns a new {@code XrSpaceLocationData} instance allocated with {@link BufferUtils}. */
+    public static XrSpaceLocationData create() {
+        ByteBuffer container = BufferUtils.createByteBuffer(SIZEOF);
+        return new XrSpaceLocationData(memAddress(container), container);
+    }
+
     /** Returns a new {@code XrSpaceLocationData} instance for the specified memory address. */
     public static XrSpaceLocationData create(long address) {
         return new XrSpaceLocationData(address, null);
@@ -96,6 +114,34 @@ public class XrSpaceLocationData extends Struct<XrSpaceLocationData> {
     /** Like {@link #create(long) create}, but returns {@code null} if {@code address} is {@code NULL}. */
     public static @Nullable XrSpaceLocationData createSafe(long address) {
         return address == NULL ? null : new XrSpaceLocationData(address, null);
+    }
+
+    /**
+     * Returns a new {@link XrSpaceLocationData.Buffer} instance allocated with {@link MemoryUtil#memAlloc memAlloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static XrSpaceLocationData.Buffer malloc(int capacity) {
+        return new Buffer(nmemAllocChecked(__checkMalloc(capacity, SIZEOF)), capacity);
+    }
+
+    /**
+     * Returns a new {@link XrSpaceLocationData.Buffer} instance allocated with {@link MemoryUtil#memCalloc memCalloc}. The instance must be explicitly freed.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static XrSpaceLocationData.Buffer calloc(int capacity) {
+        return new Buffer(nmemCallocChecked(capacity, SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link XrSpaceLocationData.Buffer} instance allocated with {@link BufferUtils}.
+     *
+     * @param capacity the buffer capacity
+     */
+    public static XrSpaceLocationData.Buffer create(int capacity) {
+        ByteBuffer container = __create(capacity, SIZEOF);
+        return new Buffer(memAddress(container), container, -1, 0, capacity, capacity);
     }
 
     /**
@@ -113,6 +159,44 @@ public class XrSpaceLocationData extends Struct<XrSpaceLocationData> {
         return address == NULL ? null : new Buffer(address, capacity);
     }
 
+    /**
+     * Returns a new {@code XrSpaceLocationData} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static XrSpaceLocationData malloc(MemoryStack stack) {
+        return new XrSpaceLocationData(stack.nmalloc(ALIGNOF, SIZEOF), null);
+    }
+
+    /**
+     * Returns a new {@code XrSpaceLocationData} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack the stack from which to allocate
+     */
+    public static XrSpaceLocationData calloc(MemoryStack stack) {
+        return new XrSpaceLocationData(stack.ncalloc(ALIGNOF, 1, SIZEOF), null);
+    }
+
+    /**
+     * Returns a new {@link XrSpaceLocationData.Buffer} instance allocated on the specified {@link MemoryStack}.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static XrSpaceLocationData.Buffer malloc(int capacity, MemoryStack stack) {
+        return new Buffer(stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+    }
+
+    /**
+     * Returns a new {@link XrSpaceLocationData.Buffer} instance allocated on the specified {@link MemoryStack} and initializes all its bits to zero.
+     *
+     * @param stack    the stack from which to allocate
+     * @param capacity the buffer capacity
+     */
+    public static XrSpaceLocationData.Buffer calloc(int capacity, MemoryStack stack) {
+        return new Buffer(stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+    }
+
     // -----------------------------------
 
     /** Unsafe version of {@link #locationFlags}. */
@@ -123,7 +207,7 @@ public class XrSpaceLocationData extends Struct<XrSpaceLocationData> {
     // -----------------------------------
 
     /** An array of {@link XrSpaceLocationData} structs. */
-    public static class Buffer extends StructBuffer<XrSpaceLocationData, Buffer> {
+    public static class Buffer extends StructBuffer<XrSpaceLocationData, Buffer> implements NativeResource {
 
         private static final XrSpaceLocationData ELEMENT_FACTORY = XrSpaceLocationData.create(-1L);
 
