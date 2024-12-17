@@ -1046,7 +1046,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         nullable..GLFWcursor.p("cursor")
     )
 
-    void(
+    IgnoreMissing..void(
         "GetPreeditCursorRectangle",
 
         GLFWwindow.p("window"),
@@ -1056,7 +1056,7 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         Check(1)..nullable..int.p("h")
     )
 
-    void(
+    IgnoreMissing..void(
         "SetPreeditCursorRectangle",
 
         GLFWwindow.p("window"),
@@ -1066,13 +1066,13 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         int("h")
     )
 
-    void(
+    IgnoreMissing..void(
         "ResetPreeditText",
 
         GLFWwindow.p("window")
     )
 
-    unsigned_int.p(
+    IgnoreMissing..unsigned_int.p(
         "GetPreeditCandidate",
 
         GLFWwindow.p("window"),
@@ -1101,21 +1101,21 @@ val GLFW = "GLFW".nativeClass(Module.GLFW, prefix = "GLFW", binding = GLFW_BINDI
         nullable..GLFWcharmodsfun("cbfun")
     )
 
-    GLFWpreeditfun(
+    IgnoreMissing..GLFWpreeditfun(
         "SetPreeditCallback",
 
         GLFWwindow.p("window"),
         nullable..GLFWpreeditfun("cbfun")
     )
 
-    GLFWimestatusfun(
+    IgnoreMissing..GLFWimestatusfun(
         "SetIMEStatusCallback",
 
         GLFWwindow.p("window"),
         nullable..GLFWimestatusfun("cbfun")
     )
 
-    GLFWpreeditcandidatefun(
+    IgnoreMissing..GLFWpreeditcandidatefun(
         "SetPreeditCandidateCallback",
 
         GLFWwindow.p("window"),
